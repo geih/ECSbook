@@ -1,0 +1,140 @@
+\subsubsection{Single point source in arbitrary point}
+In the above, we made things simple by assuming that the current source was placed in the origin ${\bf r} = 0$. It is relatively intuitive that if the point source were located in an arbitrary point ${\bf r_1} $, $r$ in the denominator of eq. \ref{eq:pointsource} should be replaced with $|{\bf r-r_1}|}$. To derive this mathematically, we start by noting that the current density integrated over an arbitrary surface containing the source should, as before, be identical to the total source current.
+
+\begin{equation}
+\oiint_{S} {\bf i}({\bf r}, t) \cdot  \,d{\bf S} = \oiint_{S} \sigma\nabla\phi({\bf r}, t) \cdot \, d{\bf S}  = I_1
+\label{eq:berit1}
+\end{equation}
+
+To solve this, it is convenient to chose a spherical surface with radius $R = |{\bf r-r_1}|}$ centered at the source location ${\bf r_1}}$ (Fig. \ref{fig:pointsource}B). We then know that the electrical potential is the same for all ${\bf r}$ in this surface ($\phi({\bf r}, t) = \phi(R,t)$), and that that its gradient is perpendicular to the surface increment. If we use this, eq. \ref{eq:berit1} becomes:
+
+\begin{equation}
+4\pi R^2\sigma \frac{d\phi(R)}{dR} = I_1
+\label{eq:berit2}
+\end{equation}
+Integration with respect to $R$ gives us:
+
+\begin{equation}
+\phi(R, t) = \phi({\bf r}, t) = \frac{I_1}{4\pi \sigma R} = \frac{I_1}{4\pi \sigma |{\bf r} - {\bf r_1}|}
+\label{eq:berit3}
+\end{equation}
+
+
+\begin{equation}
+\phi = \frac{I_1}{4\pi \sigma |{\bf r-r_1}|},
+\end{equation}
+
+If we have several point-current sources, $I_{1}, I_2, I_3, ... $ in locations ${\bf r_1}, {\bf r_2}, {\bf r_3} ... $), their contributions add up linearly, and the potential in a point ${\bf r}$ is given by:
+
+\begin{equation}
+\phi({\bf r}) = \frac{I_1}{4\pi  \sigma {\bf |r-r_1|}} + \frac{I_2}{4\pi  \sigma {\bf |r-r_2|} } + \frac{I_3}{4\pi  \sigma {\bf |r-r_3|} } + ... = \sum_k \frac{I_k}{4\pi  \sigma {\bf |r-r_k|} }.
+\label{eq:pointsources}
+\end{equation}
+
+\subsection{Current conservation}
+Volume conductor theory is essentially based on current conservation in the extracellular medium. Mathematically, current conservation implies that:
+
+\begin{equation}
+\nabla {\bf i}({\bf r}, t) = - CSD({\bf r}, t),
+\label{eq:CSD1}
+\end{equation}
+where ${\bf i}$ is the extracellular current density, and $CSD$ is the current source density. Eq. \ref{eq:CSD1} shows that if there are no neuronal current sources, the gradient of the current density must be zero, i.e., $\nabla \cdot {\bf i} = 0$, which tells us that no net current can enter/leave any given point in the extracellular space. The $CSD$ term in Eq. \ref{eq:CSD1} then accounts for  the points where net currents actually do enter or leave the extracellular space in terms of transmembrane neuronal currents.
+
+The current density ${\bf i}$ could in principle include several kinds of electrical currents \cite{Gratiy2017}, but under most conditions ohmic drift currents dominate, and in this chapter we assume that:
+
+\begin{equation}
+{\bf i} = \nabla ({\sigma \nabla \phi})
+\label{eq:ohmici}
+\end{equation}
+If we combine Eq. \ref{eq:ohmici} and Eq. \ref{eq:CSD1}, we get:
+
+\begin{equation}
+\nabla ({\sigma \nabla \phi}) = - CSD
+\label{eq:CSD2}
+\end{equation}
+
+If we further assume that the conductivity $\sigma$ is constant, Eq. \ref{eq:CSD2} simplifies to:
+
+\begin{equation}
+\sigma \nabla^2 \phi = - CSD
+\label{eq:CSD3}
+\end{equation}
+
+If we know the $CSD$, we can integrate this expression over space to derive what $\phi$ will be. In principle, the equation can also be used the other way around, i.e., if we record the potential at several points in space, we can use it to predict the underlying current sources. However, this \textit{backward} problem is ill posed, and solutions are not unique \ghn{More on this?}. Here, we focus on the forward modelling problem, i.e., going from a known $CSD$ to a prediction of the extracellular potential. 
+
+\begin{equation}
+\nabla^2 \phi = - CSD/\sigma,
+\label{eq:trygve}
+\end{equation}
+where we have introduced the electrical field 
+
+${\bf E}={\bf \nabla} \phi$ \ghn{Comment on this? Maxwell -> quasistatic -> cross-product = 0 implies E is gradient of scalar function. Is anything gained by introducing  {\bf E} at all, when we already have $\phi$? Or how about using {\bf E} instead of $\nabla\phi$ from the start?}, and for now assumed that the conductivity, $\sigma$, is a scalar constant. We integrate each side of this equation over a 3D volume,
+\begin{equation}
+\iiint_V E({\bf r}) \,d^3V =  - \frac{1}{\sigma} \iiint_V \ CSD({\bf r}) \, d^3V.
+\label{eq:trygve2}
+\end{equation}
+If we consider the simplest possible case of a single point current source $I_1$ in ${\bf r}=0$, the right hand side becomes $-I_1/\sigma$. By Gauss' theorem, we can convert the left hand side to a surface integral, and get:
+\begin{equation}
+\iiint_V E(r) \,d^3V =  \oiint_{S} E(r) \,d^2S = 4\pi r^2 E(r) = 4\pi r^2 \frac{d\phi}{dr} = -\frac{I_1}{\sigma},
+\label{eq:trygve3}
+\end{equation}
+where we have exploited the spherical symmetry of the problem. Finally, integration with respect to $r$ gives us
+
+
+\section{PNP og KNP}
+Both the PNP formalism and the electroneutral formalism allow us to compute the dynamics of ion concentrations and the electrical potential in the extracellular space of neural tissue containing an arbitrary set of neuronal and glial current sources. For example, in recent work, a version of the electroneutral formalism was developed into a framework for computing the extracellular dynamics (of $c_k$ and $\phi$) in a 3D space surrounding morphologically complex neurons simulated with the NEURON simulation tool \citep{Solbra2018}. However, both the PNP and electroneutral formalisms keep track of the spatial distribution of ion concentrations, and as such they require a suitable meshing of the 3D space, and numerical solutions based on finite difference- or finite element methods. In both cases, simulations can become very heavy, and for systems at a tissue level, the computational demand may become incommensurable. For that reason, there is much to gain from deriving simpler frameworks where effects of ion concentration dynamics are neglected, since, for many scenarios, this may be a good approximation. Below, we will derive these simpler frameworks using the Nernst-Planck fluxes (eq. \ref{eq:JNP}) as a starting point, as this approach will make the involved approximations transparent.
+
+\subsection{General currents in the extracellular space}
+Starting more generally, the extracellular current density could in principle have additional contributions from  diffusion of ions, advection and displacement currents: 
+
+\begin{equation}
+{\bf i} = {\bf i^{ohm}} + {\bf i^{dif}} + {\bf i^{adv}} + {\bf i^{dis}}, 
+\label{eq:generalcurrent}
+\end{equation}
+
+The advective current, 
+\begin{equation}
+{\bf i^{adv}} = F \rho {\bf u}, 
+\label{eq:iadv}
+\end{equation}
+is the current that arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. 
+
+The displacement current,
+\begin{equation}
+{\bf i^{dis}} = \frac{\partial \rho}{\partial t},
+\label{eq:idis}
+\end{equation}
+represents the capacitive effect of a medium that allows local charge accumulation, so that $\rho$ can vary with time.  
+
+For the physiological conditions of the extracellular solution, it has been shown theoretically that the charge relaxation time, i.e., the time it takes for $d\rho/dt$ to decay to zero when responding to a change in the electric field, is in the order of 1 ns \cite{Grodzinsky2011, Gratiy2017}. This means that the displacement current (eq. \ref{eq:idis}) will mainly be important under conditions when the electrical field varies with frequencies in the GHz range. As the relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this, the displacement current can safely be neglected. Related to this, the actual charge accumulation that takes place during a relaxation time of 1 ns is very small. For most practical purposes it is a therefore good approximation to assume that the extracellular medium is electroneutral \cite{Solbra2018}, which means that $\rho = 0$ so that the advective current becomes zero. Hence, for practical purposes, it is safe to assume that both the displacement current (eq. \ref{eq:idis}) and the advective current (eq. \ref{eq:iadv}) give negligible contributions to extracellular dynamics. A more physically rigorous argument for this was given in \cite{Gratiy2017}. 
+
+If we can neglect advective and displacement currents, we are left with the Ohmic drift current and the diffusive current. The Ohmic drift current is given by:
+\begin{equation}
+{\bf i^{ohm}} = \sigma {\bf E} = - \sigma \nabla \phi,
+\label{eq:ohmiciagain}
+\end{equation}
+where the last equality follows from the quasi-static approximation of Maxwell's equations (Chapter \ref{sec:quasistatic}). In standard VC theory, this is assumed to be the only extracellular current, and we recognize it from eq. \ref{eq:ohmici}. 
+
+Finally, the diffusive current is given by: 
+\begin{equation}
+{\bf i^{dif}} = -F \sum_k z_k D_k \nabla c_k.
+\label{eq:idif}
+\end{equation}
+It represents the current that arrises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along extracellular concentration gradients ($\nabla c_k$), and carry along with them a net charge. Diffusive currents are neglected in standard VC theory under the (\textit{a-priori}) assumption that they are much smaller than Ohmic drift currents at the coarse grained scale of brain tissue. However, the magnitude of diffusive currents depend on the steepness of the concentration gradients in the extracellular solution, and it has been estimated that diffusive will have a notable impact on extracellular potential in physiological conditions with large concentration gradients  \cite{Halnes2016, Gratiy2017}. Diffusive effects on extracellular potentials may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite{Somjen2001, Frohlich2008, Wei2014, Ayata2015}). 
+
+In the reminder of this chapter, we present the theory for extracellular dynamics when the currents in the extracellular space are electrodiffusive, i.e., when the charge carriers in the brain, the ions, move due to diffusion as well as Ohmic drift. 
+
+
+
+\subsection{Om CSD}
+This the standard expression used in current source density (CSD) theory \citep{Mitzdorf1985, Nicholson1975, Pettersen2006}, where spatially distributed recordings of $\phi$ are used to make theoretical predictions of underlying current sources. When using Eq. \ref{eq:CSDstandard}, it is implicitly assumed that the Laplacian of $\phi$ exclusively reflects transmembrane current sources, and that it is not contributed to by diffusive processes. 
+
+
+
+
+
+
+
+
+
+

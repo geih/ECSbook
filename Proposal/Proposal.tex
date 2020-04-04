@@ -1,0 +1,435 @@
+\documentclass[preprint,11pt,authoryear]{elsarticle}
+\pdfoutput=1
+\pdfminorversion=4
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lineno}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{algorithm}
+\usepackage[noend]{algpseudocode}
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+\bibliographystyle{elsarticle-harv}
+\biboptions{square}
+
+\renewcommand\familydefault{\sfdefault}
+\usepackage[scaled]{helvet}
+
+\usepackage{units}
+\usepackage[usenames, dvipsnames]{xcolor}
+
+\usepackage{soul}
+\usepackage{placeins}
+
+\usepackage{nameref}
+\usepackage[pdftex,breaklinks=true,colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,filecolor=blue,pdffitwindow,backref=true,pagebackref=false,bookmarks=true,bookmarksopen=true,bookmarksnumbered=true]{hyperref}
+\usepackage[plain]{fancyref}
+\usepackage{array}
+\usepackage{multirow}
+
+% Text layout
+%\hoffset 2 cm
+\topmargin 0.0cm
+\oddsidemargin 0.5cm
+\evensidemargin 0.5cm
+\textwidth 16cm 
+\textheight 21cm
+
+%custom color for \hlc
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlb}[2][blue]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlr}[2][Maroon]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlj}[2][OliveGreen]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlR}[2][red]{ {\sethlcolor{#1} \hl{#2}} }
+
+
+%boxes and highlight color for text updates, personified!
+\newcommand{\asnote}[1]{\color{white}{\hlb{AS: #1 }}\color{black}}
+\newcommand{\astxt}[1]{{\color{blue}#1}}
+\newcommand{\mjnote}[1]{\color{white}{\hlr{MJ: #1 }}\color{black}}
+\newcommand{\mjtxt}[1]{{\color{Maroon}#1}}
+\newcommand{\tvnnote}[1]{\color{white}{\hlj{TVN: #1 }}\color{black}}
+\newcommand{\tvntxt}[1]{{\color{OliveGreen}#1}}
+\newcommand{\gtenote}[1]{\color{white}{\hlR{GTE: #1 }}\color{black}}
+\newcommand{\gen}[1]{\color{white}{\hlR{GTE: #1 }}\color{black}}
+\newcommand{\gtetxt}[1]{{\color{red}#1}}
+\newcommand{\gex}[1]{{\color{red}#1}}
+\newcommand{\genn}[1]{{\color{orange}#1}}
+
+%fancy ref formatting
+\Frefformat{plain}{\fancyreffiglabelprefix}{Fig~#1}
+\newcommand*{\Frefsecshortname}{Section}%
+\Frefformat{plain}{\fancyrefseclabelprefix}{\Frefsecshortname~#1}
+\Frefformat{plain}{\fancyrefeqlabelprefix}{Eq~(#1)}
+
+%tables as in Nordlie et al. (2009)
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{morefloats}
+
+%table formatting
+\newcommand{\modelhdr}[3]{%
+   \multicolumn{#1}{|l|}{%
+     \color{white}\cellcolor[gray]{0.0}%
+     \textbf{\makebox[0pt]{#2}\hspace{0.5\linewidth}\makebox[0pt][c]{#3}}%
+   }%
+}
+\newcommand{\parameterhdr}[3]{%
+   \multicolumn{#1}{|l|}{%
+     \color{black}\cellcolor[gray]{0.8}%
+     \textbf{\makebox[0pt]{#2}\hspace{0.5\linewidth}\makebox[0pt][c]{#3}}%
+   }%
+}
+\def\tabspace{0.5ex}
+
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+
+%\journal{arXiv}
+%\journal{Outline for book}
+
+
+% redefinition of \author{?} because of bug (reset of \@corref missing), taken from:
+% http://tex.stackexchange.com/questions/116515/elsarticle-frontmatter-corresponding-author
+\makeatletter
+\def\@author#1{\g@addto@macro\elsauthors{\normalsize%
+    \def\baselinestretch{1}%
+    \upshape\authorsep#1\unskip\textsuperscript{%
+      \ifx\@fnmark\@empty\else\unskip\sep\@fnmark\let\sep=,\fi
+      \ifx\@corref\@empty\else\unskip\sep\@corref\let\sep=,\fi
+      }%
+    \def\authorsep{\unskip,\space}%
+    \global\let\@fnmark\@empty
+    \global\let\@corref\@empty  %% Added
+    \global\let\sep\@empty}%
+    \@eadauthor={#1}
+}
+\makeatother
+
+% - define commands -
+\newcommand{\ppo}{\mathrm{pO_2}}
+% -
+
+% - mine pakker -
+\usepackage[exponent-product = \cdot]{siunitx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[normalem]{ulem} % strikethroughs \sout{Hello World}
+%\usepackage{booktabs} % to make nice tables
+\graphicspath{{Figures/}} %Setting the graphicspath
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+\title{Proposed outline for book on extracellular potentials} 
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+%\author{Marte J. S\ae{}tra\fnref{label1,label2}}
+%\author{Andreas V. Solbr\aa{}\fnref{label1,label2}}
+%\author{Anna Devor\fnref{label3,label4,label5}}
+%\author{Anders M. Dale\fnref{label3,label4}}
+%\author{Gaute T. Einevoll\corref{cor1}\fnref{label1,label2,label6}}
+
+%\address[label1]{Centre for Integrative Neuroplasticity, University of Oslo, Oslo, Norway}
+%\address[label2]{Department of Physics, University of Oslo, Oslo, Norway}
+%\address[label3]{Department of Radiology, University of California San Diego, La Jolla, CA, United States}
+%\address[label4]{Department of Neurosciences, University of California San Diego, La Jolla, CA, United States}
+%\address[label5]{Martinos Center for Biomedical Imaging, MGH, Harvard Medical School, Charlestown, MA, United States}
+%\address[label6]{Faculty of Science and Technology, Norwegian University of Life Sciences, Å%s, Norway}
+
+%\cortext[cor1]{correspondence: \href{gaute.einevoll@nmbu.no}{gaute.einevoll@nmbu.no}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{}
+
+%Word count
+
+%% Max 350 words
+%\begin{abstract}
+%The ...
+%\end{abstract}
+
+%\begin{keyword}
+%% cortex \sep metabolism \sep analysis \sep estimation
+%%% keywords here, in the form: keyword \sep keyword
+%%% MSC codes here, in the form: \MSC code \sep code
+%%% or \MSC[2008] code \sep code (2000 is the default)
+%\end{keyword}
+
+\end{frontmatter}
+
+%Word count: $\approx 6000$, $\,$ Number of Figures: $9$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start line numbering here if you want
+
+%\linenumbers
+
+Neuronal activity gives rise to electrical potentials which can be measured by electrodes, either inside the brain tissue, on the top of the cortex, or on the top of the scalp. Experimental measurements of extracellular potentials at various locations are used to gain insight in neuronal activity. However, the relationship between what neurons did and what was recorded at some distance from them is not trivial. Interpretations of the recorded signals must therefore rely on a biophysically based theory on how electrical signals propagate through brain tissue.
+
+This text book introduces the theory for how to compute extracellular potentials surrounding active neurons. 
+
+It is an application oriented book, and introduces the main frameworks and tools that are used within the field of computational neuroscience. The book will be accompanied with computer exercises/tutorials that the reader can access online.
+
+It also presents 
+
+
+Target group: Be a book for graduate students entering the field of computational neuroscience, and a main reference for modellers of extracellular fields in the brain. 
+
+It is not a book about information coding of the brain, but about understanding the physical processes that give rise to the electrical fields recorded at various locations. We focus on applications - i.e. on modeling what is measured, and on interpreations of the measurement: What do they tell us about the underlying neuronal activity. As such, it will also be of interest to experimentalists that wish to gain insight in the link between neuronal activity and extracellular potetials. 
+
+We present the material focusing on application, and 
+
+
+
+\section{Contents}
+As a tentative plan, our book will contain the following chapters.
+
+\begin{itemize}
+
+\begin{itemize}
+
+\item {\bf Chapter 1: Introduction} 
+Here, we will introduce the the concepts of extracellular electrical fields, the different ways to measure them, and the role of modeling in establishing the link between the measured fields and the underlying cellular processes. 
+
+\end{itemize}
+
+\item {\bf Part 1: Theory}
+
+\begin{itemize}
+
+\item {\bf Chapter 2: Neural dynamics}
+Extracellular fields are predominantly evoked by electrical currents entering or leaving the extracellular space through neuronal membranes. We start the theory section by introducing the theory for modeling morphologically complex neurons. Subchapters will include: 
+\begin{itemize}
+\item Hodgkin-Huxley type ion channel models
+\item Multicompartment models
+\item Cable equation
+\end{itemize}
+
+\item {\bf Chapter 3: Volume conductor theory}
+Once the transmembrane neuronal currents (current sources) are known, volume conductor (VC) theory is used to compute the resulting extracellular potential at an arbitrary point in space. In this chapter we derive volume conductor theory from principles of current conservation, and introduce the various approximations that the theory rests upon. Subchapters will include: 
+\begin{itemize}
+\item Continuous medium approximation (the theory is valid on a coarse grained scale)
+\item VC theory for infinite isotropic homogeneous extracellular medium
+\item VC theory for infinite anisotropic homogeneous extracellular medium
+\item VC theory for non-homogeneous extracellular medium (methods of images or finite element solutions)
+\item Modelling the electrode (disc-electrode approximation)
+\item Dipole-appoximation for far fields
+\item Assumptions underlying VC theory
+\end{itemize}
+
+\item {\bf Chapter 4: Extracellular conductivity}
+A key parameter(or variable) in VC theory is the extracellular conductivity. We therefore devote a small chapter to it, where we review the experimental measurements of the conductivity and its theoretical basis. Subchapters will include: 
+\begin{itemize}
+\item Experimental measurements
+\item Theoretical explorations
+\end{itemize}
+
+\item {\bf Chapter 5: Electrodiffusion}
+The standard theory presented in chapter 2-3 implicitly applies the assumption that ion concentrations in the intracellular and extracellular space are constant in time. This approximation simplifies things a lot, and works good for many scenarios. However, several pathological conditions are associated with large extracellular concentration shifts. In these cases, ionic diffusion can in principle affect extracellular potentials. In chapter 5, we present a more general, electrodiffusive theory for extracellular currents and fields. Subchapters will include: 
+
+\begin{itemize}
+\item About all current types that could be present in tissue (drift, diffusion, advective, displacement), and argument to why only drift currents and diffusive currents are non negligible.
+\item Poisson-Nernst-Planck (PNP) framework for electrodiffusion. 
+\item Electroneutral frameworks for electrodiffusion. 
+\end{itemize}
+
+\item {\bf Chapter 6: Schemes for computing extracellular potentials from neural activity.}
+
+\begin{itemize}
+
+\item Standard modeling scheme (LFPy). Drift currents only. No feedback from ECS on neurodynamics. Subchapters on how to use it with different neuron models.
+\begin{itemize}
+\item Multicompartment models
+\item Spiking point neuron models (hybrid LFPy)
+\item Firing-rate models (kernel tricks)
+\end{itemize}
+
+\item KNP scheme for extracellular dynamics. Electrodiffusive. No feedback from ECS on neurodynamics. 
+
+\item Self-consistent schemes: Unified frameworks for neurodynamics and extracellular dynamics.
+\begin{itemize}
+\item EMI - with drift only, keeping track of charges only 
+\item KNP-EMI - with diffusion and drift, keeping track of ion concentrations assuming electroneutrality. Coarse spatial scale.
+\item PNP - with diffusion and drift, keeping track of ion concentrations and charge relaxation. Fine spatial scale.
+\end{itemize}
+
+\end{itemize}
+
+\end{itemize}
+
+
+\item {\bf Part 2: Applications:}
+
+\begin{itemize}
+
+\item {\bf Chapter 7: Spikes}
+Shows simulations and analysis of extracellular spike signatures. Subchapters will include:
+\begin{itemize}
+\item Spikes in neurons with passive dendrites \citep{Pettersen2008a}
+\item Spikes in neurons with active dendrites \citep{Gold2006}
+\item Multi-unit activity (MUA) \citep{Pettersen2008}
+\end{itemize}
+
+\item {\bf Chapter 8: Local field potentials (LFPs)}
+Shows simulations and analysis of LFPs.
+
+\begin{itemize}
+
+\item Contributions of single neurons  to LFP:
+\begin{itemize}
+\item Case: Passive dendrites.
+\item Case: Active dendrites.
+\end{itemize}
+
+\item Population LFPs (neurons not synaptically connected)
+\begin{itemize}
+\item Case: Passive dendrites. Including large scale simulations, cases with analytical results, and a magic simple formula. 
+\item Case: Active dendrites. Including large scale simulations.
+\item Some cases using abstract neuron models (kernel trick).
+\end{itemize}
+
+\item Network LFPs:
+\begin{itemize}
+\item Cortical LFPs from single corticothalamic neuron
+\item Cortical networks with passive dendrites
+\item Cortical network with active dendrites
+\end{itemize}
+
+\end{itemize}
+
+\item {\bf Chapter 9: ECoG}
+Simulations and interpreations of electrical fields on the surface of cortex. 
+
+\item {\bf Chapter 9: EEG}
+Simulations and interpretations of electrical fields on the scalp. Here one must account for the fact that electrical signals go through different media (i.e., brain, bone, skin), and the effects of the head shape. 
+
+\item {\bf Chapter 10: MEG}
+Simulations and interpretations of magnetic fields on the scalp.
+
+\item {\bf Chapter 11: Electrical stimulation.}
+Effects of stimulating brain tissue electrically through extracellular electrodes. Chapter limited to the fundamental principles. 
+
+\item {\bf Chapter 12: Technology}
+A brief review of the latest technology (electrodes etc.)
+
+\end{itemize}
+
+\end{itemize}
+
+\section{Competing titles}
+Competing Titles, arranged in chronological order:
+
+\begin{itemize}
+
+\item Koch and Segev, Eds. (1998) Methods in neural modelling , 2nd ed., MIT Press
+
+Strengths: A wide selection of topics is covered in depth
+
+Weaknesses: Collection of chapters, without much logical progression
+
+
+\item Koch (1999) Biophysics of computation , OUP (Paperback issued in 2004)
+
+Strengths: A well written book, unified by the overarching question of how the biophysics ofneurons underlies computation.
+
+Weaknesses: The treatment is restricted to single neurons and is too advanced as an introductionto computational neuroscience for a general biological audience.
+
+\item Dayan and Abbott (2001) Theoretical neuroscience , MIT Press
+
+Strengths: Strong mathematical treatment of a number of topics, particularly of coding and learning
+
+Weaknesses: Too mathematical for our intended audience
+
+\item De Schutter, Ed. (2001) Computational Neuroscience: Realistic Modelling for experimentalists , CRC Press
+
+Strengths: A wide selection of topics is covered in depth
+
+Weaknesses: Collection of chapters, without much logical progression
+
+\item Trappenberg (2010) Fundamentals of computational neuroscience , 2nd ed., OUP
+
+Strengths: Good treatment of high-level network modelling
+
+Weaknesses: It is higher level than its title suggests
+
+\item Gerstner, Kistler, Naud and Paninski (2014) Neuronal Dynamics, CUP
+
+Strengths: Excellent access to material through the Web including the entire book.
+
+Weaknesses: A briefer exposition than ours; limited to fewer topics. Higher level, moremathematical focus.
+
+\item Gabbiani and Cox (2017) Mathematics for Neuroscientists , 2nd ed., Academic Press
+
+Strengths: Focus on the properties of single neurons as well as extracellular potentials,neurovascular coupling, visual processing and neural networks. MATLAB scripts for generatingaround 40 figures and also some in Python. ?How to use this book? section with diagram showingpathways through the book.
+
+Weaknesses: Emphasis on the mathematics, which may not motivate the experimentalneuroscientist. The computer scripts given lack explanation and so less accessible to thenon-mathematician.
+
+\item Brief comments on more narrowly focussed books:Eliasmith and Anderson (2002) Neural Engineering: Computation, Representation, andDynamics , MIT Press (Paperback issued in 2004)Three principles of neural engineering are presented based on the representation of signals byneural ensembles, transformations of these representations through neuronal coupling weights,and the integration of control theory and neural dynamics.Matlab software package written in Matlab is available on the Web.Laing and Lord, Eds. (2009) Stochastic Methods in Neuroscience , OUPCollection of analysis methods for large amounts of neurophysiological data, and advances instochastic analysis.Mallot (2013) Computational Neuroscience - a first course , SpringerThis treats three subjects: membrane biophysics, systems theory and artificial neural networksfrom a more cognitive perspective.
+
+\end{itemize}
+
+\section{Bibliography}
+\label{sec:bibliography}
+\bibliography{Biblo.bib}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}  

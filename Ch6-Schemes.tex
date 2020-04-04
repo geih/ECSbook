@@ -1,0 +1,55 @@
+\section{Schemes for computing EPs from neural activity}
+\label{sec:schemes}
+\ghnote{Geir and Torbjorn will write most this. Torbjorn takes care of the LFPy-part, Geir takes care of the other schemes.}
+\ghnote{GH: I reorganized this following the logic from the theory part - starting with the VC-stuff.}
+
+We may classify the schemes for computing extracellular dynamics by whether or not they are self consistent and whether or not they include ion concentration dynamics (Fig. \ref{fig:schemes}). By self consistent, we mean that the neuronal and extracellular dynamics are modelled on a unified framework, so that (ephaptic) effects of extracellular variables on the neurodynamics are accounted for. 
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/schemes.png}
+\end{center}
+\caption{\textbf{Overview of schemes for computing extracellular dynamics.}}
+\label{fig:schemes}
+\end{figure}
+
+\subsection{Schemes based on standard VC-theory}
+Based on standard VC theory - compute neurodynamics first, and then have an analytical solution for the ECS-potential.
+Not self consistent, no ephaptic effects. Assumes constant ion concentrations.
+
+Present LFPy here. Explain that there are different ways of simulating the neurodynamics, and then enter subsubsections: 
+
+\subsubsection{Neurodynamics based on multicompartmental neuron models}
+The standard way - what LFPy was originally designed for \cite{Hagen2018}.
+Same trick used earlier \citep{Holt1999}.
+
+\subsubsection{Neurodynamics from point-neuron models}
+Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \citep{Hagen2016}, Skaar et al (in revision)
+
+\subsubsection{Neurodynamics using firing-rate models}
+Would make things even faster. Population firing-rate models  \citep{Hagen2016}. Kernel trick (Ness et al, on-going project) 
+
+
+\subsection{Extracellular Kirchhoff-Nernst-Planck (KNP) scheme}
+As in \cite{Solbra2018}. Keeps track of ion concentrations and accounts for diffusive effects on ECS potentials. Theory presented in Chapter \ref{sec:eldiff}. Perhaps it is ok to have it both places. 
+
+
+\subsection{The Extracellular-Membrane-Intracellular (EMI) scheme}
+Self consistent scheme, assuming constant ion concentration, includes only drift currents. Accounts for ephaptic effects \cite{Tveito2019}. More complete than LFPy, but has the disadvantage that it is computationally expensive. Simulations based on FEM.
+
+
+\subsection{Self consistent electrodiffusive schemes}
+Keep track of all variables ($c_k$ and $\phi$) in all compartments. Diffusion and drift included. 
+
+\subsubsection{The KNP-EMI-scheme}
+Already presented briefly in chapter \ref{sec:eldiff}. Perhaps remove it from there and put it only here. 
+
+\subsubsection{The PNP-scheme}
+Already presented briefly in chapter \ref{sec:eldiff}. Perhaps remove it from there and put it only here. 
+
+\subsubsection{Domain models}
+Perhaps have a little chapter about the Mori domain models, although they are essentially the KNP-EMI-scheme but without explicit geometries. I am not sure that they are meaningfull in terms of predicting extracellular potentials though - at least not others than the low frequency (DC-like) part of them during spreading depression. Then again, in terms of predicting extracellular potentials on the large coarse grained scale the, also the PNP and KNP-EMI schemes probably come short, as they can not be "coarse-grained" and are to computationally heavy to run for any large scale system. 
+
+
+

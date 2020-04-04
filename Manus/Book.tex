@@ -1,0 +1,129 @@
+\documentclass[pdftex, 3p, preprint, authoryear, 12pt]{elsarticle}
+%\documentclass[16pt]{elsarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{a4paper}
+\usepackage[parfill]{parskip}
+%\usepackage{ifpdf}
+%\renewcommand*\familydefault{\sfdefault} %in stead of cmbright
+%\usepackage[cm]{sfmath} %ditto
+\usepackage[slantedGreek]{cmbright}
+\usepackage{amsmath,esint}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{upgreek}
+\usepackage{ulem}
+\normalem
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{sidecap}
+
+\usepackage{lineno}
+
+\definecolor{newtextcolor}{cmyk}{0.01,0.7,1,0} %% color for new text
+\definecolor{newtextcolor2}{cmyk}{1,0.01,0.01,0} %% color for new text
+\newcommand{\newtext}[1]{{\color{newtextcolor}#1}}
+%\newcommand{\newtextGTE}[1]{{\color{newtextcolor2}#1}}
+\newcommand{\BookRef}[1]{{\color{blue}#1}}
+\newcommand{\Comment}[1]{{\color{newtextcolor}#1}}
+\newcommand{\Figure}[1]{{\color{red}#1}}
+
+\newcommand{\ghnote}[1]{{\color{red}#1}}
+
+%\newcommand{\ul}[1]{{\underline{#1}}
+
+
+\ifpdf
+    \usepackage[pdftex,bookmarks=true]{hyperref}
+    \hypersetup{
+        colorlinks = False,
+        linkcolor = blue,
+        anchorcolor = blue,
+        citecolor = blue,
+        filecolor = blue,
+        pagecolor = blue,
+        urlcolor = blue
+    }
+\else
+    \usepackage[hypertex,bookmarks=true]{hyperref}
+        \hypersetup{
+        colorlinks = true,
+        linkcolor = blue,
+        anchorcolor = blue,
+        citecolor = blue,
+        filecolor = blue,
+        pagecolor = blue,
+        urlcolor = blue
+    }
+\fi
+
+\bibliographystyle{plainnat}
+
+\makeatletter
+\def\ps@pprintTitle{%
+  \let\@oddhead\@empty
+  \let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\hfil\thepage\hfil}
+  \let\@evenfoot\@oddfoot
+}
+\makeatother
+
+%\journal{...}
+
+%\definecolor{newtextcolor}{cmyk}{0,1,1,0} %% color for new text
+%\newcommand{\newtext}[1]{{\color{newtextcolor}#1}}
+
+
+\begin{document}
+
+%\linenumbers
+
+\begin{frontmatter}
+
+\author{Geir Halnes, Torbj\o rn Vefferstad Ness, Solveig N\ae ss, Klas H. Pettersen, Gaute T. Einevoll}
+
+\title{Book about electrical fields in the brain - \today}
+
+\end{frontmatter}
+
+{\huge Things to consider}
+\begin{itemize}
+
+\item Structure plan on: https://www.overleaf.com/2551421161hjxkhwwvjrqk
+\item Refer to main Sections as "Chapters", subsections as Sections?
+\item When to include functional arguments and not?
+\item When to include Units and not?
+
+\end{itemize}
+
+
+{\huge Part 1}
+\include{Ch1-intro}
+\include{Ch2-neurodynamics}
+\include{Ch3-VCtheory}
+\include{Ch4-conductivity}
+\include{Ch5-eldiff}
+\include{Ch6-schemes}
+
+{\huge Part 2}
+\include{Ch7-spikes}
+\include{Ch8-LFP}
+\include{Ch9-ECoG}
+\include{Ch10-EEG}
+\include{Ch11-MEG}
+\include{Ch12-stimulation}
+\include{Ch13-technology}
+
+
+
+%\section{Synapses \Comment{- Gaute}}
+%\subsection{Chemical synapses:  postsynaptic response}
+%\subsection{Chemical synapses:  synaptic plasticity}
+%\subsection{Electrical synapses: gap junctions}
+
+\bibliography{ECS_bookchapter.bib}
+
+\end{document}
+
