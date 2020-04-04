@@ -19,8 +19,13 @@
 \usepackage{color}
 \usepackage{booktabs}
 \usepackage{sidecap}
-
+\usepackage[usenames, dvipsnames]{xcolor}
 \usepackage{lineno}
+
+%\usepackage{soul}
+\usepackage{soulutf8}
+\usepackage{placeins}
+
 
 \definecolor{newtextcolor}{cmyk}{0.01,0.7,1,0} %% color for new text
 \definecolor{newtextcolor2}{cmyk}{1,0.01,0.01,0} %% color for new text
@@ -30,7 +35,34 @@
 \newcommand{\Comment}[1]{{\color{newtextcolor}#1}}
 \newcommand{\Figure}[1]{{\color{red}#1}}
 
-\newcommand{\ghnote}[1]{{\color{red}#1}}
+
+%custom color for \hlc
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlb}[2][blue]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlr}[2][Maroon]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlj}[2][OliveGreen]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlR}[2][red]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlp}[2][Purple]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlt}[2][Tealblue]{ {\sethlcolor{#1} \hl{#2}} }
+
+
+%\newcommand{\ghnote}[1]{{\color{red}#1}}
+
+%boxes and highlight color for text updates, personified!
+\newcommand{\ghnote}[1]{\color{white}{\hlb{GH: #1 }}\color{black}}
+\newcommand{\ghtxt}[1]{{\color{blue}#1}}
+\newcommand{\gtenote}[1]{\color{white}{\hlR{GTE: #1 }}\color{black}}
+\newcommand{\gen}[1]{\color{white}{\hlR{GTE: #1 }}\color{black}}
+\newcommand{\gtetxt}[1]{{\color{red}#1}}
+\newcommand{\gex}[1]{{\color{red}#1}}
+\newcommand{\genn}[1]{{\color{orange}#1}}
+
+\newcommand{\tvnnote}[1]{\color{white}{\hlj{TVN: #1 }}\color{black}}
+\newcommand{\tvntxt}[1]{{\color{OliveGreen}#1}}
+
+\newcommand{\snnote}[1]{\color{white}{\hlp{SN: #1 }}\color{black}}
+\newcommand{\sntxt}[1]{{\color{Purple}#1}}
+\newcommand{\slntxt}[1]{{\color{RoyalPurple}#1}}
 
 %\newcommand{\ul}[1]{{\underline{#1}}
 
@@ -82,7 +114,7 @@
 
 \begin{frontmatter}
 
-\author{Geir Halnes, Torbj\o rn Vefferstad Ness, Solveig N\ae ss, Klas H. Pettersen, Gaute T. Einevoll}
+\author{Geir Halnes, Torbjørn V. Ness, Solveig N\ae ss, Klas H. Pettersen, Gaute T. Einevoll}
 
 \title{Book about electrical fields in the brain - \today}
 
