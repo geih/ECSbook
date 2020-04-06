@@ -11,7 +11,7 @@ Modelling of neurons is at the core of computational neuroscience, and the topic
 \subsection{Multicompartmental modeling}
 Most simulations of extracellular potentials are based on multicompartmental neuronal models based on a Hodgkin-Huxley-type formalism. A model of a neuron is then characterized by (i) its morphology, and (ii) its membrane mechanisms. 
 
-In a multicompartmental model, the morphology of the real neuron (Fig. \ref{fig:multicomp}A) is discretized as a set of compartments connected by resistors (Fig. \ref{fig:multicomp}B). In such a model there are two kinds of currents which together determine the membrane potential dynamics of the neuron (Fig. \ref{fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents (green arrows). Below, first present a framework for modeling the transmembrane currents in a single compartment, and next show how a number of such compartments can be connected together to a multicompartment model.
+In a multicompartmental model\index{multicompartment modelling}, the morphology of the real neuron (Fig. \ref{fig:multicomp}A) is discretized as a set of compartments connected by resistors (Fig. \ref{fig:multicomp}B). In such a model there are two kinds of currents which together determine the membrane potential dynamics of the neuron (Fig. \ref{fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents (green arrows). Below, first present a framework for modeling the transmembrane currents in a single compartment, and next show how a number of such compartments can be connected together to a multicompartment model.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -31,6 +31,17 @@ In a multicompartmental model, the morphology of the real neuron (Fig. \ref{fig:
 
 \subsection{Cable theory}
 \ghnote{Skriv om cable theory her, og noen analytiske tilfeller som hjelper oss aa faa en kjerneforstaaelse.}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{Figures/capacitive_currents.pdf}
+\end{center}
+\caption{\textbf{Capacitive currents are important for current conservation} 
+\tvnnote{Jeg snek inn denne figuren igjen, så får vi se om vi skal ha den med :-)}}
+\label{fig:capacitive_currents}
+\end{figure}
+
+
+
 
 \subsection{Point neurons}
 \ghnote{skriv om punktmodeller her, problemet med at de ikke gir opphav til ekstracellulare felter, og triks for aa bruke dem likevel.}

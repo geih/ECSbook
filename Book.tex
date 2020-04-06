@@ -21,7 +21,8 @@
 \usepackage{sidecap}
 \usepackage[usenames, dvipsnames]{xcolor}
 \usepackage{lineno}
-
+\usepackage{imakeidx}
+\makeindex
 %\usepackage{soul}
 \usepackage{soulutf8}
 \usepackage{placeins}
@@ -127,10 +128,13 @@
 \item Refer to main Sections as "Chapters", subsections as Sections?
 \item When to include functional arguments and not?
 \item When to include Units and not?
-
+\item How to make this a "computational essay"?
+\item Real booky-books tend to have an Index at the end. Add \verb|\index| around words to add them to Index
+\item References after each chapter, or at end of book?
 \end{itemize}
 
-
+\tableofcontents
+\newpage
 {\huge Part 1}
 \include{Ch1-intro}
 \include{Ch2-neurodynamics}
@@ -139,6 +143,7 @@
 \include{Ch5-eldiff}
 \include{Ch6-schemes}
 
+%\newpage
 {\huge Part 2}
 \include{Ch7-spikes}
 \include{Ch8-LFP}
@@ -149,13 +154,13 @@
 \include{Ch13-technology}
 
 
-
 %\section{Synapses \Comment{- Gaute}}
 %\subsection{Chemical synapses:  postsynaptic response}
 %\subsection{Chemical synapses:  synaptic plasticity}
 %\subsection{Electrical synapses: gap junctions}
-
-\bibliography{ECS_bookchapter.bib}
-
+\section{References}
+\bibliography{ECS_book.bib}
+%\section*{Index}
+\printindex
 \end{document}
 
