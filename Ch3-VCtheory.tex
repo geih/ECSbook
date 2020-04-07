@@ -10,13 +10,14 @@ As it used in neuroscience, VC theory rests on a set of assumptions regarding th
 \subsection{Continuous, porous medium approximation for VC theory}
 \label{sec:continuous}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-When presenting the theory for modeling single neurons (Chapter \ref{sec:NeuralDynamics}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross section of a piece of brain tissue shows that it is densely packed with neural and glial processes (Fig.\ref{fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous geometry, with an average intercell-distance of about 40-60 nm \cite{Sykova2008}. 
+When presenting the theory for modeling single neurons (Chapter \ref{sec:NeuralDynamics}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross section of a piece of brain tissue shows that it is densely packed with neural and glial processes (Fig.\ref{fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.3\textwidth]{Figures/ECSdummy.jpeg}
 \end{center}
 \caption{\textbf{Tortuous medium}  Cross section image of a piece of neural tissue. Extracellular space (marked red) occupies about 20 \% of the total tissue volume, and has a highly tortuous structure. Placeholder, taken from \cite{Sykova2008}.
+\tvnnote{Vi får vel lage vår egen illustrasjon her, kanskje med panel A lik denne, og panel B en zoomet ut versjon der det ser mer homogent ut?}
 }
 \label{fig:ECS}
 \end{figure}
@@ -107,8 +108,10 @@ We start by deriving the contribution to $\phi$ from a single neuronal point sou
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Pointsource.png}
+\includegraphics[width=0.6\textwidth]{Figures/pointsource_3D_illustration.png}
 \end{center}
 \caption{\textbf{Extracellular field from single neuronal point source.} 
+\tvnnote{Lage 3D versjon, inspirert av den underste?}
 }
 \label{fig:pointsource}
 \end{figure}
@@ -168,6 +171,7 @@ A more sophisticated choice may be to assume that the transmembrane current is e
 \end{equation}
 \tvnnote{little L (denominator inside log) and big i are indistinguishable, but have completely different meanings!}
 \tvnnote{How  about dropping the subscript k?}
+\tvnnote{Også ta med uttrykket med integrasjon, slik som i lign. (4) i Linden et al. (2014)?}
 Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the longitudinal distance from the end of the segment, and $l_k = \delta s_k + h_k$ is the longitudinal distance from the start of the segment (Fig.~\ref{fig:line_source_illustration}). Eq. \ref{eq:linesource} and Eq. \ref{eq:pointsource} are the equivalent expressions where the transmembrane currents in a single neuronal segment are treated as a line source and point source, respectively. As for the point-source approximation, the contributions from several line-sources add up linearly. That is, if we have multiple segments $k$, the extracellular potential can be computed as:
 \begin{figure}[!ht]
 \begin{center}
@@ -252,6 +256,7 @@ where the volume integral runs over all sources. Here, the $CSD$ represents what
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Infinite anisotropic homogeneous extracellular medium}
 \label{sec:anisohomo}
+\tvnnote{Blir det feil å bare kalle seksjonen "Anisotropic extracellular medium"? Syntes det blir litt rotete å ta med "infinite" og "homogeneous" i tittelen.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In the previous subsection we assumed that the extracellular conductivity $\sigma$ was the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma$. If we use the point source approximation, and denote the conductivity in the different spatial directions $\sigma_x$, $\sigma_y$ and $\sigma_z$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
 
@@ -281,7 +286,7 @@ In general, the brain does not have an isotropic $\sigma$. For example, in corte
 \end{itemize}
 
 
-\subsection{Modelling the electrode}
+\subsection{Electrodes}
 \label{sec:electrode}
 \begin{itemize}
 \item Disc-electrode approximation
@@ -400,6 +405,7 @@ To account for diffusive effects, one needs to compute not only the electrical p
 
 \subsubsection{Frequency independent conductivity} 
 \label{sec:f-independent}
+\tvnnote{Her gir det kanskje mest mening å bare oppgi antagelsen om "isotropic, homogeneous and frequency independent conductivity", og henvise til kapittelet om konduktivitet?}
 Generally, the response of a medium to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that account for capacitive and inductive effects that are frequency dependent. Above (Chapter \ref{sec:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium includes capacitive effects, as an extracellular current traveling through it could interact with nearby capacitive neural membranes. However, for the relevant frequencies in extracellular recordings, the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite{Logothetis2007, Miceli2017, Ranta2017}. We have therefore based the VC theory presented here on the assumption that the medium is Ohmic or resistive, meaning that we the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite{Bedard2004, Tracey2011, Miceli2017}. 
 
 
