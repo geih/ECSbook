@@ -6,9 +6,10 @@
 \item No current monopoles - trick needed for point neurons
 \end{itemize}
 
-Modelling of neurons is at the core of computational neuroscience, and the topic has been treated in detail in several text books (see e.g., \cite{KockSegev1998, Koch1999, Hille2001, Dayan2005, Sterratt2011}). We therefore only give a brief introduction to it here. 
+Modelling of neurons is at the core of computational neuroscience, and the topic has been treated in detail in several text books (see e.g., \cite{johnston1994foundations, KockSegev1998, Koch1999, Hille2001, Dayan2005, Sterratt2011}). We therefore only give a brief introduction to it here. 
 
-Most simulations of extracellular potentials are based on multicompartmental neuronal models based on a Hodgkin-Huxley-type formalism. A model of a neuron is then characterized by (i) its morphology, and (ii) its membrane mechanisms. In a multicompartmental model\index{multicompartment modelling}, the morphology of the real neuron (Fig. \ref{fig:multicomp}A) is discretized as a set of compartments connected by resistors (Fig. \ref{fig:multicomp}B). In such a model there are two kinds of currents which together determine the membrane potential dynamics of the neuron (Fig. \ref{fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents (green arrows). Once the currents are characterized, the dynamics of the membrane potential can be computed by demanding that the sum of currents into a given compartment is zero (Kircchoff's current law). 
+Most simulations of extracellular potentials are based on biophysical multicompartmental neuronal models, which are typically based on a formalism similar to that used in the celebrated model by Hodgkin and Huxley \cite{Hodgkin1952}. In models based on
+a Hodgkin-Huxley-type formalism, a neuron is characterized by (i) its morphology, and (ii) its membrane mechanisms. In a multicompartmental model\index{multicompartment modelling}, the morphology of the real neuron (Fig. \ref{fig:multicomp}A) is represented as a discretized set of compartments connected by resistors (Fig. \ref{fig:multicomp}B). In such a model there are two categories of currents which together determine the membrane potential dynamics of the neuron (Fig. \ref{fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents (green arrows). Once all the currents are characterized, the dynamics of the membrane potential can be computed by demanding that the sum of currents into a given compartment is zero (Kircchoff's current law). 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -23,7 +24,7 @@ Below, we first present a framework for modeling the transmembrane currents in a
 
 
 \subsection{Membrane currents}
-In models based on a Hodgkin-Huxley type formalism, a patch of membrane typically includes three autonomous types of transmembrane currents. These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through various active ion channels ($i_x$), of which there can be several different kinds ($x$ is an index). In addition, a neuron may receive external stimuli, either through (iv) synaptic currents ($i_{syn}$) or (v) experimental current injections ($i_{stim}$). In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
+In Hodgkin-Huxley type models, the membrane typically includes three autonomous classes of transmembrane currents. These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive external stimuli, either through (iv) synaptic currents ($i_{syn}$) or (v) experimental current injections ($i_{stim}$). In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
 
 \begin{equation}
 i_c + i_L + \sum_x{i_x} + i_{syn} + i_{stim} = 0.
@@ -44,19 +45,19 @@ represents the charging up of the membrane potential $\phi_m$ due to a charge de
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Fig02/capacitive_currents.pdf}
 \end{center}
-\caption{\textbf{Capacitive currents are important for current conservation.}  (\textbf{(A)}) The extracellular and intracellular bulk solutions are essentially electroneutral, and the only region where there is a nonzero charge density is in the thin debye layers around the capacitive membrane. The capacitive current is not due to ions crossing the membrane, but due to ions piling up on either side of it, separating a charge density $\rho$ and a charge density $-\rho$, giving rise to a membrane potential of $\phi_m = \rho/c_m$. An outward capacitive current could correspond to an anion leaving the membrane on the inside (\textbf{(B)}), which will coincide with a cation leaving the membrane on the outside (\textbf{(C)}). Thus, capacitive membrane currents give rise to electrical ionic volume currents both in the intra- and extracellular space. 
+\caption{\textbf{Capacitive currents are important for current conservation.}  (\textbf{(A)}) The extracellular and intracellular bulk solutions are essentially electroneutral, and the only region where there is a nonzero charge density is in the thin debye layers around the capacitive membrane. The capacitive current is not due to ions crossing the membrane, but due to ions piling up on either side of it, separating a charge density $\rho$ and a charge density $-\rho$, giving rise to a membrane potential of $\phi_m = \rho/c_m$. An outward capacitive current could correspond to an anion leaving the membrane on the inside (\textbf{(B)}), which will coincide with a cation leaving the membrane on the outside (\textbf{(C)}). Thus, capacitive membrane currents do give rise to electrical ionic volume currents both in the intra- and extracellular space.
 }
 \label{fig:capacitive_currents}
 \end{figure}
 
 
 \subsubsection{Leakage current}
-The leakage current is expressed as
+The leakage current is given by
 \begin{equation}
 i_L = \bar{g}_L (\phi_m - E_L),
 \label{eq:HHleak}
 \end{equation}
-where $\bar{g}_L$ is the leak conductance (the bar indicates that it's a constant). The factor $(\phi_m - E_L)$ is often called the driving force, and $E_L$ is the leak reversal potential. The biophysical origin of the reversal potential is explained later (see SECTION). For now, we will simply think of $E_L$ as a constant, and the leakage current as representative of an orchestra of physiological processes that together will drive the membrane potential towards this constant value. Together, the capacitive current and the leakage current form an RC-circuit that determines the passive properties of the membrane. If the neuron were to include only these two currents, it could be well modelled as an RC-circuit (Fig. \ref{fig:RC}). Such RC-neuron models are often used to simulate the subthreshold dynamics of neurons.
+where $\bar{g}_L$ is the leak conductance (the bar indicates that it's a constant). The factor $(\phi_m - E_L)$ is often called the driving force, and $E_L$ the leak reversal potential. The biophysical origin of the reversal potential is explained later (see SECTION). For now, we will simply think of $E_L$ as the "target potential" that the leakage current will strive to drive the membrane towards. In reality, the leakage current is not a single current, but represents an orchestra of physiological processes that together will drive the membrane potential towards $E_L$. Together, the capacitive current and the leakage current determine the passive properties of the membrane. If the neuron were to include only these two currents, it could be well modeled as an RC-circuit, and RC-neuron models are often used to simulate the subthreshold dynamics of neurons (Fig. \ref{fig:RC}). 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -67,7 +68,7 @@ where $\bar{g}_L$ is the leak conductance (the bar indicates that it's a constan
 \label{fig:RC}
 \end{figure}
 
-In the RC-model, $E_L$ will be identical to the resting potential of the neuron. In the more general models, which also include active ion channels (see below), the resting potential will still tend to be close to $E_L$, but will typically not be identical to $E_L$, as there some of the active ion channels can be partially open during rest. In the HH model, $E_L$ had the value $-54.4$ mV. 
+In the RC-model, $E_L$ will be identical to the resting potential of the neuron. In the more general models, which also include active ion channels (see below), the resting potential will still tend to be close to $E_L$, but will typically not be identical to $E_L$, as there some of the active ion channels can be partially open during rest, and thus affect the resting potential. In the HH model, $E_L$ had the value $-54.4$ mV. 
 
 
 \subsubsection{Active ion channels}
@@ -78,77 +79,213 @@ I_x = \bar{g}_x m_x^{\alpha} h_x^{\beta}(V-E_x)
 \label{eq:HHform}
 \end{equation}
 
-Here, $\bar{g}_x$ denotes the conductance all channels of type $x$ are fully open (the bar indicates that it's a constant), while $E_x$ is the reversal potential for the ion species that travels through the channel.
+Here, $\bar{g}_x$ denotes the conductance when all channels of type $x$ are fully open (the bar indicates that it's a constant), while $E_x$ is the reversal potential for the ion species that travels through the channel. In analogy with the leak reversal potential, we may think of $E_x$ as the target potential that the current through ion channel $x$ will strive to drive the membrane potential towards. The intrinsic membrane potential dynamics is thus due to the competition between various currents that try to drive it towards various reversal potentials. We note that the current density $I_x$ does not represent the current through single ion channel, but a large number of channels of the same type $x$. 
 
-An active ion channel differs from the passive leakage channel in that its total conductance, $\bar{g}_{x} m^{\alpha} h^{\beta}$, will vary with time due to the so-called gating variables, $m$ and $h$, which determine the dynamics of how the ion channel activates or deactivates (opens or closes). Here, $m$ and $h$ represent two different types of gates, which have different dependencies in terms of when they open/close. The exponents $\alpha$ and $\beta$ indicate that a channel $x$ may have several copies of each type of gate.  At the cellular level, the values of $m$ and $h$ interpret as the fraction of the gates of the various types that are open, and the values are thus numbers between zero (all gates in the closed state) and one (all gates in the open state). For an ion channel to be open, all its gates must be in the open state. The product $m^{\alpha} h^{\beta}$ thus interprets as the fractions of ion channels that are open.
+Active ion channels differ from the passive leakage channel in that their total conductance, $\bar{g}_{x} m^{\alpha} h^{\beta}$, will vary with time due to the so-called gating variables, in eq. \ref{eq:HHform} denoted $m$ and $h$. These determine the dynamics of how the ion channel activates or deactivates (opens or closes). Here, $m$ and $h$ represent two different types of gates, which have different dependencies in terms of what makes them open/close. The exponents $\alpha$ and $\beta$ indicate that a channel $x$ may have several copies of each type of gate. The values of $m$ and $h$ interpret as the fraction of the gates of the various types that are open, and the values are thus numbers between zero (all gates in the closed state) and one (all gates in the open state). For an ion channel to be open, all its gates must be in the open state. The product $m^{\alpha} h^{\beta}$ thus interprets as the fractions of ion channels that are open.
 
 For voltage-gated ion channels, the the dynamics of the gating variables are described by kinetics equations on the form:
 \begin{equation}
-\frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\phi_m) - x}{\tau_x(\phi_m}),  \, \text{for } x = \{m,h\}.
+\frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\phi_m) - x}{\tau_x(\phi_m)},  \, \text{for } x = \{m,h\}.
 \label{eq:HHgate}
 \end{equation}
-The same kind of formalism also applies to ligand gated ion channels, i.e., channels that instead of opening and closing as a function of the membrane potential $\phi_m$, open or close as a function of a concentration of some ligand. The most common ligand gated channels in the brain are Ca$^{2+}$ gated ion channels. Here, the steady state activation $x_{inflty}(\phi_m)$ and activation time constant $\tau_x(\phi_m)$ are functions of the membrane potential, and these must be determined experimentally for each individual ion channel type. We do not go into these experimental issues here. 
+Here, the steady state activation $x_{inflty}(\phi_m)$ and activation time constant $\tau_x(\phi_m)$ are functions of the membrane potential, and these must be determined experimentally for each individual ion channel type. We do not go into these experimental issues here. 
 
+The same kind of formalism can also be applied to ligand gated ion channels, i.e., channels that instead of opening and closing as a function of the membrane potential $\phi_m$, open or close as a function of a concentration of some ligand. The most common ligand gated channels in the brain are Ca$^{2+}$ gated ion channels, i.e., channels with gate opening controlled by the intracellular Ca$^{2+}$ concentration ($[Ca^{2+}]_i$), where:
 
-
-and  $\bar{g}_{K} n^4$ are functions of voltage and time via the so-called gating variables $m$, $h$ and $n$. The exponents indicate that the Na$^+$ channels has three copies of a gate of type $m$, and one copy of a gate of type $h$, while the K$^+$ has only one kind of gate, but four copies of it. At the cellular level, $m$, $h$ and $n$ interpret as the fraction of the the gates that are open, and they thus take numbers between zero (all gates in the closed state) and one (all gates in the open state). The products $m^3 h$ and $n^4$ thus interpret as the fractions of the Na$^+$ channels and the K$^+$ channels that are open, respectively. The dynamics of the gating variables are described by kinetics equations on the form:
-
-
-the original HH model contains two active ion channels, a Na$^+$ and a K$^+$ channel, which together are responsible for action potential generation:
 \begin{equation}
-i_{Na} = \bar{g}_{Na} m^3 h (\phi_m - E_{Na}),
-\label{eq:HHNa}
+\frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}([Ca^{2+}]_i) - x}{\tau_x([Ca^{2+}]_i)},  \, \text{for } x = \{m,h\}.
+\label{eq:HHgateCa}
 \end{equation}
-\begin{equation}
-i_{K} = \bar{g}_{K} n^4 (\phi_m - E_{K}).
-\label{eq:HHK}
-\end{equation}
-Here, $\bar{g}_{Na}$ and $\bar{g}_K$ are the conductances for fully open channels (the bars indicate that they are constants), while $E_{Na}$ and $E_{K}$ are the Na$^+$ and K$^+$ reversal potentials, which in the HH model had the values $50$ mV and $-77$ mV, respectively. Like the leakage current will tend to drive $\phi_m$ towards $E_L$, the Na$^+$ current, when active, will tend to drive $\phi_m$ towards $E_{Na}$, and the K$^+$ current will tend to drive $\phi_m$ towards $E_K$. 
 
-The active channels differ from the passive leakage channel in that their total conductances $\bar{g}_{Na} m^3 h$ and  $\bar{g}_{K} n^4$ are functions of voltage and time via the so-called gating variables $m$, $h$ and $n$. The exponents indicate that the Na$^+$ channels has three copies of a gate of type $m$, and one copy of a gate of type $h$, while the K$^+$ has only one kind of gate, but four copies of it. At the cellular level, $m$, $h$ and $n$ interpret as the fraction of the the gates that are open, and they thus take numbers between zero (all gates in the closed state) and one (all gates in the open state). The products $m^3 h$ and $n^4$ thus interpret as the fractions of the Na$^+$ channels and the K$^+$ channels that are open, respectively. The dynamics of the gating variables are described by kinetics equations on the form:
-\begin{equation}
-\frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\phi_m) - x}{\tau_x(\phi_m}),  \, \text{for } x = \{m,n,h\}.
-\label{eq:HHgate}
-\end{equation}
-Here, the steady state activation $x_{inflty}(\phi_m)$ and activation time constant $\tau_x(\phi_m)$ are functions of the membrane potential which must be determined experimentally. This is quite some work, and we do not go into these experimental issues here. 
 
-In the original study by Hodgkin and Huxley it was found that:
+\subsubsection{Active ion channels in the Hodgkin-Huxley model}
+Just to give an example of a complete neuron model, the full Hodgkin-Huxley models is given by
 \begin{equation}
-x_{\infty}(\phi_m) = \frac{\alpha_x(\phi_m)}{\alpha_x(\phi_m) + \beta_x(\phi_m)}, 
-\label{eq:xinfly}
+c_m \frac{d\phi_m}{dt} = -\bar{g}_L(\phi_m-E_L) - \bar{g}_{Na} m^3 h (\phi_m - E_{Na}) - \bar{g}_{K} n^4 (\phi_m - E_{K}).
+\label{eq:HHfull}
 \end{equation}
-and
+
+Compared to modern neuron models, it is relatively simple in that it only contains two active ion channels, a Na$^+$ with three activation gates ($m^3$) and one inactivation gate ($h$), as well as a K$^+$ channel with four inactivation gates $n^4$. These two channels are together responsible for action potential generation. In eq. \ref{eq:HHfull}, $\bar{g}_{Na}$ and $\bar{g}_K$ are the conductances for fully open channels, while $E_{Na}$ and $E_{K}$ are the Na$^+$ and K$^+$ reversal potentials. Like we defined in eq. \ref{eq:HHgate}, the gating kinetics is given by: 
 \begin{equation}
-\tau_{x}(\phi_m) = \frac{1}{\alpha_x(\phi_m) + \beta_x(\phi_m)}, 
-\label{eq:taux}
+\frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\phi_m) - x}{\tau_x(\phi_m)},  \, \text{for } x = \{m,h,n\}.
+\label{eq:HHgates}
 \end{equation}
-with
+The experimentally determined functions for $x_{infty}(\phi_m)$ and $\tau_x(\phi_m)$, and all model parameter values are given in Table \ref{tab:HH}. An electric circuit representation of the HH model is depicted in Fig. \ref{fig:HHcircuit}
+
+\begin{table}[h!]
+\begin{center}
+\caption{The Hodgkin-Huxley model}
+\label{tab:HH}
+    \begin{tabular}{l}
+    \hline
+    $x_{\infty}(\phi_m) = \frac{\alpha_x(\phi_m)}{\alpha_x(\phi_m) + \beta_x(\phi_m)}$ for $x = m,n,h$ \\ \hline
+    $ \alpha_n = \frac{0.01 \mathrm{ms}^{-1} \phi_m+55 \mathrm{mV}}{1-e^{-(\phi_m+55 \mathrm{mV})/10 \mathrm{mV}}}$  \\ \hline
+    $ \beta_n = 0.125 \mathrm{ms}^-1 e^{-(\phi_m+65 \mathrm{mV})/80 \mathrm{mV}} $  \\ \hline
+    $ \alpha_m = \frac{0.1 \mathrm{ms}^{-1} \phi_m+ 40 \mathrm{mV}} {1-e^{-(\phi_m+40 \mathrm{mV})/10 \mathrm{mV}}}$  \\ \hline
+    $\beta_m = 4 \mathrm{ms}^{-1} e^{-(\phi_m+65  \mathrm{mV})/18 \mathrm{mV}} $  \\ \hline
+    $\alpha_h = 0.07 \mathrm{ms}^{-1} e^{-(\phi_m+65 \mathrm{mV})/20 \mathrm{mV}}$  \\ \hline
+    $\beta_h = \frac{1 \mathrm{ms}^{-1}}{1+e^{-(\phi_m+35 \mathrm{mV}))/10 \mathrm{mV})}} $  \\ \hline
+    $c_m = 1.0 \mu $F/cm$^2$ \\ \hline
+    $\bar{g}{Na} = 120\times 10^{-9}$ m$^2$/s\\ \hline
+    $\bar{g}_{K} = 36$ mS/cm$^2$ \\ \hline
+    $\bar{g}_{L} = 0.3$ mS/cm$^2$ \\ \hline
+    $E_{Na} = 50$ mV \\ \hline
+    $E_{K} = -77$ mV \\ \hline
+    $E_{L} = -54.4$ mV \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Fig02/HHmodel.png}
+\end{center}
+\caption{\textbf{Hodgkin Huxley model.}
+}
+\label{fig:HHcircuit}
+\end{figure}
+
+
+\subsubsection{Reversal potentials}
+A prerequisite for having transmembrane currents in neurons is that the intra- and extracellular solutions contain different ionic compositions. Neurons have a set of homeostatic mechanisms that make sure that it stays that way. The perhaps most important of these is the ATPase pump, which uses energy to pump K$^+$ ions into the neuron and Na$^+$ ions out, and as a result, the intracellular space is comparatively rich in K$^+$, while the extracellular space is comparatively rich on Na$^+$. Typical values of ion concentrations of the main charge carriers inside and outside neurons are given in Table \ref{table:ion-concentrations}.
+
+\begin{table}[h]
+\centering
+\caption{Major charge carrier concentrations inside/outside a typical mammalian neuron. Example values taken from \cite{Wu2019}, but may vary with species and brain regions. Nernst potentials were computed from Eq. \ref{eq:revpots} assuming a body temperature of 309.15 K.}
+\label{table:ion-concentrations}
+{\begin{tabular}{lccccc}\toprule
+						    & 	K$^+$	&	Na$^+$	&	Mg$^2+$	  &	Cl$^-$	&	Ca$^{2+}$	 \\ \midrule
+Inside (mM)				    & 140		&		10	&		0.5	&	10		&  	10$^{-4}$	  	\\
+Outside (mM)			           & 5			&		145	&		2	&	110 		&		2		  	\\
+Nernst potential (mV)		    &	-89		&	    	+71	&		+19	&	-64		&		+132 		  	\\
+\bottomrule
+\end{tabular}}{}
+\end{table}
+
+Ion channels are pores in the membrane, some of which are selectively permeable only to specific ions. For example, when a Na$^+$ channel opens, only Na$^+$ ions will pass through it, and they will diffuse from the extracellular space, where the Na$^+$ concentration is highest, and into the neuron. As this diffusive process transfers charged ions into the neuron, it will charge up the membrane potential. The membrane potential will in turn evoke an electrostatic force on the Na$^+$ ions, causing an electrical drift of Na$^+$ in the opposite direction. The ionic reversal potential is defined as the potential at which the electrical drift current and diffusive current of a given ion species are in an equilibrium where they are equal in magnitude but oppositely directed. It can be calculated from the Nernst-Planck equation for electrodiffusion. If we approximate the problem as one-dimensional (in the $z$-direction, perpendicular to the membrane), the Nernst-Planck equation for an ion species $k$ is:
+%%%%
+\begin{equation}
+j_k = j_{k,\text{diff}} + j_{k,\text{drift}} 
+=  - P_k \Big(\frac{d[k]}{dz} +  \frac{Fz_k}{RT}  [k] \frac{d\phi}{dz} \Big), 
+\label{eq:NP1D}
+\end{equation}
+%%%%
+where the first term is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. Here, the membrane permeability ($P_k$) to ion $k$ has replaced the diffusion constant in a free solution ($D_k$) which appears in the more common form of the Nernst-Planck equation. Furthermore, $z_{k}$ is the valency of ion species $k$, $R = 8.314$ J mol$^{-1}$K$^{-1}$ is the gas constant, $F = 96485.3365$ C/mol is Faraday's constant, and $T$ is the absolute temperature (K). The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
+
+\begin{equation}
+\frac{1}{[k]} \frac{d[k]}{dz} = - \frac{Fz_k}{RT}  \frac{d\phi_m}{dz}.
+\end{equation}
+We may multiply both sides by $dz$ and re-arrange this to get:
+\begin{equation}
+-d\phi = \frac{RT}{Fz_k}  \frac{d[k]}{[k]}.
+\end{equation}
+Now we may integrate from the inside to the outside of the membrane:
+\begin{align}
+-\int_{\phi_{\text{in}}}^{\phi_{\text{out}}}  dV &= \frac{RT}{Fz_k}  \int_{[k]_{\text{in}}}^{[k]_{\text{out}}} \frac{d[k]}{[k]} \rightarrow \\
+\phi_{\text{in}}-\phi_{\text{out}} &= \frac{RT}{Fz_k} ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}} \rightarrow \\
+E_k & =  \frac{RT}{Fz_k}  ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}} 
+\label{eq:revpots}
+\end{align}
+where the last equality follows from the definition of $E_k$ as the membrane potential $\phi_{\text{in}}-\phi_{\text{out}}$ for which the the net flux (in Eq. \ref{eq:NP1D}) is zero. Eq. \ref{eq:revpots} was used to compute the reversal potentials listed in Table \ref{table:ion-concentrations}. 
+
+Based on Eq. \ref{eq:NP1D} and a few assumptions, it has been shown that a membrane current is well described by the Goldman-Hodkgkin-Katz equation (see e.g., \cite{johnston1994foundations}):
+
+\begin{equation}
+I_\text{k} = P_k z_k F \frac{z_k F \phi_m}{R T} \Big( \frac{[k]_\text{in}-[k]_\text{out} e^{-z_k F \phi_m/RT}} {1-e^{-z_k F \phi_m/RT}} \Big), 
+\label{eq:GHK}
+\end{equation}
+The transmembrane currents used in the HH type formalism (Eq. \ref{eq:HHform}), which are proportional to the driving force $(V-E_k)$, are linearized (sometimes called quasi-Ohmic) versions of the Goldman-Hodkgkin-Katz equation.
+
+Eq. \ref{eq:NP1D} defined the reversal potential for individual ion species, which is relevant for ion specific ion channels. In contrast, the passive membrane has some leakage permeability to all ion species simultaneously. This gives rise to a leak reversal potential $E_L$ (from Eq. \ref{eq:HHleak}), representing the equilibrium condition where the leakages of various ions across the membrane sum to a zero net electrical current. If we assume that only the three most important charge carriers (K$^{+}$, Na$^{+}$ and Cl$^{-}$) contribute, and that they are defined by Eq. \ref{eq:GHK} with leak permeabilities $P_K$, $P_{Na}$ and $P_{Cl}$, it can be shown that they are in equilibrium at the potential:
+
+\begin{equation}
+E_L = \frac{R T}{F} 
+\ln \frac{P_\text{K} [K]_\text{out}+P_\text{Na} [Na]_\text{out} + P_\text{Cl} [Cl]_\text{in}}
+           {P_\text{K} [K]_\text{in}+P_\text{Na} [Na]_\text{in} + P_\text{Cl} [Cl]_\text{out}}.
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Morphology}
+So far, we have only introduced the formalism for modeling neurons as a single compartment (see Fig. \ref{fig:multikompisen}A, rightmost figure). When doing that, one implicitly assumes that the whole neuron is isopotential (same $\phi_m$ evenrywhere). This is generally not true, and especially not in neurons with long and branchy dendrites, where $\phi_m$ can be very different in the soma compared to what it is in the tip of a distal dendrite. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{Fig02/Multikompis.png}
+\end{center}
+\caption{\textbf{Multi-compartment model.}
+}
+\label{fig:multikompisen}
+\end{figure}
+
+Models that account for morphological features of neurons are called multicompartmental models. The neural morphology is then represented as cylindrical segments connected with resistors and the mathematical formalism for modeling it is relatively straightforward, and $\phi_m$ can be computed in each individual segment. To give an understanding of the formalism used in multicompartmental models, let us consider a subset including three connected cylindrical compartments (Fig. \ref{fig:multikompisen}B), and let us for simplicity assume that the three cylinders have the same length ($L$) and diameter ($d$). The two categories of currents that are involved are (i) the transmembrane currents that we introduced in the previous subsection, all of which we can group together into a total transmembrane current $I^M_j$, and (ii) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ denotes the current from compartment $n-1$ to $n$). 
+
+The dynamics of such a system is computed using Kirchhoff's current law, which demands that the sum of currents into a given segment ($n$) should be zero:
+
+\begin{equation}
+I_{n-1,n} - I_{n,j+1} - I^M_n = 0
+\label{eq:Kirch}
+\end{equation}
+We note that we calculate with total currents here (unit A), not current densities. The axial currents are defined by Ohms law:
 \begin{eqnarray}
-\alpha_n = 0.01 \frac{\phi_m+55}{1-e^{-(\phi_m+55)/10}}, \\
-\beta_n = 0.125 e^{-(\phi_m+65)/80}, \\
-\alpha_m = 0.1 \frac{\phi_m+40}{1-e^{-(\phi_m+40)/10}}, \\
-\beta_m = 4 e^{-(\phi_m+65)/18}, \\
-\alpha_h = 0.07 e^{-(\phi_m+65)/20}, \\
-\beta_h = \frac{1}{1+e^{-(\phi_m+35)/10}}, 
+I_{n-1,n} = \frac{\phi_{n-1}-V_n}{4 R_a L/(\pi d^2)}, \nonumber \\ 
+I_{n,n+1} = \frac{\phi_{n}-V_{n+1}}{4 R_a L/(\pi d^2)},
+\label{eq:axialcurrents}
 \end{eqnarray}
-where $\phi_m$ should be inserted with units mV for things to become correct. 
+where the the denominators represent the axial resistance between two segments, defined in terms of the axial resistivity $R_a$ ($\Omega$ m), a material property of the cytosol solution, the cross section area $\pi d^2/4$ and the segment length or travel distance ($L$ (m)). We note that $\phi_n$ is the intracellular potential in compartment $n$, but we shall in the reminder of this subchapter assume that the extracellular space is isopotential and grounded ($\phi = 0$ there), so that the $\phi_n$ will be identical to the membrane potential.
 
 
-\subsubsection{Active ion channels in Hodgkin-Huxley type models}
-The Hodgkin-Huxley model was adapted to experiments performed on the giant axon in a motor neuron of a squid. The reason for this was simply that this kind of neuron was very large, which made it easy to record from and manipulate experimentally. In general, neurons come in many varieties, and their dynamical properties vary. The Hodgkin-Huxley model is limited in its ability to capture the dynamics of, say, a pyramidal cell in the mammalian cortex. Fortunately, however, the type of mathematical formalism used to describe the ion channel dynamics is still applicable to most neuronal mechanisms. 
-
-In models based on a Hodgkin-Huxley type formalism, a patch of membrane typically include three various types of transmembrane currents. These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there can be several different kinds ($x$ is an index). 
-
-
-
-
-
-ion channels are described on the equational form
+If we write the membrane current as: 
+\begin{equation}
+I_n^{cap} + I_n^{ion} + I_n^{leak} + I_n^{stim} = -\pi d L c_m \frac{d\phi_n}{dt} + \pi d L (i_n^{ion} + i_n^{leak}) + I_n^{stim}
+\label{eq:Imemb}
+\end{equation}
+where $i^{ion}$ represent the total current density of all active ion channel currents, and insert this into Eq. \ref{eq:Kirch}, we get:
 
 \begin{equation}
-I_x = g_x m_x^{\alpha} h_x^{\beta}(V-E_x)
-\label{eq:HHform}
+c_m \frac{d\phi_n}{dt} = i_n^{ion} + i_n^{leak} + \frac{d}{4R_a}\left(\frac{V_{n+1}-V_n}{L^2} - \frac{V_n-V_{n-1}}{L^2} \right) + \frac{I^{stim}}{\pi d L}
+\label{eq:multimain}
 \end{equation}
+
+
+
+If we write the membrane current as: 
+\begin{equation}
+I_j^{cap} + I_j^{ion} + I_j^{stim} = -\pi d L c_m \frac{d\phi_n}{dt} - \pi d L \frac{\phi_n-E_m}{R_m} + I_n^{stim}
+\label{eq:Imemb}
+\end{equation}
+where $i^{ion}$ represent all ionic currents through ion channels and leakage, this becomes:
+
+\begin{equation}
+c_m \frac{d\phi_n}{dt} = \frac{E_m-\phi_n}{R_m} + \frac{d}{4R_a}\left(\frac{V_{j+1}-V_j}{l^2} - \frac{V_j-V_{j-1}}{l^2} \right) + \frac{I^{stim}}{\pi d l}
+\label{eq:multimain}
+\end{equation}
+
+
+
+
+\item membrane currents are as before (with stimulus-term):
+
+\item With membrane currents and axial currents inserted in Eq. \ref{eq:Kirch}, we get:
+\begin{equation}
+C_m \frac{dV_j}{dt} = \frac{E_m-V_j}{R_m} + \frac{d}{4R_a}\left(\frac{V_{j+1}-V_j}{l^2} - \frac{V_j-V_{j-1}}{l^2} \right) + \frac{I^{stim}}{\pi d l}
+\label{eq:multimain}
+\end{equation}
+
+\item Eq. \ref{eq:multimain} is the fundamental equation for multicompartmental models. We could also add active membrane currents to the right hand side, e.g. $I^{Na}$ and $I^K$ from the HH-model.
+
+\item Multicompartmental neuron models can be solved by means of dedicated software.
+\begin{itemize}
+\item NEURON (most common, and used in this course)
+\item GENESIS
+\end{itemize}
+
+\end{itemize}
+
+\end{itemize}
+
+
+
 
 
 \begin{figure}[!ht]
@@ -160,10 +297,6 @@ I_x = g_x m_x^{\alpha} h_x^{\beta}(V-E_x)
 \label{fig:multicomp}
 \end{figure}
 
-
-
-\subsubsection{Morphology}
-\ghnote{Skriv om multicomp her}
 
 \subsection{Cable theory}
 \ghnote{Skriv om cable theory her, og noen analytiske tilfeller som hjelper oss aa faa en kjerneforstaaelse.}
