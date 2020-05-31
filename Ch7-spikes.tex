@@ -55,7 +55,7 @@ However, as described in the previous section,
 a two-compartment neuron model is the simplest model that can produce an extracellular potential such as a 
 spike. An example of this is provided in Figure~\ref{Spikes:fig:TwoCompartment} where active sodium and potassium conductances are added to the  soma compartment of an otherwise passive neuron model. 
 The membrane potential during a spike is illustrated in the right panel, and the  
-corresponding EP is computed from Equation~\ref{Spikes:equation:Ve-two-compartment}. Around the soma a characteristic
+corresponding EP is computed from Equation~\ref{XX:equation:Ve-two-compartment}. Around the soma a characteristic
 EP spike with a sharp negative peak followed by a slower positive hump is seen, in accordance with typical experimental
 spike recordings as exemplified by Figure~\ref{Spikes:fig:Henze}. Around the dendrite compartment inverted
 spikes of the same sizes are seen, but such inverted spikes are rarely, if ever, seen in experiments. This suggests that
@@ -72,7 +72,7 @@ spike shapes that would be recorded by an electrode at different positions aroun
 \end{center}
 \caption{\textbf{EP (spike) from action potential for a two-compartment neuron model with active sodium
 and potassium conductances in the soma compartment}. Computed from 
-Equation~\ref{mm:equation:Ve-two-compartment}.
+Equation~\ref{XX:equation:Ve-two-compartment}.
 Left panel shows the EP at different spatial positions, while right panel shows the corresponding
 soma membrane potential during the action potential. 
 \gen{Figure + caption to be updated}
@@ -87,7 +87,7 @@ soma membrane potential during the action potential.
 A more detailed picture of spike shapes is obtained by considering a detailed multi-compartmental neuron model
 with a comprehensive branching structure typical for real neurons as in Figure~\ref{Spikes:fig:MultiCompartment}.
 With this dendritic morphology the membrane currents through the dendrites are spread over a larger membrane area.
-As a result, Equation~\ref{Spikes:equation:Ve-multi-compartment} predicts that the largest EP spikes will be seen
+As a result, Equation~\ref{XX:equation:Ve-multi-compartment} predicts that the largest EP spikes will be seen
 around the soma for the example pyramidal neuron in Figure~\ref{Spikes:fig:MultiCompartment}.  
 Around the apical dendrites, the spikes will still have an inverted shape compared to spikes close to the soma. 
 However, their amplitudes will be small, only a few microvolts, so they will not be seen in most experiments.
@@ -284,44 +284,44 @@ spike will decay as $1/r$ in this regime as well.
 \gen{From David Sterratt: Intuition for the relationship witd $d, C_m, f, r_a$.}
 
 For recording positions far away from the soma, the contribution from return membrane currents must be taken into
-account in the sum in Equation~\ref{mm:equation:Ve-multi-compartment}. An approximate way of doing this is to
+account in the sum in Equation~\ref{XX:equation:Ve-multi-compartment}. An approximate way of doing this is to
 assume all return currents to leave the dendrite at a single point on the dendrite. Then we have 
 a current dipole where the transmembrane current entering at the soma is balanced with a oppositely directed current
 with the same magnitude leaving at a single point on the dendrite. The current dipole length is then given by the distance
 between the soma and the dendritic position of the return current. An estimate of this length is provided by the 
 frequency-dependent length constant  $\lambda_\mathrm{AC}(f)$  corresponding to the weighted mean of the positions of the return currents along
-the dendrite stick (see Box~\ref{mm:box:ball-and-stick-spikes}). 
+the dendrite stick (see Box XX). 
 Then with the use of expression for the EP around a current dipole in 
-Equation~\ref{mm:equation:Ve-dipole-p}:
+Equation~\ref{XX:equation:Ve-dipole-p}:
 %%%
 \begin{equation}
   |\hat{V}_\mathrm{e,far}(f,\vec{r})|  \propto d^{2} \frac{|\cos \theta| }{r^2  R_\mathrm{a}}  |\hat{V}_\mathrm{s}(f)| 
-  \label{mm:equation:Ve_far}
+  \label{Spikes:equation:Ve_far}
 \end{equation}
 %%%
 The suffix `far' is addeds because this expression only applies in the `far-field' limit, that is,
-far away from the soma. A first observation from this formula is that the EP is no longer radially symmetric, and depends both on the radial distance $r$ from the neuron and  the angle $\theta$ with the dipole axis, that is, the direction of the dendritic stick  (see Box~\ref{mm:box:dipolar-EP}). The amplitude will be largest
+far away from the soma. A first observation from this formula is that the EP is no longer radially symmetric, and depends both on the radial distance $r$ from the neuron and  the angle $\theta$ with the dipole axis, that is, the direction of the dendritic stick  (see Box~XX). The amplitude will be largest
 above and below the neuron where $\theta=0^\circ$ and $\theta=180^\circ$, respectively. In the sideways direction 
 ($\theta \sim 90^\circ$) the EP will be much smaller, as is characteristic for spatial pattern of potentials around a current
-dipole as illustrated in Figure~\ref{mm:fig:EP-spike-TwoCompartment}. A qualitatively similar dipolar pattern, although not so distinct,
-is also seen for the spike generated by the biophysically detailed multi-compartment neuron in Figure~\ref{mm:fig:EP-spike-MultiCompartment}.
+dipole as illustrated in Figure~\ref{Spikes:fig:TwoCompartment}. A qualitatively similar dipolar pattern, although not so distinct,
+is also seen for the spike generated by the biophysically detailed multi-compartment neuron in Figure~\ref{Spikes:fig:MultiCompartment}.
 
-Another difference of this far-field expression with the near-field expression in Equation~\ref{mm:equation:Ve_near}, is that the
+Another difference of this far-field expression with the near-field expression in Equation~\ref{Spikes:equation:Ve_near}, is that the
 amplitude decays as $1/r^2$, characteristic for potentials around dipolar sources, rather than $1/r$ which is characteristic for potentials around 
 a single source. This transition from a $1/r$ `monopolar' regime to a $1/r^2$ dipolar regime is indeed observed in
-the spike-amplitude panel in Figure~\ref{mm:fig:EP-spike-ball-and-stick-results}.
+the spike-amplitude panel in Figure~\ref{Spikes:fig:ball-and-stick-results}.
 
 There are several qualitative insights regarding the sizes and widths of spikes that can 
-be found from the near-field and far-field formulae in Equations~\ref{mm:equation:Ve_near} and 
-\ref{mm:equation:Ve_far}, respectively. One relates directly to the shape of the spike:
+be found from the near-field and far-field formulae in Equations~\ref{Spikes:equation:Ve_near} and 
+\ref{Spikes:equation:Ve_far}, respectively. One relates directly to the shape of the spike:
 in the near-field expression, the high-frequency components of the spike is amplified 
 compared to the low-frequency components, that is, $\hat{V}_\mathrm{e,near}(f,r) \propto \sqrt{f}$.
 Thus close to the soma the spike is observed to be sharper than the intracellular action potential
-as observed in the insets in Figure~\ref{mm:fig:EP-spike-ball-and-stick-frequency}. 
+as observed in the insets in Figure~\ref{Spikes:fig:ball-and-stick-frequency}. 
 In the far-field regime there is no such high-frequency amplification ($\hat{V}_\mathrm{e,near}(f,r) \propto f^0 \sim 1$).
 As a consequence, spikes measured far away from the soma will have less high-frequency content than those measured close to soma.
 Thus the far-away spikes will be blunter and have larger spike widths as seen in the spike-width panel of 
-Figure~\ref{mm:fig:EP-spike-ball-and-stick-results}.
+Figure~\ref{Spikes:fig:ball-and-stick-results}.
 
 The spike amplitude is proportional to $d^{2}$ far away from the soma and $d^{3/2}$ close to the soma,
 where $d$ is the diameter of the dendritic stick diameter.
@@ -334,7 +334,7 @@ This reflects that the frequencies dominating the spike are so high that the cap
 %\todo{DCS: I'm wondering if we need more details on frequency-dependent cable theory, beyond Eq. 5.11.}
 
 An overall observation is that the spike is quite local, that is, the amplitude of the spike decays rapidly with distance from the neuron soma. For the pyramidal neuron considered in 
-Figure~\ref{mm:fig:EP-spike-ball-and-stick-results}, for example, the spike amplitude decays from being about
+Figure~\ref{Spikes:fig:ball-and-stick-results}, for example, the spike amplitude decays from being about
 300 microvolts a distance 20 micrometers from the soma center to being only about 10 microvolts a
 distance 100 micrometers away. This rapid decay eases the interpretation of recorded spikes, since it implies
 that in practice an electrode contact will only pick up spikes from neurons with somas positioned within a radius of some tens of micrometers.
@@ -448,12 +448,12 @@ and the spike EP is thus found to be
 %
 %
 For recording positions further away from the soma, the contribution from return membrane currents must be taken into
-account in the sum in Equation~\ref{mm:equation:Ve-multi-compartment}. An approximate way of doing this is to
+account in the sum in Equation~\ref{XX:equation:Ve-multi-compartment}. An approximate way of doing this is to
 assume all return currents to leave the dendrite at a single height $\lambda_\mathrm{AC}(f)$ above the soma, where 
 this frequency-dependent length constant corresponds to the weighted mean of the positions of the return currents along
 the dendrite stick. (The subscript `AC' denotes `alternating current'.)
 Then the EP can be approximated by using the 
-dipolar expression in Equation~\ref{mm:equation:Ve-dipole-p}, that is,
+dipolar expression in Equation~\ref{XX:equation:Ve-dipole-p}, that is,
 %%%
 \begin{equation}
   |\hat{V}_\mathrm{e,far}(f,\vec{r})| =  \frac{|p(f) \cos \theta|}{4 \pi \sigma r^2} 
@@ -464,7 +464,7 @@ dipolar expression in Equation~\ref{mm:equation:Ve-dipole-p}, that is,
 One way to define an AC length constant is as the mean value of the 
 envelope of the sinusoidally varying (normalized) membrane current
 $\hat{i}_\mathrm{m}$ weighted with distance $z$ from soma, 
-see Figure~\ref{mm:fig:EP-spike-ball-and-stick-sketch}. 
+see Figure~\ref{Spikes:fig:ball-and-stick-sketch}. 
 For an infinite dendrite stick this corresponds to
 %
 \begin{equation}
@@ -497,7 +497,7 @@ Thus for EPs measured far away from the soma we find
   \label{Spikes:box:equation:Ve_far_2}
 \end{equation}
 %
-Equations~(\ref{mm:box:equation:Ve_near_2}) and (\ref{mm:box:equation:Ve_far_2}) describe how each frequency component of 
+Equations~(\ref{Spikes:box:equation:Ve_near_2}) and (\ref{Spikes:box:equation:Ve_far_2}) describe how each frequency component of 
 the soma membrane potential  $\hat{V}_\mathrm{s}(f)$ is `translated' into frequency components of the 
 EP spike ($\hat{V}_\mathrm{e,near}(f,\vec{r})$ and $\hat{V}_\mathrm{e,far}(f,\vec{r})$, respectively). 
 %\end{boxfloat}
@@ -587,9 +587,18 @@ dendritic branches attached to the soma will thus generate the largest spikes. S
 
 
 \subsection{Spikes in neurons with active dendrites} 
-Kjernereferanse: \citep{Gold2006}
-Perhaps start this by showing membrane potentials for cells with active dendrites. 
-Then show extracellular signatures.
+\begin{itemize}
+\item Kjernereferanse: \citep{Gold2006}
+\item Perhaps start this by showing membrane potentials for cells with active dendrites. 
+\item Then show extracellular signatures.
+\end{itemize}
+
+\subsection{Axonal contributions to spikes}
+\begin{itemize}
+\item Describe recent theoretical studies from Brette's group
+\item And also experimental results from neurons grown on a chip from Hierlemann's group
+\end{itemize}
+
 
 \subsection{Multi-unit activity (MUA)} 
 Kjernereferanse: \citep{Pettersen2008}
