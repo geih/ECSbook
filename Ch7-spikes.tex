@@ -1,23 +1,22 @@
 \section{Spikes}
-%\ghnote{Antar dette blir et Torbjoern-kapittel.}
 
 \ghnote{Tekst under klippet fra bokkapittel. Tenker at vi trenger en intro her som forklarer dette.}
-Extracellular potentials measured within neural tissue are often split into two separate frequency domains, which reflect different aspects of the underlying neural activity. The low frequency part, the local field potential (LFP), is thought to mostly reflect synaptic input to populations of pyramidal cells, while the high-frequency part, the multi-unit activity (MUA), reflects the population spiking activity (Fig.~\ref{fig:LFP_MUA}).
+Extracellular potentials measured within neural tissue are often split into two separate frequency domains, which reflect different aspects of the underlying neural activity. The low frequency part, the local field potential (LFP), is thought to mostly reflect synaptic input to populations of pyramidal cells, while the high-frequency part, the multi-unit activity (MUA), reflects the population spiking activity (Fig.~\ref{XX:fig:LFP_MUA}).
 %%%%%%%%%
 % Figure
 %%%%%%%%%
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{Figures/eap_illustration.png}
-\includegraphics[width=0.6\textwidth]{Figures/LFP_spike_effect_test_300Hz.png}
+\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
+\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-LFP_spike_effect_test_300Hz.png}
 \end{center}
 \caption{\textbf{Potential EAP figures} 
-Common missconception that spikes only have frequency content above a few hundred Hz. Delta pulse have flat frequency spectrum.}
-\label{fig:freq_dep}
+Common misconception that spikes only have frequency content above a few hundred Hz. Delta pulse have flat frequency spectrum.}
+\label{Spikes:fig:freq_dep}
 \end{figure}
 
 \subsection{Spikes in neurons with passive dendrites} 
-\label{spikes:sec:EP-spikes}
+\label{Spikes:sec:EP-spikes}
 %Kjernereferanse: \citep{Pettersen2008a}
 %
 %Perhaps start this by showing membrane potentials for cells with passive dendrites. 
@@ -30,13 +29,13 @@ Common missconception that spikes only have frequency content above a few hundre
 %\begin{cnfigure}{Figures/mm/EP-spike-Henze-w100-r150}
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics{Figures/Spikes/EP-spike-Henze-w100-r150}
+\includegraphics{Figures/Spikes/Spikes-Henze-w100-r150}
 \end{center}
 \caption{\textbf{Simultaneous recording of intracellular and extracellular action potentials (`spikes').}
 Adapted from \citet{Henze2000}.
 \gen{Figure + caption to be updated}
 }
-\label{spikes:sec:fig:EP-spike-Henze}
+\label{Spikes:fig:Henze}
 \end{figure}
 %%%%%%%%%%%
 
@@ -44,21 +43,21 @@ Adapted from \citet{Henze2000}.
 %The recording of spikes, the EPs corresponding to action potentials in individual neurons, has been
 %key for learning about how neurons and neural networks function in live brains. 
 When a sharp electrode is placed close to the soma of a neuron, an intracellular action potential will be seen
-extracellularly as a sharp `spike' in the EP (Figure~\ref{mm:fig:EP-spike-Henze}). The magnitudes of these signals are quite different. While intracellular action potentials have amplitudes of $\sim$100~mV, the amplitudes of extracellular
+extracellularly as a sharp `spike' in the EP (Figure~\ref{Spikes:fig:Henze}). The magnitudes of these signals are quite different. While intracellular action potentials have amplitudes of $\sim$100~mV, the amplitudes of extracellular
 spikes are typically less than 1~mV. Nevertheless, the detection of these spiking events from the recorded signal is relatively easily, and faithful records of the firing activity of neurons can be obtained. Such measurements have been instrumental in learning about \index{neural representations}, that is, how neurons in different parts of the brain, for example, encode information about visual and other sensory input. 
 
 %%%
 \subsubsection{Spikes from two-compartment neuron models}
-\label{spikes:sec:EP-spikes-two-compartment}
+\label{Spikes:sec:EP-spikes-two-compartment}
 %%%
 Intracellular potentials can be modelled with a single-compartment neuron model as described in Chapter~3.
 However, as described in the previous section, 
 a two-compartment neuron model is the simplest model that can produce an extracellular potential such as a 
-spike. An example of this is provided in Figure~\ref{mm:fig:EP-spike-TwoCompartment} where active sodium and potassium conductances are added to the  soma compartment of an otherwise passive neuron model. 
+spike. An example of this is provided in Figure~\ref{Spikes:fig:TwoCompartment} where active sodium and potassium conductances are added to the  soma compartment of an otherwise passive neuron model. 
 The membrane potential during a spike is illustrated in the right panel, and the  
-corresponding EP is computed from Equation~\ref{mm:equation:Ve-two-compartment}. Around the soma a characteristic
+corresponding EP is computed from Equation~\ref{Spikes:equation:Ve-two-compartment}. Around the soma a characteristic
 EP spike with a sharp negative peak followed by a slower positive hump is seen, in accordance with typical experimental
-spike recordings as exemplified by Figure~\ref{mm:fig:EP-spike-Henze}. Around the dendrite compartment inverted
+spike recordings as exemplified by Figure~\ref{Spikes:fig:Henze}. Around the dendrite compartment inverted
 spikes of the same sizes are seen, but such inverted spikes are rarely, if ever, seen in experiments. This suggests that
 modelling dendrites as a single compartment is inadequate when one is interested in predicting the detailed spatial pattern of 
 spike shapes that would be recorded by an electrode at different positions around a neuron.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
@@ -69,7 +68,7 @@ spike shapes that would be recorded by an electrode at different positions aroun
 %\begin{cnfigure}{Figures/mm/EP-spike-TwoCompartment-w100-r150}
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics{Figures/Spikes/EP-spike-TwoCompartment-w100-r150}
+\includegraphics{Figures/Spikes/Spikes-TwoCompartment-w100-r150}
 \end{center}
 \caption{\textbf{EP (spike) from action potential for a two-compartment neuron model with active sodium
 and potassium conductances in the soma compartment}. Computed from 
@@ -78,24 +77,22 @@ Left panel shows the EP at different spatial positions, while right panel shows 
 soma membrane potential during the action potential. 
 \gen{Figure + caption to be updated}
 }
-\label{spikes:fig:EP-spike-TwoCompartment}
+\label{Spikes:fig:TwoCompartment}
 \end{figure}
-
-\end{document}
 
 %%%
 \subsection{Spikes from multi-compartment neuron models}
-\label{mm:sec:EP-spikes-multi-compartment}
+\label{Spikes:sec:EP-spikes-multi-compartment}
 %%%
 A more detailed picture of spike shapes is obtained by considering a detailed multi-compartmental neuron model
-with a comprehensive branching structure typical for real neurons as in Figure~\ref{mm:fig:EP-spike-MultiCompartment}.
+with a comprehensive branching structure typical for real neurons as in Figure~\ref{Spikes:fig:MultiCompartment}.
 With this dendritic morphology the membrane currents through the dendrites are spread over a larger membrane area.
-As a result, Equation~\ref{mm:equation:Ve-multi-compartment} predicts that the largest EP spikes will be seen
-around the soma for the example pyramidal neuron in Figure~\ref{mm:fig:EP-spike-MultiCompartment}.  
+As a result, Equation~\ref{Spikes:equation:Ve-multi-compartment} predicts that the largest EP spikes will be seen
+around the soma for the example pyramidal neuron in Figure~\ref{Spikes:fig:MultiCompartment}.  
 Around the apical dendrites, the spikes will still have an inverted shape compared to spikes close to the soma. 
 However, their amplitudes will be small, only a few microvolts, so they will not be seen in most experiments.
 
-As for the two-compartment spike model, the spike amplitude in Figure~\ref{mm:fig:EP-spike-MultiCompartment} 
+As for the two-compartment spike model, the spike amplitude in Figure~\ref{Spikes:fig:MultiCompartment} 
 decays sharply with distance from the neuron. In addition, the spike width increases
 with distance as demonstrated by the insets at two example positions. For the large spike recorded next to
 the soma the half-width of the spike is $\sim$0.6~ms, while at the position outside the dendrite, the half-width is increased to
@@ -107,101 +104,110 @@ also the shape of recorded spikes.
 %%%%%%%%%%
 % Figure: Spike from multi-compartment model
 %%%%%%%%%%
-\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
-\caption[]{EP (spike) from action potential for a multi-compartmental neuron model with active sodium
-and potassium conductances in the soma compartment as computed from 
-Equation~\ref{mm:equation:Ve-multi-compartment}.
+%\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{Figures/Spikes/Spikes-MultiCompartment-w100-r150}
+\end{center}
+\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model}. Active sodium
+and potassium conductances in the soma compartment and computed from 
+Equation~\ref{XX:equation:Ve-multi-compartment}.
 Left panel shows the EP at different spatial positions, while right panel shows the corresponding
 soma membrane potential during the action potential. 
-\todo{Figure + caption to be updated. Will change to Hay-model (which Bruce also will use).}
+\gen{Figure + caption to be updated. Change to Hay-model,}
 }
-\label{mm:fig:EP-spike-MultiCompartment}
-\figpermOurs
-\end{cnfigure}
+\label{Spikes:fig:MultiCompartment}
+%\figpermOurs
+\end{figure}
 
 %%%
 \subsection{Spikes from ball-and-stick neurons}
-\label{mm:sec:spike-widths-amplitudes}
+\label{Spikes:sec:spike-widths-amplitudes}
 %%%
-\todo{June 2019: Make equivalent of old Figs. 12.6 for ball and stick?}
+%\todo{June 2019: Make equivalent of old Figs. 12.6 for ball and stick?}
 %%
 The extracellular measurement of spikes from a neuron in living brains is blind in the sense that it is
 unknown what type of neuron is recorded from when an electrode is lowered into the brain.
 Some neuron types produce spikes with larger amplitudes and/or broader shapes than
-others, and as seen in Figure~\ref{mm:fig:EP-spike-MultiCompartment} both the shape and amplitude 
+others, and as seen in Figure~\ref{Spikes:fig:MultiCompartment} both the shape and amplitude 
 depend critically on recording positions. Large spike amplitudes imply that they will be more dominant in electrical recordings,
 and this bias should ideally be considered in the analysis of joint recordings 
 of spikes from many neurons.
 
-%%%%%%
-% FIGURE - ball-and-stick spike
-%%%%%%
-\begin{figure}[t]
-  \multifigurebox{}{}{%
-    \vbox{%
-      \hspace*{8mm}\includegraphics{Figures/network/extracellular-arrangement}\\
-      \includegraphics{Figures/network/extracellular}}}
-  \caption{\emph{Simulation of \term{extracellular field potential}s. Extracellular
-    electrodes (black, grey, blue and dark-blue) are placed
-    close to a ball-and-stick model neuron with an active soma and
-    synapses on its dendrite. The soma is 40\uum long and 40\uum
-    in diameter. The single dendritic cable is 200\uum long and 4\uum in
-    diameter. The top traces show intracellular recordings when the
-    synapses are activated enough to cause an action potential to be
-    fired.  Traces are from the soma (black), halfway down the
-    dendrite (blue) and in the distal dendrite (dark-blue).
-    The initial synaptic stimulation can be seen in the dendritic
-    traces. The lower traces show the extracellular recordings
-    corresponding to the electrodes of the same colour.  During the
-    synaptic stimulation, the dendrites act as a sink of extracellular
-    current and the soma acts as a source. This can be seen in the
-    negative deflection of the extracellular potential in medial and
-    distal dendrites and the positive deflection of the extracellular
-    potential close to the soma. During the action potential, the soma
-    is a sink of current and the dendrites are current sources; this
-    is reflected in the large negative deflection of the extracellular
-    potential close to the soma and the smaller deflections of the
-    extracellular potential near the dendrites. As the neuron
-    repolarises, the roles of the soma and dendrites are again
-    reversed.} 
-        \todo{Revise: Figure and caption copied directly from first edition. Must be adapted.}}
-  \figpermOurs
-  \label{mm:fig:extracellular}
-\end{figure}
-%%%%%%%%%%%%
+%%%%%%%
+%% FIGURE - ball-and-stick spike
+%%%%%%%
+%\begin{figure}[t]
+%  \multifigurebox{}{}{%
+%    \vbox{%
+%      \hspace*{8mm}\includegraphics{Figures/network/extracellular-arrangement}\\
+%      \includegraphics{Figures/network/extracellular}}}
+%  \caption{\emph{Simulation of \term{extracellular field potential}s. Extracellular
+%    electrodes (black, grey, blue and dark-blue) are placed
+%    close to a ball-and-stick model neuron with an active soma and
+%    synapses on its dendrite. The soma is 40\uum long and 40\uum
+%    in diameter. The single dendritic cable is 200\uum long and 4\uum in
+%    diameter. The top traces show intracellular recordings when the
+%    synapses are activated enough to cause an action potential to be
+%    fired.  Traces are from the soma (black), halfway down the
+%    dendrite (blue) and in the distal dendrite (dark-blue).
+%    The initial synaptic stimulation can be seen in the dendritic
+%    traces. The lower traces show the extracellular recordings
+%    corresponding to the electrodes of the same colour.  During the
+%    synaptic stimulation, the dendrites act as a sink of extracellular
+%    current and the soma acts as a source. This can be seen in the
+%    negative deflection of the extracellular potential in medial and
+%    distal dendrites and the positive deflection of the extracellular
+%    potential close to the soma. During the action potential, the soma
+%    is a sink of current and the dendrites are current sources; this
+%    is reflected in the large negative deflection of the extracellular
+%    potential close to the soma and the smaller deflections of the
+%    extracellular potential near the dendrites. As the neuron
+%    repolarises, the roles of the soma and dendrites are again
+%    reversed.} 
+%        \gen{Revise: Figure and caption copied directly from first edition. Must be adapted.}}
+%  %\figpermOurs
+%  \label{mm:fig:extracellular}
+%\end{figure}
+%%%%%%%%%%%%%
 
  
 To understand the link between the morphology of neurons and spikes amplitudes and shapes
 it is convenient to consider ball-and-stick neurons where a dendrite cable `stick' is connected to a point-like soma.
-The relation between the intracellular action potential and the corresponding extracellular spike for such a 
-neuron is illustrated in the example in Figure~\ref{mm:fig:extracellular}.
+%The relation between the intracellular action potential and the corresponding extracellular spike for such a 
+%neuron is illustrated in the example in Figure~\ref{mm:fig:extracellular}.
 Despite its simplicity, the ball-and-stick neuron model exhibits the key qualitative features observed in
-Figure~\ref{mm:fig:EP-spike-MultiCompartment} 
-when the multi-compartmental EP formula in  Equation~\ref{mm:equation:Ve-multi-compartment}
+Figure~\ref{Spikes:fig:MultiCompartment} 
+when the multi-compartmental EP formula in  Equation~\ref{XX:equation:Ve-multi-compartment}
 is used; that is, rapid attenuation of spike amplitude 
 and increased spike width as the distance from the soma increases.
-Figure~\ref{mm:fig:EP-spike-ball-and-stick-results}
+Figure~\ref{Spikes:fig:ball-and-stick-results}
 shows the distance dependence of these spike measures both for a detailed multi-compartmental pyramidal neuron model 
-and ball-and-stick neurons (Figure~\ref{mm:fig:EP-spike-ball-and-stick-neuron-models}).
+and ball-and-stick neurons (Figure~\ref{Spikes:fig:ball-and-stick-neuron-models}).
 While the spike width and amplitude of the multi-compartmental neuron are larger than for
 the two example ball-and-stick neurons (with short and long dendrite sticks, respectively), 
 the shapes of the curves are similar. Note also that the results for a ball-and-stick neuron with an infinitely long dendritic stick is
 effectively identical to the long-stick results in the figure~\citep{Pettersen2008}.
-\todo{DCS: The frequency dependence here comes from intracellular properties? If so, would be great to make it clear.}
+\gen{From Sterratt: The frequency dependence here comes from intracellular properties? If so, would be great to make it clear.}
 
 
 %%%%%%%%%%
 % Figure: Neuron models considered in plot of spike widths and amplitudes
 %%%%%%%%%% 
-\begin{cnfigure}{Figures/mm/EP-spike-ball-and-stick-neuron-models-w43-r300}
-\caption[]{Neuron models considered in results in Figure~\ref{mm:fig:EP-spike-ball-and-stick-results}. 
-\todo{Figure + caption to be updated.
-Adapted from \citet{Pettersen2008}.}
+%\begin{cnfigure}{Figures/mm/EP-spike-ball-and-stick-neuron-models-w43-r300}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{Figures/Spikes/Spikes-ball-and-stick-neuron-models-w43-r300}
+\end{center}
+\caption[]{\textbf{Neuron models considered in results in Figure~\ref{Spikes:fig:ball-and-stick-results}}. 
+\gen{Figure + caption to be updated.}
+Adapted from \citet{Pettersen2008}.
 }
-\label{mm:fig:EP-spike-ball-and-stick-neuron-models}
-\figpermOurs
-\end{cnfigure}
+\label{Spikes:fig:ball-and-stick-neuron-models}
+%\figpermOurs
+\end{figure}
 
+\end{document}
 
 To understand the physical origin of these results it is easier to consider each frequency 
 component of the action potential separately. From Fourier theory it follows that any signal
