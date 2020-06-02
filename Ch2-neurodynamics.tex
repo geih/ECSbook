@@ -264,10 +264,12 @@ c_m \frac{d\phi_n}{dt} = \frac{E_m-\phi_n}{R_m} + \frac{d}{4R_a}\left(\frac{\phi
 Although all neurons contain some active membrane mechanisms, the passive model (Eq. \ref{eq:multipassive}) can still work as a fairly good approximation for signalling in neural dendrites, which generally has fewer active mechanisms that the soma and axon. 
 
 
-
 %%%%%%%%%%%%%%%%%%%%
 \subsubsection{Cable equation}
 If we in Eq. \ref{eq:multipassive} let $L \righarrow \delta x$, and take the limit $\delta x \rightarrow 0$, we may derive the cable equation (see e.g. \cite{Sterratt2011}): 
+\begin{itemize}
+\item membrane currents are as before (with stimulus-term):
+
 
 \begin{equation}
 c_m \frac{\partial \phi}{\partial t} = \frac{E_m-\phi}{R_m} +  \frac{d}{4 R_a}  \frac{\partial^2 V}{\partial x^2}  + \frac{I_e}{\pi d},
@@ -283,6 +285,7 @@ where we have introduced the length constant,
 \lambda = \sqrt{\frac{d R_m}{4 R_a}} \,\, \ttext{cm}, 
 \label{eq:lengthconst}
 \end{equation}
+
 and the time constant, 
 \begin{equation}
 \tau_m \equiv R_m c_m  \,\, \ttext{ms}.
@@ -292,6 +295,9 @@ The cable equation serves as a continuous version of a passive neural branch (wi
 where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. 
 
 Whereas multicompartmental models (Eq. \ref{eq_multimain} and \ref{eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved numerically for some idealized scenarios. As boundary conditions one then usually uses either "sealed ends" ($\partial \phi_m/\partial x$ is zero at the ends of the cable) or "killed ends" ($\phi_m$ is zero at the ends of the cable). The "sealed ends" condition is most common, and is e.g., used by the NEURON simulation software. 
+
+\begin{itemize}
+\item Eq. \ref{eq:multimain} is the fundamental equation for multicompartmental models. We could also add active membrane currents to the right hand side, e.g. $I^{Na}$ and $I^K$ from the HH-model.
 
 
 %%%%%%%%%%%%%%%%%%%%
