@@ -97,6 +97,45 @@ The same kind of formalism can also be applied to ligand gated ion channels, i.e
 \end{equation}
 
 
+\subsubsection{Stimulus currents and synapses}
+Finally, the stimulus current in Eq. \ref{eq:singlecomp_zerosum}, can be represent any external stimulus that a neuron receives. Typically, it is either taken to represent an experimental current injection, 
+
+\begin{equation}
+i_\text{inj}(x)= 
+\begin{cases}
+    constant, & \text{if } t_{start} > t > t_{end} \\
+    0,              & \text{otherwise}
+\end{cases}
+\label{eq:injected}
+\end{equation}
+or a synaptic input. Synapses come in many forms, and they can be either inhibitory (making the receiving neuron less likely to fire) or excitatory (making the receiving neuron more likely to fire). The most common synapses are chemical synapses, which are normally modeled more or less like an ion channel:
+\begin{equation}
+I_\text{syn}(t) = g_\text{syn}(t) \big( \phi_m(t)-E_\text{syn} \big), 
+\label{eq:chemicalsynapse}
+\end{equation}
+where $E_\text{syn}$ is the reversal potential of the synapse, and $g_\text{syn}(t)$ the conductance. Unlike for ion channels, which are often voltage or calcium activates, the synapse is activated by neurotransmitters from the pre-synaptic cell. As the response is quite stereotypical (i.e., the same every time a synapse is activated), it is common to model $g_\text{syn}(t)$ as a constant $\bar{g}_\text{syn}$ multiplied with a temporal kernel determining the opening and closing of a synapse set off at an activation time $t_s$. Typical choices for $g_\text{syn}(t)$ are: 
+
+\begin{align}
+&\text{(i) exponential decay:} \;\; g_\text{syn}(t) = \bar{g}_\text{syn} e^{-(t-t_\text{s})/\tau}\, \Theta(t-t_\text{s}) \\
+&\text{(ii) $\alpha$-function:} \;\; g_\text{syn}(t) = \bar{g}_\text{syn} \frac{t-t_\text{s}}{\tau} e^{-(t-t_\text{s})/\tau} \, \Theta(t-t_\text{s}) \\
+&\text{(iii) $\beta$-function:} \;\; g_\text{syn}(t) = \bar{g}_\text{syn} \frac{\tau_1 \tau_2}{\tau_1-\tau_2} 
+\Big( e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2} \Big) \, \Theta(t-t_\text{s}) \\
+& \text{(iv)} g_\text{syn}(t) = \bar{g}_\text{syn} \frac{e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2}} {1+\mu [\text{Mg}^{2+}] e^{-\gamma \phi_m} } \, \Theta(t-t_\text{s}),
+\label{eq:synapseforms}
+\end{align}
+where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,   $\Theta(t< 0)=0$. Simple waveform (cf., (i)--(iii) above) typically used for AMPA  and GABA receptors, while the waveform (iv), is mainly relevant for NMDA-receptors, 
+where the conductance is influenced by membrane voltage and concentration of extracellular magnesum. In all these equation, $the \tau$'s and the $\gamma$ are parameters that determine the time course of the synapse opening, and must be tuned to experimental data. 
+
+Chemical synapses may be plastic, meaning that their maximum conductance $\bar{g}_\text{syn}$ can vary with time, depending on the spiking history of the neuron. Synaptic plasticity is the mechanism for learning and memory formation. We do not go further into this topic here. 
+
+In addition to having chemical synapses, some neurons may also be connected directly by electrical synapses called \underline{gap junctions}, where the current from one neural process into the other is simply a function of the voltage difference between them and the conductance: 
+
+\begin{equation}
+i_\text{gap}=g_\text{gap} (\phi_{m2}-\phi_{m1})
+\label{eq:gapjunction}
+\end{equation}
+
+
 \subsubsection{The Hodgkin-Huxley model}
 To give an example of a model with active ion channels, we here list up the equations for the original Hodgkin-Huxley model. Compared to modern biophysically detailed neuron models, it is relatively simple in that it only contains two (voltage-gated) active ion channels, a Na$^+$ with three activation gates ($m^3$) and one inactivation gate ($h$), as well as a K$^+$ channel with four inactivation gates $n^4$:
 \begin{equation}
@@ -230,9 +269,9 @@ I_{n-1,n} = \frac{\phi_{n-1}-\phi_n}{4 R_a L/(\pi d^2)}, \nonumber \\
 I_{n,n+1} = \frac{\phi_{n}-\phi_{n+1}}{4 R_a L/(\pi d^2)}.
 \label{eq:axialcurrents}
 \end{eqnarray}
-Here, the denominators represent the axial resistance between two compartments, defined in terms of the axial resistivity $R_a$ ($\Omega$ cm), a material property of the cytosol solution, the cross section area $\pi d^2/4$ and the segment length or travel distance ($L$ (m)). We note that $\phi_n$ is the intracellular potential in compartment $n$, but we shall in the reminder of this chapter assume that the extracellular space is isopotential and grounded ($\phi = 0$ there), so that the $\phi_n$ will be identical to the membrane potential in compartment $n$.
+Here, the denominators represent the axial resistance between two compartments, defined in terms of the axial resistivity $R_a$ ($\Omega$ cm), a material property of the cytosol solution, the cross section area $\pi d^2/4$, and the segment length or travel distance ($L$ (m)). We note that $\phi_n$ is the \emph{intracellular} potential in compartment $n$, but we shall in the reminder of this chapter assume that the extracellular space is isopotential and grounded ($\phi = 0$ there), so that the $\phi_n$ will be identical to the membrane potential in compartment $n$.
 
-The situation becomes more complicated when connecting cylinders of different length and diameter, and especially when dealing with branch points. However, the theory for doing this, and the theory for knowing how many pieces one should split ones neuron into for accurate predictions is well established \cite{Rall1977,Rall1989}, and designated software such as NEURON \cite{Hines1997, Hines2009} automatizes the compartmentalization for the user once the neural morphology is specified. For the reminder of this chapter, we stick with our simplified scenario (Fig. \ref{fig:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of morphology modeling. 
+The situation becomes more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite{Rall1977,Rall1989}, and designated software such as NEURON \cite{Hines1997, Hines2009} automatizes the compartmentalization for the user once the neural morphology is specified. For the reminder of this chapter, we stick with our simplified scenario (Fig. \ref{fig:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of morphology modeling. 
 
 
 %%%%%%%%%%%%
@@ -244,32 +283,28 @@ I_n^{cap} + I_n^{ion} + I_n^{leak} + I_n^{stim} = -\pi d L c_m \frac{d\phi_n}{dt
 \end{equation}
 where $i^{ion}$ represent the total current density of all transmembrane ionic currents (through leakage and active ion channels). We have expressed the capacitive and ionic currents (mA) as current densities (mA/cm$^2$) multiplied with the cylinder membrane area $\pi d L$ (cm$^2$). If we insert this into Eq. \ref{eq:Kirch}, we get:
 
-
 \begin{equation}
 c_m \frac{d\phi_n}{dt} = i_n^{ion} + \frac{d}{4R_a}\left(\frac{\phi_{n+1}-\phi_n}{L^2} - \frac{\phi_n-\phi_{n-1}}{L^2} \right) + \frac{I^{stim}}{\pi d L}, 
 \label{eq:multimain}
 \end{equation}
-which is the fundamental equation for multicompartment models. Here,  $i_n^{ion}$ can contain any combination of passive and active membrane mechanisms. For whatever choice of membrane mechanisms, Eq. \ref{eq:multimain} can be solved numerically for appropriately chosen boundary conditions, the most common being to use either a sealed end ($\frac{\partial \phi_m}{\partial x} = 0$), or a killed end ($\phi_m=0$). The NEURON simulator by default uses the sealed-end condition, which means that no axial current leaves at the ends of the simulated structure. 
+which is the fundamental equation for multicompartment models. Here,  $i_n^{ion}$ can contain any combination of passive and active membrane mechanisms. For whatever choice of membrane mechanisms, Eq. \ref{eq:multimain} can be solved numerically for appropriately chosen boundary conditions, the most common being to use either a sealed end ($\frac{\partial \phi_m}{\partial x} = 0$), or a killed end ($\phi_m=0$). The NEURON simulator by default uses the sealed-end condition, which means that no axial current leaves at the ends of the simulated structure. Eq. \ref{eq:multimain} is the fundamental equation for multicompartmental models.
 
 
 %%%%%%%%%%%%%%%%%
 \subsubsection{Passive multicomparmtent models}
-In the case when we have no active ion channels, $i_n^{ion} = g_L(\phi_n - E_L)$ is simply the leakage current denstiy. In purely passive models, it is custom to refer to the leakage reversal potential simply as the membrane resting potential, and call it $E_m$. It is also custom to replace the leak conductance $g_L$ with the membrane resistivity $R_m = 1/g_L$ (\Omega cm$^2$). Eq. \ref{eq:multimain} then simplifies to:
+In the case when we have no active ion channels, $i_n^{ion} = g_L(\phi_n - E_L)$ is simply the leakage current denstiy. In purely passive models, it is custom to refer to the leakage reversal potential simply as the membrane resting potential, and call it $E_m$. It is also custom to replace the leak conductance $g_L$ with the membrane resistivity $R_m = 1/g_L$ ($\Omega$ cm$^2$). Eq. \ref{eq:multimain} then simplifies to:
 
 \begin{equation}
 c_m \frac{d\phi_n}{dt} = \frac{E_m-\phi_n}{R_m} + \frac{d}{4R_a}\left(\frac{\phi_{n+1}-\phi_n}{L^2} - \frac{\phi_n-\phi_{n-1}}{L^2} \right) + \frac{I^{stim}}{\pi d L}
 \label{eq:multipassive}
 \end{equation}
 
-Although all neurons contain some active membrane mechanisms, the passive model (Eq. \ref{eq:multipassive}) can still work as a fairly good approximation for signalling in neural dendrites, which generally has fewer active mechanisms that the soma and axon. 
+Although all neurons contain some active membrane mechanisms, the passive model (Eq. \ref{eq:multipassive}) is still often used as an approximation for signaling in neural dendrites, which generally have fewer active mechanisms than the soma and axon. 
 
 
 %%%%%%%%%%%%%%%%%%%%
 \subsubsection{Cable equation}
-If we in Eq. \ref{eq:multipassive} let $L \righarrow \delta x$, and take the limit $\delta x \rightarrow 0$, we may derive the cable equation (see e.g. \cite{Sterratt2011}): 
-\begin{itemize}
-\item membrane currents are as before (with stimulus-term):
-
+If we in Eq. \ref{eq:multipassive} let $L \rightarrow \delta x$, and take the limit $\delta x \rightarrow 0$, we may derive the cable equation (see e.g., \cite{Sterratt2011}): 
 
 \begin{equation}
 c_m \frac{\partial \phi}{\partial t} = \frac{E_m-\phi}{R_m} +  \frac{d}{4 R_a}  \frac{\partial^2 V}{\partial x^2}  + \frac{I_e}{\pi d},
@@ -282,22 +317,19 @@ where we have introduced the stimulus current per unit length, $I_e(x,t) = I^{st
 \end{equation}
 where we have introduced the length constant,
 \begin{equation}
-\lambda = \sqrt{\frac{d R_m}{4 R_a}} \,\, \ttext{cm}, 
+\lambda = \sqrt{\frac{d R_m}{4 R_a}} \,\, \text{cm}, 
 \label{eq:lengthconst}
 \end{equation}
 
 and the time constant, 
 \begin{equation}
-\tau_m \equiv R_m c_m  \,\, \ttext{ms}.
+\tau_m \equiv R_m c_m  \,\, \text{ms}.
 \label{eq:lengthconst}
 \end{equation}
 The cable equation serves as a continuous version of a passive neural branch (with infinitely many infinitely small compartments), 
 where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. 
 
-Whereas multicompartmental models (Eq. \ref{eq_multimain} and \ref{eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved numerically for some idealized scenarios. As boundary conditions one then usually uses either "sealed ends" ($\partial \phi_m/\partial x$ is zero at the ends of the cable) or "killed ends" ($\phi_m$ is zero at the ends of the cable). The "sealed ends" condition is most common, and is e.g., used by the NEURON simulation software. 
-
-\begin{itemize}
-\item Eq. \ref{eq:multimain} is the fundamental equation for multicompartmental models. We could also add active membrane currents to the right hand side, e.g. $I^{Na}$ and $I^K$ from the HH-model.
+Whereas multicompartmental models (Eq. \ref{eq_multimain} and \ref{eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved numerically for some idealized scenarios.
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -328,7 +360,7 @@ which has the solution:
 \phi_m(x) &= E_m + \big( \phi_m(0)-E_m \big) e^{-x/\lambda}.
 \label{eq:semiinf3}
 \end{align}
-The (general-solution) term containing $e^{+x/\lambda}$ was excluded from the solution on the count of being unphysical as it diverges when $x \rightarrow \infty$.The injected current will determine what $\phi_m(0)$ is a the boundary, and we may introduce it by defining the input resistance in steady state as $R_{\infty} =  \frac{\Delta \phi_m}{I_e} =  \frac{\phi_m(0)-E_m}{I_e}$, according to Ohm's law. With this, Eq. \ref{eq:semiinf3} can be written:
+The (general-solution) term containing $e^{+x/\lambda}$ was excluded from the solution on the count of being unphysical as it diverges when $x \rightarrow \infty$.The injected current will determine what $\phi_m(0)$ is a the boundary, and we may introduce it by defining the input resistance in steady state as $R_{\infty} =  \Delta \phi_m/I_e =  (\phi_m(0)-E_m)/I_e$, according to Ohm's law. With this, Eq. \ref{eq:semiinf3} can be written:
 \begin{equation}
 \phi_m(x) = E_m + R_{\infty} I_e e^{-x/\lambda}
 \label{eq:semiinf4}
@@ -339,74 +371,31 @@ Eq. \ref{eq: semiinf4} is useful as it gives us analytical insight into signals 
 Eq. \ref{eq:lengthconst} also sows that $\lambda \propto \sqrt{d}$, meaning that signals will spread further the thicker the dendrite, and that $\lambda \propto \sqrt{R_m/R_a}$ meaning that the signal is facilitated by having a large membrane resistance compared to the axial resistance. We may also get some insight in what aspects of the neurite that determine the input resistance $R_{\infty}$ by requiring that the axial current at $x=0$ should be identical to the input current. From that, we can calculate the input resistance, 
 
 \begin{align}
-& - \frac{4R_a}{\pi d^2} \frac{\partial \phi_m}{\partial x} = i_e \Big|_{x=0} \\
-&  \frac{4R_a \lambda}{\pi d^2} R_{\infty} I_e = I_e \\
-& R_{\infty} =  \sqrt{\frac{4R_m R_a}{\pi^2 d^3}  \\
+&- \frac{4R_a}{\pi d^2} \frac{\partial \phi_m}{\partial x}  = i_e  \Big|_{x=0} \\
+&\frac{4R_a \lambda}{\pi d^2} R_{\infty} i_e  = i_e \\
+&R_{\infty} =  \sqrt{\frac{4R_m R_a}{\pi^2 d^3}}, 
 \label{eq:inputresistance}
 \end{align}
+
 where we used eq. \ref{eq:semiinf3} for $\phi_m$ and eq. \ref{eq:lengthconst} for $\lambda$. Eq. \ref{eq:inputresistance} shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
 
+\subsubsection{Temporal solutions of cable equation}
+It can be shown that the temporal solution for $\phi_m$ in a passive cable is \cite{rall1969}:
+\begin{equation}
+\phi_m(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + \ldots, 
+\label{eq:cabletemporal}
+\end{equation}
+where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_m = R_m C_m$ is the \emph{membrane time constant}, and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). Fig. \ref{fig:temporalrall} shows the the membrane potentials at selected positions along a $500 \, \mu$m long cable responding to a current injection (top panel) resembling a synaptic input in one end. We see that the peak response comes faster in proximal than in distal location, but that potential is about the same at all points along the cable after 2 ms. After this, $\phi_m$  decay gradually towards the resting state. This takes place at the slower time scale of the membrane time constant, which in this simulation was 10~ms ($R_m=1\,\Omega \text{m}^2$, and $C_m=1\,\mu\text{F}/\text{cm}^2$). Although the dynamics of course will be system specific, depending on the membrane time constant and generally on the presence of active mechanisms, the simulation in Fig. \ref{fig:temporalrall} may give some general idea on how signals spread in dendrites.
 
-
-%
-%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{Lecture-InputResistance}
-\caption{
-%\textbf{}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{Fig02/Temporalcable.png}
+\end{center}
+\caption{\textbf{Temporal solution of cable equation.}
 }
-\label{figure:InputResistance}
+\label{fig:temporalrall}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-\item What is the \emph{input resistance}?
-\end{itemize}
-%%%%
-\begin{align*}
-&I_e=I_a= \frac{1}{r_a} \frac{V(\delta x)-V(0)}{\delta x}  =  \frac{1}{r_a} \frac{\partial V}{\partial x}\Big|_{x=0},
-\;\; (\delta x \rightarrow 0\; \text{in last step}) \\
-&\frac{1}{r_a} \frac{\partial V}{\partial x}\Big|_{x=0} =  \frac{1}{r_a} \frac{\partial}{\partial x} \Big( \hat{V}(0)e^{-x/\lambda} \Big)  \Big|_{x=0}
-= - \frac{1}{r_a} \frac{1}{\lambda} \hat{V}(0) \\
-&R_\infty =  \frac{\hat{V}(0)}{|I_e|}  =  r_a \lambda =  r_a \sqrt{\frac{r_m}{r_a}} = \sqrt{r_m r_a} = \sqrt{\frac{4 R_m R_a}{\pi^2 d^2}}
-\end{align*}
-%%%%
-$\Rightarrow$ input resistance of thinner neurites (dendrites) higher than for thick ones.
-%
-\begin{itemize}
-\item Finite cable \\
-\Figure{STERRATT-FIG-2.18}
-\end{itemize}
-
-\subsection{Temporal solutions of cable equation \BookRef{- 2.9 in Sterratt}}
-
-\begin{itemize}
-\item General solution:
-%%%%
-\begin{equation*}
-V(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + \ldots
-\end{equation*}
-%%%%
-$\tau_0$ is the \emph{membrane time constant}: $\tau_0=\tau_m=R_m C_m$ \\
-($\tau_0 > \tau_1 > \tau_2 > \ldots$) \\
-\Figure{STERRATT-FIG-2.17(b)}
-%
-\item For example in figure, the membrane potentials at all positions recorded is the same after about 2 ms
-\item But note that the system has not yet reached steady state (back to resting potential)   
-\item Explanation: Membrane time constant is 10~ms ($R_m=1\;\Omega\text{m}^2,\;C_m=1\;\mu\text{F}/\text{cm}^2=0.01\;\text{F}/\text{m}^2$ $\Rightarrow$ $\tau_m=R_m C_m$=10~ms)
-\end{itemize}
-\Comment{BOX 2.7: Eccles vs. Rall}
-
-%%%%%%%%%%%%%
-%%%CH4
-%%%%%%%%%%%%%
-%\include{FYS388-LecNotes-Ch4-Synapses}
 
 
-
-
-\subsection{Point neurons}
-\ghnote{skriv om punktmodeller her, problemet med at de ikke gir opphav til ekstracellulare felter, og triks for aa bruke dem likevel.}
-\tvnnote{Gir det egentlig mening å gå inn på dette før vi har introdusert VC-teori? Hva med å bare kort gå via punktnevroner i utledningen av kabel-ligningen, og henvise til senere seksjoner?}
-\subsection{Constant concentrations approximation}
+\subsection{Assumptions}
 \ghnote{Skrive om konsentrasjonseffekter. Tror det er bra aa spare Nernst-potensialene til dette delkap. Si noe om at man ofte ikke trenger aa holde styr paa konsentrasjoner pga. homeostatiske mekanismer "bakt inn" i passiv lekkasje.Si noe om hva som skal til for faktisk aa modellere konsentrasjoner uten aa gaa inn i detalj. Referere til rammeverkene som kommer i Kap 6.}
