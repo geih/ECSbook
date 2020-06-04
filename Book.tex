@@ -113,14 +113,12 @@
 %\definecolor{newtextcolor}{cmyk}{0,1,1,0} %% color for new text
 %\newcommand{\newtext}[1]{{\color{newtextcolor}#1}}
 
-
 \begin{document}
-
 %\linenumbers
 
 \begin{frontmatter}
 
-\author{Geir Halnes, Torbjørn V. Ness, Solveig N\ae ss, Klas H. Pettersen, Gaute T. Einevoll}
+\author{Geir Halnes, Torbjorn V. Ness, Solveig N\ae ss, Klas H. Pettersen, Gaute T. Einevoll}
 
 \title{Book about electrical fields in the brain - \today}
 
@@ -136,27 +134,29 @@
 \item How to make this a "computational essay"?
 \item Real booky-books tend to have an Index at the end. Add \verb|\index| around words to add them to Index
 \item \tvnnote{Kanskje vi bør ha med en enkel oppsummering av elektriske felter også, i et eget kapittel (nytt kapittel 2)? Når man først møter dette fagfeltet kan jo for eksempel linken mellom elektriske ladninger -> elekltriske felter, og elektriske strømmer -> elektriske potensialer være litt forvirrende? Gir også et naturlig sted å snakke om temaer som jording, Maxwell's ligninger etc.?}
+\end{itemize}
 
 
 \tableofcontents
 \newpage
 {\huge Part 1}
-\include{Ch1-intro}
-\include{Ch2-neurodynamics}
-\include{Ch3-VCtheory}
-\include{Ch4-conductivity}
-\include{Ch5-eldiff}
-\include{Ch6-schemes}
+\include{Ch-Intro}
+\include{Ch-Neuron}
+\include{Ch-VC}
+\include{Ch-Eldiff}
+\include{Ch-Sigma}
+\include{Ch-Schemes}
 
 %\newpage
 {\huge Part 2}
-\include{Ch7-spikes}
-\include{Ch8-LFP}
-\include{Ch9-ECoG}
-\include{Ch10-EEG}
-\include{Ch11-MEG}
-\include{Ch12-stimulation}
-\include{Ch13-technology}
+\include{Ch-Spikes}
+\include{Ch-LFP}
+\include{Ch-ECoG}
+\include{Ch-EEG}
+\include{Ch-MEG}
+\include{Ch-Stim}
+\include{Ch-Tech}
+\include{Ch14-Last}
 
 \appendix
 \section{Derivation of four-sphere model}
