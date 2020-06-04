@@ -12,16 +12,16 @@ As \sntxt{\sout{it}} used in neuroscience, VC theory rests on a set of assumptio
 \subsection{Continuous, porous medium approximation for VC theory}
 \label{sec:continuous}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-When presenting the theory for modeling single neurons (Chapter \ref{sec:NeuralDynamics}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross section of a piece of brain tissue shows that it is densely packed with neural and glial processes (Fig.\ref{fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
+When presenting the theory for modeling single neurons (Chapter \ref{sec:NeuralDynamics}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross section of a piece of brain tissue shows that it is densely packed with neural and glial processes (Fig.\ref{VC:fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.3\textwidth]{Figures/ECSdummy.jpeg}
+\includegraphics[width=0.3\textwidth]{Figures/VC/ECSdummy.jpeg}
 \end{center}
 \caption{\textbf{Tortuous medium}  Cross section image of a piece of neural tissue. Extracellular space (marked red) occupies about 20 \% of the total tissue volume, and has a highly tortuous structure. Placeholder, taken from \cite{Sykova2008}.
 \tvnnote{Vi får vel lage vår egen illustrasjon her, kanskje med panel A lik denne, og panel B en zoomet ut versjon der det ser mer homogent ut?}
 }
-\label{fig:ECS}
+\label{VC:fig:ECS}
 \end{figure}
 
 At the microscopic scale, the conductivity $\sigma$ in the brain tissue is thus highly non-homogeneous, as it will be very high at points where there are membranes and much lower in the extracellular space between membranes. Accordingly, electric potentials can vary greatly over tiny distances, and become very large near cell membranes. When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. In practice, the electrodes used in experimental recordings perform such an averaging. Sizes of electrodes used to record extracellular potentials typically range from 5 $\mu$m to 125 $\mu$m in diameter\cite{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). Experimental recordings thus give us the average potential over a region in space that typically spans over both extracellular space and several neural and glial processes. It is thus the dynamics at this coarse grained spatial scale that we are interested in. 
@@ -53,15 +53,15 @@ The continuous, porous medium approximation is revisited in Chapter \ref{sec:con
 \subsection{From neuronal current sources to extracellular potentials}
 \label{sec:continuous}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Throughout this chapter we shall assume that we know the neuronal (and glial) transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution of current sources (Fig. \ref{fig:CSD}B), which we call the current source density ($CSD$). For example, the $CSD$ representing the four point sources in Fig. \ref{fig:CSD}A would be formulated as a sum of four delta functions. 
+Throughout this chapter we shall assume that we know the neuronal (and glial) transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution of current sources (Fig. \ref{VC:fig:CSD}B), which we call the current source density ($CSD$). For example, the $CSD$ representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions. 
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.3\textwidth]{Figures/CSD.png}
+\includegraphics[width=0.3\textwidth]{Figures/VC/CSD.png}
 \end{center}
 \caption{\textbf{Neuronal current sources.}  {\bf (A)} When simulated on a numerical scheme, the transmembrane currents are known at a discrete set of neuronal segments, i.e., as a set of point sources.  {\bf (B)} As a mathematical generality, we can describe the transmembrane currents as a current source density ($CSD$) distribution. We note the sum of current entering/leaving a neuron is always zero, so that in {\bf (A)}, we must have that $I_1 + I_2 + I_3 + I_4 = 0$, and in {\bf (B)} we have that the spatial integral over the $CSD$ must be zero.
 }
-\label{fig:CSD}
+\label{VC:fig:CSD}
 \end{figure}
 \snnote{Use C, not CSD, as in definition above?}
 Volume conductor theory is essentially based on current continuity in the extracellular medium, i.e., the requirement that no net current can enter/leave a given point in space. Mathematically, current continuity implies that:
@@ -105,17 +105,17 @@ We shall now derive an expression for the extracellular potential $\phi$ in the 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Point source approximation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We start by deriving the contribution to $\phi$ from a single neuronal point source $I_1$ at the point ${\bf r_1}=0$ (Fig. \ref{fig:pointsource}A). 
+We start by deriving the contribution to $\phi$ from a single neuronal point source $I_1$ at the point ${\bf r_1}=0$ (Fig. \ref{VC:fig:pointsource}A). 
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{Figures/Pointsource.png}
-\includegraphics[width=0.6\textwidth]{Figures/pointsource_3D_illustration.png}
+\includegraphics[width=0.6\textwidth]{Figures/VC/Pointsource.png}
+\includegraphics[width=0.6\textwidth]{Figures/VC/pointsource_3D_illustration.png}
 \end{center}
 \caption{\textbf{Extracellular field from single neuronal point source.} 
 \tvnnote{Lage 3D versjon, inspirert av den underste?}
 }
-\label{fig:pointsource}
+\label{VC:fig:pointsource}
 \end{figure}
 
 Here, we could compute $\phi$ by solving eq. \ref{eq:CSD3}. However, due to the spherical symmetry of this simple case, we can take a shorter path by realizing that the current density (eq. \ref{eq:ohmici}) must radially directed, and that its magnitude must be solely a function of distance $r$ from the source:
@@ -174,15 +174,15 @@ A more sophisticated choice may be to assume that the transmembrane current is e
 \tvnnote{little L (denominator inside log) and big i are indistinguishable, but have completely different meanings!}
 \tvnnote{How  about dropping the subscript k?}
 \tvnnote{Også ta med uttrykket med integrasjon, slik som i lign. (4) i Linden et al. (2014)?}
-Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the longitudinal distance from the end of the segment, and $l_k = \delta s_k + h_k$ is the longitudinal distance from the start of the segment (Fig.~\ref{fig:line_source_illustration}). Eq. \ref{eq:linesource} and Eq. \ref{eq:pointsource} are the equivalent expressions where the transmembrane currents in a single neuronal segment are treated as a line source and point source, respectively. As for the point-source approximation, the contributions from several line-sources add up linearly. That is, if we have multiple segments $k$, the extracellular potential can be computed as:
+Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the longitudinal distance from the end of the segment, and $l_k = \delta s_k + h_k$ is the longitudinal distance from the start of the segment (Fig.~\ref{VC:fig:line_source_illustration}). Eq. \ref{eq:linesource} and Eq. \ref{eq:pointsource} are the equivalent expressions where the transmembrane currents in a single neuronal segment are treated as a line source and point source, respectively. As for the point-source approximation, the contributions from several line-sources add up linearly. That is, if we have multiple segments $k$, the extracellular potential can be computed as:
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.4\textwidth]{Figures/line_source_illustration.png}
+\includegraphics[width=0.4\textwidth]{Figures/VC/line_source_illustration.png}
 \end{center}
 \caption{\textbf{Line-source approximation.} 
 \cite{Holt1998} \tvnnote{Add subscripts?}
 }
-\label{fig:line_source_illustration}
+\label{VC:fig:line_source_illustration}
 \end{figure}
 
 \begin{equation}
@@ -224,7 +224,7 @@ By the definition of the delta-function, the right hand side of equation \ref{eq
 \label{eq:berit1}
 \end{equation}
 
-To solve this, it is convenient to chose the volume that we integrate over to be a sphere centered at the source location ${\bf r'}$, and with radius $R = |{\bf r-r'}|$ (Fig. \ref{fig:pointsource}B). Due to the symmetry of problem, we then know that the electrical potential is the same for all ${\bf r}$ on the surface of the sphere, so that $\phi({\bf r}) = \phi(R)$. We also know that its gradient $\nabla\phi({\bf r}) = d\phi(R)/dR$ is constant over the surface, and perpendicular to the surface increment $d{\bf S}$. If we use this, eq. \ref{eq:berit1} becomes:
+To solve this, it is convenient to chose the volume that we integrate over to be a sphere centered at the source location ${\bf r'}$, and with radius $R = |{\bf r-r'}|$ (Fig. \ref{VC:fig:pointsource}B). Due to the symmetry of problem, we then know that the electrical potential is the same for all ${\bf r}$ on the surface of the sphere, so that $\phi({\bf r}) = \phi(R)$. We also know that its gradient $\nabla\phi({\bf r}) = d\phi(R)/dR$ is constant over the surface, and perpendicular to the surface increment $d{\bf S}$. If we use this, eq. \ref{eq:berit1} becomes:
 \begin{equation}
 \oiint_{S} \frac{d\phi(R)}{dR} d{S}  = - \frac{I'}{\sigma},
 \label{eq:berit1ogenhalv}
