@@ -4,7 +4,7 @@ In the standard VC theory presented in Chapter \ref{sec:VC}), we assumed that ex
 
 In this chapter, we will introduce a more general, electrodiffusive theory for extracellular dynamics, which accounts effects of ionic diffusion as well as ohmic drift. However, before we present the electrodiffusive theory, we will try to get an intuition of how diffusion potentials arise.
 
-\subsection{What is a diffusion potential?}
+\subsection{\blue{What is a diffusion potential?}}
 To get a qualitative understanding of what a diffusion potential is, let us consider a simple two-compartment system with two ionic solutions interacting at a junction  (Fig. \ref{Eldiff:fig:diffpot}). We assume that we in one compartment (the left) have a high concentration of NaCl, and in the other compartment (the right) have a lower concentration of NaCl (Fig. \ref{Eldiff:fig:diffpot}A). Initially, both compartments are electroneutral, i.e., they contain equal amounts of Na$^+$ and Cl$^-$. As there are no electrical forces present, the initial system dynamics will be driven exclusively by diffusion. 
 
 \begin{figure}[!ht]
@@ -44,7 +44,7 @@ The diffusion potential is often called the liquid junction potential, since it 
 Whereas the Nernst-Potential and liquid junction potentials in patch clamping are somewhat familiar examples of diffusion potentials, diffusion potentials in the extracellular space have not been that much studied in neuroscience. Below we will outline the physical theory for studying electrodiffusive processes, but before starting, we need to make some comments on the medium that we consider. 
 
 
-\subsection{Continuous, porous medium approximation for electrodiffusion}
+\subsection{\blue{Continuous, porous medium approximation for electrodiffusion}}
 \label{sec:porous}
 In Section \ref{sec:continuous}, we introduced the continuous, porous medium approximation for coarse grained transports in brain tissue. We will use the same approximation for electrodiffusive processes. To do so, however, we need to expand it by introducing some additional variables that are relevant for ion concentration dynamics:
 
@@ -78,7 +78,7 @@ Here $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ is defined by th
 We note that there are two commonly used conventions for defining the variables and parameters involved in computing extracellular dynamics. One can either define them relative to (i) the unit volume and unit cross section area of the tissue as a whole, or (ii) relative to to the unit volume and unit cross section area of the fraction of it that is extracellular. The first (i) of these conventions is standard in VC theory (Section \ref{sec:VC}), whereas the second (ii) is more common in electrodiffusive models. In this book, we have chosen to use the same convention (i) for both VC theory and electrodiffusive theory, since it will make it easier to compare the two directly. However, we made one exception, and defined $c_k$ using the extracellular fraction of the tissue volume as reference. The advantage of using this alternative reference volume for $c_k$ is that $c_k$ then represents a "real" extracellular concentration (as it is measured). The disadvantage is that the volume fraction $\alpha$ will appear in the continuity equation, something it wouldn?t do we used convention (i) also for $c_k$. However, we thought that we could live with that.
 
 
-\subsection{Electrodiffusive ion concentration dynamics}
+\subsection{\blue{Electrodiffusive ion concentration dynamics}}
 To study an electrodiffusive process, we must keep track of the ion concentration dynamics of each individual ion species. 
 With the effective diffusion constant, $\tilde{D}_k$, the flux density (${\bf j_k}$) of an ion species $k$ is given by the Nernst-Planck equation:
 \begin{equation}
@@ -104,7 +104,7 @@ we get the Nernst-Planck continuity equation:
 Before we go into how to solve the Nernst-Planck system of equations, we will in the next subsection show how they relate to to the VC theory presented in Chapter \ref{sec:VC}.
 
 
-\subsection{Electrodiffusive electrodynamics}
+\subsection{\blue{Electrodiffusive electrodynamics}}
 From the equations for ion concentration dynamics (eqns. \ref{eq:JNP}-\ref{eq:NP} ) we can derive a corresponding set of equations for net charge dynamics. If we multiply eq. \ref{eq:JNP} by $F\cdot z_k$ and sum over all ion species $k$, we get the extracellular current density:
 \begin{equation}
 {\bf i} = F\sum_k {z_k {\bf j_k}} = -\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} - F\sum_{k} \frac{\tilde{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi}, 
@@ -155,12 +155,12 @@ Eq. \ref{eq:eldiffCSD2} is the electrodiffusive counterpart to eq. \ref{eq:CSD2}
 We note that, apart from helping us realizing the relationship between standard VC theory and electrodiffusive theory, eq. \ref{eq:eldiffCSD} is not very "user friendly". Whereas eq. \ref{eq:CSD2} allowed us to derive an analytical expression for the electrical potential at all points in space once the CSD was known, eq. \ref{eq:eldiffCSD} does not. To solve  eq. \ref{eq:eldiffCSD}, we must keep track of the spatial distribution of ion concentrations by solving the Nernst-Planck system of equations (eq. \ref{eq:NP}) using one of the numerical frameworks we introduce in the next subsection.
 
 
-\subsection{Frameworks for solving the Nernst-Planck equations} 
+\subsection{\blue{Frameworks for solving the Nernst-Planck equations} }
 Let us for now assume that the neuronal source terms $f_k$ are known at all points in space, and that we want to solve the Nernst-Planck continuity equation for the resulting extracellular ion concentration dynamics. If there are $K$ different ion species present in the system of study, eq. \ref{eq:NP} gives us $K$ equations, i.e., one for each individual ion concentrations $c_k$. However, the dynamics of the individual ion species are coupled by the additional variable $\phi$. Hence, we have $K+1$ variables, and are therefore in need of an additional equation for $\phi$. 
 
 There are two main approaches to this called the Poisson-Nernst-Planck (PNP) framework or the electroneutral framework.
 
-\subsubsection{The Poisson-Nernst-Planck (PNP) framework}
+\subsubsection{\blue{The Poisson-Nernst-Planck (PNP) framework}}
 The physically most detailed approach for defining $\phi$ in the eq. \ref{eq:NP}) is to use Poisson's equation from electrostatics:
 \begin{equation}
 \nabla^2 \phi = -\rho/\epsilon.
@@ -180,7 +180,7 @@ The challenge in solving the PNP system of equations is that it is very computat
 To use our previous cartoon example as a reference, the PNP scheme explicitly models the charge separation process depicted in (Fig. \ref{Eldiff:fig:diffpot}B). Due to the computational load associated with this, the PNP framework is not suitable for estimating dynamics at the level of tissue. However, it has been used in neuroscience to study various electrodiffusive processes taking place on a very tiny spatiotemporal scale near and inside membranes \cite{Leonetti1998, Leonetti2004, Lu2007, Lopreore2008, Nanninga2008, Pods2013, Gardner2015}. 
 
 
-\subsubsection{The electroneutral framework}
+\subsubsection{\blue{The electroneutral framework}}
 An alternative to the PNP framework is to replace the Poisson equation (eq. \ref{eq:poisson}) with the simplifying approximation that the bulk solution is electroneutral:
 \begin{equation}
 \alpha F \sum_k z_k c_k = 0.
@@ -197,7 +197,7 @@ In practice, it is often more convenient to impose the electroneutrality constra
 We note that the electroneutrality constraint (eq. \ref{eq:electroneutral} or \ref{eq:electroneutral2}) only applies to the bulk solution, i.e. to points in extracellular space (or intracellular space) where there is no membrane current source. The membrane dynamics must then be dealt with separately. In previous implementations, this problem has been tackled in various ways, depending on whether the framework was tailored to simulate intracellular dynamics, extracellular dynamics, or both, and whether it was tailored for applications to a coarse grained (tissue level) spatial scale or a more microscopic scale \citep{Mori2008, Mori2009, Mori2009a, Mori2011, Halnes2015, Halnes2013, Pods2017, Niederer2013, OConnell2016, Solbra2018, tuttle2019, ellingsrud2019}. We shall revisit some of these frameworks in Chapter \ref{sec:Schemes}. In this Section, we will only introduce one of them, the so-called Kirchhoff-Nernst-Planck (KNP) framework, since this was tailored to compute extracellular dynamics on the coarse-grained scale that we have focused on in this chapter \citep{Solbra2018}.
 
 
-\subsubsection{The electroneutral Kirchhoff-Nernst-Planck framework}
+\subsubsection{\blue{The electroneutral Kirchhoff-Nernst-Planck framework}}
 The KNP framework, in the form presented in \cite{Solbra2018}, focuses solely on the dynamics in the extracellular space, when "receiving" input from discrete neuronal sources. In this sense it is similar to standard VC theory, except that it includes the dynamics of ion concentrations and their effects on extracellular potentials. Unlike standard VC theory, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the KNP scheme requires the sources to be expressed as a set of ion specific flux-sources, i.e., one source $f_k$ per ion species $k$ (in eq. \ref{eq:NP}). 
 
 In the KNP-framework, membrane dynamics is accounted for by replacing the electroneutrality constraint (eq. \ref{eq:electroneutral2}) with
@@ -229,7 +229,7 @@ Since the KNP equations are coupled in the sense that $\phi$ affects the dynamic
 \end{figure}
 
 
-\subsection{Do diffusion potentials matter?}
+\subsection{\orange{Do diffusion potentials matter?}}
 Due to the computational challenges they impose, it is tempting to make the assumption that diffusive currents contribute so little to the extracellular potential that we don't have to bother with them. This is what normally is being done, as most theoretical studies of extracellular potentials are based on standard VC theory. For most purposes, this is probably a good approximation, but its validity depends on one of the two following criteria being met:
 
 \begin{enumerate}
@@ -241,7 +241,7 @@ The first criterion is general and quite intuitive. If C1 holds, the last term i
 
 In the two following sub-sections we shall explore when and to which degree the criteria C1-C2 are likely to be met under physiological conditions.
 
-\subsubsection{Magnitude of diffusion potentials.}
+\subsubsection{\orange{Magnitude of diffusion potentials.}}
 Here, we will make some crude estimation of the magnitude that we can expect diffusion potentials to have in neural tissue. To make these, make the following simplifications of eq. \ref{eq:eldiffCSD2}): Firstly, diffusion potentials depend solely on extracellular concentration gradients, and not on the instantaneous activity of neurons. Let us therefore assume that $CSD = 0$, and consider the extracellular dynamics is governed by
 \begin{equation}
 \nabla \cdot (\sigma_e\nabla\phi_d) = - \nabla \cdot \left (\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} \right), 
@@ -281,7 +281,7 @@ Based on eq. \ref{eq:diffpot2}, we make some estimates of the magnitude of the d
 Based on the above estimates, diffusion potentials can not as a generality be expected to be so small that they can be ruled out as possible contributors to the LFP. 
 
 
-\subsubsection{Frequency of diffusion potentials}
+\subsubsection{\orange{Frequency of diffusion potentials}}
 \ghnote{Krevende kapittel. Sammenligne noen powerspectra her. Regne ut et par selv, ala Gratiy.} 
 
 Previous computational studies have predicted that effects of diffusion on extracellular potentials are not necessarily small, but tend to be very slow, meaning that they will only affect the very low-frequency components of $\phi$ \citep{Halnes2016, Halnes2017}. This is due to the diffusive current being a direct function of ion concentrations $c_k$, which on a large spatial scale typically vary on a much slower time scale (seconds-minutes) than the fluctuations in $\phi$ that we commonly are interested in (milliseconds-seconds). Furthermore, electrodes used to record $\phi$ typically have a lower cutoff frequency of 0.1-1Hz \citep{Einevoll2013}, which means that most of the tentative diffusive contribution will be filtered out from experimental recordings. It may therefore be a good approximation to neglect the diffusive term, except in the case of pathologically dramatic concentration variations.

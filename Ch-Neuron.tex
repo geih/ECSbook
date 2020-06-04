@@ -23,7 +23,7 @@ a Hodgkin-Huxley-type formalism, a neuron is characterized by (i) its morphology
 Below, we first present a framework for modeling the transmembrane currents in a single compartment (subchapter called "Membrane currents"), and next show how a number of such compartments can be connected together to a multicompartment model (subchapter called "Morphology").
 
 
-\subsection{Membrane currents}
+\subsection{\blue{Membrane currents}}
 In Hodgkin-Huxley type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive  (iv) external stimuli ($i_{stim}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
 
 \begin{equation}
@@ -32,7 +32,7 @@ i_c + i_L + \sum_x{i_x} +  i_{stim} = 0.
 \end{equation}
 Below, we define the various currents that go into this equation.
 
-\subsubsection{Capacitive current}
+\subsubsection{\blue{Capacitive current}}
 The capacitive current density,
 \begin{equation}
 i_c = c_m \frac{d\phi_m}{dt},
@@ -51,7 +51,7 @@ represents the charging up of the membrane potential $\phi_m$ due to a charge de
 \end{figure}
 
 
-\subsubsection{Leakage current}
+\subsubsection{\blue{Leakage current}}
 The leakage current density is given by
 \begin{equation}
 i_L = \bar{g}_L (\phi_m - E_L),
@@ -70,7 +70,7 @@ where $\bar{g}_L$ (mS/cm$^2$) is the leak conductance (the bar indicates that it
 
 In the RC-model, $E_L$ will be identical to the resting potential of the neuron. In the more general models, which also include active ion channels (see below), the resting potential will still tend to be close to $E_L$, but will typically not be identical to $E_L$, as there some of the active ion channels can be partially open during rest, and thus affect the resting potential. For example values, see the parameters used in the original Hodgkin-Huxley model (Table \ref{tab:HH}).
 
-\subsubsection{Active ion channels}
+\subsubsection{\blue{Active ion channels}}
 In addition to $I_c$ and $I_L$, biophysical neuronal models typically include a number of active ion channels. When based on a Hodgkin-Huxley type formalism, current through an active an active ion channel $x$ is modeled as:
 
 \begin{equation}
@@ -97,7 +97,7 @@ The same kind of formalism can also be applied to ligand gated ion channels, i.e
 \end{equation}
 
 
-\subsubsection{Stimulus currents and synapses}
+\subsubsection{\orange{Stimulus currents and synapses}}
 Finally, the stimulus current in Eq. \ref{eq:singlecomp_zerosum}, can be represent any external stimulus that a neuron receives. Typically, it is either taken to represent an experimental current injection, 
 
 \begin{equation}
@@ -136,7 +136,8 @@ i_\text{gap}=g_\text{gap} (\phi_{m2}-\phi_{m1})
 \end{equation}
 
 
-\subsubsection{The Hodgkin-Huxley model}
+\subsubsection{\orange{The Hodgkin-Huxley model}}
+\ghnote{Maybe make this a box.}
 To give an example of a model with active ion channels, we here list up the equations for the original Hodgkin-Huxley model. Compared to modern biophysically detailed neuron models, it is relatively simple in that it only contains two (voltage-gated) active ion channels, a Na$^+$ with three activation gates ($m^3$) and one inactivation gate ($h$), as well as a K$^+$ channel with four inactivation gates $n^4$:
 \begin{equation}
 c_m \frac{d\phi_m}{dt} = -\bar{g}_L(\phi_m-E_L) - \bar{g}_{Na} m^3 h (\phi_m - E_{Na}) - \bar{g}_{K} n^4 (\phi_m - E_{K}).
@@ -183,7 +184,8 @@ The experimentally determined functions for $x_{infty}(\phi_m)$ and $\tau_x(\phi
 \end{figure}
 
 
-\subsubsection{Reversal potentials}
+\subsubsection{\orange{Reversal potentials}}
+\ghnote{Maybe move this as part of the the "assumptions" subsection at the end?}
 A prerequisite for having transmembrane currents in neurons is that the intra- and extracellular solutions contain different ionic compositions. Neurons have a set of homeostatic mechanisms that make sure that it stays that way. The perhaps most important of these is the ATPase pump, which uses energy to pump K$^+$ ions into the neuron and Na$^+$ ions out, and as a result, the intracellular space is comparatively rich in K$^+$, while the extracellular space is comparatively rich on Na$^+$. Typical values of ion concentrations of the main charge carriers inside and outside neurons are given in Table \ref{table:ion-concentrations}.
 
 \begin{table}[h]
@@ -243,7 +245,7 @@ E_L = \frac{R T}{F}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Morphology}
+\subsection{\blue{Morphology}}
 The formalism introduced so far has been for the modeling a neuron as a single compartment. When doing that, one implicitly assumes that the whole neuron is isopotential (same $\phi_m$ evenrywhere). This is generally not true, and especially not in neurons with long and branchy dendrites, where $\phi_m$ can be very different in the soma compared to what it is in the tip of a distal dendrite. Models that account for morphological features of neurons are called multicompartmental models (Fig. \ref{Neuron:fig:multikompisen}A). The neural morphology is then represented as cylindrical compartments connected with resistors, and $\phi_m$ can be computed in each individual compartment. 
 
 \begin{figure}[!ht]
@@ -275,7 +277,7 @@ The situation becomes more complicated when the connected cylinders are of diffe
 
 
 %%%%%%%%%%%%
-\subsubsection{Active multicomparmtent models}
+\subsubsection{\blue{Active multicomparmtent models}}
 To specify our neuron model further, we write the membrane current as
 \begin{equation}
 I_n^{cap} + I_n^{ion} + I_n^{leak} + I_n^{stim} = -\pi d L c_m \frac{d\phi_n}{dt} + \pi d L i_n^{ion} + I_n^{stim}, 
@@ -291,7 +293,7 @@ which is the fundamental equation for multicompartment models. Here,  $i_n^{ion}
 
 
 %%%%%%%%%%%%%%%%%
-\subsubsection{Passive multicomparmtent models}
+\subsubsection{\blue{Passive multicomparmtent models}}
 In the case when we have no active ion channels, $i_n^{ion} = g_L(\phi_n - E_L)$ is simply the leakage current denstiy. In purely passive models, it is custom to refer to the leakage reversal potential simply as the membrane resting potential, and call it $E_m$. It is also custom to replace the leak conductance $g_L$ with the membrane resistivity $R_m = 1/g_L$ ($\Omega$ cm$^2$). Eq. \ref{eq:multimain} then simplifies to:
 
 \begin{equation}
@@ -303,7 +305,7 @@ Although all neurons contain some active membrane mechanisms, the passive model 
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection{Cable equation}
+\subsubsection{\blue{Cable equation}}
 If we in Eq. \ref{eq:multipassive} let $L \rightarrow \delta x$, and take the limit $\delta x \rightarrow 0$, we may derive the cable equation (see e.g., \cite{Sterratt2011}): 
 
 \begin{equation}
@@ -333,7 +335,8 @@ Whereas multicompartmental models (Eq. \ref{eq_multimain} and \ref{eq:multipassi
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection{Steady state solution of the cable equation}
+\subsubsection{\orange{Steady state solution of the cable equation}}
+\ghnote{Have to consider what to include here ... what do we want with it? what do we need for later?}
 As an example solution, we consider the steady state solution of a semi-infinite cable, receiving a constant current injection $I_e$ at the sealed end in $x=0$ (Fig. \ref{fig_Semiinf}).
 
 \begin{figure}[!ht]
@@ -379,7 +382,9 @@ Eq. \ref{eq:lengthconst} also sows that $\lambda \propto \sqrt{d}$, meaning that
 
 where we used eq. \ref{eq:semiinf3} for $\phi_m$ and eq. \ref{eq:lengthconst} for $\lambda$. Eq. \ref{eq:inputresistance} shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
 
-\subsubsection{Temporal solutions of cable equation}
+
+\subsubsection{\orange{Temporal solutions of cable equation}}
+\ghnote{Have to consider what to include here ... what do we want with it? what do we need for later?}
 It can be shown that the temporal solution for $\phi_m$ in a passive cable is \cite{rall1969}:
 \begin{equation}
 \phi_m(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + \ldots, 
@@ -396,6 +401,8 @@ where the coefficients $C_n(x)$ depend on the distance along the cable, while $\
 \label{Neuron:fig:temporalrall}
 \end{figure}
 
+\subsection{\red{Maybe a subsection about $\lambda$, frequency dependence etc.}}
 
-\subsection{Assumptions}
+
+\subsection{\red{Assumptions}}
 \ghnote{Skrive om konsentrasjonseffekter. Tror det er bra aa spare Nernst-potensialene til dette delkap. Si noe om at man ofte ikke trenger aa holde styr paa konsentrasjoner pga. homeostatiske mekanismer "bakt inn" i passiv lekkasje.Si noe om hva som skal til for faktisk aa modellere konsentrasjoner uten aa gaa inn i detalj. Referere til rammeverkene som kommer i Kap 6.}
