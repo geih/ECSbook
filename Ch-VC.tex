@@ -339,7 +339,7 @@ The point-source approximation, Eq. \ref{eq:VCtheory} (or the line-source versio
 The VC theory presented in this Chapter relies on several assumptions and approximations. Below, we discuss the most important of these. 
 \tvnnote{Jeg foreslår at vi viser listen først, og henviser til de respektive underseksjonene} 
 
-\subsubsection{\blue{Quasi-static approximation of Maxwell's equations}}
+\subsubsection{\orange{Quasi-static approximation of Maxwell's equations}}
 \label{sec:quasistatic}
 In the quasi-static approximation to Maxwell's equations, one neglects terms with the time derivatives of the electric and magnetic fields. For linear materials with instantaneous response properties, Maxwell's (macroscopic) equations for the curl of the electric and magnetic fields can then be simplified to:
 \begin{equation}
@@ -359,7 +359,7 @@ where $\mu$ and $\epsilon$ are the permeability and permittivity of the medium r
 The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \cite{Nunez2006, Grodzinsky2011}.
 
 
-\subsubsection{\blue{Linear extracellular medium} }
+\subsubsection{\orange{Linear extracellular medium} }
 In a linear extracellular medium, the relationship between the current density and the electrical field is given by
 \begin{equation}
 {\bf i} = \sigma {\bf E}.
@@ -371,7 +371,7 @@ Eq. \ref{eq:bertil} is essentially Ohm's law for a volume conductor. If we combi
 the quasi-static approximation (i.e., with eq. \ref{eq:conservative}), we get a current density given by ${\bf i} = \sigma \nabla \phi$, which is what we assumed in the beginning of this chapter (eq. \ref{eq:ohmici}).
 
 
-\subsubsection{\blue{Extracellular currents are exclusively due to Ohmic drift}}
+\subsubsection{\orange{Extracellular currents are exclusively due to Ohmic drift}}
 \label{sec:onlyohmic}
 When basing the VC theory on eq. \ref{eq:ohmici}, we assumed that extracellular currents are mediated exclusively by Ohmic drift. In principle, the extracellular current density could have additional contributions from diffusion of ions, advection currents and displacement currents:
 
@@ -406,17 +406,17 @@ However, diffusive currents can have a notable impact on $\phi$ in physiological
 To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \cite{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:eldiff}.
 
 
-\subsubsection{\blue{Frequency independent conductivity} }
+\subsubsection{\orange{Frequency independent conductivity} }
 \label{sec:f-independent}
 \tvnnote{Her gir det kanskje mest mening å bare oppgi antagelsen om "isotropic, homogeneous and frequency independent conductivity", og henvise til kapittelet om konduktivitet?}
 Generally, the response of a medium to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that account for capacitive and inductive effects that are frequency dependent. Above (Chapter \ref{sec:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium includes capacitive effects, as an extracellular current traveling through it could interact with nearby capacitive neural membranes. However, for the relevant frequencies in extracellular recordings, the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite{Logothetis2007, Miceli2017, Ranta2017}. We have therefore based the VC theory presented here on the assumption that the medium is Ohmic or resistive, meaning that we the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite{Bedard2004, Tracey2011, Miceli2017}. 
 
 
-\subsubsection{\blue{Isotropic conductivity} }
+\subsubsection{\orange{Isotropic conductivity} }
 A commonly used approximation in VC theory, is that $\sigma$ is isotropic, i.e., the same in all spatial directions. This is mostly an acceptable approximation, and the theory presented in Section \ref{sec:isohomo} relied on this assumption. However, as we showed in Section \ref{sec:anisohomo}, it is possible to expand the formalism to account for an anisotropic conductivities.
 
 
-\subsubsection{\blue{Homogeneous conductivity} }
+\subsubsection{\orange{Homogeneous conductivity} }
 Another commonly applied assumption in VC theory, is that the conductivity is the same everywhere, an assumption that we used in Section \ref{sec:isohomo} and Section \ref{sec:anisohomo}, but relaxed in Section \label{sec:nonhomo}. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
 
 When signals are recorded very far from their sources, it is likely that they on their journey have experienced a $\sigma$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through both brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{eq:csds} or \ref{eq:anisos}) that link the extracellular potentials to the underlying current sources. Analytical solutions can still be obtained for some simple non-homogeneous cases, such as those presented in Section \ref{sec:nonhomo}. For more general cases, one can in principle always solve eq. \ref{eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \citep{Logg2012}. For examples of neuroscience applications using this approach, see \cite{Moffitt2005, Frey2009, Joucla2012, Haufe2015, Ness2015, Buccino2019b, Obien2019}. 
@@ -426,7 +426,7 @@ When signals are recorded very far from their sources, it is likely that they on
 
 
 
-\subsubsection{\blue{No ephaptic coupling} }
+\subsubsection{\orange{No ephaptic coupling} }
 Ephaptic coupling refers to the effect where the activity of a neuron affects the membrane potential of another neuron or itself through the extracellular potential it creates. The VC theory presented here does not in itself make any assumption regarding ephaptic effects being present or not. That is, eq. \ref{eq:csds} for the extracellular potential holds regardless of whether the or not ephaptic effects were accounted for when the neurodynamics, i.e., the $CSD$ was computed. However, in the practical usage of the VC theory, ephaptic effects are typically neglected since it makes things a lot simpler to do so. Then, neurodynamics and extracellular potentials can be computed in two independent steps. That is, first the neuronal transmembrane currents are computed under the assumption that the extracellular potential is zero (cf. Chapter \ref{sec:Neuron}), and next, the computed transmembrane currents are used to predict a non-zero extracellular potential (cf. eg. \ref{eq:csds}). Despite its evident inconsistency, this approach can give fairly accurate results since extracellular potentials are generally so much smaller than the membrane potential that the ephaptic effect is small. There are, however, aspects of neuronal activity that can not be understood without accounting for ephaptic effects \cite{Holt1999, Anastassiou2015, Goldwyn2016}. 
 
 To account for ephaptic effects, one must model the neurodynamics and extracellular potential simultaneously on a unified framework, which is more computationally challenging (more on this in Chapter \ref{sec:schemes}).
