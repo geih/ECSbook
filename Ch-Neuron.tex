@@ -8,8 +8,9 @@
 
 Modelling of neurons is at the core of computational neuroscience, and the topic has been treated in detail in several text books (see e.g., \cite{johnston1994foundations, KockSegev1998, Koch1999, Hille2001, Dayan2005, Sterratt2011}). We therefore only give a brief introduction to it here. 
 
-Most simulations of extracellular potentials are based on biophysical multicompartmental neuronal models, which are typically based on a formalism similar to that used in the celebrated model by Hodgkin and Huxley \cite{Hodgkin1952}. In models based on
-a Hodgkin-Huxley-type formalism, a neuron is characterized by (i) its morphology, and (ii) its membrane mechanisms. In a multicompartmental model\index{multicompartment modelling}, the morphology of the real neuron (Fig. \ref{Neuron:fig:multicomp}A) is represented as a discretized set of compartments connected by resistors (Fig. \ref{Neuron:fig:multicomp}B). In such a model there are two categories of currents which together determine the membrane potential dynamics of the neuron (Fig. \ref{Neuron:fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents (green arrows). Once all the currents are characterized, the dynamics of the membrane potential can be computed by demanding that the sum of currents into a given compartment is zero (Kircchoff's current law). 
+Most simulations of extracellular potentials are based on biophysical multicompartmental neuronal models based on a formalism similar to that used in the celebrated model by Hodgkin and Huxley for membrane mechanisms (see e.g., \cite{Hodgkin1952, KockSegev1998, Pospischil2008}), and cable theory for how signals propagate in dendrites and axons (see, e.g., \cite{koch1999, rall2011}). A neuron is then characterized by (i) its morphology, and (ii) its membrane mechanisms. 
+
+In a multicompartmental model\index{multicompartment modelling}, the morphology of the real neuron (Fig. \ref{Neuron:fig:multicomp}A) is represented as a discretized set of compartments connected by resistors (Fig. \ref{Neuron:fig:multicomp}B). In such a model there are two categories of currents which together determine the membrane potential dynamics of the neuron (Fig. \ref{Neuron:fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents (green arrows). Once all the currents are characterized, the dynamics of the membrane potential can be computed by demanding that the sum of currents into a given compartment is zero (Kircchoff's current law). 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -262,10 +263,10 @@ where we have introduced the length constant,
 and the time constant, 
 \begin{equation}
 \tau_m \equiv R_m c_m  \,\, \text{ms}.
-\label{eq:lengthconst}
+\label{eq:timeconst}
 \end{equation}
 The cable equation serves as a continuous version of a passive neural branch (with infinitely many infinitely small compartments), 
-where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. If a certain point along the cable is set to a certain potential $\phi$, $\tau_m$ will tell us how fast this local potential will dissipate towards rest, while $\lambda$ will tell us how long part of the cable that will be affected by this local potential.
+where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. If a certain point along the cable is set to a certain potential $\phi$, $\tau_m$ will tell us how fast this local potential will dissipate towards rest, while $\lambda$ will tell us how long part of the cable that will be affected by this local potential. 
 
 Whereas multicompartmental models (Eq. \ref{eq_multimain} and \ref{eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved numerically for some idealized scenarios. Below, we consider a couple of scenarios that will also make the interpretation of $\tau_m$ and $\lambda$ clearer. 
 
@@ -317,13 +318,28 @@ Eq. \ref{eq:lengthconst} also sows that $\lambda \propto \sqrt{d}$, meaning that
 where we used eq. \ref{eq:semiinf3} for $\phi_m$ and eq. \ref{eq:lengthconst} for $\lambda$. Eq. \ref{eq:inputresistance} shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
 
 
+\subsection{\blue{Frequency dependence of the cable length constant}}
+As we just saw, the length constant $\lambda$ (eq. \ref{eq:lengthconst}) is the length over which the potential falls to a fraction $1/e$ of its boundary value when the finite end of a semi-infinite cable is fixed at a constant potential. As this interpretation depends on a constant, direct-current (DC), boundary condition, $\lambda$ is often referred to as the DC length constant. 
+
+It is possible to derive a corresponding length constant for AC input to a semi-infinite cable \cite{Pettersen2008a}: 
+\begin{equation}
+\lambda_{AC} = \lambda \sqrt{ \frac{2}{1+\sqrt{(\omega \tau)^2 + 1}} }.
+\label{eq:AClambda}
+\end{equation}
+Here $\tau$ still is the membrane time constant (eq. \ref{eq:timeconst}), $\lambda$ is still the DC length constant (eq. \ref{eq:lengthconst}), and $\omega = 2\pi f$ is the angular frequency of the the boundary potential.
+
+For a constant boundary condition ($I_e = \text{constant}$ in eq. \ref{eq:semiinf4}) or, equivalently, $\phi_m(0) = \text{constant} in eq. \ref{eq:semiinf3}), $\omega$ is zero, and we may verify that $\lambda_{AC}$ becomes identical to the DC length constant $\lambda$. For an AC input, we see that $\lambda_{AC}$ decreases with $\omega$, and for high frequencies $\lambda_{AC} \propto (\omega \tau^{-1/2})$. Thus, low frequency input will tend to travel further in dendritic structures, while high frequency input will affect dendritic structures more locally. 
+
+As we shall see later, an important factor determining the size and shape of extracellular potentials is the distance between inward (sinks) and outward (sources) transmembrane currents. This spatial separation is proportional to the neuronal length constant, and from eq. \ref{eq:AClambda} we thus know that the source/sink separation will be larger for low frequency components of the neuronal activity.
+
+
 \subsubsection{\orange{Temporal solutions of cable equation}}
 It can be shown that the temporal solution for $\phi_m$ in a passive cable is \cite{rall1969}:
 \begin{equation}
-\phi_m(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + \ldots, 
+\phi_m(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + C_2(x) e^{-t/\tau_2} + \ldots, 
 \label{eq:cabletemporal}
 \end{equation}
-where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_m = R_m C_m$ is the \emph{membrane time constant}, and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). Fig. \ref{Neuron:fig:temporalrall} shows the the membrane potentials at selected positions along a $500 \, \mu$m long cable responding to a current injection (top panel) resembling a synaptic input in one end. We see that the peak response comes faster in proximal than in distal location, but that potential is about the same at all points along the cable after 2 ms. After this, $\phi_m$  decay gradually towards the resting state. This decay takes place at the slower time scale of the membrane time constant, which in this simulation was 10~ms ($R_m=1\,\Omega \text{m}^2$, and $C_m=1\,\mu\text{F}/\text{cm}^2$). Although the dynamics of course will be system specific, depending on the membrane time constant and generally on the presence of active mechanisms, the simulation in Fig. \ref{Neuron:fig:temporalrall} may give some general idea on how signals spread in dendrites.
+where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_m = R_m C_m$ is the \emph{membrane time constant} (eq. \ref{eq:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). Fig. \ref{Neuron:fig:temporalrall} shows the the membrane potentials at selected positions along a $500 \, \mu$m long cable responding to a current injection (top panel) resembling a synaptic input in one end. We see that the peak response comes faster in proximal than in distal location, but that potential is about the same at all points along the cable after 2 ms. After this, $\phi_m$  decay gradually towards the resting state. This decay takes place at the slower time scale of the membrane time constant, which in this simulation was 10~ms ($R_m=1\,\Omega \text{m}^2$, and $C_m=1\,\mu\text{F}/\text{cm}^2$). Although the dynamics of course will be system specific, depending on the membrane time constant and generally on the presence of active mechanisms, the simulation in Fig. \ref{Neuron:fig:temporalrall} may give some general idea on how signals spread in dendrites.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -334,11 +350,22 @@ where the coefficients $C_n(x)$ depend on the distance along the cable, while $\
 \label{Neuron:fig:temporalrall}
 \end{figure}
 
-\subsection{\red{Maybe a subsection about $\lambda$, frequency dependence etc.}}
-\ghnote{Not sure what to write here. Read previous papers by Klas...}
 
 
 \subsection{\red{Assumptions}}
+Neuronal modeling as presented here, based on the combination of a Hodgkin-Huxley type formalism for membrane mechanisms, and cable theory for intracellular signal propagation, relies on a series of important assumptions. 
+
+Firstly, Hodgkin-Huxley type ion channels do have some limitations when it comes to capturing the exact electrophysiological dynamics of ion channel gating, something that has inspired the development of detailed ion channel models based on Markov type kinetics, which typically are characterized by a large number of states and related transitions (see e.g., \cite{balbi2017}). Secondly, the cable equation is based on the assumption that the neuronal morphology can be considered as a one-dimensional structure, i.e., 
+
+amount of details that one includes in the model of an ion channel, 
+
+Cable equation 1D
+\cite{lindsay2004maxwell}
+
+actual ion channel gating are modeled with, 
+
+
+Neural modeling, as presented here, is
 
 \ghnote{Skrive om konsentrasjonseffekter. Tror det er bra aa spare Nernst-potensialene til dette delkap. Si noe om at man ofte ikke trenger aa holde styr paa konsentrasjoner pga. homeostatiske mekanismer "bakt inn" i passiv lekkasje.Si noe om hva som skal til for faktisk aa modellere konsentrasjoner uten aa gaa inn i detalj. Referere til rammeverkene som kommer i Kap 6.}
 
