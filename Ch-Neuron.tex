@@ -8,7 +8,7 @@
 
 Modelling of neurons is at the core of computational neuroscience, and the topic has been treated in detail in several text books (see e.g., \cite{johnston1994foundations, KockSegev1998, Koch1999, Hille2001, Dayan2005, Sterratt2011}). We therefore only give a brief introduction to it here. 
 
-Most simulations of extracellular potentials are based on biophysical multicompartmental neuronal models based on a formalism similar to that used in the celebrated model by Hodgkin and Huxley for membrane mechanisms (see e.g., \cite{Hodgkin1952, KockSegev1998, Pospischil2008}), and cable theory for how signals propagate in dendrites and axons (see, e.g., \cite{koch1999, rall2011}). A neuron is then characterized by (i) its morphology, and (ii) its membrane mechanisms. 
+Most simulations of extracellular potentials are based on biophysical multicompartmental neuronal models based on a formalism similar to that used in the celebrated model by Hodgkin and Huxley for membrane mechanisms (see e.g., \cite{Hodgkin1952, KockSegev1998, Pospischil2008}), and cable theory for how signals propagate in dendrites and axons (see, e.g., \cite{koch1999, rall2011}). We shall limit ourselves to present this framework, which we will refer to as the Hodgkin-Huxley (HH) type framework. In the HH-type framework, a neuron is characterized by (i) its morphology, and (ii) its membrane mechanisms. 
 
 In a multicompartmental model\index{multicompartment modelling}, the morphology of the real neuron (Fig. \ref{Neuron:fig:multicomp}A) is represented as a discretized set of compartments connected by resistors (Fig. \ref{Neuron:fig:multicomp}B). In such a model there are two categories of currents which together determine the membrane potential dynamics of the neuron (Fig. \ref{Neuron:fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents (green arrows). Once all the currents are characterized, the dynamics of the membrane potential can be computed by demanding that the sum of currents into a given compartment is zero (Kircchoff's current law). 
 
@@ -318,7 +318,7 @@ Eq. \ref{eq:lengthconst} also sows that $\lambda \propto \sqrt{d}$, meaning that
 where we used eq. \ref{eq:semiinf3} for $\phi_m$ and eq. \ref{eq:lengthconst} for $\lambda$. Eq. \ref{eq:inputresistance} shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
 
 
-\subsection{\blue{Frequency dependence of the cable length constant}}
+\subsubsection{\blue{Frequency dependence of the cable length constant}}
 As we just saw, the length constant $\lambda$ (eq. \ref{eq:lengthconst}) is the length over which the potential falls to a fraction $1/e$ of its boundary value when the finite end of a semi-infinite cable is fixed at a constant potential. As this interpretation depends on a constant, direct-current (DC), boundary condition, $\lambda$ is often referred to as the DC length constant. 
 
 It is possible to derive a corresponding length constant for AC input to a semi-infinite cable \cite{Pettersen2008a}: 
@@ -351,27 +351,11 @@ where the coefficients $C_n(x)$ depend on the distance along the cable, while $\
 \end{figure}
 
 
-
-\subsection{\red{Assumptions}}
-Neuronal modeling as presented here, based on the combination of a Hodgkin-Huxley type formalism for membrane mechanisms, and cable theory for intracellular signal propagation, relies on a series of important assumptions. 
-
-Firstly, Hodgkin-Huxley type ion channels do have some limitations when it comes to capturing the exact electrophysiological dynamics of ion channel gating, something that has inspired the development of detailed ion channel models based on Markov type kinetics, which typically are characterized by a large number of states and related transitions (see e.g., \cite{balbi2017}). Secondly, the cable equation is based on the assumption that the neuronal morphology can be considered as a one-dimensional structure, i.e., 
-
-amount of details that one includes in the model of an ion channel, 
-
-Cable equation 1D
-\cite{lindsay2004maxwell}
-
-actual ion channel gating are modeled with, 
+%%%%%%%%%%
 
 
-Neural modeling, as presented here, is
-
-\ghnote{Skrive om konsentrasjonseffekter. Tror det er bra aa spare Nernst-potensialene til dette delkap. Si noe om at man ofte ikke trenger aa holde styr paa konsentrasjoner pga. homeostatiske mekanismer "bakt inn" i passiv lekkasje.Si noe om hva som skal til for faktisk aa modellere konsentrasjoner uten aa gaa inn i detalj. Referere til rammeverkene som kommer i Kap 6.}
-
-\subsubsection{\orange{Reversal potentials}}
-\ghnote{Maybe move this as part of the the "assumptions" subsection at the end?}
-A prerequisite for having transmembrane currents in neurons is that the intra- and extracellular solutions contain different ionic compositions. Neurons have a set of homeostatic mechanisms that make sure that it stays that way. The perhaps most important of these is the ATPase pump, which uses energy to pump K$^+$ ions into the neuron and Na$^+$ ions out, and as a result, the intracellular space is comparatively rich in K$^+$, while the extracellular space is comparatively rich on Na$^+$. Typical values of ion concentrations of the main charge carriers inside and outside neurons are given in Table \ref{table:ion-concentrations}.
+\subsection{\orange{Ion concentration dynamics and reversal potentials}}
+The key driver of transmembrane currents in neurons is ionic diffusion, and a prerequisite for having such currents is that the intra- and extracellular solutions contain different ionic compositions. Typical values of ion concentrations of the main charge carriers inside and outside neurons are given in Table \ref{table:ion-concentrations}. 
 
 \begin{table}[h]
 \centering
@@ -386,7 +370,12 @@ Nernst potential (mV)		    &	-89		&	    	+71	&		+19	&	-64		&		+132 		  	\\
 \end{tabular}}{}
 \end{table}
 
-Ion channels are pores in the membrane, some of which are selectively permeable only to specific ions. For example, when a Na$^+$ channel opens, only Na$^+$ ions will pass through it, and they will diffuse from the extracellular space, where the Na$^+$ concentration is highest, and into the neuron. As this diffusive process transfers charged ions into the neuron, it will charge up the membrane potential. The membrane potential will in turn evoke an electrostatic force on the Na$^+$ ions, causing an electrical drift of Na$^+$ in the opposite direction. The ionic reversal potential is defined as the potential at which the electrical drift current and diffusive current of a given ion species are in an equilibrium where they are equal in magnitude but oppositely directed. It can be calculated from the Nernst-Planck equation for electrodiffusion. If we approximate the problem as one-dimensional (in the $z$-direction, perpendicular to the membrane), the Nernst-Planck equation for an ion species $k$ is:
+In the HH-type formalism presented in this chapter, ion concentrations were implicitly assumed to be constant, and therefore they did not enter into the equations. As neuronal electrodynamics is generated by ions flowing across the membrane, this may seem like a peculiar assumption. However, the approximation if often good, as neurons possess a set of homeostatic mechanisms that strive to maintain the ion concentration gradients between the intra- and extracellular space close to baseline. The perhaps most important of these is the ATPase pump, which uses energy to pump K$^+$ ions into the neuron and Na$^+$ ions out, and as a result, the intracellular space tends to remain comparatively rich in K$^+$, while the extracellular space is tends to remain comparatively rich on Na$^+$. 
+
+Below, we shall explain how the ionic concentrations are implicitly present in the HH-formalism as they determine the ionic reversal potentials ($E_x$ in eq. \ref{eq:HHform}). We shall also briefly discuss cases where the assumptions of constant ion concentrations are not applicable. 
+
+\subsubsection{Ionic reversal potentials}
+Ion channels are pores in the membrane, some of which are selectively permeable only to specific ions. For example, when a Na$^+$ channel opens, Na$^+$ ions will diffuse from the extracellular space, where the Na$^+$ concentration is highest, and into the neuron. As this diffusive process transfers charged ions into the neuron, it will increase (depolarize) membrane potential. The membrane potential will in turn evoke an electrostatic force on the Na$^+$ ions, causing an electrical drift of Na$^+$ in the opposite (outward) direction. The ionic reversal potential is defined as the potential at which the electrical drift current and diffusive current of a given ion species are in an equilibrium, i.e., they are equal in magnitude but oppositely directed. It can be calculated from the Nernst-Planck equation for electrodiffusion. If we approximate the problem as one-dimensional (in the $z$-direction, perpendicular to the membrane), the Nernst-Planck equation for an ion species $k$ is:
 %%%%
 \begin{equation}
 j_k = j_{k,\text{diff}} + j_{k,\text{drift}} 
@@ -412,20 +401,54 @@ E_k & =  \frac{RT}{Fz_k}  ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}}
 \end{align}
 where the last equality follows from the definition of $E_k$ as the membrane potential $\phi_{\text{in}}-\phi_{\text{out}}$ for which the the net flux (in Eq. \ref{eq:NP1D}) is zero. Eq. \ref{eq:revpots} was used to compute the reversal potentials listed in Table \ref{table:ion-concentrations}. 
 
-Based on Eq. \ref{eq:NP1D} and a few assumptions, it has been shown that a membrane current is well described by the Goldman-Hodkgkin-Katz equation (see e.g., \cite{johnston1994foundations}):
-
-\begin{equation}
-I_\text{k} = P_k z_k F \frac{z_k F \phi_m}{R T} \Big( \frac{[k]_\text{in}-[k]_\text{out} e^{-z_k F \phi_m/RT}} {1-e^{-z_k F \phi_m/RT}} \Big), 
-\label{eq:GHK}
-\end{equation}
-The transmembrane currents used in the HH type formalism (Eq. \ref{eq:HHform}), which are proportional to the driving force $(V-E_k)$, are linearized (sometimes called quasi-Ohmic) versions of the Goldman-Hodkgkin-Katz equation.
-
-Eq. \ref{eq:NP1D} defined the reversal potential for individual ion species, which is relevant for ion specific ion channels. In contrast, the passive membrane has some leakage permeability to all ion species simultaneously. This gives rise to a leak reversal potential $E_L$ (from Eq. \ref{eq:HHleak}), representing the equilibrium condition where the leakages of various ions across the membrane sum to a zero net electrical current. If we assume that only the three most important charge carriers (K$^{+}$, Na$^{+}$ and Cl$^{-}$) contribute, and that they are defined by Eq. \ref{eq:GHK} with leak permeabilities $P_K$, $P_{Na}$ and $P_{Cl}$, it can be shown that they are in equilibrium at the potential:
+Eq. \ref{eq:NP1D} defined the reversal potential for individual ion species, which is relevant for ion specific ion channels. In contrast, the passive membrane has some leakage permeability to all ion species simultaneously. This gives rise to a leak reversal potential $E_L$ (from Eq. \ref{eq:HHleak}), representing the equilibrium condition where the leakages of various ions across the membrane sum to a zero net electrical current.  If we assume that only the three most important charge carriers (K$^{+}$, Na$^{+}$ and Cl$^{-}$) contribute, and that they have leak permeabilities $P_K$, $P_{Na}$ and $P_{Cl}$, it can be shown that they are in equilibrium at the potential:
 
 \begin{equation}
 E_L = \frac{R T}{F} 
 \ln \frac{P_\text{K} [K]_\text{out}+P_\text{Na} [Na]_\text{out} + P_\text{Cl} [Cl]_\text{in}}
            {P_\text{K} [K]_\text{in}+P_\text{Na} [Na]_\text{in} + P_\text{Cl} [Cl]_\text{out}}.
+\label{eq:Eleak_GHK}
 \end{equation}
+
+\subsubsection{The Goldman-Hodgkin-Katz equation}
+If one combines Eq. \ref{eq:NP1D} with the assumptions that (i) ions cross the membrane independently, and (ii) that the electrical field within the membrane is constant, one can derive the Goldman-Hodkgkin-Katz equation for the membrane currents (see e.g., \cite{johnston1994foundations}):
+
+\begin{equation}
+I_\text{k} = P_k z_k F \frac{z_k F \phi_m}{R T} \Big( \frac{[k]_\text{in}-[k]_\text{out} e^{-z_k F \phi_m/RT}} {1-e^{-z_k F \phi_m/RT}} \Big), 
+\label{eq:GHK}
+\end{equation}
+Eq. \ref{eq:Eleak_GHK} can be derived from eq. \ref{eq:GHK} by requiring that the sum of all ionic currents, each independently defined by eq. \ref{eq:GHK}, is zero.
+
+The transmembrane currents used in the HH-type formalism (Eq. \ref{eq:HHform}), which are proportional to the driving force $(V-E_k)$, are linearized (sometimes called quasi-Ohmic) versions of the Goldman-Hodkgkin-Katz equation.
+
+
+
+
+\subsection{\red{Utklipp}}
+The HH-type framework does have some limitations. Firstly, HH-type ion channel models (cf. eq.\ref{eq:HHform}) are somewhat crude representations of the electrophysiological dynamics of single ion channel gating, and alternative models exist which models ion channels in greater detail, e.g. with Markov-type models (see e.g., \cite{balbi2017}). Secondly, cable-equation based models assume that the neuronal morphology is well represented by a one-dimensional, branching cable, and a critical study of this approximation can be found in \cite{lindsay2004maxwell}. Thirdly, in HH-type models, ion concentrations of the main charge carriers are assumed to remain effectively constant under the simulated period. Fourthly, the extracellular potential is assumed to be constant and grounded, so that it does not provide any (ephaptic) feedback effects on the computed neurodynamics. 
+
+The two first of the above listed assumptions regard the level of detail in the representation of the neuron.
+
+the two latter regard the interaction between the neuron and its surroundings, and thus the physical consistency of the modeling framework. As the two latter assumptions are most relevant for the interplay between the neurodynamics and extracellular potentials, we shall pay some extra attention to those.
+
+
+
+
+
+The HH-type framework presented in this chapter, has become the gold standard for biophysically detailed neuronal simulations on the cellular and network level. Today, this framework is used for simulating the dynamics of large neuronal networks (see e.g., \cite{traub2005, markram2015, arkhipov2018}). 
+
+
+
+give simplified approximations of the electrophysiological dynamics of ion channel gating, and ion channels could be modeled in greater detail, e.g. with Markov-type models (see e.g., \cite{balbi2017}). 
+
+
+
+
+
+
+Neuronal modeling as presented here, based on the combination of a Hodgkin-Huxley type formalism for membrane mechanisms, and cable theory for intracellular signal propagation, is the standard framework for biophysical modeling of neurodynamics at the cellular and network level  \ghnote{Sitat(er) paa dette?}. 
+
+This standard framework relies on a set of assumptions.  Thirdly, the neurodynamics is typically computed under the assumption that ion concentrations of the main charge carriers remain effectively constant under the simulated period. Fourthly, the neurodynamics is typically computed under the assumption that the extracellular potential is constant and grounded, and thus does not provide any feedback effects on the computed neurodynamics. 
+
 
 
