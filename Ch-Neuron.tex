@@ -333,7 +333,7 @@ It is possible to derive a corresponding length constant for AC input to a semi-
 \end{equation}
 Here $\tau$ still is the membrane time constant (eq. \ref{eq:timeconst}), $\lambda$ is still the DC length constant (eq. \ref{eq:lengthconst}), and $\omega = 2\pi f$ is the angular frequency of the the boundary potential.
 
-For a constant boundary condition ($I_e = \text{constant}$ in eq. \ref{eq:semiinf4}) or, equivalently, $\phi_m(0) = \text{constant} in eq. \ref{eq:semiinf3}), $\omega$ is zero, and we may verify that $\lambda_{AC}$ becomes identical to the DC length constant $\lambda$. For an AC input, we see that $\lambda_{AC}$ decreases with $\omega$, and for high frequencies $\lambda_{AC} \propto (\omega \tau^{-1/2})$. Thus, low frequency input will tend to travel further in dendritic structures, while high frequency input will affect dendritic structures more locally. 
+For a constant boundary condition ($I_e = \text{constant}$ in eq. \ref{eq:semiinf4}) or, equivalently, $\phi_m(0) = \text{constant}$ in eq. \ref{eq:semiinf3}), $\omega$ is zero, and we may verify that $\lambda_{AC}$ becomes identical to the DC length constant $\lambda$. For an AC input, we see that $\lambda_{AC}$ decreases with $\omega$, and for high frequencies $\lambda_{AC} \propto (\omega \tau^{-1/2})$. Thus, low frequency input will tend to travel further in dendritic structures, while high frequency input will affect dendritic structures more locally. 
 
 As we shall see later, an important factor determining the size and shape of extracellular potentials is the distance between inward (sinks) and outward (sources) transmembrane currents. This spatial separation is proportional to the neuronal length constant, and from eq. \ref{eq:AClambda} we thus know that the source/sink separation will be larger for low frequency components of the neuronal activity.
 
@@ -435,23 +435,23 @@ Looking at eq. \ref{eq:GHK}, we see that the transmembrane currents are nonlinea
 The leakage reversal potential (eq. \ref{eq:Eleak_GHK}) can be derived from eq. \ref{eq:GHK} by requiring that the sum of all ionic currents, each independently defined by eq. \ref{eq:GHK}, is zero.
 
 
-\subsubsection{Intracellular  Ca\textsuperscript{2+} dynamics}
-While ion concentrations are typically assumed to be constant in HHC-based models, it is common to make an exception for Ca\textsuperscript{2+}. The main reason for this is that the intracellular Ca\textsuperscript{2+} concentration ($\text{[Ca]_i}$) is very low compared to that of the other ion species (Table \ref{tab:HH}). Unlike for the other ion species,  $\text{[Ca]_i}$, can therefore change quite dramatically on a short time scale, e.g., during the opening of Ca\textsuperscript{2+} channel. 
+\subsubsection{Intracellular Calcium dynamics}
+While ion concentrations are typically assumed to be constant in HHC-based models, it is common to make an exception for Ca$^{2+}$. The main reason for this is that the intracellular Ca$^{2+}$ concentration ($\mathrm{[Ca]_i}$) is very low compared to that of the other ion species (Table \ref{tab:HH}). Unlike for the other ion species,  $\mathrm{[Ca]_i}$, can therefore change quite dramatically on a short time scale, e.g., during the opening of Ca$^{2+}$ channel. 
 
-The motivations for modeling $\text{[Ca]_i}$ are several. Firstly, to accurately model currents through Ca\textsuperscript{2+} channels, the concentration dependent GHK formalism (eq. \ref{eq:GHK}) is often used (see e.g., \cite{Destexhe1994, Zhu1999, Halnes2011}). Secondly, Ca\textsuperscript{2+} does not only act as a charge carrier in neurons, but is also a second messenger, which means that it can trigger a number of intracellular chemical processes, including the gating of Ca\textsuperscript{2+} activated ion channels. Thirdly, modeling $\text{[Ca]_i}$ could be motivated by the aim to reproduce data from Ca\textsuperscript{2+} imaging experiments. 
+The motivations for modeling $\mathrm{[Ca]_i}$ are several. Firstly, to accurately model currents through Ca$^{2+}$ channels, the concentration dependent GHK formalism (eq. \ref{eq:GHK}) is often used (see e.g., \cite{Destexhe1994, Zhu1999, Halnes2011}). Secondly, Ca$^{2+}$ does not only act as a charge carrier in neurons, but is also a second messenger, which means that it can trigger a number of intracellular chemical processes, including the gating of Ca$^{2+}$ activated ion channels. Thirdly, modeling $\mathrm{[Ca]_i}$ could be motivated by the aim to reproduce data from Ca$^{2+}$ imaging experiments. 
 
-When Ca\textsuperscript{2+} dynamics is included in HHC-based models of the electrical activity of neurons, it is usually to account for the activation of ion channels that instead of being voltage gated, open or close as a function of $\text{[Ca]_i}$. The kinetics scheme for voltage gated ion channels (\ref{eq:HHgate}) is then replaced with one dependent on $\text{[Ca]_i}$:
+When Ca$^{2+}$ dynamics is included in HHC-based models of the electrical activity of neurons, it is usually to account for the activation of ion channels that instead of being voltage gated, open or close as a function of $\mathrm{[Ca]_i}$. The kinetics scheme for voltage gated ion channels (\ref{eq:HHgate}) is then replaced with one dependent on $\mathrm{[Ca]_i}$:
 
 \begin{equation}
-\frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\text{[Ca]_i}) - x}{\tau_x(\text{[Ca]_i}},  \, \text{for } x = \{m,h\},
+\frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\mathrm{[Ca]_i}) - x}{\tau_x(\mathrm{[Ca]_i}},  \, \text{for } x = \{m,h\},
 \label{eq:Cagate}
 \end{equation}
-and the $\text{[Ca]_i}$ in a neuronal compartment is typically modeled using a simplified framework on the form:
+and the $\mathrm{[Ca]_i}$ in a neuronal compartment is typically modeled using a simplified framework on the form:
 \begin{equation}
-\frac{d\text{[Ca]_i}}{dt} = \gamma i_{Ca} - \frac{\text{[Ca]_i}-\text{[Ca]_{i,0}}}{\tau_{Ca}}, 
+\frac{d\mathrm{[Ca]_i}}{dt} = \gamma i_{Ca} - \frac{\mathrm{[Ca]_i}-\mathrm{[Ca]_{i,0}}}{\tau_{Ca}}, 
 \label{eq:Cadynamics}
 \end{equation}
-where a transmembrane Ca\textsuperscript{2+} current ($i_{Ca}$ is converted to a change in $\text{[Ca]_i}$ by the conversion factor $\gamma$, which is proportional to the surface to volume ratio of the neuronal compartment where $\text{[Ca]_i}$ is defined. In addition, the last term in eq. \ref{eq:Cadynamics} represents the summed activity of a number of extrusion mechanisms that will make $\text{[Ca]_i}$ will decay towards some baseline value $\text{[Ca]_{i,0}}$ with a time constant $\tau_{Ca}$ (see e.g. \cite{Sterratt2011}).
+where a transmembrane Ca$^{2+}$ current ($i_{Ca}$ is converted to a change in $\mathrm{[Ca]_i}$ by the conversion factor $\gamma$, which is proportional to the surface to volume ratio of the neuronal compartment where $\mathrm{[Ca]_i}$ is defined. In addition, the last term in eq. \ref{eq:Cadynamics} represents the summed activity of a number of extrusion mechanisms that will make $\mathrm{[Ca]_i}$ will decay towards some baseline value $\mathrm{[Ca]_{i,0}}$ with a time constant $\tau_{Ca}$ (see e.g. \cite{Sterratt2011}).
 
 
 
@@ -464,15 +464,15 @@ As the final part of this chapter, we will discuss two important assumptions tha
 In most neuronal models based on the HHC framework, the reversal potentials (eq. \ref{eq:revpots}) of the main charge carriers are assumed to be constants, which implicitly means that ion concentrations are assumed to be constant. If this were not true, and 
 so that the ion concentrations and reversal potentials were allowed to change, it could potentially have a dramatic impact on the neurodynamics. 
 
-As we saw earlier (eq. \ref{eq:Cadynamics}) some models do indeed account for Ca\textsuperscript{2+} dynamics, and it could seem natural to think that one might use a similar framework for all the other ion species as well. A simple reason for not doing this is, as we have stated, that there is no motivation for it because they change so little during normal activity. A more complex reason is a framework equivalent to that in eq. \ref{eq:Cadynamics} might not be all that meaningful for the more abundant ion species, as we shall explain below. 
+As we saw earlier (eq. \ref{eq:Cadynamics}) some models do indeed account for Ca$^{2+}$ dynamics, and it could seem natural to think that one might use a similar framework for all the other ion species as well. A simple reason for not doing this is, as we have stated, that there is no motivation for it because they change so little during normal activity. A more complex reason is a framework equivalent to that in eq. \ref{eq:Cadynamics} might not be all that meaningful for the more abundant ion species, as we shall explain below. 
 
 Another reason is that it might not be all that m
 
 
 However, the simple model for ion concentration dynamics given by eq. \ref{eq:Cadynamics} rests on some important approximations.
-Firstly, the model is local in the sense that $\text{[Ca]_i}$ changes as a function of the transmembrane flux only. Intracellular diffusion and electrical migration of Ca\textsuperscript{2+} are thus assumed to have a negligible impact on the dynamics of $\text{[Ca]_i}$. In principle, such electrodiffusive processes could have an impact both on the dynamics of $\text{[Ca]_i}$ and on the dynamics of the membrane potential, since diffusing ions will carry electrical currents (see e.g., \cite{Qian1989}). 
+Firstly, the model is local in the sense that $\mathrm{[Ca]_i}$ changes as a function of the transmembrane flux only. Intracellular diffusion and electrical migration of Ca$^{2+}$ are thus assumed to have a negligible impact on the dynamics of $\mathrm{[Ca]_i}$. In principle, such electrodiffusive processes could have an impact both on the dynamics of $\mathrm{[Ca]_i}$ and on the dynamics of the membrane potential, since diffusing ions will carry electrical currents (see e.g., \cite{Qian1989}). 
 
-Secondly, the model represented by eq. \ref{eq:Cadynamics} is not ion conserving, since it allows $\text{[Ca]_i}$ to change inside the neuron without the extracellular Ca\textsuperscript{2+} concentration changing accordingly. This approximation may work fairly well for Ca\textsuperscript{2+}, since the intracellular concentration is so much lower than the extracellular. For other ion species, intra- and extracellular concentrations are of more comparable magnitudes, and for these it might not be meaningful to model the intracellular concentration without also modeling the extracellular concentrations. 
+Secondly, the model represented by eq. \ref{eq:Cadynamics} is not ion conserving, since it allows $\mathrm{[Ca]_i}$ to change inside the neuron without the extracellular Ca$^{2+}$ concentration changing accordingly. This approximation may work fairly well for Ca$^{2+}$, since the intracellular concentration is so much lower than the extracellular. For other ion species, intra- and extracellular concentrations are of more comparable magnitudes, and for these it might not be meaningful to model the intracellular concentration without also modeling the extracellular concentrations. 
 
 To model the extracellular ion concentrations, one needs to define extracellular compartments of finite volumes, either by making some simplified approximation that each intracellular compartment has a (single) finite extracellular compartment to its disposal (see e.g., \cite{Kager2000, kneller2002, Cressman2009, WeiUllahSchiff2014, Saetra2020}), or by meshing up the extracellular space and computing the ion concentration dynamics there using some numerical framework for diffusion (see e.g., \cite{newton2018}) or electrodiffusion (see e.g., \cite{ellingsrud2020}). Such frameworks are generally computationally heavy, and can not be based on the simplified HHC scheme presented in this chapter. 
 
@@ -492,7 +492,7 @@ In forward modeling of $\phi_e$, the workflow typically includes two steps. Firs
 Despite this inconsistency, the approach often give fairly accurate results. The reason is that $\phi_e$ tends to be much smaller than the membrane potential $\phi_m$
 
 
-The approximation is nevertheless useful since $\phie$ is typically so much smaller than $\phim$ that the (ephaptic) effect of $\phie$ on neurodynamics can be neglected without severe loss in accuracy \cite{anastassiou2015}. 
+The approximation is nevertheless useful since $\phi_e$ is typically so much smaller than $\phi_m$ that the (ephaptic) effect of $\phi_e$ on neurodynamics can be neglected without severe loss in accuracy \cite{anastassiou2015}. 
 
 
 
