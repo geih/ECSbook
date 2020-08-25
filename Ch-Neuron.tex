@@ -3,7 +3,7 @@
 
 The main contribution to extracellular potentials comes from the electrical activity of neurons. When we want to simulate extracellular potentials, we therefore typically start by simulating neurons. 
 
-There exist many types of frameworks for constructing neuronal models at various levels of detail and abstraction. For the purpose of simulating extracellular potentials, it is most common to use multicompartmental neuron models based on the Hodgkin-Huxley-Cable (HHC) framework \index{multicompartment modelling}, and we shall here limit ourselves to present this framework. The HHC framework uses the formalism of the celebrated model by Hodgkin and Huxley (HH) to model membrane mechanisms (see e.g., \cite{Hodgkin1952, KockSegev1998, Pospischil2008}), and cable theory to predict how signals propagate spatially in dendrites and axons (see, e.g., \cite{koch1999, rall2011}). HHC-type models have become the gold standard for biophysically detailed neuronal simulations on the cellular and network level. Today, this framework is used for simulating the dynamics of large neuronal networks (see e.g., \cite{traub2005, markram2015, arkhipov2018}).
+There exist many types of frameworks for constructing neuronal models at various levels of detail and abstraction. For the purpose of simulating extracellular potentials, it is most common to use multicompartmental neuron models based on the Hodgkin-Huxley-Cable (HHC) framework \index{multicompartment modelling}, and we shall here limit ourselves to present this framework. The HHC framework uses the formalism of the celebrated model by Hodgkin and Huxley (HH) to model membrane mechanisms (see e.g., \citep{Hodgkin1952, KockSegev1998, Pospischil2008}), and cable theory to predict how signals propagate spatially in dendrites and axons (see, e.g., \citep{koch1999, rall2011}). HHC-type models have become the gold standard for biophysically detailed neuronal simulations on the cellular and network level. Today, this framework is used for simulating the dynamics of large neuronal networks (see e.g., \citep{traub2005, markram2015, arkhipov2018}).
 
 In a HHC-type model, a neuron is characterized by (i) its morphology, and (ii) its membrane mechanisms. The morphology of the real neuron (Fig. \ref{Neuron:fig:multicomp}A) is represented as a discretized set of compartments connected by resistors (Fig. \ref{Neuron:fig:multicomp}B), and there are two categories of currents which together determine the membrane potential dynamics in the compartments (Fig. \ref{Neuron:fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents at each compartment (green arrows). Once all the currents are characterized, the dynamics of the membrane potential can be computed by Kirchhoff's current law, which demands that the sum of currents into a given compartment is zero.
 
@@ -96,7 +96,7 @@ For voltage-gated ion channels, the the dynamics of the gating variables can be 
 \end{equation}
 Here, the steady state activation $x_{\infty}(\phi_m)$, represents the fraction of gates that will end up in the open state if the cell is clamped at a given potential $\phi_m$ for sufficiently long time. However, the process of opening the gates takes some time, as accounted for by the activation time constant $\tau_x(\phi_m)$ (ms). Both $x_{\infty}(\phi_m)$ and $\tau_x(\phi_m)$ are functions of the membrane potential, and these must be determined experimentally for each individual ion channel type. We do not go into the experimental challenges here, but will think of them as known functions. 
 
-There are also many ion channels whose activation or inactivation does not depend on $\phi_m$, but on some other variable, such as the concentration of some ion species or ligand. A common example are Ca$^{2+}$ gated ion channels, i.e., channels with gate opening controlled by the intracellular Ca$^{2+}$ concentration ($[Ca^{2+}]_i$). There are also ion channels whose activation depend on more than one variable, such as e.g., ion channels whose activation depend on both $\phi_m$ and $[Ca^{2+}]_i$. Fortunately, a HHC type formalism can in most cases be applied also to these kind of ion channels, provided that $x_{inflty}(\phi_m)$ and $\tau_x(\phi_m)$ in eq. \ref{eq:HHgate} can be replaced with experimentally determined functions of the relevant variables. 
+There are also many ion channels whose activation or inactivation does not depend on $\phi_m$, but on some other variable, such as the concentration of some ion species or ligand. A common example are Ca$^{2+}$ gated ion channels, i.e., channels with gate opening controlled by the intracellular Ca$^{2+}$ concentration ($[Ca^{2+}]_i$). There are also ion channels whose activation depend on more than one variable, such as e.g., ion channels whose activation depend on both $\phi_m$ and $[Ca^{2+}]_i$. Fortunately, a HHC type formalism can in most cases be applied also to these kind of ion channels, provided that $x_{\infty}(\phi_m)$ and $\tau_x(\phi_m)$ in eq. \ref{eq:HHgate} can be replaced with experimentally determined functions of the relevant variables. 
 
 
 \subsubsection{\orange{The Hodgkin-Huxley model}}
@@ -111,7 +111,7 @@ The two active ion channels are together responsible for action potential genera
 \frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\phi_m) - x}{\tau_x(\phi_m)},  \, \text{for } x = \{m,h,n\}.
 \label{eq:HHgates}
 \end{equation}
-The experimentally determined functions for $x_{infty}(\phi_m)$ and $\tau_x(\phi_m)$, and all model parameter values are given in Table \ref{tab:HH}. An electric circuit representation of the HH model is depicted in Fig. \ref{Neuron:fig:HHcircuit}.
+The experimentally determined functions for $x_{\infty}(\phi_m)$ and $\tau_x(\phi_m)$, and all model parameter values are given in Table \ref{tab:HH}. An electric circuit representation of the HH model is depicted in Fig. \ref{Neuron:fig:HHcircuit}.
 
 \begin{table}[h!]
     \caption{\textbf{The Hodgkin-Huxley model.}}
@@ -279,12 +279,12 @@ and the time constant,
 \label{eq:timeconst}
 \end{equation}
 The cable equation serves as a continuous version of a passive neural branch (with infinitely many infinitely small compartments), 
-where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. If a certain point along the cable is perturbed, so that the potential is shifted from rest to a given value $\phi$, $\tau_m$ will determine how fast the local potential will dissipate back towards rest, while $\lambda$ will tell us how far the local perturbation will spread along the cable. Whereas multicompartmental models (Eq. \ref{eq_multimain} and \ref{eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved numerically for some idealized scenarios. Below, we consider a couple of scenarios that will  make the interpretation of $\tau_m$ and $\lambda$ clearer. 
+where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. If a certain point along the cable is perturbed, so that the potential is shifted from rest to a given value $\phi$, $\tau_m$ will determine how fast the local potential will dissipate back towards rest, while $\lambda$ will tell us how far the local perturbation will spread along the cable. Whereas multicompartmental models (Eq. \ref{eq:multimain} and \ref{eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved numerically for some idealized scenarios. Below, we consider a couple of scenarios that will  make the interpretation of $\tau_m$ and $\lambda$ clearer. 
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection{\blue{Steady state solution of the cable equation}}
-Let us consider the steady state solution of a semi-infinite cable, receiving a constant current injection $I_e$ at the sealed end in $x=0$ (Fig. \ref{fig_Semiinf}).
+\subsubsection{\orange{Steady state solution of the cable equation}}
+Let us consider the steady state solution of a semi-infinite cable, receiving a constant current injection $I_e$ at the sealed end in $x=0$ (Fig. \ref{Neuron:fig:Semiinf}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -316,11 +316,11 @@ The general-solution to the equation also has a term containing $e^{+x/\lambda}$
 \label{eq:semiinf4}
 \end{equation}
 
-Eqns. \ref{eq: semiinf4} and \ref{eq: semiinf4}, together with the length constant (eq. \ref{eq:lengthconst}) are useful as they give us analytical insight into signals spreading in e.g., passive dendrites. Some insights that can be derived from these equations are:
+Eqns. \ref{eq:semiinf3} and \ref{eq:semiinf4}, together with the length constant (eq. \ref{eq:lengthconst}) are useful as they give us analytical insight into signals spreading in e.g., passive dendrites. Some insights that can be derived from these equations are:
 
 \begin{itemize}
 
-\item Eq. \ref{eq: semiinf4} shows that in steady-state, the amplitude will decay exponentially from the injection site and outwards, and will be reduced by a factor $1/e$ over the length $\lambda$. If we put in some typical values in eq. \ref{eq:lengthconst}, like a dendritic diameter $d=1$~$\mu$m, a membrane resistance of $R_m=10\;\text{k}\Omega\text{cm}^2$, and an axial resistivity $R_a=35.4\;\Omega\text{cm}$, we get a length constant of $\lambda = 840\; \mu$m. Very long dendrites will thus only to a small degree sense what is going on in the soma.
+\item Eq. \ref{eq:semiinf4} shows that in steady-state, the amplitude will decay exponentially from the injection site and outwards, and will be reduced by a factor $1/e$ over the length $\lambda$. If we put in some typical values in eq. \ref{eq:lengthconst}, like a dendritic diameter $d=1$~$\mu$m, a membrane resistance of $R_m=10\;\text{k}\Omega\text{cm}^2$, and an axial resistivity $R_a=35.4\;\Omega\text{cm}$, we get a length constant of $\lambda = 840\; \mu$m. Very long dendrites will thus only to a small degree sense what is going on in the soma.
 
 \item According to eq. \ref{eq:lengthconst}, $\lambda \propto \sqrt{d}$, meaning that signals will spread further the thicker the dendrite.
 

@@ -45,7 +45,7 @@ $\sigma$ as defined in this way. For comparison, the microscopic and unhindered 
 
 \end{itemize}
 
-The continuous, porous medium approximation is revisited in Chapter \ref{sec:conductivity}, where we review experimental measurements and theoretical interpretations of the tissue conductivity.
+The continuous, porous medium approximation is revisited in Chapter \ref{sec:sigma}, where we review experimental measurements and theoretical interpretations of the tissue conductivity.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -400,7 +400,7 @@ represents the current that arrises when ions (with valence $z_k$ and diffusion 
 so that one might generally make quite good predictions with a VC theory that neglects them \cite{Halnes2016, Gratiy2017}. 
 However, diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite{Halnes2016, Gratiy2017}. Diffusive effects on $\phi$may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite{Somjen2001, Frohlich2008, Wei2014, Ayata2015}). 
 
-To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \cite{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:eldiff}.
+To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \cite{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:Eldiff}.
 
 
 \subsubsection{\blue{No ephaptic coupling} }
@@ -409,7 +409,7 @@ The standard workflow when modeling the extracellular potential ($\phi$) involve
 
 In reality, the activity of a neuron will affects the membrane potential of both neighboring neurons and itself through the extracellular potential it creates. Such effects of the extracellular potential on the neurodynamics are called \textit{ephaptic}. As we discussed in Section \ref{sec:HHCassumptions}, $\phi$ is typically much smaller than the membrane potential, so that ephaptic effects are commonly assumed to be negligibly small. Provided that this is true, the two-step approach works well. 
 
-There are, however, aspects of neuronal activity that can not be understood without accounting for ephaptic effects \cite{Holt1999, Anastassiou2015, Goldwyn2016}. To account for ephaptic effects, one must model the neurodynamics and extracellular potential simultaneously on a unified framework, which is more computationally challenging than using the two-step approach outlined so far in this book. We shall comment further on such unified frameworks in Chapter \ref{sec:schemes}.
+There are, however, aspects of neuronal activity that can not be understood without accounting for ephaptic effects \citep{Holt1999, anastassiou2015, Goldwyn2016}. To account for ephaptic effects, one must model the neurodynamics and extracellular potential simultaneously on a unified framework, which is more computationally challenging than using the two-step approach outlined so far in this book. We shall comment further on such unified frameworks in Chapter \ref{sec:Schemes}.
 
 We note that VC theory in itself does not in itself make any assumption regarding ephaptic effects being present or not. That is, the extracellular potential is determined by eq. \ref{eq:pointsources} or \ref{eq:csds} regardless of whether or not ephaptic effects were accounted for when the neural current sources were computed. 
 
