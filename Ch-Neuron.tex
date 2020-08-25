@@ -405,7 +405,7 @@ Nernst potential (mV)		    &	-89		&	    	+71	&		+19	&	-64		&		+132 		  	\\
 In HHC-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_L$ (eq. \ref{eq:HHleak}), which largely determines the cell's resting potential (see see \cite{offner1991} for a critical study of this approximation). Below, we shall explain how the ionic concentrations are implicitly present in the HHC-formalism as they determine the ionic reversal potentials ($E_x$ in eq. \ref{eq:HHform}). We shall also comment on the cases where the assumptions of constant ion concentrations are not applicable. 
 
 
-\subsubsection{Ionic reversal potentials}
+\subsubsection{\blue{Ionic reversal potentials}}
 Ion channels are pores in the membrane, some of which are selectively permeable only to specific ions. For example, when a Na$^+$ channel opens, Na$^+$ ions will diffuse from Na$^+$-rich extracellular space and into the neuron. As this diffusive process transfers charged ions into the neuron, it will increase (depolarize) the membrane potential. The increased potential will in turn evoke an electrostatic force on the Na$^+$ ions, causing an electrical drift of Na$^+$ in the opposite (outward) direction. 
 
 The ionic reversal potential is defined as the membrane potential at which the electrical drift current and diffusive current of a given ion species are in an equilibrium, i.e., they are equal in magnitude but oppositely directed. It can be calculated from the Nernst-Planck equation for electrodiffusion. If we approximate the problem as one-dimensional (in the $z$-direction, perpendicular to the membrane), the Nernst-Planck equation for an ion species $k$ is:
@@ -435,7 +435,7 @@ E_k & =  \frac{RT}{Fz_k}  ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}}
 \end{align}
 where the last equality follows from the definition of $E_k$ as the membrane potential $\phi_{\text{in}}-\phi_{\text{out}}$ for which the the net flux (in Eq. \ref{eq:NP1D}) is zero. Eq. \ref{eq:revpots} was used to compute the reversal potentials listed in Table \ref{table:ion-concentrations}. As ion concentrations are generally assumed to remain constant in HH-type models, the reversal potentials are also assumed to be constant. As a consequence, one typically do not think that much about ionic concentrations when constructing such models, but simply use values for $E_k$ based or empirical measurements of the potential at which a certain membrane current becomes zero.
 
-\subsubsection{The Goldman-Hodgkin-Katz equation}
+\subsubsection{\blue{The Goldman-Hodgkin-Katz equation}}
 Eq. \ref{eq:NP1D} defined the reversal potential for an individual ion species, which is relevant for modeling ion specific ion channels. To calculate the reversal potential for an non-specific ion channel, we need to express all the individual ion currents separately, and compute when they sum to zero. 
 
 If we combine Eq. \ref{eq:NP1D} with the assumptions that (i) ions cross the membrane independently, and (ii) that the electrical field within the membrane is constant, we can derive the Goldman-Hodkgkin-Katz (GHK) equation for the membrane currents (see e.g., \cite{hodgkin1949, johnston1994foundations}):
@@ -455,7 +455,7 @@ E_L = \frac{R T}{F}
 Looking at eq. \ref{eq:GHK}, we see that the transmembrane currents are nonlinear functions of both the ionic concentrations $[k]$ in the intra and extracellular space, and the membrane potential $\phi_m$. In comparison, the transmembrane currents used in the HH-type formalism (eq. \ref{eq:HHform}), which are proportional to the driving force $(V-E_k)$, are linearized (sometimes called quasi-Ohmic) versions of the Goldman-Hodkgkin-Katz equation. The HH-form (eq. \ref{eq:HHform}) is generally deemed as sufficient for modeling most ion channels, because it gives good predictions of the membrane currents. Ion concentrations and ionic reversal potentials are assumed to be constant.
 
 
-\subsubsection{Intracellular Calcium dynamics}
+\subsubsection{\blue{Intracellular Calcium dynamics}}
 While ion concentrations are typically assumed to be constant in HHC-based models, it is common to make an exception for Ca$^{2+}$. The main reason for this is that the intracellular Ca$^{2+}$ concentration ($\mathrm{[Ca]_i}$) is very low compared to that of the other ion species (Table \ref{tab:HH}). Unlike for the other ion species,  $\mathrm{[Ca]_i}$, can therefore change quite dramatically on a short time scale, e.g., during the opening of Ca$^{2+}$ channel. 
 
 The motivations for modeling $\mathrm{[Ca]_i}$ are several. Firstly, to accurately model currents through Ca$^{2+}$ channels, the concentration dependent GHK formalism (eq. \ref{eq:GHK}) is often used (see e.g., \cite{Destexhe1994, Zhu1999, Halnes2011}), and one then needs an expression for $\mathrm{[Ca]_i}$. Secondly, modeling $\mathrm{[Ca]_i}$ could be motivated by the aim to reproduce data from Ca$^{2+}$ imaging experiments. Thirdly, Ca$^{2+}$ does not only act as a charge carrier in neurons, but is also a second messenger, which means that it can trigger a number of intracellular chemical processes, including the gating of Ca$^{2+}$ activated ion channels. 
