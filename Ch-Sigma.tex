@@ -7,16 +7,73 @@
 \item Theoretical explorations \citep{Meffin2012,Tahayori2012,Meffin2014,Tahayori2014}
 \end{itemize}
 
+
+\ghnote{Jeg tok en del greier fra VC-kapittelet og sakset det inn hit. Det mest dramatiske var at jeg flyttet VC-delkapitlene om anisotropt og inhomogent medium hit. Jeg syntes det foeltes ryddigere  aa ta med dette stoffet paa samme sted som vi diskuterer antakelsene, dvs. ikke diskutere antakelsene i etterkant av aa ha utvidet teorien slik at man ikke trenger aa gjoere disse antakelsene... }
+
+A key parameter, or sometimes, variable, in volume conductor theory is the extracellular conductivity, $\sigma$. In most applications of VC theory, $\sigma$ is assumed to be a constant. Its value is normally taken from some experimental measurement, and typical values are between 0.2 and 0.3 S/m (Fig. \label{Sigma:fig:freq_dep}). 
+
+Throughout the previous section, we assumed that it was homogeneous, anisotropic and frequency independent. In this chapter we shall discuss these assumptions. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\blue{Anisotropic extracellular medium}}
+\label{sec:Anisotropic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{\orange{Isotropic conductivity} }
+In Section \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma$. If we use the point source approximation (Section \ref{eq:pointsources}), and denote the conductivity in the different spatial directions $\sigma_x$, $\sigma_y$ and $\sigma_z$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
+
+\begin{equation}
+\phi(x,y,z) = \sum_k \frac{I_k}{4\pi(\sigma_y\sigma_z (x-x_k)^2 + \sigma_x\sigma_z (y-y_k)^2 + \sigma_x\sigma_y (z-z_k)^2)}.
+\label{eq:Panisos}
+\end{equation}
+If we use the CSD-description of the sources (Section \label{eq:csds}, the corresponding expression is:
+
+\begin{equation}
+\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi(\sigma_y\sigma_z (x-x_k)^2 + \sigma_x\sigma_z (y-y_k)^2 + \sigma_x\sigma_y (z-z_k)^2)} \, dV, 
+\label{eq:Canisos}
+\end{equation}
+
+In general, the brain does not have an isotropic $\sigma$. For example, in cortex it has been found that the conductivity is about 50\% higher in the depth direction, i.e., for currents running in parallel to the axis of pyramidal cell dendrites \citep{Goto2010}. However, the overall effect of the anisotropy on extracellular potentials often appears to be quite weak \citep{Ness2015}, and the approximation that $\sigma$ is isotropic often gives good predictions of the potential.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\red{TORBJORN ON: Nonhomogeneous extracellular medium}}
+\label{sec:nonhomo}
+In Section \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
+
+The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{eq:csds} or \ref{eq:anisos}) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
+
+\ghnote{Enter Torbjorn:}
+\begin{itemize}
+\item Method of Images \citep{Ness2015}
+\item FEM \citep{Ness2015}, ...
+\end{itemize}
+
+For more general cases, one can in principle always solve eq. \ref{eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \citep{Logg2012}. For examples of neuroscience applications using this approach, see \cite{Moffitt2005, Frey2009, Joucla2012, Haufe2015, Ness2015, Buccino2019b, Obien2019}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{\orange{Frequency dependence of the conductivity} }
+\label{sec:f-independent}
+Regardless of whether a medium is isotropic and homogeneous or not, its response to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that account for capacitive and inductive effects that are frequency dependent. 
+
+In Section \ref{sec:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium includes capacitive effects, as an extracellular current traveling through it could interact with nearby capacitive neural membranes. 
+
+However, for the relevant frequencies in extracellular recordings (Fig. \label{Sigma:fig:freq_dep}), the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite{Logothetis2007, Miceli2017, Ranta2017}. In most applications of VC theory, one therefore applies the assumption that the medium is Ohmic or resistive, meaning that the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite{Bedard2004, Tracey2011, Miceli2017}. 
+
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/frequency_dependence.png}
 \end{center}
 \caption{\textbf{Literature review of reported conductivities in various species and experimental setups.} 
-Most studies seem to indicate a very weak frequency dependence of the extracellular conductivity\index{conductivity}, which would have a negligible effect on measured extracellular potentials \citep{Miceli2017}. The very low and strongly frequency dependent values measured by \cite{Gabriel1996} represents an outlier, and although it has received substantial attention, it has to the best of our knowledge not been reproduced by any other study.
-For details about the data, see \cite{Miceli2017}, and references therein \citep{Ranck1963, Gabriel1996, Logothetis2007, Elbohouty2013, Wagner2014}
+Most studies seem to indicate a very weak frequency dependence of the extracellular conductivity\index{conductivity}, which would have a negligible effect on measured extracellular potentials \citep{Miceli2017}. The very low and strongly frequency dependent values measured by \cite{Gabriel1996} represents an outlier, and although it has received substantial attention, it has to the best of our knowledge not been reproduced by any other study. For details about the data, see \cite{Miceli2017}, and references therein \citep{Ranck1963, Gabriel1996, Logothetis2007, Elbohouty2013, Wagner2014}.
 }
 \label{Sigma:fig:freq_dep}
 \end{figure}
+
+\tvnnote{Utledning tilsvarende Appendix B i Nunez?}
+\ghnote{Vet ikke helt.... Kanskje....}
 
 
 \begin{figure}[!ht]
@@ -27,24 +84,35 @@ For details about the data, see \cite{Miceli2017}, and references therein \citep
 \label{Sigma:fig:maxwell_resistivity}
 \end{figure}
 
-\subsection{Capacitive effects in neuronal tissue}
-At high frequencies, extracellular currents could pass through neurons as capacitive currents.
-\tvnnote{Utledning tilsvarende Appendix B i Nunez?}
+
+\subsection{\orange{Theoretical estimate of the conductivity based on ion concentrations} }
+Currents in brain tissue are mediated by the movements of ions. 
+
+The 
+As we show later, $\sigma$ can be expressed as a function of ion concentrations:
+\begin{equation}
+\sigma_e = \frac{F}{psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k}.
+\label{eq:sigma1}
+\end{equation}
+Here $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ is defined by the gas constant ($R$), Faraday's constant ($F$) and the temperature ($T$).
+
+\begin{equation}
+\tilde{D_k} = \alpha \frac{D_k}{\lambda^2}, 
+\label{eq:diffconst}
+\end{equation}
+
+\begin{table}[h!]
+\begin{center}
+\caption{Diffusion constants}
+\label{tab:diffconsts}
+    \begin{tabular}{l|l}
+    \hline
+    $D_{Na}$ & $1.33\times 10^{-9}$ m$^2$/s\\ \hline
+    $D_K$ & $1.96  \times 10^{-9}$ m$^2$/s \\ \hline
+    $D_{Cl}$ & $2.03 \times 10^{-9}$ m$^2$/s \\ \hline
+    $D_{Ca}$ & $0.71\times 10^{-9}$ m$^2$/s \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
 
 
-\ghnote{DELKAPITLENE NEDENFOR BLE KLIPPET INN FRA VC-TEORI-KAPITTELET. SATSER PAA AT TORBJORN KAN BRUKE DEM TIL NOE BRA.}
-
-\subsubsection{\orange{Frequency independent conductivity} }
-\label{sec:f-independent}
-\tvnnote{Her gir det kanskje mest mening å bare oppgi antagelsen om "isotropic, homogeneous and frequency independent conductivity", og henvise til kapittelet om konduktivitet?}
-Generally, the response of a medium to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that account for capacitive and inductive effects that are frequency dependent. In Section \ref{sec:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium includes capacitive effects, as an extracellular current traveling through it could interact with nearby capacitive neural membranes. However, for the relevant frequencies in extracellular recordings, the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite{Logothetis2007, Miceli2017, Ranta2017}. We have therefore based the VC theory presented here on the assumption that the medium is Ohmic or resistive, meaning that we the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite{Bedard2004, Tracey2011, Miceli2017}. 
-
-
-\subsubsection{\orange{Isotropic conductivity} }
-A commonly used approximation in VC theory, is that $\sigma$ is isotropic, i.e., the same in all spatial directions. This is mostly an acceptable approximation, and the theory presented in Section \ref{sec:isohomo} relied on this assumption. However, as we showed in Section \ref{sec:anisohomo}, it is possible to expand the formalism to account for an anisotropic conductivities.
-
-
-\subsubsection{\orange{Homogeneous conductivity} }
-Another commonly applied assumption in VC theory, is that the conductivity is the same everywhere, an assumption that we used in Section \ref{sec:isohomo} and Section \ref{sec:anisohomo}, but relaxed in Section \label{sec:nonhomo}. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
-
-When signals are recorded very far from their sources, it is likely that they on their journey have experienced a $\sigma$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through both brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{eq:csds} or \ref{eq:anisos}) that link the extracellular potentials to the underlying current sources. Analytical solutions can still be obtained for some simple non-homogeneous cases, such as those presented in Section \ref{sec:nonhomo}. For more general cases, one can in principle always solve eq. \ref{eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \citep{Logg2012}. For examples of neuroscience applications using this approach, see \cite{Moffitt2005, Frey2009, Joucla2012, Haufe2015, Ness2015, Buccino2019b, Obien2019}. 

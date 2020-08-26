@@ -252,53 +252,6 @@ As earlier stated, the solution for a general CSD can be expressed as a convolut
 where the volume integral runs over all sources. Here, $C$ represents whatever approximation one used for the current sources, and eq. \ref{eq:csds} is the continuous counterpart to eq. \ref{eq:pointsources}. If we describe the CSD as a sum of point sources, i.e.,  $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$, eq. \ref{eq:csds} reduces to eq.\ref{eq:pointsources}.
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\blue{Anisotropic extracellular medium}}
-\label{sec:Anisotropic}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In the previous subsection we assumed that the extracellular conductivity $\sigma$ was the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma$. If we use the point source approximation, and denote the conductivity in the different spatial directions $\sigma_x$, $\sigma_y$ and $\sigma_z$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
-
-\begin{equation}
-\phi(x,y,z) = \sum_k \frac{I_k}{4\pi(\sigma_y\sigma_z (x-x_k)^2 + \sigma_x\sigma_z (y-y_k)^2 + \sigma_x\sigma_y (z-z_k)^2)}.
-\label{eq:Panisos}
-\end{equation}
-If we use the CSD-description of the sources, the corresponding expression is:
-
-\begin{equation}
-\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi(\sigma_y\sigma_z (x-x_k)^2 + \sigma_x\sigma_z (y-y_k)^2 + \sigma_x\sigma_y (z-z_k)^2)} \, dV, 
-\label{eq:Canisos}
-\end{equation}
-
-In general, the brain does not have an isotropic $\sigma$. For example, in cortex it has been found that the conductivity is about 50\% higher in the depth direction, i.e., for currents running in parallel to the axis of pyramidal cell dendrites \citep{Goto2010}. However, the overall effect of the anisotropy on extracellular potentials often appears to be quite weak \citep{Ness2015}, and the approximation that $\sigma$ is isotropic often gives good predictions of the potential.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\red{TORBJORN ON: Nonhomogeneous extracellular medium}}
-\label{sec:nonhomo}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-\item Method of Images \citep{Ness2015}
-\item FEM \citep{Ness2015}, ...
-\end{itemize}
-
-
-\subsection{\red{TORBJORN ON: Electrodes}}
-\label{sec:electrode}
-\begin{itemize}
-\item Disc-electrode approximation
-\end{itemize}
-\ghnote{Teksten under er klippet inn fra bokkapittelet:}. 
-
-The simplest and most commonly used approach when modeling extracellular recordings is to calculate the extracellular potential at single points following one of the approaches outlined above, and use this as a measure of recorded potentials. Implicitly, this assumes ideal point electrodes, that is, the electrodes (and electrode shank) do not affect the extracellular potential and the extracellular potential does not vary substantially over the surface of the electrodes. (The point-electrode assumption was used for all simulation examples in this chapter).
-
-A numerically straightforward extension is the disc-electrode approximation where the potential is evaluated at a number of points on the electrode surface, and the average calculated \citep{ Linden2014}. This approach takes into account the physical extent of the electrode, but not any effect the electrode itself might have on the electric potential. Close to the electrode surface the electric potential will however be affected by the presence of the high-conductivity electrode contact \citep{McIntyre2001, Moulin2008}. A numerically much more comprehensive approach to modeling electrodes is to use the Finite Element Method (FEM) to model the electrode \citep{Moulin2008, Ness2015}, or the electrode shank \citep{Moffitt2005, Buccino2019b}. Using FEM for validation, \cite{Ness2015} found that the ideal point-electrode and disc-electrode approximations where reasonably accurate when the distance between the current sources and the recording electrode was bigger than $\sim$4 times and $\sim$2 times the electrode radius, respectively, indicating that the effects of the electrodes themselves are negligible in most cases \citep{Nelson2010}.
-The presence of large multi-contact electrode probes can, however, substantially affect the extracellular potential in its vicinity, by effectively introducing a large non-conducting volume~\citep{Mechler2012}, and this can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell is in front of or behind the electrode shank \citep{Buccino2019b}.
-
-Note that for modelling current stimulation electrodes (as opposed to just recording electrodes), more complex electrode models might be needed due to electrode polarization effects \citep{McIntyre2001, Martinsen2008, Joucla2012}.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\orange{SOLVEIGS SANG om Dipole approximation}}
 \label{sec:dipole}
@@ -327,6 +280,22 @@ The current dipole moment is a function of the sum of all the transmembrane curr
 For example, if we have a simple two-compartmental (and purely dipolar) neuron with a current sink $-I$ at location $\mathbf{r}_1$ and a current source $I$ at location $\mathbf{r}_2$, the current dipole moment can be formulated as $\mathbf{p} = -I\mathbf{r}_1 + I\mathbf{r}_2 = I(\mathbf{r}_2 - \mathbf{r}_1) = I\mathbf{d}$. Here $\mathbf{d}$ is the distance vector between the current sink and the current source, giving the length $d$ and direction of the current dipole. 
 
 As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is though to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \citep{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \citep{naess2020biophysical}.
+
+
+\subsection{\red{TORBJORN ON: Electrodes}}
+\label{sec:electrode}
+\begin{itemize}
+\item Disc-electrode approximation
+\end{itemize}
+\ghnote{Teksten under er klippet inn fra bokkapittelet:}. 
+
+The simplest and most commonly used approach when modeling extracellular recordings is to calculate the extracellular potential at single points following one of the approaches outlined above, and use this as a measure of recorded potentials. Implicitly, this assumes ideal point electrodes, that is, the electrodes (and electrode shank) do not affect the extracellular potential and the extracellular potential does not vary substantially over the surface of the electrodes. (The point-electrode assumption was used for all simulation examples in this chapter).
+
+A numerically straightforward extension is the disc-electrode approximation where the potential is evaluated at a number of points on the electrode surface, and the average calculated \citep{ Linden2014}. This approach takes into account the physical extent of the electrode, but not any effect the electrode itself might have on the electric potential. Close to the electrode surface the electric potential will however be affected by the presence of the high-conductivity electrode contact \citep{McIntyre2001, Moulin2008}. A numerically much more comprehensive approach to modeling electrodes is to use the Finite Element Method (FEM) to model the electrode \citep{Moulin2008, Ness2015}, or the electrode shank \citep{Moffitt2005, Buccino2019b}. Using FEM for validation, \cite{Ness2015} found that the ideal point-electrode and disc-electrode approximations where reasonably accurate when the distance between the current sources and the recording electrode was bigger than $\sim$4 times and $\sim$2 times the electrode radius, respectively, indicating that the effects of the electrodes themselves are negligible in most cases \citep{Nelson2010}.
+The presence of large multi-contact electrode probes can, however, substantially affect the extracellular potential in its vicinity, by effectively introducing a large non-conducting volume~\citep{Mechler2012}, and this can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell is in front of or behind the electrode shank \citep{Buccino2019b}.
+
+Note that for modelling current stimulation electrodes (as opposed to just recording electrodes), more complex electrode models might be needed due to electrode polarization effects \citep{McIntyre2001, Martinsen2008, Joucla2012}.
+
 
 
 %%%%%%
