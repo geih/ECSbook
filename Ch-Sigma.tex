@@ -10,7 +10,7 @@
 
 \ghnote{Jeg tok en del greier fra VC-kapittelet og sakset det inn hit. Det mest dramatiske var at jeg flyttet VC-delkapitlene om anisotropt og inhomogent medium hit. Jeg syntes det foeltes ryddigere  aa ta med dette stoffet paa samme sted som vi diskuterer antakelsene, dvs. ikke diskutere antakelsene i etterkant av aa ha utvidet teorien slik at man ikke trenger aa gjoere disse antakelsene... }
 
-A key parameter, or sometimes, variable, in volume conductor theory is the extracellular conductivity, $\sigma$. In most applications of VC theory, $\sigma$ is assumed to be a constant. Its value is normally taken from some experimental measurement, and typical values are between 0.2 and 0.3 S/m (Fig. \label{Sigma:fig:freq_dep}). 
+A key parameter, or sometimes, variable, in volume conductor theory is the extracellular conductivity, $\sigma$. In most applications of VC theory, $\sigma$ is assumed to be a constant. Its value is normally taken from some experimental measurement, where typical values are between 0.2 and 0.3 S/m (Fig. \label{Sigma:fig:freq_dep}). 
 
 Throughout the previous section, we assumed that it was homogeneous, anisotropic and frequency independent. In this chapter we shall discuss these assumptions. 
 
@@ -61,7 +61,6 @@ In Section \ref{sec:onlyohmic}) we argued that the extracellular displacement cu
 
 However, for the relevant frequencies in extracellular recordings (Fig. \label{Sigma:fig:freq_dep}), the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite{Logothetis2007, Miceli2017, Ranta2017}. In most applications of VC theory, one therefore applies the assumption that the medium is Ohmic or resistive, meaning that the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite{Bedard2004, Tracey2011, Miceli2017}. 
 
-
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/frequency_dependence.png}
@@ -73,7 +72,7 @@ Most studies seem to indicate a very weak frequency dependence of the extracellu
 \end{figure}
 
 \tvnnote{Utledning tilsvarende Appendix B i Nunez?}
-\ghnote{Vet ikke helt.... Kanskje....}
+\ghnote{Vet ikke helt.... Kanskje.... }
 
 
 \begin{figure}[!ht]
@@ -86,24 +85,19 @@ Most studies seem to indicate a very weak frequency dependence of the extracellu
 
 
 \subsection{\orange{Theoretical estimate of the conductivity based on ion concentrations} }
-Currents in brain tissue are mediated by the movements of ions. 
+Extracellular current are mediated by the ions dissolved in the extracellular solution, and the conductivity of the extracellular medium if thus a function of thus depends on the ion concentrations, i.e., on the availability of free charge carriers \cite{Grodzinsky2011}: 
 
-The 
-As we show later, $\sigma$ can be expressed as a function of ion concentrations:
 \begin{equation}
-\sigma_e = \frac{F}{psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k}.
+\sigma = \frac{F^2}{RT}\sum_{k} D_k z_{k}^2 c_{k}.
 \label{eq:sigma1}
 \end{equation}
-Here $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ is defined by the gas constant ($R$), Faraday's constant ($F$) and the temperature ($T$).
+Here $z_{k}$, $D_k$ and $c_{k}$ denote the valency, diffusion coefficient and concentration, respectively, of ion species $k$, while $F = 96485.3$ C/mol is the Faraday constant, $R = 8.314$ JK$^{-1}$mol$^{-1}$ is the gas constant, and $T$ the temperature. 
 
-\begin{equation}
-\tilde{D_k} = \alpha \frac{D_k}{\lambda^2}, 
-\label{eq:diffconst}
-\end{equation}
+Eq. \ref{eq:sigma1} allows us to compare the measured $\sigma$ with the $\sigma$ predicted from the typical ion concentrations in the extracellular space of the brain, such as those listed previously in Table \ref{table:ion-concentrations}. For this, we also need the diffusion constants of these species. In a dilute solution, such as the extracellular fluid, these are as given in Table \ref{tab:diffconsts}.
 
 \begin{table}[h!]
 \begin{center}
-\caption{Diffusion constants}
+\caption{Diffusion constants. Values taken from from \cite{Bowen2002, Lyshevski2007}}
 \label{tab:diffconsts}
     \begin{tabular}{l|l}
     \hline
@@ -111,8 +105,20 @@ Here $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ is defined by th
     $D_K$ & $1.96  \times 10^{-9}$ m$^2$/s \\ \hline
     $D_{Cl}$ & $2.03 \times 10^{-9}$ m$^2$/s \\ \hline
     $D_{Ca}$ & $0.71\times 10^{-9}$ m$^2$/s \\ \hline
+    $D_{Mg}$ & $0.72\times 10^{-9}$ m$^2$/s \\ \hline    
     \end{tabular}
 \end{center}
 \end{table}
 
+If we insert the values from Tables \ref{table:ion-concentrations} and \ref{tab:diffconsts} into equation \ref{eq:sigma1}, and assume a body temperature of $T = 310$ K, we get a conductivity $\sigma = 1.56$ S/m. This is a factor 5-8 times higher than the values (0.2-0.3 S/m) which are typically measured for the tissue conductivity. The discrepancy is mainly due to the fact that currents through brain tissue do not move through a free ion solution, but are (i) confined to stay in the small fraction of the tissue volume that is extracellular. In addition, (ii) the currents will face obstacles (neural and glial membranes) along their path, forcing them take detours. This is commonly incorporated into the theory by introducing reduced, effective diffusion coefficients: 
 
+\begin{equation}
+\tilde{D_k} = \alpha \frac{D_k}{\lambda^2}, 
+\label{eq:diffconst}
+\end{equation}
+where the parameter $\alpha$ denotes the extracellular volume fraction, while $\lambda$ is called the tortuosity of the medium, and accounts for the obstacles to free diffusion \citep{Nicholson1998}. Typical values for $\alpha$ and $\lambda$ in brain tissue are 0.2 and 1.6, respectively \citep{Nicholson1981, Nicholson1998}. If we insert the effective diffusion constants into eq. \ref{eq:sigma1} it reduces $\sigma$ to $0.122$ S/m. This is somewhat lower than the values that are typically measured for $\sigma$. The main explanation is probably that we have underestimated $\sigma$ by only including the main charge carriers from 
+Table \ref{table:ion-concentrations} in our calculation. The extracellular solution contains many ions (such as e.g., H$^+$ and HCO$_3$$^-$) besides these, which also will contribute to the conductivity. 
+
+\ghnote{Forklaringen i siste setning er sikkert bra, men det finnes muligens andre? Deler av stroemmen gaar gjennom nevroner? }
+
+As we shall see in Section \ref{sec:eldiff}, the definition of $\sigma$ given by eq. \ref{eq:sigma1} follows naturally if we use the Nernst-Planck equation for electrodiffusive ion concentration dynamics to compute extracellular currents. 
