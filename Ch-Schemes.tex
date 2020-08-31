@@ -3,7 +3,8 @@
 \ghnote{Geir and Torbjorn will write most this. Torbjorn takes care of the LFPy-part, Geir takes care of the other schemes.}
 \ghnote{GH: I reorganized this following the logic from the theory part - starting with the VC-stuff.}
 
-We may classify the schemes for computing extracellular dynamics by whether or not they are self consistent and whether or not they include ion concentration dynamics (Fig. \ref{Schemes:fig:schemes}). By self consistent, we mean that the neuronal and extracellular dynamics are modelled on a unified framework, so that (ephaptic) effects of extracellular variables on the neurodynamics are accounted for. 
+
+We may classify the schemes for computing extracellular dynamics by whether or not they are self consistent and whether or not they include ion concentration dynamics (Fig. \ref{Schemes:fig:schemes}). By self consistent, we mean that the neuronal and extracellular dynamics are modeled on a unified framework, so that (ephaptic) effects of extracellular variables on the neurodynamics are accounted for. 
 
 
 \begin{figure}[!ht]
@@ -20,16 +21,11 @@ We may classify the schemes for computing extracellular dynamics by whether or n
 \gen{Enig. Kanskje helt til slutt i Part 1, eller helt forst i Part 2? 
 "Dette er verkt{\o}yene vi har - now applications ...?"}
 
-We here give a simple overview of what we will deal with in Part 1 of this book by reference to Fig. \ref{Intro:fig:Knallfigur}. The extracellular potential largely originates from neuronal transmembrane currents. In the Figure, we have illustrated these for a simple (two-compartment) neuron, with currents that cross its membrane in the form of a current sink $I_1$ in one compartment, and a current source $I_2$ in the other (green arrows). In Chapter \ref{sec:Neuron}, we describe how to model and compute the intracellular dynamics, the membrane potential dynamics, and the transmembrane currents of neurons (green and yellow arrows). In the following chapters, we shift the focus from neurons to the extracellular medium, where the main focus will be on the extracellular potential $\phi$.
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=1\textwidth]{Figures/Skjemaoversikt.png}
-\end{center}
-\caption{\textbf{Overview of the problem that we focus on in this book.} 
-}
-\label{Intro:fig:Knallfigur}
-\end{figure}
+We here give a simple overview of what we will deal with in Part 1 of this book by reference to Fig. \ref{Intro:fig:Knallfigur}. The extracellular potential largely originates from neuronal transmembrane currents. In the Figure, we have illustrated these for a simple (two-compartment) neuron, with currents that cross its membrane in the form of a current sink $I_1$ in one compartment, and a current source $I_2$ in the other (green arrows). In Chapter \ref{sec:Neuron}, we describe how to model and compute the intracellular dynamics, the membrane potential dynamics, and the transmembrane currents of neurons (green and yellow arrows). 
+
+In the following chapters, we shift the focus from neurons to the extracellular medium, where the main focus will be on the extracellular potential $\phi$.
+
 
 The simplest take on computing $\phi$ is to treat the extracellular medium as a volume conductor (VC). VC theory then allows us to derive an analytical expression for $\phi$ as a direct function of the neural current sources (Fig. \ref{Intro:fig:Knallfigur}A2). Chapter \ref{sec:VC} of this book gives a thorough introduction to VC theory where we derive the key equations from first principles and highlight the many assumptions that the theory is based upon.
 

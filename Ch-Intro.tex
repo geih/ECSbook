@@ -6,3 +6,43 @@
 \end{itemize}
 
 
+\subsection{Overview the contents in this book}
+Throughout most parts of this book, we shall compute extracellular potentials using a two-step procedure:  
+
+\begin{itemize}
+\item {\bf Step 1:} Compute the electrical activity of the cells believed to contribute to the extracellular potential. 
+\item {\bf Step 2:} Compute the extracellular potential that arises from a given, underlying cellular activity.
+\end{itemize}
+
+Using the two-step procedure, we assume that the neurodynamics computed in step (1) is independent of the extracellular potential computed in step (2). This is often a good approximation, and the reason for using it is that it makes computations a lot simpler and a lot less computationally demanding. 
+
+Following this two-step procedure, Chapter \ref{sec:Neuron} describes how to model and compute the dynamics of morphologically complex neurons (step 1), and Chapter \ref{sec:VC} describes how to compute the resulting extracellular potential (step 2). The computations in step 2 depends on the extracellular medium, as reflected through its conductivity $\sigma$. Chapter \ref{sec:Sigma} is devoted to present experimental and theoretical estimates of $\sigma$, and to explain how various choices for  $\sigma$ can be incorporated into the theory (step 2). Taken together, chapters \ref{sec:Neuron}-\ref{sec:Sigma} contain the theory used for all simulations in the application part (Part 2) of this book, which is also the standard theory used within the field of neuroscience to simulate extracellular potentials. 
+
+The standard theory (covered by Chapters \ref{sec:Neuron}-\ref{sec:Sigma}) assumes that ion concentrations in the extracellular (and intracellular) environment do not vary with time. This is thought to be a good approximation during normal cellular activity. However, extracellular ion concentration shifts are a trademark of many pathological conditions such as epilepsy, stroke or spreading depression \cite{Somjen2001, Frohlich2008, Zandt2015review, Ayata2015}. Local concentration shifts may in turn evoke diffusive currents, which could in principle have an impact on extracellular potentials. In Chapter \ref{sec:Eldiff} we expand step 2 by outlining a theory for modeling extracellular ion concentration dynamics surrounding active neurons, and the effects that this will have on the extracellular potential. 
+
+Changes, both in the extracellular potential and the extracellular ion concentrations, 
+
+The motivation for using this evidently inconsistent approach is that $\phi$ is typically so much smaller than the membrane potential that the ephaptic effects can be neglected without any severe loss in accuracy. This might not be true for all biologically relevant geometries and scenarios, and frameworks that compute the extracellular, membrane and intracellular potentials in a self consistent manner exist (all arrows in Fig. \ref{Intro:fig:Knallfigur}C), as do unified frameworks that compute both ion concentrations and electrical potentials in a self consistent manner (all arrows in Fig. \ref{Intro:fig:Knallfigur}D). A summary of available frameworks for computing extracellular potentials (and ion concentrations) is given in Chapter \ref{sec:Schemes}.
+
+
+
+a Hodgkin-Huxley-Cable
+
+
+the intracellular dynamics, the membrane potential dynamics, and the transmembrane currents of neurons (green and yellow arrows).
+
+That is, we first compute the neurodynamics, then the extracellular potential. 
+
+
+These two subproblems are typically solved in two independent steps. When doing that, one implicitly assumes that the neurodynamics computed in step (1) is independent of the extracellular potential computed in step (2). The reason for doing this, is that it makes the computation simpler, and a lot less computationally demanding. 
+
+
+Throughout most of this book, we shall stick with this two-step procedure. 
+
+
+
+
+
+
+
+That is, one first computes the neurodynamics (1), typically under the assumption 

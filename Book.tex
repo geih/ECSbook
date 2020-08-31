@@ -30,6 +30,8 @@
 \usepackage{placeins}
 
 \numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
 
 \definecolor{newtextcolor}{cmyk}{0.01,0.7,1,0} %% color for new text
 \definecolor{newtextcolor2}{cmyk}{1,0.01,0.01,0} %% color for new text
@@ -101,7 +103,7 @@
     }
 \fi
 
-\bibliographystyle{plainnat}
+%\bibliographystyle{plainnat}
 
 \makeatletter
 \def\ps@pprintTitle{%
@@ -164,9 +166,6 @@
 
 %
 {\huge Appendices}
-\appendix
-\include{AppB-multipole}
-
 
 \appendix
 \section{Derivation of four-sphere model}
