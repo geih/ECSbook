@@ -5,7 +5,7 @@ In the standard VC theory presented in Chapter \ref{sec:VC}), we assumed that ex
 In this chapter, we will introduce a more general, electrodiffusive theory for extracellular dynamics, which accounts effects of ionic diffusion as well as ohmic drift. However, before we present the electrodiffusive theory, we will try to get an intuition of how diffusion potentials arise.
 
 \subsection{\blue{What is a diffusion potential?}}
-\label{sec:LJpot}
+\label{sec:Elfdiff:LJpot}
 We can get an intuitive understanding of what a diffusion potential is by considering a simple two-compartment system with two ionic solutions interacting at a junction  (Fig. \ref{Eldiff:fig:diffpot}). Let us assume that the left compartment contains a high concentration of NaCl, while the right compartment contains a lower concentration of NaCl (Fig. \ref{Eldiff:fig:diffpot}A). Initially, both compartments are electroneutral, i.e., they contain equal amounts of Na$^+$ and Cl$^-$. As no electrical forces are present, the initial system dynamics will be driven exclusively by diffusion. 
 
 \begin{figure}[!ht]
@@ -32,7 +32,7 @@ Whereas the Nernst-Potential and liquid junction potentials in patch clamping ar
 
 
 \subsection{\blue{Continuous, porous medium approximation for electrodiffusion}}
-\label{sec:porous}
+\label{sec:Eldiff:porous}
 In Section \ref{sec:continuous}, we introduced the continuous, porous medium approximation for coarse grained transports in brain tissue. We will use the same approximation for electrodiffusive processes. To do so, however, we need to expand it by introducing some additional variables that are relevant for ion concentration dynamics:
 
 \begin{itemize}
@@ -66,6 +66,7 @@ We note that there are two commonly used conventions for defining the variables 
 
 
 \subsection{\blue{Electrodiffusive ion concentration dynamics}}
+\label{sec:Eldiff:ionconcentrationdynamics}
 When modeling an electrodiffusive process, we keep track of the ion concentration dynamics of each individual ion species. With the effective diffusion constant, $\tilde{D}_k$, the flux density (${\bf j_k}$) of an ion species $k$ is given by the Nernst-Planck equation:
 \begin{equation}
 {\bf j_k} = - \tilde{D_k} {\bf \nabla} c_{k} - \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi.
@@ -91,6 +92,7 @@ Before we explain how to solve the Nernst-Planck system of equations, we will in
 
 
 \subsection{\blue{Electrodiffusive electrodynamics}}
+\label{sec:Eldiff:electrodynamics}
 From the equations for ion concentration dynamics (eqns. \ref{Eldiff:eq:JNP}-\ref{Eldiff:eq:NP} ) we can derive a corresponding set of equations for net charge dynamics. If we multiply eq. \ref{Eldiff:eq:JNP} by $F\cdot z_k$ and sum over all ion species $k$, we get the extracellular current density:
 \begin{equation}
 {\bf i} = F\sum_k {z_k {\bf j_k}} = -\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} - F\sum_{k} \frac{\tilde{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi}, 
@@ -138,10 +140,11 @@ Let us now look at the charge density, $\rho$ at the left hand side of eq. \ref{
 
 Eq. \ref{Eldiff:eq:eldiffCSD2} is the electrodiffusive counterpart to eq. \ref{VC:eq:CSD2}, that we used as starting point in standard VC theory. The difference between the two equations is the last term in eq. \ref{Eldiff:eq:eldiffCSD2}, which is the diffusive contribution not accounted for in \ref{VC:eq:CSD2}. As eq. \ref{Eldiff:eq:eldiffCSD2} shows, also diffusive processes can contribute to the genesis of extracellular potentials, and if present, they could give rise to a non-zero $\phi$ even in the absence of neuronal sources ($C = 0$). Diffusive currents can thus be seen as an additional "source" for generating extracellular potentials \cite{Halnes2017}. 
 
-We note that, apart from helping us realizing the relationship between standard VC theory and electrodiffusive theory, eq. \ref{Eldiff:eq:eldiffCSD2} is not very "user friendly". Whereas eq. \ref{VC:eq:CSD2} allowed us to derive an analytical expression for the electrical potential at all points in space once the CSD was known, eq. \ref{Eldiff:eq:eldiffCSD2} does not. To solve  eq. \ref{Eldiff:eq:eldiffCSD2}, we must keep track of the spatial distribution of ion concentrations by solving the Nernst-Planck system of equations (eq. \ref{Eldiff:eq:NP}) using one of the numerical frameworks we introduce in the next subsection.
+We note that, apart from helping us realizing the relationship between standard VC theory and electrodiffusive theory, eq. \ref{Eldiff:eq:eldiffCSD2} is not very "user friendly". Whereas eq. \ref{VC:eq:CSD2} allowed us to derive an analytical expression for the electrical potential at all points in space once the CSD was known, eq. \ref{Eldiff:eq:eldiffCSD2} does not. To solve  eq. \ref{Eldiff:eq:eldiffCSD2}, we must keep track of the spatial distribution of ion concentrations by solving the Nernst-Planck system of equations (eq. \ref{Eldiff:eq:NP}) using one of the numerical frameworks we introduce Chapter \ref{sec:Schemes}. 
 
 
 \subsection{\blue{Frameworks for solving the Nernst-Planck equations} }
+\label{sec:Eldiff:frameworks}
 Let us for now assume that the neuronal source terms $f_k$ are known at all points in space, and that we want to solve the Nernst-Planck continuity equation for the resulting extracellular ion concentration dynamics. If there are $K$ different ion species present in the system of study, eq. \ref{Eldiff:eq:NP} gives us $K$ equations, i.e., one for each individual ion concentrations $c_k$. However, the dynamics of the individual ion species are coupled by the additional variable $\phi$. Hence, we have $K+1$ variables, and are in need of an additional equation for $\phi$. There are two main approaches to this: One can either use the so-called \textit{Poisson-Nernst-Planck (PNP)} framework, or the so-called \textit{electroneutral} framework.
 
 \subsubsection{\blue{The Poisson-Nernst-Planck (PNP) framework}}
@@ -165,6 +168,7 @@ Due to its computational demand, the PNP framework is not suitable for estimatin
 
 
 \subsubsection{\blue{The electroneutral framework}}
+
 An alternative to the PNP framework is to replace the Poisson equation (eq. \ref{Eldiff:eq:poisson}) with the simplifying approximation that the bulk solution is electroneutral:
 \begin{equation}
 \alpha F \sum_k z_k c_k = 0.
@@ -215,6 +219,7 @@ Since the KNP equations are coupled in the sense that $\phi$ affects the dynamic
 
 
 \subsection{\blue{Do diffusion potentials matter?}}
+\label{sec:Eldiff:estimates}
 Due to the computational challenges they impose, it is tempting to make the assumption that diffusive currents contribute so little to the extracellular potential that we don't have to bother with them. This is what normally is being done, as most theoretical studies of extracellular potentials are based on standard VC theory. For most purposes, this is probably a good approximation, but its validity depends on one of the two following criteria being met:
 
 \begin{enumerate}
