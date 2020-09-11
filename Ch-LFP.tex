@@ -1,8 +1,8 @@
-\section{Local Field Potentials}
+\section{TVN/GTE: Local Field Potentials}
 \label{sec:LFP}
-\ghnote{Torbjorn will write this chapter}
+\ghnote{Torbjorn will take the main responsibility for this chapter}
 
-\subsection{Single-neuron LFPs}
+\subsection{\red{TBV:Single-neuron LFPs}}
 \begin{itemize}
 \item Passive dendrites \citep{Linden2010}
 \item Active dendrites \citep{Ness2016}
@@ -21,7 +21,7 @@ and synapses.
 \label{LFP:fig:LFP_lego}
 \end{figure}
 
-\subsection{Population LFPs}
+\subsection{\red{TBV:Population LFPs}}
 \begin{itemize}
 \item Passive dendrites 
 \begin{itemize}
@@ -34,7 +34,7 @@ and synapses.
 \item Kernel trick? 
 \end{itemize}
 
-\subsubsection{Effect of synaptic correlations}
+\subsubsection{\red{TBV:Effect of synaptic correlations}}
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1.\textwidth]{Figures/LFP/LFP_effect_correlation_illustration.png}
@@ -45,7 +45,7 @@ Basically, it is just because PSD is squared, and variability increase sum of sq
 \label{LFP:fig:correlation_boost}
 \end{figure}
 
-\subsection{\orange{Example: How local is the  local field potential? - GTE}}
+\subsection{\orange{GTE: Example: How local is the  local field potential?}}
 \label{LFP:sec:how-local-is-the-local-field-potential}
 
 The recording of LFPs has a long history in neuroscience. Therefore maybe it is surprising that the question 
@@ -102,8 +102,7 @@ a spatial reach defined in this way exists. It turns out that a finite spatial r
 We next consider a simple qualitative model that illuminates what factors determine $\sigma(R)$ and when the conditions for
 which it converges to a finite value as $R$ increases. 
 
-\subsubsection{\orange{Qualitative model}}
-
+\subsubsection{\orange{GTE: Qualitative model}}
 Two factors are expected to be key in determining how the compound population LFP $\sigma(R)$ increases with $R$:
 (i) how sharply the single-neuron contribution, that is, the \index{shape function} $f(r)$, decays with distance from the neurons, and (ii) the number
 density $N(r)$ of neurons positioned in a ring of radius $r$ around the electrode. Here we are interested in the compound LFP for large values of
@@ -194,7 +193,7 @@ the ancient question of why the night sky is dark given the numerous stars in th
 Olbers' paradox and the link to the spatial-reach question is described in Box XX.
 
 
-\subsubsection{\red{Box:  Why is the night sky dark? Olbers' paradox}}
+\subsubsection{\red{GTE: Box:  Why is the night sky dark? Olbers' paradox}}
 \gen{Was a Box in chapter in Sterratt}
 %%%%%%%%%%
 % Box: Why is the night sky dark? Olbers' paradox
@@ -213,7 +212,7 @@ Why is the night sky dark? An interesting historical paradox from astronomy, kno
 %\end{boxfloat}
 %%%
 
-\subsubsection{\orange{Quantitative model}}
+\subsubsection{\orange{GTE: Quantitative model}}
 
 The results from the qualitative modelling above demonstrates that the size of the compound LFP 
 from a population of neurons receiving synaptic inputs, depend critically on the level of 
@@ -321,7 +320,7 @@ The analytical formulae in Equation~\ref{LFP:equation:sigmaR2-uncorrelated-quant
 further suggest a new definition of the spatial reach $R_\text{reach}$, that is, $R_\text{reach}$ 
 can be set to be the distance from the electrode at which the 
 intermediate-$R$ ($r_\varepsilon \le R \le r_*$) and the 
-infinite-$R$ ($R \rightarrow \infty$) formulae intersect~\cite{Einevoll2013a}, see 
+infinite-$R$ ($R \rightarrow \infty$) formulae intersect~\citep{Einevoll2013a}, see 
 Figure~\ref{LFP:fig:how-local-center-of-population}a. For this particular value of $R$ we have 
 $2R_\text{reach}-r_\varepsilon=3 r_* - r_\varepsilon$, that is, $R_\text{reach} =1.5 r_*$. 
 
@@ -332,8 +331,7 @@ used in Figure~\ref{LFP:fig:how-local-center-of-population}a,
 this corresponds to $R_\text{reach}$=0.15~mm. 
 Note that this result pertains to the situation where the electrode is at the same depth level as the neuronal somas. But the same reasoning and modelling can equally be used for the case where the neuronal somas are above or below the recording electrode, see~\citet{Einevoll2013a}.
 
-We can now ask the question of how many neurons contribute to the recorded LFP. To get a rough idea,
-we can estimate the number of neurons with somas contained within a sphere of radius $R_\text{reach}$
+We can now ask the question of how many neurons contribute to the recorded LFP. To get a rough idea, we can estimate the number of neurons with somas contained within a sphere of radius $R_\text{reach}$
 around the electrode. With a neuron density of, for example, $\rho_\text{neuron}$=50000 neurons per mm$^3$ which is typical for grey matter in 
 cortex~\gen{REF:Beaulieu 1993}, we find that this sphere will contain $N_\text{neuron}=4 \pi R_\text{reach}^3 \rho_\text{neuron}/3$=\gex{XX}~neurons.
 
@@ -381,7 +379,7 @@ the single-neuron LFPs will be partially correlated. However, a corresponding fo
 %%%%%%%%%%
 % Box: General expression for compound LFP
 %%%%%%%%%%
-\subsubsection{\red{Box: General expression for population LFP}}
+\subsubsection{\red{GTE: Box: General expression for population LFP}}
 \gen{This was a box in Sterratt chapter}
 %\begin{boxfloat}{General expression for population LFP}
 %  \label{LFP:box:population-LFP-general}
@@ -438,7 +436,7 @@ Thus, all else equal, the relative contribution from the correlated sources will
 %%%
 
 
-\subsubsection{\orange{How sharply does the LFP decay outside a population of neurons?}}
+\subsubsection{\orange{GTE: How sharply does the LFP decay outside a population of neurons?}}
 
 Another way to phrase the question of how local the LFP is, is to measure how sharply the LFP decays outside a neuronal population receiving synaptic inputs.
 This can be explored with our quantitative model by computing how the recorded LFP will decay when the recording electrode is moved away from the center of 
@@ -539,11 +537,11 @@ and~\ref{LFP:equation:sigmaR2-X-correlated-quantitative} in fact reveals that in
 same large-X power-law behaviour as the single-neuron shape function $f(r)$, see \citep{Einevoll2013a}.      
 
 
-\subsection{Network LFPs}
+\subsection{\red{TVN/EH: Network LFPs}}
 \begin{itemize}
 \item Cortical LFPs from single corticothalamic neuron \citep{Hagen2017}
 \item Cortical networks with passive dendrites with hybrid trick \citep{Hagen2016}
 \item Cortical network with active dendrites \citep{Reimann2013}
 \end{itemize}
 
-\subsection{Insights from LFP studies} 
+\subsection{\red{GTE: Insights from LFP studies}} 

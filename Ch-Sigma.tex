@@ -1,14 +1,8 @@
 \section{Extracellular conductivity}
 \label{sec:Sigma}
 \index{Extracellular conductivity}
-
-\begin{itemize}
-\item Experimental measurements \citep{Miceli2017}
-\item Theoretical explorations \citep{Meffin2012,Tahayori2012,Meffin2014,Tahayori2014}
-\end{itemize}
-
-
-\ghnote{GH: Jeg laget en skisse til dette kapittelet, men her er det fint om Torbjorn sjekker alt jeg har foretatt meg. Jeg tok en del greier fra VC-kapittelet og sakset det inn hit. Det mest dramatiske var at jeg flyttet VC-delkapitlene om anisotropt og inhomogent medium hit. Jeg syntes det virket ryddigere aa ta med dette stoffet paa samme sted som vi diskuterer antakelsene, dvs. ikke diskutere antakelsene i etterkant av aa ha utvidet teorien slik at man ikke trenger aa gjoere disse antakelsene... }
+\ghnote{GH: Planen var at dette skulle bli Torbjorns kapittel, men jeg laget en skisse.
+Fint om Torbjorn sjekker alt jeg har foretatt meg, samt fyller ut med egne greier. Jeg sakset en del greier fra VC-kapittelet inn hit, blant annet delkapitlene om anisotropt og inhomogent medium. Pros: Naa utvider vi VC-teori i traad m/ at vi diskuterer (or relaxer) antakelser rundt sigma, jmf. tidligere versjon der vi utvidet VC teorien foerst, og deretter diskuterte og relaxet antakelsene. Cons: Naa blir det VC teori ogsaa i Sigma-kapittelet.}
 
 A key parameter, or sometimes, variable, in volume conductor (VC) theory is the extracellular conductivity, $\sigma$. In most applications of VC theory, $\sigma$ is assumed to be a constant. Its value is normally taken from some experimental measurement, and typical recorded values are between 0.2 and 0.3 S/m (Fig. \label{Sigma:fig:freq_dep}). \ghnote{GH: Paastanden stemmer m/ figuren, men jeg har ikke oversikt over andre estimater som finnes der ute.} 
 
@@ -17,10 +11,9 @@ Throughout the previous section, we assumed that  $\sigma$  was homogeneous, ani
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Anisotropic extracellular medium}}
-\label{sec:Anisotropic}
+\label{sec:Sigma:Anisotropic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{\orange{Isotropic conductivity} }
-In Section \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma$. If we use the point source approximation (eq. \ref{VC:eq:pointsources}), and denote the conductivity in the different spatial directions $\sigma_x$, $\sigma_y$ and $\sigma_z$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
+In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma$. If we use the point source approximation (eq. \ref{VC:eq:pointsources}), and denote the conductivity in the different spatial directions $\sigma_x$, $\sigma_y$ and $\sigma_z$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
 
 \begin{equation}
 \phi(x,y,z) = \sum_k \frac{I_k}{4\pi(\sigma_y\sigma_z (x-x_k)^2 + \sigma_x\sigma_z (y-y_k)^2 + \sigma_x\sigma_y (z-z_k)^2)}.
@@ -37,38 +30,38 @@ In general, the brain does not have an isotropic $\sigma$. For example, in corte
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\red{TORBJORN: Nonhomogeneous extracellular medium}}
-\label{sec:nonhomo}
-In Section \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
+\subsection{\red{TVN: Nonhomogeneous extracellular medium}}
+\label{sec:Sigma:nonhomo}
+In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
 
 The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{VC:eq:csds} or \ref{VC:eq:anisos}) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
 
-\ghnote{Enter Torbjorn:}
+\ghnote{Enter TVN:}
 \begin{itemize}
 \item Method of Images \citep{Ness2015}
 \item FEM \citep{Ness2015}, ...
 \end{itemize}
 
-For more general cases, one can in principle always solve eq. \ref{VC:eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \citep{Logg2012}. For examples of neuroscience applications using this approach, see \cite{Moffitt2005, Frey2009, Joucla2012, Haufe2015, Ness2015, Buccino2019b, Obien2019}. 
+For more general cases, one can in principle always solve eq. \ref{VC:eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \citep{Logg2012}. For examples of neuroscience applications using this approach, see \citep{Moffitt2005, Frey2009, Joucla2012, Haufe2015, Ness2015, Buccino2019b, Obien2019}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{\orange{TORBJORN: Frequency dependence of the conductivity} }
-\label{sec:f-independent}
-\ghnote{GH: Skrev skisse til dette.}
+\subsection{\orange{TVN: Frequency dependence of the conductivity} }
+\label{sec:Sigma:f-independent}
+\ghnote{GH: Skrev skisse til dette. Puttet figuren m/ sigma-maalinger inn her, da disse ser ut til aa primaert diskuteres opp mot eventuell frekvensavhengighet. Mulig vi burde ha med "eksperimentelle maalinger i kapittel-tittelen?}
 
 Regardless of whether a medium is isotropic and homogeneous or not, its response to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that account for capacitive and inductive effects that are frequency dependent. 
 
-In Section \ref{sec:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium includes capacitive effects, as an extracellular current traveling through it could interact with nearby capacitive neural membranes. 
+In Section \ref{sec:VC:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium includes capacitive effects, as an extracellular current traveling through it could interact with nearby capacitive neural membranes. 
 
-However, for the relevant frequencies in extracellular recordings (Fig. \label{Sigma:fig:freq_dep}), the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite{Logothetis2007, Miceli2017, Ranta2017}. In most applications of VC theory, one therefore applies the assumption that the medium is Ohmic or resistive, meaning that the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite{Bedard2004, Tracey2011, Miceli2017}. 
+However, for the relevant frequencies in extracellular recordings (Fig. \ref{Sigma:fig:freq_dep}), the capacitive and inductive effects appear to be negligible compared to the resistive effects \citep{Logothetis2007, Miceli2017, Ranta2017}. In most applications of VC theory, one therefore applies the assumption that the medium is Ohmic or resistive, meaning that the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \citep{Bedard2004, Tracey2011, Miceli2017}. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/frequency_dependence.png}
 \end{center}
 \caption{\textbf{Literature review of reported conductivities in various species and experimental setups.} 
-Most studies seem to indicate a very weak frequency dependence of the extracellular conductivity\index{conductivity}, which would have a negligible effect on measured extracellular potentials \citep{Miceli2017}. The very low and strongly frequency dependent values measured by \cite{Gabriel1996} represents an outlier, and although it has received substantial attention, it has to the best of our knowledge not been reproduced by any other study. For details about the data, see \cite{Miceli2017}, and references therein \citep{Ranck1963, Gabriel1996, Logothetis2007, Elbohouty2013, Wagner2014}.
+Most studies seem to indicate a very weak frequency dependence of the extracellular conductivity\index{conductivity}, which would have a negligible effect on measured extracellular potentials \citep{Miceli2017}. The very low and strongly frequency dependent values measured by \citep{Gabriel1996} represents an outlier, and although it has received substantial attention, it has to the best of our knowledge not been reproduced by any other study. For details about the data, see \citep{Miceli2017}, and references therein \citep{Ranck1963, Gabriel1996, Logothetis2007, Elbohouty2013, Wagner2014}.
 }
 \label{Sigma:fig:freq_dep}
 \end{figure}
@@ -85,9 +78,12 @@ Most studies seem to indicate a very weak frequency dependence of the extracellu
 \label{Sigma:fig:maxwell_resistivity}
 \end{figure}
 
+\subsection{\orange{TVN: Theoretical explorations....} }
+\ghnote{I den opprinnelige planen sto det at vi skulle skrive om dette, med referenser til Meffin2012, Tahayori2012, Meffin2014, Tahayori2014. Jeg vet ikke helt hva dette gaar i, men det gjoer sikkert Torbjorn og/eller Gaute?}
 
-\subsection{\orange{GEIR: Theoretical estimate of the conductivity based on ion concentrations} }
-Extracellular current are mediated by the ions dissolved in the extracellular solution, and the conductivity of the extracellular medium if thus a function of thus depends on the ion concentrations, i.e., on the availability of free charge carriers \cite{Grodzinsky2011}: 
+\subsection{\orange{GH: Theoretical estimate of the conductivity based on ion concentrations} }
+\label{sec:Sigma:concentrationbased}
+Extracellular current are mediated by the ions dissolved in the extracellular solution, and the conductivity of the extracellular medium if thus a function of thus depends on the ion concentrations, i.e., on the availability of free charge carriers \citep{Grodzinsky2011}: 
 
 \begin{equation}
 \sigma = \frac{F^2}{RT}\sum_{k} D_k z_{k}^2 c_{k}.
@@ -99,7 +95,7 @@ Eq. \ref{Sigma:eq:sigma1} allows us to compare the measured $\sigma$ with the $\
 
 \begin{table}[h!]
 \begin{center}
-\caption{Diffusion constants. Values taken from from \cite{Bowen2002, Lyshevski2007}}
+\caption{Diffusion constants. Values taken from from \citep{Bowen2002, Lyshevski2007}}
 \label{Sigma:tab:diffconsts}
     \begin{tabular}{l|l}
     \hline
@@ -118,9 +114,8 @@ If we insert the values from Tables \ref{table:ion-concentrations} and \ref{Sigm
 \tilde{D_k} = \alpha \frac{D_k}{\lambda^2}, 
 \label{Sigma:eq:diffconst}
 \end{equation}
-where the parameter $\alpha$ denotes the extracellular volume fraction, while $\lambda$ is called the tortuosity of the medium, and accounts for the obstacles to free diffusion \citep{Nicholson1998}. Typical values for $\alpha$ and $\lambda$ in brain tissue are 0.2 and 1.6, respectively \citep{Nicholson1981, Nicholson1998}. If we insert the effective diffusion constants into eq. \ref{Sigma:eq:sigma1} it reduces $\sigma$ to $0.122$ S/m. This is somewhat lower than the values that are typically measured for $\sigma$. The main explanation is probably that we have underestimated $\sigma$ by only including the main charge carriers from 
-Table \ref{table:ion-concentrations} in our calculation. The extracellular solution contains many ions (such as e.g., H$^+$ and HCO$_3$$^-$) besides these, which also will contribute to the conductivity. 
+where the parameter $\alpha$ denotes the extracellular volume fraction, while $\lambda$ is called the tortuosity of the medium, and accounts for the obstacles to free diffusion \citep{Nicholson1998}. Typical values for $\alpha$ and $\lambda$ in brain tissue are 0.2 and 1.6, respectively \citep{Nicholson1981, Nicholson1998}. If we insert the effective diffusion constants into eq. \ref{Sigma:eq:sigma1} it reduces $\sigma$ to $0.122$ S/m. This is somewhat lower than the values that are typically measured for $\sigma$. The main explanation is probably that we have underestimated $\sigma$ by only including the main charge carriers from Table \ref{table:ion-concentrations} in our calculation. The extracellular solution contains many ions (such as e.g., H$^+$ and HCO$_3$$^-$) besides these, which also will contribute to the conductivity. 
 
 \ghnote{Forklaringen i siste setning er sikkert bra, men det finnes muligens andre? Deler av stroemmen gaar gjennom nevroner? }
 
-As we shall see in Section \ref{sec:eldiff}, the definition of $\sigma$ given by eq. \ref{Sigma:eq:sigma1} follows naturally if we use the Nernst-Planck equation for electrodiffusive ion concentration dynamics to compute extracellular currents. 
+As we shall see in Chapter \ref{sec:Eldiff}, the definition of $\sigma$ given by eq. \ref{Sigma:eq:sigma1} follows naturally if we use the Nernst-Planck equation for electrodiffusive ion concentration dynamics to compute extracellular currents. 

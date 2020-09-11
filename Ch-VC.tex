@@ -9,25 +9,25 @@ As used in neuroscience, VC theory rests on a set of assumptions regarding the n
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Continuous, porous medium approximation for VC theory}}
-\label{sec:continuous}
+\label{sec:VC:continuous}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross section of a piece of brain tissue shows that it is densely packed with neural and glial processes (Fig.\ref{VC:fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
+When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross-section of a piece of brain tissue shows that it is densely packed with neural and glial processes (Fig.\ref{VC:fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.3\textwidth]{Figures/VC/ECSdummy.jpeg}
 \end{center}
-\caption{\textbf{Tortuous medium}  Cross section image of a piece of neural tissue. Extracellular space (marked red) occupies about 20 \% of the total tissue volume, and has a highly tortuous structure. Placeholder, taken from \cite{Sykova2008}.
+\caption{\textbf{Tortuous medium}  Cross-section image of a piece of neural tissue. Extracellular space (marked red) occupies about 20 \% of the total tissue volume, and has a highly tortuous structure. Placeholder, taken from \citep{Sykova2008}.
 \tvnnote{Vi får vel lage vår egen illustrasjon her, kanskje med panel A lik denne, og panel B en zoomet ut versjon der det ser mer homogent ut?}
 }
 \label{VC:fig:ECS}
 \end{figure}
 
-At the microscopic scale, the conductivity $\sigma$ in the brain tissue is thus highly non-homogeneous. For example, it will be very high at a cellular membrane and much lower in the extracellular space between membranes. Accordingly, electric potentials can vary greatly over tiny distances, and become very large near cell membranes. When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. In practice, the electrodes used in experimental recordings perform such an averaging. Sizes of electrodes used to record extracellular potentials typically range from 5 $\mu$m to 125 $\mu$m in diameter\cite{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). Experimental recordings thus give us the average potential over a region in space that typically spans over both extracellular space and several neural and glial processes. It is thus the dynamics at this coarse grained spatial scale that we will focus on.
+At the microscopic scale, the conductivity $\sigma$ in the brain tissue is thus highly non-homogeneous. For example, it will be very high at a cellular membrane and much lower in the extracellular space between membranes. Accordingly, electric potentials can vary greatly over tiny distances, and become very large near cell membranes. When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. In practice, the electrodes used in experimental recordings perform such an averaging. Sizes of electrodes used to record extracellular potentials typically range from 5 $\mu$m to 125 $\mu$m in diameter\citep{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). Experimental recordings thus give us the average potential over a region in space that typically spans over both extracellular space and several neural and glial processes. It is thus the dynamics at this coarse grained spatial scale that we will focus on.
 
-At the coarse grained spatial scale, it is reasonable to assume that microscale inhomogeneities average out, and that the brain tissue can be treated as a continuous medium \cite{Gratiy2017}. The VC theory presented in this Chapter is based on the continuous medium approximation, and thus describes the extracellular dynamics on a coarse grained spatial scale, with a spatial resolution larger than a micrometer. 
+At the coarse grained spatial scale, it is reasonable to assume that microscale inhomogeneities average out, and that the brain tissue can be treated as a continuous medium \citep{Gratiy2017}. The VC theory presented in this chapter is based on the continuous medium approximation, and thus describes the extracellular dynamics on a coarse grained spatial scale, with a spatial resolution larger than a micrometer. 
 
-A continuous, porous medium is defined by two key parameters \cite{Nicholson1981}. The first parameter is $\alpha$, is the fraction of the tissue volume that is extracellular space. It typically is about 0.2 in brain tissue, although this can vary between brain regions and even locally due to cellular swelling. The second parameter is $\lambda$, the tortuosity of the medium \cite{Nicholson1981}. It interprets as the ratio between the shortest pathway between two points in space and the euclidian distance between these two points. The tortuosity can be measured experimentally, and for extracellular transport, it has been found that $\lambda = 1.6$ \cite{Nicholson1998}. 
+A continuous, porous medium is defined by two key parameters \citep{Nicholson1981}. The first parameter is $\alpha$, is the fraction of the tissue volume that is extracellular space. It typically is about 0.2 in brain tissue, although this can vary between brain regions and even locally due to cellular swelling. The second parameter is $\lambda$, the tortuosity of the medium \citep{Nicholson1981}. It interprets as the ratio between the shortest pathway between two points in space and the euclidian distance between these two points. The tortuosity can be measured experimentally, and for extracellular transport, it has been found that $\lambda = 1.6$ \citep{Nicholson1998}. 
 
 The continuous, tortuous medium approximation has implications for how we interpret the various concepts and variables that we use, so we here give a brief list of definitions: 
 
@@ -50,7 +50,7 @@ The continuous, porous medium approximation is revisited in Chapter \ref{sec:sig
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{From neuronal current sources to extracellular potentials}}
-\label{sec:continuous}
+\label{sec:VC:main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Throughout this chapter we shall assume that we know the neuronal (and glial) transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution of current sources (Fig. \ref{VC:fig:CSD}B), which we call the current source density ($CSD$). For example, the $CSD$ representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions. 
 
@@ -95,13 +95,14 @@ In the following subsections, we show how VC-theory is used to compute $\phi$ in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Infinite isotropic homogeneous extracellular medium}}
-\label{sec:isohomo}
+\label{sec:VC:isohomo}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 We shall now derive an expression for the extracellular potential $\phi$ in the case where the extracellular medium is infinite, isotropic and homogeneous. By homogeneous we mean that the conductivity $\sigma$ is the same everywhere in space, and by isotropic we mean that $\sigma$ is the same in all spatial directions. Although the extracellular medium in reality is neither infinite, nor strictly isotropic and homogeneous, this approximation may still in many cases give fairly good predictions of $\phi$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{\blue{Point source approximation}}
+\label{sec:VC:pointsource}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 We start by deriving the contribution to $\phi$ from a single neuronal point source $I_k$ at the point ${\bf r_k}=0$ (Fig. \ref{VC:fig:pointsource}A). 
 
@@ -160,6 +161,7 @@ If we have several point-current sources, $I_{1}, I_2, I_3, ... $ in locations $
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{\blue{Line source approximation}}
+\label{sec:VC:linesource}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Eq.~\ref{VC:eq:pointsources} is referred to as the point-source approximation \citep{Holt1999, Pettersen2008a}, since it approximates the neuron as a set of point current sources, i.e., the neuron delivers to the extracellular space a singular current source per neuronal segment, located in the segment midpoint. 
 
@@ -178,7 +180,7 @@ Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the lo
 \includegraphics[width=0.4\textwidth]{Figures/VC/line_source_illustration.png}
 \end{center}
 \caption{\textbf{Line-source approximation.} 
-\cite{Holt1998} \tvnnote{Add subscripts?}
+\citep{Holt1998} \tvnnote{Add subscripts?}
 }
 \label{VC:fig:line_source_illustration}
 \end{figure}
@@ -193,6 +195,7 @@ The line-source approximation is believed to give a better prediction of $\phi$ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{\blue{Current-source-density description}}
+\label{sec:VC:CSD}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The forward modelling formulas in Eq. \ref{VC:eq:pointsources} and \label{VC:eq:linesources} can be expressed more generally in terms of the CSD. The starting point is then eq. \ref{VC:eq:CSD3}, which for a homogeneous and isotopic medium can be written: 
 
@@ -253,9 +256,9 @@ where the volume integral runs over all sources. Here, $C$ represents whatever a
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\orange{SOLVEIG: Dipole approximation}}
-\label{sec:dipole}
-\ghnote{GH: Jeg skrev en skisse til dette kapittelet, men fint om Solveig kan gaa gjennom.}
+\subsection{\orange{SN: Dipole approximation}}
+\label{sec:VC:dipole}
+\ghnote{GH: Jeg skrev en skisse til dette kapittelet, men fint om SN kan gaa gjennom.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The \textit{dipole approximation} \index{Dipole approximation} is an alternative to eq. \ref{VC:eq:pointsources} for predicting the extracellular potential. The approximation is good provided that the "measuring point" for $\phi$ is far away from the source-sink distribution that it originates from, like in the case of EEG.
 
@@ -267,7 +270,7 @@ To be more precise, if the distance from the center of the volume containing the
 \end{equation}
 where $R$ is the distance from the center of the source distribution, $C_{monopole}$ is the monopolar contribution of the CSD to $\phi$, $C_{dipole}$ is the dipolar contribution from the CSD to $\phi$, and so on. The derivation of this expression can be found in Appendix \ref{app:dipoleappendix}. 
 
-As we explained in Section \ref{sec:membranecurrents}, the net sum of currents over a neuronal membrane is always zero, meaning that the monopolar contribution, i.e., first term in eq. \ref{VC:eq:multipole}, vanishes. Furthermore, the quadrupole, octopole and higher-order contributions to $\phi$ decay rapidly with distance $R$. Provided that we are sufficiently far away from the source distribution, $\phi$ can therefore be well approximated by dipole contribution alone:
+As we explained in Section \ref{sec:Neuron:membranecurrents}, the net sum of currents over a neuronal membrane is always zero, meaning that the monopolar contribution, i.e., first term in eq. \ref{VC:eq:multipole}, vanishes. Furthermore, the quadrupole, octopole and higher-order contributions to $\phi$ decay rapidly with distance $R$. Provided that we are sufficiently far away from the source distribution, $\phi$ can therefore be well approximated by dipole contribution alone:
 
 \begin{equation}\label{VC:eq:CDA}
 \Phi(\mathbf{R}) \approx \frac{1}{4 \pi \sigma} \frac{|\mathbf{p}| \cos \theta}{R^2},
@@ -283,8 +286,8 @@ For example, if we have a simple two-compartmental (and purely dipolar) neuron w
 As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is though to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \citep{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \citep{naess2020biophysical}.
 
 
-\subsection{\red{TORBJORN: Electrodes}}
-\label{sec:electrode}
+\subsection{\red{TVN: Electrodes}}
+\label{sec:VC:electrodes}
 \begin{itemize}
 \item Disc-electrode approximation
 \end{itemize}
@@ -292,7 +295,7 @@ As we mentioned above, the current dipole approximation is only applicable when 
 
 The simplest and most commonly used approach when modeling extracellular recordings is to calculate the extracellular potential at single points following one of the approaches outlined above, and use this as a measure of recorded potentials. Implicitly, this assumes ideal point electrodes, that is, the electrodes (and electrode shank) do not affect the extracellular potential and the extracellular potential does not vary substantially over the surface of the electrodes. (The point-electrode assumption was used for all simulation examples in this chapter).
 
-A numerically straightforward extension is the disc-electrode approximation where the potential is evaluated at a number of points on the electrode surface, and the average calculated \citep{ Linden2014}. This approach takes into account the physical extent of the electrode, but not any effect the electrode itself might have on the electric potential. Close to the electrode surface the electric potential will however be affected by the presence of the high-conductivity electrode contact \citep{McIntyre2001, Moulin2008}. A numerically much more comprehensive approach to modeling electrodes is to use the Finite Element Method (FEM) to model the electrode \citep{Moulin2008, Ness2015}, or the electrode shank \citep{Moffitt2005, Buccino2019b}. Using FEM for validation, \cite{Ness2015} found that the ideal point-electrode and disc-electrode approximations where reasonably accurate when the distance between the current sources and the recording electrode was bigger than $\sim$4 times and $\sim$2 times the electrode radius, respectively, indicating that the effects of the electrodes themselves are negligible in most cases \citep{Nelson2010}.
+A numerically straightforward extension is the disc-electrode approximation where the potential is evaluated at a number of points on the electrode surface, and the average calculated \citep{ Linden2014}. This approach takes into account the physical extent of the electrode, but not any effect the electrode itself might have on the electric potential. Close to the electrode surface the electric potential will however be affected by the presence of the high-conductivity electrode contact \citep{McIntyre2001, Moulin2008}. A numerically much more comprehensive approach to modeling electrodes is to use the Finite Element Method (FEM) to model the electrode \citep{Moulin2008, Ness2015}, or the electrode shank \citep{Moffitt2005, Buccino2019b}. Using FEM for validation, \citep{Ness2015} found that the ideal point-electrode and disc-electrode approximations where reasonably accurate when the distance between the current sources and the recording electrode was bigger than $\sim$4 times and $\sim$2 times the electrode radius, respectively, indicating that the effects of the electrodes themselves are negligible in most cases \citep{Nelson2010}.
 The presence of large multi-contact electrode probes can, however, substantially affect the extracellular potential in its vicinity, by effectively introducing a large non-conducting volume~\citep{Mechler2012}, and this can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell is in front of or behind the electrode shank \citep{Buccino2019b}.
 
 Note that for modelling current stimulation electrodes (as opposed to just recording electrodes), more complex electrode models might be needed due to electrode polarization effects \citep{McIntyre2001, Martinsen2008, Joucla2012}.
@@ -301,13 +304,12 @@ Note that for modelling current stimulation electrodes (as opposed to just recor
 
 %%%%%%
 \subsection{\blue{Approximations used in VC theory}}
-\label{sec:approximations}
+\label{sec:VC:approximations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The VC theory presented in this Chapter relies on several assumptions and approximations. Firstly, the theory is based on the 
-quasi-static approximation of Maxwell's equations (see Section \ref{sec:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:noephaptic} for more on this). Finally, the extracellular conductivity is in most applications assumed to be isotropic, homogeneous and frequency independent. It is possible to relax these assumptions, and we discussed cases with an anisotropic medium in Section \ref{sec:Anisotropic}, and cases with a non-homogeneous medium in Section \ref{sec:nonhomo}. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Section \ref{sec:Sigma}).
+The VC theory presented in this chapter relies on several assumptions and approximations. Firstly, the theory is based on the quasi-static approximation of Maxwell's equations (see Section \ref{sec:VC:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:VC:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:VC:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:VC:ephaptic} for more on this). Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Chapter \ref{sec:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
 
 \subsubsection{\blue{Quasi-static approximation of Maxwell's equations}}
-\label{sec:quasistatic}
+\label{sec:VC:quasistatic}
 In the quasi-static approximation to Maxwell's equations, one neglects terms with the time derivatives of the electric (${\bf E}$) and magnetic (${\bf B}$) fields. For linear materials with instantaneous response properties, Maxwell's (macroscopic) equations for the curl of the electric and magnetic fields can then be simplified to:
 \begin{equation}
 \nabla \times {\bf E} = - \frac{\partial {\bf B}}{\partial t}  \approx 0, 
@@ -323,23 +325,23 @@ where $\mu$ and $\epsilon$ are the permeability and permittivity of the medium r
 {\bf E} = \nabla \cdot \phi.
 \label{VC:eq:conservative}
 \end{equation}
-The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \cite{Nunez2006, Grodzinsky2011}.
+The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \citep{Nunez2006, Grodzinsky2011}.
 
 
 \subsubsection{\blue{Linear extracellular medium} }
-\label{sec:LinEx}
+\label{sec:VC:LinEx}
 In a linear extracellular medium, the relationship between the current density and the electric field is given by
 \begin{equation}
 {\bf i} = \sigma {\bf E}.
 \label{VC:eq:bertil}
 \end{equation}
-This relation is constitutive, meaning that it is observed in nature rather than derived from any physical principle \citep{Nunez2006, Pettersen2012}. It is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions), inhomogeneous (position dependent), and complex (accounting for capacitive effects). We note that eq. \ref{VC:eq:bertil} is generally only valid in the frequency domain, while in the time domain, ${\bf i}$ must be given as a temporal convolution of $\sigma$ and ${\bf E}$ \cite{Bedard2009}. However, if $\sigma$ is frequency independent (this assumption is discussed further below), eq. \ref{VC:eq:bertil} will also be valid in the time domain.
+This relation is constitutive, meaning that it is observed in nature rather than derived from any physical principle \citep{Nunez2006, Pettersen2012}. It is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions), inhomogeneous (position dependent), and complex (accounting for capacitive effects). We note that eq. \ref{VC:eq:bertil} is generally only valid in the frequency domain, while in the time domain, ${\bf i}$ must be given as a temporal convolution of $\sigma$ and ${\bf E}$ \citep{Bedard2009}. However, if $\sigma$ is frequency independent (this assumption is discussed further below), eq. \ref{VC:eq:bertil} will also be valid in the time domain.
 
 Eq. \ref{VC:eq:bertil} is essentially Ohm's law for a volume conductor. If we combine it with the quasi-static approximation (i.e., with eq. \ref{VC:eq:conservative}), we get a current density given by ${\bf i} = \sigma \nabla \phi$, which is what we assumed in the beginning of this chapter (eq. \ref{VC:eq:ohmici}).
 
 
 \subsubsection{\blue{Extracellular currents are exclusively due to Ohmic drift}}
-\label{sec:onlyohmic}
+\label{sec:VC:onlyohmic}
 When basing the VC theory on eq. \ref{VC:eq:ohmici}, we assumed that extracellular currents are mediated exclusively by Ohmic drift. In principle, the extracellular current density could have additional contributions from diffusion of ions, advection currents and displacement currents:
 
 \begin{equation}
@@ -359,7 +361,7 @@ is the current that arises in a bulk solution if the solution has a charge densi
 \end{equation}
 represents the capacitive effect of a medium that allows local charge accumulation, so that $\rho$ can vary with time.  
 
-For the physiological conditions of the extracellular solution, the charge relaxation time, i.e., the time it takes for $d\rho/dt$ to decay to zero when responding to a change in the electric field, is in the order of 1 ns \cite{Grodzinsky2011, Gratiy2017}. This means that the displacement current (eq. \ref{VC:eq:idis}) will mainly be important under conditions when the electrical field varies with frequencies in the GHz range. As the relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this, the displacement current can safely be neglected. Related to this, the actual charge accumulation that takes place during a relaxation time of 1 ns is very small. For most practical purposes it is a therefore good approximation to assume that the extracellular medium is electroneutral \cite{Solbra2018}, which means that $\rho = 0$ so that the advective current becomes zero. Hence, for practical purposes, it is safe to assume that both the displacement current (eq. \ref{VC:eq:idis}) and the advective current (eq. \ref{VC:eq:iadv}) give negligible contributions to extracellular dynamics. A more physically rigorous argument for this was given in \cite{Gratiy2017}. 
+For the physiological conditions of the extracellular solution, the charge relaxation time, i.e., the time it takes for $d\rho/dt$ to decay to zero when responding to a change in the electric field, is in the order of 1 ns \citep{Grodzinsky2011, Gratiy2017}. This means that the displacement current (eq. \ref{VC:eq:idis}) will mainly be important under conditions when the electrical field varies with frequencies in the GHz range. As the relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this, the displacement current can safely be neglected. Related to this, the actual charge accumulation that takes place during a relaxation time of 1 ns is very small. For most practical purposes it is a therefore good approximation to assume that the extracellular medium is electroneutral \citep{Solbra2018}, which means that $\rho = 0$ so that the advective current becomes zero. Hence, for practical purposes, it is safe to assume that both the displacement current (eq. \ref{VC:eq:idis}) and the advective current (eq. \ref{VC:eq:iadv}) give negligible contributions to extracellular dynamics. A more physically rigorous argument for this was given in \citep{Gratiy2017}. 
 
 The diffusive current,
 \begin{equation}
@@ -367,17 +369,17 @@ The diffusive current,
 \label{VC:eq:idif}
 \end{equation}
 represents the current that arrises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along extracellular concentration gradients ($\nabla c_k$), and carry along with them a net charge. Diffusive currents are neglected in standard VC theory under the assumption that they are much smaller than Ohmic drift currents at the coarse grained scale of brain tissue. By estimates, the effect of diffusion on $\phi$ is most likely small under normal conditions, 
-so that one might generally make quite good predictions with a VC theory that neglects them \cite{Halnes2016, Gratiy2017}. 
-However, diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite{Halnes2016, Gratiy2017}. Diffusive effects on $\phi$may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite{Somjen2001, Frohlich2008, Wei2014, Ayata2015}). 
+so that one might generally make quite good predictions with a VC theory that neglects them \citep{Halnes2016, Gratiy2017}. 
+However, diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \citep{Halnes2016, Gratiy2017}. Diffusive effects on $\phi$may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \citep{Somjen2001, Frohlich2008, Wei2014, Ayata2015}). 
 
-To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \cite{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:Eldiff}.
+To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \citep{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:Eldiff}.
 
 
 \subsubsection{\blue{No ephaptic coupling} }
-\label{sec:noephaptic}
+\label{sec:VC:ephaptic}
 The standard workflow when modeling the extracellular potential ($\phi$) involves two steps: First, one uses the HHC formalism (cf. Chapter \ref{sec:Neuron}) to compute the transmembrane currents in all neuronal compartments. Next, one uses VC theory (eq. \ref{VC:eq:pointsources}) to estimate the resulting $\phi$. Since the fundamental equation in the HHC formalism (eq. \ref{Neuron:eq:multimain}) was derived under the assumption that $\phi=0$, this two-step approach is evidently inconsistent. 
 
-In reality, the activity of a neuron will affects the membrane potential of both neighboring neurons and itself through the extracellular potential it creates. Such effects of the extracellular potential on the neurodynamics are called \textit{ephaptic}. As we discussed in Section \ref{sec:HHCassumptions}, $\phi$ is typically much smaller than the membrane potential, so that ephaptic effects are commonly assumed to be negligibly small. Provided that this is true, the two-step approach works well. 
+In reality, the activity of a neuron will affects the membrane potential of both neighboring neurons and itself through the extracellular potential it creates. Such effects of the extracellular potential on the neurodynamics are called \textit{ephaptic}. As we discussed in Section \ref{sec:Neuron:HHCassumptions}, $\phi$ is typically much smaller than the membrane potential, so that ephaptic effects are commonly assumed to be negligibly small. Provided that this is true, the two-step approach works well. 
 
 There are, however, aspects of neuronal activity that can not be understood without accounting for ephaptic effects \citep{Holt1999, anastassiou2015, Goldwyn2016}. To account for ephaptic effects, one must model the neurodynamics and extracellular potential simultaneously on a unified framework, which is more computationally challenging than using the two-step approach outlined so far in this book. We shall comment further on such unified frameworks in Chapter \ref{sec:Schemes}.
 

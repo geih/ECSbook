@@ -131,6 +131,100 @@ This the standard expression used in current source density (CSD) theory \citep{
 
 
 
+\subsection{\blue{Frameworks for solving the Nernst-Planck equations} }
+\label{sec:Eldiff:frameworks}
+Let us for now assume that the neuronal source terms $f_k$ are known at all points in space, and that we want to solve the Nernst-Planck continuity equation for the resulting extracellular ion concentration dynamics. If there are $K$ different ion species present in the system of study, eq. \ref{Eldiff:eq:NP} gives us $K$ equations, i.e., one for each individual ion concentrations $c_k$. However, the dynamics of the individual ion species are coupled by the additional variable $\phi$. Hence, we have $K+1$ variables, and are in need of an additional equation for $\phi$. There are two main approaches to this: One can either use the so-called \textit{Poisson-Nernst-Planck (PNP)} framework, or the so-called \textit{electroneutral} framework.
+
+\subsubsection{\blue{The Poisson-Nernst-Planck (PNP) framework}}
+The physically most detailed approach for defining $\phi$ in the eq. \ref{Eldiff:eq:NP}) is to use Poisson's equation from electrostatics:
+\begin{equation}
+\nabla^2 \phi = -\rho/\epsilon.
+\label{Eldiff:eq:poisson}
+\end{equation}
+Here $\epsilon$ is the permittivity of the medium, and the local extracellular charge density $\rho$ is determined from the ionic concentrations: 
+\begin{equation}
+\rho = F \sum_k z_k c_k.
+\label{Eldiff:eq:Frode}
+\end{equation}
+
+The system of equations combining Poisson's equation (eq. \ref{Eldiff:eq:poisson}) and the Nernst-Planck equation (eq. \ref{Eldiff:eq:NP})
+is called the Poisson-Nernst-Planck (PNP) formalism, and the PNP equations can in principle be solved for arbitrary complex geometries using numerical methods, like the Finite Element Method (FEM). 
+
+To solve the PNP system of equations is extremely computationally demanding. One reason for this is that the concentrations of ions in a given volume of space are almost so that the net positive and negative charges outbalance, so that the medium is very close to electroneutral. A non-zero $\rho$ thus reflects a tiny deviance from electronutrality, and it has been estimated that this deviance typically involves only a fraction $\sim 10^{-9}$ of the ions present \cite{Aguilella1986}. An accurate prediction of $\rho$ from eq. \ref{Eldiff:eq:Frode} thus requires an extreme precision in the modeling of the ionic concentrations $c_k$. Another reason, as we discussed briefly in Section \ref{sec:LJpot}, is that the charge-relaxation time in the extracellular solution, i.e., the time scale that $\rho$ varies on, is in the order of nanoseconds. In addition, any non-zero charge density in neural tissue is predominantly resolved in nano-meter thick layers around neuronal membranes \cite{Grodzinsky2011, Gratiy2017}. Simulations of $\rho$ therefore require a spatiotemporal resolution smaller than nanometers and nanoseconds, and thus a very fine-grained description of the tissue where neuronal, glial and extracellular geometries are explicitly defined.
+
+Due to its computational demand, the PNP framework is not suitable for estimating dynamics at the level of tissue. However, it has been used in neuroscience to study various electrodiffusive processes taking place on a very tiny spatiotemporal scale near and inside membranes \cite{Leonetti1998, Leonetti2004, Lu2007, Lopreore2008, Nanninga2008, Pods2013, Gardner2015}. 
+
+
+\subsubsection{\blue{The electroneutral framework}}
+
+An alternative to the PNP framework is to replace the Poisson equation (eq. \ref{Eldiff:eq:poisson}) with the simplifying approximation that the bulk solution is electroneutral:
+\begin{equation}
+\alpha F \sum_k z_k c_k = 0.
+\label{Eldiff:eq:electroneutral}
+\end{equation}
+Eq. \ref{Eldiff:eq:electroneutral} is then imposed as a constraint when solving eq. \ref{Eldiff:eq:NP} by use of some numerical method. When using this approach, the constraint determines the value that $\phi$ must have for there to be no charge accumulation anywhere in the extracellular space, a problem which has a unique solution. To use our previous cartoon example as a reference, the electroneutral scheme circumvents nanosecond-fast charge relaxation process (Fig. \ref{Eldiff:fig:diffpot}B) by assuming that the system is always in quasi-steady (Fig. \ref{Eldiff:fig:diffpot}C). It has been shown that this is a good approximation on spatiotemporal scales larger than micrometers and microseconds \citep{Grodzinsky2011, Pods2017, Solbra2018}, and that this approximation gives stable solutions with an arbitrary coarse resolution.
+
+In practice, it is often more convenient to impose the electroneutrality constraint on differential form:
+\begin{equation}
+\alpha F \sum_k{z_k \frac{\partial c_k}{\partial t}} = 0.
+\label{Eldiff:eq:electroneutral2}
+\end{equation}
+
+We note that the electroneutrality constraint (eq. \ref{Eldiff:eq:electroneutral} or \ref{Eldiff:eq:electroneutral2}) only applies to the bulk solution, i.e. to points in extracellular space (or intracellular space, if one were to use such a formalism inside neurons) where there is no membrane current source. The membrane dynamics must then be dealt with separately. In previous implementations, this problem has been tackled in various ways, depending on whether the framework was tailored to simulate intracellular dynamics, extracellular dynamics, or both, and whether it was tailored for applications to a coarse grained (tissue level) spatial scale or a more microscopic scale \citep{Qian1989, Mori2008, Mori2009, Mori2009a, Mori2011, Halnes2015, Halnes2013, Pods2017, Niederer2013, OConnell2016, Solbra2018, tuttle2019, ellingsrud2020}. We shall revisit some of these frameworks in Chapter \ref{sec:Schemes}. In this Section, we will only introduce one of them, the so-called Kirchhoff-Nernst-Planck (KNP) framework, since this was tailored to compute extracellular dynamics on the coarse-grained scale that we have focused on in this chapter \citep{Solbra2018}.
+
+
+\subsubsection{\blue{The electroneutral Kirchhoff-Nernst-Planck framework}}
+The KNP framework, in the form presented in \cite{Solbra2018}, focuses solely on the dynamics in the extracellular space, when "receiving" input from discrete neuronal sources. In this sense it is similar to standard VC theory, except that it includes the dynamics of ion concentrations and their effects on extracellular potentials. Unlike standard VC theory, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the KNP scheme requires the sources to be expressed as a set of ion specific flux-sources, i.e., one source $f_k$ per ion species $k$ (in eq. \ref{Eldiff:eq:NP}), and an additional capacitive neuronal membrane current source density, $C_{cap}$, the only source term not accounted for in the set $f_k$.
+
+In the KNP-framework, membrane dynamics is accounted for by replacing the electroneutrality constraint (eq. \ref{Eldiff:eq:electroneutral2}) with
+\begin{equation}
+\alpha F \sum_k{z_k \frac{\partial c_k}{\partial t}} = C_{cap},
+\label{Eldiff:eq:electroneutral3}
+\end{equation}
+where 
+\begin{equation}
+C_{cap} = {\alpha}\frac{\partial \rho_{mem}}{\partial dt},
+\label{Eldiff:eq:Andreas}
+\end{equation}
+reflects the membrane potential dynamics of a neuron. As $C_{cap}$ is zero at locations where there is no neuronal membrane source, eq. \ref{Eldiff:eq:electroneutral2} still holds in the bulk solution. 
+
+The constraint in eq. \ref{Eldiff:eq:electroneutral3} was essentially what we used earlier to get from eq. \ref{Eldiff:eq:chargecontinuity} to eq. \ref{Eldiff:eq:eldiffCSD2}. The KNP scheme thus uses Eq. \ref{Eldiff:eq:eldiffCSD2} with $C$ as defined in eq.  \ref{Eldiff:eq:CSDdecomposed} to to derive $\phi$:
+\begin{equation}
+\nabla \cdot (\sigma\nabla\phi) = - F \sum_k z_k f_k -  C_{cap} - F\alpha \nabla \cdot \left (\sum_k{z_k \tilde{D_k}{\bf \nabla} c_{k}} \right).
+\label{Eldiff:eq:KNPfinal}
+\end{equation}
+Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, the latter represented by the first two terms on the right hand side.
+
+Since the KNP equations are coupled in the sense that $\phi$ affects the dynamics of $c_k$ and $c_k$ the dynamics of $\phi$, the KNP set of equations do not give any simple analytical relationship between the neuronal CSD and the extracellular potential. Instead, the KNP set of equations must be solved on some numerical framework using a suitable meshing of the tissue volume, i.e., like that depicted in Fig. \ref{Eldiff:fig:KNPmesh}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Figures/Eldiff/KNP.png}
+\end{center}
+\caption{\textbf{KNP scheme}. Blue star: Mesh cell containing no neuronal sources, so that $C=0$. Red star: Mesh cell containing neural sources. Here $C$ can be computed by summing over all neuronal transmembrane currents, including the capacitive current, and dividing by the volume of the mesh cell. \ghnote{LAGE LITT MER INFORMATIV FIG HER OM VI SKAL HA FIG HER.}}
+\label{Eldiff:fig:KNPmesh}
+\end{figure}
+
+
+\section{UTKLIPP FRA SCHEMES}
+These ephaptic effects may include the effect that the extracellular potential, and, if accounted for, variations in extracellular ionic concentrations, have on the neurodynamics. Changes in extracellular ion concentrations may also give rise to extracellular diffusion potentials, as we explored in (Chapter \ref{sec:Eldiff}).
+
+
+and, also the effect of extracellular concentration changes  (if included in the model) on ionic reversal potentials (Eq. \ref{Neuron:eq:revpots}). 
+
+
+A key parameter, and sometimes variable, in VC theory is the conductivity ($\sigma$) of the extracellular medium. In Chapter \ref{sec:Sigma} we give an overview of the experimental and theoretical estimates of $\sigma$. 
+
+
+In previous implementations, this problem has been tackled in various ways, depending on whether the framework was tailored to simulate intracellular dynamics, extracellular dynamics, or both, and whether it was tailored for applications to a coarse grained (tissue level) spatial scale or a more microscopic scale \citep{Qian1989, Mori2008, Mori2009, Mori2009a, Mori2011, Halnes2015, Halnes2013, Pods2017, Niederer2013, OConnell2016, Solbra2018, tuttle2019, ellingsrud2020}.
+
+
+
+Another assumption that is typically used when applying VC theory is that the extracellular potential $\phi$ does not have any (ephaptic) effect on the neuronal membrane potential dynamics. This simplifies computations dramatically, because it allows us to perform them in a two-step procedure where we (i) first compute the neurodynamics independently, typically under the assumption that the extracellular potential is zero ($\phi = 0$), and (ii) next use the analytical VC-expression to compute a nonzero $\phi$. The motivation for using this evidently inconsistent approach is that $\phi$ is typically so much smaller than the membrane potential that the ephaptic effects can be neglected without any severe loss in accuracy. This might not be true for all biologically relevant geometries and scenarios, and frameworks that compute the extracellular, membrane and intracellular potentials in a self consistent manner exist (all arrows in Fig. \ref{Intro:fig:Knallfigur}C), as do unified frameworks that compute both ion concentrations and electrical potentials in a self consistent manner (all arrows in Fig. \ref{Intro:fig:Knallfigur}D). A summary of available frameworks for computing extracellular potentials (and ion concentrations) is given in Chapter \ref{sec:Schemes}.
+
+
+
+
 
 
 
