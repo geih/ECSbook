@@ -1,11 +1,13 @@
 \section{Electrodiffusion in the extracellular space}
 \label{sec:Eldiff}
+\index{Electrodiffusion}
 In the standard VC theory presented in Chapter \ref{sec:VC}), we assumed that extracellular currents, and thus extracellular potentials, are exclusively due to ohmic drift. However, when ion concentrations are present in the extracellular space, there will also be diffusive currents present, which can evoke so called diffusion potentials. 
 
 In this chapter, we will introduce a more general, electrodiffusive theory for extracellular dynamics, which accounts effects of ionic diffusion as well as ohmic drift. However, before we present the electrodiffusive theory, we will try to get an intuition of how diffusion potentials arise.
 
 \subsection{\blue{What is a diffusion potential?}}
 \label{sec:Eldiff:LJpot}
+\index{Diffusion potential}
 We can get an intuitive understanding of what a diffusion potential is by considering a simple two-compartment system with two ionic solutions interacting at a junction  (Fig. \ref{Eldiff:fig:diffpot}). Let us assume that the left compartment contains a high concentration of NaCl, while the right compartment contains a lower concentration of NaCl (Fig. \ref{Eldiff:fig:diffpot}A). Initially, both compartments are electroneutral, i.e., they contain equal amounts of Na$^+$ and Cl$^-$. As no electrical forces are present, the initial system dynamics will be driven exclusively by diffusion. 
 
 \begin{figure}[!ht]
@@ -33,6 +35,8 @@ Whereas the Nernst-Potential and liquid junction potentials in patch clamping ar
 
 \subsection{\blue{Continuous, porous medium approximation for electrodiffusion}}
 \label{sec:Eldiff:porous}
+\index{Continuous medium}
+\index{Porous medium}
 In Section \ref{sec:VC:continuous}, we introduced the continuous, porous medium approximation for coarse grained transports in brain tissue. We will use the same approximation for electrodiffusive processes. To do so, however, we need to expand it by introducing some additional variables that are relevant for ion concentration dynamics:
 
 \begin{itemize}
@@ -40,7 +44,7 @@ In Section \ref{sec:VC:continuous}, we introduced the continuous, porous medium 
 
 \item ${\bf j_k}$ (units $mol/\mathrm{m^2s}$) will denote the extracellular flux density of an ion species $k$. It will be defined as the number of extracellular ions (in mols) crossing a unit tissue area per second. 
 
-\item $\tilde{D}_k$ (units $\mathrm{m^2/s}$) will denote the effective diffusion constant for ion species $k$ in the extracellular medium. In the porous medium, extracellular, diffusing ions are (i) confined the stay in the extracellular volume fraction $\alpha$, and will (ii) face obstacles (neurites) along their path forcing them take detours, reflected through a tortuosity $\lambda$ \citep{Nicholson1998}. This slows down the diffusive process compared to what we would get for free diffusion in a medium containing only the extracellular fluid. The effective diffusion constant is given by:
+\item $\tilde{D}_k$ (units $\mathrm{m^2/s}$) will denote the effective diffusion constant \index{Diffusion constant} for ion species $k$ in the extracellular medium. In the porous medium, extracellular, diffusing ions are (i) confined the stay in the extracellular volume fraction $\alpha$, and will (ii) face obstacles (neurites) along their path forcing them take detours, reflected through a tortuosity $\lambda$ \citep{Nicholson1998}. This slows down the diffusive process compared to what we would get for free diffusion in a medium containing only the extracellular fluid. The effective diffusion constant is given by:
 \begin{equation}
 \tilde{D_k} = \alpha \frac{D_k}{\lambda^2}, 
 \label{Eldiff:eq:diffconst}
@@ -49,7 +53,7 @@ where $D_k$ is the diffusion constant for an ion species $k$ in the pure (unhind
 
 \item $f_k$ (units mol/m$^3$) will represent the ion-flux-source density, i.e., the local neuronal output of an ion species $k$ per unit tissue volume. It is essentially is the ion-dynamics counterpart to the current-source-density (CSD) presented earlier (eq. \ref{VC:eq:CSD1}).
 
-\item $\sigma$ (units S/m) will have the same interpretation as in Chapyer \ref{sec:VC}, and denotes the tissue averaged extracellular conductivity. As we show later, $\sigma$ can be expressed as a function of ion concentrations:
+\item $\sigma$ (units S/m) will have the same interpretation as in Chapytr \ref{sec:VC}, and denotes the tissue averaged extracellular conductivity. As we show later, $\sigma$ can be expressed as a function of ion concentrations:
 \begin{equation}
 \sigma_e = \frac{F}{psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k}.
 \label{Eldiff:eq:sigma1}
@@ -74,7 +78,7 @@ When modeling an electrodiffusive process, we keep track of the ion concentratio
 \end{equation}
 The first term on the right hand side of eq. \ref{Eldiff:eq:JNP} is called Fick's law, which defines the ionic flux density due to diffusion $j_{k}^\text{diff}$. The second term is the additional drift flux density $j_{k}^\text{drift}$, which accounts for the flux density of ions moving along gradients in the extracellular potential $\phi$.
 
-In eq. \ref{Eldiff:eq:JNP}, the the electrical mobility of the ions is $\tilde{D_k}/\psi$, and thus linearly related to their diffusion constant. This relationship is called the Einstein relation, and is valid for dilute solutions such as the extracellular fluid \citep{Grodzinsky2011}.
+In eq. \ref{Eldiff:eq:JNP}, the the electrical mobility of the ions is $\tilde{D_k}/\psi$, and thus linearly related to their diffusion constant. This relationship is called the Einstein relation \index{Einstein relation}, and is valid for dilute solutions such as the extracellular fluid \citep{Grodzinsky2011}.
 
 The general continuity equation for an ion species $k$ is,
 \begin{equation}
@@ -145,6 +149,7 @@ We note that, apart from helping us realizing the relationship between standard 
 
 \subsection{\blue{Do diffusion potentials matter?}}
 \label{sec:Eldiff:estimates}
+\index{Diffusion potential}
 Due to the computational challenges they impose, it is tempting to make the assumption that diffusive currents contribute so little to the extracellular potential that we don't have to bother with them. This is what normally is being done, as most theoretical studies of extracellular potentials are based on standard VC theory. For most purposes, this is probably a good approximation, but its validity depends on one of the two following criteria being met:
 
 \begin{enumerate}

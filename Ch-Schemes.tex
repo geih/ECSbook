@@ -20,22 +20,139 @@ When organizing the content of Part 1 of this book, we mostly followed the princ
 Some readers might want to skip directly to the standard VC-theory based schemes (Section \ref{sec:Schemes:VC}).
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{\orange{TVN/EH: Two-step scheme: Hodgkin-Huxley-Cable + Volume Conductor theory)}}
+\label{sec:Schemes:VC}
+\ghnote{GH: La inn forslag til intro her:}
+The standard two-step scheme for computing extracellular potentials can be summarized as: 
+
+\begin{itemize}
+\item {\bf Step 1:} Compute the electrical activity of neurons using the Hodgkin-Huxley-Cable (HHC) framework presented in Chapter \ref{sec:Neuron}, assuming that it is unaffected by whatever goes on in the extracellular space. 
+\item {\bf Step 2:} Compute the extracellular potential $\phi$ resulting from the neural transmembrane currents computed in step 1, using Volume Conductor (VC) theory (Chapters \ref{sec:VC}-\ref{sec:Sigma}). 
+\end{itemize}
+
+The HHC+VC scheme is not self-consistent, and does not account for ephaptic effects of $\phi$ on neurodynamics. Also, it does not account for any effects of ion concentration dynamics on neuronal activity of extracelluar potentials. However, among the existing schemes for computing the extracellular potential, the HHC+VC scheme is the by far most computationally efficient, as the alternative schemes (presented later) require numerical simulations of extracellular dynamics using finite element or finite difference methods. It is therefore the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the HHC+VC-framework.
+
+When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like HHC+VC. As we showed in Chapter \ref{sec:VC}, VC theory gave us an analytical expression for $\phi$ as a direct function of the neural current sources, meaning that it is the simulations of the neurodynamics (step 1) which requires most of the computer power. Below, we present computational schemes for the standard HHC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}).
+
+%%%%%%
+
+\subsubsection{\red{TVN: Neurodynamics based on multicompartmental neuron models}}
+\label{sec:Schemes:LFPy}
+\index{Hodgkin-Huxley-Cable (HHC) framework}
+
+The standard way - what LFPy was originally designed for \citep{Hagen2018}.
+Same trick used earlier \citep{Holt1999}.
+
+
+\subsubsection{\red{TVN: Neurodynamics from point-neuron models}}
+\label{sec:Schemes:HybridLFPy}
+\index{Point neuron model}
+
+Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \citep{Hagen2016}, Skaar et al (in revision)
+
+
+\subsubsection{\red{EH: Neurodynamics using firing-rate models}}
+\label{sec:Schemes:KernelLFPy}
+\index{Firing rate model}
+
+Would make things even faster. Population firing-rate models  \citep{Hagen2016}. Kernel trick (Ness et al, on-going project) 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{\blue{Self-consistent volume conduction scheme}}
+The self-consistent (VC+VC) scheme models both intra- and extracellular electrodynamics by Ohmic volume conduction:
+\begin{equation}
+\nabla \cdot \sigma_r \nabla \phi_r
+\end{equation}
+where $r$ takes the indexes $i$ (intracellular space) or $e$ (extracellular space). The intra- and extracellular dynamics are coupled through suitable boundary mechanisms at the membrane, i.e., a current \textit{entering} the membrane (normal component) at one side of the membrane, is constrained to be identical to the current \textit{leaving} the membrane (negative normal component) on the opposite side  \citep{Krassowska1994}. These entering and leaving currents are in turn determined by the transmembrane current $I_m$, which, again, in most applications are modeled with Hodgkin-Huxley like kinetics \citep{Agudelo-Toro2013, Tveito2017}. 
+
+Unlike the standard two-step HHC+VC framework, the VC+VC framework accounts for the ephaptic effect \index{Ephaptic effects} from the extracellular potential on the neuronal membrane potential dynamics. As such, VC+VC is the more complete framework. However, it has the disadvantage that it is computationally expensive. In the HHC + VC scheme, which uses volume conduction modeling only for the extracellular space, $\phi_e$ can be computed as an analytical function of the transmembrane neural currents (cf. Chapter \ref{sec:VC}). Analytical examples of solutions have also been obtained with the VC+VC scheme for idealized scenarios 
+ \citep{Krassowska1994}, but general applications of VC+VC require that both the intra- and extracellular spaces are spatially resolved and their dynamics computed on a numerical framework \citep{Agudelo-Toro2013, Tveito2017}. 
+
+Using VC+VC to simulate larger systems with realistic morphologies would probably exceed the capacity of today's computers. However, VC+VC has been used to perform a systematic exploration of the inaccuracies induced when ignoring ephaptic effects in a small system of neurons represented with stylized geometries  \citep{Tveito2019}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{\blue{Two-step scheme: Hodgkin-Huxley-Cable + Electrodiffusion}}
+\label{sec:Schemes:KNP}
+By necessity, the transmembrane ionic currents that mediate neurodynamics will lead to changes in the intra- and extracellular ion concentrations. Under normal circumstances, these changes are limited to small deviances from baseline, since neurons and glial cells contain numerous homeostatic mechanisms that work continuously to restore baseline concentrations. However, during neuronal hyperactivity, or during several pathological conditions, the homeostatic machinery can fail to keep up, and ion concentrations may then change rather dramatically, both in the intra- and extracellular space \citep{Dietzel1989, Somjen2001, Frohlich2008, Zandt2015, Ayata2015}. This will in turn change the neuronal reversal potentials (cf. eq. \ref{Neuron:eq:revpots}), and through that alter the neuronal firing properties, something that has been the topic of several studies (see e.g., \citep{Qian1989, Cressman2009, Zandt2011, Oyehaug2012, WeiUllahSchiff2014, Saetra2020}). Local changes in extracellular concentrations will also give rise to diffusive currents along extracellular concentration gradients. These will in turn generate diffusion potentials. Under such circumstances, the extracellular potential ($\phi_e$) is not solely a function of cellular transmembrane currents (as assumed when using VC theory), but also contains contribution from extracellular diffusion \citep{Halnes2016}. 
+
+The HHC+ED scheme is a two-step scheme developed to compute the dynamics in the extracellular space, when when "receiving" input from discrete neuronal sources. Like the standard HHC+VC-scheme, the HHC+ED does not account for any feedback effects from the $\phi_e$ or ion concentrations on the neurodynamics. However, unlike the standard HHC+VC scheme, it computes the dynamics of extracellular ion concentrations and accounts for their effects on $\phi_e$. In the one existing implementation of this scheme, the extracellular dynamics was computed using the so-called electroneutral \index{Electroneutral} electrodiffusive \index{Electrodiffusion} Kirchhoff-Nernst-Planck (KNP) framework \citep{Solbra2018}. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Figures/Eldiff/KNP.png}
+\end{center}
+\caption{\textbf{KNP scheme}. Blue star: Mesh cell containing no neuronal sources, so that $C=0$. Red star: Mesh cell containing neural sources. Here $C$ can be computed by summing over all neuronal transmembrane currents, including the capacitive current, and dividing by the volume of the mesh cell. \ghnote{LAGE LITT MER INFORMATIV FIG HER OM VI SKAL HA FIG HER.}}
+\label{Eldiff:fig:KNPmesh}
+\end{figure}
+
+The HHC+ED can be summarized as follows:
+
+\begin{itemize}
+\item {\bf Step 1:} Compute neurodynamics using a standard HHC-type framework (Chapter \ref{sec:Neuron}). Unlike in the standard HHC+VC scheme, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the HHC+ED scheme requires that all neural sources are expressed as a set of ion specific fluxes, i.e., one source $f_k$ per ion species $k$ and an additional capacitive neuronal membrane current source density, $C_{cap}$, the only source term not accounted for in the set $f_k$.
+
+\item {\bf Step 2:} Use the electrodiffusive KNP framework to compute the voltage and ion concentration dynamics in the extracellular space, when "receiving" input from discrete neuronal sources computed in Step 1.
+\end{itemize}
+
+The KNP scheme used in (Step 2) is a method for solving the extracellular ion concentration dynamics that we introduced in Chapter \ref{sec:Eldiff}, and the fundamental equation: 
+\begin{equation}
+\alpha \frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[ \tilde{D_k} {\bf \nabla} c_k + \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi \right] + f_k,
+\label{Schemes:eq:NP}
+\end{equation}
+is the Nernst-Planck equation in on the same form that we used earlier (eq. \ref{Eldiff:eq:NP}). We recall that $\alpha$ is the extracellular volume fraction, and $\tilde{D_k}$ is the effective diffusion constant for ions in the (coarse-grained) extracellular space. As all variables are extracellular, we have skipped the indexing. 
+
+To solve this set of equations (one instance of eq. \ref{Eldiff:eq:NP} for each ion species $k$), we need an additional constraint for the additional variable $\phi$. To account for capacitive sources, i.e., charge accumulation at neural membranes, we use the constraint:
+\begin{equation}
+\alpha F \sum_k{z_k \frac{\partial c_k}{\partial t}} = C_{cap},
+\label{Schemes:eq:electroneutral3}
+\end{equation}
+where the (neural) capacitive current source density:
+\begin{equation}
+C_{cap} = {\alpha}\frac{\partial \rho_{mem}}{\partial dt},
+\label{Schemes:eq:Andreas}
+\end{equation}
+reflects the membrane potential dynamics of a neuron due to charge accumulating on the membrane surface. As $C_{cap}$ is zero at all locations where there is no neuronal membrane source, the bulk solution of the extracellular space will be electroneutral, i.e., the ionic concentrations will sum up to a zero charge density:
+\begin{equation}
+\sum_k{z_k \frac{\partial c_k}{\partial t}} = 0.
+\label{Schemes:eq:electroneutral4}
+\end{equation}
+We will comment further on the electroneutrality condition in Section \ref{sec:Schemes:complete}.
+
+The constraint in eq. \ref{Schemes:eq:electroneutral3} was essentially what we used in Chapter \ref{sec:Eldiff} to get from eq. \ref{Eldiff:eq:chargecontinuity} to eq. \ref{Eldiff:eq:eldiffCSD2}. The KNP scheme thus uses Eq. \ref{Eldiff:eq:eldiffCSD2} with $C$ as defined in eq.  \ref{Eldiff:eq:CSDdecomposed} to to derive $\phi$:
+\begin{equation}
+\nabla \cdot (\sigma\nabla\phi) = - F \sum_k z_k f_k -  C_{cap} - F\alpha \nabla \cdot \left (\sum_k{z_k \tilde{D_k}{\bf \nabla} c_{k}} \right).
+\label{Schemes:eq:KNPfinal}
+\end{equation}
+Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, and with that, the Nernst-Planck equations (eq. \ref{Schemes:eq:NP}) can be solved on a suitable numerical framework.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsection{\blue{Self-consistent electrodiffusive schemes}}
 \label{sec:Schemes:complete}
-By necessity, the transmembrane ionic currents that mediate neurodynamics will lead to changes in the intra- and extracellular ion concentrations. Under normal circumstances, these changes are limited to small deviances from baseline, since neurons and glial cells contain numerous homeostatic mechanisms that work continuously to restore baseline concentrations. However, during neuronal hyperactivity, or during several pathological conditions, the homeostatic machinery can fail to keep up, and ion concentrations may then change rather dramatically, both in the intra- and extracellular space \citep{Dietzel1989, Somjen2001, Frohlich2008, Zandt2015, Ayata2015}. This will in turn change the neuronal reversal potentials (cf. eq. \ref{Neuron:eq:revpots}), and through that alter the neuronal firing properties, something that has been the topic of several studies (see e.g., \citep{Qian1989, Cressman2009, Zandt2011, Oyehaug2012, WeiUllahSchiff2014, Saetra2020}). Local changes in extracellular concentrations will also give rise to diffusive currents along extracellular concentration gradients. These will in turn generate diffusion potentials. Under such circumstances, the extracellular potential ($\phi_e$) is not solely a function of cellular transmembrane currents (as assumed when using VC theory), but also contains contribution from extracellular diffusion \citep{Halnes2016}. 
-
+\index{Electrodiffusion}
 In principle, we can compute all ionic concentrations and their coupling to the electrical potential by requiring that the Nernst-Planck continuity equation:
 \begin{equation}
 \frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[{D_k} {\bf \nabla} c_k + \frac{D_k z_k c_k}{\psi} {\bf \nabla} \phi \right].
 \label{Schemes:eq:NP}
 \end{equation}
-should be fulfilled at all points in space, i.e., both intra- and extracellularly. Eq. \ref{Schemes:eq:NP} gives us one equation for each individual ion concentration $c_k$, and to solve the system of equations, we are in need an additional equation for the additional variable, the electrical potential $\phi$, which couples the dynamics of the individual ion species. There are two main approaches to this, the so-called \textit{Poisson-Nernst-Planck (PNP)} framework, or the so-called \textit{electroneutral} framework, both of which we will introduce in the following subsections. 
+should be fulfilled at all points in space, i.e., both intra- and extracellularly. Eq. \ref{Schemes:eq:NP} gives us one equation for each individual ion concentration $c_k$, and to solve the system of equations, we are in need an additional equation for the additional variable, the electrical potential $\phi$, which couples the dynamics of the individual ion species. There are two main approaches to this, the so-called \textit{Poisson-Nernst-Planck (PNP)} framework, or the so-called \textit{electroneutral} \index{Electroneutral}framework, both of which we will introduce in the following subsections. 
 
 
 \subsubsection{\blue{The Poisson-Nernst-Planck (PNP) framework}}
 \label{sec:Schemes:PNP}
+\index{Poisson-Nernst-Planck equations}
 The physically most detailed approach for defining $\phi$ in the eq. \ref{Schemes:eq:NP}) is to use Poisson's equation from electrostatics:
 \begin{equation}
 \nabla^2 \phi = -\rho/\epsilon
@@ -58,6 +175,7 @@ Due to its computational demand, the PNP framework is not suitable for estimatin
 
 \subsubsection{\blue{The electroneutral framework}}
 \label{sec:Schemes:electroneutral}
+\index{Electroneutral}
 An alternative to the PNP framework is to replace the Poisson equation (eq. \ref{Eldiff:eq:poisson}) with the approximation that the bulk solution is electroneutral:
 \begin{equation}
 F \sum_k z_k c_k = 0.
@@ -101,16 +219,18 @@ I_{cap}^r = \pm \frac{\partial \rho_{m}^r}{\partial dt},
 where the left hand side followed from the definition of the capacitive membrane current (cf. eq. \ref{Neuron:eq:HHcap}). $I_{cap}$, which is given by the membrane potential dynamics computed with the a HH-type framework, was then (ii) made ion specific, and defined so that the ratio between the contributions ($I^k_{cap}$) from the various ion species $k$ was identical to the ratio between the various species $c_k^r$ in the bulk solution close to the membrane at either side.
 \end{itemize}
 
-Although they differ in implementation details, the two approaches (A1 and A2) should be close to equivalent from a physics point of view. In practice, only a very tiny fraction of the ions present are involved in building up the membrane potential, and the choice as two which ion species that are actually constitute the membrane charge in eq. \ref{Schemes:eq:rhomem} or \ref{Schemes:eq:rhocap2} is probably quite unimportant for the overall system dynamics. The choice should rather be regarded as a technicality, made to ensure ion conservation and a consistent charge-concentration relationship at all points in space. 
+Although they differ in implementation details, the two approaches (A1 and A2) should be close to equivalent from a physics point of view. In practice, only a very tiny fraction of the ions present are involved in building up the membrane potential, and the choice as to which ion species that actually constitute the membrane charge in eq. \ref{Schemes:eq:rhomem} or \ref{Schemes:eq:rhocap2} is probably quite unimportant for the overall system dynamics. The choice should rather be regarded as a technicality, made to ensure ion conservation and a consistent charge-concentration relationship at all points in space. 
 
 Like the PNP scheme, both versions of the electroneutral scheme must be solved on some numerical framework using a suitable meshing of the tissue volume. While the electroneutral frameworks are computationally much more efficient than the PNP framework, they are still too heavy to allow for simulations of large systems of neurons described with explicit geometries on today's computers. To our knowledge, the largest system that so far has been simulated in 3D on an electroneutral framework is small piece of tissue containing a bundle of 9 axons described with idealized geometries \citep{ellingsrud2020}.
 
 
+
 \subsubsection{\blue{Domain models}}
 \label{sec:Schemes:domain}
-A different category of electroneutral models are the bi- or tri-domain models, inspired from by the bi-domain model by Eisenberg \citep{eisenberg1970}, which has previously been used to simulate cardiac tissue \citep{henriquez1993, sundnes2006, Mori2008}. In a bi-domain model of brain tissue, the two domains represent neurons and extracellular space \citep{Mori2015}, while tri-domain models have added an additional glial domain \citep{OConnell2016, tuttle2019}. 
+\index{Domain models}
+A different category of electroneutral models have been inspired from by the bi-domain model by Eisenberg \citep{eisenberg1970}, which has previously been used to simulate cardiac tissue \citep{henriquez1993, sundnes2006, Mori2008}. 
 
-In the domain models, geometry is not explicitly accounted for. Instead, all domains "exist" at each point in space, and are defined through a set of domain-specific variables (e.g., domain-voltage, domain-ion concentrations, domain-volume fractions). The domains interact locally through a set of  (Hodgkin-Huxley type) membrane mechanisms, while spatial electrodiffusive dynamics may occur within each domain, i.e. through electrodiffusive transports through the extracellular space\citep{Mori2015, OConnell2016, tuttle2019}, or through a syncytium of glial cells \citep{OConnell2016, tuttle2019}. Typically, neurons are assumed not to interact in such a spatially continuous fashion  (Fig. \ref{Schemes:fig:domainmodel}). 
+In this category, the most advanced models for brain tissue are the tri-domain models, where three the domains represent (i) neurons, (ii) extracellular space, and (iii) a glial syncytium, i.e., a populations of gap-junction coupled glial cells \citep{OConnell2016, tuttle2019}. In the domain models, geometry is not explicitly accounted for. Instead, all domains "exist" at each point in space, and are defined through a set of domain-specific variables (e.g., domain-voltage, domain-ion concentrations, domain-volume fractions). The domains interact locally through a set of (Hodgkin-Huxley type) membrane mechanisms, while spatial electrodiffusive transports occurs within the domains. By assumption, ion transport through the glial syncytium equivalent to extracellular transport, i.e., it can occur in a spatially continuous fashion through a (tortous) intracellular space involving many interconnected cells. In contrast, neurons are "local" in the sense that no intracellular transport over distances occur within the neural domain (Fig.\ref{Schemes:fig:domainmodel}). 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -121,105 +241,8 @@ In the domain models, geometry is not explicitly accounted for. Instead, all dom
 \label{Schemes:fig:domainmodel}
 \end{figure}
 
+Simpler, related models include the bi-domain model for neurons and extracellular space \citep{Mori2015}, or 1D models of glial K$^+$ buffering, where only the glial and extracellular domain were included \cite{Gardner-Medwin1983, Chen2000, Halnes2013}.
+
 Domain models are suited to model brain dynamics taking place on a slow time-scale, such as the wave of K$^+$ and the slow, DC-like diffusion potentials and glial buffering potentials that take place during speading depression \citep{Mori2015, OConnell2016, tuttle2019}. As these models treat brain tissue as a homogeneous, coarse-grained continuum, they are not suited to model the faster fluctuations of extracellular potentials which are recorded in MUA, LFP and EEG, as these depend strongly on morphologies of neurons \citep{Einevoll2013}. 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{\blue{Self-consistent volume conduction scheme}}
-The self-consistent (VC+VC) scheme models both intra- and extracellular electrodynamics by Ohmic volume conduction:
-\begin{equation}
-\nabla \cdot \sigma_r \nabla \phi_r
-\end{equation}
-where $r$ takes the indexes $i$ (intracellular space) or $e$ (extracellular space). The intra- and extracellular dynamics are coupled through suitable boundary mechanisms at the membrane, i.e., a current \textit{entering} the membrane (normal component) at one side of the membrane, is constrained to be identical to the current \textit{leaving} the membrane (negative normal component) on the opposite side  \citep{Krassowska1994}. These entering and leaving currents are in turn determined by the transmembrane current $I_m$, which, again, in most applications are modeled with Hodgkin-Huxley like kinetics \citep{Agudelo-Toro2013, Tveito2017}. 
-
-Unlike the standard two-step HHC+VC framework, the VC+VC framework accounts for the ephaptic 
-effect from the extracellular potential on the neuronal membrane potential dynamics. As such, VC+VC is the more complete framework. However, it has the disadvantage that it is computationally expensive. In the HHC + VC scheme, which uses volume conduction modeling only for the extracellular space, $\phi_e$ can be computed as an analytical function of the transmembrane neural currents (cf. Chapter \ref{sec:VC}). Analytical examples of solutions have also been obtained with the VC+VC scheme for idealized scenarios 
- \citep{Krassowska1994}, but general applications of VC+VC require that both the intra- and extracellular spaces are spatially resolved and their dynamics computed on a numerical framework \citep{Agudelo-Toro2013, Tveito2017}. 
-
-Using EMI to simulate larger systems with realistic morphologies would probably exceed the capacity of today's computers. However, EMI has been used to perform a systematic exploration of the inaccuracies induced when ignoring ephaptic effects in a small system of neurons represented with stylized geometries  \citep{Tveito2019}.
-
-
-\subsection{\blue{Two-step scheme: Hodgkin-Huxley-Cable + Electrodiffusion}}
-\label{sec:Schemes:KNP}
-The HHC+ED scheme is a two-step scheme developed to compute the dynamics in the extracellular space, when when "receiving" input from discrete neuronal sources. Like the standard HHC+VC-scheme, the HHC+ED does not account for any feedback effects from the extracellular dynamics on the neurodynamics, but unlike the standard HHC+VC scheme, it computes the dynamics of extracellular ion concentrations and accounts concentration effects on extracellular potentials. 
-
-In the one existing implementation of this scheme, the extracellular dynamics was computed using the electroneutral electrodiffusive Kirchhoff-Nernst-Planck (KNP) framework \citep{Solbra2018}. This is essentially the KNP-EMI scheme that we presented in Section \ref{sec:Schemes:electroneutral}, but here applied to the extracellular space only.
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{Figures/Eldiff/KNP.png}
-\end{center}
-\caption{\textbf{KNP scheme}. Blue star: Mesh cell containing no neuronal sources, so that $C=0$. Red star: Mesh cell containing neural sources. Here $C$ can be computed by summing over all neuronal transmembrane currents, including the capacitive current, and dividing by the volume of the mesh cell. \ghnote{LAGE LITT MER INFORMATIV FIG HER OM VI SKAL HA FIG HER.}}
-\label{Eldiff:fig:KNPmesh}
-\end{figure}
-
-The HHC+ED can be summarized as follows:
-
-\begin{itemize}
-\item Step 1: Compute neurodynamics using a standard HHC-type framework (Chapter \ref{sec:Neuron}). Unlike in the standard HHC+VC scheme, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the HHC+ED scheme requires that all neural sources are expressed as a set of ion specific fluxes, i.e., one source $f_k$ per ion species $k$ and an additional capacitive neuronal membrane current source density, $C_{cap}$, the only source term not accounted for in the set $f_k$.
-
-\item Step 2: Use the electrodiffusive KNP framework to compute the voltage and ion concentration dynamics in the extracellular space, when "receiving" input from discrete neuronal sources computed in Step 1.
-
-\end{itemize}
-
-In Step 2, the KNP scheme is used as a method for solving the extracellular ion concentration dynamics that we introduced in Chapter \ref{sec:Eldiff}, and the fundamental equation for accomplishing Step 2 is thus the Nernst-Planck equation on the form:
-
-\begin{equation}
-\alpha \frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[ \tilde{D_k} {\bf \nabla} c_k + \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi \right] + f_k,
-\label{Schemes:eq:NP}
-\end{equation}
-which is the same form that we used earlier (eq. \ref{Eldiff:eq:NP}). We recall that $\alpha$ is the extracellular volume fraction, and $\tilde{D_k}$ is the effective diffusion constant for ions in the (coarse-grained) extracellular space. As all variables are extracellular, we have skipped the indexing. 
-
-To solve this set of equations (one instance of eq. \ref{Eldiff:eq:NP} for each ion species $k$), we need an additional constraint for the additional variable $\phi$. To account for capacitive sources, i.e., charge accumulation at neural membranes, we do not use the electroneutrality constraint (eq. \ref{Schemes:eq:electroneutral2}), but replace it with:
-\begin{equation}
-\alpha F \sum_k{z_k \frac{\partial c_k}{\partial t}} = C_{cap},
-\label{Schemes:eq:electroneutral3}
-\end{equation}
-where the capacitive current source density:
-\begin{equation}
-C_{cap} = {\alpha}\frac{\partial \rho_{mem}}{\partial dt},
-\label{Schemes:eq:Andreas}
-\end{equation}
-reflects the membrane potential dynamics of a neuron due to charge accumulating on the membrane surface. As $C_{cap}$ is zero at all locations where there is no neuronal membrane source, eq. \ref{Schemes:eq:electroneutral2} still holds in the bulk solution.
-
-The constraint in eq. \ref{Schemes:eq:electroneutral3} was essentially what we used in Chapter \ref{sec:Eldiff} to get from eq. \ref{Eldiff:eq:chargecontinuity} to eq. \ref{Eldiff:eq:eldiffCSD2}. The KNP scheme thus uses Eq. \ref{Eldiff:eq:eldiffCSD2} with $C$ as defined in eq.  \ref{Eldiff:eq:CSDdecomposed} to to derive $\phi$:
-\begin{equation}
-\nabla \cdot (\sigma\nabla\phi) = - F \sum_k z_k f_k -  C_{cap} - F\alpha \nabla \cdot \left (\sum_k{z_k \tilde{D_k}{\bf \nabla} c_{k}} \right).
-\label{Schemes:eq:KNPfinal}
-\end{equation}
-Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, and with that, the Nernst-Planck equations (eq. \ref{Schemes:eq:NP}) can be solved on a suitable numerical framework.
-
-
-\subsection{\orange{TVN/EH: Two-step scheme: Hodgkin-Huxley-Cable + Volume Conductor theory)}}
-\label{sec:Schemes:VC}
-
-\ghnote{GH: La inn forslag til intro her:}
-As we have explained earlier, the standard way of modeling extracellular potentials is to use a two-step procedure, where we first (step 1) simulate the neurodynamics from on a Hodgkin-Huxley-Cable (HHC) framework (Chapter \ref{sec:Neuron}), assuming that it is unaffected by whatever goes on in the extracellular space, and then (step 2) compute the extracellular potential $\phi$ resulting from the neurodynamics computed in step 1 using Volume Conductor (VC) theory (Chapters \ref{sec:VC}-\ref{sec:Sigma}). 
-
-Among the existing schemes for computing the extracellular potential, the HHC+VC scheme is the by far most computationally efficient, as the alternative schemes (presented above) require numerical simulations of extracellular dynamics using finite element or finite difference methods. Although the HHC+VC scheme is not self-consistent, and does not account for effects of ion concentration dynamics, it is therefore still the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the HHC+VC-framework.
-
-To simulate large networks containing thousands of neurons is computationally demanding. As we showed in Chapter \ref{sec:VC}, VC theory gave us an analytical expression for $\phi$ as a direct function of the neural current sources, meaning that it is the simulations of the neurodynamics (step 1) which requires most of the computer power. Below, we present the standard way of doing that (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}).
-
-%%%%%%
-
-\subsubsection{\red{TVN: Neurodynamics based on multicompartmental neuron models}}
-\label{sec:Schemes:LFPy}
-The standard way - what LFPy was originally designed for \citep{Hagen2018}.
-Same trick used earlier \citep{Holt1999}.
-
-
-\subsubsection{\red{TVN: Neurodynamics from point-neuron models}}
-\label{sec:Schemes:HybridLFPy}
-Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \citep{Hagen2016}, Skaar et al (in revision)
-
-
-\subsubsection{\red{EH: Neurodynamics using firing-rate models}}
-\label{sec:Schemes:KernelLFPy}
-Would make things even faster. Population firing-rate models  \citep{Hagen2016}. Kernel trick (Ness et al, on-going project) 
-
-%%%%%%%%%%%%%%%%%%%%%%
-
 
 

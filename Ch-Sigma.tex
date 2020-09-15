@@ -1,6 +1,6 @@
 \section{Extracellular conductivity}
 \label{sec:Sigma}
-\index{Extracellular conductivity}
+\index{Conductivity}
 \ghnote{GH: Planen var at dette skulle bli Torbjorns kapittel, men jeg laget en skisse.
 Fint om Torbjorn sjekker alt jeg har foretatt meg, samt fyller ut med egne greier. Jeg sakset en del greier fra VC-kapittelet inn hit, blant annet delkapitlene om anisotropt og inhomogent medium. Pros: Naa utvider vi VC-teori i traad m/ at vi diskuterer (or relaxer) antakelser rundt sigma, jmf. tidligere versjon der vi utvidet VC teorien foerst, og deretter diskuterte og relaxet antakelsene. Cons: Naa blir det VC teori ogsaa i Sigma-kapittelet.}
 
@@ -12,6 +12,8 @@ Throughout the previous section, we assumed that  $\sigma$  was homogeneous, ani
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Anisotropic extracellular medium}}
 \label{sec:Sigma:Anisotropic}
+\index{Conductivity!Anisotropic}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma$. If we use the point source approximation (eq. \ref{VC:eq:pointsources}), and denote the conductivity in the different spatial directions $\sigma_x$, $\sigma_y$ and $\sigma_z$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
 
@@ -32,6 +34,8 @@ In general, the brain does not have an isotropic $\sigma$. For example, in corte
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\red{TVN: Nonhomogeneous extracellular medium}}
 \label{sec:Sigma:nonhomo}
+\index{Conductivity!Nonhomogeneous}
+
 In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
 
 The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{VC:eq:csds} or \ref{VC:eq:anisos}) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
@@ -48,6 +52,7 @@ For more general cases, one can in principle always solve eq. \ref{VC:eq:CSD2} f
 
 \subsection{\orange{TVN: Frequency dependence of the conductivity} }
 \label{sec:Sigma:f-independent}
+\index{Conductivity!Frequency dependence}
 \ghnote{GH: Skrev skisse til dette. Puttet figuren m/ sigma-maalinger inn her, da disse ser ut til aa primaert diskuteres opp mot eventuell frekvensavhengighet. Mulig vi burde ha med "eksperimentelle maalinger i kapittel-tittelen?}
 
 Regardless of whether a medium is isotropic and homogeneous or not, its response to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that account for capacitive and inductive effects that are frequency dependent. 
@@ -61,7 +66,7 @@ However, for the relevant frequencies in extracellular recordings (Fig. \ref{Sig
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/frequency_dependence.png}
 \end{center}
 \caption{\textbf{Literature review of reported conductivities in various species and experimental setups.} 
-Most studies seem to indicate a very weak frequency dependence of the extracellular conductivity\index{conductivity}, which would have a negligible effect on measured extracellular potentials \citep{Miceli2017}. The very low and strongly frequency dependent values measured by \citep{Gabriel1996} represents an outlier, and although it has received substantial attention, it has to the best of our knowledge not been reproduced by any other study. For details about the data, see \citep{Miceli2017}, and references therein \citep{Ranck1963, Gabriel1996, Logothetis2007, Elbohouty2013, Wagner2014}.
+Most studies seem to indicate a very weak frequency dependence of the extracellular conductivity\index{Conductivity}, which would have a negligible effect on measured extracellular potentials \citep{Miceli2017}. The very low and strongly frequency dependent values measured by \citep{Gabriel1996} represents an outlier, and although it has received substantial attention, it has to the best of our knowledge not been reproduced by any other study. For details about the data, see \citep{Miceli2017}, and references therein \citep{Ranck1963, Gabriel1996, Logothetis2007, Elbohouty2013, Wagner2014}.
 }
 \label{Sigma:fig:freq_dep}
 \end{figure}
@@ -78,11 +83,17 @@ Most studies seem to indicate a very weak frequency dependence of the extracellu
 \label{Sigma:fig:maxwell_resistivity}
 \end{figure}
 
-\subsection{\orange{TVN: Theoretical explorations....} }
-\ghnote{I den opprinnelige planen sto det at vi skulle skrive om dette, med referenser til Meffin2012, Tahayori2012, Meffin2014, Tahayori2014. Jeg vet ikke helt hva dette gaar i, men det gjoer sikkert Torbjorn og/eller Gaute?}
+\subsection{\red{TVN: Theoretical explorations....} }
+\index{Conductivity!Theoretical estimates}
+
+\ghnote{Dette var et punkt i den opprinnelige planen. Referenser: Meffin2012, 
+Tahayori2012, Meffin2014, Tahayori2014. Jeg vet ikke helt hva dette gaar i, men det gjoer sikkert Torbjorn og/eller Gaute?}
+
 
 \subsection{\orange{GH: Theoretical estimate of the conductivity based on ion concentrations} }
 \label{sec:Sigma:concentrationbased}
+\index{Conductivity!Ion concentration dependence}
+
 Extracellular current are mediated by the ions dissolved in the extracellular solution, and the conductivity of the extracellular medium if thus a function of thus depends on the ion concentrations, i.e., on the availability of free charge carriers \citep{Grodzinsky2011}: 
 
 \begin{equation}
