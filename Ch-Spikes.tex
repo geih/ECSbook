@@ -215,12 +215,11 @@ This is illustrated in Figure~\ref{Spikes:fig:ball-and-stick-frequency} where th
 represent the intracellular action potential (membrane potential) and extracellular spike, respectively, are shown.
 A key observation here is that for the extracellular spike, the largest
 contributions comes from frequencies larger than 100~hertz.
+\ghnote{Det overrasket at f-spektrum til intra vs ekstra er saa fundamentalt ulike. Er signalet i Figurpanel A ufiltrert, mens det i B er filtrert?}
 %\todo{DCS: Ensure Figures/mm/dipole-comparison-w43-r300.png is committed
 %  to git repository and then uncomment above line.}
 
-For the ball-and-stick neuron, a membrane current entering the soma has to return to ECS through the cable
-stick, see Figure~\ref{Spikes:fig:ball-and-stick-sketch}.
-When an oscillating membrane current is entered through the soma, the spatial pattern of return current will depend on the frequency of the oscillation due to the capacitive properties of the membrane: For higher frequencies the capacitive membrane current will be larger, and the 
+For the ball-and-stick neuron, a membrane current entering the soma has to return to ECS through the cable stick, see Figure~\ref{Spikes:fig:ball-and-stick-sketch}. When an oscillating membrane current is entered through the soma, the spatial pattern of return current will depend on the frequency of the oscillation due to the capacitive properties of the membrane: For higher frequencies the capacitive membrane current will be larger, and the 
 membrane effectively more leaky. Thus the injected soma current will return closer to the soma for higher frequencies, 
 as  seen in the inset in Figure~\ref{Spikes:fig:ball-and-stick-sketch}.  
 
@@ -347,6 +346,7 @@ that in practice an electrode contact will only pick up spikes from neurons with
 %\begin{sidebox}
 \subsubsection{\red{Side box: Fourier sum}}
 \gen{This subsection used to be a side box in the Sterratt chapter}.
+\ghnote{Appendix eller box?}
 Time signals, such as the time course of a spike $V_\mathrm{e}(t)$,  can conveniently 
 be represented as a sum of \index{Fourier components} with different frequencies $f$. 
 Such a Fourier sum can be constructed in
