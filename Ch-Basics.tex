@@ -1,70 +1,134 @@
 \section{Basic concepts} 
 \label{sec:Basics}
+Action potentials and extracellular potentials are electric signals, and to understand them, we need to have some basic knowledge about the physics of electricity. 
 
-\begin{itemize}
-\item Why we care \citep{Buzsaki2012,Pettersen2012,Einevoll2013,Einevoll2013a,Einevoll2019}
-\end{itemize}
-
-
-\subsection{\orange{GH: The neuroscience}}
-The main functional unit in the brain is the neuron. There are many different kinds of neurons. Some tend to increase the activity of other neurons, and are called excitatory, while others tend to decrease the activity of other neurons, and are called inhibitory. Apart from this, the different kinds of neurons also vary in terms of their morphology. So-called pyramidal cells, for example, tend to form long nerve fibre branches (dendrites) in a preferred spatial direction, from the bottom towards the top of laminar parts of the brain, such as cortex and hippocampus. Other neurons, such as spiny stellate cells, have more spherically symmetric morphologies. The different kinds of neurons also vary in terms of their dynamical properties, input-output relations etc. 
-
-As indicated in Fig. \ref{Basics:fig:Basics}A, the neural morphology can be divided into three functionally different parts: The \textit{soma}, the \textit{dendrites} and the \textit{axon}. The synapses, through which a neuron receives input from other neurons, are predominantly distributed over its dendrites, which are long an branchy extrusions from the soma.
-
-A single neuron may have synaptic connections from thousands of other neurons, and can receive input from several of them at the same time. These inputs are sensed, or "integrated" by the soma, which, depending on the net input, decides whether or not the neuron produces an output signal. 
-
-The axon is another type of extrusion from the soma, which forms synapses onto the dendrites of other neurons. When the neuron produces an output signal, an electric pulse will travel along the axon and reach the synaptic location, where the (presynaptic) output from one neuron becomes the (postsynaptic) input to another. 
-
-When a neuron rests, i.e., when it receives no input from any other neuron, its membrane potential has a negative value. The exact value varies between different neuron species, but a typical value could be $-70$ mV. When it receives inputs from other neurons, the membrane potential is jolted away from the resting potential. If the input is sufficiently strong to drive it above a certain threshold, which is often around $-50$ mV, although also this may vary between different neuron species, a set of intrinsic membrane mechanisms called ion channels will be activated. The are basically pores that open in the membrane, allowing charged particles (ions) to rush into and out from the neuron in a systematic manner to charge up and de-charge the membrane. 
-The sum of these transmembrane fluxes produce a so-called action potential, a sharp spike in the voltage which peaks at some positive value of for example $+20$ mV. The action potential is the main output signal of a neuron, and the basic signaling unit in the brain.
-
-The dynamics of the membrane potential of a neuron can be recorded experimentally with an electrode inserted into the soma of the neuron (Fig. \ref{Basics:fig:Basics}A). Such recordings will give us good insight into the dynamics of the single neuron from which it is recorded. However, if we are trying to answer some question relevant at a more systemic level, such as "how is the visual cortex processing a particular type of visual inputs?", the doings of a single neuron might not give us too much insight. 
-
-As it is experimentally challenging to record intracellularly from more than one, or at least from more than a few, neurons at the same time, many experimental studies are therefore instead based on using extracellular recordings. An electrode is then inserted, for example, into the brain tissue amidst the jungle of neurons that the experimentalist wants to know something about (Fig. \ref{Basics:fig:Basics}B). The signal recorded with an extracellular electrode will reflect the activity of a large number of neurons, and the interpretation of this signal is not as straightforward as the interpretation of an intracellular recording. In order to interpret extracellular recordings we therefore need a theory that relates what a population of neurons is doing to what an electrode placed amidst them, or at some distance away from them, measures. The objective of this book is present such a theory.
+The overview given here will ...
 
 
 \subsection{\orange{GH: The physics}}
-Action potentials and extracellular potentials are electric signals, and to understand them, we need to have some basic knowledge about the physics of electricity. 
 
-The fundamental electric quantity in charge, which is measured in Coulomb (C). The basic unit of charge, the unit charge $e = 1.602\times10^{-19}$ C, is the charge of a proton, and likewise, $-e$ is the charge of an electron. Unlike in a standard electrical cable made of copper, where the charge carriers electrons, the charge carriers in the brain are ions, such as for example Na$^+$, K$^+$, Cl$^-$ or $Ca^{2+}$. Here, the valencies (superscripts) indicate that Na$^+$, K$^+$ have charge $e$, Cl$^-$ has charge $-e$, while $Ca^{2+}$ has charge $2e$.
 
-Starting at a rather fundamental level, two charges $q_1$ and $q_2$ will act on each other with a force given by Coulomb's law:
+\subsubsection{\orange{GH: Electric charge}}
+The fundamental quantity for electricity is the charge carried by the protons and electrons that build up the atoms that build up the material world. The proton has a charge $e$, while the electron has a charge $-e$, where $e = 1.602\times10^{-19}$ Coulomb (C) is the unit charge. 
+
+In the brain, the charge carriers are not free electrons (or protons), but ions. Ions are atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. Important charge carriers in the brain are Na$^+$, K$^+$ (with charge $e$), Cl$^-$ (with charge $-e$), and $Ca^{2+}$ (with charge $2e$), which are floating around in the saline solutions that fill both the intracellular and extracellular space.
+
+Starting at a fundamental level, a pair of charges, $q'$ and $q$, will act on each others with a force given by Coulomb's law:
+
 \begin{equation}
-{\bf F} = k_e\frac{q_1 q_2}{r^2}\frac{\bf r}{|{\bf r}|},
-\label{Basics:eq:Coulomb}
+F = k_e\frac{q q'}r^2, 
+\label{Basics:eq:CoulombF}
 \end{equation}
-where $k_e = 8.99\times10^9$ N$\cdot$ m$^2\cdot$C$^{-2}$ is Coulomb's constant, and $r$ is the distance between the two charges. Here, the use of boldface ${\bf F}$ indicates that the force is a vector, i.e., it has a direction, and this direction is defined by ${\bf r}\|{\bf r}|$ on the right hand side, which is a vector with length unity along the line between the two charges. The force will be repelling if the charges have the same valency and attractive if they have the opposite valency. 
+where $k_e = 8.99\times10^9$ N$\cdot$ m$^2\cdot$C$^{-2}$ is Coulomb's constant, and $r$ is the distance between the two charges. The direction of the force is along the line between the two charges, and the force will be repelling if the charges have the same valency (sign) and attractive if they have the opposite valency. 
 
-Eq. \ref{Basics:eq:Coulomb} is useful at a microscopic level, i.e., if we were to study the dynamics of a tiny system containing only the two charges $q_1$ and $q_2$ in a vacuum. Combined with Newtons law (${\bf F}=m {\bf a}$), which tells us how a particle (with mass $m$) will be accelerated (${\bf a}$)
-when exposed to a force (${\bf F}$), Eq. \ref{Basics:eq:Coulomb} would then allow us to predict the motion of the two particles. However, when investigating the brain, we are not interested in these microscopic interactions, but the joint interactions of a very, very large number of particles, so we hardly want to keep track of the motion of each individual charge.
+If there are several point charges present, the contribution from each of them sum up linearly. We can then use Coulomb's law to compute the net force that will act on one charge $q$ in a position ${\bf r}$, by summing the contributions from all other charges $q_1, q_2, q_3 ... q_N$ in positions ${\bf r_1}, {\bf r_2}, {\bf r_3} ... {\bf r_N}$: 
+\begin{equation}
+{\bf F}({\bf r}) = \sum_{n=1}^N k_e q q_n \frac{{\bf r}-{\bf r_n}{|{\bf r}-{\bf r_n}|^3}.
+\label{Basics:eq:CoulombFN}
+\end{equation}
+We have here used a boldface notation to indicate that the force and positions are vectors, entities that have both a magnitude and spatial direction. The position vector ${\bf r}$ can be visualized as an arrow from a reference point $r=0$ to the position of the charge $q$. Likewise, the vector ${\bf r}-{\bf r_n}$ as an arrow between the positions of the charge pair $q$ and $q_n$, defining both the distance and direction of the (imagined) line connecting them.
 
-What we deal with at a more macroscopic level is usually the "average" movement of the charges, i.e., the electrical current ${\bf I}$, which has the SI unit Ampere (A), where A = C/s. It is often more convenient to express currents as current densities, ${\bf i}$ (A/(m$^2$)), which is simply the current per unit cross section area. Throughout most of this book, we shall assume that current densities are given by the formula:
+If our system of study consisted of a small number $N_{small}$ of charges, we could use $N_{small}$ instances of eq. \ref{Basics:eq:CoulombFN} to compute the force acting on each individual charge. Together with Newton's law ${\bf F} = m {\bf a}$, which tells us how the charges will be accelerated in the force direction, eq.\ref{Basics:eq:CoulombFN} would then allow us to compute the movements of all our charges over time. However, when trying to understand what is going on in the brain, we are usually not interested such microscopic interactions between a small number of charges, but rather the joint interactions of a very, very large number of particles. It is then not feasible to keep track of the motion of each individual charge. 
 
+At the larger scale, it is therefore more useful to work with electric fields, which we will define below. It is still nice to have taken a look at  Eq. \ref{Basics:eq:CoulombFN}, since it establishes the fundamental origin of electrical forces and fields. 
+
+
+\subsubsection{\orange{GH: Electric fields}}
+The electric field can be defined as the force that will act on a reference charge $q$, i.e., 
+\begin{equation}
+{\bf E}({\bf r}) = {\bf F}({\bf r})/q.
+\label{Basics:eq:E}
+\end{equation}
+
+In general, an electric field can originate either from electric charges, or from time-varying magnetic fields. However, we shall assume that the problems that we deal with in this book are \textit{quasi-electrostatic}, which means that the latter contribution can be neglected. Electric fields are then exclusively due to the forces given by eq. \ref{Basics:eq:CoulombFN}, and by inserting eq. \ref{Basics:eq:CoulombFN} into eq. \ref{Basics:eq:E}, we get:
+\begin{equation}
+{\bf E}({\bf r}) = \sum_{n=1}^N k_e q_n \frac{{\bf r}-{\bf r_n}{|{\bf r}-{\bf r_n}|^3}.
+\label{Basics:eq:CoulombEN}
+\end{equation}
+
+Eq. \ref{Basics:eq:CoulombEN} is valid down to a microscopic level, and the field predicted by it will fluctuate vividly on a very fine spatial scale. It will be big at all locations that are close to a charge (i.e., where ${|{\bf r}-{\bf r_n}|$ for some $n$ is small), and smaller at points where the distance to the nearest charge is longer. As we argued in the previous subsection, it is not a feasible to keep track of each individual charge in a macroscopic system. Apart from revealing the origin of the electrical field, eq. \ref{Basics:eq:CoulombEN} is therefore not very useful for us. 
+
+Fortunately, these microscopic field fluctuations are not of too much interest for us when trying to understand the brain. The electrodes that we use when recording brain signals have a spatial extension, and their tip diameter are typically on the order of a micrometer or so. Hence, when we record some signal in the brain, we practically record the average signal over an electrode surface of, say, a square micrometer. 
+
+
+Experimentally, when we insert an electrode into the brain, the electrode has some spatial extension. 
+
+The diameter of a typical electrode may be in the order of some micrometers, which 
+
+
+
+
+
+The field given by 
+
+{\bf r}-{\bf r_n}
+
+
+
+
+
+
+
+\subsubsection{\orange{GH: Electric potentials}}
+An often more practically useful concept that the electrical field, is the electrical potential $\phi$ (with units Volt (V)), which is what we normally measure experimentally when we stick an electrode into the brain. In the quasi-static regime, the electric field can be expressed as the spatial derivative of the potential:
+\begin{equation}
+{\bf E}(x,y,z) = - \nabla \phi(x,y,z) = - \left(\frac{d\phi}{dx} {\bf i}  + \frac{d\phi}{dy} {\bf j} + \frac{d\phi}{dz} {\bf k} \right)
+\phi 
+\label{Basics:eq:EV}
+\end{equation}
+The spatial derivative $\nabla$ computes how much a property changes in the various spatial directions, and ${\bf i}$, ${\bf j}$ and  ${\bf k}$ are the unit vectors in the three spatial directions $x$, $y$ and $z$, respectively. 
+
+To get an intuitive understanding of the electric potential, it helps to consider an idealized one-dimensional scenario with a constant field in the $x$-direction. Then, eq. \ref{Basics:eq:EV} simplifies to,
+\begin{equation}
+E(x) = -\frac{d\phi(x)}{dx} = -\frac{\Delta \phi}{\Delta x} = -\frac{\phi(x_b)-\phi(x_a)}{x_b-x_a},
+\label{Basics:eq:EV1D}
+\end{equation}
+where the first equality follows from the 1D-assumption, the second from the assumption that $E$ is constant, and the third is simply a definition of the second, where $x_b$ and $x_a$ may represent any two arbitrary points in space. For example, if $E = 1$ V/m, and if the distance between our points $x_b-x_a$ is 1m, Eq. \ref{Basics:eq:EV1D} tells us that $\phi$ will be 1 V  lower in $x_b$ compared to $x_a$.
+
+The motivation for introducing the last example, was that we wanted use it to make a comment on \textit{grounding}. In the example, the same field $E$ can be obtained with any pair of potentials $\phi_a$ and $\phi_b$ as long as the difference between them is 1 V. We can therefore not speak of the potential as an absolute quantity, only of the potential \textit{difference} between two points. When we record potential in a given location, we therefore always record it relative to some an arbitrary reference point, which we normally call \textit{ground}, and where we define $\phi = 0$. When recording extracellular potential, the reference electrode can be placed either outside or inside brain tissue \cite{Sharott2015}, but typically sufficiently far away that one can assume that the potential at the reference electrode is not affected by the processes that one wishes to investigate with the measuring electrode. 
+
+
+\subsubsection{\orange{GH: Electric current}}
+
+Eq. \ref{Basics:eq:CoulombE}
+
+\ref{Basics:eq:CoulombE2}
+
+A test charge $q$ in a medium will of course be exposed to the fields from a large number of other charges. 
+
+
+
+
+
+The force that a charge excerts on other charges can be expressed as an electric field.
+
+A charge is surrounded by 
+
+Fundamentally, the electric field can be defined as the force that will act on a reference charge $q$, i.e., ${\bf E} = {\bf F}/q$. Now, if we existed in a vacuum where $q$ was the only charge present, this relation implies that a constant field ${\bf E}$ would give a constant acceleration of $q$ (since ${\bf F} = m{\bf a}$) in the field-direction. 
+
+In a macroscopic system, however, the constant acceleration will only go on for a very tiny time period (called the charge relaxation-time) before our protagonist charge $q$ will bump into some other particle and be scattered out in some random direction. After the scattering event, the acceleration will start "from scratch" again, and go on until the next collision takes place, and so on. Whereas the scattering events will make the motion of $q$ random, the small periods of acceleration between them will at average give $q$ a net drift velocity in the field direction. As the same will happen for all other charges that are present, this gives rise to a drift of charge in field direction. This (average) drift will not be in constant acceleration, but rather at constant velocity, and is what constitutes the current density given by Eq. \ref{Basics:eq:i}, which is often referred to as the drift current density. 
+
+
+In addition to originating from 
+
+
+
+
+\subsubsection{\orange{GH: Currents}}
+
+What we deal with at a more macroscopic level is therefore usually the "average" movement of the charges, i.e., the electrical current ${\bf I}$, which has the SI unit Ampere (A = C/s). It is often more convenient to express currents as current densities, ${\bf i}$ (A/(m$^2$)), which is simply the current per unit cross section area. 
+
+Throughout most of this book, we shall assume that current densities are given by the formula:
 \begin{equation}
 {\bf i} = \sigma {\bf E}
 \label{Basics:eq:i}
 \end{equation}
 which is a version of Ohms law that, apart from the current density, contains two fundamental quantities that we need to establish an understanding of. The conductivity $\sigma$ (with units Siemens per square meters (S/m$^2$)) expresses how well the medium conducts a current. This is a material property, and in brain tissue, it is often assumed to be a constant, at least within a given brain region. The electric field {\bf E} (with units Newton per Coulomb (N/C) or Volt per meter (V/m)) is the driving force for the current.
 
-To get an intuition for the electric field, we may pay a short revisit to the microscopic scale. Fundamentally, the electric field can be defined as the force that will act on a reference charge $q$, i.e., ${\bf E} = {\bf F}/q$. Now, if we existed in a vacuum where $q$ was the only charge present this relation would tell us that a constant field ${\bf E}$ would give a constant acceleration of $q$ (since ${\bf F} = m{\bf a}$) in the field-direction. In a macroscopic system, however, this acceleration will only go on for a very tiny time period (called the charge relaxation-time) before our protagonist will bump into some other particle and be scattered out in a random direction. After the scattering event, the acceleration will start "from scratch" again, and go on until the next collision takes place, and so on. Whereas the scattering events will make the motion of $q$ random, the small periods of acceleration between them will at average give $q$ a net drift velocity in the field direction. As the same will happen for all the particles that are present, this gives rise to a drift of charge in field direction, and this is what constitutes the current density given by Eq. \ref{Basics:eq:i}, which is often referred to as the drift current density. 
 
+\subsubsection{\orange{GH: From neurodynamics to electric fields}}
 The link between neural activity and the extracellular fields, come from the fact that currents generally move in loops. 
 
-
-The final quantity that we need to establish an understanding of is the electrical potential $\phi$ (with units Volt (V)), which is what we normally measure when we stick an electrode into the brain. It is tightly related to the electric field, which can be defined as the spatial derivative of the potential:
-\begin{equation}
-{\bf E(x,y,z)} = - \nabla \phi(x,y,z) = - \left(\frac{d\phi}{dx} {\bf i}  + \frac{d\phi}{dy} {\bf j} + \frac{d\phi}{dz} {\bf k} \right)
-\phi 
-\label{Basics:eq:EV}
-\end{equation}
-The spatial derivative $\nabla$ computes how much a property changes in the various spatial directions, and ${\bf i}$, ${\bf j}$ and  ${\bf k}$ are the unit vectors in the three spatial directions $x$, $y$ and $z$, respectively. To get an intuitive understanding of this, it helps to consider a idealized scenario where the field is constant and only in one spatial dimension $x$. Then, eq. \ref{Basics:eq:EV} simplifies to,
-\begin{equation}
-E(x) = -\frac{d\phi(x)}{dx} = -\frac{\Delta \phi}{\Delta x} = -\frac{\phi(x_b)-\phi(x_a)}{x_b-x_a},
-\label{Basics:eq:EV1D}
-\end{equation}
-where the first equality follows from the 1D-assumption, the second from the assumption that $E$ is constant, and the third is simply a definition of the former, where $x_b$ and $x_a$ may represent any two arbitrary points in space. For example, if $E = 1$ V/m, and if the distance between our points $x_b-x_a$ is 1m, Eq. \ref{Basics:eq:EV1D} tells us that $\phi$ will be 1 V  lower in $x_b$ compared to $x_a$.
-
-The reason why we introduced the last example, is that we want to use it to make a comment on \textit{grounding}. The example above could be fulfilled with $\phi_a = 0$ V and $\phi_b = -1$ V, but equally well with $\phi_a = 100$ V and $\phi_b = 99$ V. The field, and all physics would be the same, for any set of values with a difference of $-1$. The potential is thus not an absolute quantity, but is always defined relative to a reference point which we normally call \textit{ground}, where we define $\phi = 0$. Hence, when we measure a potential somewhere, we measure the potential difference between the chosen location and an arbitrarily chosen ground reference point. When performing measurements of extracellular potentials, we often place the reference electrode somewhere far away, either oustide or inside brain tissue \cite{Sharott2015}, and if we record it in many positions, we record it relative to the same reference electrode. 
 
 
 

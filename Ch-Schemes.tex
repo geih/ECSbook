@@ -107,11 +107,11 @@ The HHC+ED can be summarized as follows:
 The KNP scheme used in (Step 2) is a method for solving the extracellular ion concentration dynamics that we introduced in Chapter \ref{sec:Eldiff}, and the fundamental equation: 
 \begin{equation}
 \alpha \frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[ \tilde{D_k} {\bf \nabla} c_k + \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi \right] + f_k,
-\label{Schemes:eq:NP}
+\label{Schemes:eq:NPe}
 \end{equation}
-is the Nernst-Planck equation in on the same form that we used earlier (eq. \ref{Eldiff:eq:NP}). We recall that $\alpha$ is the extracellular volume fraction, and $\tilde{D_k}$ is the effective diffusion constant for ions in the (coarse-grained) extracellular space. As all variables are extracellular, we have skipped the indexing. 
+is the Nernst-Planck equation in on the same form that we used earlier (eq. \ref{Eldiff:eq:NPe}). We recall that $\alpha$ is the extracellular volume fraction, and $\tilde{D_k}$ is the effective diffusion constant for ions in the (coarse-grained) extracellular space. As all variables are extracellular, we have skipped the indexing. 
 
-To solve this set of equations (one instance of eq. \ref{Eldiff:eq:NP} for each ion species $k$), we need an additional constraint for the additional variable $\phi$. To account for capacitive sources, i.e., charge accumulation at neural membranes, we use the constraint:
+To solve this set of equations (one instance of eq. \ref{Eldiff:eq:NPe} for each ion species $k$), we need an additional constraint for the additional variable $\phi$. To account for capacitive sources, i.e., charge accumulation at neural membranes, we use the constraint:
 \begin{equation}
 \alpha F \sum_k{z_k \frac{\partial c_k}{\partial t}} = C_{cap},
 \label{Schemes:eq:electroneutral3}
@@ -133,7 +133,7 @@ The constraint in eq. \ref{Schemes:eq:electroneutral3} was essentially what we u
 \nabla \cdot (\sigma\nabla\phi) = - F \sum_k z_k f_k -  C_{cap} - F\alpha \nabla \cdot \left (\sum_k{z_k \tilde{D_k}{\bf \nabla} c_{k}} \right).
 \label{Schemes:eq:KNPfinal}
 \end{equation}
-Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, and with that, the Nernst-Planck equations (eq. \ref{Schemes:eq:NP}) can be solved on a suitable numerical framework.
+Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, and with that, the Nernst-Planck equations (eq. \ref{Schemes:eq:NPe}) can be solved on a suitable numerical framework.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

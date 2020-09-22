@@ -1,9 +1,23 @@
 \section{Introduction} 
 \label{sec:Intro}
 
-\begin{itemize}
-\item Why we care \citep{Buzsaki2012,Pettersen2012,Einevoll2013,Einevoll2013a,Einevoll2019}
-\end{itemize}
+Some words about why we care \citep{Buzsaki2012,Pettersen2012,Einevoll2013,Einevoll2013a,Einevoll2019}.
+
+
+\subsection{\red{GH: The brain is electric}}
+The main functional unit in the brain is the neuron. There are many different kinds of neurons. Some tend to increase the activity of other neurons, and these are called excitatory neurons, while others tend to decrease the activity of other neurons, and are called inhibitory neurons. Different kinds of neurons also vary in terms of their morphology. So-called pyramidal cells, for example, tend to form long nerve fibre branches (dendrites) in a preferred spatial direction, from the bottom towards the top of laminar parts of the brain, such as cortex and hippocampus. Other neurons, such as spiny stellate cells, have more spherically symmetric morphologies. The different kinds of neurons also vary in terms of their dynamical properties, i.e., in terms of how they respond to particular kinds of inputs.
+
+As indicated in Fig. \ref{Basics:fig:Basics}A, the neural morphology can be divided into three functionally different parts: The \textit{soma}, the \textit{dendrites} and the \textit{axon}. The synapses, through which a neuron receives input from other neurons, are predominantly distributed over its dendrites, which are long and branchy extrusions from the soma. A single neuron may have synaptic connections from thousands of other neurons, and can receive input from several of them at the same time. These inputs are sensed, or "integrated" by the soma, which, depending on the net input, decides whether or not the neuron produces an output signal. The axon is another type of extrusion from the soma, which forms synapses onto the dendrites of other neurons. When the neuron produces an output signal, an electric pulse will travel along the axon and reach the synaptic location, where the (presynaptic) output from one neuron becomes the (postsynaptic) input to another. 
+
+When a neuron rests, i.e., when it receives no input from any other neuron, its membrane potential has a negative value. The exact value varies between different neuron species, but a typical value could be $-70$ mV. When it receives inputs from other neurons, the membrane potential is jolted away from the resting potential. If the input is sufficiently strong to drive it above a certain threshold, which is often around $-50$ mV, although also this may vary between different neuron species, a set of intrinsic membrane mechanisms called ion channels will be activated. The are basically pores that open in the membrane, allowing charged particles (ions) to rush into and out from the neuron in a systematic manner to charge up and de-charge the membrane. 
+The sum of these transmembrane fluxes produce a so-called action potential, a sharp spike in the voltage which peaks at some positive value of for example $+20$ mV. The action potential is the main output signal of a neuron, and the basic signaling unit in the brain.
+
+The dynamics of the membrane potential of a neuron can be recorded experimentally with an electrode inserted into the soma of the neuron (Fig. \ref{Basics:fig:Basics}A). Such recordings will give us good insight into the dynamics of the single neuron from which it is recorded. However, if we are trying to answer some question relevant at a more systemic level, such as "how is the visual cortex processing a particular type of visual inputs?", the doings of a single neuron might not give us too much insight. 
+
+As it is experimentally challenging to record intracellularly from more than one, or at least from more than a few, neurons at the same time, many experimental studies are instead based on using extracellular recordings. An electrode is then inserted, for example, into the brain tissue amidst the jungle of neurons that the experimentalist wants to know something about (Fig. \ref{Basics:fig:Basics}B). The signal recorded with an extracellular electrode will reflect the activity of a large number of neurons, and the interpretation of this signal is not as straightforward as the interpretation of an intracellular recording. In order to interpret extracellular recordings we therefore need a theory that relates what a population of neurons is doing to what an electrode placed amidst them, or at some distance away from them, measures. The objective of this book is present such a theory.
+
+
+
 
 
 \subsection{\orange{GH: Overview the contents in this book}}
