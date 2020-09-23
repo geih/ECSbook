@@ -13,14 +13,14 @@ As used in neuroscience, VC theory rests on a set of assumptions regarding the n
 \index{Porous medium}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross-section of a piece of brain tissue shows that it is densely packed with neural and glial processes (Fig.\ref{VC:fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous \index{Tortuosity} geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
+When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross-section of a piece of brain tissue shows that it is densely packed with neural and glial processes \tvnnote{"processes" høres litt feil ut for meg?} (Fig.\ref{VC:fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous \index{Tortuosity} geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.3\textwidth]{Figures/VC/ECSdummy.jpeg}
 \end{center}
 \caption{\textbf{Tortuous medium}  Cross-section image of a piece of neural tissue. Extracellular space (marked red) occupies about 20 \% of the total tissue volume, and has a highly tortuous structure. Placeholder, taken from \citep{Sykova2008}.
-\tvnnote{Vi får vel lage vår egen illustrasjon her, kanskje med panel A lik denne, og panel B en zoomet ut versjon der det ser mer homogent ut?}
+\tvnnote{Vi får vel lage vår egen illustrasjon her, kanskje med panel A lik denne, og panel B en zoomet ut versjon der det ser mer homogent ut? Hadde Klas allerede laget en lignende figur til Sterratt? Dette bildet overdriver forresten situasjonen litt, siden det er fryse-tørket eller noe slikt, så mesteparten av CSFen er tatt bort.}
 }
 \label{VC:fig:ECS}
 \end{figure}
@@ -301,11 +301,11 @@ As we mentioned above, the current dipole approximation is only applicable when 
 Intracranial recording electrodes comes in a variety of sizes and 
 \ghnote{GH:Teksten under er klippet inn fra bokkapittelet.} 
 
-\subsubsection{Point-electrode approximation}
+\subsubsection{\red{Point-electrode approximation}}
 \index{Point-electrode}
 The simplest and most commonly used approach when modeling extracellular recordings is to calculate the extracellular potential at single points following one of the approaches outlined above, and use this as a measure of recorded potentials. Implicitly, this assumes ideal point electrodes, that is, the electrodes (and electrode shank) do not affect the extracellular potential and the extracellular potential does not vary substantially over the surface of the electrodes.
 
-\subsubsection{Disc-electrode approximation}
+\subsubsection{\red{Disc-electrode approximation}}
 \index{Disc-electrode}
 A numerically straightforward extension is the disc-electrode approximation where the potential is evaluated at a number of points on the electrode surface, and the average calculated \citep{ Linden2014}. This approach takes into account the physical extent of the electrode, but not any effect the electrode itself might have on the electric potential. Close to the electrode surface the electric potential will however be affected by the presence of the high-conductivity electrode contact \citep{McIntyre2001, Moulin2008}. A numerically much more comprehensive approach to modeling electrodes is to use the Finite Element Method (FEM) to model the electrode \citep{Moulin2008, Ness2015}, or the electrode shank \citep{Moffitt2005, Buccino2019b}. Using FEM for validation, \citep{Ness2015} found that the ideal point-electrode and disc-electrode approximations where reasonably accurate when the distance between the current sources and the recording electrode was bigger than $\sim$4 times and $\sim$2 times the electrode radius, respectively, indicating that the effects of the electrodes themselves are negligible in most cases \citep{Nelson2010}. In certain cases, like in ECoG measurements from the cortical surface, the recording electrodes are both large and close to the neuronal sources, and in such cases the electrode properties can have a large effect on measured potentials \citep{Vermaas2020, Rogers2020}.
 
