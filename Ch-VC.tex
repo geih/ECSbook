@@ -1,61 +1,23 @@
 \section{Volume conductor theory}
 \label{sec:VC}
 \index{Volume conductor theory}
-As we saw in the previous section, simulations of morphologically complex neurons allow us to compute the transmembrane currents entering/leaving the neuron at various locations. This chapter is about how we, when we know the distribution of neuronal current sources, can use volume conductor (VC) theory to predict the extracellular potential at a given point in space. VC theory is the fundament for forward modeling of extracellular potentials at different spatial scales, from extracellular spikes, LFPs and MUAs, to ECoGs and EEGs.
+As we saw in the previous section, simulations of morphologically complex neurons allow us to compute the transmembrane currents entering/leaving the neuron at various locations. This chapter is about how we, when we know the distribution of neuronal current sources, can use volume conductor (VC) theory to predict the extracellular potential at any given point in space. VC theory is the fundament for forward modeling of extracellular potentials at different spatial scales, from extracellular spikes, LFPs and MUAs, to ECoGs and EEGs.
 
-As used in neuroscience, VC theory rests on a set of assumptions regarding the nature of extracellular current densities ({\bf i}), the medium that they travel through, and the effective conductivity ($\sigma$) \index{Conductivity} for an extracellular current. Instead of introducing these assumptions right away, we start with presenting the VC theory in the form in which it is most commonly used, and postpone a more thorough discussion of the underlying assumptions to the end of the chapter. Before we start deriving the theory, however, we need to make a note on how we approximate the extracellular medium, i.e., the medium that an extracellular current travels through.
+Before we present the VC theory, we again want to emphasize that our scale of interest is a macroscopic one. When we talk about an extracellular current density or an extracellular potential, we will always refer to spatial averages of these quantities at a coarse-grained ($> \mu$m) scale. At this spatial scale we shall assume that brain tissue can be represented as a continuous medium \index{continuous medium} with an effective conductivity $\sigma$  \index{Conductivity}, representing the conductivity experienced by macroscopic extracellular currents. Furthermore, we
+shall assume that an extracellular current density in this medium is linear and given by Ohm's law:
+\begin{equation}
+{\bf i}({\bf r}, t) = - \sigma({\bf r}, t) \nabla \phi({\bf r}, t),
+\label{VC:eq:ohmici}
+\end{equation}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\blue{Continuous, porous medium approximation for VC theory}}
-\label{sec:VC:continuous}
-\index{Continuous medium}
-\index{Porous medium}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross-section of a piece of brain tissue shows that it is densely packed with neural and glial processes \tvnnote{"processes" høres litt feil ut for meg?} (Fig.\ref{VC:fig:ECS}). The extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous \index{Tortuosity} geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.3\textwidth]{Figures/VC/ECSdummy.jpeg}
-\end{center}
-\caption{\textbf{Tortuous medium}  Cross-section image of a piece of neural tissue. Extracellular space (marked red) occupies about 20 \% of the total tissue volume, and has a highly tortuous structure. Placeholder, taken from \citep{Sykova2008}.
-\tvnnote{Vi får vel lage vår egen illustrasjon her, kanskje med panel A lik denne, og panel B en zoomet ut versjon der det ser mer homogent ut? Hadde Klas allerede laget en lignende figur til Sterratt? Dette bildet overdriver forresten situasjonen litt, siden det er fryse-tørket eller noe slikt, så mesteparten av CSFen er tatt bort.}
-}
-\label{VC:fig:ECS}
-\end{figure}
-
-At the microscopic scale, the conductivity \index{Conductivity} $\sigma$ in the brain tissue is thus highly non-homogeneous. For example, it will be very high at a cellular membrane and much lower in the extracellular space between membranes. Accordingly, electric potentials can vary greatly over tiny distances, and become very large near cell membranes. When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. In practice, the electrodes used in experimental recordings perform such an averaging.
-Sizes of electrodes used to record extracellular potentials typically range from 5 $\mu$m to 125 $\mu$m in diameter\citep{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). Experimental recordings thus give us the average potential over a region in space that typically spans over both extracellular space and several neural and glial processes. It is thus the dynamics at this coarse grained spatial scale that we will focus on.
-
-At the coarse grained spatial scale, it is reasonable to assume that microscale inhomogeneities average out, and that the brain tissue can be treated as a continuous medium \citep{Gratiy2017}. The VC theory presented in this chapter is based on the continuous medium approximation, and thus describes the extracellular dynamics on a coarse grained spatial scale, with a spatial resolution larger than a micrometer. 
-
-A continuous, porous medium is defined by two key parameters \citep{Nicholson1981}. The first parameter is $\alpha$, is the fraction of the tissue volume that is extracellular space. It typically is about 0.2 in brain tissue, although this can vary between brain regions and even locally due to cellular swelling. The second parameter is $\lambda$, the tortuosity of the medium \citep{Nicholson1981}. It interprets as the ratio between the shortest pathway between two points in space and the euclidian distance between these two points. The tortuosity can be measured experimentally, and for extracellular transport, it has been found that $\lambda = 1.6$ \citep{Nicholson1998}. 
-
-The continuous, tortuous medium approximation has implications for how we interpret the various concepts and variables that we use, so we here give a brief list of definitions: 
-
-\begin{itemize}
-\item We will use the term "extracellular medium" \index{Extracellular medium}to refer to the tissue as it is \textit{experienced} by extracellular currents. It is not the same as the "extracellular solution" \index{Extracellular solution}, i.e. the fluid filling the extracellular space. The extracellular medium is a medium where extracellular currents (i) are confined to move predominantly through the fraction $\alpha$ of the total medium volume, and (ii) must take detours around neural and glial obstacles, as reflected through the tortuosity $\lambda$ \citep{Nicholson1998, Nunez2006}. 
-
-\item  {\bf i} (units $\mathrm{A/m^2}$) will denote the current density for currents traveling extracellularly through the brain tissue. It is defined as current per unit \textit{tissue} (cross-section) area.
-
-\item $\phi$ (unit V) will be used to denote the extracellular potential on the coarse grained scale, i.e., it will represent the extracellular potential averaged over some volume of at least a cube micrometer.
-
-\item $\sigma$ (units S/m) will denote tissue averaged extracellular conductivity \index{Conductivity}, i.e., it is not the (microscopic) conductivity of the extracellular solution, but the coarse-grained conductivity of the extracellular medium as defined above, where the reduced volume fraction and tortuosity are accounted for. Experimental recordings of the extracellular conductivity typically measure 
-$\sigma$ as defined in this way. For comparison, the microscopic and unhindered conductivity of the (pure) extracellular solution should theoretically be a fraction $\lambda^2/\alpha$ higher. 
-
-\item $C$ (units A/m$^3$) will denote the current source density (CSD), defined as the local neuronal output current per unit tissue volume \index{Current source density}.
-
-\end{itemize}
-
-The continuous, porous medium approximation is revisited in Chapter \ref{sec:sigma}, where we review experimental measurements and theoretical interpretations of the tissue conductivity.
+Further discussion of the assumptions underlying VC theory are found at the end of this chapter (Section \ref{sec:VC:approximations}), and in Chapter \ref{sec:Sigma}, where we discuss the continuous medium approximation in greater detail.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{From neuronal current sources to extracellular potentials}}
 \label{sec:VC:main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Throughout this chapter we shall assume that we know the neuronal (and glial) transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution of current sources (Fig. \ref{VC:fig:CSD}B), which we call the current source density ($CSD$). For example, the $CSD$ representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions. 
+Throughout this chapter we shall assume that we know the neuronal (and glial) transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution of current sources (Fig. \ref{VC:fig:CSD}B), which we \textit{call the current source density}\index(Current source density) (CSD). For example, the CSD representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -72,12 +34,7 @@ Volume conductor theory is essentially based on current continuity in the extrac
 \end{equation}
 where ${\bf i}$ is the extracellular current density, and $C$ is the current source density. What Eq. \ref{VC:eq:CSD1} essentially tells us, is that if a neuron outputs a current into a (infinitesimal) volume of space (the $C$ term), an equally large current leaves that volume as an extracellular current (the $\nabla \cdot {\bf i}$ term).
 
-In this chapter, we shall assume that the extracellular current density is described by:
-\begin{equation}
-{\bf i}({\bf r}, t) = - \sigma({\bf r}, t) \nabla \phi({\bf r}, t),
-\label{VC:eq:ohmici}
-\end{equation}
-where $\sigma$ is the effective conductivity for an extracellular current in brain tissue. If we combine Eq. \ref{VC:eq:ohmici} and Eq. \ref{VC:eq:CSD1}, we get:
+In this chapter, we shall assume that the extracellular current density is described by Ohm's law (eq. \ref{VC:eq:ohmici}). If we combine Eq. \ref{VC:eq:ohmici} and Eq. \ref{VC:eq:CSD1}, we get:
 
 \begin{equation}
 \nabla \left( \sigma({\bf r}, t) \nabla \phi({\bf r}, t) \right) = - C({\bf r}, t),
@@ -91,7 +48,7 @@ which simplifies to the more commonly used relation:
 \end{equation}
 in the less general case where the conductivity $\sigma$ is constant. Hence, if we know the distribution of neuronal current sources, we can integrate eq. \ref{VC:eq:CSD2} or eq. \ref{VC:eq:CSD3} to predict the electrical potential in the extracellular space surrounding the sources. 
 
-As indicated above, the variables ${\bf i}$, $\sigma$ and $\phi$ can in general be functions of both position and time. However, for the remainder of this chapter, we shall mostly assume that $\sigma$ is constant. Furthermore, it is implicit in eq. \ref{VC:eq:CSD2} that the relationship between current sources and extracellular potentials is instantaneous (i.e., we can solve eq.  \ref{VC:eq:CSD2} at each time point independently), and in the remainder of the chapter we therefore only use the positional argument for ${\bf i}$ and $\phi$. 
+As indicated above, the variables ${\bf i}$, $\sigma$ and $\phi$ can in general be functions of both position and time. However, for the remainder of this chapter, we shall for simplicity assume that $\sigma$ is constant. Furthermore, it is implicit in eq. \ref{VC:eq:CSD2} that the relationship between current sources and extracellular potentials is instantaneous (i.e., we can solve eq.  \ref{VC:eq:CSD2} at each time point independently), and in the remainder of the chapter we therefore only use the positional argument for ${\bf i}$ and $\phi$. 
 
 In the following subsections, we show how VC-theory is used to compute $\phi$ in some idealized cases with a homogeneous extracellular medium, and then discuss how this theory can be expanded to more complex cases accounting for inhomogeneities. 
 
