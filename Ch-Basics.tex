@@ -35,13 +35,14 @@ The electric field (measured in volts per meter (V/m)) can be defined as the for
 \label{Basics:eq:E}
 \end{equation}
 
-In general, an electric field can originate either from electric charges, or from time-varying magnetic fields. However, we shall assume that the problems that we deal with in this book are \textit{quasi-electrostatic}, which means that the latter contribution can be neglected. Electric fields are then exclusively due to the forces given by eq. \ref{Basics:eq:CoulombFN}, and by inserting eq. \ref{Basics:eq:CoulombFN} into eq. \ref{Basics:eq:E}, we get:
+In general, an electric field can originate either from electric charges, or from time-varying magnetic fields. However, we shall assume that the problems that we deal with in this book are \textit{quasi-electrostatic}, which means that the latter contribution can be neglected. \tvnnote{Kanskje mer ryddig å utsette dette til etter Maxwells ligninger, og her bare si at elektriske felter kan lages av ladninger?}
+Electric fields are then exclusively due to the forces given by eq. \ref{Basics:eq:CoulombFN}, and by inserting eq. \ref{Basics:eq:CoulombFN} into eq. \ref{Basics:eq:E}, we get:
 \begin{equation}
 {\bf E}({\bf r}) = \sum_{n=1}^N k_e q_n \frac{{\bf r}-{\bf r_n}}{|{\bf r}-{\bf r_n}|^3}.
 \label{Basics:eq:CoulombEN}
 \end{equation}
 
-Eq. \ref{Basics:eq:CoulombEN} applies to a microscopic level, and the field predicted by it will fluctuate vividly on a very fine spatial scale. It will be big at locations that are close to a charge (i.e., where $|{\bf r}-{\bf r_n}|$ for some $n$ is small), and smaller at points where the distance to the nearest charge is longer. As we argued in the previous subsection, it is not a feasible to keep track of each individual charge when we want to study a macroscopic system, and eq.\ref{Basics:eq:CoulombEN} is therefore not very useful for us.
+Eq. \ref{Basics:eq:CoulombEN} applies to a microscopic level, and the field predicted by it will fluctuate vividly on a very fine spatial scale \tvnnote{Mener vi bare at det faller med avstand? I så fall syntes jeg fluctuate vividly gir et litt missvisende bilde :-)}. It will be big at locations that are close to a charge (i.e., where $|{\bf r}-{\bf r_n}|$ for some $n$ is small), and smaller at points where the distance to the nearest charge is longer. As we argued in the previous subsection, it is not a feasible to keep track of each individual charge when we want to study a macroscopic system, and eq.\ref{Basics:eq:CoulombEN} is therefore not very useful for us.
 
 Fortunately, microscopic field fluctuations are not what we are interested in when we are trying to understand the brain. The technical argument for why this is not the case, is that the electrodes used for recording brain signals have a tip diameter on the order of a micrometer or so, which is much, much larger than the average intra-charge distance in the saline solution of the brain. The electrodes therefore do not "see" the microscopic fluctuations, but rather record an average taken over the electrode surface. When we speak of an electric field or potential in the brain, we therefore always mean field or potential on a so-called \textit{coarse-grained} scale, averaged over an electrode surface of at least $1 \mu$m$^2$. The non-technical argument is that it is this coarse-grained signal, and not the microscopic reality that is bubbling underneath it, that are of importance for the key brain processes. 
 
@@ -50,7 +51,8 @@ knowledge of the microscopic charge distribution (cf. eg. \ref{Basics:eq:Coulomb
 
 
 \subsection{\orange{GH: Electric potentials}}
-Tightly related to the electric field ${\bf E}$ is the electric potential $\phi$ (with units volt (V)), which is what we normally measure experimentally when we stick an electrode into the brain. While ${\bf E}$ is a fundamental physical entity, $\phi$ may be regarded as an auxiliary variable, a way to represent the electric field that often makes computations simpler. 
+Tightly related to the electric field ${\bf E}$ is the electric potential $\phi$ (with units volt (V)), which is what we normally measure experimentally when we stick an electrode into the brain. While ${\bf E}$ is a fundamental physical entity, $\phi$ may be regarded as an auxiliary variable, a way to represent the electric field that often makes computations simpler \tvnnote{Kanskje enda viktigere at den er lettere å måle?}. 
+
 
 In the quasi-electrostatic regime, the electric field can be expressed as the spatial derivative, or gradient, of the potential:
 \begin{equation}
@@ -66,7 +68,7 @@ E = -\frac{d\phi(x)}{dx} = -\frac{\Delta \phi}{\Delta x} = -\frac{\phi(x_b)-\phi
 \end{equation}
 where the first equality follows from the 1D-assumption, the second from the assumption that $E$ is constant, and the third is simply a definition of the second, where $x_b$ and $x_a$ may represent any two arbitrary points in space. For example, if $E = 1$ V/m, and if the distance between our points $x_b-x_a$ is 1m, Eq. \ref{Basics:eq:EV1D} tells us that $\phi$ will be 1 V  lower in $x_b$ compared to $x_a$.
 
-The motivation for introducing the last example, was that we wanted to use it to make a comment on \textit{grounding}. In the example, the same field $E$ can be obtained with any pair of potentials $\phi_a$ and $\phi_b$ as long as the difference between them is 1 V. Since it is the field (not the potential) that is the fundamental physical entity, we can therefore not speak of the potential in a certain point as an absolute entity, but only of the potential \textit{difference} between two points. When we record potential in a given location, we therefore always record it relative to some an arbitrary reference point, which we normally call \textit{ground}, and where we define $\phi = 0$. 
+The motivation for introducing the last example, was that we wanted to use it to make a comment on \textit{grounding}. In the example, the same field $E$ can be obtained with any pair of potentials $\phi_a$ and $\phi_b$ as long as the difference between them is 1 V. Since it is the field (not the potential) that is the fundamental physical entity, we can therefore not speak of the potential in a certain point as an absolute entity, but only of the potential \textit{difference} between two points. When we record potential in a given location, we therefore always record it relative to some an arbitrary reference point, which we normally call \textit{ground}, and where we define $\phi = 0$. \tvnnote{Syntes også dette er et fint sted å snakke litt om hva potensialet "er": Hvor mye energi vil det kreve å flytte en ladning fra jording til målepunkt.}
 
 When recording extracellular potential, the reference electrode can be placed either outside or inside brain tissue \cite{Sharott2015}, but typically sufficiently far away that one can assume that the potential at the reference electrode is not affected by the processes that one wishes to investigate with the measuring electrode. 
 
