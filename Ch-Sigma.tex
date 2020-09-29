@@ -10,6 +10,51 @@ A key parameter, or sometimes, variable, in volume conductor (VC) theory is the 
 Throughout the previous section, we assumed that  $\sigma$  was homogeneous, anisotropic and frequency independent. In this chapter we shall discuss these assumptions. In addition, we discuss some experimental and theoretical estimates of  $\sigma$. 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\blue{Continuous, porous medium approximation for VC theory}}
+\label{sec:VC:continuous}
+\index{Continuous medium}
+\index{Porous medium}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross-section of a piece of brain tissue shows that it is densely packed with neurons and glial cells (Fig.\ref{VC:fig:ECS}), and that the extracellular space (colored red in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous \index{Tortuosity} geometry, with an average intercell-distance of about 40-60 nm \citep{Sykova2008}. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.3\textwidth]{Figures/VC/ECSdummy.jpeg}
+\end{center}
+\caption{\textbf{Tortuous medium}  Cross-section image of a piece of neural tissue. Extracellular space (marked red) occupies about 20 \% of the total tissue volume, and has a highly tortuous structure. Placeholder, taken from \citep{Sykova2008}.
+\tvnnote{Vi får vel lage vår egen illustrasjon her, kanskje med panel A lik denne, og panel B en zoomet ut versjon der det ser mer homogent ut? Hadde Klas allerede laget en lignende figur til Sterratt? Dette bildet overdriver forresten situasjonen litt, siden det er fryse-tørket eller noe slikt, så mesteparten av CSFen er tatt bort.}
+}
+\label{VC:fig:ECS}
+\end{figure}
+
+At the microscopic scale, the conductivity \index{Conductivity} $\sigma$ in the brain tissue is thus highly non-homogeneous. For example, it will be very high at a cellular membrane and much lower in the extracellular space between membranes. Accordingly, electric potentials can vary greatly over tiny distances, and become very large near cell membranes. When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. In practice, the electrodes used in experimental recordings perform such an averaging. Sizes of electrodes used to record extracellular potentials typically range from 5 $\mu$m to 125 $\mu$m in diameter\citep{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). Experimental recordings thus give us the average potential over a region in space that typically spans over both extracellular space and several neural and glial processes. It is thus the dynamics at this coarse grained spatial scale that we will focus on.
+
+At the coarse grained spatial scale, it is reasonable to assume that microscale inhomogeneities average out, and that the brain tissue can be treated as a continuous medium \citep{Gratiy2017}. The VC theory presented in this chapter is based on the continuous medium approximation, and thus describes the extracellular dynamics on a coarse grained spatial scale, with a spatial resolution larger than a micrometer. 
+
+A continuous, porous medium is defined by two key parameters \citep{Nicholson1981}. The first parameter is $\alpha$, is the fraction of the tissue volume that is extracellular space. It typically is about 0.2 in brain tissue, although this can vary between brain regions and even locally due to cellular swelling. The second parameter is $\lambda$, the tortuosity of the medium \citep{Nicholson1981}. It interprets as the ratio between the shortest pathway between two points in space and the euclidian distance between these two points. The tortuosity can be measured experimentally, and for extracellular transport, it has been found that $\lambda = 1.6$ \citep{Nicholson1998}. 
+
+The continuous, tortuous medium approximation has implications for how we interpret the various concepts and variables that we use, so we here give a brief list of definitions: 
+
+\begin{itemize}
+\item We will use the term "extracellular medium" \index{Extracellular medium}to refer to the tissue as it is \textit{experienced} by extracellular currents. It is not the same as the "extracellular solution" \index{Extracellular solution}, i.e. the fluid filling the extracellular space. The extracellular medium is a medium where extracellular currents (i) are confined to move predominantly through the fraction $\alpha$ of the total medium volume, and (ii) must take detours around neural and glial obstacles, as reflected through the tortuosity $\lambda$ \citep{Nicholson1998, Nunez2006}. 
+
+\item  {\bf i} (units $\mathrm{A/m^2}$) will denote the current density for currents traveling extracellularly through the brain tissue. It is defined as current per unit \textit{tissue} (cross-section) area.
+
+\item $\phi$ (unit V) will be used to denote the extracellular potential on the coarse grained scale, i.e., it will represent the extracellular potential averaged over some volume of at least a cube micrometer.
+
+\item $\sigma$ (units S/m) will denote tissue averaged extracellular conductivity \index{Conductivity}, i.e., it is not the (microscopic) conductivity of the extracellular solution, but the coarse-grained conductivity of the extracellular medium as defined above, where the reduced volume fraction and tortuosity are accounted for. Experimental recordings of the extracellular conductivity typically measure 
+$\sigma$ as defined in this way. For comparison, the microscopic and unhindered conductivity of the (pure) extracellular solution should theoretically be a fraction $\lambda^2/\alpha$ higher. 
+
+\item $C$ (units A/m$^3$) will denote the current source density (CSD), defined as the local neuronal output current per unit tissue volume \index{Current source density}.
+
+\end{itemize}
+
+The continuous, porous medium approximation is revisited in Chapter \ref{sec:sigma}, where we review experimental measurements and theoretical interpretations of the tissue conductivity.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Anisotropic extracellular medium}}
 \label{sec:Sigma:Anisotropic}
