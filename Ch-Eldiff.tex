@@ -55,7 +55,7 @@ where $D_k$ is the diffusion constant for an ion species $k$ in the pure (unhind
 
 \item $\sigma_e$ (units S/m) will denote the tissue averaged extracellular conductivity for extracellular current densities defined as ${\bf i_e}$. As we show later, $\sigma_e$ can be expressed as a function of ion concentrations:
 \begin{equation}
-\sigma_e = \frac{F}{psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k}.
+\sigma_e = \frac{F}{\psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k}.
 \label{Eldiff:eq:sigma1}
 \end{equation}
 Here $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ is defined by the gas constant ($R$), Faraday's constant ($F$) and the temperature ($T$). Since $\sigma_e$ relates to ${\bf i_e}$ in the same way that $\sigma$ related to ${\bf i}$ in Chapter \ref{sec:VC}, $\sigma_e = \sigma /\alpha$.
@@ -102,7 +102,7 @@ From the equations for ion concentration dynamics (eqns. \ref{Eldiff:eq:JNP}-\re
 \end{equation}
 where the first term on the right hand side is the diffusive current density ${\bf i_e^\text{diff}}$, and the second term is the Ohmic drift current density ${\bf i_e^\text{drift}}$. Since we know from earlier that the drift current density should equal $- \sigma_e \nabla \phi$  (cf. eq. \ref{VC:eq:ohmici}) we may identify the the conductivity $\sigma_e$ of the extracellular medium as \citep{Koch1999}:
 \begin{equation}
-\sigma = \frac{F}{psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k},
+\sigma = \frac{F}{\psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k},
 \label{Eldiff:eq:sigma}
 \end{equation}
 as we postulated in eq. \ref{Eldiff:eq:sigma1}. With this, we can write eq. \ref{Eldiff:eq:INPa} on the simpler form:
