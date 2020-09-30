@@ -1,7 +1,5 @@
-\section{Schemes for computing EPs from neural activity}
+\section{Schemes for computing extracellular potentials from neural activity}
 \label{sec:Schemes}
-\ghnote{Geir and Torbjorn will write most this. Torbjorn takes care of the LFPy-part, Geir takes care of the other schemes.}
-\ghnote{GH: I reorganized this following the logic from the theory part - starting with the VC-stuff.}
 
 There exist several different schemes for computing the extracellular dynamics surrounding active cells, varying in terms of completeness. In this chapter, we summarize the schemes depicted in Fig. \ref{Schemes:fig:schemes}, where they have been classified by whether or not they are (i) self consistent, and whether or not they (ii) account for effects of ion concentration dynamics (Fig. \ref{Schemes:fig:schemes}). By self consistent, we mean that the neuronal and extracellular dynamics are modeled on a unified framework, so that (ephaptic) effects of extracellular variables on the neurodynamics are accounted for. 
 
@@ -22,46 +20,6 @@ Some readers might want to skip directly to the standard VC-theory based schemes
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{\orange{TVN/EH: Two-step scheme: Hodgkin-Huxley-Cable + Volume Conductor theory)}}
-\label{sec:Schemes:VC}
-\ghnote{GH: La inn forslag til intro her:}
-The standard two-step scheme for computing extracellular potentials can be summarized as: 
-
-\begin{itemize}
-\item {\bf Step 1:} Compute the electrical activity of neurons using the Hodgkin-Huxley-Cable (HHC) framework presented in Chapter \ref{sec:Neuron}, assuming that it is unaffected by whatever goes on in the extracellular space. 
-\item {\bf Step 2:} Compute the extracellular potential $\phi$ resulting from the neural transmembrane currents computed in step 1, using Volume Conductor (VC) theory (Chapters \ref{sec:VC}-\ref{sec:Sigma}). 
-\end{itemize}
-
-The HHC+VC scheme is not self-consistent, and does not account for ephaptic effects of $\phi$ on neurodynamics. Also, it does not account for any effects of ion concentration dynamics on neuronal activity of extracelluar potentials. However, among the existing schemes for computing the extracellular potential, the HHC+VC scheme is the by far most computationally efficient, as the alternative schemes (presented later) require numerical simulations of extracellular dynamics using finite element or finite difference methods. It is therefore the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the HHC+VC-framework.
-
-When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like HHC+VC. As we showed in Chapter \ref{sec:VC}, VC theory gave us an analytical expression for $\phi$ as a direct function of the neural current sources, meaning that it is the simulations of the neurodynamics (step 1) which requires most of the computer power. Below, we present computational schemes for the standard HHC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}).
-
-%%%%%%
-
-\subsubsection{\red{TVN: Neurodynamics based on multicompartmental neuron models}}
-\label{sec:Schemes:LFPy}
-\index{Hodgkin-Huxley-Cable (HHC) framework}
-
-The standard way - what LFPy was originally designed for \citep{Hagen2018}.
-Same trick used earlier \citep{Holt1999}.
-
-
-\subsubsection{\red{TVN: Neurodynamics from point-neuron models}}
-\label{sec:Schemes:HybridLFPy}
-\index{Point neuron model}
-
-Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \citep{Hagen2016}, Skaar et al (in revision)
-
-
-\subsubsection{\red{EH: Neurodynamics using firing-rate models}}
-\label{sec:Schemes:KernelLFPy}
-\index{Firing rate model}
-
-Would make things even faster. Population firing-rate models  \citep{Hagen2016}. Kernel trick (Ness et al, on-going project) 
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
