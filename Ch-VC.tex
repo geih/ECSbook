@@ -3,8 +3,7 @@
 \index{Volume conductor theory}
 As we saw in the previous section, simulations of morphologically complex neurons allow us to compute the transmembrane currents entering/leaving the neuron at various locations. This chapter is about how we, when we know the distribution of neuronal current sources, can use volume conductor (VC) theory to predict the extracellular potential at any given point in space. VC theory is the fundament for forward modeling of extracellular potentials at different spatial scales, from extracellular spikes, LFPs and MUAs, to ECoGs and EEGs.
 
-Before we present the VC theory, we again want to emphasize that our scale of interest is a macroscopic one. When we talk about an extracellular current density or an extracellular potential, we will always refer to spatial averages of these quantities at a coarse-grained ($> \mu$m) scale. At this spatial scale we shall assume that brain tissue can be represented as a continuous medium \index{continuous medium} with an effective conductivity $\sigma$  \index{Conductivity}, representing the conductivity experienced by macroscopic extracellular currents. Furthermore, we
-shall assume that an extracellular current density in this medium is linear and given by Ohm's law:
+Before we present the VC theory, we again want to emphasize that our scale of interest is a macroscopic one. When we talk about an extracellular current density or an extracellular potential, we will always refer to these quantities at a coarse-grained, i.e., as spatial averages over a volume of at least a cube micrometer. At this spatial scale we shall assume that the extracellular medium can be represented as a continuous medium \index{continuous medium} with an effective conductivity $\sigma$  \index{Conductivity}, representing the conductivity experienced by macroscopic extracellular currents. Furthermore, we shall assume that an extracellular current density in this medium is linear and given by Ohm's law:
 \begin{equation}
 {\bf i}({\bf r}, t) = - \sigma({\bf r}, t) \nabla \phi({\bf r}, t),
 \label{VC:eq:ohmici}
@@ -17,7 +16,7 @@ Further discussion of the assumptions underlying VC theory are found at the end 
 \subsection{\blue{From neuronal current sources to extracellular potentials}}
 \label{sec:VC:main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Throughout this chapter we shall assume that we know the neuronal (and glial) transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution of current sources (Fig. \ref{VC:fig:CSD}B), which we \textit{call the current source density}\index(Current source density) (CSD). For example, the CSD representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions. 
+Throughout this chapter we shall assume that we know the neuronal (and glial) transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution of current sources (Fig. \ref{VC:fig:CSD}B), which we \textit{call the current source density}\index(Current source density) (CSD), with units A/m$^3$. For example, the CSD representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions. 
 
 \begin{figure}[!ht]
 \begin{center}
