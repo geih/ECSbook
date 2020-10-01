@@ -69,6 +69,12 @@ Buccino, A.~P., Kuchta, M., J{\ae}ger, K.~H., Ness, T.~V., Berthet, P., Mardal,
   potentials?}
 \newblock {\em Journal of Neural Engineering}, 16(2).
 
+\bibitem[Buitenweg et~al., 2003]{Buitenweg2003}
+Buitenweg, J.~R., Rutten, W. L.~C., and Marani, E. (2003).
+\newblock {Geometry-based finite-element modeling of the electrical contact
+  between a cultured neuron and a microelectrode.}
+\newblock {\em IEEE transactions on bio-medical engineering}, 50(4):501--9.
+
 \bibitem[Buzs\'{a}ki et~al., 2012]{Buzsaki2012}
 Buzs\'{a}ki, G., Anastassiou, C.~a., and Koch, C. (2012).
 \newblock {The origin of extracellular fields and currents--EEG, ECoG, LFP and
@@ -366,6 +372,11 @@ Holt, G.~R. (1998).
   cable theory in neurobiology}.
 \newblock PhD thesis, California Institute of Technology.
 
+\bibitem[Ishai et~al., 2013]{Ishai2013}
+Ishai, P.~B., Talary, M.~S., Caduff, A., Levy, E., and Feldman, Y. (2013).
+\newblock {Electrode polarization in dielectric measurements: a review}.
+\newblock {\em Measurement Science and Technology}, 24(10):102001.
+
 \bibitem[Johnston and Wu, 1994]{johnston1994foundations}
 Johnston, D. and Wu, S. M.-S. (1994).
 \newblock {\em Foundations of cellular neurophysiology}.
@@ -376,6 +387,12 @@ Joucla, S. and Yvert, B. (2012).
 \newblock {Modeling extracellular electrical neural stimulation: from basic
   understanding to MEA-based applications.}
 \newblock {\em Journal of physiology, Paris}, 106(3-4):146--58.
+
+\bibitem[Joucla et~al., 2014]{Joucla2014}
+Joucla, S., Yvert, B., Gli{\`{e}}re, A., and Yvert, B. (2014).
+\newblock {Current approaches to model extracellular electrical neural
+  microstimulation}.
+\newblock {\em Frontiers in neuroscience}, 8(February):1--12.
 
 \bibitem[Kager et~al., 2000]{Kager2000}
 Kager, H., Wadman, W.~J., and Somjen, G.~G. (2000).
@@ -643,6 +660,11 @@ Newton, A.~J., McDougal, R.~A., Hines, M.~L., and Lytton, W.~W. (2018).
   dynamics.
 \newblock {\em Frontiers in neuroinformatics}, 12:41.
 
+\bibitem[Nicholson, 2001]{Nicholson2001}
+Nicholson, C. (2001).
+\newblock Diffusion and related transport mechanisms in brain tissue.
+\newblock {\em Reports on progress in Physics}, 64(7):815.
+
 \bibitem[Nicholson and Freeman, 1975]{nicholson1975}
 Nicholson, C. and Freeman, J.~A. (1975).
 \newblock Theory of current source-density analysis and determination of
@@ -700,6 +722,13 @@ O'Connell, R. and Mori, Y. (2016).
 Offner, F.~F. (1991).
 \newblock Ion flow through membranes and the resting potential of cells.
 \newblock {\em The Journal of membrane biology}, 123(2):171--182.
+
+\bibitem[Parasuram et~al., 2016]{parasuram2016}
+Parasuram, H., Nair, B., D'Angelo, E., Hines, M., Naldi, G., and Diwakar, S.
+  (2016).
+\newblock Computational modeling of single neuron extracellular electric
+  potentials and network local field potentials using lfpsim.
+\newblock {\em Frontiers in Computational Neuroscience}, 10:65.
 
 \bibitem[Pettersen and Einevoll, 2008]{Pettersen2008a}
 Pettersen, K.~H. and Einevoll, G.~T. (2008).
@@ -812,6 +841,12 @@ S{\ae}tra, M.~J., Einevoll, G.~T., and Halnes, G. (2020).
 Savtchenko, L.~P., Poo, M.~M., and Rusakov, D.~A. (2017).
 \newblock {Electrodiffusion phenomena in neuroscience: A neglected companion}.
 
+\bibitem[Schwan, 1992]{Schwan1992}
+Schwan, H.~P. (1992).
+\newblock {Linear and nonlinear electrode polarization and biological
+  materials.}
+\newblock {\em Annals of biomedical engineering}, 20(3):269--88.
+
 \bibitem[Sharott, 2015]{Sharott2015}
 Sharott, A. (2015).
 \newblock {\em Local Field Potential, Methods of Recording}, pages 1557--1559.
@@ -888,7 +923,7 @@ Tveito, A., J{\ae}ger, K.~H., Lines, G.~T., Paszkowski, {\L}., Sundnes, J.,
   membrane potential and extracellular potential for neurons.
 \newblock {\em Frontiers in computational neuroscience}, 11:27.
 
-\bibitem[Vermaas et~al., 2020]{Vermaas2020}
+\bibitem[Vermaas et~al., 2020]{Vermaas2020b}
 Vermaas, M., Piastra, M.~C., Oostendorp, T., Ramsey, N., and Tiesinga, P. H.~E.
   (2020).
 \newblock {When to include ECoG electrode properties in volume conduction

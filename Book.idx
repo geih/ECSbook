@@ -25,10 +25,13 @@
 \indexentry{Current source density|hyperpage}{34}
 \indexentry{Dipole approximation|hyperpage}{35}
 \indexentry{Electrode model|hyperpage}{36}
+\indexentry{Electrode polarization|hyperpage}{37}
+\indexentry{Finite Element Method|hyperpage}{37}
 \indexentry{Point-electrode|hyperpage}{37}
-\indexentry{Disc-electrode|hyperpage}{37}
+\indexentry{Disc-electrode approximation|hyperpage}{37}
+\indexentry{ECoG|hyperpage}{37}
 \indexentry{Quasi-static approximation to Maxwell's equations|hyperpage}{38}
-\indexentry{Extracellular medium! Linear|hyperpage}{38}
+\indexentry{Extracellular medium! Linear|hyperpage}{39}
 \indexentry{Diffusive current|hyperpage}{39}
 \indexentry{Ephaptic effects|hyperpage}{40}
 \indexentry{Conductivity|hyperpage}{41}
@@ -67,14 +70,11 @@
 \indexentry{Diffusion constant|hyperpage}{77}
 \indexentry{Einstein relation|hyperpage}{78}
 \indexentry{Diffusion potential|hyperpage}{79}
-\indexentry{Hodgkin-Huxley-Cable (HHC) framework|hyperpage}{84}
-\indexentry{Point neuron model|hyperpage}{84}
-\indexentry{Firing rate model|hyperpage}{84}
-\indexentry{Ephaptic effects|hyperpage}{85}
-\indexentry{Electroneutral|hyperpage}{85}
-\indexentry{Electrodiffusion|hyperpage}{85}
-\indexentry{Electrodiffusion|hyperpage}{87}
+\indexentry{Ephaptic effects|hyperpage}{84}
+\indexentry{Electroneutral|hyperpage}{84}
+\indexentry{Electrodiffusion|hyperpage}{84}
+\indexentry{Electrodiffusion|hyperpage}{86}
+\indexentry{Electroneutral|hyperpage}{86}
+\indexentry{Poisson-Nernst-Planck equations|hyperpage}{86}
 \indexentry{Electroneutral|hyperpage}{87}
-\indexentry{Poisson-Nernst-Planck equations|hyperpage}{87}
-\indexentry{Electroneutral|hyperpage}{88}
-\indexentry{Domain models|hyperpage}{90}
+\indexentry{Domain models|hyperpage}{89}

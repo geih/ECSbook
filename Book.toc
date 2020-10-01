@@ -37,9 +37,10 @@
 \contentsline {subsection}{\numberline {4.4}{\color {red}TVN: Modelling recording electrodes}}{36}{subsection.4.4}
 \contentsline {subsubsection}{\numberline {4.4.1}Point-electrode approximation}{37}{subsubsection.4.4.1}
 \contentsline {subsubsection}{\numberline {4.4.2}{\color {red}Disc-electrode approximation}}{37}{subsubsection.4.4.2}
-\contentsline {subsection}{\numberline {4.5}{\color {blue}Approximations used in VC theory}}{37}{subsection.4.5}
+\contentsline {subsubsection}{\numberline {4.4.3}{\color {red}Effect of the electrode probes}}{38}{subsubsection.4.4.3}
+\contentsline {subsection}{\numberline {4.5}{\color {blue}Approximations used in VC theory}}{38}{subsection.4.5}
 \contentsline {subsubsection}{\numberline {4.5.1}{\color {blue}Quasi-static approximation of Maxwell's equations}}{38}{subsubsection.4.5.1}
-\contentsline {subsubsection}{\numberline {4.5.2}{\color {blue}Linear extracellular medium} }{38}{subsubsection.4.5.2}
+\contentsline {subsubsection}{\numberline {4.5.2}{\color {blue}Linear extracellular medium} }{39}{subsubsection.4.5.2}
 \contentsline {subsubsection}{\numberline {4.5.3}{\color {blue}Extracellular currents are exclusively due to Ohmic drift}}{39}{subsubsection.4.5.3}
 \contentsline {subsubsection}{\numberline {4.5.4}{\color {blue}No ephaptic coupling} }{40}{subsubsection.4.5.4}
 \contentsline {section}{\numberline {5}Extracellular conductivity}{41}{section.5}
@@ -50,9 +51,9 @@
 \contentsline {subsection}{\numberline {5.5}{\color {red}TVN: Theoretical explorations....} }{44}{subsection.5.5}
 \contentsline {subsection}{\numberline {5.6}{\color {orange}GH: Theoretical estimate of the conductivity based on ion concentrations} }{44}{subsection.5.6}
 \contentsline {section}{\numberline {6}Two-step scheme for computing extracellular potentials from neural activity}{47}{section.6}
-\contentsline {subsubsection}{\numberline {6.0.1}{\color {red}TVN: Neurodynamics based on multicompartmental neuron models}}{47}{subsubsection.6.0.1}
-\contentsline {subsubsection}{\numberline {6.0.2}{\color {red}TVN: Neurodynamics from point-neuron models}}{47}{subsubsection.6.0.2}
-\contentsline {subsubsection}{\numberline {6.0.3}{\color {red}EH: Neurodynamics using firing-rate models}}{47}{subsubsection.6.0.3}
+\contentsline {subsection}{\numberline {6.1}{\color {red}TVN: Neurodynamics based on multicompartmental neuron models}}{47}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}{\color {red}TVN: Neurodynamics from point-neuron models}}{47}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}{\color {red}EH: Neurodynamics using firing-rate models}}{47}{subsection.6.3}
 \contentsline {section}{\numberline {7}GTE: Spikes}{49}{section.7}
 \contentsline {subsection}{\numberline {7.1}{\color {orange}Spikes in neurons with passive dendrites}}{50}{subsection.7.1}
 \contentsline {subsubsection}{\numberline {7.1.1}{\color {orange}Spikes from two-compartment neuron models}}{50}{subsubsection.7.1.1}
@@ -103,24 +104,20 @@
 \contentsline {subsubsection}{\numberline {13.5.1}{\color {blue}Magnitude of diffusion potentials.}}{80}{subsubsection.13.5.1}
 \contentsline {subsubsection}{\numberline {13.5.2}{\color {red}GH: Frequency of diffusion potentials}}{81}{subsubsection.13.5.2}
 \contentsline {section}{\numberline {14}Schemes for computing extracellular potentials from neural activity}{83}{section.14}
-\contentsline {subsection}{\numberline {14.1}{\color {orange}TVN/EH: Two-step scheme: Hodgkin-Huxley-Cable + Volume Conductor theory)}}{84}{subsection.14.1}
-\contentsline {subsubsection}{\numberline {14.1.1}{\color {red}TVN: Neurodynamics based on multicompartmental neuron models}}{84}{subsubsection.14.1.1}
-\contentsline {subsubsection}{\numberline {14.1.2}{\color {red}TVN: Neurodynamics from point-neuron models}}{84}{subsubsection.14.1.2}
-\contentsline {subsubsection}{\numberline {14.1.3}{\color {red}EH: Neurodynamics using firing-rate models}}{84}{subsubsection.14.1.3}
-\contentsline {subsection}{\numberline {14.2}{\color {blue}Self-consistent volume conduction scheme}}{85}{subsection.14.2}
-\contentsline {subsection}{\numberline {14.3}{\color {blue}Two-step scheme: Hodgkin-Huxley-Cable + Electrodiffusion}}{85}{subsection.14.3}
-\contentsline {subsection}{\numberline {14.4}{\color {blue}Self-consistent electrodiffusive schemes}}{87}{subsection.14.4}
-\contentsline {subsubsection}{\numberline {14.4.1}{\color {blue}The Poisson-Nernst-Planck (PNP) framework}}{87}{subsubsection.14.4.1}
-\contentsline {subsubsection}{\numberline {14.4.2}{\color {blue}The electroneutral framework}}{88}{subsubsection.14.4.2}
-\contentsline {subsubsection}{\numberline {14.4.3}{\color {blue}Domain models}}{90}{subsubsection.14.4.3}
-\contentsline {section}{\numberline {15}Technology}{91}{section.15}
-\contentsline {subsection}{\numberline {15.1}{\color {red}KHP will write this. Dedicated to Elon.}}{91}{subsection.15.1}
-\contentsline {section}{\numberline {16}The last chapter}{92}{section.16}
-\contentsline {subsection}{\numberline {16.1}{\color {red}Summay or discussion or take-home-messages or conclusions?}}{92}{subsection.16.1}
-\contentsline {section}{\numberline {Appendix A}Derivation of four-sphere model}{93}{appendix.A}
-\contentsline {section}{\numberline {Appendix B}Derivation of the current dipole approximation}{94}{appendix.B}
-\contentsline {subsection}{\numberline {Appendix B.1}Current multipole expansion}{94}{subsection.B.1}
-\contentsline {subsection}{\numberline {Appendix B.2}Monopole contribution in neural tissue}{96}{subsection.B.2}
-\contentsline {subsection}{\numberline {Appendix B.3}Dipole contribution in neural tissue/ the current dipole approximation}{96}{subsection.B.3}
-\contentsline {subsection}{\numberline {Appendix B.4}Quadrupole contribution from a single current sink source pair}{97}{subsection.B.4}
-\contentsline {subsection}{\numberline {Appendix B.5}Octopole contribution from a single current sink source pair}{97}{subsection.B.5}
+\contentsline {subsection}{\numberline {14.1}{\color {blue}Self-consistent volume conduction scheme}}{84}{subsection.14.1}
+\contentsline {subsection}{\numberline {14.2}{\color {blue}Two-step scheme: Hodgkin-Huxley-Cable + Electrodiffusion}}{84}{subsection.14.2}
+\contentsline {subsection}{\numberline {14.3}{\color {blue}Self-consistent electrodiffusive schemes}}{86}{subsection.14.3}
+\contentsline {subsubsection}{\numberline {14.3.1}{\color {blue}The Poisson-Nernst-Planck (PNP) framework}}{86}{subsubsection.14.3.1}
+\contentsline {subsubsection}{\numberline {14.3.2}{\color {blue}The electroneutral framework}}{87}{subsubsection.14.3.2}
+\contentsline {subsubsection}{\numberline {14.3.3}{\color {blue}Domain models}}{89}{subsubsection.14.3.3}
+\contentsline {section}{\numberline {15}Technology}{90}{section.15}
+\contentsline {subsection}{\numberline {15.1}{\color {red}KHP will write this. Dedicated to Elon.}}{90}{subsection.15.1}
+\contentsline {section}{\numberline {16}The last chapter}{91}{section.16}
+\contentsline {subsection}{\numberline {16.1}{\color {red}Summay or discussion or take-home-messages or conclusions?}}{91}{subsection.16.1}
+\contentsline {section}{\numberline {Appendix A}Derivation of four-sphere model}{92}{appendix.A}
+\contentsline {section}{\numberline {Appendix B}Derivation of the current dipole approximation}{93}{appendix.B}
+\contentsline {subsection}{\numberline {Appendix B.1}Current multipole expansion}{93}{subsection.B.1}
+\contentsline {subsection}{\numberline {Appendix B.2}Monopole contribution in neural tissue}{95}{subsection.B.2}
+\contentsline {subsection}{\numberline {Appendix B.3}Dipole contribution in neural tissue/ the current dipole approximation}{95}{subsection.B.3}
+\contentsline {subsection}{\numberline {Appendix B.4}Quadrupole contribution from a single current sink source pair}{96}{subsection.B.4}
+\contentsline {subsection}{\numberline {Appendix B.5}Octopole contribution from a single current sink source pair}{96}{subsection.B.5}

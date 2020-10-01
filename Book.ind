@@ -31,25 +31,28 @@
   \item Diffusion potential, \hyperpage{75}, \hyperpage{79}
   \item Diffusive current, \hyperpage{39}
   \item Dipole approximation, \hyperpage{35}
-  \item Disc-electrode, \hyperpage{37}
-  \item Domain models, \hyperpage{90}
+  \item Disc-electrode approximation, \hyperpage{37}
+  \item Domain models, \hyperpage{89}
 
   \indexspace
 
+  \item ECoG, \hyperpage{37}
   \item Einstein relation, \hyperpage{78}
   \item Electrode model, \hyperpage{36}
+  \item Electrode polarization, \hyperpage{37}
   \item Electrodiffusion, \hyperpage{27}, \hyperpage{75}, 
-		\hyperpage{85}, \hyperpage{87}
-  \item Electroneutral, \hyperpage{85}, \hyperpage{87, 88}
+		\hyperpage{84}, \hyperpage{86}
+  \item Electroneutral, \hyperpage{84}, \hyperpage{86, 87}
   \item Ephaptic effects, \hyperpage{30}, \hyperpage{40}, 
-		\hyperpage{85}
+		\hyperpage{84}
   \item Extracellular medium, \hyperpage{42}
-    \subitem  Linear, \hyperpage{38}
+    \subitem  Linear, \hyperpage{39}
   \item Extracellular solution, \hyperpage{42}
 
   \indexspace
 
-  \item Firing rate model, \hyperpage{47}, \hyperpage{84}
+  \item Finite Element Method, \hyperpage{37}
+  \item Firing rate model, \hyperpage{47}
   \item Fourier components, \hyperpage{55}
 
   \indexspace
@@ -60,7 +63,7 @@
 
   \item Hodgkin-Huxley type model, \hyperpage{16}
   \item Hodgkin-Huxley-Cable (HHC) framework, \hyperpage{15}, 
-		\hyperpage{47}, \hyperpage{84}
+		\hyperpage{47}
 
   \indexspace
 
@@ -86,10 +89,10 @@
   \indexspace
 
   \item pair-wise correlation, \hyperpage{66}
-  \item Point neuron model, \hyperpage{47}, \hyperpage{84}
+  \item Point neuron model, \hyperpage{47}
   \item Point source approximation, \hyperpage{32}
   \item Point-electrode, \hyperpage{37}
-  \item Poisson-Nernst-Planck equations, \hyperpage{87}
+  \item Poisson-Nernst-Planck equations, \hyperpage{86}
   \item Porous medium, \hyperpage{41}, \hyperpage{76}
 
   \indexspace

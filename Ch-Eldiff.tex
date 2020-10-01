@@ -5,6 +5,8 @@ In the standard VC theory presented in Chapter \ref{sec:VC}), we assumed that ex
 
 In this chapter, we will introduce a more general, electrodiffusive theory for extracellular dynamics, which accounts effects of ionic diffusion as well as ohmic drift. However, before we present the electrodiffusive theory, we will try to get an intuition of how diffusion potentials arise.
 
+
+
 \subsection{\blue{What is a diffusion potential?}}
 \label{sec:Eldiff:LJpot}
 \index{Diffusion potential}
@@ -183,7 +185,7 @@ Finally, due to the linearity in eq. \ref{Eldiff:eq:diffpot}, the diffusion pote
 \Delta \phi_d = \frac{F}{\bar{\sigma_e}} \sum_k{z_k \tilde{D}_k \Delta c_k}
 \label{Eldiff:eq:diffpot2}
 \end{equation}
-where $\Delta c_k = c_{k}^{2} - c_{k}^{1}$ and $Delta \phi_d = \phi_d^{2} - \phi_d^{1}$ denote the concentration and potential difference between compartments 1 and 2. Within each compartment, $\sigma_e$ can be determined from the ionic concentrations by use of eq. \ref{Eldiff:eq:sigma1}. However, since we for this problem need the conductivity experienced by an Ohmic current traveling between the two compartments, we have in eq. \ref{Eldiff:eq:diffpot2} used the average $\sigma_e$ of the two compartments:
+where $\Delta c_k = c_{k}^{2} - c_{k}^{1}$ and $\Delta \phi_d = \phi_d^{2} - \phi_d^{1}$ denote the concentration and potential difference between compartments 1 and 2. Within each compartment, $\sigma_e$ can be determined from the ionic concentrations by use of eq. \ref{Eldiff:eq:sigma1}. However, since we for this problem need the conductivity experienced by an Ohmic current traveling between the two compartments, we have in eq. \ref{Eldiff:eq:diffpot2} used the average $\sigma_e$ of the two compartments:
 \begin{equation}
 \sigma_e = \frac{F}{2\psi}\sum_{k} \left(\tilde{D}_k z_{k}^2 c_{k}^{1} + \tilde{D}_k z_{k}^2 c_{k}^{2} \right).
 \label{Eldiff:eq:sigma2}

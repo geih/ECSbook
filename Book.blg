@@ -1,5 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2015)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: Book.aux
 The style file: apalike.bst
 A level-1 auxiliary file: Ch-Intro.aux
@@ -7,6 +7,7 @@ A level-1 auxiliary file: Ch-Basics.aux
 A level-1 auxiliary file: Ch-Neuron.aux
 A level-1 auxiliary file: Ch-VC.aux
 A level-1 auxiliary file: Ch-Sigma.aux
+A level-1 auxiliary file: Ch-LFPy.aux
 A level-1 auxiliary file: Ch-Spikes.aux
 A level-1 auxiliary file: Ch-LFP.aux
 Case mismatch error between cite keys nelson2008 and Nelson2008
@@ -24,55 +25,68 @@ A level-1 auxiliary file: Ch-Tech.aux
 A level-1 auxiliary file: Ch-Last.aux
 A level-1 auxiliary file: AppB-multipole.aux
 Database file #1: ECS_book.bib.bib
-I was expecting a `,' or a `}'---line 3477 of file ECS_book.bib.bib
+I was expecting a `,' or a `}'---line 3495 of file ECS_book.bib.bib
  :   
  :   Edition = {3rd}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Repeated entry---line 9297 of file ECS_book.bib.bib
+ : @article{Nelson2008
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9330 of file ECS_book.bib.bib
+ : @article{Ishai2013
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9380 of file ECS_book.bib.bib
+ : @article{Gabriel1996
+ :                     ,
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Zandt2015review"
+Warning--I didn't find a database entry for "Vermaas2020"
 Warning--I didn't find a database entry for "Tveito2019"
 Warning--can't use both author and editor fields in Logg2012
 Warning--can't use both author and editor fields in Pettersen2012
 Warning--can't use both author and editor fields in Sharott2015
-You've used 156 entries,
+You've used 162 entries,
             1935 wiz_defined-function locations,
-            1481 strings with 36264 characters,
-and the built_in function-call counts, 67822 in all, are:
-= -- 6566
-> -- 3282
-< -- 73
-+ -- 1154
-- -- 1134
-* -- 6279
-:= -- 11872
-add.period$ -- 470
-call.type$ -- 156
-change.case$ -- 1329
-chr.to.int$ -- 154
-cite$ -- 159
-duplicate$ -- 2231
-empty$ -- 4457
-format.name$ -- 1370
-if$ -- 12950
+            1521 strings with 37483 characters,
+and the built_in function-call counts, 70262 in all, are:
+= -- 6798
+> -- 3398
+< -- 75
++ -- 1194
+- -- 1174
+* -- 6507
+:= -- 12309
+add.period$ -- 488
+call.type$ -- 162
+change.case$ -- 1379
+chr.to.int$ -- 160
+cite$ -- 165
+duplicate$ -- 2315
+empty$ -- 4620
+format.name$ -- 1416
+if$ -- 13411
 int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 169
-newline$ -- 782
-num.names$ -- 470
-pop$ -- 1068
+missing$ -- 175
+newline$ -- 812
+num.names$ -- 488
+pop$ -- 1104
 preamble$ -- 1
-purify$ -- 1344
+purify$ -- 1394
 quote$ -- 0
-skip$ -- 1671
+skip$ -- 1733
 stack$ -- 0
-substring$ -- 4973
-swap$ -- 210
+substring$ -- 5135
+swap$ -- 216
 text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 904
+type$ -- 940
 warning$ -- 3
-while$ -- 557
+while$ -- 578
 width$ -- 0
-write$ -- 2022
-(There were 2 error messages)
+write$ -- 2100
+(There were 5 error messages)
