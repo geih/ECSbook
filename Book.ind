@@ -1,0 +1,127 @@
+\begin{theindex}
+
+  \item (, \hyperpage{31}
+  \item \emph{in vitro}, \hyperpage{57}
+
+  \indexspace
+
+  \item Active ion channels, \hyperpage{17}
+
+  \indexspace
+
+  \item Cable equation, \hyperpage{22}
+  \item Calcium dynamics, \hyperpage{29}
+  \item Capacitive current, \hyperpage{16}
+  \item Conductivity, \hyperpage{31}, \hyperpage{41, 42}, 
+		\hyperpage{44}
+    \subitem Anisotropic, \hyperpage{42}
+    \subitem Frequency dependence, \hyperpage{43}
+    \subitem Homogeneous and isotropic, \hyperpage{32}
+    \subitem Ion concentration dependence, \hyperpage{44}
+    \subitem Nonhomogeneous, \hyperpage{43}
+    \subitem Theoretical estimates, \hyperpage{44}
+  \item Continuous medium, \hyperpage{41}, \hyperpage{76}
+  \item continuous medium, \hyperpage{31}
+  \item correlations, \hyperpage{61}
+  \item Current source density, \hyperpage{34}
+
+  \indexspace
+
+  \item Diffusion constant, \hyperpage{77}
+  \item Diffusion potential, \hyperpage{75}, \hyperpage{79}
+  \item Diffusive current, \hyperpage{39}
+  \item Dipole approximation, \hyperpage{35}
+  \item Disc-electrode approximation, \hyperpage{37}
+  \item Domain models, \hyperpage{89}
+
+  \indexspace
+
+  \item ECoG, \hyperpage{37}
+  \item Einstein relation, \hyperpage{78}
+  \item Electrode model, \hyperpage{36}
+  \item Electrode polarization, \hyperpage{37}
+  \item Electrodiffusion, \hyperpage{27}, \hyperpage{75}, 
+		\hyperpage{84}, \hyperpage{86}
+  \item Electroneutral, \hyperpage{84}, \hyperpage{86, 87}
+  \item Ephaptic effects, \hyperpage{30}, \hyperpage{40}, 
+		\hyperpage{84}
+  \item Extracellular medium, \hyperpage{42}
+    \subitem  Linear, \hyperpage{39}
+  \item Extracellular solution, \hyperpage{42}
+
+  \indexspace
+
+  \item Finite Element Method, \hyperpage{37}
+  \item Firing rate model, \hyperpage{47}
+  \item Fourier components, \hyperpage{55}
+
+  \indexspace
+
+  \item Goldman-Hodgkin-Katz equation, \hyperpage{28}
+
+  \indexspace
+
+  \item Hodgkin-Huxley type model, \hyperpage{16}
+  \item Hodgkin-Huxley-Cable (HHC) framework, \hyperpage{15}, 
+		\hyperpage{47}
+
+  \indexspace
+
+  \item Ion concentration dynamics, \hyperpage{26}
+
+  \indexspace
+
+  \item Leakage current, \hyperpage{17}
+  \item Line source approximation, \hyperpage{33}
+
+  \indexspace
+
+  \item MEG, \hyperpage{72}
+  \item method of images, \hyperpage{57}
+  \item micro-electrode array (MEA), \hyperpage{57}
+  \item Multicompartmental neuron model, \hyperpage{15}, \hyperpage{20}, 
+		\hyperpage{22}
+
+  \indexspace
+
+  \item neural representations, \hyperpage{50}
+
+  \indexspace
+
+  \item pair-wise correlation, \hyperpage{66}
+  \item Point neuron model, \hyperpage{47}
+  \item Point source approximation, \hyperpage{32}
+  \item Point-electrode, \hyperpage{37}
+  \item Poisson-Nernst-Planck equations, \hyperpage{86}
+  \item Porous medium, \hyperpage{41}, \hyperpage{76}
+
+  \indexspace
+
+  \item Quasi-static approximation to Maxwell's equations, 
+		\hyperpage{38}
+
+  \indexspace
+
+  \item Reversal potential, \hyperpage{27}
+
+  \indexspace
+
+  \item shape function, \hyperpage{61}
+  \item spatial reach, \hyperpage{60}
+  \item spike sorting, \hyperpage{57}
+  \item Stimulus currents, \hyperpage{19}
+  \item Synapse models, \hyperpage{20}
+
+  \indexspace
+
+  \item Tortuosity, \hyperpage{41}
+
+  \indexspace
+
+  \item uncorrelated, \hyperpage{61}
+
+  \indexspace
+
+  \item Volume conductor theory, \hyperpage{31}
+
+\end{theindex}
