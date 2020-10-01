@@ -46,7 +46,7 @@ In Chapter \ref{sec:Sigma}, we introduced the continuous, porous medium approxim
 
 \item  ${\bf i_e}$ (units $\mathrm{A/m^2}$) will denote the extracellular current density, defined as extracellular current per per extracellular unit cross-section area. In comparison, the current density ${\bf i}$ in Chapter \ref{sec:VC} was defined as extracellular current per unit tissue cross-section area, which means that ${\bf i_e} = {\bf i}/\alpha$.
 
-\item $\tilde{D}_k$ (units $\mathrm{m^2/s}$) will denote the effective diffusion constant \index{Diffusion constant} for ion species $k$ in the extracellular medium. It is defined so that the diffusive flux is given by ${\bf j_k} = -\tilde{D}_k \nabla c_k$. The effective diffusion constant accounts for the fact that diffusing ions face obstacles (neurites) along their path forcing them take detours, reflected through a tortuosity $\lambda$ \citep{Nicholson1998}, and is given by:
+\item $\tilde{D}_k$ (units $\mathrm{m^2/s}$) will denote the effective diffusion constant \index{Diffusion constant} for ion species $k$ in the extracellular medium. It is defined so that the diffusive flux is given by ${\bf j_k^{diff}} = -\tilde{D}_k \nabla c_k$. The effective diffusion constant accounts for the fact that diffusing ions face obstacles (neurites) along their path forcing them take detours, reflected through a tortuosity $\lambda$ \citep{Nicholson1998}, and is given by:
 \begin{equation}
 \tilde{D_k} = \frac{D_k}{\lambda^2}, 
 \label{Eldiff:eq:diffconst}
@@ -102,7 +102,7 @@ From the equations for ion concentration dynamics (eqns. \ref{Eldiff:eq:JNP}-\re
 \end{equation}
 where the first term on the right hand side is the diffusive current density ${\bf i_e^\text{diff}}$, and the second term is the Ohmic drift current density ${\bf i_e^\text{drift}}$. Since we know from earlier that the drift current density should equal $- \sigma_e \nabla \phi$  (cf. eq. \ref{VC:eq:ohmici}) we may identify the the conductivity $\sigma_e$ of the extracellular medium as \citep{Koch1999}:
 \begin{equation}
-\sigma = \frac{F}{\psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k},
+\sigma_e = \frac{F}{\psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k},
 \label{Eldiff:eq:sigma}
 \end{equation}
 as we postulated in eq. \ref{Eldiff:eq:sigma1}. With this, we can write eq. \ref{Eldiff:eq:INPa} on the simpler form:
@@ -113,12 +113,12 @@ as we postulated in eq. \ref{Eldiff:eq:sigma1}. With this, we can write eq. \ref
 
 Likewise, if we multiply eq. \ref{Eldiff:eq:salamander} by $F\cdot z_k$ and sum over all ion species, we get the continuity equation for charge: 
 \begin{equation}
-\frac{\partial \rho_e}{\partial t} =  \nabla \cdot \left (\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} + \sigma\nabla\phi  \right)  + C_{ion}.
+\frac{\partial \rho_e}{\partial t} =  \nabla \cdot \left (\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} + \sigma_e\nabla\phi  \right)  + C_{ion}.
 \label{Eldiff:eq:chargecontinuity}
 \end{equation}
 We have here introduced the extracellular charge density (define as extracellular charge per tissue unit volume), 
 \begin{equation}
-\rho_e = \alpha F \sum_k z_k c_k,  
+\rho_e = F \sum_k z_k c_k,  
 \label{Eldiff:eq:roen}
 \end{equation}
 and the ionic current source, 
@@ -131,7 +131,7 @@ The index "ion" signifies that this source term exclusively accounts for the sou
 C_e = C_e^{ion} + C_e^{cap} = F \sum_k z_k f_k - \frac{\partial \rho_{mem}}{\partial t}.
 \label{Eldiff:eq:CSDdecomposed}
 \end{equation}
-$C_e^{cap}$ interprets as the neuronal capacitive membrane current, $c_m \partial \phi_m/\partial t$ per extracellular unit volume, and the negative sign in front of the last term in \ref{Eldiff:eq:CSDdecomposed} follows from the fact that an outwards capacitive current (i.e., a source) implies an accumulation negative charge on the external side of the membrane. 
+$C_e^{cap}$ interprets as the neuronal capacitive membrane current ($c_m \partial \phi_m/\partial t$) per extracellular unit volume, and the negative sign in front of the last term in \ref{Eldiff:eq:CSDdecomposed} follows from the fact that an outwards capacitive current (i.e., a source) implies an accumulation negative charge on the external side of the membrane. 
 
 Let us now look at the charge density, $\rho_e$ at the left hand side of eq. \ref{Eldiff:eq:chargecontinuity}. In general, $\rho_e$ could be composed of free charges in the extracellular bulk solution as well as charges bound to the outside of the neural membrane, i.e., we could have $\rho_e = \rho_e^{free} + \rho_e^{mem}$. However, as we have argued earlier, the bulk solution is very close to electroneutral, and if we assume perfect bulk electroneutrality ($\rho_e^{free} = 0$), we must have that $\rho_e=\rho_e^{mem}$. We can then combine eq. \ref{Eldiff:eq:chargecontinuity}  with eq. \ref{Eldiff:eq:CSDdecomposed} to arrive at:
 
