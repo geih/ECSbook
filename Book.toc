@@ -63,61 +63,66 @@
 \contentsline {subsubsection}{\numberline {7.3.2}{\color {red}Box: Ball-and-stick model for spikes}}{55}{subsubsection.7.3.2}
 \contentsline {subsubsection}{\numberline {7.3.3}{\color {red}Box: Spike-sorting}}{56}{subsubsection.7.3.3}
 \contentsline {subsubsection}{\numberline {7.3.4}{\color {red}Box:Spikes in microelectrode arrays (MEAs)}}{57}{subsubsection.7.3.4}
-\contentsline {subsection}{\numberline {7.4}{\color {red}Spikes in neurons with active dendrites}}{58}{subsection.7.4}
-\contentsline {subsection}{\numberline {7.5}{\color {red}Axonal contributions to spikes}}{58}{subsection.7.5}
-\contentsline {subsection}{\numberline {7.6}{\color {red}Multi-unit activity (MUA)} }{58}{subsection.7.6}
-\contentsline {subsection}{\numberline {7.7}{\color {red}Insights from MUA studies}}{58}{subsection.7.7}
-\contentsline {section}{\numberline {8}TVN/GTE: Local Field Potentials}{59}{section.8}
-\contentsline {subsection}{\numberline {8.1}{\color {red}TBV:Single-neuron LFPs}}{59}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}{\color {red}TBV:Population LFPs}}{59}{subsection.8.2}
-\contentsline {subsubsection}{\numberline {8.2.1}{\color {red}TBV:Effect of synaptic correlations}}{59}{subsubsection.8.2.1}
-\contentsline {subsection}{\numberline {8.3}{\color {orange}GTE: Example: How local is the local field potential?}}{59}{subsection.8.3}
-\contentsline {subsubsection}{\numberline {8.3.1}{\color {orange}GTE: Qualitative model}}{61}{subsubsection.8.3.1}
-\contentsline {paragraph}{Uncorrelated single-neuron LFPs}{61}{section*.29}
-\contentsline {paragraph}{Correlated single-neuron LFPs}{62}{section*.30}
-\contentsline {subsubsection}{\numberline {8.3.2}{\color {red}GTE: Box: Why is the night sky dark? Olbers' paradox}}{62}{subsubsection.8.3.2}
-\contentsline {subsubsection}{\numberline {8.3.3}{\color {orange}GTE: Quantitative model}}{63}{subsubsection.8.3.3}
-\contentsline {paragraph}{Uncorrelated single-neuron LFPs}{63}{section*.32}
-\contentsline {paragraph}{Correlated single-neuron LFPs}{65}{section*.34}
-\contentsline {subsubsection}{\numberline {8.3.4}{\color {red}GTE: Box: General expression for population LFP}}{66}{subsubsection.8.3.4}
-\contentsline {subsubsection}{\numberline {8.3.5}{\color {orange}GTE: How sharply does the LFP decay outside a population of neurons?}}{66}{subsubsection.8.3.5}
-\contentsline {subsection}{\numberline {8.4}{\color {red}TVN/EH: Network LFPs}}{68}{subsection.8.4}
-\contentsline {subsection}{\numberline {8.5}{\color {red}GTE: Insights from LFP studies}}{68}{subsection.8.5}
-\contentsline {section}{\numberline {9}TVN/SN: ECoG}{69}{section.9}
-\contentsline {subsection}{\numberline {9.1}{\color {red}TVN/SN: Insights from ECoG studies}}{69}{subsection.9.1}
-\contentsline {section}{\numberline {10}SN: EEG}{70}{section.10}
-\contentsline {subsection}{\numberline {10.1}{\color {red}From transmembrane currents to current dipoles}}{70}{subsection.10.1}
-\contentsline {subsection}{\numberline {10.2}{\color {red}SN: 4-sphere model}}{70}{subsection.10.2}
-\contentsline {subsection}{\numberline {10.3}{\color {red}Complex head models}}{70}{subsection.10.3}
-\contentsline {subsection}{\numberline {10.4}{\color {red}Differences between EEG and LFP signals}}{70}{subsection.10.4}
-\contentsline {subsection}{\numberline {10.5}{\color {red}SN: Insights from EEG studies} }{70}{subsection.10.5}
-\contentsline {section}{\numberline {11}TVN/GH: MEG}{72}{section.11}
-\contentsline {subsection}{\numberline {11.1}{\color {red}TVN: Insights from MEG studies} }{72}{subsection.11.1}
-\contentsline {section}{\numberline {12}TVN: Electrical stimulation}{73}{section.12}
-\contentsline {subsection}{\numberline {12.1}{\color {red}TVN TO WRITE THIS}}{73}{subsection.12.1}
-\contentsline {section}{\numberline {13}Electrodiffusion in the extracellular space}{75}{section.13}
-\contentsline {subsection}{\numberline {13.1}{\color {blue}What is a diffusion potential?}}{75}{subsection.13.1}
-\contentsline {subsection}{\numberline {13.2}{\color {blue}Continuous, porous medium approximation for electrodiffusion}}{76}{subsection.13.2}
-\contentsline {subsection}{\numberline {13.3}{\color {blue}Electrodiffusive ion concentration dynamics}}{77}{subsection.13.3}
-\contentsline {subsection}{\numberline {13.4}{\color {blue}Electrodiffusive electrodynamics}}{78}{subsection.13.4}
-\contentsline {subsection}{\numberline {13.5}{\color {blue}Do diffusion potentials matter?}}{79}{subsection.13.5}
-\contentsline {subsubsection}{\numberline {13.5.1}{\color {blue}Magnitude of diffusion potentials.}}{80}{subsubsection.13.5.1}
-\contentsline {subsubsection}{\numberline {13.5.2}{\color {red}GH: Frequency of diffusion potentials}}{81}{subsubsection.13.5.2}
-\contentsline {section}{\numberline {14}Schemes for computing extracellular potentials from neural activity}{83}{section.14}
-\contentsline {subsection}{\numberline {14.1}{\color {blue}Self-consistent volume conduction scheme}}{84}{subsection.14.1}
-\contentsline {subsection}{\numberline {14.2}{\color {blue}Two-step scheme: Hodgkin-Huxley-Cable + Electrodiffusion}}{84}{subsection.14.2}
-\contentsline {subsection}{\numberline {14.3}{\color {blue}Self-consistent electrodiffusive schemes}}{86}{subsection.14.3}
-\contentsline {subsubsection}{\numberline {14.3.1}{\color {blue}The Poisson-Nernst-Planck (PNP) framework}}{86}{subsubsection.14.3.1}
-\contentsline {subsubsection}{\numberline {14.3.2}{\color {blue}The electroneutral framework}}{87}{subsubsection.14.3.2}
-\contentsline {subsubsection}{\numberline {14.3.3}{\color {blue}Domain models}}{89}{subsubsection.14.3.3}
-\contentsline {section}{\numberline {15}Technology}{90}{section.15}
-\contentsline {subsection}{\numberline {15.1}{\color {red}KHP will write this. Dedicated to Elon.}}{90}{subsection.15.1}
-\contentsline {section}{\numberline {16}The last chapter}{91}{section.16}
-\contentsline {subsection}{\numberline {16.1}{\color {red}Summay or discussion or take-home-messages or conclusions?}}{91}{subsection.16.1}
-\contentsline {section}{\numberline {Appendix A}Derivation of four-sphere model}{92}{appendix.A}
-\contentsline {section}{\numberline {Appendix B}Derivation of the current dipole approximation}{93}{appendix.B}
-\contentsline {subsection}{\numberline {Appendix B.1}Current multipole expansion}{93}{subsection.B.1}
-\contentsline {subsection}{\numberline {Appendix B.2}Monopole contribution in neural tissue}{95}{subsection.B.2}
-\contentsline {subsection}{\numberline {Appendix B.3}Dipole contribution in neural tissue/ the current dipole approximation}{95}{subsection.B.3}
-\contentsline {subsection}{\numberline {Appendix B.4}Quadrupole contribution from a single current sink source pair}{96}{subsection.B.4}
-\contentsline {subsection}{\numberline {Appendix B.5}Octopole contribution from a single current sink source pair}{96}{subsection.B.5}
+\contentsline {subsection}{\numberline {7.4}Dependence of spike size and shape on neuronal properties}{58}{subsection.7.4}
+\contentsline {subsubsection}{\numberline {7.4.1}Spike amplitude dependence on distance}{59}{subsubsection.7.4.1}
+\contentsline {subsubsection}{\numberline {7.4.2}Spike amplitude dependence on neuronal parameters}{59}{subsubsection.7.4.2}
+\contentsline {subsubsection}{\numberline {7.4.3}Spike shape dependence on distance}{60}{subsubsection.7.4.3}
+\contentsline {subsubsection}{\numberline {7.4.4}Generalisation of findings to other neuron models}{60}{subsubsection.7.4.4}
+\contentsline {subsection}{\numberline {7.5}{\color {red}Spikes in neurons with active dendrites}}{60}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}{\color {red}Axonal contributions to spikes}}{60}{subsection.7.6}
+\contentsline {subsection}{\numberline {7.7}{\color {red}Multi-unit activity (MUA)} }{60}{subsection.7.7}
+\contentsline {subsection}{\numberline {7.8}{\color {red}Insights from MUA studies}}{61}{subsection.7.8}
+\contentsline {section}{\numberline {8}TVN/GTE: Local Field Potentials}{62}{section.8}
+\contentsline {subsection}{\numberline {8.1}{\color {red}TBV:Single-neuron LFPs}}{62}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}{\color {red}TBV:Population LFPs}}{62}{subsection.8.2}
+\contentsline {subsubsection}{\numberline {8.2.1}{\color {red}TBV:Effect of synaptic correlations}}{62}{subsubsection.8.2.1}
+\contentsline {subsection}{\numberline {8.3}{\color {orange}GTE: Example: How local is the local field potential?}}{62}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}{\color {orange}GTE: Qualitative model}}{64}{subsubsection.8.3.1}
+\contentsline {paragraph}{Uncorrelated single-neuron LFPs}{64}{section*.29}
+\contentsline {paragraph}{Correlated single-neuron LFPs}{65}{section*.30}
+\contentsline {subsubsection}{\numberline {8.3.2}{\color {red}GTE: Box: Why is the night sky dark? Olbers' paradox}}{65}{subsubsection.8.3.2}
+\contentsline {subsubsection}{\numberline {8.3.3}{\color {orange}GTE: Quantitative model}}{66}{subsubsection.8.3.3}
+\contentsline {paragraph}{Uncorrelated single-neuron LFPs}{66}{section*.32}
+\contentsline {paragraph}{Correlated single-neuron LFPs}{68}{section*.34}
+\contentsline {subsubsection}{\numberline {8.3.4}{\color {red}GTE: Box: General expression for population LFP}}{69}{subsubsection.8.3.4}
+\contentsline {subsubsection}{\numberline {8.3.5}{\color {orange}GTE: How sharply does the LFP decay outside a population of neurons?}}{69}{subsubsection.8.3.5}
+\contentsline {subsection}{\numberline {8.4}{\color {red}TVN/EH: Network LFPs}}{71}{subsection.8.4}
+\contentsline {subsection}{\numberline {8.5}{\color {red}GTE: Insights from LFP studies}}{71}{subsection.8.5}
+\contentsline {section}{\numberline {9}TVN/SN: ECoG}{72}{section.9}
+\contentsline {subsection}{\numberline {9.1}{\color {red}TVN/SN: Insights from ECoG studies}}{72}{subsection.9.1}
+\contentsline {section}{\numberline {10}SN: EEG}{73}{section.10}
+\contentsline {subsection}{\numberline {10.1}{\color {red}From transmembrane currents to current dipoles}}{73}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}{\color {red}SN: 4-sphere model}}{73}{subsection.10.2}
+\contentsline {subsection}{\numberline {10.3}{\color {red}Complex head models}}{73}{subsection.10.3}
+\contentsline {subsection}{\numberline {10.4}{\color {red}Differences between EEG and LFP signals}}{73}{subsection.10.4}
+\contentsline {subsection}{\numberline {10.5}{\color {red}SN: Insights from EEG studies} }{73}{subsection.10.5}
+\contentsline {section}{\numberline {11}TVN/GH: MEG}{75}{section.11}
+\contentsline {subsection}{\numberline {11.1}{\color {red}TVN: Insights from MEG studies} }{75}{subsection.11.1}
+\contentsline {section}{\numberline {12}TVN: Electrical stimulation}{76}{section.12}
+\contentsline {subsection}{\numberline {12.1}{\color {red}TVN TO WRITE THIS}}{76}{subsection.12.1}
+\contentsline {section}{\numberline {13}Electrodiffusion in the extracellular space}{78}{section.13}
+\contentsline {subsection}{\numberline {13.1}{\color {blue}What is a diffusion potential?}}{78}{subsection.13.1}
+\contentsline {subsection}{\numberline {13.2}{\color {blue}Continuous, porous medium approximation for electrodiffusion}}{79}{subsection.13.2}
+\contentsline {subsection}{\numberline {13.3}{\color {blue}Electrodiffusive ion concentration dynamics}}{80}{subsection.13.3}
+\contentsline {subsection}{\numberline {13.4}{\color {blue}Electrodiffusive electrodynamics}}{81}{subsection.13.4}
+\contentsline {subsection}{\numberline {13.5}{\color {blue}Do diffusion potentials matter?}}{82}{subsection.13.5}
+\contentsline {subsubsection}{\numberline {13.5.1}{\color {blue}Magnitude of diffusion potentials.}}{83}{subsubsection.13.5.1}
+\contentsline {subsubsection}{\numberline {13.5.2}{\color {red}GH: Frequency of diffusion potentials}}{84}{subsubsection.13.5.2}
+\contentsline {section}{\numberline {14}Schemes for computing extracellular potentials from neural activity}{86}{section.14}
+\contentsline {subsection}{\numberline {14.1}{\color {blue}Self-consistent volume conduction scheme}}{87}{subsection.14.1}
+\contentsline {subsection}{\numberline {14.2}{\color {blue}Two-step scheme: Hodgkin-Huxley-Cable + Electrodiffusion}}{87}{subsection.14.2}
+\contentsline {subsection}{\numberline {14.3}{\color {blue}Self-consistent electrodiffusive schemes}}{89}{subsection.14.3}
+\contentsline {subsubsection}{\numberline {14.3.1}{\color {blue}The Poisson-Nernst-Planck (PNP) framework}}{89}{subsubsection.14.3.1}
+\contentsline {subsubsection}{\numberline {14.3.2}{\color {blue}The electroneutral framework}}{90}{subsubsection.14.3.2}
+\contentsline {subsubsection}{\numberline {14.3.3}{\color {blue}Domain models}}{92}{subsubsection.14.3.3}
+\contentsline {section}{\numberline {15}Technology}{93}{section.15}
+\contentsline {subsection}{\numberline {15.1}{\color {red}KHP will write this. Dedicated to Elon.}}{93}{subsection.15.1}
+\contentsline {section}{\numberline {16}The last chapter}{94}{section.16}
+\contentsline {subsection}{\numberline {16.1}{\color {red}Summay or discussion or take-home-messages or conclusions?}}{94}{subsection.16.1}
+\contentsline {section}{\numberline {Appendix A}Derivation of four-sphere model}{95}{appendix.A}
+\contentsline {section}{\numberline {Appendix B}Derivation of the current dipole approximation}{96}{appendix.B}
+\contentsline {subsection}{\numberline {Appendix B.1}Current multipole expansion}{96}{subsection.B.1}
+\contentsline {subsection}{\numberline {Appendix B.2}Monopole contribution in neural tissue}{98}{subsection.B.2}
+\contentsline {subsection}{\numberline {Appendix B.3}Dipole contribution in neural tissue/ the current dipole approximation}{98}{subsection.B.3}
+\contentsline {subsection}{\numberline {Appendix B.4}Quadrupole contribution from a single current sink source pair}{99}{subsection.B.4}
+\contentsline {subsection}{\numberline {Appendix B.5}Octopole contribution from a single current sink source pair}{99}{subsection.B.5}

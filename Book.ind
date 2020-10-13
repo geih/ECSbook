@@ -20,31 +20,31 @@
     \subitem Ion concentration dependence, \hyperpage{44}
     \subitem Nonhomogeneous, \hyperpage{43}
     \subitem Theoretical estimates, \hyperpage{44}
-  \item Continuous medium, \hyperpage{41}, \hyperpage{76}
+  \item Continuous medium, \hyperpage{41}, \hyperpage{79}
   \item continuous medium, \hyperpage{31}
-  \item correlations, \hyperpage{61}
+  \item correlations, \hyperpage{64}
   \item Current source density, \hyperpage{34}
 
   \indexspace
 
-  \item Diffusion constant, \hyperpage{77}
-  \item Diffusion potential, \hyperpage{75}, \hyperpage{79}
+  \item Diffusion constant, \hyperpage{80}
+  \item Diffusion potential, \hyperpage{78}, \hyperpage{82}
   \item Diffusive current, \hyperpage{39}
   \item Dipole approximation, \hyperpage{35}
   \item Disc-electrode approximation, \hyperpage{37}
-  \item Domain models, \hyperpage{89}
+  \item Domain models, \hyperpage{92}
 
   \indexspace
 
   \item ECoG, \hyperpage{37}
-  \item Einstein relation, \hyperpage{78}
+  \item Einstein relation, \hyperpage{81}
   \item Electrode model, \hyperpage{36}
   \item Electrode polarization, \hyperpage{37}
-  \item Electrodiffusion, \hyperpage{27}, \hyperpage{75}, 
-		\hyperpage{84}, \hyperpage{86}
-  \item Electroneutral, \hyperpage{84}, \hyperpage{86, 87}
+  \item Electrodiffusion, \hyperpage{27}, \hyperpage{78}, 
+		\hyperpage{87}, \hyperpage{89}
+  \item Electroneutral, \hyperpage{87}, \hyperpage{89, 90}
   \item Ephaptic effects, \hyperpage{30}, \hyperpage{40}, 
-		\hyperpage{84}
+		\hyperpage{87}
   \item Extracellular medium, \hyperpage{42}
     \subitem  Linear, \hyperpage{39}
   \item Extracellular solution, \hyperpage{42}
@@ -76,7 +76,7 @@
 
   \indexspace
 
-  \item MEG, \hyperpage{72}
+  \item MEG, \hyperpage{75}
   \item method of images, \hyperpage{57}
   \item micro-electrode array (MEA), \hyperpage{57}
   \item Multicompartmental neuron model, \hyperpage{15}, \hyperpage{20}, 
@@ -88,12 +88,12 @@
 
   \indexspace
 
-  \item pair-wise correlation, \hyperpage{66}
+  \item pair-wise correlation, \hyperpage{69}
   \item Point neuron model, \hyperpage{47}
   \item Point source approximation, \hyperpage{32}
   \item Point-electrode, \hyperpage{37}
-  \item Poisson-Nernst-Planck equations, \hyperpage{86}
-  \item Porous medium, \hyperpage{41}, \hyperpage{76}
+  \item Poisson-Nernst-Planck equations, \hyperpage{89}
+  \item Porous medium, \hyperpage{41}, \hyperpage{79}
 
   \indexspace
 
@@ -106,8 +106,8 @@
 
   \indexspace
 
-  \item shape function, \hyperpage{61}
-  \item spatial reach, \hyperpage{60}
+  \item shape function, \hyperpage{64}
+  \item spatial reach, \hyperpage{63}
   \item spike sorting, \hyperpage{57}
   \item Stimulus currents, \hyperpage{19}
   \item Synapse models, \hyperpage{20}
@@ -118,7 +118,7 @@
 
   \indexspace
 
-  \item uncorrelated, \hyperpage{61}
+  \item uncorrelated, \hyperpage{64}
 
   \indexspace
 
