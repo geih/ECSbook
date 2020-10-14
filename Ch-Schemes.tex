@@ -1,9 +1,9 @@
-\section{Schemes for computing extracellular potentials from neural activity}
+\section{Self-consistent schemes for computing extracellular potentials from neural activity}
 \label{sec:Schemes}
 
 The extracellular potentials that we have analyzed so far have been computed using the two-step Hodgkin-Huxley-Cable + Volume Conductor (HHC+VC) scheme (Fig. \ref{Schemes:fig:schemes}A), which is based on the theory that we presented in Chapters \ref{sec:Neuron}-\ref{sec:Sigma}. 
 
-The HHC+VC scheme has two main limitations. Firstly, it is not self-consistent. That is, it does not compute the (intracellular) neurodynamics and the extracellular dynamics on a unified framework, and does therefore not account for so-called \textit{ephaptic effects} of extracellular variables (computed in step 2) on the neurodynamics (computed in step 1). Secondly, the HHC+VC scheme does not account for any effects that varying ion concentrations may have on the neurodynamics or on the extracellular potential, but implicitly assumes that all ion concentrations remain constant under the simulated period. 
+The HHC+VC scheme has two main limitations. Firstly, since it in Step 1 computes the neurodynamics under the assumption that the extracellular potential is constant (zero), and in Step 2 uses this neurodynamics to compute a non-zero extracellular potential, it is not self-consistent. As such, it does not account for so-called \textit{ephaptic effects} of extracellular variables (computed in step 2) on the neurodynamics (computed in Step 1). Secondly, the HHC+VC scheme does not account for any effects that varying ion concentrations may have on the neurodynamics or on the extracellular potential, but implicitly assumes that all ion concentrations remain constant under the simulated period. 
 
 In this chapter, we briefly summarize some alternative schemes (Fig. \ref{Schemes:fig:schemes}).
 Among all existing schemes, HHC+VC is the by far most "user-friendly" scheme, and is thought to be sufficient for most purposes. However, for purposes where it is not, one should consider using one of the alternative schemes, which account ion concentration effects on the extracellular potential (Fig. \ref{Schemes:fig:schemes}B), ephaptic feedback from extracellular dynamics on neurodynamics (Fig. \ref{Schemes:fig:schemes}C) or both (Fig. \ref{Schemes:fig:schemes}D).
@@ -13,26 +13,25 @@ Among all existing schemes, HHC+VC is the by far most "user-friendly" scheme, an
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Figures/Schemes/Schemes.png}
 \end{center}
-\caption{\textbf{Overview of schemes for computing extracellular dynamics.} The extracellular potential largely originates from neuronal transmembrane currents, illustrated for a simple (two-compartment) neuron, with currents that cross its membrane in the form of a current sink $I_1$ in one compartment, and a current source $I_2$ in the other (green arrows). {\textbf (A)}: HHC+VC: Two-step procedure which (step 1) computes transmembrane neural currents in an independent simulation using Hodgkin-Huxlley-Cable (HHC) formalism, and then (step 2) from these computes the extracellular potential using Volume Conductor (VC) theory. {\textbf (B)}: HHC + ED: Two-step scheme, which (step 1) computes currents and ion fluxes in an independent simulations based on HHC, and (step 2) from these computes the changes in the extracellular potential and ion concentrations using an electrodiffusive (ED) framework. {\textbf (C)}: VC + VC: Computes intracellular and extracellular electrodynamics simultaneously on a unified VC framework. Accounts for ephaptic effects, but assumes ion concentrations to be constant. {\textbf (D)}: ED + ED: Computes intracellular and extracellular ion concentration- and electrodynamics simultaneously on a unified electrodiffusive framework based on the Nernst-Planck equation. Account for ephaptic effects and ion-concentration dynamics. 
+\caption{\textbf{Overview of schemes for computing extracellular dynamics.} The extracellular potential largely originates from neuronal transmembrane currents, illustrated for a simple (two-compartment) neuron, with currents that cross its membrane in the form of a current sink $I_1$ in one compartment, and a current source $I_2$ in the other (green arrows). {\textbf (A)}: HHC+VC: Two-step procedure which (Step 1) computes transmembrane neural currents in an independent simulation using Hodgkin-Huxlley-Cable (HHC) formalism, and then (Step 2) from these computes the extracellular potential using Volume Conductor (VC) theory. {\textbf (B)}: HHC + ED: Two-step scheme, which (Step 1) computes currents and ion fluxes in an independent simulations based on HHC, and (Step 2) from these computes the changes in the extracellular potential and ion concentrations using an electrodiffusive (ED) framework. {\textbf (C)}: VC + VC: Computes intracellular and extracellular electrodynamics simultaneously on a unified VC framework. Accounts for ephaptic effects, but assumes ion concentrations to be constant. {\textbf (D)}: ED + ED: Computes intracellular and extracellular ion concentration- and electrodynamics simultaneously on a unified electrodiffusive framework based on the Nernst-Planck equation. Account for ephaptic effects and ion-concentration dynamics. 
 }
 \label{Schemes:fig:schemes}
 \end{figure}
 
-When organizing the content of Part 1 of this book, we mostly followed the principle that we first present the simplest operational model, and then follow up by expanding it to more general cases and discussions of the underlying assumptions. In the current chapter, we have done things the other way around. We present the complete, self-consistent electrodiffusive schemes first (Section \ref{sec:Schemes:complete}), and follow up with the less complete schemes (Sections \ref{sec:Schemes:KNP}-\ref{sec:Schemes:VC}), showing how these can be seen as reductions of the former. 
-
 
 %%%%%%%%%%%%%%%%%%
-
 
 \subsection{\blue{Self-consistent electrodiffusive schemes}}
 \label{sec:Schemes:complete}
 \index{Electrodiffusion}
+By necessity, the transmembrane ionic currents that mediate neurodynamics cause the intra- and extracellular ion concentrations to change. Under normal circumstances, these changes are limited to small deviances from baseline, since neurons and glial cells contain numerous homeostatic mechanisms that work continuously to restore baseline concentrations. However, during neuronal hyperactivity, or during several pathological conditions, the homeostatic machinery can fail to keep up, and ion concentrations may then change rather dramatically, both in the intra- and extracellular space \citep{Dietzel1989, Somjen2001, Frohlich2008, Zandt2015, Ayata2015}. This will in turn change the neuronal reversal potentials (cf. eq. \ref{Neuron:eq:revpots}), and through that alter the neuronal firing properties, something that has been the topic of several studies (see e.g., \citep{Qian1989, Cressman2009, Zandt2011, Oyehaug2012, WeiUllahSchiff2014, Saetra2020}). Local changes in extracellular concentrations will also give rise to diffusive currents along extracellular concentration gradients. These will in turn generate diffusion potentials. Under such circumstances, the extracellular potential ($\phi_e$) is not solely a function of cellular transmembrane currents (as assumed when using VC theory), but also contains contribution from extracellular diffusion \citep{Halnes2016}. 
+
 When modeling an electrodiffusive process, we keep track of the ion concentration dynamics of each individual ion species. The fundamental equation for doing that is the Nernst-Planck equation for the flux density (${\bf j_k}$ of an ion species $k$:
 \begin{equation}
 {\bf j_k} = - D_k {\bf \nabla} c_{k} - \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi, 
 \label{Schemes:eq:JNP}
 \end{equation}
-where ${D}_k$ is the diffusion constant (units $\mathrm{m^2/s}$), $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ (units V) is defined by the gas constant ($R$), Faraday's constant ($F$) and the temperature ($T$). The first term on the right is Fick's law for diffusion, while the second term accounts for ions migrating in the electric field. 
+where ${D}_k$ is the diffusion constant (units $\mathrm{m^2/s}$), $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ (units V) is defined by the gas constant ($R$), Faraday's constant ($F$) and the temperature ($T$). The first term on the right is Fick's law for diffusion, while the second term accounts for ions migrating in the electric field.  In eq. \ref{Schemes:eq:JNP}, the the electrical mobility of the ions is $D_k/\psi$, and thus linearly related to their diffusion constant. This relationship is called the Einstein relation \index{Einstein relation}, and is valid for dilute solutions such as the extracellular fluid \citep{Grodzinsky2011}.
 
 Ion conservation implies that:
 \begin{equation}
@@ -45,18 +44,44 @@ which combined with eq. \ref{Schemes:eq:JNP} gives us the Nernst-Planck continui
 \label{Schemes:eq:NP}
 \end{equation}
 
-In principle, we can compute all ionic concentrations and their coupling to the electrical potential by requiring that eq. \ref{Schemes:eq:NP} should be fulfilled at all points in space, i.e., both intra- and extracellularly. Eq. \ref{Schemes:eq:NP} then gives us one equation for each individual ion concentration $c_k$, and to solve the system of equations, we are in need an additional equation for the additional variable $\phi$, the electrical potential which couples the dynamics of the individual ion species. There are two main approaches to this, the so-called \textit{Poisson-Nernst-Planck (PNP)} framework, or the so-called \textit{electroneutral} \index{Electroneutral}framework, both of which we will introduce in the following subsections. 
+In principle, we can compute all ionic concentrations and their coupling to the electrical potential by requiring that eq. \ref{Schemes:eq:NP} should be fulfilled at all points in space, i.e., both intra- and extracellularly, and across the membrane. Eq. \ref{Schemes:eq:NP} then gives us one equation for each individual ion concentration $c_k$, and to solve the system of equations, we are in need an additional equation for the additional variable $\phi$, the electrical potential which couples the dynamics of the individual ion species. There are two main approaches to this, the so-called \textit{Poisson-Nernst-Planck (PNP)} framework, or the so-called \textit{electroneutral} framework, both of which we will introduce in the following subsections. 
+
+
+\subsubsection{\blue{What is a diffusion potential?}}
+\label{sec:Schemes:LJpot}
+\index{Diffusion potential}
+Before we start introducing electrodiffusive schemes, we may establish an intuitive understanding of the link between ion concentration dynamics and electric potentials by considering a simple two-compartment system with two ionic solutions interacting at a junction  (Fig. \ref{Schemes:fig:diffpot}). Let us assume that the left compartment contains a high-concentration solution of NaCl, while the right compartment contains a low-concentration solution of NaCl (Fig. \ref{Schemes:fig:diffpot}A). Initially, both compartments are electroneutral, i.e., they contain equal amounts of Na$^+$ and Cl$^-$. As no electrical forces are present, the initial system dynamics will be driven exclusively by diffusion. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Schemes/Diffusionpot.png}
+\end{center}
+\caption{\textbf{Diffusion potential at the junction between two ionic solutions}. ({\bf A}) Initial condition with high concentration NaCl in the left compartment and low concentration NaCl in the right compartment. ({\bf B}) Since $D_{Cl} > D_{Na}$, we initially expect the flux of Cl$^-$ to be higher than the flux of Na$^+$. ({\bf C}) The net charge transfer in ({\bf B}) will give rise to a potential difference $\phi_d$ between the two compartments, which will prevent further charge accumulation. }
+\label{Schemes:fig:diffpot}
+\end{figure}
+
+Without solving any equations, we realize both Na$^+$ and Cl$^-$ will diffuse towards the low-concentration compartment on the right-hand-side. The diffusion speed for the various ions will be proportional to their respective diffusion constants, which in dilute solutions have the values given in Table \ref{Sigma:tab:diffconsts}). As the Table shows, the diffusion constant for Cl$^-$, is higher than that for Na$^+$. This means that rightward diffusive flux of Cl$^-$ will initially be larger than that for Na$^+$  (Fig. \ref{Schemes:fig:diffpot}B). Hence, we have a charge separation process, which leads to an excess of positive charge in the left compartment and negative charge in the right compartment. As the left compartment becomes positively charged compared to the right compartment, a potential difference ($\Delta \phi_d$) between compartments. Since $\Delta \phi_d$ stems from a diffusion process, it is often called the \textit{diffusion potential} \index{Diffusion potential}. 
+
+The diffusion potential will counteract the on-going charge separation process by causing an electrical push on the anions (Cl$^-$) in the leftward direction, i.e., in the opposite direction from the diffusion of Cl$^-$. The net rightward flux of Cl$^-$ will therefore be reduced. Similarly, it causes a rightward pull on the cations (Na$^+$), thus increasing the net rightward flux of Na$^+$. The effect of the diffusion potential is thus to reduce the Cl$^-$ flux and increase the Na$^+$ flux. Once it is gets big enough, $\Delta \phi_d$ will stabilize the system in a so-called quasi-steady state, where the net fluxes of Na$^+$ and Cl$^-$ have the same magnitude, and no further charge separation will take place (Fig. \ref{Eldiff:fig:diffpot}C). It has been shown that, in the extracellular medium of the brain, it only takes in the order of 10 ns to reach this quasi-steady state \citep{Solbra2018}. In the quasi-steady state, $\Delta \phi_d$ will still vary with time (hence the term "quasi"), but then at the much slower time-scale of ion concentration variations, which normally takes seconds to minutes.
+
+Since it happens so fast, computer simulations of the charge separation process must be run with a sub-nanosecond time resolution. That makes such simulations computationally demanding, and not even feasible for large systems. Fortunately, one can for many purposes obtain accurate predictions of both $\Delta \phi_d$ and ion concentration dynamics by using an electroneutral mathematical framework that does not model the charge relaxation process explicitly, but instead derives the quasi-steady state potential analytically under the assumption that it is reached instantaneously. We shall introduce the modeling frameworks for electrodiffusive processes in the following sections. 
+
+We note that the diffusion potential arises due to differences in diffusion constants between different ions present  (cf. Table \ref{Sigma:tab:diffconsts}). If all ions had identical diffusion constants, there would be no charge separation and thus no diffusion potential. We also note that the diffusion potential is not something very exotic and new for this chapter. The reversal potential of an ion channel (eq. \ref{Neuron:eq:revpots}) is essentially a single-ion diffusion potential, and the leakage reversal potential (eq. \ref{Neuron:eq:Eleak_GHK}) is a diffusion potential depending on the differences in passive membrane permeabilities (playing the role of diffusion constants) of the various ion species.
+
+The diffusion potential is often called the \textit{liquid-junction potential} \index{Liquid-junction potential}, since it is most pronounced at the junction between to different ionic solutions \citep{Sokalski2001}. The liquid-junction potential ($\Delta \phi_{lj}$) is a familiar term for experimentalists performing patch clamp experiments. One then typically uses a pipette electrode filled with an ionic solution that resembles that of the intracellular medium. When the pipette pierces through brain tissue on its way to a target cell, it comes in contact with the extracellular solution. Through a process similar to that depicted in Fig. \ref{Eldiff:fig:diffpot}, only involving a larger number of different ions, a diffusion potential (with a typical magnitude of a few millivolts) is then instantly evoked at the junction between the pipette solution and the extracellular solution. This (roughly constant) potential difference over the pipette junction remains, and needs to be estimated and subtracted from the recordings of the cellular membrane potential.
+
+Whereas the Nernst-Potential and liquid junction potentials in patch clamping are somewhat familiar examples of diffusion potentials, diffusion potentials in the extracellular space tend to be smaller in magnitude, and have not been that much studied in neuroscience. Below, we will outline the physical theory for studying electrodiffusive processes.
 
 
 \subsubsection{\blue{The Poisson-Nernst-Planck (PNP) framework}}
 \label{sec:Schemes:PNP}
 \index{Poisson-Nernst-Planck equations}
-The physically most detailed approach for defining $\phi$ in the eq. \ref{Schemes:eq:NP}) is to use Poisson's equation from electrostatics:
+The physically most detailed approach for defining $\phi$ in eq. \ref{Schemes:eq:NP}) is to use Poisson's equation from electrostatics:
 \begin{equation}
 \nabla^2 \phi = -\rho/\epsilon
 \label{Schemes:eq:poisson}
 \end{equation}
-Here $\epsilon$ is the permittivity of the medium, and in the last step, we have expressed the local charge density $\rho$ as a function of the ionic concentrations. 
+Here $\epsilon$ is the (local) permittivity of the medium, and in the last step, we have expressed the local charge density $\rho$ as a function of the ionic concentrations. 
 \begin{equation}
 \rho =git  F\sum_k z_k c_k.
 \label{Schemes:eq:PNPrho}
@@ -64,15 +89,11 @@ Here $\epsilon$ is the permittivity of the medium, and in the last step, we have
 
 The PNP equations (eq. \ref{Eldiff:eq:NP} together with eq. \ref{Schemes:eq:poisson}) can in principle be solved for arbitrary complex geometries using numerical methods, like the Finite Element Method (FEM). 
 
-To apply the PNP scheme poses several challenges. Firstly, one needs to represent the geometry and properties of the cellular membranes. In principle, this could be achieved through having spatially and temporally varying diffusion coefficients $D_k$. Membranes would then be characterized with values of $D_k$ that are (i) lower than in the extra- or intracellular bulk solution, since diffusion through membranes is constricted compared to diffusion through the bulk solutions, (ii) different in different spatial directions (i.e., normal to membrane surface versus parallel to membrane surface), and (iii) time dependent due to the opening/closing of ion channels, and varying with 
+To apply the PNP scheme within a neuroscience context poses several challenges. Firstly, one needs to represent the geometry and properties of the cellular membranes. In principle, this could be achieved through having spatially and temporally varying diffusion coefficients $D_k$. However, the resolution with which one needed to represent $D_k$ would then be extremely high. Whereas $D_k$ could have a constant value in the intra- and extracellular bulk solutions, $D_k$ would over the membranes be (i) different in different spatial directions (i.e., normal to membrane surface versus parallel to membrane surface), (ii) vary with the very fine spatial resolution of an ion channel, and (iii) also be time dependent due to the opening/closing of ion channels. Unless the PNP scheme is applied to specifically model currents inside ion channels on a very small spatial scale (see e.g., \citep{Gardner2011, Zheng2011}), such a fine-grained tensor description of $D_k$ does not seem like a reasonable approach. 
 
-on a very fine spatial scale depending on whether or not there are ion channels present at a particular patch of membrane. 
+Instead, it is common to rather have the PNP equations being defined in two disjoint domains - the intra and extracellular - and to couple the dynamics in these two domains by introducing suitable boundary conditions at the membrane. In many applications, the membrane dynamics is then based on a Hodgkin-Huxley (HH) type formalism (c.f., Section \ref{sec:Neuron:membranecurrents}) also in PNP type modeling (see e.g., \citep{Lopreore2008, Pods2013, Gardner2015, Pods2017}). When applying a HH formalism in this context, all transmembrane currents are made ion specific, i.e., they are described in terms of ionic fluxes over the membrane, so that for example a Na$^+$ current density ($i_{Na}$) in the standard HH formalism would need to be replaced with a Na$^+$ flux density, $j_{Na} = i_{Na}/(Fz_k)$. The leakage current ($i_L$ in eq. \ref{Neuron:eq:HHleak}) is in standard HH applications non-specific in terms of which ions that mediate it, but will in a PNP context have to be made ion specific by decomposing it into specific leakage fluxes of the various ions that are involved (see e.g., \citep{Pods2013}). Apart from that, the HH formalism for membrane mechanisms can be applied in its original form also in an electrodiffusive context.
 
-Unless the PNP scheme is applied to specifically model currents inside ion channels on a very small spatial scale (see e.g., \citep{Gardner2011, Zheng2011}), such a fine-grained tensor description of $D_k$ will 
-
-it is common to rather have the PNP equations being defined in two disjoint domains - the intra and extracellular - and to couple the dynamics in these two domains by introducing suitable boundary conditions at the membrane manifold. In many applications, the membrane dynamics is then instead described using a Hodgkin-Huxley (HH) type formalism (c.f., Section \ref{sec:Neuron:membranecurrents}) also in PNP type modeling (see e.g., \citep{Lopreore2008, Pods2013, Gardner2015, Pods2017}). When applying a HH formalism in this context, all transmembrane currents must be made ion specific, i.e., they must be described in terms of ionic fluxes over the membrane, so that for example a Na$^+$ current density ($i_{Na}$) in the standard HH formalism would need to be replaced with a Na$^+$ flux density, $j_{Na} = i_{Na}/(Fz_k)$. Apart from that, the HH formalism for membrane mechanisms can be applied in its original form also in an electrodiffusive context.
-
-Secondly, solving the PNP system of equations is extremely computationally demanding. One reason for this is that the concentrations of ions in a finite volume of space are almost so that the net positive and negative charges outbalance, meaning that the medium is very close to electroneutral. A non-zero charge density ($\rho$) thus reflects a deviance from electronutrality, and it has been estimated that this deviance typically involves only a fraction $\sim 10^{-9}$ of the ions present \citep{Aguilella1987}. An accurate prediction of $\rho$ from eq. \ref{Schemes:eq:PNPrho} thus requires an extreme precision in the modeling of the ionic concentrations $c_k$. Another reason, as we discussed briefly in Section \ref{sec:Eldiff:LJpot}, is that the charge-relaxation time in the extracellular solution, i.e., the time scale that $\rho$ varies on, is in the order of nanoseconds. In addition, any non-zero charge density in neural tissue is predominantly resolved in nano-meter thick layers around neuronal membranes \citep{Grodzinsky2011, Gratiy2017}. Simulations of $\rho$ therefore require a spatiotemporal resolution smaller than nanometers and nanoseconds, and thus a very fine-grained description of the tissue where neuronal, glial and extracellular geometries are explicitly defined.
+A second challenge with the PNP system of equations is that solving them is extremely computationally demanding. One reason for this is that the concentrations of ions in a finite volume of space are almost so that the net positive and negative charges outbalance, meaning that the medium is very close to electroneutral. A non-zero charge density ($\rho$) thus reflects a deviance from electronutrality, and it has been estimated that this deviance typically involves only a fraction $\sim 10^{-9}$ of the ions present \citep{Aguilella1987}. An accurate prediction of $\rho$ from eq. \ref{Schemes:eq:PNPrho} thus requires an extreme precision in the modeling of the ionic concentrations $c_k$. Another, related, reason is that the charge-relaxation time in the extracellular solution, i.e., the time scale that $\rho$ varies on, is in the order of nanoseconds. In addition, any non-zero charge density in neural tissue is predominantly resolved in nano-meter thick layers around neuronal membranes \citep{Grodzinsky2011, Gratiy2017}. Simulations of $\rho$ therefore require a spatiotemporal resolution smaller than nanometers and nanoseconds, and thus a very fine-grained description of the tissue where neuronal, glial and extracellular geometries are explicitly defined.
 
 Due to its computational demand, the PNP framework is not suitable for estimating dynamics at the level of tissue, and the framework does not lend itself to be coarse-grained. Applications in neuroscience have therefore been limited to studies of electrodiffusive processes taking place on a very tiny spatiotemporal scale near and inside membranes (see e.g., \citep{Leonetti2004, Lu2007, Lopreore2008, Nanninga2008, Gardner2011, Zheng2011, Pods2013, Gardner2015}). See \citep{Savtchenko2017} for a review of applications in neuroscience.
 
@@ -91,42 +112,35 @@ F \sum_k{z_k \frac{\partial c_k}{\partial t}} = 0.
 \label{Schemes:eq:electroneutral2}
 \end{equation}
 
-The electroneutrality approximation (eq. \ref{Schemes:eq:electroneutral} or \ref{Schemes:eq:electroneutral2}) can be imposed as a constraint when solving eq.\ref{Schemes:eq:NP} by use of some numerical method. The constraint is then used to determine the value that $\phi$ must have for there to be no charge accumulation anywhere in the extracellular or intracellular bulk solutions, a problem which has a unique solution. 
+The electroneutrality approximation (eq. \ref{Schemes:eq:electroneutral} or \ref{Schemes:eq:electroneutral2}) can be imposed as a constraint when solving eq.\ref{Schemes:eq:NP} by use of some numerical method. The constraint is then used to determine what $\phi$ must be at all points in space for there to be no charge accumulation anywhere in the extracellular or intracellular bulk solutions.
 
-To explain how this differs from the PNP framework, we may use our previous cartoon example (Fig. \ref{Eldiff:fig:diffpot}) as a reference. While the PNP framework explicitly models the nanosecond-fast charge relaxation process (Fig. \ref{Eldiff:fig:diffpot}B), the electroneutral scheme circumvents this by assuming (and ensuring) that the system is always in quasi-steady (Fig. \ref{Eldiff:fig:diffpot}C). It has been shown that this is a good approximation on spatiotemporal scales larger than micrometers and microseconds \citep{Grodzinsky2011, Pods2017, Solbra2018}. The advantage with this approach is that it, unlike PNP, gives stable solutions with an arbitrary coarse spatiotemporal resolution.
+To explain how this differs from the PNP framework, we may use our previous cartoon example (Fig. \ref{Schemes:fig:diffpot}) as a reference. While the PNP framework explicitly models the nanosecond-fast charge relaxation process (Fig. \ref{Eldiff:fig:diffpot}B), the electroneutral scheme circumvents it by assuming (and ensuring) that the system is always in quasi-steady (Fig. \ref{Eldiff:fig:diffpot}C). It has been shown that this is a good approximation on spatiotemporal scales larger than micrometers and microseconds \citep{Grodzinsky2011, Pods2017, Solbra2018}. The advantage with this approach is that it, unlike PNP, gives stable solutions with an arbitrary coarse spatiotemporal resolution.
 
-We note that the electroneutrality constraint (eq. \ref{Schemes:eq:electroneutral} or \ref{Schemes:eq:electroneutral2}) only applies to the intra- and extracellular bulk solutions, so that the membrane dynamics must be dealt with separately. Firstly, one must define the equations that govern the membrane dynamics. A natural choice for this is, again, to use an ion-specific HH-like formalism \citep{Mori2006, Mori2009, Pods2017, ellingsrud2020}. 
+We note that the electroneutrality constraint (eq. \ref{Schemes:eq:electroneutral} or \ref{Schemes:eq:electroneutral2}) only applies to the intra- and extracellular bulk solutions, so that the membrane dynamics must be dealt with separately. Firstly, one must then define the equations that govern the membrane dynamics. A natural choice for this is, again, to use an ion-specific HH-like formalism \citep{Mori2006, Mori2009, Pods2017, ellingsrud2020}. 
 
-Secondly, the electroneutrality condition does not apply at the membrane, where a non-zero charge density ($\rho_{m}$) builds up the membrane potential according to the capacitor relationship:
+Secondly, the electroneutrality condition does not apply at the membrane, where a non-zero membrane (surface) charge density ($\eta^{mem}$ (C/m$^2$)) builds up the membrane potential according to the capacitor relationship:
 \begin{equation}
-C_m \phi_{m} = \pm \rho_{mr},
+c_m \phi_{m} = \pm \eta_{r}^{mem},
 \label{Schemes:eq:rhocap}
 \end{equation}
-where $r$ takes the indexes $i$ (intracellular side of the membrane) or $e$ (extracellular side of the membrane), and where the plus-sign should be used for $r=i$, and the minus-sign for $r=e$, a convention that follows from the definition $\phi_{m} = \phi_{i} - \phi_{e}$. The intra- and extracellular membrane charge densities in eq. \ref{Schemes:eq:rhocap} are equal in magnitude and opposite in sign, since the charge stored on one side of a capacitor always balances the charge stored on the other side. 
+or its temporal derivative: 
+\begin{equation}
+i_{cap} = \pm \frac{\partial \eta_{r}^{mem}}{\partial t},
+\label{Schemes:eq:rhocapt}
+\end{equation}
+Here, $c_m$ (F/m$^2$) in eq. \ref{Schemes:eq:rhocap} is the specific membrane capacitance, and the left hand side of eq. \ref{Schemes:eq:rhocapt} follows the definition is the capacitive membrane current density $i_{cap}$  (eq. \ref{Neuron:eq:HHcap}). In both equations, $r$ takes the indices $i$ (intracellular side of the membrane) or $e$ (extracellular side of the membrane), and the plus-sign should be used for $r=i$, and the minus-sign for $r=e$, a convention that follows from the definition $\phi_{m} = \phi_{i} - \phi_{e}$. The intra- and extracellular membrane charge densities in eq. \ref{Schemes:eq:rhocap} or their derivatives in \ref{Schemes:eq:rhocapt} are equal in magnitude and opposite in sign, since the charge stored on one side of a capacitor always balances the charge stored on the other side. 
 
-A technical challenge when implementing the electroneutral framework is that, while eq. \ref{Schemes:eq:rhocap} uniquely determines what  $\rho^{mr}$ must be for a given $\phi_{m}$, it does not uniquely determine the composition of ions that gives rise to this  $\rho^{mr}$. When implementing the electroneutral framework, one must keep track of all ionic movements, and therefore also make some assumption as to which ions that actually constitute the membrane charge. In previous implementations, two different approaches has been taken to this:
+For the electroneutrality constraint at the membrane (eq. \ref{Schemes:eq:rhocap} or \ref{Schemes:eq:rhocapt}) to be useful, $\eta_{r}^{mem}$ must be expressed in terms of the ion concentrations. That is, one needs an additional condition to specify the composition of ions that constitute $\eta_{r}^{mem}$ in eq. \ref{Schemes:eq:rhocap} or mediate $i_{cap}$ in eq. \ref{Schemes:eq:rhocapt}, so that ion conservation and a consistent charge-concentration relationship  at all points in space is ensured. Previous schemes for implementing the electroneutral framework vary somewhat in the approach taken to this:
 
 \begin{itemize}
+\item The electroneutral scheme with internal boundary conditions at membranes (ENM) used an assumption regarding the ion concentration profile building up the membrane charge $\eta_{r}^{mem}$  \citep{Mori2006, Mori2009, Pods2017}.
 
-\item In the approach (A1) taken by Mori and Peskin \citep{Mori2006, Mori2009}, also used by Pods \citep{Pods2017}, a set of additional state variables ($c_k^{mr}$) were defined for the membrane ion concentrations. These were defined so that they (i) summed up to the correct membrane charge density: 
-\begin{equation}
-\rho_{m}^r = F \sum_k z_k c_k^{mr},
-\label{Schemes:eq:rhomem}
-\end{equation}
-and (ii) so that the ratio between the membrane concentrations $c_k^{mr}$ of the various ion species $k$ was roughly the same as the ratio between the various species $c_k^r$ in the bulk solution close to the membrane on either side. 
-
-\item In the approach (A2) by Ellingsrud et al. \citep{ellingsrud2020}, which they there referred to as the Kirchhoff-Nernst-Planck + Extracellular-Membrane-Intracellular (KNP-EMI) scheme, the membrane boundary condition was instead based on (i) using the differential form of eq. \ref{Schemes:eq:rhocap}:
-\begin{equation}
-I_{cap}^r = \pm \frac{\partial \rho_{m}^r}{\partial dt}, 
-\label{Schemes:eq:rhocap2}
-\end{equation}
-where the left hand side followed from the definition of the capacitive membrane current (cf. eq. \ref{Neuron:eq:HHcap}). $I_{cap}$, which is given by the membrane potential dynamics computed with the a HH-type framework, was then (ii) made ion specific, and defined so that the ratio between the contributions ($I^k_{cap}$) from the various ion species $k$ was identical to the ratio between the various species $c_k^r$ in the bulk solution close to the membrane at either side.
+\item The Kirchhoff-Nernst-Planck (KNP) scheme used an assumption regarding how much various ion species contribute to the capacitive membrane current $i_{cap}$ \citep{ellingsrud2020}. 
 \end{itemize}
 
-Although they differ in implementation details, the two approaches (A1 and A2) should be close to equivalent from a physics point of view. In practice, only a very tiny fraction of the ions present are involved in building up the membrane potential, and the choice as to which ion species that actually constitute the membrane charge in eq. \ref{Schemes:eq:rhomem} or \ref{Schemes:eq:rhocap2} is probably quite unimportant for the overall system dynamics. The choice should rather be regarded as a technicality, made to ensure ion conservation and a consistent charge-concentration relationship at all points in space. 
+Although they differ in implementation details, the two electroneutral schemes (ENM and KNP) should be close to equivalent from a physics point of view, and both were constrained so that the membrane charges had more or less the same concentration profiles as the bulk solution close to the membrane at either side. In practice, only a very tiny fraction of the ions present are involved in building up the membrane potential, and the choice as to which ion species that actually constitute the membrane charge in eq. \ref{Schemes:eq:rhomem} or \ref{Schemes:eq:rhocap2} is probably quite unimportant for the overall system dynamics.
 
-Like the PNP scheme, both versions of the electroneutral scheme must be solved on some numerical framework using a suitable meshing of the tissue volume. While the electroneutral frameworks are computationally much more efficient than the PNP framework, they are still too heavy to allow for simulations of large systems of neurons described with explicit geometries on today's computers. To our knowledge, the largest system that so far has been simulated in 3D on an electroneutral framework is small piece of tissue containing a bundle of 9 axons described with idealized geometries \citep{ellingsrud2020}.
-
+Like the PNP scheme, both versions of the electroneutral scheme must be solved on some numerical framework. While the electroneutral frameworks are computationally much more efficient than the PNP framework, they are still too heavy to allow for simulations of large systems of neurons described with explicit geometries on today's computers. To our knowledge, the largest system that so far has been simulated in 3D on an electroneutral framework is small piece of tissue containing a bundle of 9 axons described with idealized geometries \citep{ellingsrud2020}.
 
 
 \subsubsection{\blue{Domain models}}
@@ -134,7 +148,11 @@ Like the PNP scheme, both versions of the electroneutral scheme must be solved o
 \index{Domain models}
 A different category of electroneutral models have been inspired from by the bi-domain model by Eisenberg \citep{eisenberg1970}, which has previously been used to simulate cardiac tissue \citep{henriquez1993, sundnes2006, Mori2008}. 
 
-In this category, the most advanced models for brain tissue are the tri-domain models, where three the domains represent (i) neurons, (ii) extracellular space, and (iii) a glial syncytium, i.e., a populations of gap-junction coupled glial cells \citep{OConnell2016, tuttle2019}. In the domain models, geometry is not explicitly accounted for. Instead, all domains "exist" at each point in space, and are defined through a set of domain-specific variables (e.g., domain-voltage, domain-ion concentrations, domain-volume fractions). The domains interact locally through a set of (Hodgkin-Huxley type) membrane mechanisms, while spatial electrodiffusive transports occurs within the domains. By assumption, ion transport through the glial syncytium equivalent to extracellular transport, i.e., it can occur in a spatially continuous fashion through a (tortous) intracellular space involving many interconnected cells. In contrast, neurons are "local" in the sense that no intracellular transport over distances occur within the neural domain (Fig.\ref{Schemes:fig:domainmodel}). 
+In this category, the most advanced models for brain tissue are the tri-domain models, where three the domains represent (i) neurons, (ii) extracellular space, and (iii) a glial syncytium, i.e., a populations of gap-junction coupled glial cells \citep{OConnell2016, tuttle2019}. Simpler, related models include the bi-domain model for neurons and extracellular space \citep{Mori2015}, or 1D models of glial K$^+$ buffering, where only the glial and extracellular domain were included \cite{Gardner-Medwin1983, Chen2000, Halnes2013}.
+
+The domain models do not model individual cells, but represents tissue as a (volume-averaged) continuum. All domains "exist" in parallel at each point in space, and are defined through a set of domain-specific variables (e.g., domain-voltage, domain-ion concentrations, domain-osmolarity, domain-volume fractions etc.). The domains interact locally through a set of (Hodgkin-Huxley type) membrane mechanisms, while spatial electrodiffusive transports may occur \textit{within} the domains. 
+
+In the tri-domain models \citep{OConnell2016, tuttle2019}, intra-domain ion transport was assumed to occur in the glial and extracellular domain, but not the neural domain. The rationale behind that assumption was that a type of glial cells called astrocytes tend to be gap-junction coupled into a syncytium. In the syncytium, the intracellular space is more or less continuous in the same way that the extracellular space is continuous. Transport processes within the syncytium is then equivalent to extracellular transport in the sense that both take place in a continuous, tortous space. In contrast, neurons do not form synciti, and are "local" in the sense that no intracellular transport over distances occur within the neural domain (Fig.\ref{Schemes:fig:domainmodel}). 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -145,12 +163,43 @@ In this category, the most advanced models for brain tissue are the tri-domain m
 \label{Schemes:fig:domainmodel}
 \end{figure}
 
-Simpler, related models include the bi-domain model for neurons and extracellular space \citep{Mori2015}, or 1D models of glial K$^+$ buffering, where only the glial and extracellular domain were included \cite{Gardner-Medwin1983, Chen2000, Halnes2013}.
-
-Domain models are suited to model brain dynamics taking place on a slow time-scale, such as the wave of K$^+$ and the slow, DC-like diffusion potentials and glial buffering potentials that take place during speading depression \citep{Mori2015, OConnell2016, tuttle2019}. As these models treat brain tissue as a homogeneous, coarse-grained continuum, they are not suited to model the faster fluctuations of extracellular potentials which are recorded in MUA, LFP and EEG, as these depend strongly on morphologies of neurons \citep{Einevoll2013}. 
+Domain models are suited to model brain dynamics taking place on large spatiotemporal scale, such as the wave of K$^+$ and the slow, DC-like diffusion potentials and glial buffering potentials that take place during the pathology of spreading depression \citep{Mori2015, OConnell2016, tuttle2019}. As these models treat brain tissue as a homogeneous, coarse-grained continuum, they are not suited to model the faster fluctuations of extracellular potentials which are recorded in MUA, LFP and EEG, as these depend strongly on morphologies of neurons \citep{Einevoll2013}. 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{\blue{Two-step scheme for extracellular electrodiffusion surrounding active neurons}}
+\label{sec:Schemes:KNP}
+In the two-step, Hodgkin-Huxley-Cable + Kirchhoff-Nernst-Planck (HHC+KNP), scheme, the neurodynamics is computed in an independent step (Step 1), and assumed to be unaffected by whatever goes on in the extracellular space. In the next step (Step 2), the neuronal transmembrane output is treated as an "external input" source to the extracellular medium \citep{Halnes2016, Solbra2018}. 
+
+The HHC+KNP scheme thus adopts the approach of the standard HHC+VC framework (Chapter \ref{sec:LFPy}), but with the volume conductor theory used in the latter replaced with the electroneutral electrodiffusive Kirchhoff-Nernst-Planck (KNP) framework \citep{Halnes2016, Solbra2018, ellingsrud2020}. 
+
+Compared to the self-consistent electrodiffusive schemes presented in Section \ref{sec:Schemes:complete}, the HHC+KNP scheme is less computationally demanding, and lends itself to be combined with HHC-simulations of morphologically detailed neuron models. However, like the HHC+VC scheme, the HHC+KNP scheme is not self-consistent, and it does not account for any feedback effects from the extracellular ion concentrations ($c_k$) or potential ($\phi$) on the neurodynamics.
+
+The HHC+KNP scheme can be summarized as follows:
+
+\begin{itemize}
+\item {\bf Step 1:} Compute neurodynamics using a standard HHC-type framework (Chapter \ref{sec:Neuron}). Unlike in the standard HHC+VC scheme, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the HHC+KNP scheme requires that all neural sources are expressed as a set of ion specific sources, i.e., one source $f_k$ per ion species $k$ and an additional capacitive neuronal membrane current source density, $f_{cap}$ (proportional to $i_{cap}$ in eq. \ref{Schemes:eq:rhocapt}), the only source term not accounted for in the set $f_k$.
+
+\item {\bf Step 2:} Use the electrodiffusive KNP framework to compute the dynamics of $c_k$ and $\phi$ in the extracellular space when "receiving" input from discrete neuronal sources computed in Step 1. The Nernst-Planck continuity equation (eq. \ref{Schemes:eq:NP}) is then applied exclusively to the extracellular space, and the neural output is expressed as a source term ($f_k$):
+\begin{equation}
+\frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[ \tilde{D}_k {\bf \nabla} c_k + \frac{\tilde{D}_k z_k c_k}{\psi} {\bf \nabla} \phi \right] + f_k, 
+\label{Schemes:eq:NPe}
+\end{equation}
+where $\tilde{D}_k$ denotes the effective extracellular diffusion constant for an ion species $k$. This equation can be solved when combined with an electroneutrality constraint such as that in the 
+eq. \ref{Schemes:eq:electroneutral2} for the bulk solution and eq. \ref{Schemes:eq:rhocapt} at the membrane. 
+\end{itemize}
+
+The HHC+KNP scheme accounts for the effects that extracellular diffusive currents have on $\phi$.
+The standard HHC+VC scheme assumes that these effects are negligible (as discussed in Section \ref{sec:VC:onlyohmic}), and in the next chapter we will use the HHC+KNP scheme to examine the warranty of this assumption in various scenarios. We will there also present the HHC+KNP scheme in further detail, and the definition and use of the source terms  $f_{cap}$ and  $f_k$, and the intepretation of the effective diffusion constant $\tilde{D}_k$ will be made clear there. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Figures/Eldiff/KNP.png}
+\end{center}
+\caption{\textbf{KNP scheme}. Blue star: Mesh cell containing no neuronal sources, so that $C=0$. Red star: Mesh cell containing neural sources. Here $C$ can be computed by summing over all neuronal transmembrane currents, including the capacitive current, and dividing by the volume of the mesh cell. \ghnote{LAGE LITT MER INFORMATIV FIG HER OM VI SKAL HA FIG HER.}}
+\label{Eldiff:fig:KNPmesh}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,62 +221,5 @@ Using VC+VC to simulate larger systems with realistic morphologies would probabl
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{\blue{Two-step scheme: Hodgkin-Huxley-Cable + Electrodiffusion}}
-\label{sec:Schemes:KNP}
-By necessity, the transmembrane ionic currents that mediate neurodynamics will lead to changes in the intra- and extracellular ion concentrations. Under normal circumstances, these changes are limited to small deviances from baseline, since neurons and glial cells contain numerous homeostatic mechanisms that work continuously to restore baseline concentrations. However, during neuronal hyperactivity, or during several pathological conditions, the homeostatic machinery can fail to keep up, and ion concentrations may then change rather dramatically, both in the intra- and extracellular space \citep{Dietzel1989, Somjen2001, Frohlich2008, Zandt2015, Ayata2015}. This will in turn change the neuronal reversal potentials (cf. eq. \ref{Neuron:eq:revpots}), and through that alter the neuronal firing properties, something that has been the topic of several studies (see e.g., \citep{Qian1989, Cressman2009, Zandt2011, Oyehaug2012, WeiUllahSchiff2014, Saetra2020}). Local changes in extracellular concentrations will also give rise to diffusive currents along extracellular concentration gradients. These will in turn generate diffusion potentials. Under such circumstances, the extracellular potential ($\phi_e$) is not solely a function of cellular transmembrane currents (as assumed when using VC theory), but also contains contribution from extracellular diffusion \citep{Halnes2016}. 
-
-The HHC+ED scheme is a two-step scheme developed to compute the dynamics in the extracellular space, when when "receiving" input from discrete neuronal sources. Like the standard HHC+VC-scheme, the HHC+ED does not account for any feedback effects from the $\phi_e$ or ion concentrations on the neurodynamics. However, unlike the standard HHC+VC scheme, it computes the dynamics of extracellular ion concentrations and accounts for their effects on $\phi_e$. In the one existing implementation of this scheme, the extracellular dynamics was computed using the so-called electroneutral \index{Electroneutral} electrodiffusive \index{Electrodiffusion} Kirchhoff-Nernst-Planck (KNP) framework \citep{Solbra2018}. 
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{Figures/Eldiff/KNP.png}
-\end{center}
-\caption{\textbf{KNP scheme}. Blue star: Mesh cell containing no neuronal sources, so that $C=0$. Red star: Mesh cell containing neural sources. Here $C$ can be computed by summing over all neuronal transmembrane currents, including the capacitive current, and dividing by the volume of the mesh cell. \ghnote{LAGE LITT MER INFORMATIV FIG HER OM VI SKAL HA FIG HER.}}
-\label{Eldiff:fig:KNPmesh}
-\end{figure}
-
-The HHC+ED can be summarized as follows:
-
-\begin{itemize}
-\item {\bf Step 1:} Compute neurodynamics using a standard HHC-type framework (Chapter \ref{sec:Neuron}). Unlike in the standard HHC+VC scheme, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the HHC+ED scheme requires that all neural sources are expressed as a set of ion specific fluxes, i.e., one source $f_k$ per ion species $k$ and an additional capacitive neuronal membrane current source density, $C_{cap}$, the only source term not accounted for in the set $f_k$.
-
-\item {\bf Step 2:} Use the electrodiffusive KNP framework to compute the voltage and ion concentration dynamics in the extracellular space, when "receiving" input from discrete neuronal sources computed in Step 1.
-\end{itemize}
-
-The KNP scheme used in (Step 2) is a method for solving the extracellular ion concentration dynamics that we introduced in Chapter \ref{sec:Eldiff}, and the fundamental equation: 
-\begin{equation}
-\alpha \frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[ \tilde{D_k} {\bf \nabla} c_k + \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi \right] + f_k,
-\label{Schemes:eq:NPe}
-\end{equation}
-is the Nernst-Planck equation in on the same form that we used earlier (eq. \ref{Eldiff:eq:NPe}). We recall that $\alpha$ is the extracellular volume fraction, and $\tilde{D_k}$ is the effective diffusion constant for ions in the (coarse-grained) extracellular space. As all variables are extracellular, we have skipped the indexing. 
-
-To solve this set of equations (one instance of eq. \ref{Eldiff:eq:NPe} for each ion species $k$), we need an additional constraint for the additional variable $\phi$. To account for capacitive sources, i.e., charge accumulation at neural membranes, we use the constraint:
-\begin{equation}
-\alpha F \sum_k{z_k \frac{\partial c_k}{\partial t}} = C_{cap},
-\label{Schemes:eq:electroneutral3}
-\end{equation}
-where the (neural) capacitive current source density:
-\begin{equation}
-C_{cap} = {\alpha}\frac{\partial \rho_{mem}}{\partial dt},
-\label{Schemes:eq:Andreas}
-\end{equation}
-reflects the membrane potential dynamics of a neuron due to charge accumulating on the membrane surface. As $C_{cap}$ is zero at all locations where there is no neuronal membrane source, the bulk solution of the extracellular space will be electroneutral, i.e., the ionic concentrations will sum up to a zero charge density:
-\begin{equation}
-\sum_k{z_k \frac{\partial c_k}{\partial t}} = 0.
-\label{Schemes:eq:electroneutral4}
-\end{equation}
-We will comment further on the electroneutrality condition in Section \ref{sec:Schemes:complete}.
-
-The constraint in eq. \ref{Schemes:eq:electroneutral3} was essentially what we used in Chapter \ref{sec:Eldiff} to get from eq. \ref{Eldiff:eq:chargecontinuity} to eq. \ref{Eldiff:eq:eldiffCSD2}. The KNP scheme thus uses Eq. \ref{Eldiff:eq:eldiffCSD2} with $C$ as defined in eq.  \ref{Eldiff:eq:CSDdecomposed} to to derive $\phi$:
-\begin{equation}
-\nabla \cdot (\sigma\nabla\phi) = - F \sum_k z_k f_k -  C_{cap} - F\alpha \nabla \cdot \left (\sum_k{z_k \tilde{D_k}{\bf \nabla} c_{k}} \right).
-\label{Schemes:eq:KNPfinal}
-\end{equation}
-Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, and with that, the Nernst-Planck equations (eq. \ref{Schemes:eq:NPe}) can be solved on a suitable numerical framework.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

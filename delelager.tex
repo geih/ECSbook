@@ -226,9 +226,59 @@ We note that there are two commonly used conventions for defining the variables 
 
 
 
+To solve this set of equations (one instance of eq. \ref{Eldiff:eq:NPe} for each ion species $k$), we need an additional constraint for the additional variable $\phi$. For this, we use the assumption that the bulk solution should be electroneutral, but do account for charge accumulation at neural membranes (cf. eq. \refl{Schemes:eq:rhocap}). In the HHC+ED framework, this constraint is expressed as:
+\begin{equation}
+F \sum_k{z_k \frac{\partial c_k}{\partial t}} = C_e^{cap},
+\label{Schemes:eq:electroneutral3}
+\end{equation}
+where the (neural) capacitive current source density:
+\begin{equation}
+C_e^{cap} = {\alpha}\frac{\partial \rho_e^{mem}}{\partial dt},
+\label{Schemes:eq:Andreas}
+\end{equation}
+reflects the membrane potential dynamics of a neuron due to charge accumulating on the external membrane surface. As $C_e^{cap}$ is zero at all locations where there is no neuronal membrane source, the bulk solution of the extracellular space will be electroneutral.
+
+
+The scheme (S1) used by Mori and Peskin \citep{Mori2006, Mori2009}, also used by Pods \citep{Pods2017}, was based on introducing additional state variables for the ion concentrations building up the membrane charge. 
+
+
+were defined to keep track of the ions building up the charge stored inside the membrane Debye layer. The membrane concentrations were then derived as a function of the concentration profile immediately outside the membrane, and constrained so that it they summed up to the correct membrane charge density (\eta_{mr} in eq. \ref{Schemes:eq:rhocap}).
+
+In the scheme (S2) used by Ellingsrud et al. \citep{ellingsrud2020} which they there referred to as the Kirchhoff-Nernst-Planck + Extracellular-Membrane-Intracellular (KNP-EMI) scheme, the membrane boundary condition was instead based on letting $i_{cap}$ in eq. \ref{Schemes:eq:rhocapt} be defined so that the contributions ($i^k_{cap}$) from the various ion species $k$ were of the same ratio as their concentrations $c_k^r$ in the bulk solution close to the membrane at either side. The membrane charge was not introduced as additional state variables, but represented as a nonzero charge accumulation in the bulk solution immediately inside and outside the membrane. 
+
+
+\item In the approach (A2) by Ellingsrud et al. \citep{ellingsrud2020}, which they there referred to as the Kirchhoff-Nernst-Planck + Extracellular-Membrane-Intracellular (KNP-EMI) scheme, the membrane boundary condition was instead based on (i) using the differential form of eq. \ref{Schemes:eq:rhocap}:
+\begin{equation}
+I_{cap}^r = \pm \frac{\partial \rho_{m}^r}{\partial dt}, 
+\label{Schemes:eq:rhocap2}
+\end{equation}
+where the left hand side followed from the definition of the capacitive membrane current (cf. eq. \ref{Neuron:eq:HHcap}). $I_{cap}$, which is given by the membrane potential dynamics computed with the a HH-type framework, was then (ii) made ion specific, and defined so that the ratio between the contributions ($I^k_{cap}$) from the various ion species $k$ was identical to the ratio between the various species $c_k^r$ in the bulk solution close to the membrane at either side.
+\end{itemize}
 
 
 
+
+
+To solve this set of equations (one instance of eq. \ref{Eldiff:eq:NPe} for each ion species $k$), we need an additional constraint for the additional variable $\phi$. For this, we use the assumption that the bulk solution should be electroneutral, but do account for charge accumulation at neural membranes (cf. eq. \refl{Schemes:eq:rhocapt}). In the HHC+KNP scheme, this constraint is expressed as:
+\begin{equation}
+F \sum_k{z_k \frac{\partial c_k}{\partial t}} = f_{cap},
+\label{Schemes:eq:electroneutral3}
+\end{equation}
+where the (neural) capacitive current source density:
+\begin{equation}
+f_{cap} = \frac{\partial \rho_e^{mem}}{\partial dt},
+\label{Schemes:eq:Andreas}
+\end{equation}
+reflects the membrane potential dynamics of a neuron due to charge accumulating on the external membrane surface. Eq. \ref{Schemes:eq:Andreas} is the same as eq. \ref{Schemes:eq:rhocapt}, but with extracellular surface charge density $\eta_e^{mem}$ (C/m$^2$) converted to a volume charge density, $ \rho_e^{mem}$ (C/m$^3$), defined as the total extracellular membrane charge within a piece of tissue, divided by extracellular volume in this piece of tissue. As $f_{cap}$ is zero at all locations where there is no neuronal membrane source, the bulk solution of the extracellular space will be electroneutral.
+
+\subsubsection{\blue{Kirchhoff-Nernst-Planck framework for extracellular electrodiffusion}}
+
+The constraint in eq. \ref{Schemes:eq:electroneutral3} was essentially what we used in Chapter \ref{sec:Eldiff} to get from eq. \ref{Eldiff:eq:chargecontinuity} to eq. \ref{Eldiff:eq:eldiffCSD2}. The KNP scheme thus uses Eq. \ref{Eldiff:eq:eldiffCSD2} with $C$ as defined in eq.  \ref{Eldiff:eq:CSDdecomposed} to to derive $\phi$:
+\begin{equation}
+\nabla \cdot (\sigma\nabla\phi) = - F \sum_k z_k f_k -  C_{cap} - F\alpha \nabla \cdot \left (\sum_k{z_k \tilde{D_k}{\bf \nabla} c_{k}} \right).
+\label{Schemes:eq:KNPfinal}
+\end{equation}
+Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, and with that, the Nernst-Planck equations (eq. \ref{Schemes:eq:NPe}) can be solved on a suitable numerical framework.
 
 
 

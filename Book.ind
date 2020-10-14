@@ -32,7 +32,7 @@
   \item Diffusive current, \hyperpage{39}
   \item Dipole approximation, \hyperpage{35}
   \item Disc-electrode approximation, \hyperpage{37}
-  \item Domain models, \hyperpage{89}
+  \item Domain models, \hyperpage{87}
 
   \indexspace
 
@@ -41,10 +41,10 @@
   \item Electrode model, \hyperpage{36}
   \item Electrode polarization, \hyperpage{37}
   \item Electrodiffusion, \hyperpage{27}, \hyperpage{75}, 
-		\hyperpage{84}, \hyperpage{86}
-  \item Electroneutral, \hyperpage{84}, \hyperpage{86, 87}
+		\hyperpage{84}, \hyperpage{89}
+  \item Electroneutral, \hyperpage{84, 85}, \hyperpage{89}
   \item Ephaptic effects, \hyperpage{30}, \hyperpage{40}, 
-		\hyperpage{84}
+		\hyperpage{88}
   \item Extracellular medium, \hyperpage{42}
     \subitem  Linear, \hyperpage{39}
   \item Extracellular solution, \hyperpage{42}
@@ -92,7 +92,7 @@
   \item Point neuron model, \hyperpage{47}
   \item Point source approximation, \hyperpage{32}
   \item Point-electrode, \hyperpage{37}
-  \item Poisson-Nernst-Planck equations, \hyperpage{86}
+  \item Poisson-Nernst-Planck equations, \hyperpage{84}
   \item Porous medium, \hyperpage{41}, \hyperpage{76}
 
   \indexspace

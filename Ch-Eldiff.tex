@@ -1,103 +1,82 @@
 \section{Electrodiffusion in the extracellular space}
 \label{sec:Eldiff}
 \index{Electrodiffusion}
-In the standard VC theory presented in Chapter \ref{sec:VC}), we assumed that extracellular currents, and thus extracellular potentials, are exclusively due to ohmic drift. However, when ion concentrations are present in the extracellular space, there will also be diffusive currents present, which can evoke so called diffusion potentials. 
+What we will work with in this Chapter, is the two-step, Hodgkin-Huxley-Cable + Kirchhoff-Nernst-Planck (HHC+KNP) scheme that we briefly introduced in Section \ref{sec:Schemes:KNP}. This scheme allows us to combine HHC-type simulations of morphologically detailed neurons with electrodiffusive dynamics of the ion concentrations $c_k$ and electric potential $\phi$ in the extracellular space surrounding such neurons. 
 
-In this chapter, we will introduce a more general, electrodiffusive theory for extracellular dynamics, which accounts effects of ionic diffusion as well as ohmic drift. However, before we present the electrodiffusive theory, we will try to get an intuition of how diffusion potentials arise.
+In the HHC+ED scheme, the neurodynamics is computed in an independent step (Step 1), and assumed to be unaffected by whatever goes on in the extracellular space. In the next step (Step 2), the neuronal transmembrane output is treated as an "external input" source to the extracellular medium. The HHC+ED scheme thus adopts the approach of the standard HHC+VC framework (Chapter \ref{sec:LFPy}), but with the volume conductor theory used in the latter replaced with an electroneutral electrodiffusive framework, which in the existing implementations was called the Kirchhof-Nernst-Planck (KNP) framework \citep{Halnes2016, Solbra2018}. Like the standard HHC+VC-scheme, the HHC+ED does not account for any feedback effects from the $\phi$ or ion concentrations on the neurodynamics.
 
-
-
-\subsection{\blue{What is a diffusion potential?}}
-\label{sec:Eldiff:LJpot}
-\index{Diffusion potential}
-We can get an intuitive understanding of what a diffusion potential is by considering a simple two-compartment system with two ionic solutions interacting at a junction  (Fig. \ref{Eldiff:fig:diffpot}). Let us assume that the left compartment contains a high concentration of NaCl, while the right compartment contains a lower concentration of NaCl (Fig. \ref{Eldiff:fig:diffpot}A). Initially, both compartments are electroneutral, i.e., they contain equal amounts of Na$^+$ and Cl$^-$. As no electrical forces are present, the initial system dynamics will be driven exclusively by diffusion. 
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.8\textwidth]{Figures/Eldiff/Diffusionpot.png}
-\end{center}
-\caption{\textbf{Diffusion potential at the junction between two ionic solutions}. ({\bf A}) Initial condition with high concentration NaCl in the left compartment and low concentration NaCl in the right compartment. ({\bf B}) Since $D_{Cl} > D_{Na}$, we initially expect the flux of Cl$^-$ to be higher than the flux of Na$^+$. ({\bf C}) The net charge transfer in ({\bf B}) will give rise to a potential difference $\phi_d$ between the two compartments, which will prevent further charge accumulation. }
-\label{Eldiff:fig:diffpot}
-\end{figure}
-
-Without solving any equations, we realize both Na$^+$ and Cl$^-$ will diffuse towards the low-concentration compartment on the right-hand-side. The diffusion speed for the various ions will be proportional to their respective diffusion constants, which in dilute solutions have the values given in Table \ref{Sigma:tab:diffconsts}). As the Table shows, the diffusion constant for Cl$^-$, is higher than that for Na$^+$. This means that rightward diffusive flux of Cl$^-$ will initially be larger than that for Na$^+$  (Fig. \ref{Eldiff:fig:diffpot}B). 
-
-The fact that we initially have a higher diffusive flux of anions than of cations is quite dramatic. A charge-separation process like that will lead to an excess of positive charge in the left compartment and negative charge in the right compartment. In turn, this will give rise to a potential difference ($\Delta \phi_d$) between compartments. Since $\Delta \phi_d$ stems from a diffusion process, it is often called the diffusion potential. 
-
-The diffusion potential will counteract the on-going charge separation process. That is, it will cause an electrical drift of anions (Cl$^-$) in the leftward direction, i.e., in the opposite direction from the diffusion of Cl$^-$. The net rightward flux of Cl$^-$ will therefore be reduced. Oppositely, it will cause a rightward drift of cations (Na$^+$), thus increasing the net rightward flux of Na$^+$. The effect of the diffusion potential is thus to reduce the Cl$^-$ flux and increase the Na$^+$ flux. Once it is gets big enough, $\Delta \phi_d$ will stabilize the system in a so-called quasi-steady state, where the net fluxes of Na$^+$ and Cl$^-$ have the same magnitude, and there will no longer will take place any net charge transfer (Fig. \ref{Eldiff:fig:diffpot}C). It has been shown that, in the extracellular medium of the brain, it only takes in the order of 10 ns to reach this quasi-steady state \citep{Solbra2018}. In the quasi-steady state, $\Delta \phi_d$ will still vary with time (hence the term "quasi"), but then at the much slower time-scale of ion concentration variations, which normally takes seconds to minutes.
-
-To model the charge separation process taking place on a timescale, one need to run simulations with a sub-nanosecond time resolution, which is computationally demanding, and not even feasible for large systems. Fortunately, one can for many purposes obtain accurate predictions of both $\Delta \phi_d$ and ion concentration dynamics by using an electroneutral mathematical framework that does not model the charge relaxation process explicitly, but instead derives the quasi-steady state potential analytically under the assumption that it is reached instantaneously \citep{Solbra2018}. We shall introduce the modelling frameworks for electrodiffusive processes later on.
-
-We note that the diffusion potential arises due to differences in diffusion constants between different ions present  (cf. Table \ref{Sigma:tab:diffconsts}). If all ions had identical diffusion constants, there would be no charge separation and thus no diffusion potential. We also note that the diffusion potential is not something very exotic and new for this chapter. The reversal potential of an ion channel (eq. \ref{Neuron:eq:revpots}) is essentially a single-ion diffusion potential, and the leakage reversal potential (eq. \ref{Neuron:eq:Eleak_GHK}) is a diffusion potential depending on the differences in passive membrane permeabilities (playing the role of diffusion constants) of the various ion species.
-
-The diffusion potential is often called the liquid-junction potential, since it is most pronounced at the junction between to different ionic solutions \citep{Sokalski2001}. The liquid-junction potential ($\Delta \phi_{lj}$) is a familiar term for experimentalists performing patch clamp experiments. One then typically uses a pipette electrode filled with a ionic solution that resembles that of the intracellular medium. When the pipette pierces through brain tissue on its way to a target cell, it comes in contact with the extracellular solution. Through a process similar to that depicted in Fig. \ref{Eldiff:fig:diffpot}, only involving a larger number of different ions, a diffusion potential (with a typical magnitude of a few millivolts) is then instantly evoked at the junction between the pipette solution and the extracellular solution. This (roughly constant) potential difference over the pipette junction remains, and needs to be estimated and subtracted from the recordings of the cellular membrane potential.
-
-Whereas the Nernst-Potential and liquid junction potentials in patch clamping are somewhat familiar examples of diffusion potentials, diffusion potentials in the extracellular space tend to be smaller in magnitude, and have not been that much studied in neuroscience. Below we will outline the physical theory for studying electrodiffusive processes, but before starting, we need to make some comments on the medium that we consider. 
+The KNP scheme used in step 2 is a method for solving the extracellular ion concentration dynamics based on the the fundamental Nernst-Planck continuity equation, and will be presented in further detail below. Before doing so, however, we need to define our extracellular medium at the coarse-grained scale that we are interested in. 
 
 
 \subsection{\blue{Continuous, porous medium approximation for electrodiffusion}}
 \label{sec:Eldiff:porous}
 \index{Continuous medium}
 \index{Porous medium}
-In Chapter \ref{sec:Sigma}, we introduced the continuous, porous medium approximation for coarse grained transports in brain tissue, and will use a similar approximation for electrodiffusive processes. However, unlike what we did in Chapter \ref{sec:Sigma}, where our reference volume was the tissue as a whole, we shall here follow the convention that we use only the fraction $\alpha$ of tissue that is extracellular space as our reference volume \citep{Nicholson2001}. All extracellular variables will then be defined relative to the actual volume that they exist in. The relevant variables, as defined through this convention, are: 
+In Chapter \ref{sec:Sigma}, we introduced the continuous, porous medium approximation for coarse grained transports in brain tissue. A similar approximation can be used for extracellular electrodiffusive processes. 
+
+Unlike what we did in Chapter \ref{sec:Sigma}, where our reference volume was the tissue as a whole, we shall here follow the convention that we use only the fraction $\alpha$ of tissue that is extracellular space as our reference volume \citep{Chen2000}. If we define all extracellular variables relative to the actual volume that they exist in, they can be defined as:
+
+\ghnote{Kanskje en figur for pedagogikkens skyld.}
+
 
 \begin{itemize}
-\item $c_k$ (units $\mathrm{mol/m^3}$ = mM) will denote the extracellular concentration of an ion species $k$, defined as the number of extracellular ions of species $k$ (in mol) per extracellular volume unit (which is a fraction $\alpha$ of the tissue volume unit).
+\item $c_k$ (units $\mathrm{mol/m^3}$ = mM) is the extracellular concentration of an ion species $k$, defined as the number of extracellular ions of species $k$ (in mol) per extracellular volume unit (which is a fraction $\alpha$ of the tissue volume unit).
 
-\item ${\bf j_k}$ (units $mol/\mathrm{m^2s}$) will denote the extracellular flux density of an ion species $k$, defined as the number of extracellular ions (in mols) per extracellular unit cross- section area (which is a fraction $\alpha$ of a unit tissue cross-section area) per second.
+\item $\rho_e$ (units $\mathrm{C/m^3}$) is the extracellular charge density
+concentration of an ion species $k$, defined as the number of extracellular ions of species $k$ (in mol) per extracellular volume unit (which is a fraction $\alpha$ of the tissue volume unit).
 
-\item  ${\bf i_e}$ (units $\mathrm{A/m^2}$) will denote the extracellular current density, defined as extracellular current per per extracellular unit cross-section area. In comparison, the current density ${\bf i}$ in Chapter \ref{sec:VC} was defined as extracellular current per unit tissue cross-section area, which means that ${\bf i_e} = {\bf i}/\alpha$.
+\item ${\bf j_k}$ (units $mol/\mathrm{m^2s}$) is the extracellular flux density of an ion species $k$, defined as the number of extracellular ions (in mols) crossing an extracellular unit cross- section area (which is a fraction $\alpha$ of a unit tissue cross-section area) per second.
 
-\item $\tilde{D}_k$ (units $\mathrm{m^2/s}$) will denote the effective diffusion constant \index{Diffusion constant} for ion species $k$ in the extracellular medium. It is defined so that the diffusive flux is given by ${\bf j_k^{diff}} = -\tilde{D}_k \nabla c_k$. The effective diffusion constant accounts for the fact that diffusing ions face obstacles (neurites) along their path forcing them take detours, reflected through a tortuosity $\lambda$ \citep{Nicholson1998}, and is given by:
+\item  ${\bf i_e}$ (units $\mathrm{A/m^2}$) is the extracellular current density, defined as extracellular current per per extracellular unit cross-section area. In comparison, the current density ${\bf i}$ in Chapter \ref{sec:VC} was defined as extracellular current per unit tissue cross-section area, which means that ${\bf i_e} = {\bf i}/\alpha$.
+
+\item $\tilde{D}_k$ (units $\mathrm{m^2/s}$) is the effective diffusion constant \index{Diffusion constant} for ion species $k$ in the extracellular medium. It is defined so that the diffusive flux is given by ${\bf j_k^{diff}} = -\tilde{D}_k \nabla c_k$ \citep{nicholson2001}. The effective diffusion constant accounts for the fact that diffusing ions face obstacles (neurites) along their path forcing them take detours, reflected through a tortuosity $\lambda$ which has a value of about 
+$1.6$ in the extracellular space \citep{Nicholson1998}. The effective diffusion constant is given by:
 \begin{equation}
 \tilde{D_k} = \frac{D_k}{\lambda^2}, 
 \label{Eldiff:eq:diffconst}
 \end{equation}
-where $D_k$ is the diffusion constant for an ion species $k$ in the pure (unhindered) extracellular solution. The fact that diffusing ions are confined the stay only in the extracellular volume fraction $\alpha$ is already accounted for in the flux definition.
+where $D_k$ is the diffusion constant for an ion species $k$ in the pure (unhindered) extracellular solution. The fact that diffusing ions are confined the stay only in the extracellular volume fraction $\alpha$ is already accounted for in the flux definition. 
 
-\item $\sigma_e$ (units S/m) will denote the tissue averaged extracellular conductivity for extracellular current densities defined as ${\bf i_e}$. As we show later, $\sigma_e$ can be expressed as a function of ion concentrations:
+\item $\sigma_e$ (units S/m) is the tissue averaged extracellular conductivity for extracellular current densities defined as ${\bf i_e}$. As we show later, $\sigma_e$ can be expressed as a function of ion concentrations:
 \begin{equation}
 \sigma_e = \frac{F}{\psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k}.
 \label{Eldiff:eq:sigma1}
 \end{equation}
 Here $z_{k}$ is the valency of ion species $k$, and $\psi=RT/F$ is defined by the gas constant ($R$), Faraday's constant ($F$) and the temperature ($T$). Since $\sigma_e$ relates to ${\bf i_e}$ in the same way that $\sigma$ related to ${\bf i}$ in Chapter \ref{sec:VC}, $\sigma_e = \sigma /\alpha$.
 
-\item $f_k$ (units mol/m$^3$) will represent the ion-flux-source density, i.e., the local neuronal output of an ion species $k$ per per extracellular volume unit. It is essentially is the ion-dynamics counterpart to the current-source-density (CSD) presented earlier (eq. \ref{VC:eq:CSD1}).
+\item $f_k$ (units mol/m$^3$) is the ion-flux-source density, i.e., the local neuronal output of an ion species $k$ per per extracellular volume unit. It is essentially is the ion-dynamics counterpart to the current-source-density (CSD) presented earlier (eq. \ref{VC:eq:CSD1}).
 
-\item $C_e$ (units A/m$^3$) represents the current source density, i.e., the local neuronal output current per extracellular volume unit. $C_e = C/\alpha$ where $C$ (as defined in Chapter \ref{sec:VC}) is neuronal output current per tissue volume unit.
-
+\item $C_e$ (units A/m$^3$) is the current source density, i.e., the local neuronal output current per extracellular volume unit. $C_e = C/\alpha$ where $C$ (as defined in Chapter \ref{sec:VC}) is neuronal output current per tissue volume unit.
 \end{itemize}
 
 
 \subsection{\blue{Electrodiffusive ion concentration dynamics}}
 \label{sec:Eldiff:ionconcentrationdynamics}
-When modeling an electrodiffusive process, we keep track of the ion concentration dynamics of each individual ion species. With the effective diffusion constant, $\tilde{D}_k$, the flux density (${\bf j_k}$) of an ion species $k$ is given by the Nernst-Planck equation:
+In the coarse-grained description, using the effective diffusion constant, $\tilde{D}_k$, the flux density (${\bf j_k}$) of an ion species $k$ is given by the Nernst-Planck equation:
 \begin{equation}
-{\bf j_k} = - \tilde{D_k} {\bf \nabla} c_{k} - \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi.
+{\bf j_k} = - \tilde{D}_k {\bf \nabla} c_{k} - \frac{\tilde{D}_k z_k c_k}{\psi} {\bf \nabla} \phi.
 \label{Eldiff:eq:JNP}
 \end{equation}
-The first term on the right hand side of eq. \ref{Eldiff:eq:JNP} is called Fick's law, which defines the ionic flux density due to diffusion $j_{k}^\text{diff}$. The second term is the additional drift flux density $j_{k}^\text{drift}$, which accounts for the flux density of ions moving along gradients in the extracellular potential $\phi$.
-
-In eq. \ref{Eldiff:eq:JNP}, the the electrical mobility of the ions is $\tilde{D_k}/\psi$, and thus linearly related to their diffusion constant. This relationship is called the Einstein relation \index{Einstein relation}, and is valid for dilute solutions such as the extracellular fluid \citep{Grodzinsky2011}.
+The first term on the right hand side of eq. \ref{Eldiff:eq:JNP} is the ionic flux density due to diffusion (${\bf j_{k}^\text{diff}}$), and the second term is the additional flux density due to electrical drift along gradients in the extracellular potential $\phi$ (${\bf j_{k}^\text{drift}}$). 
 
 The general continuity equation for an ion species $k$ is,
 \begin{equation}
 \frac{\partial c_k}{\partial t} = - \nabla \cdot {\bf j_k} + f_k,
 \label{Eldiff:eq:salamander}
 \end{equation}
-where we remember that all variables or parameters are defined relative to the extracellular unit volume or extracellular unit cross-section area. If we insert the electroduffusive flux density (eq. \ref{Eldiff:eq:JNP}) into eq. \ref{Eldiff:eq:salamander},
+where we have included the neuronal source term $f_k$. If we insert the electroduffusive flux density (eq. \ref{Eldiff:eq:JNP}) into eq. \ref{Eldiff:eq:salamander},
 we get the Nernst-Planck continuity equation:
 \begin{equation}
 \frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[ \tilde{D_k} {\bf \nabla} c_k + \frac{\tilde{D_k} z_k c_k}{\psi} {\bf \nabla} \phi \right] + f_k.
 \label{Eldiff:eq:NP}
 \end{equation}
 
-Before we explain how to solve the Nernst-Planck system of equations, we will in the next subsection show how they relate to to the VC theory presented in Chapter \ref{sec:VC}.
-
 
 \subsection{\blue{Electrodiffusive electrodynamics}}
 \label{sec:Eldiff:electrodynamics}
-From the equations for ion concentration dynamics (eqns. \ref{Eldiff:eq:JNP}-\ref{Eldiff:eq:NP} ) we can derive a corresponding set of equations for net charge dynamics. If we multiply eq. \ref{Eldiff:eq:JNP} by $F\cdot z_k$ and sum over all ion species $k$, we get the extracellular current density:
+From the equations for ion concentration dynamics (eqns. \ref{Eldiff:eq:JNP}-\ref{Eldiff:eq:NP} ) we can derive a corresponding set of equations for net charge dynamics. This will show us how they relate to to the VC theory presented in Chapter \ref{sec:VC}, and will also allow us to derive an expression for $\phi$, which we need in order to solve these equations. 
+
+If we multiply eq. \ref{Eldiff:eq:JNP} by $F\cdot z_k$ and sum over all ion species $k$, we get the extracellular current density:
 \begin{equation}
 {\bf i_e} = F\sum_k {z_k {\bf j_k}} = -\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} - F\sum_{k} \frac{\tilde{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi}, 
 \label{Eldiff:eq:INPa}
@@ -115,7 +94,7 @@ as we postulated in eq. \ref{Eldiff:eq:sigma1}. With this, we can write eq. \ref
 
 Likewise, if we multiply eq. \ref{Eldiff:eq:salamander} by $F\cdot z_k$ and sum over all ion species, we get the continuity equation for charge: 
 \begin{equation}
-\frac{\partial \rho_e}{\partial t} =  \nabla \cdot \left (\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} + \sigma_e\nabla\phi  \right)  + C_{ion}.
+\frac{\partial \rho_e}{\partial t} =  \nabla \cdot \left (\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} + \sigma_e\nabla\phi  \right)  + C_e^{ion}.
 \label{Eldiff:eq:chargecontinuity}
 \end{equation}
 We have here introduced the extracellular charge density (define as extracellular charge per tissue unit volume), 
