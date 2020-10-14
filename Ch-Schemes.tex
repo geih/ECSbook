@@ -83,9 +83,11 @@ The physically most detailed approach for defining $\phi$ in eq. \ref{Schemes:eq
 \end{equation}
 Here $\epsilon$ is the (local) permittivity of the medium, and in the last step, we have expressed the local charge density $\rho$ as a function of the ionic concentrations. 
 \begin{equation}
-\rho =git  F\sum_k z_k c_k.
+\rho = F\sum_k z_k c_k + \rho_0.
 \label{Schemes:eq:PNPrho}
 \end{equation}
+Here, a static charge density ($\rho_0$) was added as a technicality. The reason for this term is that, when we model ion concentrations, we normally do not include absolutely all ion species that are present, but chose to keep track of the most important ones (such as Na$^+$, K$^+$, Cl$^-$ and Ca$^{2+}$). Nevertheless, it is the total charge density that enters the equation, and $\rho_0$
+accounts for the charge not included in the set $c_k$. 
 
 The PNP equations (eq. \ref{Eldiff:eq:NP} together with eq. \ref{Schemes:eq:poisson}) can in principle be solved for arbitrary complex geometries using numerical methods, like the Finite Element Method (FEM). 
 
@@ -103,7 +105,7 @@ Due to its computational demand, the PNP framework is not suitable for estimatin
 \index{Electroneutral}
 An alternative to the PNP framework is to replace the Poisson equation (eq. \ref{Eldiff:eq:poisson}) with the approximation that the bulk solution is electroneutral:
 \begin{equation}
-F \sum_k z_k c_k = 0.
+F \sum_k z_k c_k + \rho_0 = 0.
 \label{Schemes:eq:electroneutral}
 \end{equation}
 In practice, it is often more convenient to impose the electroneutrality approximation on differential form:
