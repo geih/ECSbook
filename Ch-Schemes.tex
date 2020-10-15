@@ -89,7 +89,7 @@ Here $\epsilon$ is the (local) permittivity of the medium, and in the last step,
 \rho = F\sum_k z_k c_k + \rho_0.
 \label{Schemes:eq:PNPrho}
 \end{equation}
-When we model ion concentrations, we normally do not include absolutely all ion species that are present, but rather chose to keep track of the most important ones (such as Na$^+$, K$^+$, Cl$^-$ and Ca$^{2+}$). A static charge density $\rho_0$ was therefore added to eq.\ref{Schemes:eq:PNPrho} to account for all charges not included in the set $c_k$. 
+When we model ion concentrations, we normally do not include absolutely all ion species that are present, but rather chose to keep track of the most important ones (such as Na$^+$, K$^+$, Cl$^-$ and Ca$^{2+}$). A static charge density $\rho_0$\index{Static charge density} was therefore added to eq.\ref{Schemes:eq:PNPrho} to account for all charges not included in the set $c_k$. 
 
 The PNP equations (eq. \ref{Eldiff:eq:NP} together with eq. \ref{Schemes:eq:poisson}) can in principle be solved for arbitrary complex geometries using numerical methods, like the Finite Element Method (FEM). 
 
@@ -99,13 +99,13 @@ Instead, it is common to rather have the PNP equations being defined in two disj
 
 A second challenge with the PNP system of equations is that solving them is extremely computationally demanding. One reason for this is that the concentrations of ions in a finite volume of space are almost so that the net positive and negative charges outbalance, meaning that the medium is very close to electroneutral. A non-zero charge density ($\rho$) thus reflects a deviance from electronutrality, and it has been estimated that this deviance typically involves only a fraction $\sim 10^{-9}$ of the ions present \citep{Aguilella1987}. An accurate prediction of $\rho$ from eq. \ref{Schemes:eq:PNPrho} thus requires an extreme precision in the modeling of the ionic concentrations $c_k$. Another, related, reason is that the charge-relaxation time in the extracellular solution, i.e., the time scale that $\rho$ varies on, is in the order of nanoseconds. In addition, any non-zero charge density in neural tissue is predominantly resolved in nano-meter thick layers around neuronal membranes \citep{Grodzinsky2011, Gratiy2017}. Simulations of $\rho$ therefore require a spatiotemporal resolution smaller than nanometers and nanoseconds, and thus a very fine-grained description of the tissue where neuronal, glial and extracellular geometries are explicitly defined.
 
-Due to its computational demand, the PNP framework is not suitable for estimating dynamics at the level of tissue, and the framework does not lend itself to be coarse-grained. Applications in neuroscience have therefore been limited to studies of electrodiffusive processes taking place on a very tiny spatiotemporal scale near and inside membranes (see e.g., \citep{Leonetti2004, Lu2007, Lopreore2008, Nanninga2008, Gardner2011, Zheng2011, Pods2013, Gardner2015}). See \citep{Savtchenko2017} for a review of applications in neuroscience.
+Due to its computational demand, the PNP framework is not suitable for estimating dynamics at the level of tissue, and the framework does not lend itself to be coarse-grained. Applications in neuroscience have therefore been limited to studies of electrodiffusive processes taking place on a very tiny spatiotemporal scale, such as in dendritic spines or near and inside membranes (see e.g., \citep{Leonetti2004, Lu2007, Lopreore2008, Nanninga2008, Gardner2011, Zheng2011, Pods2013, Gardner2015, lagache2019, cartailler2019}). See \citep{Savtchenko2017} for a review of applications in neuroscience.
 
 
 \subsubsection{\blue{The electroneutral framework}}
 \label{sec:Schemes:electroneutral}
 \index{Electroneutral}
-An alternative to the PNP framework is to replace the Poisson equation (eq. \ref{Eldiff:eq:poisson}) with the approximation that the bulk solution is electroneutral:
+An alternative to the PNP framework is to replace the Poisson equation (eq. \ref{Schemes:eq:poisson}) with the approximation that the bulk solution is electroneutral:
 \begin{equation}
 F \sum_k z_k c_k + \rho_0 = 0.
 \label{Schemes:eq:electroneutral}
@@ -116,9 +116,9 @@ F \sum_k{z_k \frac{\partial c_k}{\partial t}} = 0.
 \label{Schemes:eq:electroneutral2}
 \end{equation}
 
-The electroneutrality approximation (eq. \ref{Schemes:eq:electroneutral} or \ref{Schemes:eq:electroneutral2}) can be imposed as a constraint when solving eq.\ref{Schemes:eq:NP} by use of some numerical method. The constraint is then used to determine what $\phi$ must be at all points in space for there to be no charge accumulation anywhere in the extracellular or intracellular bulk solutions.
+The electroneutrality approximation (eq. \ref{Schemes:eq:electroneutral} or \ref{Schemes:eq:electroneutral2}) can be imposed as a constraint when solving eq.\ref{Schemes:eq:NP} by use of some numerical method. The constraint determines what $\phi$ must be at all points in space for there to be no charge accumulation anywhere in the extracellular or intracellular bulk solutions, which, as soon as reference point ($\phi = 0$) is set, has a unique solution.
 
-To explain how this differs from the PNP framework, we may use our previous cartoon example (Fig. \ref{Schemes:fig:diffpot}) as a reference. While the PNP framework explicitly models the nanosecond-fast charge relaxation process (Fig. \ref{Eldiff:fig:diffpot}B), the electroneutral scheme circumvents it by assuming (and ensuring) that the system is always in quasi-steady (Fig. \ref{Eldiff:fig:diffpot}C). It has been shown that this is a good approximation on spatiotemporal scales larger than micrometers and microseconds \citep{Grodzinsky2011, Pods2017, Solbra2018}. The advantage with this approach is that it, unlike PNP, gives stable solutions with an arbitrary coarse spatiotemporal resolution.
+To explain how the electroneutral framework differs from the PNP framework, we may use our previous cartoon example (Fig. \ref{Schemes:fig:diffpot}) as a reference. While the PNP framework explicitly models the nanosecond-fast charge relaxation process (Fig. \ref{Schemes:fig:diffpot}B), the electroneutral framework circumvents it by assuming (and ensuring) that the system is always in quasi-steady (Fig. \ref{Schemes:fig:diffpot}C). It has been shown that this is a good approximation on spatiotemporal scales larger than micrometers and microseconds \citep{Grodzinsky2011, Pods2017, Solbra2018}. The advantage with this approach is that it, unlike PNP, gives stable solutions with an arbitrary coarse spatiotemporal resolution.
 
 We note that the electroneutrality constraint (eq. \ref{Schemes:eq:electroneutral} or \ref{Schemes:eq:electroneutral2}) only applies to the intra- and extracellular bulk solutions, so that the membrane dynamics must be dealt with separately. Firstly, one must then define the equations that govern the membrane dynamics. A natural choice for this is, again, to use an ion-specific HH-like formalism \citep{Mori2006, Mori2009, Pods2017, ellingsrud2020}. 
 
@@ -137,12 +137,12 @@ Here, $c_m$ (F/m$^2$) in eq. \ref{Schemes:eq:rhocap} is the specific membrane ca
 For the electroneutrality constraint at the membrane (eq. \ref{Schemes:eq:rhocap} or \ref{Schemes:eq:rhocapt}) to be useful, $\eta_{r}^{mem}$ must be expressed in terms of the ion concentrations. That is, one needs an additional condition to specify the composition of ions that constitute $\eta_{r}^{mem}$ in eq. \ref{Schemes:eq:rhocap} or mediate $i_{cap}$ in eq. \ref{Schemes:eq:rhocapt}, so that ion conservation and a consistent charge-concentration relationship  at all points in space is ensured. Previous schemes for implementing the electroneutral framework vary somewhat in the approach taken to this:
 
 \begin{itemize}
-\item The electroneutral scheme with internal boundary conditions at membranes (ENM) used an assumption regarding the ion concentration profile building up the membrane charge $\eta_{r}^{mem}$  \citep{Mori2006, Mori2009, Pods2017}.
+\item The electroneutral scheme with internal boundary conditions at membranes (ENM), derived the concentration profile of the membrane charge density $\eta_{r}^{mem}$ from a set of constraints as to how ion concentrations are distributed within the Debye-layer \citep{Mori2006, Mori2009, Pods2017}.
 
-\item The Kirchhoff-Nernst-Planck (KNP) scheme used an assumption regarding how much various ion species contribute to the capacitive membrane current $i_{cap}$ \citep{ellingsrud2020}. 
+\item The Kirchhoff-Nernst-Planck (KNP) scheme did not resolve Debye-layer concentrations, but let the membrane concentration profile follow from an assumption regarding how much various ion species contributed to the capacitive membrane current $i_{cap}$ \citep{ellingsrud2020}.
 \end{itemize}
 
-Although they differ in implementation details, the two electroneutral schemes (ENM and KNP) should be close to equivalent from a physics point of view, and both were constrained so that the membrane charges had more or less the same concentration profiles as the bulk solution close to the membrane at either side. In practice, only a very tiny fraction of the ions present are involved in building up the membrane potential, and the choice as to which ion species that actually constitute the membrane charge in eq. \ref{Schemes:eq:rhomem} or \ref{Schemes:eq:rhocap2} is probably quite unimportant for the overall system dynamics.
+Both electroneutral schemes (ENM and KNP) were designed so that the membrane concentration profiles were functions of, and similar to, the concentration profiles in the bulk solution close to the membrane. Although they differ in implementation details, the two schemes should be close to equivalent from a physics point of view, except at Debye layer-resolution close to the membrane.  In practice, only a very tiny fraction of the ions present are involved in building up the membrane potential, and the choice as to which ion species that actually constitute the membrane charge in eq. \ref{Schemes:eq:rhocap} or \ref{Schemes:eq:rhocapt} is probably quite unimportant for the overall system dynamics.
 
 Like the PNP scheme, both versions of the electroneutral scheme must be solved on some numerical framework. While the electroneutral frameworks are computationally much more efficient than the PNP framework, they are still too heavy to allow for simulations of large systems of neurons described with explicit geometries on today's computers. To our knowledge, the largest system that so far has been simulated in 3D on an electroneutral framework is small piece of tissue containing a bundle of 9 axons described with idealized geometries \citep{ellingsrud2020}.
 
@@ -183,7 +183,7 @@ Compared to the self-consistent electrodiffusive schemes presented in Section \r
 The HHC+KNP scheme can be summarized as follows:
 
 \begin{itemize}
-\item {\bf Step 1:} Compute neurodynamics using a standard HHC-type framework (Chapter \ref{sec:Neuron}). Unlike in the standard HHC+VC scheme, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the HHC+KNP scheme requires that all neural sources are expressed as a set of ion specific sources, i.e., one source $f_k$ per ion species $k$ and an additional capacitive neuronal membrane current source density, $f_{cap}$ (proportional to $i_{cap}$ in eq. \ref{Schemes:eq:rhocapt}), the only source term not accounted for in the set $f_k$.
+\item {\bf Step 1:} Compute neurodynamics using a standard HHC-type framework (Chapter \ref{sec:Neuron}). Unlike in the standard HHC+VC scheme, where the different kinds of transmembrane currents, such as leakage currents, capacitive currents, and ion specific active currents, can be grouped into a single source variable $C$ for the total CSD at each segment, the HHC+KNP scheme requires that all neural sources are expressed as a set of ion specific sources, i.e., one source $f_k$ per ion species $k$ and an additional capacitive neuronal membrane current source density, $C_e^{cap}$ (proportional to $i_{cap}$ in eq. \ref{Schemes:eq:rhocapt}), the only source term not accounted for in the set $f_k$.
 
 \item {\bf Step 2:} Use the electrodiffusive KNP framework to compute the dynamics of $c_k$ and $\phi$ in the extracellular space when "receiving" input from discrete neuronal sources computed in Step 1. The Nernst-Planck continuity equation (eq. \ref{Schemes:eq:NP}) is then applied exclusively to the extracellular space, and the neural output is expressed as a source term ($f_k$):
 \begin{equation}
@@ -195,7 +195,7 @@ eq. \ref{Schemes:eq:electroneutral2} for the bulk solution and eq. \ref{Schemes:
 \end{itemize}
 
 The HHC+KNP scheme accounts for the effects that extracellular diffusive currents have on $\phi$.
-The standard HHC+VC scheme assumes that these effects are negligible (as discussed in Section \ref{sec:VC:onlyohmic}), and in the next chapter we will use the HHC+KNP scheme to examine the warranty of this assumption in various scenarios. We will there also present the HHC+KNP scheme in further detail, and the definition and use of the source terms  $f_{cap}$ and  $f_k$, and the intepretation of the effective diffusion constant $\tilde{D}_k$ will be made clear there. 
+The standard HHC+VC scheme assumes that these effects are negligible (as discussed in Section \ref{sec:VC:onlyohmic}), and in the next chapter we will use the HHC+KNP scheme to examine the warranty of this assumption in various scenarios. We will there also present the HHC+KNP scheme in further detail, and the definition and use of the source terms  $C_e^{cap}$ and  $f_k$, and the intepretation of the effective diffusion constant $\tilde{D}_k$ will be made clear there. 
 
 \begin{figure}[!ht]
 \begin{center}
