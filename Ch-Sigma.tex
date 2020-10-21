@@ -5,7 +5,7 @@
 Fint om Torbjorn sjekker alt jeg har foretatt meg, samt fyller ut med egne greier. Jeg sakset en del greier fra VC-kapittelet inn hit, blant annet delkapitlene om anisotropt og inhomogent medium. Pros: Naa utvider vi VC-teori i traad m/ at vi diskuterer (or relaxer) antakelser rundt sigma, jmf. tidligere versjon der vi utvidet VC teorien foerst, og deretter diskuterte og relaxet antakelsene. Cons: Naa blir det VC teori ogsaa i Sigma-kapittelet.}
 \tvnnote{Egentlig syntes jeg mer kan flyttes hit, inkludert det med "Tortuous medium" og $\lambda$, og Figure 3.1? I så fall blir det i VC-teori bare en kort oppsumerring, omtrent slik som første avsnitt av "continuous, porus medium approximation for VC theory", samt en referanse til dette kapittelet. Jeg syntes hvertfall at alt bør være skrevet her også, slik at man ikke må lete etter informasjon om dette i forskjellige deler av boka.}
 
-A key parameter, or sometimes, variable, in volume conductor (VC) theory is the extracellular conductivity, $\sigma$. In most applications of VC theory, $\sigma$ is assumed to be a constant, and its value is normally taken from some experimental measurement. Estimates can vary greatly between different recordings, but common values are between 0.2 and 0.3 S/m (Fig. \ref{Sigma:fig:freq_dep}). \tvnnote{Bør kanskje ta med at det er stor variasjon i målingene: Goto et al. (2010) hadde variasjon på omtrent en faktor av to, og vi (Miceli et al. 2017) målte en variasjon på omtrent en faktor av tre, som jo er ganske enormt mye. Vet ikke hvor mye av dette som var målefeil, og hvor mye som representerte faktisk variasjon.} Throughout the previous section, we assumed that  $\sigma$  was homogeneous, anisotropic and frequency independent. In this chapter we shall discuss these assumptions. In addition, we discuss some experimental and theoretical estimates of  $\sigma$. Before doing so, however, we shall introduce the continuous, porous medium approximation in some detail, to show what $\sigma$ actually represents.
+A key parameter, or sometimes, variable, in volume conductor (VC) theory is the extracellular conductivity, $\sigma_t$. In most applications of VC theory, $\sigma_t$ is assumed to be a constant, and its value is normally taken from some experimental measurement. Estimates can vary greatly between different recordings, but common values are between 0.2 and 0.3 S/m (Fig. \ref{Sigma:fig:freq_dep}). Throughout the previous section, we assumed that  $\sigma$  was homogeneous, anisotropic and frequency independent. In this chapter we shall discuss these assumptions. In addition, we discuss some experimental and theoretical estimates of  $\sigma_t$. Before doing so, however, we shall introduce the continuous, porous medium approximation in some detail, to show what $\sigma_t$ actually represents.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,7 +35,7 @@ A continuous, porous medium is defined by two key parameters \citep{Nicholson198
 
 The continuous, tortuous medium approximation has implications for how we interpret the various concepts and variables that we use. For example, in the previous Chapter we used the term "extracellular medium" \index{Extracellular medium}, to refer to brain tissue as it is \textit{experienced} by macroscopic extracellular currents. Importantly, the extracellular medium is not the same as the "extracellular solution" \index{Extracellular solution}, i.e. the fluid filling the extracellular space. Although extracellular currents indeed pass through the extracellular solution, they do not pass through a 3D volumed filled exclusively by this solution. Instead they pass through the extracellular medium, defined as a medium where they (i) are confined to move only through a fraction $\alpha$ of the total medium volume, and (ii) must take detours around neural and glial obstacles, as reflected through the tortuousity $\lambda$ \citep{Nicholson1998, Nunez2006}. 
 
-The (macroscopic) extracellular conductivity $\sigma$ (S/m) \index{Conductivity} is thus not the same as the (microscopic) conductivity of the extracellular solution, but the coarse-grained conductivity of the extracellular medium as defined above, so that the reduced volume fraction and tortuousity are accounted for. Experimental recordings of the extracellular conductivity typically measure $\sigma$ as defined in this way. For comparison, the microscopic and unhindered conductivity of the (pure) extracellular solution should theoretically be a fraction $\lambda^2/\alpha$ higher. 
+The (macroscopic) extracellular conductivity $\sigma_t$ (S/m) \index{Conductivity} is thus not the same as the (microscopic) conductivity of the extracellular solution, but the coarse-grained conductivity of the extracellular medium as defined above, so that the reduced volume fraction and tortuousity are accounted for. Experimental recordings of the extracellular conductivity typically measure $\sigma_t$ as defined in this way. For comparison, the microscopic and unhindered conductivity of the (pure) extracellular solution $\sigma_{saline}$ should theoretically be a fraction $\lambda^2/\alpha$ higher. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,20 +44,20 @@ The (macroscopic) extracellular conductivity $\sigma$ (S/m) \index{Conductivity}
 \index{Conductivity!Anisotropic}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma$. If we use the point source approximation (eq. \ref{VC:eq:pointsources}), and denote the conductivity in the different spatial directions $\sigma_x$, $\sigma_y$ and $\sigma_z$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
+In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma_t$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma_t$. If we use the point source approximation (eq. \ref{VC:eq:pointsources}), and denote the conductivity in the different spatial directions $\sigma_{tx}$, $\sigma_{ty}$ and $\sigma_{tz}$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \citep{nicholson1975, Pettersen2012}:
 
 \begin{equation}
-\phi(x,y,z) = \sum_k \frac{I_k}{4\pi(\sigma_y\sigma_z (x-x_k)^2 + \sigma_x\sigma_z (y-y_k)^2 + \sigma_x\sigma_y (z-z_k)^2)}.
+\phi(x,y,z) = \sum_k \frac{I_k}{4\pi(\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2)}.
 \label{Sigma:eq:Panisos}
 \end{equation}
 If we use the CSD-description of the sources (eq. \ref{VC:eq:csds}, the corresponding expression is:
 
 \begin{equation}
-\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi(\sigma_y\sigma_z (x-x_k)^2 + \sigma_x\sigma_z (y-y_k)^2 + \sigma_x\sigma_y (z-z_k)^2)} \, dV, 
+\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi(\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2)} \, dV, 
 \label{Sigma:eq:Canisos}
 \end{equation}
 
-In general, the brain does not have an isotropic $\sigma$. For example, in cortex it has been found that the conductivity is about 50\% higher in the depth direction, i.e., for currents running in parallel to the axis of pyramidal cell dendrites \citep{Goto2010}. However, the overall effect of the anisotropy on extracellular potentials often appears to be quite weak \citep{Ness2015, Miceli2017}, and the approximation that $\sigma$ is isotropic often gives good predictions of the potential.
+In general, the brain does not have an isotropic $\sigma_t$. For example, in cortex it has been found that the conductivity is about 50\% higher in the depth direction, i.e., for currents running in parallel to the axis of pyramidal cell dendrites \citep{Goto2010}. However, the overall effect of the anisotropy on extracellular potentials often appears to be quite weak \citep{Ness2015, Miceli2017}, and the approximation that $\sigma_t$ is isotropic often gives good predictions of the potential.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -65,9 +65,9 @@ In general, the brain does not have an isotropic $\sigma$. For example, in corte
 \label{sec:Sigma:nonhomo}
 \index{Conductivity!Nonhomogeneous}
 
-In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
+In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma_t$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \citep{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \citep{Logothetis2007}. 
 
-The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{VC:eq:csds} or \ref{VC:eq:anisos}) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
+The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma_t$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma_t$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{VC:eq:csds} or \ref{VC:eq:anisos}) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
 
 \ghnote{Enter TVN:}
 \begin{itemize}
@@ -126,12 +126,12 @@ Tahayori2012, Meffin2014, Tahayori2014. Jeg vet ikke helt hva dette gaar i, men 
 Extracellular current are mediated by the ions dissolved in the extracellular solution, and the conductivity of the extracellular medium if thus a function of thus depends on the ion concentrations, i.e., on the availability of free charge carriers \citep{Grodzinsky2011}: 
 
 \begin{equation}
-\sigma = \frac{F^2}{RT}\sum_{k} D_k z_{k}^2 c_{k}.
+\sigma_{saline} = \frac{F^2}{RT}\sum_{k} D_k z_{k}^2 c_{k}.
 \label{Sigma:eq:sigma1}
 \end{equation}
 Here $z_{k}$, $D_k$ and $c_{k}$ denote the valency, diffusion coefficient and concentration, respectively, of ion species $k$, while $F = 96485.3$ C/mol is the Faraday constant, $R = 8.314$ JK$^{-1}$mol$^{-1}$ is the gas constant, and $T$ the temperature. 
 
-Eq. \ref{Sigma:eq:sigma1} allows us to compare the measured $\sigma$ with $\sigma$ as predicted from the typical ion concentrations in the extracellular space of the brain, such as those listed previously in Table \ref{table:ion-concentrations}. For this, we also need the diffusion constants of these species. In a dilute solution, such as the extracellular fluid, these are as given in Table \ref{Sigma:tab:diffconsts}.
+Eq. \ref{Sigma:eq:sigma1} allows us to compare the measured $\sigma_t$ with $\sigma_{saline}$ as predicted from the typical ion concentrations in the extracellular space of the brain, such as those listed previously in Table \ref{table:ion-concentrations}. For this, we also need the diffusion constants of these species. In a dilute solution, such as the extracellular fluid, these are as given in Table \ref{Sigma:tab:diffconsts}.
 
 \begin{table}[h!]
 \begin{center}
@@ -148,14 +148,20 @@ Eq. \ref{Sigma:eq:sigma1} allows us to compare the measured $\sigma$ with $\sigm
 \end{center}
 \end{table}
 
-If we insert the values from Tables \ref{table:ion-concentrations} and \ref{Sigma:tab:diffconsts} into equation \ref{Sigma:eq:sigma1}, and assume a body temperature of $T = 310$ K, we get a conductivity $\sigma = 1.56$ S/m. This is a factor 5-8 times higher than the values (0.2-0.3 S/m) which are typically measured for the tissue conductivity. The discrepancy is mainly due to the fact that currents through brain tissue do not move through a free ion solution, but are (i) confined to stay in the small fraction of the tissue volume that is extracellular. In addition, (ii) the currents will face obstacles (neural and glial membranes) along their path, forcing them take detours. This is commonly incorporated into the theory by introducing reduced, effective diffusion coefficients: 
-
+If we insert the values from Tables \ref{table:ion-concentrations} and \ref{Sigma:tab:diffconsts} into equation \ref{Sigma:eq:sigma1}, and assume a body temperature of $T = 310$ K, we get a conductivity $\sigma_{saline} = 1.56$ S/m. This is a factor 5-8 times higher than the values (0.2-0.3 S/m) which are typically measured for the tissue conductivity. The discrepancy is mainly due to the fact that currents through brain tissue do not move through a free ion solution, and the effective tissue conductivity $\sigma_t$ is lower than $\sigma_{saline}$ for two main reasons. Firstly, extracellular currents are confined to stay in the small fraction $\alpha$ of the tissue volume that is extracellular. Hence, only a fraction $\alpha$ of the tissue volume has a conductvity as predicted by eq. \ref{Sigma:eq:sigma1}. Secondly, even within the extracellular volume fraction, eq. \ref{Sigma:eq:sigma1} overestimates the conductivity, because extracellular currents will face obstacles (neural and glial membranes) along their path, forcing them take detours.The tortuous structure of the extracellular space is commonly incorporated into the theory by introducing reduced, effective diffusion coefficients \citep{Nicholson1981}: 
 \begin{equation}
-\tilde{D_k} = \alpha \frac{D_k}{\lambda^2}, 
+\tilde{D}_k = \frac{D_k}{\lambda^2}, 
 \label{Sigma:eq:diffconst}
 \end{equation}
-where the parameter $\alpha$ denotes the extracellular volume fraction, while $\lambda$ is called the tortuosity of the medium, and accounts for the obstacles to free diffusion \citep{Nicholson1998}. Typical values for $\alpha$ and $\lambda$ in brain tissue are 0.2 and 1.6, respectively \citep{Nicholson1981, Nicholson1998}. If we insert the effective diffusion constants into eq. \ref{Sigma:eq:sigma1} it reduces $\sigma$ to $0.122$ S/m. This is somewhat lower than the values that are typically measured for $\sigma$. The main explanation is probably that we have underestimated $\sigma$ by only including the main charge carriers from Table \ref{table:ion-concentrations} in our calculation. The extracellular solution contains many ions (such as e.g., H$^+$ and HCO$_3$$^-$) besides these, which also will contribute to the conductivity. 
+where the tortuosity $\lambda$ and accounts for the obstacles to free diffusion \citep{Nicholson1981}. 
+
+If we correct eq. \ref{Sigma:eq:sigma1} for the extracellular volume fraction and tortuous structure of the extracellular space, we get an estimate for the tissue conductivity as
+\begin{equation}
+\sigma_{t} = \frac{F^2}{RT}\sum_{k} \frac{\alpha D_k}{\lambda^2} z_{k}^2 c_{k}.
+\label{Sigma:eq:sigmat}
+\end{equation}
+Typical values for $\alpha$ and $\lambda$ in brain tissue are 0.2 and 1.6, respectively \citep{Nicholson1981, Nicholson1998}. With these values, $\sigma_t = 0.122$ S/m, almost a factor 13 lower than $\sigma_{saline}$. This is also lower than the values that are typically measured for $\sigma_t$. The main explanation is probably that we have underestimated $\sigma_t$ by only including the (main) charge carriers listed in Table \ref{table:ion-concentrations} in our calculation. The extracellular solution contains many ions (such as e.g., H$^+$, $HPO4^{2?} and and HCO$_3$$^-$) besides these, which also will contribute to the conductivity. 
 
 \ghnote{Forklaringen i siste setning er sikkert bra, men det finnes muligens andre? Deler av stroemmen gaar gjennom nevroner? }
 
-As we shall see in Chapter \ref{sec:Eldiff}, the definition of $\sigma$ given by eq. \ref{Sigma:eq:sigma1} follows naturally if we use the Nernst-Planck equation for electrodiffusive ion concentration dynamics to compute extracellular currents. 
+As we shall see in Chapter \ref{sec:Eldiff}, the definition of $\sigma_t$ given by eq. \ref{Sigma:eq:sigmat} follows naturally if we use the Nernst-Planck equation for electrodiffusive ion concentration dynamics to compute extracellular currents. 
