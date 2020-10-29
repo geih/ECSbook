@@ -1,6 +1,7 @@
 \section{TVN/GTE: Local Field Potentials}
 \label{sec:LFP}
 \ghnote{Torbjorn will take the main responsibility for this chapter}
+\tvnnote{Add brief historical perspective?}
 
 %\subsection{\red{Introduction to Local Field Potentials}}
 Extracellular potentials measured in neural tissue reflects extracellular spikes, vast numbers of synaptic inputs, as well as different types of noise. The Local Field Potential (LFP) is the low-frequency part of these extracellular potentials, found by low-pass filtering the recorded signals below $\lesssim$ 500~Hz. The LFP is thought to primarily reflect synaptic inputs to populations of geometrically aligned pyramidal cells.
@@ -9,7 +10,19 @@ Extracellular potentials measured in neural tissue reflects extracellular spikes
 The LFP is thought to reflect synaptic inputs to thousands of pyramidal neurons, but many important features of the LFP can be studied by considering synaptic input to single neurons.
 
 \subsection{Intrinsic dendritic filtering}
-For high frequencies, the membrane is more leaky, and returns closer to the input 
+For high frequencies, the membrane is more leaky, and current returns closer to the input \ref{LFP:fig:intrinsic_dendritic_filt}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.8\textwidth]{Figures/LFP/intrinsic_dend_filt.pdf}
+\end{center}
+\caption{\textbf{Intrinsic dendritic filtering.}
+Illustration of the LFP at a snapshot in time in response 
+to a sinusoidal synapse with different frequencies to a 
+dendritic stick.
+}
+\label{LFP:fig:intrinsic_dendritic_filt}
+\end{figure}
 
 \begin{itemize}
 \item Passive dendrites \citep{Linden2010}
