@@ -413,16 +413,18 @@ assumption of constant ion concentrations also tends to hold on a longer time sc
 
 \begin{table}[h]
 \centering
-\caption{Major charge carrier concentrations inside/outside a typical mammalian neuron. Example values taken from \cite{Wu2019}, but may vary with species and brain regions. Nernst potentials were computed from Eq. \ref{Neuron:eq:revpots} assuming a body temperature of 309.15 K.}
-\label{table:ion-concentrations}
-{\begin{tabular}{lccccc}\toprule
-						    & 	K$^+$	&	Na$^+$	&	Mg$^2+$	  &	Cl$^-$	&	Ca$^{2+}$	 \\ \midrule
-Inside (mM)				    & 140		&		10	&		0.5	&	10		&  	10$^{-4}$	  	\\
-Outside (mM)			           & 5			&		145	&		2	&	110 		&		2		  	\\
-Nernst potential (mV)		    &	-89		&	    	+71	&		+19	&	-64		&		+132 		  	\\
+\caption{Major charge carrier concentrations inside/outside a typical mammalian neuron. Concentration values were taken from Table 2-1 in \citep{Somjenboka} for neurons in the central nervous system  (intracellular) and human cerebrospinal fluid (extracellular). Values vary with species and brain regions. Nernst potentials were computed from Eq. \ref{Neuron:eq:revpots} assuming a body temperature of 309.15 K.}
+\label{Neuron:tab:ion-concentrations}
+\begin{tabular}{lcccccc}\toprule
+					& 	K$^+$	&	Na$^+$	&	Mg$^{2+}$	  &	Cl$^-$	&	Ca$^{2+}$	 	& HCO3$^-$ 	\\ \midrule
+Intracellular (mM)				    & 125		&		10	&		0.5	&	6.6		&  	6$\times$10$^{-5}$	  & 	18 \\
+Extracellular (mM)			           & 2.9			&		147	&		0.7	&	119 		&		1	&	23.3	  	\\
+Nernst potential (mV)		    &	-100		&	    	+72	&		+4.5	&	-77		&		+129 	& 	-6.9  	\\
 \bottomrule
-\end{tabular}}{}
+\end{tabular}{}
 \end{table}
+
+\citep{Somjenboka}
 
 In HHC-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_L$ (eq. \ref{Neuron:eq:HHleak}), which largely determines the cell's resting potential (see see \cite{offner1991} for a critical study of this approximation). Below, we shall explain how the ionic concentrations are implicitly present in the HHC-formalism as they determine the ionic reversal potentials ($E_x$ in eq. \ref{Neuron:eq:HHform}). We shall also comment on the cases where the assumptions of constant ion concentrations are not applicable. 
 

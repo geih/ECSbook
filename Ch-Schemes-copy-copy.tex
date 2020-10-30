@@ -24,7 +24,7 @@ Among all existing schemes, HHC+VC is the by far most "user-friendly" scheme, an
 \subsection{\blue{Self-consistent electrodiffusive schemes}}
 \label{sec:Schemes:complete}
 \index{Electrodiffusion} \index{Nernst-Planck equation}
-
+By necessity, the transmembrane ionic currents that mediate neurodynamics cause the intra- and extracellular ion concentrations to change. Under normal circumstances, these changes are limited to small deviances from baseline, since neurons and glial cells contain numerous homeostatic mechanisms that work continuously to restore baseline concentrations. However, during neuronal hyperactivity, or during several pathological conditions, the homeostatic machinery can fail to keep up, and ion concentrations may then change rather dramatically, both in the intra- and extracellular space \citep{Dietzel1989, Somjen2001, Frohlich2008, Zandt2015, Ayata2015}. This will in turn change the neuronal reversal potentials (cf. eq. \ref{Neuron:eq:revpots}), and through that alter the neuronal firing properties, something that has been the topic of several studies (see e.g., \citep{Qian1989, Cressman2009, Zandt2011, Oyehaug2012, WeiUllahSchiff2014, Saetra2020}). Local changes in extracellular concentrations will also give rise to diffusive currents along extracellular concentration gradients. These will in turn generate diffusion potentials. Under such circumstances, the extracellular potential ($\phi_e$) is not solely a function of cellular transmembrane currents (as assumed when using VC theory), but also contains contribution from extracellular diffusion \citep{Halnes2016}. 
 
 When modeling an electrodiffusive process, we keep track of the ion concentration dynamics of each individual ion species. The fundamental equation for doing that is the Nernst-Planck equation for the flux density (${\bf j_k}$ of an ion species $k$:
 \begin{equation}
@@ -197,6 +197,13 @@ eq. \ref{Schemes:eq:electroneutral2} for the bulk solution and eq. \ref{Schemes:
 The HHC+KNP scheme accounts for the effects that extracellular diffusive currents have on $\phi$.
 The standard HHC+VC scheme assumes that these effects are negligible (as discussed in Section \ref{sec:VC:onlyohmic}), and in the next chapter we will use the HHC+KNP scheme to examine the warranty of this assumption in various scenarios. We will there also present the HHC+KNP scheme in further detail, and the definition and use of the source terms  $C_e^{cap}$ and  $f_k$, and the intepretation of the effective diffusion constant $\tilde{D}_k$ will be made clear there. 
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Figures/Eldiff/KNP.png}
+\end{center}
+\caption{\textbf{KNP scheme}. Blue star: Mesh cell containing no neuronal sources, so that $C=0$. Red star: Mesh cell containing neural sources. Here $C$ can be computed by summing over all neuronal transmembrane currents, including the capacitive current, and dividing by the volume of the mesh cell. \ghnote{LAGE LITT MER INFORMATIV FIG HER OM VI SKAL HA FIG HER.}}
+\label{Eldiff:fig:KNPmesh}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
