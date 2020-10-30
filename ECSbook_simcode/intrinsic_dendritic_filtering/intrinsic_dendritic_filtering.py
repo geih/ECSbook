@@ -93,13 +93,12 @@ sigma = 0.3
 
 # Define electrode parameters
 grid_electrode_parameters = {
-    'sigma' : sigma,      # extracellular conductivity
-    'x' : grid_x.flatten(),  # electrode requires 1d vector of positions
-    'y' : grid_y.flatten(),
-    'z' : grid_z.flatten(),
+    'sigma': sigma,      # extracellular conductivity
+    'x': grid_x.flatten(),  # electrode requires 1d vector of positions
+    'y': grid_y.flatten(),
+    'z': grid_z.flatten(),
     'method': 'linesource'
 }
-
 
 for freq in frequencies:
 
@@ -133,7 +132,6 @@ for freq in frequencies:
     max_idx_dict[freq] = max_idx
     tvec_dict[freq] = cell.tvec
     cell.__del__()
-
 
 electrode_locs = np.array([grid_x.flatten(),
                            grid_y.flatten(),
@@ -202,7 +200,6 @@ cbar = fig.colorbar(ep_intervals, cax=cax, orientation='horizontal')
 
 cbar.set_label('$\phi$ ($\mu$V)', labelpad=0)
 cbar.set_ticks([-10, -1, -0.1, 0.1, 1, 10, 100])
-
 
 plt.savefig(join(fig_folder, "intrinsic_dend_filt.png"), dpi=100)
 plt.savefig(join(fig_folder, "intrinsic_dend_filt.pdf"), dpi=300)
