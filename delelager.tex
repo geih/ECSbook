@@ -281,6 +281,17 @@ The constraint in eq. \ref{Schemes:eq:electroneutral3} was essentially what we u
 Through this equation, $\phi$ is uniquely determined by the ion concentrations ($c_k$) and the neuronal CSD, and with that, the Nernst-Planck equations (eq. \ref{Schemes:eq:NPe}) can be solved on a suitable numerical framework.
 
 
+\begin{equation}
+\frac{\partial c_k}{\partial t} = {\bf \nabla} \cdot \left[ \tilde{D}_k {\bf \nabla} c_k + \frac{\tilde{D}_k z_k c_k}{\psi} {\bf \nabla} \phi \right] + f_k, 
+\label{Schemes:eq:NPe}
+\end{equation}
+where $\tilde{D}_k$ denotes the effective extracellular diffusion constant for an ion species $k$. This equation can be solved when combined with an electroneutrality constraint such as that in the 
+eq. \ref{Schemes:eq:electroneutral2} for the bulk solution and eq. \ref{Schemes:eq:rhocapt} at the membrane. 
+\end{itemize}
+
+
+
+
 
 
 

@@ -10,7 +10,7 @@ A key parameter, or sometimes, variable, in volume conductor (VC) theory is the 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Continuous, porous medium approximation}}
-\label{sec:VC:continuous}
+\label{sec:Sigma:continuous}
 \index{Continuous medium}
 \index{Porous medium}
 
@@ -144,24 +144,22 @@ Eq. \ref{Sigma:eq:sigma1} allows us to compare the measured $\sigma_t$ with $\si
     $D_{Cl}$ & $2.03 \times 10^{-9}$ m$^2$/s \\ \hline
     $D_{Ca}$ & $0.71\times 10^{-9}$ m$^2$/s \\ \hline
     $D_{Mg}$ & $0.72\times 10^{-9}$ m$^2$/s \\ \hline    
+    $D_{HCO3}$ & $1.18\times 10^{-9}$ m$^2$/s \\ \hline
     \end{tabular}
 \end{center}
 \end{table}
 
-If we insert the values from Tables \ref{table:ion-concentrations} and \ref{Sigma:tab:diffconsts} into equation \ref{Sigma:eq:sigma1}, and assume a body temperature of $T = 310$ K, we get a conductivity $\sigma_{saline} = 1.56$ S/m. This is a factor 5-8 times higher than the values (0.2-0.3 S/m) which are typically measured for the tissue conductivity. The discrepancy is mainly due to the fact that currents through brain tissue do not move through a free ion solution, and the effective tissue conductivity $\sigma_t$ is lower than $\sigma_{saline}$ for two main reasons. Firstly, extracellular currents are confined to stay in the small fraction $\alpha$ of the tissue volume that is extracellular. Hence, only a fraction $\alpha$ of the tissue volume has a conductvity as predicted by eq. \ref{Sigma:eq:sigma1}. Secondly, even within the extracellular volume fraction, eq. \ref{Sigma:eq:sigma1} overestimates the conductivity, because extracellular currents will face obstacles (neural and glial membranes) along their path, forcing them take detours.The tortuous structure of the extracellular space is commonly incorporated into the theory by introducing reduced, effective diffusion coefficients \citep{Nicholson1981}: 
-\begin{equation}
-\tilde{D}_k = \frac{D_k}{\lambda^2}, 
-\label{Sigma:eq:diffconst}
-\end{equation}
-where the tortuosity $\lambda$ and accounts for the obstacles to free diffusion \citep{Nicholson1981}. 
+If we insert the values from Tables \ref{Neuron:tab:ion-concentrations} and \ref{Sigma:tab:diffconsts} into equation \ref{Sigma:eq:sigma1}, and assume a body temperature of $T = 310$ K, we get a conductivity $\sigma_{saline} = 1.72$ S/m. This is a factor 6-9 times higher than the values (0.2-0.3 S/m) which are typically measured for the tissue conductivity. 
 
-If we correct eq. \ref{Sigma:eq:sigma1} for the extracellular volume fraction and tortuous structure of the extracellular space, we get an estimate for the tissue conductivity as
+Currents through brain tissue do not move through a pure ion solution, and the effective tissue conductivity $\sigma_t$ is lower than $\sigma_{saline}$ for two main reasons. Firstly, extracellular currents are confined to stay in the small fraction $\alpha$ of the tissue volume that is extracellular, so that only a fraction $\alpha$ of the tissue volume has the conductivity predicted by eq. \ref{Sigma:eq:sigma1}. Secondly, even within the extracellular volume fraction, eq. \ref{Sigma:eq:sigma1} overestimates the conductivity, because extracellular currents will encounter obstacles (neural and glial membranes) along their path, forcing them take detours that can be quantified through a tortuosity factor $\lambda$. 
+
+If we correct eq. \ref{Sigma:eq:sigma1} for the extracellular volume fraction and tortuous structure of the extracellular space, we get an estimate for the effective tissue conductivity as \citep{Okada1994}:
 \begin{equation}
-\sigma_{t} = \frac{F^2}{RT}\sum_{k} \frac{\alpha D_k}{\lambda^2} z_{k}^2 c_{k}.
+\sigma_{t} = \frac{\alpha}{\lambda^2} \sigma_{saline}.
 \label{Sigma:eq:sigmat}
 \end{equation}
-Typical values for $\alpha$ and $\lambda$ in brain tissue are 0.2 and 1.6, respectively \citep{Nicholson1981, Nicholson1998}. With these values, $\sigma_t = 0.122$ S/m, almost a factor 13 lower than $\sigma_{saline}$. This is also lower than the values that are typically measured for $\sigma_t$. The main explanation is probably that we have underestimated $\sigma_t$ by only including the (main) charge carriers listed in Table \ref{table:ion-concentrations} in our calculation. The extracellular solution contains many ions (such as e.g., H$^+$, HPO4$^{2?}$ and and HCO$_3$$^-$) besides these, which also will contribute to the conductivity. 
+Typical values for $\alpha$ and $\lambda$ for the extracellular space of brain tissue are 0.2 and 1.6, respectively \citep{Nicholson1981, Nicholson1998}. With these values, $\sigma_t$ becomes almost a factor 13 lower than $\sigma_{saline}$. 
 
-\ghnote{Forklaringen i siste setning er sikkert bra, men det finnes muligens andre? Deler av stroemmen gaar gjennom nevroner? }
+With our above estimate of $\sigma_{saline}$, we get a an estimated tissue conductivity $\sigma_t = 0.134$ S/m. This is lower than the typical measured values for $\sigma_t$, which, although they vary quite much between different experiments, tend to be $> 0.2$ S/m. The main explanation to why our $\sigma_t$ is an underestimate is probably that it is based on the assumption that all tissue currents are confined to the extracellular space, while a fraction of the real tissue currents may also travel through the intracellular medium. For example, in cerebellum, it has been estimated that about 50 \% of tissue currents travel through intracellular paths \citep{Okada1994}. An additional explanation is that the extracellular solution contains many ions (such as e.g., H$^+$ and HPO4$^{2-}$ ) that we did not include in Table \ref{Neuron:tab:ion-concentrations} and thus not in our calculation of $\sigma_t$. However, since concentrations of ions others than those in Table \ref{Neuron:tab:ion-concentrations} are quite low, they will probably have only a minor impact on the conductivity. 
 
 As we shall see in Chapter \ref{sec:Eldiff}, the definition of $\sigma_t$ given by eq. \ref{Sigma:eq:sigmat} follows naturally if we use the Nernst-Planck equation for electrodiffusive ion concentration dynamics to compute extracellular currents. 
