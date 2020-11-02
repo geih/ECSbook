@@ -9,17 +9,33 @@ Extracellular potentials measured in neural tissue reflects extracellular spikes
 \subsection{\red{TBV:Single-neuron LFPs}}
 The LFP is thought to reflect synaptic inputs to thousands of pyramidal neurons, and the contribution to the LFP from any single neuron is typically considered negligible. However, a lot of qualitatively important insights about the biophysical origin of the LFP can still be gained from considering synaptic input to single neurons. One of the defining features of the LFP 
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1.\textwidth]{Figures/LFP/dipole_basics.pdf}
+\end{center}
+\caption{\textbf{Basic building blocks of the LFP.}
+Illustration of the LFP at a snapshot in time in a region around a pyramidal
+cell in response to different types of synaptic input. The LFP signature depends on the type of synaptic input (excitatory
+or inhibitory), and the location (apical, basal, uniform), but also, to a lesser degree, to many other parameters of the cells
+and synapses.
+}
+\label{LFP:fig:LFP_lego}
+\end{figure}
+
 \subsection{Intrinsic dendritic filtering}
 An important concept in understanding the origin of LFPs is intrinsic
-dendritic filtering. This effect causes a low-pass filtering of the LFP with increasing distance from the neuronal sources.
+dendritic filtering \citep{Linden2010}. This effect causes a low-pass filtering of the LFP with increasing distance from the neuronal sources.
 It is caused by the frequency dependence of transmembrane capacitive currents, and it can be illustrated through considering sinusoidal current injection to a simple stick model (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}).
 From Kirchoff's circuit laws (Ch.~\ref{sec:Neuron}), we know
-that the current injected into a neuronal compartment must equal the current leaving the same compartment, partly through the membrane as a transmembrane current, and partly into other compartments, as axial currents $I_{inj} = I_m + I_a$ (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}). We also know that the sum of all transmembrane currents must in this case equal $I_{inj}$, but how much these return currents will be spread out over the membrane of the neuron is dependent on how easy it is for the current to move intracellularly, and how easy it is for the currents to cross the membrane.
+that the current injected into a neuronal compartment must equal the current leaving the same compartment, partly through the membrane as a transmembrane current, and partly into other compartments, as axial currents $I_{inj} = I_m + I_a$ (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf A}). We also know that the sum of all transmembrane currents must in this case equal $I_{inj}$, but how much these return currents will be spread out over the membrane of the neuron is dependent on how easy it is for the current to move intracellularly, and how easy it is for the currents to cross the membrane.
 The transmembrane current can be expressed as $I_m = c_m\frac{dV}{dt} + I_{ion}$. Note that the transmembrane current is dependent on the time derivative of the membrane potential (through the capacitive current), implying that the membrane is more "leaky" for fast changes in the membrane potential. For a sinusoidal injected current, %$I_{inj} = A \sin (2\pi f t)$,
 this means that for increasing frequencies, a larger fraction of the injected current will be balanced by local transmembrane currents instead of axial currents, shifting the tranmembrane currents closer to the input site. 
-Therefore, rapid changes in the membrane potential are associated with predominately local transmembrane currents, while slow changes in the membrane potential are associated with more distributed transmembrane currents. This can be demonstrated by simulating the extracellular potential around a simple stick model, with a sinusoidal current synapse. A stimulation frequency of 1~Hz gives rise to a large dipolar LFP around the cell, reflecting the distributed nature of the transmembrane currents (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf A}). For the same current amplitude, but with a frequency of 1000~Hz (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf B}), the resulting LFP has a much smaller dipole.
+Therefore, rapid changes in the membrane potential are associated with predominately local transmembrane currents, while slow changes in the membrane potential are associated with more distributed transmembrane currents. This can be demonstrated by simulating the extracellular potential around a simple stick model, with a sinusoidal current synapse. A stimulation frequency of 1~Hz gives rise to a large dipolar LFP around the cell, reflecting the distributed nature of the transmembrane currents (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf B}). For the same current amplitude, but with a frequency of 1000~Hz, the resulting LFP is much more spatially confined (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf C}).
 
-For high frequencies, the membrane is more leaky, and current returns closer to the input (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}).
+This has implications for how the amplitude of different frequency-components will decay with distance from the cell \citep{Linden2010}. This is because the amplitude of the LFP from a dipole will decay faster in the far-field limit, and the far-field limit is reached at a smaller distance for more spatially confined dipoles \citep{Linden2010}. In the present example, the amplitude of the LFP very close the the input site was almost identical for the two different frequencies, but the amplitude of the LFP from the high-frequency input decayed more steeply with distance (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf D}). 
+For synaptic inputs consisting of both high and low frequency 
+components, this means that with increasing distance, the low frequency components will become increasingly dominant in the LFP, causing a low-pass filtering effect in the LFP.
+Note that this is a quite general result, since we from Fourier analysis know that all signals can be written as a weighted sum of sinusoids with different frequencies.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -39,18 +55,7 @@ dendritic stick.
 \item Active dendrites \citep{Ness2016}
 \end{itemize}
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=1.\textwidth]{Figures/LFP/dipole_basics.pdf}
-\end{center}
-\caption{\textbf{Basic building blocks of the LFP.}
-Illustration of the LFP at a snapshot in time in a region around a pyramidal
-cell in response to different types of synaptic input. The LFP signature depends on the type of synaptic input (excitatory
-or inhibitory), and the location (apical, basal, uniform), but also, to a lesser degree, to many other parameters of the cells
-and synapses.
-}
-\label{LFP:fig:LFP_lego}
-\end{figure}
+
 
 \subsection{\red{TBV:Population LFPs}}
 \begin{itemize}
