@@ -1,11 +1,12 @@
 \section{Theory: Neural dynamics}
 \label{sec:Neuron}
 \index{Multicompartmental neuron model}
-The main contribution to extracellular potentials comes from the electrical activity of neurons. When we want to simulate extracellular potentials, we therefore typically start by simulating neurons. 
+The main contribution to extracellular potentials comes from the electrical activity of neurons. To model extracellular potentials, we therefore first need a model of the neurons generating them. Moreover, a neuron's contribution to the extracellular potential depends strongly on its morphology,
+meaning that we will need multicomparmental neuron models \index{Multicompartment model} that account for the neuron's spatial extension.
 
-There exist many types of frameworks for constructing neuronal models at various levels of detail and abstraction. For the purpose of simulating extracellular potentials, it is most common to use multicompartmental neuron models based on what we will refer to as the Hodgkin-Huxley-Cable (HHC) framework \index{Hodgkin-Huxley-Cable (HHC) framework}, and we shall here limit ourselves to present this framework. The HHC framework uses the formalism of the celebrated model by Hodgkin and Huxley (HH) to model membrane mechanisms (see e.g., \citep{Hodgkin1952, KockSegev1998, Pospischil2008}), and cable theory to predict how signals propagate spatially in dendrites and axons (see, e.g., \citep{Koch1999, rall2011}). HHC-type models have become the gold standard for biophysically detailed neuronal simulations on the cellular and network level. Today, this framework is used for simulating the dynamics of large neuronal networks (see e.g., \citep{traub2005, markram2015, arkhipov2018}).
+Modeling of neurons is at the core of computational neuroscience. There exist many types of frameworks for constructing neuronal models at various levels of detail and abstraction, and the topic has been treated in detail in several text books (see e.g., \citep{johnston1994foundations, KockSegev1998, Koch1999, DeSchutter2000, Hille2001, Dayan2005, Sterratt2011}). We shall here give only a rather brief introduction to the topic, and we shall limit ourselves to present the most standard kind multicompartmental neuron model, based on a framework which combines a so-called Hodgkin-Huxley type description of the neural membrane mechanisms (see e.g., \citep{Hodgkin1952, KockSegev1998, Pospischil2008}) with cable theory to predict how signals propagate spatially in dendrites and axons (see, e.g., \citep{Koch1999, rall2011}). We shall refer to this framework simply as the multicompartment (MC) framework. The MC framework has become the gold standard for biophysically detailed neuronal simulations on the cellular and network level, and has been used for simulating the dynamics of large neuronal networks (see e.g., \citep{traub2005, markram2015, arkhipov2018}).
 
-In a HHC-type model, a neuron is characterized by (i) its morphology, and (ii) its membrane mechanisms. The morphology of the real neuron (Fig. \ref{Neuron:fig:multicomp}A) is represented as a discretized set of compartments connected by resistors (Fig. \ref{Neuron:fig:multicomp}B), and there are two categories of currents which together determine the membrane potential dynamics in the compartments (Fig. \ref{Neuron:fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents at each compartment (green arrows). Once all the currents are characterized, the dynamics of the membrane potential can be computed by Kirchhoff's current law, which demands that the sum of currents into a given compartment is zero.
+A MC model is characterized by (i) its morphology, and (ii) its membrane mechanisms. The morphology (i) of the real neuron (Fig. \ref{Neuron:fig:multicomp}A) is represented as a discretized set of compartments connected by resistors (Fig. \ref{Neuron:fig:multicomp}B), and there are two categories of currents which together determine the membrane potential dynamics in the compartments (Fig. \ref{Neuron:fig:multicomp}C). These are the currents that run intracellularly between compartments (yellow arrows), and the transmembrane currents at each compartment (green arrows), which are determined by a set of (ii) neuron specific membrane mechanisms. Once all the currents are characterized, the dynamics of the membrane potential can be computed by Kirchhoff's current law, which demands that the sum of currents into a given compartment is zero.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -16,13 +17,13 @@ In a HHC-type model, a neuron is characterized by (i) its morphology, and (ii) i
 \label{Neuron:fig:multicomp}
 \end{figure}
 
-Modelling of neurons is at the core of computational neuroscience, and both the HHC formalism and other alternatives have been treated in detail in several text books (see e.g., \citep{johnston1994foundations, KockSegev1998, Koch1999, Hille2001, Dayan2005, Sterratt2011}). We therefore only give a rather brief introduction HHC formalism here. We start by presenting a framework for modeling the transmembrane currents in a single compartment (Section \ref{sec:Neuron:membranecurrents}), and next show how a number of such compartments can be connected together to a multicompartment model (Section \ref{sec:Neuron:morphology}). Together, those two sections provide a theoretical framework for modeling neurons that should be sufficient for most practical applications. Readers that crave further biophysical insight into the ionic movements that actually give rise to the transmembrane neural currents can get a brief introduction to this in Section\ref{sec:Neuron:Ions_and_reversals}. Finally, we end the chapter about neuronal modeling by briefly summarizing the main assumptions underlying the HHC (Section \ref{sec:Neuron:HHCassumptions}).
+To present the MC framework, we will start by presenting a framework for modeling the transmembrane currents in a single compartment (Section \ref{sec:Neuron:membranecurrents}), and next show how a number of such compartments can be connected together to a MC model (Section \ref{sec:Neuron:morphology}). Together, those two sections provide a theoretical framework for modeling neurons that should be sufficient for most practical applications. Readers that crave further biophysical insight into the ionic movements that actually give rise to the transmembrane neural currents can get a brief introduction to this in Section\ref{sec:Neuron:Ions_and_reversals}. Finally, we end the chapter about neuronal modeling by briefly summarizing the main assumptions underlying the HHC (Section \ref{sec:Neuron:HHCassumptions}).
 
 
 \subsection{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-In HHC-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive  (iv) external stimuli ($i_{stim}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by Hodgkin and Huxley \citep{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive  (iv) external stimuli ($i_{stim}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
 
 \begin{equation}
 i_c + i_L + \sum_x{i_x} +  i_{stim} = 0.
@@ -40,7 +41,7 @@ The capacitive current density,
 i_c = c_m \frac{d\phi_m}{dt},
 \label{Neuron:eq:HHcap}
 \end{equation}
-represents the charging up of the membrane potential $\phi_m$ due to a charge density accumulating on the outside of inside of the capacitive membrane. Here, $c_m$ is the specific membrane capacitance. In the HH-model, $c_m$ had the value
+represents the charging up of the membrane potential $\phi_m$ due to a charge density accumulating on the outside of inside of the capacitive membrane. Here, $c_m$ is the specific membrane capacitance. In the original HH-model, $c_m$ had the value
 1 $\mu$F/cm$^2$, and this value seems to be representative for most neurons.  An illustration of how to interpret the capacitive current is given in Fig. \ref{Neuron:fig:capacitive_currents}. 
 
 \begin{figure}[!ht]
@@ -86,7 +87,9 @@ Together, the capacitive current and the leakage current determine the passive p
 \subsubsection{\blue{Active ion channels}}
 \label{sec:Neuron:active}
 \index{Active ion channels}
-In addition to $i_c$ and $i_L$, biophysical neuronal models typically include a number of active ion channels. In the HHC framework, current through an active ion channel type $x$ is modeled as:
+In addition to $i_c$ and $i_L$, biophysical neuronal models typically include a number of active ion channels. These account for the "fancy" aspect of neurodynamics, and the main legacy of Hodgkin and Huxley was that they derived a mathematical model for describing the kinetics of these \citep{Hodgkin1952}.
+
+In the HH-type formalism, the current through an active ion channel type $x$ is modeled as:
 
 \begin{equation}
 i_x = \bar{g}_x m_x^{\alpha} h_x^{\beta}(V-E_x).
@@ -103,7 +106,7 @@ For voltage-gated ion channels, the the dynamics of the gating variables can be 
 \end{equation}
 Here, the steady state activation $x_{\infty}(\phi_m)$, represents the fraction of gates that will end up in the open state if the cell is clamped at a given potential $\phi_m$ for sufficiently long time. However, the process of opening the gates takes some time, as accounted for by the activation time constant $\tau_x(\phi_m)$ (ms). Both $x_{\infty}(\phi_m)$ and $\tau_x(\phi_m)$ are functions of the membrane potential, and these must be determined experimentally for each individual ion channel type. We do not go into the experimental challenges here, but will think of them as known functions. 
 
-There are also many ion channels whose activation or inactivation does not depend on $\phi_m$, but on some other variable, such as the concentration of some ion species or ligand. A common example are Ca$^{2+}$ gated ion channels, i.e., channels with gate opening controlled by the intracellular Ca$^{2+}$ concentration ($[Ca^{2+}]_i$). There are also ion channels whose activation depend on more than one variable, such as e.g., ion channels whose activation depend on both $\phi_m$ and $[Ca^{2+}]_i$. Fortunately, a HHC type formalism can in most cases be applied also to these kind of ion channels, provided that $x_{\infty}(\phi_m)$ and $\tau_x(\phi_m)$ in eq. \ref{Neuron:eq:HHgate} can be replaced with experimentally determined functions of the relevant variables. 
+There are also many ion channels whose activation or inactivation do not depend on $\phi_m$, but on some other variable, such as the concentration of some ion species or ligand \cite{Hille2001, Sterratt2011}. A common example are Ca$^{2+}$ gated ion channels, i.e., channels with gate opening controlled by the intracellular Ca$^{2+}$ concentration ($[Ca^{2+}]_i$). There are also ion channels whose activation depend on more than one variable, such as e.g., ion channels whose activation depend on both $\phi_m$ and $[Ca^{2+}]_i$. Fortunately, a HH type formalism can in most cases be applied also to these kind of ion channels, provided that $x_{\infty}(\phi_m)$ and $\tau_x(\phi_m)$ in eq. \ref{Neuron:eq:HHgate} can be replaced with experimentally determined functions of the relevant variables \cite{Sterratt2011}. 
 
 
 \subsubsection{\orange{GH: The Hodgkin-Huxley model}}
@@ -208,18 +211,18 @@ i_\text{gap}=g_\text{gap} (\phi_{m2}-\phi_{m1})
 \subsection{\blue{Morphology}}
 \label{sec:Neuron:morphology}
 \index{Multicompartmental neuron model}
-The formalism introduced so far has been for the modeling a neuron as a single compartment. When doing that, one implicitly assumes that the whole neuron is isopotential (same $\phi_m$ everywhere). This is generally not true. For example, in neurons with long and branchy dendrites, $\phi_m$ may typically be very different in the soma compared to what it is in the tip of a distal dendrite. To account for the spatial aspect of neuronal signaling, one needs to construct multicompartmental models. The neural morphology is then represented as cylindrical compartments connected with resistors, and $\phi_m$ can be computed in each individual compartment  (Fig. \ref{Neuron:fig:multikompisen}A). 
+The formalism introduced so far has been for the modeling a neuron as a single compartment. When doing that, one implicitly assumes that the whole neuron is isopotential (same $\phi_m$ everywhere). This is generally not true. For example, in neurons with long and branchy dendrites, $\phi_m$ may be very different in the soma compared to what it is in the tip of a distal dendrite. To account for the spatial aspect of neuronal signaling, one needs multicompartmental models. The neural morphology is then represented as cylindrical compartments connected with resistors, and $\phi_m$ can be computed in each individual compartment  (Fig. \ref{Neuron:fig:multikompisen}A). 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/Neuron/Multikompis.png}
 \end{center}
-\caption{\textbf{Multi-compartment model.} {\bf (A)} Representations of a neuronal morphology as a number of interconnected compartments. {\bf (B)} Subset of interconnected compartments. The currents involved in multicompartmental modelling include the sum of transmembrane currents ($I^M_n$) in a compartment $n$, and the intracellular currents running between 
+\caption{\textbf{Multi-compartment model.} {\bf (A)} Representations of a neuronal morphology as a number of interconnected compartments. {\bf (B)} Subset of interconnected compartments. The currents involved in MC modelling include the sum of transmembrane currents ($I^M_n$) in a compartment $n$, and the intracellular currents running between 
 compartments, $I_{n-1,n}$ (current from compartment $n-1$ to $n$), and $I_{n,n+1}$ (current from compartment $n$ to $n+1$).}
 \label{Neuron:fig:multikompisen}
 \end{figure}
 
-As a simple introduction to the formalism used in HHC-type models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (Fig. \ref{Neuron:fig:multikompisen}B). Let us for simplicity assume that the three cylinders have the same length ($L$) and diameter ($d$). The two categories of currents that run in this system are (i) the transmembrane currents that we introduced in the previous subsection, all of which we can group together into a total transmembrane current $I^M_n$, and (ii) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$). The dynamics of this system is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) should be zero:
+As a simple introduction to the formalism used in MC models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (Fig. \ref{Neuron:fig:multikompisen}B). Let us for simplicity assume that the three cylinders have the same length ($L$) and diameter ($d$). The two categories of currents that run in this system are (i) the transmembrane currents that we introduced in the previous subsection, all of which we can group together into a total transmembrane current $I^M_n$, and (ii) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$). The dynamics of this system is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) should be zero:
 
 \begin{equation}
 I_{n-1,n} - I_{n,j+1} - I^M_n = 0
@@ -242,7 +245,7 @@ The calculations become more complicated when the connected cylinders are of dif
 \subsubsection{\blue{Active multicomparmtent models}}
 \label{sec:Neuron:Active_multicomp}
 
-To specify our HHC-type neuron model further, we write out the total membrane current as:
+To specify our MC neuron model further, we write out the total membrane current as:
 \begin{equation}
 I^M_n = I_n^{cap} + I_n^{ion} + I_n^{stim} = -\pi d L c_m \frac{d\phi_n}{dt} + \pi d L i_n^{ion} + I_n^{stim}, 
 \label{Neuron:eq:Imemb}
@@ -253,7 +256,7 @@ where $I_n^{ion}$ represent the total current density of all transmembrane ionic
 c_m \frac{d\phi_n}{dt} = i_n^{ion} + \frac{d}{4R_a}\left(\frac{\phi_{n+1}-\phi_n}{L^2} - \frac{\phi_n-\phi_{n-1}}{L^2} \right) + \frac{I^{stim}}{\pi d L}.
 \label{Neuron:eq:multimain}
 \end{equation}
-Here,  $i_n^{ion}$ can contain any combination of passive and active membrane mechanisms. For whatever choice of membrane mechanisms, Eq. \ref{Neuron:eq:multimain} can be solved numerically for appropriately chosen boundary conditions, the most common being to use either a sealed end ($\frac{\partial \phi_n}{\partial x} = 0$), or a killed end ($\phi_n=0$). The NEURON simulator by default uses the sealed-end condition, which means that no axial current leaves at the ends of the simulated structure. Eq. \ref{Neuron:eq:multimain} is the fundamental equation for multicompartmental models.
+Here,  $i_n^{ion}$ can contain any combination of passive and active membrane mechanisms. For whatever choice of membrane mechanisms, Eq. \ref{Neuron:eq:multimain} can be solved numerically for appropriately chosen boundary conditions, the most common being to use either a sealed end ($\frac{\partial \phi_n}{\partial x} = 0$), or a killed end ($\phi_n=0$). The NEURON simulator by default uses the sealed-end condition, which means that no axial current leaves at the endpoints of the simulated structure. Eq. \ref{Neuron:eq:multimain} is the fundamental equation for multicompartmental models.
 
 
 %%%%%%%%%%%%%%%%%
@@ -268,7 +271,7 @@ c_m \frac{d\phi_n}{dt} = \frac{E_m-\phi_n}{R_m} + \frac{d}{4R_a}\left(\frac{\phi
 \label{Neuron:eq:multipassive}
 \end{equation}
 
-Although all neurons contain some active membrane mechanisms, the passive model (Eq. \ref{Neuron:eq:multipassive}) is still often used as an approximation for signaling in neural dendrites, which tend to have a lower density of active mechanisms compared to the soma and axon. 
+Although all neurons contain some active membrane mechanisms, the passive model (Eq. \ref{Neuron:eq:multipassive}) is still often used as an approximation for signaling in neural dendrites, which tend to have a lower density of active mechanisms compared to the soma and axon. As we shall see below, the passive model is useful, as it allows us to derive some analytical results for signal propagation in neural branches.
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -296,8 +299,10 @@ and the time constant,
 \tau_m \equiv R_m c_m  \,\, \text{ms}.
 \label{Neuron:eq:timeconst}
 \end{equation}
-The cable equation serves as a continuous version of a passive neural branch (with infinitely many infinitely small compartments), 
-where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. If a certain point along the cable is perturbed, so that the potential is shifted from rest to a given value $\phi$, $\tau_m$ will determine how fast the local potential will dissipate back towards rest, while $\lambda$ will tell us how far the local perturbation will spread along the cable. Whereas multicompartmental models (Eq. \ref{Neuron:eq:multimain} and \ref{Neuron:eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved numerically for some idealized scenarios. Below, we consider a couple of scenarios that will  make the interpretation of $\tau_m$ and $\lambda$ clearer. 
+
+The cable equation serves as a continuous version of a passive neural branch (with infinitely many infinitely small compartments), where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless time: $x/\lambda$) for signals in the cable. If a certain point along the cable is perturbed, so that the potential is shifted from rest to a given value $\phi$, $\tau_m$ will determine how fast the local potential will dissipate back towards rest, while $\lambda$ will tell us how far the local perturbation will spread along the cable. 
+
+Whereas MC models (Eq. \ref{Neuron:eq:multimain} and \ref{Neuron:eq:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved analytically for some idealized scenarios. Below, we consider a couple of scenarios that will  make the interpretation of $\tau_m$ and $\lambda$ clearer. 
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -404,7 +409,7 @@ where the coefficients $C_n(x)$ depend on the distance along the cable, while $\
 \subsection{\blue{Ion concentration dynamics and reversal potentials}}
 \label{sec:Neuron:Ions_and_reversals}
 \index{Ion concentration dynamics}
-The multicompartment models defined in Section \ref{sec:Neuron:Active_multicomp} together with the membrane mechanisms defined in Section \ref{sec:Neuron:membranecurrents} give a complete and operational framework for modelling the electrical activity of neurons, which works well for most purposes. The reader may chose to skip the remainder of this chapter, which delves more into the biophysical origin of neural activity. 
+MC models as defined in Section \ref{sec:Neuron:Active_multicomp} with membrane mechanisms as specified in Section \ref{sec:Neuron:membranecurrents} give a complete and operational framework for modelling the electrical activity of neurons, which works well for most purposes. The reader may chose to skip the remainder of this chapter, which delves more into the biophysical origin of neural activity. 
 
 Up til this point, we have focused on electrical currents in neurons, but talked little of their biophysical origin, i.e., the ions that carry these electrical currents. For example, action potentials are generated by a transmembrane influx of Na\textsuperscript{+}, which charges up (depolarizes) the neuron, followed by an efflux of K\textsuperscript{+}, which decharges (repolarizes) it. These fluxes are primarily driven by diffusion, and thus depend on the intra- and extracellular solutions having different ionic compositions. 
 
@@ -426,13 +431,15 @@ Nernst potential (mV)		    &	-100		&	    	+72	&		+4.5	&	-77		&		+129 	& 	-6.9  	
 
 \citep{Somjenboka}
 
-In HHC-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_L$ (eq. \ref{Neuron:eq:HHleak}), which largely determines the cell's resting potential (see see \cite{offner1991} for a critical study of this approximation). Below, we shall explain how the ionic concentrations are implicitly present in the HHC-formalism as they determine the ionic reversal potentials ($E_x$ in eq. \ref{Neuron:eq:HHform}). We shall also comment on the cases where the assumptions of constant ion concentrations are not applicable. 
+In HH-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_L$ (eq. \ref{Neuron:eq:HHleak}), which largely determines the cell's resting potential (see see \cite{offner1991} for a critical study of this approximation). Below, we shall explain how the ionic concentrations are implicitly present in the HH-formalism as they determine the ionic reversal potentials ($E_x$ in eq. \ref{Neuron:eq:HHform}). We shall also comment on the cases where the assumptions of constant ion concentrations are not applicable. 
 
 
 \subsubsection{\blue{Ionic reversal potentials}}
 \label{sec:Neuron:Erev}
 \index{Reversal potential}
-Ion channels are pores in the membrane, some of which are selectively permeable only to specific ions. For example, when a Na$^+$ channel opens, Na$^+$ ions will diffuse from Na$^+$-rich extracellular space and into the neuron. As this diffusive process transfers charged ions into the neuron, it will increase (depolarize) the membrane potential. The increased potential will in turn evoke an electrostatic force on the Na$^+$ ions, causing an electrical drift of Na$^+$ in the opposite (outward) direction. 
+Ion channels are pores in the membrane, some of which are selectively permeable only to specific ions. The ion flux through an open ion channel will be mediated by a combination of (i) diffusion and (ii) electric drift. 
+
+For example, when an K$^+$ channel opens, (i) diffusion will strive to drive K$^+$ out from the neuron, since the intracellular space is more K$^+$-rich than the extracellular space, while electric drift will strive to drive K$^+$ into the neuron, since the membrane potential $\phi_m$ (defined as intracellular minus the extracellular potential) tends to be negative ($\phi_m \sim - 70$  mV during rest). Normally, the diffusive process will dominate, so that the net flux of K$^+$ is outward. The outward flux of K$^+$ will cause a gradual decrease (hyperpolarization) of the membrane potential,  and a corresponding gradual increase of the drift component. If the K$^+$ channel stays open, the hyperpolarization will go on until the drift component becomes equal in magnitude to the diffusive component. 
 
 The ionic reversal potential is defined as the membrane potential at which the electrical drift current and diffusive current of a given ion species are in an equilibrium, i.e., they are equal in magnitude but oppositely directed. It can be calculated from the Nernst-Planck equation for electrodiffusion \index{Electrodiffusion}. If we approximate the problem as one-dimensional (in the $z$-direction, perpendicular to the membrane), the Nernst-Planck equation for an ion species $k$ is:
 
@@ -452,19 +459,21 @@ We may multiply both sides by $dz$ and re-arrange this to get:
 \begin{equation}
 -d\phi = \frac{RT}{Fz_k}  \frac{d[k]}{[k]}.
 \end{equation}
-Now we may integrate from the inside to the outside of the membrane:
+If we integrate this from the inside to the outside of the membrane, we get:
 \begin{align}
 -\int_{\phi_{\text{in}}}^{\phi_{\text{out}}}  dV &= \frac{RT}{Fz_k}  \int_{[k]_{\text{in}}}^{[k]_{\text{out}}} \frac{d[k]}{[k]} \rightarrow \\
 \phi_{\text{in}}-\phi_{\text{out}} &= \frac{RT}{Fz_k} ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}} \rightarrow \\
 E_k & =  \frac{RT}{Fz_k}  ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}} 
 \label{Neuron:eq:revpots}
 \end{align}
-where the last equality follows from the definition of $E_k$ as the membrane potential $\phi_{\text{in}}-\phi_{\text{out}}$ for which the the net flux (in Eq. \ref{Neuron:eq:NP1D}) is zero. Eq. \ref{Neuron:eq:revpots} was used to compute the reversal potentials listed in Table \ref{table:ion-concentrations}. As ion concentrations are generally assumed to remain constant in HH-type models, the reversal potentials are also assumed to be constant. As a consequence, one typically do not think that much about ionic concentrations when constructing such models, but simply use values for $E_k$ based or empirical measurements of the potential at which a certain membrane current becomes zero.
+where the last equality follows from the definition of $E_k$ as the membrane potential $\phi_{\text{in}}-\phi_{\text{out}}$ for which the the net flux (in Eq. \ref{Neuron:eq:NP1D}) is zero. Eq. \ref{Neuron:eq:revpots} was used to compute the reversal potentials listed in Table \ref{table:ion-concentrations}. 
+
+As ion concentrations are generally assumed to remain constant in HH-type models, the reversal potentials are also assumed to be constant. As a consequence, one typically do not think that much about ionic concentrations when constructing such models, but simply use values for $E_k$ based or empirical measurements of the potential at which a certain membrane current reverses, i.e., becomes zero.
 
 \subsubsection{\blue{The Goldman-Hodgkin-Katz equation}}
 \label{sec:Neuron:GHK}
 \index{Goldman-Hodgkin-Katz equation}
-Eq. \ref{Neuron:eq:NP1D} defined the reversal potential for an individual ion species, which is relevant for modeling ion specific ion channels. To calculate the reversal potential for an non-specific ion channel, we need to express all the individual ion currents separately, and compute when they sum to zero. 
+Eq. \ref{Neuron:eq:NP1D} defined the reversal potential for an individual ion species, which is relevant for modeling ion-specific ion channels. To calculate the reversal potential for a non-specific ion channel, we need to express all the individual ion currents separately, and compute when they sum to zero. 
 
 If we combine Eq. \ref{Neuron:eq:NP1D} with the assumptions that (i) ions cross the membrane independently, and (ii) that the electrical field within the membrane is constant, we can derive the Goldman-Hodkgkin-Katz (GHK) equation for the membrane currents (see e.g., \cite{hodgkin1949, johnston1994foundations}):
 \begin{equation}
@@ -480,17 +489,17 @@ E_L = \frac{R T}{F}
 \label{Neuron:eq:Eleak_GHK}
 \end{equation}
 
-Looking at eq. \ref{Neuron:eq:GHK}, we see that the transmembrane currents are nonlinear functions of both the ionic concentrations $[k]$ in the intra and extracellular space, and the membrane potential $\phi_m$. In comparison, the transmembrane currents used in the HH-type formalism (eq. \ref{Neuron:eq:HHform}), which are proportional to the driving force $(V-E_k)$, are linearized (sometimes called quasi-Ohmic) versions of the Goldman-Hodkgkin-Katz equation. The HH-form (eq. \ref{Neuron:eq:HHform}) is generally deemed as sufficient for modeling most ion channels, because it gives good predictions of the membrane currents. Ion concentrations and ionic reversal potentials are assumed to be constant.
+Looking at eq. \ref{Neuron:eq:GHK}, we see that the transmembrane currents are nonlinear functions of both the ionic concentrations $[k]$ in the intra and extracellular space, and the membrane potential $\phi_m$. In comparison, the transmembrane currents used in the HH-type formalism (eq. \ref{Neuron:eq:HHform}), which are proportional to the driving force $(V-E_k)$, are linearized (sometimes called quasi-Ohmic) versions of the Goldman-Hodkgkin-Katz equation. The HH-form (eq. \ref{Neuron:eq:HHform}) is generally deemed as sufficient for modeling most ion channels, because it gives good predictions of the membrane currents. Ion concentrations and ionic reversal potentials are then assumed to be constant.
 
 
 \subsubsection{\blue{Intracellular Calcium dynamics}}
 \label{sec:Neuron:Calcium}
 \index{Calcium dynamics}
-While ion concentrations are typically assumed to be constant in HHC-based models, it is common to make an exception for Ca$^{2+}$. The main reason for this is that the intracellular Ca$^{2+}$ concentration ($\mathrm{[Ca]_i}$) is very low compared to that of the other ion species (Table \ref{Neuron:tab:HH}). Unlike for the other ion species,  $\mathrm{[Ca]_i}$, can therefore change quite dramatically on a short time scale, e.g., during the opening of Ca$^{2+}$ channel. 
+While ion concentrations are typically assumed to be constant in HH-based models, it is common to make an exception for Ca$^{2+}$. The main reason for this is that the intracellular Ca$^{2+}$ concentration ($\mathrm{[Ca]_i}$) is very low compared to that of the other ion species (Table \ref{Neuron:tab:HH}). Unlike for the other ion species,  $\mathrm{[Ca]_i}$, can therefore change quite dramatically on a short time scale, e.g., during the opening of Ca$^{2+}$ channel. 
 
 The motivations for modeling $\mathrm{[Ca]_i}$ are several. Firstly, to accurately model currents through Ca$^{2+}$ channels, the concentration dependent GHK formalism (eq. \ref{Neuron:eq:GHK}) is often used (see e.g., \cite{Destexhe1994, Zhu1999, Halnes2011}), and one then needs an expression for $\mathrm{[Ca]_i}$. Secondly, modeling $\mathrm{[Ca]_i}$ could be motivated by the aim to reproduce data from Ca$^{2+}$ imaging experiments. Thirdly, Ca$^{2+}$ does not only act as a charge carrier in neurons, but is also a second messenger, which means that it can trigger a number of intracellular chemical processes, including the gating of Ca$^{2+}$ activated ion channels. 
 
-When Ca$^{2+}$ dynamics is included in HHC-based models, it is usually to account for the activation of ion channels that instead of being voltage gated, open or close as a function of $\mathrm{[Ca]_i}$. The kinetics scheme for voltage gated ion channels (\ref{Neuron:eq:HHgate}) is then replaced with one dependent on $\mathrm{[Ca]_i}$:
+When Ca$^{2+}$ dynamics is included in HH-based models, it is usually to account for the activation of ion channels that instead of being voltage gated, open or close as a function of $\mathrm{[Ca]_i}$. The kinetics scheme for voltage gated ion channels (\ref{Neuron:eq:HHgate}) is then replaced with one dependent on $\mathrm{[Ca]_i}$:
 
 \begin{equation}
 \frac{dx(\phi_m,t)}{dt} = \frac{x_{\infty}(\mathrm{[Ca]_i}) - x}{\tau_x(\mathrm{[Ca]_i}},  \, \text{for } x = \{m,h\},
@@ -501,23 +510,22 @@ and the $\mathrm{[Ca]_i}$ in a neuronal compartment is typically modeled using a
 \frac{d\mathrm{[Ca]_i}}{dt} = \gamma i_{Ca} - \frac{\mathrm{[Ca]_i}-\mathrm{[Ca]_{i,0}}}{\tau_{Ca}}, 
 \label{Neuron:eq:Cadynamics}
 \end{equation}
-where a transmembrane Ca$^{2+}$ current ($i_{Ca}$ is converted to a change in $\mathrm{[Ca]_i}$ by the conversion factor $\gamma$, which is proportional to the surface to volume ratio of the neuronal compartment where $\mathrm{[Ca]_i}$ is defined. In addition, the last term in eq. \ref{Neuron:eq:Cadynamics} represents the summed activity of a number of extrusion mechanisms that will make $\mathrm{[Ca]_i}$ will decay towards some baseline value $\mathrm{[Ca]_{i,0}}$ with a time constant $\tau_{Ca}$ (see e.g. \cite{Sterratt2011}).
+where a transmembrane Ca$^{2+}$ current ($i_{Ca}$ is converted to a change in $\mathrm{[Ca]_i}$ by the conversion factor $\gamma$, which is proportional to the surface to volume ratio of the neuronal compartment where $\mathrm{[Ca]_i}$ is defined. In addition, the last term in eq. \ref{Neuron:eq:Cadynamics} represents the summed activity of a number of extrusion mechanisms that will make $\mathrm{[Ca]_i}$ decay towards some baseline value $\mathrm{[Ca]_{i,0}}$ with a time constant $\tau_{Ca}$ (see e.g. \cite{Sterratt2011}).
 
-To use a simple model as in eq. \ref{Neuron:eq:Cadynamics} might not be meaningful when it comes to model the more abundant ion species (K$^{+}$, Na$^{+}$ and Cl$^{-}$). One reason is that it eq. \ref{Neuron:eq:Cadynamics} only considers the intracellular concentration. This makes sense for Ca$^2+$, since the intracellular concentration is much smaller than the extracellular concentration, so that $\mathrm{[Ca]_i}$ can experience dramatical relative changes while the extracellular concentration remains approximately constant. The same does not hold for the more abundant species, for which the concentrations are of the same order of magnitude on both sides of the membrane. Another reason is that eq. \ref{Neuron:eq:Cadynamics} is local in the sense that the concentration is affected exclusively by transmembrane ionic currents. In reality, also the axial intracellular currents are carried by ions, especially by the more abundant ones. A complete and consistent model of ion concentration dynamics would thus need to account for electrodiffusive ion concentration dynamics both in the intra- and extracellular space. Many models exist that in some way account for ion concentration dynamics (see e.g., \cite{Qian1989, Kager2000, kneller2002, Cressman2009, WeiUllahSchiff2014, newton2018, Saetra2020, ellingsrud2020}), but these are generally computationally heavy, and not based on the HHC framework.
+To use a simple model as in eq. \ref{Neuron:eq:Cadynamics} might not be meaningful when it comes to model the more abundant ion species (K$^{+}$, Na$^{+}$ and Cl$^{-}$). One reason is that eq. \ref{Neuron:eq:Cadynamics} only considers the intracellular concentration. This makes sense for Ca$^2+$, since the intracellular concentration is much smaller than the extracellular concentration, so that $\mathrm{[Ca]_i}$ can experience dramatical relative changes while the extracellular concentration remains approximately constant. The same does not hold for the more abundant species, for which the concentrations are of the same order of magnitude on both sides of the membrane. Another reason is that eq. \ref{Neuron:eq:Cadynamics} is local in the sense that the concentration is affected exclusively by transmembrane ionic currents. In reality, also the axial intracellular currents are carried by ions, especially by the more abundant ones \citep{Qian1989}. A complete and consistent model of ion concentration dynamics would thus need to account for electrodiffusive ion concentration dynamics both in the intra- and extracellular space. Such models exist (see e.g., \citep{Saetra2020, ellingsrud2020}), but they are generally computationally heavy, and not based on the MC framework that we have presented here. 
 
-
-\subsection{\blue{Underlying assumptions in the Hodgkin-Huxley-Cable framework}}
+\subsection{\blue{Underlying assumptions in multicompartment models}}
 \label{sec:Neuron:HHCassumptions}
-As the final part of this chapter, we summarize the key assumptions that the HHC-framework is based upon:
+As the final part of this chapter, we summarize the key assumptions that the standard MC framework is based upon.
 
 \begin{itemize}
-\item HH-type ion channels are simplified approximations of the electrophysiological dynamics of ion channel gating. There exist more detailed ion channel models based on e.g., a Markov-type formalism (see e.g., \cite{Destexhe1994, balbi2017}). 
+\item HH-type ion channels are simplified approximations of the electrophysiological dynamics of ion channel gating. There exist more detailed ion channel models based on a formalism more compatible with statistical physics and thermodynamics \citep{destexhe2010}, or even more detailed, Markov-type formalism based on single-channel recordings \citep{sakmann2013}.
 
-\item The HHC formalism assumes that the neuronal morphology is well represented by a one-dimensional, branching cable, meaning that radial components of intracellular currents are neglected. See e.g.,\cite{lindsay2004maxwell} for a critical study of this approximation.
+\item Being based on the cable equation, MC models assume that the neuronal morphology is well represented by a one-dimensional, branching cable, meaning that radial components of intracellular currents are neglected. See e.g.,\cite{lindsay2004maxwell} for a critical study of this approximation.
 
-\item The fundamental equation of the HHC formalism (eq. \ref{Neuron:eq:multimain}) was derived under the assumption that the extracellular potential ($\phi_e$) is zero. Although this is not true, $\phi_e$ is generally much smaller than the membrane potential $\phi_m$. The (ephaptic) effect \index{Ephaptic effects} that $\phi_e$ has on neurodynamics is therefore small \cite{anastassiou2015}, and in the HHC formalism it is neglected.
+\item Eq. \ref{Neuron:eq:multimain} was derived under the assumption that the extracellular potential ($\phi_e$) is zero. Generally, $\phi_e$ is much smaller than the membrane potential $\phi_m$, but some (so-called \textit{ephaptic}) effects \index{Ephaptic effects} of $\phi_e$ on neurodynamics could occur \cite{Holt1999, anastassiou2015, Tveito2017}. Such effects are not accounted for in the standard MC models.
 
-\item As we explained in Section \ref{sec:Neuron:Ions_and_reversals}, HHC models assume that the concentrations of the main charge carriers are constant. Generally, it is believed that the main ion concentrations change little during normal neuronal activity, so that the HHC-type framework works well. However, there are many scenarios when this is not true, and dramatic changes in ion concentrations is a trademark of several pathological conditions, such as epilepsy, stroke and spreading depression \cite{Somjen2001, Zandt2015, Ayata2015}. When concentrations change, so will ionic reversal potentials and thus the dynamical properties of neurons. HHC models are not suited to model neurons under such conditions.
+\item As we explained in Section \ref{sec:Neuron:Ions_and_reversals}, the concentrations of the main charge carriers are constant are assumed to be constant in standard MC models. As the main ion concentrations change little during normal neuronal activity, this assumption is often warranted. However, there exist scenarios when this is not true, and dramatic changes in ion concentrations is a trademark of several pathological conditions, such as epilepsy, stroke and spreading depression \cite{Somjen2001, Zandt2015, Ayata2015}. When concentrations change, so will ionic reversal potentials and thus the dynamical properties of neurons. Standard MC models are not suited to model neurons under such conditions.
 
 \end{itemize}
 
