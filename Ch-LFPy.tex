@@ -1,28 +1,32 @@
-\section{Two-step scheme for computing extracellular potentials from neural activity}
+\section{Schemes for computing extracellular potentials from neural activity}
 \label{sec:LFPy}
 \ghnote{Torbjorn will write most this.}
 \ghnote{La inn forslag til intro her:}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The standard two-step scheme for computing extracellular potentials can be summarized as: 
+The standard way of computing extracellular potentials is to use a two-step multicompartment + volume conduction (MC+VC) scheme, which can be summarized as: 
 
 \begin{itemize}
-\item {\bf Step 1:} Compute the electrical activity of neurons using the Hodgkin-Huxley-Cable (HHC) framework presented in Chapter \ref{sec:Neuron}, assuming that it is unaffected by whatever goes on in the extracellular space. 
+\item {\bf Step 1:} Compute the electrical activity of neurons using a the multicompartment (MC) framework presented in Chapter \ref{sec:Neuron}, assuming that it is unaffected by whatever goes on in the extracellular space. 
 \item {\bf Step 2:} Compute the extracellular potential $\phi$ resulting from the neural transmembrane currents computed in step 1, using Volume Conductor (VC) theory (Chapters \ref{sec:VC}-\ref{sec:Sigma}). 
 \end{itemize}
 
-This two-step HHC+VC scheme is not self-consistent, since it in Step 1 computes the neurodynamics under the assumption that $\phi$ is zero (grounded extracellular space), and in Step 2 uses this neurodynamics to compute a non-zero extracellular potential. There exist more complete and consistent schemes that account for both the ephaptic effects from $\phi$ on neurodynamics as well as for effects of ion concentration dynamics on neuronal activity of extracelluar potentials. We shall introduce alternative schemes in a later Chapter (Chapter \ref{sec:Schemes}). 
+The MC+VC scheme is not self-consistent, since Step 1 computes the neurodynamics under the assumption that $\phi$ is zero (grounded extracellular space), and Step 2 uses this neurodynamics to compute a non-zero extracellular potential. There exist more complete and consistent schemes that account for both the ephaptic effects from $\phi$ on neurodynamics as well as for effects of ion concentration dynamics on neuronal activity of extracelluar potentials. In general, these more complete schemes require numerical simulations of both the neural and extracellular dynamics using finite element or finite difference methods, and are very computationally expensive.
 
-However, in most scenarios, ephaptic effects on extracellular potentials on neurodynamics are small, and ion concentrations tend to stay close to baseline. When this is true, the simplifying approximations applied in the two-step scheme do not critically affect the accuracy of its predictions. As the  HHC+VC scheme far more computationally efficient than all alternative schemes, which require numerical simulations of extracellular dynamics using finite element or finite difference methods,  the HHC+VC scheme is the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the HHC+VC-framework.
+In most scenarios, ephaptic effects from extracellular potentials on neurodynamics are small, and ion concentrations tend to stay close to baseline. When this is true, the simplifying approximations applied in the two-step scheme do not critically affect the accuracy of its predictions. As the MC+VC scheme is far more computationally efficient than any of the more complete schemes, it remains the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the MC+VC-framework.
 
-When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like HHC+VC. As we showed in Chapter \ref{sec:VC}, VC theory gave us an analytical expression for $\phi$ as a direct function of the neural current sources, meaning that it is the simulations of the neurodynamics (step 1) which requires most of the computer power. Below, we present computational schemes for the standard HHC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}).
+When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC. As we showed in Chapter \ref{sec:VC}, VC theory gave us an analytical expression for $\phi$ as a direct function of the neural current sources (Step 2), meaning that it is the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. Below, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}). We end the chapter with a brief introduction of an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).
+
+
+
+
 
 %%%%%%
 
 \subsection{\red{TVN: Neurodynamics based on multicompartmental neuron models}}
 \label{sec:Schemes:LFPy}
-\index{Hodgkin-Huxley-Cable (HHC) framework}
+\index{Multicompartment models}
 
 The standard way - what LFPy was originally designed for \citep{Hagen2018}.
 Same trick used earlier \citep{Holt1999}.
@@ -44,5 +48,22 @@ Point neuron models do not generate extracellular fields. Sad, because simulatio
 Would make things even faster. Population firing-rate models  \citep{Hagen2016}. Kernel trick (Ness et al, on-going project) 
 
 
+\subsection{\blue{GH: Self-consistent scheme for intra- and extracellular potentials} }
+\label{sec:VC:EMI}
+\index{Ephaptic effects}
+Ephaptic effects refers to the phenomenon where the extracellular potential affects the membrane potential dynamics of neurons. The possible importance of ephaptic effects has been the topic of many studies, addressing in various ways how extracellular electric fields may affect neuronal firing or signal propagation in axons (see e.g., \citep{clark1970, Rall1977, Holt1999, Bokil2001, anastassiou2010, anastassiou2015, Goldwyn2016, capllonch2020, ruffini2020}). 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Most of these studies have been based on some simplified approximations as to how evoked fields from one neuron affects other neurons, and less focus has been put on how the presence of ephaptic effects will affect the extracellular potential itself. Rigorous modeling of this, requires that the intra- and extracellular dynamics are modeled simultaneously on a unified framework based on VC theory. Such a framework exists \citep{Krassowska1994, Agudelo-Toro2013, Tveito 2017}, and was in a recent publication referred to as the extracellular-membrane-intracellular (EMI) framework \citep{Tveito2017}. 
+
+We here only describe very briefly the essence of the EMI framework. It is based on (Ohmic) current conservation in the intra- and extracelluar spaces, so that:
+\begin{equation}
+\nabla \cdot \sigma_r \nabla \phi_r = 0,
+\ref{eq:VC:EMI}
+\end{equation}
+where $r$ takes the indexes $i$ (intracellular space) or $e$ (extracellular space). The intra- and extracellular dynamics are coupled through suitable boundary condictions at the membrane, making sure that a current \textit{entering} the membrane (normal component) at one side of the membrane, is constrained to be identical to the current \textit{leaving} the membrane (negative normal component) on the opposite side \citep{Krassowska1994}. These entering and leaving currents are in turn determined by a set of mechanisms that jointly determine the transmembrane current $I_m$. In previous numerical implementations of the EMI framework, the membrane currents were modeled with Hodgkin-Huxley like kinetics \citep{Agudelo-Toro2013, Tveito2017}. 
+
+Compared to the two-step MC+VC framework, EMI has the disadvantage that it is computationally expensive. In the MC + VC scheme, which uses volume conduction modeling only for the extracellular space, $\phi_e$ can be computed as an analytical function of the transmembrane neural currents (cf. Chapter \ref{sec:VC}). Using EMI, analytical examples of solutions can only be obtained for idealized scenarios \citep{Krassowska1994}, while general EMI applications require that both the intra- and extracellular spaces are spatially resolved and their dynamics computed on a numerical framework \citep{Agudelo-Toro2013, Tveito2017}. 
+
+Using EMI to simulate larger systems with realistic morphologies would probably exceed the capacity of today's computers. However, EMI has been used to perform a systematic exploration of the inaccuracies induced when ignoring ephaptic effects in a small system of neurons represented with stylized geometries  \citep{Tveito2017}. 
+
+There exist even more advanced framework than EMI, which, in addition to accounting for ephaptic effects, also account for effects of changing ion concentrations. We will talk briefly of this in Chapter \ref{sec:Eldiff}, where we consider electrodiffusive transports in brain tissue.
