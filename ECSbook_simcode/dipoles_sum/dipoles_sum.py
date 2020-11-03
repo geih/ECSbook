@@ -6,14 +6,13 @@ import matplotlib
 matplotlib.use("AGG")
 import matplotlib.pyplot as plt
 import neuron
-from neuron import h
 import LFPy
-from plotting_convention import mark_subplots, simplify_axes
+from plotting_convention import mark_subplots
 
 np.random.seed(12345)
 
 # Create a grid of measurement locations, in (um)
-grid_x, grid_z = np.mgrid[-500:501:20, -620:1400:20]
+grid_x, grid_z = np.mgrid[-650:651:20, -800:1600:20]
 grid_y = np.ones(grid_x.shape) * 0
 
 sigma = 0.3
@@ -89,8 +88,8 @@ def insert_synaptic_input(idx, cell):
                           'weight': 0.002, # 0.001, # synapse weight
                           'record_current': True, # record synapse current
                           'syntype': 'Exp2Syn',
-                          'tau1': 0.1, #Time constant, rise
-                          'tau2': 0.1, #Time constant, decay
+                          'tau1': 1, #Time constant, rise
+                          'tau2': 3, #Time constant, decay
                           }
     synapse_parameters['idx'] = idx
     synapse = LFPy.Synapse(cell, **synapse_parameters)
@@ -98,7 +97,7 @@ def insert_synaptic_input(idx, cell):
     return synapse, cell
 
 
-def plot_grid_LFP(cell, grid_elec_params, ax, synapses):
+def plot_grid_LFP(cell, grid_elec_params, ax, synapses, scale_max=None):
 
     grid_electrode = LFPy.RecExtElectrode(cell, **grid_elec_params)
     grid_electrode.calc_lfp()
@@ -113,9 +112,11 @@ def plot_grid_LFP(cell, grid_elec_params, ax, synapses):
     LFP = 1000 * grid_electrode.LFP[:, max_amp_t_idx].reshape(grid_x.shape)
 
     num = 11
-    levels = np.logspace(-2.0, 0, num=num)
+    levels = np.logspace(-2.2, 0, num=num)
 
-    scale_max = np.max(np.abs(LFP))
+    print(np.max(np.abs(LFP)))
+    scale_max = np.max(np.abs(LFP)) if scale_max is None else scale_max
+    print(scale_max)
 
     levels_norm = scale_max * np.concatenate((-levels[::-1], levels))
     rainbow_cmap = plt.cm.get_cmap('PRGn')  # rainbow, spectral, RdYlBu
@@ -129,7 +130,8 @@ def plot_grid_LFP(cell, grid_elec_params, ax, synapses):
      for idx in range(cell.totnsegs)]
 
     [ax.plot(cell.xmid[syn.idx], cell.zmid[syn.idx], marker='o', c='cyan',
-                 ms=3, mec='k')
+                 ms=3, mec='k'
+             )
      for syn in synapses]
 
     ep_intervals = ax.contourf(grid_x, grid_z, LFP,
@@ -138,13 +140,14 @@ def plot_grid_LFP(cell, grid_elec_params, ax, synapses):
 
     ax.contour(grid_x, grid_z, LFP, colors='k', linewidths=(1), zorder=2,
                    levels=levels_norm)
+    return ep_intervals
 
 
 def make_all_basal_dipoles():
 
     basal_dipole_fig_folder = join('.', "all_basal_dipoles")
     os.makedirs(basal_dipole_fig_folder, exist_ok=True)
-    cell = return_cell(tstop=5, dt=2**-4)
+    cell = return_cell(tstop=10, dt=2**-4)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=100,
                                        z_min=-1e9, nidx=1000)
     cell.__del__()
@@ -152,7 +155,7 @@ def make_all_basal_dipoles():
     for syn_idx in set(idxs):
         synapses = []
         print(syn_idx)
-        cell = return_cell(tstop=5, dt=2**-4)
+        cell = return_cell(tstop=10, dt=2**-4)
         syn, cell = insert_synaptic_input(syn_idx, cell)
         synapses.append(syn)
         cell.simulate(rec_imem=True)
@@ -168,30 +171,43 @@ def make_all_basal_dipoles():
 
 
 def make_figure():
-    chosen_basal_idxs = np.array([129, 184, 95]) # 118 221,
+    chosen_basal_idxs = np.array([129, 500, 95])  # 118 221,
 
     plt.close("all")
     fig = plt.figure(figsize=[4, 5])
-    fig.subplots_adjust(bottom=0.01, top=0.98, right=0.99,
-                        left=0.0, wspace=-0.0, hspace=0.0)
+    fig.subplots_adjust(bottom=0.13, top=0.98, right=0.99,
+                        left=0.0, wspace=-0.0, hspace=0.2)
     num_cols = 3
+    tstop = 10
+    dt = 2**-4
+
+    single_syn_scalemax = 1
+    multi_syn_scalemax = 50
 
     # Plot single-synapse dipoles
+    axes_to_mark = []
     for i, syn_idx in enumerate(chosen_basal_idxs):
         synapses = []
-        cell = return_cell(tstop=5, dt=2**-4)
+        cell = return_cell(tstop=tstop, dt=dt)
         syn, cell = insert_synaptic_input(syn_idx, cell)
         synapses.append(syn)
         cell.simulate(rec_imem=True)
 
         ax = fig.add_subplot(2, num_cols, i + 1, **ax_lfp_dict)
+        axes_to_mark.append(ax)
 
-        plot_grid_LFP(cell, grid_elec_params, ax, synapses)
+        ep_intervals = plot_grid_LFP(cell, grid_elec_params, ax,
+                                    synapses, scale_max=single_syn_scalemax)
 
         cell.__del__()
 
+    cax = fig.add_axes([0.05, 0.63, 0.9, 0.01], frameon=False)
+    cbar = fig.colorbar(ep_intervals, cax=cax, orientation='horizontal')
+    cbar.set_label('$\phi$ (µV)', labelpad=0)
+    cbar.set_ticks(np.array([-1, -0.1, -0.01, 0.01, 0.1, 1, 10]))
+
     # Plot compound basal input
-    cell = return_cell(tstop=5, dt=2**-4)
+    cell = return_cell(tstop=tstop, dt=dt)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=100,
                                        z_min=-1e9, nidx=1000)
     synapses = []
@@ -201,12 +217,12 @@ def make_figure():
     cell.simulate(rec_imem=True)
 
     ax = fig.add_subplot(2, num_cols, 4, **ax_lfp_dict)
-
-    plot_grid_LFP(cell, grid_elec_params, ax, synapses)
+    axes_to_mark.append(ax)
+    plot_grid_LFP(cell, grid_elec_params, ax, synapses, scale_max=multi_syn_scalemax)
     cell.__del__()
 
     # Plot compound apical input
-    cell = return_cell(tstop=5, dt=2**-4)
+    cell = return_cell(tstop=tstop, dt=dt)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=1e9,
                                        z_min=700, nidx=1000)
     synapses = []
@@ -216,12 +232,13 @@ def make_figure():
     cell.simulate(rec_imem=True)
 
     ax = fig.add_subplot(2, num_cols, 5, **ax_lfp_dict)
+    axes_to_mark.append(ax)
 
-    plot_grid_LFP(cell, grid_elec_params, ax, synapses)
+    plot_grid_LFP(cell, grid_elec_params, ax, synapses, scale_max=multi_syn_scalemax)
     cell.__del__()
 
     # Plot compound uniform input
-    cell = return_cell(tstop=5, dt=2**-4)
+    cell = return_cell(tstop=tstop, dt=dt)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=1e9,
                                        z_min=-1e9, nidx=1000)
     synapses = []
@@ -231,11 +248,18 @@ def make_figure():
     cell.simulate(rec_imem=True)
 
     ax = fig.add_subplot(2, num_cols, 6, **ax_lfp_dict)
+    axes_to_mark.append(ax)
 
-    plot_grid_LFP(cell, grid_elec_params, ax, synapses)
+    ep_intervals = plot_grid_LFP(cell, grid_elec_params, ax,
+                                 synapses, scale_max=multi_syn_scalemax)
     cell.__del__()
 
-    mark_subplots(fig.axes, xpos=0.15, ypos=0.95)
+    mark_subplots(axes_to_mark, xpos=0.15, ypos=0.95)
+
+    cax = fig.add_axes([0.05, 0.1, 0.9, 0.01], frameon=False)
+    cbar = fig.colorbar(ep_intervals, cax=cax, orientation='horizontal')
+    cbar.set_label('$\phi$ (µV)', labelpad=0)
+    cbar.set_ticks([-50, -5, -0.5, 0.5, 5, 50, 500])
 
     fig.savefig("fig_chosen_dipoles.png", dpi=300)
     fig.savefig("fig_chosen_dipoles.pdf", dpi=300)
