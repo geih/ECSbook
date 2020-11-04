@@ -59,9 +59,9 @@
 
 
 %%%%%%%% NOEN DEFINISJONER OG VALG
-\numberwithin{equation}{section}
-\numberwithin{figure}{section}
-\numberwithin{table}{section}
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
 
 \definecolor{newtextcolor}{cmyk}{0.01,0.7,1,0} %% color for new text
 \definecolor{newtextcolor2}{cmyk}{1,0.01,0.01,0} %% color for new text
@@ -164,13 +164,25 @@
 \begin{itemize}
 
 \item Structure plan on: https://www.overleaf.com/2551421161hjxkhwwvjrqk
-\item Refer to main Sections as "Chapters", subsections as Sections?
+\item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template.
+\item Reference style: 
+	\begin{itemize} 
+	\item Harvard: Cambridge gave three choices: Harvard (author?date), Vancouver (numbered),
+	and IEEE (numbered). I picked the Harvard-style - I think that is better in a book.
+	Unfortunately, Harvard uses the convention that all authors are listed in the first citation and in
+	subsequent citations just the first author's name followed by 'et al.' I think that listing all authors
+	can get quite messy. This can be overridden by using a duble asterix after \begin{verbatim}	\cite**{} \end{verbatim}.
+	\item Basic citation commands are "cite" for (Pettersen et al. 2018) and "citeasnoun" for
+	Pettersen et al. (2008).
+	\item Urls: I don't know why, but for some reason the harvard-bibtexing did not handle the urls
+	in our ".bib"-file, so I removed them all. Now it works fine. I suggest that new bibtex-entries are
+	copypasted in from google-scholar. My mendelay-generated entries contained some fields that 	the Harvard-style tried to to things with that it wasnt't able to.
+	\end{itemize}
 \item When to include functional arguments and not?
 \item When to include Units and not?
 \item How to make this a "computational essay"?
 \item Real booky-books tend to have an Index at the end. Add \verb|\index| around words to add them to Index
-\item \tvnnote{Kanskje vi bør ha med en enkel oppsummering av elektriske felter også, i et eget kapittel (nytt kapittel 2)? Når man først møter dette fagfeltet kan jo for eksempel linken mellom elektriske ladninger -> elekltriske felter, og elektriske strømmer -> elektriske potensialer være litt forvirrende? Gir også et naturlig sted å snakke om temaer som jording, Maxwell's ligninger etc.?}
-\item Boxes as in: https://tex.stackexchange.com/questions/371007/how-to-make-a-box-in-the-sense-of-see-box-1
+\item Boxes as in: https://tex.stackexchange.com/questions/371007/how-to-make-a-box-in-the-sense-of-see-box-1. 
 \end{itemize}
 
 
