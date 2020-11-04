@@ -1,34 +1,64 @@
-\documentclass[pdftex, 3p, preprint, authoryear, 10pt]{elsarticle}
-%\documentclass[16pt]{elsarticle}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{geometry}
-\geometry{a4paper}
-\usepackage[parfill]{parskip}
-%\usepackage{ifpdf}
-%\renewcommand*\familydefault{\sfdefault} %in stead of cmbright
-%\usepackage[cm]{sfmath} %ditto
-\usepackage[slantedGreek]{cmbright}
-\usepackage{amsmath,esint}
-\usepackage{amssymb}
-\usepackage{amstext}
-\usepackage{upgreek}
-\usepackage{ulem}
-\normalem
+
+%%%%%% PAKKENE TIL CAMBRIDGE %%%%%%%%%%%%%%%%%
+\documentclass[prodtf]{EngC}
+\usepackage[rightcaption,raggedright]{sidecap}% for side captions
+\usepackage{framed}         % for floatingboxes
+\usepackage{soul}           % for letterspacing in theorem-style headings
+\usepackage[agsm]{harvard} % for the Harvard author-date referencing system
+\usepackage[figuresright]{rotating}
+\usepackage{floatpag}
+\rotfloatpagestyle{empty}
+\usepackage[bottom]{footmisc}
+\usepackage{amsmath}% if you are using this package, it must be loaded before amsthm.sty
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+% for multiple indexes using multind.sty
+%\usepackage{multind} 
+%\ProvidesPackage{multind}
+%\makeindex{authors}
+%\makeindex{subject}
+
+% for a single index
+ \usepackage{makeidx}
+ \makeindex
+
+
+%%% VÅRE OPPRINNELIGE PAKKER %%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{geometry}
+%\geometry{a4paper}
+%\usepackage[parfill]{parskip}
+
+%%\usepackage{ifpdf}
+%%\renewcommand*\familydefault{\sfdefault} %in stead of cmbright
+%%\usepackage[cm]{sfmath} %ditto
+
+%\usepackage[slantedGreek]{cmbright}
+%\usepackage{amsmath,esint}
+%\usepackage{amssymb}
+%\usepackage{amstext}
+%\usepackage{upgreek}
+%\usepackage{ulem}
+%\normalem
 \usepackage{color}
-\usepackage{booktabs}
-\usepackage{sidecap}
 \usepackage[usenames, dvipsnames]{xcolor}
-\usepackage{lineno}
-\usepackage{imakeidx}
-\usepackage{framed}
-\usepackage{caption}
-\makeindex
-%\usepackage{soul}
-\usepackage{soulutf8}
-\usepackage{placeins}
 
+%\usepackage{booktabs}
+%\usepackage{sidecap}
+%\usepackage{lineno}
+%\usepackage{imakeidx}
+%\usepackage{framed}
+%\usepackage{caption}
+%\makeindex
+%\usepackage{soul}
+%\usepackage{soulutf8}
+%\usepackage{placeins}
+
+
+%%%%%%%% NOEN DEFINISJONER OG VALG
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
 \numberwithin{table}{section}
@@ -51,8 +81,8 @@
 \newcommand{\hlp}[2][Purple]{ {\sethlcolor{#1} \hl{#2}} }
 \newcommand{\hlt}[2][Tealblue]{ {\sethlcolor{#1} \hl{#2}} }
 
-
 %\newcommand{\ghnote}[1]{{\color{red}#1}}
+
 
 %boxes and highlight color for text updates, personified!
 \newcommand{\ghnote}[1]{\color{white}{\hlb{GH: #1 }}\color{black}}
@@ -78,42 +108,41 @@
 
 %\newcommand{\ul}[1]{{\underline{#1}}
 
+%
+%\ifpdf
+%    \usepackage[pdftex,bookmarks=true]{hyperref}
+%   \hypersetup{
+%        colorlinks = False,
+ %       linkcolor = blue,
+ %       anchorcolor = blue,
+  %      citecolor = blue,
+   %     filecolor = blue,
+     %   pagecolor = blue,
+       % urlcolor = blue
+%    }
+%\else
+  %  \usepackage[hypertex,bookmarks=true]{hyperref}
+     %   \hypersetup{
+       % colorlinks = true,
+     %   linkcolor = blue,
+       % anchorcolor = blue,
+        %citecolor = blue,
+        %filecolor = blue,
+        %pagecolor = blue,
+        %urlcolor = blue
+%    }
+%\fi
 
-\ifpdf
-    \usepackage[pdftex,bookmarks=true]{hyperref}
-    \hypersetup{
-        colorlinks = False,
-        linkcolor = blue,
-        anchorcolor = blue,
-        citecolor = blue,
-        filecolor = blue,
-        pagecolor = blue,
-        urlcolor = blue
-    }
-\else
-    \usepackage[hypertex,bookmarks=true]{hyperref}
-        \hypersetup{
-        colorlinks = true,
-        linkcolor = blue,
-        anchorcolor = blue,
-        citecolor = blue,
-        filecolor = blue,
-        pagecolor = blue,
-        urlcolor = blue
-    }
-\fi
 
-%\bibliographystyle{plainnat}
-\bibliographystyle{apalike}
 
-\makeatletter
-\def\ps@pprintTitle{%
-  \let\@oddhead\@empty
-  \let\@evenhead\@empty
-  \def\@oddfoot{\reset@font\hfil\thepage\hfil}
-  \let\@evenfoot\@oddfoot
-}
-\makeatother
+%\makeatletter
+%\def\ps@pprintTitle{%
+%  \let\@oddhead\@empty
+%  \let\@evenhead\@empty
+%  \def\@oddfoot{\reset@font\hfil\thepage\hfil}
+%  \let\@evenfoot\@oddfoot
+%}
+%\makeatother
 
 %\journal{...}
 
@@ -146,6 +175,9 @@
 
 
 \tableofcontents
+
+
+\mainmatter
 \newpage
 {\huge Part 1}
 \include{Ch-Intro}
@@ -185,8 +217,13 @@
 %\subsection{Chemical synapses:  postsynaptic response}
 %\subsection{Chemical synapses:  synaptic plasticity}
 %\subsection{Electrical synapses: gap junctions}
-\section*{References}
-\bibliography{ECS_book.bib}
+
+%\section*{References}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{apalike}
+
+\bibliography{ECS_book}\label{refs}
+
 %\section*{Index}
 \printindex
 \end{document}

@@ -1,8 +1,8 @@
-\section{TVN: Electrical stimulation}
+\chapter{TVN: Electrical stimulation}
 \label{sec:Stim}
 \tvnnote{Torbjørn skriver dette}
 
-\subsection{\red{TVN TO WRITE THIS}}
+\section{\red{TVN TO WRITE THIS}}
 \begin{itemize}
 \item General principle with illustration figure?
 \item Only change in external potential matters, emphasizing importance of distance to electrode and electrode size.
@@ -12,7 +12,7 @@
 \item Negative current pulses will depolarize proximal part of cell and hyperpolarize distal part of cell. Opposite for positive current.
 \end{itemize}
 
-\subsection{Mathematical investigation of toy example}
+\section{Mathematical investigation of toy example}
 \tvnnote{Konvensjonene her er ikke helt i sync med tidligere kapitler.}
 Extracellular injection of currents can cause strong extracellular potentials that affects neurons. However, getting an intuitive understanding of what is happening can be hard. We therefore mathematically explore a toy example, consisting of a two-compartment neuron model, being stimulated by a single extracellular current source, $I_{EC}$ (Fig.~\ref{Stim:fig:two_comp}). 
 
@@ -86,7 +86,7 @@ and
 \end{equation}
 In words, this means that a positive extracellular current ($I_{EC} > 0$), often referred to as an anode, will lead to the closest compartment being hyperpolarized ($\frac{dV^0}{dt}<0$), and the more distant compartment being depolarized ($\frac{dV^0}{dt}>0$). A negative extracellular current, often referred to as a catode, will have the opposite effect.
 
-\subsection{Cable equation in externally applied potentials}
+\section{Cable equation in externally applied potentials}
 In the previous section we derived mathematical expressions for the membrane potential of a two-compartment neuron model in an externally applied extracellular potential. The derivation can however easily be generalized to obtain the corresponding cable equation (see also Eq.~\ref{Neuron:eq:cable}), 
 see for example \cite{Tveito2017},
 \begin{equation}
