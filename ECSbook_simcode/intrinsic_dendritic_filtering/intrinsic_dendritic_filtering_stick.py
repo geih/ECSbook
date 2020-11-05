@@ -1,83 +1,24 @@
 
 import os
 from os.path import join
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.gridspec import GridSpec
 import neuron
-from neuron import h
 import LFPy
-from plotting_convention import mark_subplots, simplify_axes
+import ECSbook_simcode.neural_simulations as ns
+from ECSbook_simcode.plotting_convention import mark_subplots, simplify_axes
 
-def return_freq_and_psd(tvec, sig):
-    """ Returns the power and freqency of the input signal"""
-    import scipy.fftpack as ff
-    sig = np.array(sig)
-    if len(sig.shape) == 1:
-        sig = np.array([sig])
-    elif len(sig.shape) == 2:
-        pass
-    else:
-        raise RuntimeError("Not compatible with given array shape!")
-    timestep = (tvec[1] - tvec[0])/1000. if type(tvec) in [list, np.ndarray] else tvec
-    sample_freq = ff.fftfreq(sig.shape[1], d=timestep)
-    pidxs = np.where(sample_freq >= 0)
-    freqs = sample_freq[pidxs]
-
-    Y = ff.fft(sig, axis=1)[:, pidxs[0]]
-
-    power = np.abs(Y)**2/Y.shape[1]
-    return freqs, power
-
-
-def make_WN_input(cell, max_freq):
-    """ White Noise input ala Linden 2010 is made """
-    tot_ntsteps = round((cell.tstop - cell.tstart) / cell.dt + 1)
-    I = np.zeros(tot_ntsteps)
-    tvec = np.arange(tot_ntsteps) * cell.dt
-    for freq in range(1, max_freq + 1):
-        I += np.sin(2 * np.pi * freq * tvec/1000. + 2*np.pi*np.random.random())
-    return I
-
-
-def make_white_noise_stimuli(cell, input_idx, weight=None):
-
-    input_scaling = 0.005
-    max_freq = 1000
-    np.random.seed(1234)
-    input_array = input_scaling * (make_WN_input(cell, max_freq))
-    print(1000 * np.std(input_array))
-
-    noise_vec = (neuron.h.Vector(input_array) if weight is None
-                 else neuron.h.Vector(input_array * weight))
-
-    i = 0
-    syn = None
-    for sec in cell.allseclist:
-        for seg in sec:
-            if i == input_idx:
-                print("Input inserted in ", sec.name())
-                syn = neuron.h.ISyn(seg.x, sec=sec)
-                # print "Dist: ", nrn.distance(seg.x)
-            i += 1
-    if syn is None:
-        raise RuntimeError("Wrong stimuli index")
-    syn.dur = 1E9
-    syn.delay = 0
-    noise_vec.play(syn._ref_amp, cell.dt)
-    return cell, syn, noise_vec
-
+neuron.load_mechanisms(ns.cell_models_folder)
 
 def simulate_white_noise_synapse(elec_x_pos):
 
     tstop = 1000
-    dt = 2**-6
-    cell = return_cell(tstop, dt)
+    dt = 2**-8
+    cell = ns.return_stick_cell(tstop, dt)
     num_tsteps = int(tstop / dt + 1)
     t = np.arange(num_tsteps) * dt
     stim_idx = 0
-    cell, syn, noise_vec = make_white_noise_stimuli(cell, stim_idx)
+    cell, syn, noise_vec = ns.make_white_noise_stimuli(cell, stim_idx)
     cell.simulate(rec_vmem=True, rec_imem=True)
     syn_i = np.array(noise_vec)
 
@@ -94,72 +35,12 @@ def simulate_white_noise_synapse(elec_x_pos):
     lateral_electrode.calc_lfp()
 
     lat_LFP = lateral_electrode.LFP
-    freq_LFP, LFP_psd = return_freq_and_psd(cell.tvec, lat_LFP)
-    freq_syn, syn_i_psd = return_freq_and_psd(cell.tvec, syn_i[-len(cell.tvec):])
+    freq_LFP, LFP_psd = ns.return_freq_and_psd(cell.tvec, lat_LFP)
+    freq_syn, syn_i_psd = ns.return_freq_and_psd(cell.tvec, syn_i[-len(cell.tvec):])
 
     return freq_LFP, LFP_psd, syn_i_psd
 
-def return_cell(tstop, dt):
 
-    h("forall delete_section()")
-    h("""
-    proc celldef() {
-      topol()
-      subsets()
-      geom()
-      biophys()
-      geom_nseg()
-    }
-
-    create axon[1]
-
-    proc topol() { local i
-      basic_shape()
-    }
-    proc basic_shape() {
-      axon[0] {pt3dclear()
-      pt3dadd(0, 0, 0, 1)
-      pt3dadd(0, 0, 1000, 1)}
-    }
-
-    objref all
-    proc subsets() { local i
-      objref all
-      all = new SectionList()
-        axon[0] all.append()
-
-    }
-    proc geom() {
-    }
-    proc geom_nseg() {
-    forall {nseg = 200}
-    }
-    proc biophys() {
-    }
-    celldef()
-
-    Ra = 150.
-    cm = 1.
-    Rm = 30000.
-
-    forall {
-        insert pas // 'pas' for passive, 'hh' for Hodgkin-Huxley
-        g_pas = 1 / Rm
-        }
-    """)
-    cell_params = {
-                'morphology': h.all,
-                'delete_sections': False,
-                'v_init': -70.,
-                'passive': False,
-                'nsegs_method': None,
-                'dt': dt,
-                'tstart': 0.,
-                'tstop': tstop,
-            }
-    cell = LFPy.Cell(**cell_params)
-    cell.set_pos(x=-cell.xstart[0])
-    return cell
 
 frequencies = np.array([1, 1000])
 fig_folder = os.path.abspath('.')
@@ -203,7 +84,7 @@ lateral_elec_params = {
 for freq in frequencies:
 
     tstop = 1000. / freq
-    cell = return_cell(tstop, dt=tstop / 500)
+    cell = ns.return_stick_cell(tstop, dt=tstop / 500)
 
     stim_idx = 0
     stim_params = {
@@ -341,7 +222,6 @@ for i, freq in enumerate(frequencies):
                      c='k', lw=2, ls="-:"[i])
     lines.append(l)
     line_names.append("{:d} Hz".format(freq))
-
 
 mark_subplots(ax_dec, "D")
 mark_subplots(ax_wn, "E")

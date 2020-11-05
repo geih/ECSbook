@@ -7,7 +7,8 @@ matplotlib.use("AGG")
 import matplotlib.pyplot as plt
 import neuron
 import LFPy
-from plotting_convention import mark_subplots
+from ECSbook_simcode.plotting_convention import mark_subplots
+from ECSbook_simcode.neural_simulations import return_hay_cell
 
 np.random.seed(12345)
 
@@ -30,56 +31,7 @@ ax_lfp_dict = dict(aspect=1, frameon=False, xticks=[], yticks=[],
                    ylim=[np.min(grid_z), np.max(grid_z)],
                    xlim=[np.min(grid_x), np.max(grid_x)])
 
-def return_cell(tstop, dt):
-    if not os.path.isfile('L5bPCmodelsEH/morphologies/cell1.asc'):
-        print("Downloading Hay model")
-        if sys.version < '3':
-            from urllib2 import urlopen
-        else:
-            from urllib.request import urlopen
-        import ssl
-        from warnings import warn
-        import zipfile
-        #get the model files:
-        u = urlopen('http://senselab.med.yale.edu/ModelDB/eavBinDown.asp?o=139653&a=23&mime=application/zip',
-                    context=ssl._create_unverified_context())
-        localFile = open('L5bPCmodelsEH.zip', 'wb')
-        localFile.write(u.read())
-        localFile.close()
-        #unzip:
-        myzip = zipfile.ZipFile('L5bPCmodelsEH.zip', 'r')
-        myzip.extractall('.')
-        myzip.close()
 
-        #compile mod files every time, because of incompatibility with Mainen96 files:
-        if "win32" in sys.platform:
-            pth = "L5bPCmodelsEH/mod/"
-            warn("no autompile of NMODL (.mod) files on Windows.\n"
-                 + "Run mknrndll from NEURON bash in the folder L5bPCmodelsEH/mod and rerun example script")
-            if not pth in neuron.nrn_dll_loaded:
-                neuron.h.nrn_load_dll(pth+"nrnmech.dll")
-            neuron.nrn_dll_loaded.append(pth)
-        else:
-            os.system('''
-                      cd L5bPCmodelsEH/mod/
-                      nrnivmodl
-                      ''')
-            neuron.load_mechanisms('L5bPCmodelsEH/mod/')
-    cellParameters = {
-        'morphology': 'L5bPCmodelsEH/morphologies/cell1.asc',
-        'passive': True,
-        'nsegs_method': "lambda_f",
-        "lambda_f": 100,
-        'dt': dt,
-        'tstart': -1,
-        'tstop': tstop,
-        'v_init': -70,
-    }
-
-    cell = LFPy.Cell(**cellParameters)
-    cell.set_rotation(x=4.729, y=-3.166)
-
-    return cell
 
 
 def insert_synaptic_input(idx, cell):
@@ -147,7 +99,7 @@ def make_all_basal_dipoles():
 
     basal_dipole_fig_folder = join('.', "all_basal_dipoles")
     os.makedirs(basal_dipole_fig_folder, exist_ok=True)
-    cell = return_cell(tstop=10, dt=2**-4)
+    cell = return_hay_cell(tstop=10, dt=2**-4, make_passive=True)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=100,
                                        z_min=-1e9, nidx=1000)
     cell.__del__()
@@ -155,7 +107,7 @@ def make_all_basal_dipoles():
     for syn_idx in set(idxs):
         synapses = []
         print(syn_idx)
-        cell = return_cell(tstop=10, dt=2**-4)
+        cell = return_hay_cell(tstop=10, dt=2**-4, make_passive=True)
         syn, cell = insert_synaptic_input(syn_idx, cell)
         synapses.append(syn)
         cell.simulate(rec_imem=True)
@@ -188,7 +140,7 @@ def make_figure():
     axes_to_mark = []
     for i, syn_idx in enumerate(chosen_basal_idxs):
         synapses = []
-        cell = return_cell(tstop=tstop, dt=dt)
+        cell = return_hay_cell(tstop=tstop, dt=dt, make_passive=True)
         syn, cell = insert_synaptic_input(syn_idx, cell)
         synapses.append(syn)
         cell.simulate(rec_imem=True)
@@ -207,7 +159,7 @@ def make_figure():
     cbar.set_ticks(np.array([-1, -0.1, -0.01, 0.01, 0.1, 1, 10]))
 
     # Plot compound basal input
-    cell = return_cell(tstop=tstop, dt=dt)
+    cell = return_hay_cell(tstop=tstop, dt=dt, make_passive=True)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=100,
                                        z_min=-1e9, nidx=1000)
     synapses = []
@@ -222,7 +174,7 @@ def make_figure():
     cell.__del__()
 
     # Plot compound apical input
-    cell = return_cell(tstop=tstop, dt=dt)
+    cell = return_hay_cell(tstop=tstop, dt=dt, make_passive=True)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=1e9,
                                        z_min=700, nidx=1000)
     synapses = []
@@ -238,7 +190,7 @@ def make_figure():
     cell.__del__()
 
     # Plot compound uniform input
-    cell = return_cell(tstop=tstop, dt=dt)
+    cell = return_hay_cell(tstop=tstop, dt=dt, make_passive=True)
     idxs = cell.get_rand_idx_area_norm(section='allsec', z_max=1e9,
                                        z_min=-1e9, nidx=1000)
     synapses = []
@@ -261,8 +213,8 @@ def make_figure():
     cbar.set_label('$\phi$ (µV)', labelpad=0)
     cbar.set_ticks([-50, -5, -0.5, 0.5, 5, 50, 500])
 
-    fig.savefig("fig_chosen_dipoles.png", dpi=300)
-    fig.savefig("fig_chosen_dipoles.pdf", dpi=300)
+    fig.savefig("fig_chosen_dipoles_active.png", dpi=300)
+    fig.savefig("fig_chosen_dipoles_active.pdf", dpi=300)
 
 
 if __name__ == '__main__':
