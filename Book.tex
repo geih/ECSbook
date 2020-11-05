@@ -1,37 +1,67 @@
-\documentclass[pdftex, 3p, preprint, authoryear, 10pt]{elsarticle}
-%\documentclass[16pt]{elsarticle}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{geometry}
-\geometry{a4paper}
-\usepackage[parfill]{parskip}
-%\usepackage{ifpdf}
-%\renewcommand*\familydefault{\sfdefault} %in stead of cmbright
-%\usepackage[cm]{sfmath} %ditto
-\usepackage[slantedGreek]{cmbright}
-\usepackage{amsmath,esint}
-\usepackage{amssymb}
-\usepackage{amstext}
-\usepackage{upgreek}
-\usepackage{ulem}
-\normalem
+
+%%%%%% PAKKENE TIL CAMBRIDGE %%%%%%%%%%%%%%%%%
+\documentclass[prodtf]{EngC}
+\usepackage[rightcaption,raggedright]{sidecap}% for side captions
+\usepackage{framed}         % for floatingboxes
+\usepackage{soul}           % for letterspacing in theorem-style headings
+\usepackage[agsm]{harvard} % for the Harvard author-date referencing system
+\usepackage[figuresright]{rotating}
+\usepackage{floatpag}
+\rotfloatpagestyle{empty}
+\usepackage[bottom]{footmisc}
+\usepackage{amsmath}% if you are using this package, it must be loaded before amsthm.sty
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+% for multiple indexes using multind.sty
+%\usepackage{multind} 
+%\ProvidesPackage{multind}
+%\makeindex{authors}
+%\makeindex{subject}
+
+% for a single index
+ \usepackage{makeidx}
+ \makeindex
+
+
+%%% V�RE OPPRINNELIGE PAKKER %%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{geometry}
+%\geometry{a4paper}
+%\usepackage[parfill]{parskip}
+
+%%\usepackage{ifpdf}
+%%\renewcommand*\familydefault{\sfdefault} %in stead of cmbright
+%%\usepackage[cm]{sfmath} %ditto
+
+%\usepackage[slantedGreek]{cmbright}
+%\usepackage{amsmath,esint}
+%\usepackage{amssymb}
+%\usepackage{amstext}
+%\usepackage{upgreek}
+%\usepackage{ulem}
+%\normalem
 \usepackage{color}
-\usepackage{booktabs}
-\usepackage{sidecap}
 \usepackage[usenames, dvipsnames]{xcolor}
-\usepackage{lineno}
-\usepackage{imakeidx}
-\usepackage{framed}
-\usepackage{caption}
-\makeindex
-%\usepackage{soul}
-\usepackage{soulutf8}
-\usepackage{placeins}
 
-\numberwithin{equation}{section}
-\numberwithin{figure}{section}
-\numberwithin{table}{section}
+%\usepackage{booktabs}
+%\usepackage{sidecap}
+%\usepackage{lineno}
+%\usepackage{imakeidx}
+%\usepackage{framed}
+%\usepackage{caption}
+%\makeindex
+%\usepackage{soul}
+%\usepackage{soulutf8}
+%\usepackage{placeins}
+
+
+%%%%%%%% NOEN DEFINISJONER OG VALG
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
 
 \definecolor{newtextcolor}{cmyk}{0.01,0.7,1,0} %% color for new text
 \definecolor{newtextcolor2}{cmyk}{1,0.01,0.01,0} %% color for new text
@@ -51,8 +81,8 @@
 \newcommand{\hlp}[2][Purple]{ {\sethlcolor{#1} \hl{#2}} }
 \newcommand{\hlt}[2][Tealblue]{ {\sethlcolor{#1} \hl{#2}} }
 
-
 %\newcommand{\ghnote}[1]{{\color{red}#1}}
+
 
 %boxes and highlight color for text updates, personified!
 \newcommand{\ghnote}[1]{\color{white}{\hlb{GH: #1 }}\color{black}}
@@ -78,42 +108,41 @@
 
 %\newcommand{\ul}[1]{{\underline{#1}}
 
+%
+%\ifpdf
+%    \usepackage[pdftex,bookmarks=true]{hyperref}
+%   \hypersetup{
+%        colorlinks = False,
+ %       linkcolor = blue,
+ %       anchorcolor = blue,
+  %      citecolor = blue,
+   %     filecolor = blue,
+     %   pagecolor = blue,
+       % urlcolor = blue
+%    }
+%\else
+  %  \usepackage[hypertex,bookmarks=true]{hyperref}
+     %   \hypersetup{
+       % colorlinks = true,
+     %   linkcolor = blue,
+       % anchorcolor = blue,
+        %citecolor = blue,
+        %filecolor = blue,
+        %pagecolor = blue,
+        %urlcolor = blue
+%    }
+%\fi
 
-\ifpdf
-    \usepackage[pdftex,bookmarks=true]{hyperref}
-    \hypersetup{
-        colorlinks = False,
-        linkcolor = blue,
-        anchorcolor = blue,
-        citecolor = blue,
-        filecolor = blue,
-        pagecolor = blue,
-        urlcolor = blue
-    }
-\else
-    \usepackage[hypertex,bookmarks=true]{hyperref}
-        \hypersetup{
-        colorlinks = true,
-        linkcolor = blue,
-        anchorcolor = blue,
-        citecolor = blue,
-        filecolor = blue,
-        pagecolor = blue,
-        urlcolor = blue
-    }
-\fi
 
-%\bibliographystyle{plainnat}
-\bibliographystyle{apalike}
 
-\makeatletter
-\def\ps@pprintTitle{%
-  \let\@oddhead\@empty
-  \let\@evenhead\@empty
-  \def\@oddfoot{\reset@font\hfil\thepage\hfil}
-  \let\@evenfoot\@oddfoot
-}
-\makeatother
+%\makeatletter
+%\def\ps@pprintTitle{%
+%  \let\@oddhead\@empty
+%  \let\@evenhead\@empty
+%  \def\@oddfoot{\reset@font\hfil\thepage\hfil}
+%  \let\@evenfoot\@oddfoot
+%}
+%\makeatother
 
 %\journal{...}
 
@@ -135,17 +164,32 @@
 \begin{itemize}
 
 \item Structure plan on: https://www.overleaf.com/2551421161hjxkhwwvjrqk
-\item Refer to main Sections as "Chapters", subsections as Sections?
+\item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template.
+\item Reference style: 
+	\begin{itemize} 
+	\item Harvard: Cambridge gave three choices: Harvard (author?date), Vancouver (numbered),
+	and IEEE (numbered). I picked the Harvard-style - I think that is better in a book.
+	Unfortunately, Harvard uses the convention that all authors are listed in the first citation and in
+	subsequent citations just the first author's name followed by 'et al.' I think that listing all authors
+	can get quite messy. This can be overridden by using a duble asterix after \begin{verbatim}	\cite**{} \end{verbatim}.
+	\item Basic citation commands are "cite" for (Pettersen et al. 2018) and "citeasnoun" for
+	Pettersen et al. (2008).
+	\item Urls: I don't know why, but for some reason the harvard-bibtexing did not handle the urls
+	in our ".bib"-file, so I removed them all. Now it works fine. I suggest that new bibtex-entries are
+	copypasted in from google-scholar. My mendelay-generated entries contained some fields that 	the Harvard-style tried to to things with that it wasnt't able to.
+	\end{itemize}
 \item When to include functional arguments and not?
 \item When to include Units and not?
 \item How to make this a "computational essay"?
 \item Real booky-books tend to have an Index at the end. Add \verb|\index| around words to add them to Index
-\item \tvnnote{Kanskje vi bør ha med en enkel oppsummering av elektriske felter også, i et eget kapittel (nytt kapittel 2)? Når man først møter dette fagfeltet kan jo for eksempel linken mellom elektriske ladninger -> elekltriske felter, og elektriske strømmer -> elektriske potensialer være litt forvirrende? Gir også et naturlig sted å snakke om temaer som jording, Maxwell's ligninger etc.?}
-\item Boxes as in: https://tex.stackexchange.com/questions/371007/how-to-make-a-box-in-the-sense-of-see-box-1
+\item Boxes as in: https://tex.stackexchange.com/questions/371007/how-to-make-a-box-in-the-sense-of-see-box-1. 
 \end{itemize}
 
 
 \tableofcontents
+
+
+\mainmatter
 \newpage
 {\huge Part 1}
 \include{Ch-Intro}
@@ -185,8 +229,13 @@
 %\subsection{Chemical synapses:  postsynaptic response}
 %\subsection{Chemical synapses:  synaptic plasticity}
 %\subsection{Electrical synapses: gap junctions}
-\section*{References}
-\bibliography{ECS_book.bib}
+
+%\section*{References}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{apalike}
+
+\bibliography{ECS_book}\label{refs}
+
 %\section*{Index}
 \printindex
 \end{document}

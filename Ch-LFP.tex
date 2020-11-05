@@ -1,4 +1,4 @@
-\section{TVN/GTE: Local Field Potentials}
+\chapter{TVN/GTE: Local Field Potentials}
 \label{sec:LFP}
 \ghnote{Torbjorn will take the main responsibility for this chapter}
 \tvnnote{Add brief historical perspective?}
@@ -6,7 +6,7 @@
 %\subsection{\red{Introduction to Local Field Potentials}}
 Extracellular potentials measured in neural tissue reflects extracellular spikes, vast numbers of synaptic inputs, as well as different types of noise. The Local Field Potential (LFP) is the low-frequency part of these extracellular potentials, found by low-pass filtering the recorded signals below $\lesssim$ 500~Hz. The LFP is thought to primarily reflect synaptic inputs to populations of geometrically aligned pyramidal cells.
 
-\subsection{Single-neuron LFPs}
+\section{Single-neuron LFPs}
 The LFP is thought to reflect synaptic inputs to thousands of pyramidal neurons, and the contribution to the LFP from any single neuron is typically considered negligible. However, a lot of qualitatively important insights about the biophysical origin of the LFP can still be gained from considering synaptic input to single neurons. 
 
 \begin{figure}[!ht]
@@ -21,6 +21,7 @@ Snapshot of the LFP around a neuron model from synaptic input (cyan dots). LFPs 
 
 
 One of the defining features of the LFP is its dipolar nature. This stems from current conservation, implying that current going into the cell at one location is exactly balanced by current going out of the cell at other locations, so that synaptic input always gives rise to a balanced set of current sources and sinks (see Chap XX). The simulated LFP in the vicinity of a neuron stemming from a single synaptic input can be highly irregular in shape due to the morphological details of the cell. For example, different locations of a single excitatory synaptic inputs to the basal dendrite of a pyramidal cell can not be expected to result in similar LFPs, and will not necessarily be dipolar in shape (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf A-C}). However, for many simultaneous excitatory synaptic inputs to the basal dendrite of a pyramidal cell, we can expect that the irregularities largely cancel, and that the resulting LFP will be dominated by a basal sink (excitatory input gives negative transmembrane currents), and an apical source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf D}). Similarly, many excitatory synaptic inputs to the apical dendrite of a pyramidal cell can be expected to result in an apical sink and a basal source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf E}). Finally, synaptic input that is uniformly spread out over an entire neuronal morphology will tend to cause a more or less random distribution of current sources and sinks, leading to strong cancellations in the LFP and not in a dipolar shape of the LFP (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf F}) (but see also sec. XX (Ih)). 
+
 
 
 \subsection{Strong LFP signals require asymmetry}
@@ -45,9 +46,10 @@ and synapses.
 \end{figure}
 
 
-\subsection{Intrinsic dendritic filtering}
+\section{Intrinsic dendritic filtering}
+
 An important concept in understanding the origin of LFPs is intrinsic
-dendritic filtering \citep{Linden2010}. This effect causes a low-pass filtering of the LFP with increasing distance from the neuronal sources.
+dendritic filtering \cite{Linden2010}. This effect causes a low-pass filtering of the LFP with increasing distance from the neuronal sources.
 It is caused by the frequency dependence of transmembrane capacitive currents, and it can be illustrated through considering sinusoidal current injection to a simple stick model (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}).
 From Kirchoff's circuit laws (Ch.~\ref{sec:Neuron}), we know
 that the current injected into a neuronal compartment must equal the current leaving the same compartment, partly through the membrane as a transmembrane current, and partly into other compartments, as axial currents $I_{inj} = I_m + I_a$ (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf A}). We also know that the sum of all transmembrane currents must in this case equal $I_{inj}$, but how much these return currents will be spread out over the membrane of the neuron is dependent on how easy it is for the current to move intracellularly, and how easy it is for the currents to cross the membrane.
@@ -55,7 +57,7 @@ The transmembrane current can be expressed as $I_m = c_m\frac{dV}{dt} + I_{ion}$
 this means that for increasing frequencies, a larger fraction of the injected current will be balanced by local transmembrane currents instead of axial currents, shifting the transmembrane currents closer to the input site. 
 Therefore, rapid changes in the membrane potential are associated with predominately local transmembrane currents, while slow changes in the membrane potential are associated with more distributed transmembrane currents. This can be demonstrated by simulating the extracellular potential around a simple stick model, with a sinusoidal current synapse. A stimulation frequency of 1~Hz gives rise to a large dipolar LFP around the cell, reflecting the distributed nature of the transmembrane currents (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf B}). For the same current amplitude, but with a frequency of 1000~Hz, the resulting LFP is much more spatially confined (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf C}).
 
-This has implications for how the amplitude of different frequency-components will decay with distance from the cell \citep{Linden2010}. This is because the amplitude of the LFP from a dipole will decay faster in the far-field limit, and the far-field limit is reached at a smaller distance for more spatially confined dipoles \citep{Linden2010}. In the present example, the amplitude of the LFP very close the the input site was almost identical for the two different frequencies, but the amplitude of the LFP from the high-frequency input decayed more steeply with distance (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf D}). 
+This has implications for how the amplitude of different frequency-components will decay with distance from the cell \cite{Linden2010}. This is because the amplitude of the LFP from a dipole will decay faster in the far-field limit, and the far-field limit is reached at a smaller distance for more spatially confined dipoles \cite{Linden2010}. In the present example, the amplitude of the LFP very close the the input site was almost identical for the two different frequencies, but the amplitude of the LFP from the high-frequency input decayed more steeply with distance (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf D}). 
 For synaptic inputs consisting of both high and low frequency 
 components, this means that with increasing distance, the low frequency components will become increasingly dominant in the LFP, causing a low-pass filtering effect in the LFP (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf E}).
 Note that this is a quite general result, since we from Fourier analysis know that all signals can be written as a weighted sum of sinusoids with different frequencies.
@@ -81,9 +83,9 @@ Amplitude of LFP grows with population size, but spikes are only visible ~30 µm
 \cite{Haider2016} says it is synapses.
 Can definitely be expected to contribute somewhat to LFP PSDs.
 
+
 \subsection{\red{TVN: Effect of subthreshold active conductances}}
 Since the LFP is thought to mainly originate from large numbers of synaptic inputs and the resulting return currents, it is reasonable to expect that any ion channel on the cellular membrane that might affect the transmembrane currents, would also affect the LFP. Note that most ion channels are closed at the cells resting potential, and only becomes active during spiking.
-
 
 \subsection{\red{TVN: Other approaches}}
 \begin{itemize}
@@ -93,12 +95,13 @@ Since the LFP is thought to mainly originate from large numbers of synaptic inpu
 
 \subsection{\red{TBV:Population LFPs}}
 \begin{itemize}
-\item Full simulations \citep{Linden2011,Leski2013}
-\item Analytical results~\citep{Einevoll2013a}
+\item Full simulations \cite{Linden2011,Leski2013}
+\item Analytical results~\cite{Einevoll2013a}
+\item Active dendrites \cite{Ness2018}
 \item Effect of correlations
 \end{itemize}
 
-\subsubsection{\red{TBV:Effect of synaptic correlations}}
+\subsection{\red{TBV:Effect of synaptic correlations}}
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1.\textwidth]{Figures/LFP/LFP_effect_correlation_illustration.png}
@@ -109,7 +112,9 @@ Basically, it is just because PSD is squared, and variability increase sum of sq
 \label{LFP:fig:correlation_boost}
 \end{figure}
 
-\subsection{\orange{GTE: Example: How local is the  local field potential?}}
+
+
+\section{\orange{GTE: Example: How local is the  local field potential?}}
 \label{LFP:sec:how-local-is-the-local-field-potential}
 
 The recording of LFPs has a long history in neuroscience. Therefore maybe it is surprising that the question 
@@ -117,16 +122,16 @@ The recording of LFPs has a long history in neuroscience. Therefore maybe it is 
 recorded by an electric contact? Alternatively, what is the typical radius of the volume surrounding the contact containing
 the neurons generating (almost) all of the recorded LFP,  referred to as the \index{spatial reach}? 
 Experimental answers to this question have been conflicting, giving estimates for the spatial reach spanning from
-a few hundred micrometers~\citep{Katzner2009,Xing2009} to several millimetres~\citep{Kreiman2006} or more~\citep{Kajikawa2011}.
+a few hundred micrometers~\cite{Katzner2009,Xing2009} to several millimetres~\cite{Kreiman2006} or more~\cite{Kajikawa2011}.
 Modelling has revealed that these experimental observations can be reconciled, the key finding being that the spatial reach depends strongly
-on how synchronous the synaptic inputs driving the LFP-generating neurons are~\citep{Linden2011}.
+on how synchronous the synaptic inputs driving the LFP-generating neurons are~\cite{Linden2011}.
 
-%In \citet{Linden2011} it was found that the spatial
+%In \citeasnoun{Linden2011} it was found that the spatial
 %reach depends strongly on how synchronous the synaptic inputs driving the LFP-generating neurons are, see 
 %Box~\ref{mm:box:how-local-is-the-local-field-potential}. When the synaptic inputs
 %impinging on the population are asynchronous, that is, \firstterm{uncorrelated}, the spatial reach can be as low as hundred micrometers. However, when the synaptic inputs are synchronous manner, that is, \firstterm{correlated}, the spatial reach can be millimetres and even centimeters. 
 
-In \citet{Linden2011} this question was addressed by calculationg the spatial size of the pool of neurons 
+In \citeasnoun{Linden2011} this question was addressed by calculationg the spatial size of the pool of neurons 
 contributing to the LFP recorded by an electrode. The model used to explore this question
 is shown in panel (a) in Figure~\ref{LFP:fig:how-local}.
 Here a population of identical pyramidal neurons receiving synaptic inputs is positioned
@@ -159,14 +164,14 @@ and the amplitude $\sigma(R)$ (Figure~\ref{LFP:fig:how-local}b) is thus expected
 $R$. On the other hand the contribution to the compound signal from a single neuron decreases with distance 
 as seen in Section~\ref{XX:sec:LFP-single-neurons}, and so intuitively one could expect that $\sigma(R)$ approaches
 a constant value $\sigma_\infty$ as the population size $R$ increases. One can then define the spatial reach as the radius for which
-the compound LFP has reached a certain fraction $\alpha$ (for example $\alpha$=0.95 as in \citet{Linden2011}) of this limiting value $\sigma_\infty$. 
+the compound LFP has reached a certain fraction $\alpha$ (for example $\alpha$=0.95 as in \citeasnoun{Linden2011}) of this limiting value $\sigma_\infty$. 
 
 However, it is not clear at the outset that $\sigma(R)$ converges towards a fixed value as $R$ increases and that
 a spatial reach defined in this way exists. It turns out that a finite spatial reach is obtained under some conditions, but not all.
 We next consider a simple qualitative model that illuminates what factors determine $\sigma(R)$ and when the conditions for
 which it converges to a finite value as $R$ increases. 
 
-\subsubsection{\orange{GTE: Qualitative model}}
+\subsection{\orange{GTE: Qualitative model}}
 Two factors are expected to be key in determining how the compound population LFP $\sigma(R)$ increases with $R$:
 (i) how sharply the single-neuron contribution, that is, the \index{shape function} $f(r)$, decays with distance from the neurons, and (ii) the number
 density $N(r)$ of neurons positioned in a ring of radius $r$ around the electrode. Here we are interested in the compound LFP for large values of
@@ -177,17 +182,17 @@ of the ring, and $N(r)$ will thus be proportional to $r$ (panel d).
 
 A third key factor is the level of \index{correlations} between the single-neuron contributions to the compound LFP. 
 
-%\subsubsection{Uncorrelated single-neuron LFPs}
-\paragraph{Uncorrelated single-neuron LFPs}
+\subsubsection{Uncorrelated single-neuron LFPs}
+%\paragraph{Uncorrelated single-neuron LFPs}
 In a situation
 where the neurons in the population each receive synaptic inputs at completely random times, the contributions will be \index{uncorrelated}, and
 there will be strong cancellations of the individual LFP contributions. In this case, the amplitude of the compound signal  $\sigma(R)$ will not be proportional 
 to the number of individual sources. However, the variance of the compound LFP, that is, the square of  $\sigma(R)$, will be
 given as the sum of the variances of the individual single-neuron contributions. 
 (This is analogous to the situation with a so-called random walker where
-the variance, that is, square, of the displacement of the walker after $N$ random kicks is proportional to $N$, see, for example, \citet[Ch. X]{nelson2008}.)
+the variance, that is, square, of the displacement of the walker after $N$ random kicks is proportional to $N$, see, for example, \citeasnoun[Ch. X]{nelson2008}.)
 
-In this case one expects \citep{Linden2011}
+In this case one expects \cite{Linden2011}
 %%%
 \begin{equation}
 \sigma_\text{u}(R)^2 \propto \sum_i \sigma_i^2 \propto \sum_i f(r_i)^2
@@ -225,8 +230,8 @@ will approach a fixed finite value $\sigma_\infty$ as $R \rightarrow \infty$ (si
 This in turn implies that a spatial reach corresponding to the value of $R$ for which $\sigma_\text{u}(R)=\alpha \sigma_\infty$ can be found.
 In the quantitative modelling below, we will see that this spatial reach roughly corresponds to the lateral extension of the dendritic bush, that is, a few hundred micrometers or so when a value of $\alpha$ close to unity is chosen.
 
-%\subsubsection{Correlated single-neuron LFPs}
-\paragraph{Correlated single-neuron LFPs}
+\subsubsection{Correlated single-neuron LFPs}
+%\paragraph{Correlated single-neuron LFPs}
 
 For fully correlated synaptic inputs onto the neurons, the single-neuron LFP contributions to the compound population LFP will overlap in time.
 Further, if the different synaptic inputs have similar spatial positions on the receiving neurons, for example, all placed on the apical dendrites,  there will be little cancellation of their contributions of the single-neuron LFP contributions. 
@@ -257,7 +262,7 @@ the ancient question of why the night sky is dark given the numerous stars in th
 Olbers' paradox and the link to the spatial-reach question is described in Box XX.
 
 
-\subsubsection{\red{GTE: Box:  Why is the night sky dark? Olbers' paradox}}
+\subsection{\red{GTE: Box:  Why is the night sky dark? Olbers' paradox}}
 \gen{Was a Box in chapter in Sterratt}
 %%%%%%%%%%
 % Box: Why is the night sky dark? Olbers' paradox
@@ -270,13 +275,13 @@ Olbers' paradox and the link to the spatial-reach question is described in Box X
 \end{center}
 \vspace*{6pt}
 %
-Why is the night sky dark? An interesting historical paradox from astronomy, known as Olbers' paradox~\citep{Harrison1989}, has some analogies with the question of summation of LFP signals from many neurons. The question is why the night sky is dark given the following:
+Why is the night sky dark? An interesting historical paradox from astronomy, known as Olbers' paradox~\cite{Harrison1989}, has some analogies with the question of summation of LFP signals from many neurons. The question is why the night sky is dark given the following:
 (i) the light intensity from a single star falls off as $1/r^2$, (ii) in a homogeneous universe the number of stars in a spherical shell of a certain thickness around the Earth should increase as $r^2$. According to this the contribution from each such shell of stars to the illumination on Earth should thus be independent of the distance $r$. With an infinite universe there will be an infinite number of shells and thus an infinite light intensity on Earth! This paradox is resolved if one takes into account modern knowledge that the universe is not infinitely old and the speed of light is finite so that there are no contributing stars for shells at distances of 14 billion light years or more away. This summation of light from numerous starts is analogous to the summation of LFP from numerous neurons in the surrounding brain. A difference is that while neuronal LFPs are essentially dipoles, the stars are monopole light sources. Also the geometry is different (three-dimensional shells for stars, two-dimensional rings for neurons). The outcome is that while a finite brain is not required for a finite LFP, a finite universe is indeed required to resolve Olbers' paradox.
 \gen{This text is copied directly from a book chapter we wrote (Einevoll2013a) and should be modified to avoid self-duplication.}
 %\end{boxfloat}
 %%%
 
-\subsubsection{\orange{GTE: Quantitative model}}
+\subsection{\orange{GTE: Quantitative model}}
 
 The results from the qualitative modelling above demonstrates that the size of the compound LFP 
 from a population of neurons receiving synaptic inputs, depend critically on the level of 
@@ -304,7 +309,7 @@ Here $r_*$ is the radial distance at which the amplitude decay changes from $1/\
 From Figure~\ref{LFP:fig:how-local-shape-function}b we see that $r_*$ is about 100~micrometers for all the presently considered neurons. We have also introduced a lower cut-off $r_\varepsilon$ under 
 which the signal is assumed to be constant rather than diverging as $1/\sqrt{r}$. This cut-off reflects the finite size of the neuronal somas so $r_\varepsilon$ could be about 10 micrometers or so. 
 
-For the example in Figure~\ref{LFP:fig:how-local-shape-function} where synaptic inputs are evenly spread across the dendritic membranes, the parameter $r_*$ can be assumed to be roughly the same for the three example neurons. This is not so for the parameter $f_0$ describing the overall amplitude of the signal, however. This parameter will in general depend not only on the neuronal morphology, but in particular on the number and strength of synaptic inputs ~\citep{Linden2010,Linden2011,Einevoll2013a}.
+For the example in Figure~\ref{LFP:fig:how-local-shape-function} where synaptic inputs are evenly spread across the dendritic membranes, the parameter $r_*$ can be assumed to be roughly the same for the three example neurons. This is not so for the parameter $f_0$ describing the overall amplitude of the signal, however. This parameter will in general depend not only on the neuronal morphology, but in particular on the number and strength of synaptic inputs ~\cite{Linden2010,Linden2011,Einevoll2013a}.
 
 %%%%%%%%%%
 % Figure: LFP - how local - shape - function
@@ -325,8 +330,8 @@ onto L5 neurons, cf. Figure in Linden 2011.}
 %%%%%%%%%%%%%%%%%%
 
 
-%\subsubsection{Uncorrelated single-neuron LFPs}
-\paragraph{Uncorrelated single-neuron LFPs}
+\subsubsection{Uncorrelated single-neuron LFPs}
+%\paragraph{Uncorrelated single-neuron LFPs}
 
 For the case with uncorrelated single-neuron LFPs, the integral in Equation~\ref{LFP:equation:sigmaR2-uncorrelated-integral} for the variance of the compound LFP signal can now
 be written as 
@@ -384,7 +389,7 @@ The analytical formulae in Equation~\ref{LFP:equation:sigmaR2-uncorrelated-quant
 further suggest a new definition of the spatial reach $R_\text{reach}$, that is, $R_\text{reach}$ 
 can be set to be the distance from the electrode at which the 
 intermediate-$R$ ($r_\varepsilon \le R \le r_*$) and the 
-infinite-$R$ ($R \rightarrow \infty$) formulae intersect~\citep{Einevoll2013a}, see 
+infinite-$R$ ($R \rightarrow \infty$) formulae intersect~\cite{Einevoll2013a}, see 
 Figure~\ref{LFP:fig:how-local-center-of-population}a. For this particular value of $R$ we have 
 $2R_\text{reach}-r_\varepsilon=3 r_* - r_\varepsilon$, that is, $R_\text{reach} =1.5 r_*$. 
 
@@ -393,15 +398,15 @@ gives that $\sigma (R_\text{reach})=\sqrt{23/27}\sigma_\infty \simeq 0.92 \sigma
 stems from neurons closer than $R_\text{reach}=1.5~r_*$. For the numerical values
 used in Figure~\ref{LFP:fig:how-local-center-of-population}a,
 this corresponds to $R_\text{reach}$=0.15~mm. 
-Note that this result pertains to the situation where the electrode is at the same depth level as the neuronal somas. But the same reasoning and modelling can equally be used for the case where the neuronal somas are above or below the recording electrode, see~\citet{Einevoll2013a}.
+Note that this result pertains to the situation where the electrode is at the same depth level as the neuronal somas. But the same reasoning and modelling can equally be used for the case where the neuronal somas are above or below the recording electrode, see~\citeasnoun{Einevoll2013a}.
 
 We can now ask the question of how many neurons contribute to the recorded LFP. To get a rough idea, we can estimate the number of neurons with somas contained within a sphere of radius $R_\text{reach}$
 around the electrode. With a neuron density of, for example, $\rho_\text{neuron}$=50000 neurons per mm$^3$ which is typical for grey matter in 
 cortex~\gen{REF:Beaulieu 1993}, we find that this sphere will contain $N_\text{neuron}=4 \pi R_\text{reach}^3 \rho_\text{neuron}/3$=\gex{XX}~neurons.
 
 
-%\subsubsection{Correlated single-neuron LFPs}
-\paragraph{Correlated single-neuron LFPs}
+\subsubsection{Correlated single-neuron LFPs}
+%\paragraph{Correlated single-neuron LFPs}
 
 For the case with correlated single-neuron LFPs, insertion of the shape function $f(r)$ from 
 Equation~\ref{LFP:equation:sigmaR2-uncorrelated-quantitative-2}  into the integral
@@ -431,7 +436,7 @@ due to the necessarily finite size of pools of correlated neuronal LFP sources i
 why the night sky is dark and not light due to the illumination from all the stars surrounding us, see  Box \gex{Olbers}.
 %~\ref{LFP:box:Olbers}.)
 
-For correlated LFP sources, the model predicts that the spatial reach in practice will be set by the size of the pool of neurons receiving correlated synaptic inputs surrounding the electrode, see \citet[Figure~5]{Linden2011}. This may explain why experimental estimates of the spatial reach has varied so widely, from a few hundred micrometers to centimetres \gen{Kreiman2006, Liu and Newsome2006, Berens et al 2008a, Katzner2009, Xing et al. 2009}.
+For correlated LFP sources, the model predicts that the spatial reach in practice will be set by the size of the pool of neurons receiving correlated synaptic inputs surrounding the electrode, see \citeasnoun[Figure~5]{Linden2011}. This may explain why experimental estimates of the spatial reach has varied so widely, from a few hundred micrometers to centimetres \gen{Kreiman2006, Liu and Newsome2006, Berens et al 2008a, Katzner2009, Xing et al. 2009}.
 
 The above formulae for $\sigma_\text{c}(R)$ for the population LFP represent the two extreme cases where either the single-neuron
 LFPs are completely uncorrelated (Equation~\ref{LFP:equation:sigmaR2-uncorrelated-quantitative-2}) or completely correlated 
@@ -440,10 +445,12 @@ the single-neuron LFPs will be partially correlated. However, a corresponding fo
 
 \gen{GTE: Note that the boost of LFPs requires asymmetric input.}
  
+ 
+ 
 %%%%%%%%%%
 % Box: General expression for compound LFP
 %%%%%%%%%%
-\subsubsection{\red{GTE: Box: General expression for population LFP}}
+\subsection{\red{GTE: Box: General expression for population LFP}}
 \gen{This was a box in Sterratt chapter}
 %\begin{boxfloat}{General expression for population LFP}
 %  \label{LFP:box:population-LFP-general}
@@ -453,7 +460,7 @@ for the population LFP will depend on the population radius $R$ for the cases of
 single-neuron LFPs, respectively. However, an analogous formula for the intermediate case with partially correlated single-neuron LFPs, can
 also be derived.
 
-Following \citet{Linden2011} we assume the single-neuron LFP contribution $\phi_i(t)$ from a neuron $i$ to be a product of a 
+Following \citeasnoun{Linden2011} we assume the single-neuron LFP contribution $\phi_i(t)$ from a neuron $i$ to be a product of a 
 temporal part $\xi_i(t)$ and a spatial part $f(r_i)$ where $r_i$ is the distance between the neuron and the electrode:
 %%%
 \begin{equation}  
@@ -483,7 +490,7 @@ With the general applicable expression
 \label{LFP:box:equation:phii-phij}
 \end{equation}
 %%%
-it was shown in \citet{Linden2011} that the population LFP amplitude is given as
+it was shown in \citeasnoun{Linden2011} that the population LFP amplitude is given as
 %%%
 \begin{equation}
   \sigma(R)=\sqrt{(1-c_\phi) \sigma_\text{u}(R)^2 +  c_\phi \sigma_\text{c}(R)^2}\;\;.
@@ -500,15 +507,15 @@ Thus, all else equal, the relative contribution from the correlated sources will
 %%%
 
 
-\subsubsection{\orange{GTE: How sharply does the LFP decay outside a population of neurons?}}
+\subsection{\orange{GTE: How sharply does the LFP decay outside a population of neurons?}}
 
 Another way to phrase the question of how local the LFP is, is to measure how sharply the LFP decays outside a neuronal population receiving synaptic inputs.
 This can be explored with our quantitative model by computing how the recorded LFP will decay when the recording electrode is moved away from the center of 
 the population. We label this distance $X$ and assume, as above, a circularly symmetric neuronal population. 
 
-%\subsubsection{Uncorrelated sources} 
+\subsubsection{Uncorrelated sources} 
 For the case with uncorrelated single-neuron LFP contributions, the integral in Equation~\ref{LFP:equation:sigmaR2-uncorrelated-quantitative}
-giving the amplitude of the population LFP signal is now replaced by~\citep{Einevoll2013a} 
+giving the amplitude of the population LFP signal is now replaced by~\cite{Einevoll2013a} 
 %%%
 \begin{equation}
 \sigma_\text{u}(R,X)^2 =  \rho \iint_{\{|\vec{r}|\le R\}}\, f(|\vec{r}-\vec{X}|)^2  \, dA 
@@ -532,7 +539,7 @@ can be written as
 for which solutions in general must be found numerically. 
 \gen{How should this 2D integral be displayed? dr at the end?}
 
-%\subsubsection{Correlated sources} 
+\subsubsection{Correlated sources} 
 Likewise, for the case of completely correlated single-neuron LFP contributions, 
 the integral in Equation~\ref{LFP:equation:sigmaR2-correlated-quantitative} becomes
 %%% 
@@ -595,17 +602,17 @@ $R \rightarrow \infty$. And this is indeed close to what is observed for $R=1$~m
 Figure~\ref{LFP:fig:how-local-outside-population-center}(b). 
 
 Close inspection of the large-$X$ tail of the population-LFP curves in Figure~\ref{LFP:fig:how-local-outside-population-center}
-reveals a power law, that is, $\sigma(R,X) \sim 1/X^2$~\citep[Figure~3.9]{Einevoll2013a}. For sufficiently large values of $X$, that is,
+reveals a power law, that is, $\sigma(R,X) \sim 1/X^2$~\cite[Figure~3.9]{Einevoll2013a}. For sufficiently large values of $X$, that is,
 $X \gg R$, inspection of the integral expressions in Equations~\ref{LFP:equation:sigmaR2-X-uncorrelated-quantitative}  
 and~\ref{LFP:equation:sigmaR2-X-correlated-quantitative} in fact reveals that in this limit the population LFP will exhibit the 
-same large-X power-law behaviour as the single-neuron shape function $f(r)$, see \citep{Einevoll2013a}.      
+same large-X power-law behaviour as the single-neuron shape function $f(r)$, see \cite{Einevoll2013a}.      
 
 
-\subsection{\red{TVN/EH: Network LFPs}}
+\section{\red{TVN/EH: Network LFPs}}
 \begin{itemize}
-\item Cortical LFPs from single corticothalamic neuron \citep{Hagen2017}
-\item Cortical networks with passive dendrites with hybrid trick \citep{Hagen2016}
-\item Cortical network with active dendrites \citep{Reimann2013}
+\item Cortical LFPs from single corticothalamic neuron \cite{Hagen2017}
+\item Cortical networks with passive dendrites with hybrid trick \cite{Hagen2016}
+\item Cortical network with active dendrites \cite{Reimann2013}
 \end{itemize}
 
-\subsection{\red{GTE: Insights from LFP studies}} 
+\section{\red{GTE: Insights from LFP studies}} 

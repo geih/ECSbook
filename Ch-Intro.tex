@@ -1,10 +1,10 @@
-\section{Introduction} 
+\chapter{Introduction} 
 \label{sec:Intro}
 
-Some words about why we care \citep{Buzsaki2012,Pettersen2012,Einevoll2013,Einevoll2013a,Einevoll2019}.
+Some words about why we care \cite{Buzsaki2012,Pettersen2012,Einevoll2013,Einevoll2013a,Einevoll2019}.
 
 
-\subsection{\red{GH: The brain is electric}}
+\section{\red{GH: The brain is electric}}
 The main functional unit in the brain is the neuron. There are many different kinds of neurons. Some tend to increase the activity of other neurons, and these are called excitatory neurons, while others tend to decrease the activity of other neurons, and are called inhibitory neurons. Different kinds of neurons also vary in terms of their morphology. So-called pyramidal cells, for example, tend to form long nerve fibre branches (dendrites) in a preferred spatial direction, from the bottom towards the top of laminar parts of the brain, such as cortex and hippocampus. Other neurons, such as spiny stellate cells, have more spherically symmetric morphologies. The different kinds of neurons also vary in terms of their dynamical properties, i.e., in terms of how they respond to particular kinds of inputs.
 
 As indicated in Fig. \ref{Basics:fig:Basics}A, the neural morphology can be divided into three functionally different parts: The \textit{soma}, the \textit{dendrites} and the \textit{axon}. The synapses, through which a neuron receives input from other neurons, are predominantly distributed over its dendrites, which are long and branchy extrusions from the soma. A single neuron may have synaptic connections from thousands of other neurons, and can receive input from several of them at the same time. These inputs are sensed, or "integrated" by the soma, which, depending on the net input, decides whether or not the neuron produces an output signal. The axon is another type of extrusion from the soma, which forms synapses onto the dendrites of other neurons. When the neuron produces an output signal, an electric pulse will travel along the axon and reach the synaptic location, where the (presynaptic) output from one neuron becomes the (postsynaptic) input to another. 
@@ -20,7 +20,7 @@ As it is experimentally challenging to record intracellularly from more than one
 
 
 
-\subsection{\orange{GH: Overview the contents in this book}}
+\section{\orange{GH: Overview the contents in this book}}
 This book is divided into two parts. In Part 1 we introduce the theory for modeling neurons and the extracellular potential that they give rise to, and in Part 2 we apply this theory to extract key insights about how to interpret extracellular potentials in terms of what aspects of neural activity that they reflect.
 
 Throughout most parts of this book, we shall compute extracellular potentials using a two-step procedure:  
@@ -32,7 +32,7 @@ Throughout most parts of this book, we shall compute extracellular potentials us
 
 Following this two-step procedure, Chapter \ref{sec:Neuron} describes how to model and compute the dynamics of morphologically complex neurons (step 1), and Chapter \ref{sec:VC} describes how to compute the resulting extracellular potential (step 2). The computations in step 2 depend on the extracellular medium, as reflected through its conductivity $\sigma$. Chapter \ref{sec:Sigma} is devoted to present experimental and theoretical estimates of $\sigma$, and to explain how various choices for $\sigma$ can be incorporated into the theory (step 2). Taken together, chapters \ref{sec:Neuron}-\ref{sec:Sigma} contain the theory used for all simulations in the application part (Part 2) of this book, which remains the standard theory used within the field of neuroscience to simulate extracellular potentials. 
 
-The standard theory (covered by Chapters \ref{sec:Neuron}-\ref{sec:Sigma}) assumes (1) that ion concentrations in the extracellular (and intracellular) environment do not vary with time. This is thought to be a good approximation during normal cellular activity. However, extracellular ion concentration shifts are a trademark of many pathological conditions such as epilepsy, stroke or spreading depression \citep{Somjen2001, Frohlich2008, Zandt2015review, Ayata2015}. In Chapter \ref{sec:Eldiff} we expand step 2 by outlining a theory for modeling extracellular ion concentration dynamics surrounding active neurons, and the effects that this will have on the extracellular potential. 
+The standard theory (covered by Chapters \ref{sec:Neuron}-\ref{sec:Sigma}) assumes (1) that ion concentrations in the extracellular (and intracellular) environment do not vary with time. This is thought to be a good approximation during normal cellular activity. However, extracellular ion concentration shifts are a trademark of many pathological conditions such as epilepsy, stroke or spreading depression \cite{Somjen2001,Frohlich2008,Zandt2015review,Ayata2015}. In Chapter \ref{sec:Eldiff} we expand step 2 by outlining a theory for modeling extracellular ion concentration dynamics surrounding active neurons, and the effects that this will have on the extracellular potential. 
 
 The standard theory also assumes (2) that the extracellular potential (computed in step 2) does not have any feedback effect on the neurodynamics (computed in step 1). The justification making such an assumption is that $\phi$ is usually so much smaller than the membrane potential such, so-called ephaptic effects can be neglected without any severe loss in accuracy. Also, assuming this, simplifies the mathematical framework, and speeds up computations substantially. 
 
