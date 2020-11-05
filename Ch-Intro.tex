@@ -1,7 +1,7 @@
 \chapter{Introduction} 
 \label{sec:Intro}
 
-Some words about why we care \cite{Buzsaki2012,Pettersen2012,Einevoll2013,Einevoll2013a,Einevoll2019}.
+Some words about why we care \cite**{Buzsaki2012,Pettersen2012,Einevoll2013,Einevoll2013a,Einevoll2019}.
 
 
 \section{\red{GH: The brain is electric}}
@@ -32,7 +32,7 @@ Throughout most parts of this book, we shall compute extracellular potentials us
 
 Following this two-step procedure, Chapter \ref{sec:Neuron} describes how to model and compute the dynamics of morphologically complex neurons (step 1), and Chapter \ref{sec:VC} describes how to compute the resulting extracellular potential (step 2). The computations in step 2 depend on the extracellular medium, as reflected through its conductivity $\sigma$. Chapter \ref{sec:Sigma} is devoted to present experimental and theoretical estimates of $\sigma$, and to explain how various choices for $\sigma$ can be incorporated into the theory (step 2). Taken together, chapters \ref{sec:Neuron}-\ref{sec:Sigma} contain the theory used for all simulations in the application part (Part 2) of this book, which remains the standard theory used within the field of neuroscience to simulate extracellular potentials. 
 
-The standard theory (covered by Chapters \ref{sec:Neuron}-\ref{sec:Sigma}) assumes (1) that ion concentrations in the extracellular (and intracellular) environment do not vary with time. This is thought to be a good approximation during normal cellular activity. However, extracellular ion concentration shifts are a trademark of many pathological conditions such as epilepsy, stroke or spreading depression \cite{Somjen2001,Frohlich2008,Zandt2015review,Ayata2015}. In Chapter \ref{sec:Eldiff} we expand step 2 by outlining a theory for modeling extracellular ion concentration dynamics surrounding active neurons, and the effects that this will have on the extracellular potential. 
+The standard theory (covered by Chapters \ref{sec:Neuron}-\ref{sec:Sigma}) assumes (1) that ion concentrations in the extracellular (and intracellular) environment do not vary with time. This is thought to be a good approximation during normal cellular activity. However, extracellular ion concentration shifts are a trademark of many pathological conditions such as epilepsy, stroke or spreading depression \cite**{Somjen2001,Frohlich2008,Zandt2015,Ayata2015}. In Chapter \ref{sec:Eldiff} we expand step 2 by outlining a theory for modeling extracellular ion concentration dynamics surrounding active neurons, and the effects that this will have on the extracellular potential. 
 
 The standard theory also assumes (2) that the extracellular potential (computed in step 2) does not have any feedback effect on the neurodynamics (computed in step 1). The justification making such an assumption is that $\phi$ is usually so much smaller than the membrane potential such, so-called ephaptic effects can be neglected without any severe loss in accuracy. Also, assuming this, simplifies the mathematical framework, and speeds up computations substantially. 
 

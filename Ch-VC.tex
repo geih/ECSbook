@@ -127,9 +127,9 @@ If we have several point-current sources, $I_{1}, I_2, I_3, ... $ in locations $
 \index{Line source approximation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Eq.~\ref{VC:eq:pointsources} is referred to as the point-source approximation \cite{Holt1999,Pettersen2008a}, since it approximates the neuron as a set of point current sources, i.e., the neuron delivers to the extracellular space a singular current source per neuronal segment, located in the segment midpoint. 
+Eq.~\ref{VC:eq:pointsources} is referred to as the point-source approximation \cite**{Holt1999,Pettersen2008a}, since it approximates the neuron as a set of point current sources, i.e., the neuron delivers to the extracellular space a singular current source per neuronal segment, located in the segment midpoint. 
 
-A more sophisticated choice may be to assume that the transmembrane current is evenly distributed over the segment axis, a choice which is referred to as the line-source approximation \cite{Holt1999,Linden2014}. The contribution to the extracellular potential from a current $I_k$ in a segment $k$ can be found analytically by integrating eq. \ref{VC:eq:pointsource} over the center-line axis of the compartment (see Appendix C in \cite{Holt1998}). We here skip the derivation, but give the final solution. For a segment with length $\Delta s_k$, the contribution to the extracellular potential will be:
+A more sophisticated choice may be to assume that the transmembrane current is evenly distributed over the segment axis, a choice which is referred to as the line-source approximation \cite**{Holt1999,Linden2014}. The contribution to the extracellular potential from a current $I_k$ in a segment $k$ can be found analytically by integrating eq. \ref{VC:eq:pointsource} over the center-line axis of the compartment (see Appendix C in \cite**{Holt1998}). We here skip the derivation, but give the final solution. For a segment with length $\Delta s_k$, the contribution to the extracellular potential will be:
 
 \begin{equation}
 \phi({\bf r},t)_k = \frac{I_k}{4\pi \sigma_t} \int \frac{dr_k}{|{\bf r-r_k}|} = 
@@ -143,7 +143,7 @@ Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the lo
 \includegraphics[width=0.4\textwidth]{Figures/VC/line_source_illustration.png}
 \end{center}
 \caption[]{\textbf{Line-source approximation.} 
-\cite{Holt1998} \tvnnote{Add subscripts?}
+\cite**{Holt1998} \tvnnote{Add subscripts?}
 }
 \label{VC:fig:line_source_illustration}
 \end{figure}
@@ -153,7 +153,7 @@ Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the lo
 \label{VC:eq:linesources}
 \end{equation}
 
-The line-source approximation is believed to give a better prediction of $\phi$ than the point-source approximation at points in space that are very near neuronal membranes, especially when it comes to predicting rapid fluctuations in $\phi$, such as the extracellular action potential signature \cite{Holt1999}. At points further away from membranes, the two approaches give converging predictions.
+The line-source approximation is believed to give a better prediction of $\phi$ than the point-source approximation at points in space that are very near neuronal membranes, especially when it comes to predicting rapid fluctuations in $\phi$, such as the extracellular action potential signature \cite**{Holt1999}. At points further away from membranes, the two approaches give converging predictions.
 \tvnnote{Lage figur med LFPy som sammenligner metodene?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -226,7 +226,7 @@ where the volume integral runs over all sources. Here, $C$ represents whatever a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The \textit{dipole approximation} \index{Dipole approximation} is an alternative to eq. \ref{VC:eq:pointsources} for predicting the extracellular potential. The approximation is good provided that the "measuring point" for $\phi$ is far away from the source-sink distribution that it originates from, like in the case of EEG.
 
-To be more precise, if the distance from the center of the volume containing the current sources to the measurement point is larger than the maximal distance from volume center to any source [cite - find Jackson!], we can reformulate eq. \ref{VC:eq:pointsources} by using the the multipole expansion \cite{Nunez2006}:
+To be more precise, if the distance from the center of the volume containing the current sources to the measurement point is larger than the maximal distance from volume center to any source [cite - find Jackson!], we can reformulate eq. \ref{VC:eq:pointsources} by using the the multipole expansion \cite**{Nunez2006}:
 
 \begin{equation}
 \phi(R) = \frac{C_{monopole}}{R} + \frac{C_{dipole}}{R^2} + \frac{C_{quadrupole}}{R^3} + \frac{C_{octupole}}{R^4} + ...
@@ -241,13 +241,13 @@ As we explained in Section \ref{sec:Neuron:membranecurrents}, the net sum of cur
 \end{equation}
 where we have expressed $C_{dipole}$ in terms of the current dipole moment ($\mathbf{p}$), the angle ($\theta$) between the current dipole moment and the distance vector ($\mathbf{R}$), as explained in Appendix \ref{app:dipoleappendix}. 
 
-The current dipole moment is a function of the sum of all the transmembrane currents in a neuron \cite{Pettersen2008,Pettersen2014,Nunez2006}: 
+The current dipole moment is a function of the sum of all the transmembrane currents in a neuron \cite**{Pettersen2008,Pettersen2014,Nunez2006}: 
 \begin{equation}\label{VC:eq:dipole}
 \mathbf{p} = \sum_{k=1}^N I_k \mathbf{r}_k.
 \end{equation}
 For example, if we have a simple two-compartmental (and purely dipolar) neuron with a current sink $-I$ at location $\mathbf{r}_1$ and a current source $I$ at location $\mathbf{r}_2$, the current dipole moment can be formulated as $\mathbf{p} = -I\mathbf{r}_1 + I\mathbf{r}_2 = I(\mathbf{r}_2 - \mathbf{r}_1) = I\mathbf{d}$. Here $\mathbf{d}$ is the distance vector between the current sink and the current source, giving the length $d$ and direction of the current dipole. 
 
-As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is though to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \cite{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \cite{naess2020biophysical}.
+As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is though to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \cite**{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \cite**{naess2020biophysical}.
 
 
 \section{\red{TVN: Modelling recording electrodes}}
@@ -255,36 +255,36 @@ As we mentioned above, the current dipole approximation is only applicable when 
 \index{Electrode model}
 We have demonstrated how we can use volume conductor theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. Here we present a short review of different approaches to model such effects.
 
-\tvnnote{Litt usikker på om jeg bruker alle begreper riktig i dette avsnittet} Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to ground \cite{Martinsen2008}. For recording electrodes to accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very high conductivity so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside the electrode surface is in practice homogeneous. The amplifier must however have a near zero conductivity, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite{Schwan1992,Moulin2008,Ishai2013,Martinsen2008}. 
-The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite{Ness2015,Vermaas2020}\tvnnote{Bør finne lærebok-referanse til dette?}.
+\tvnnote{Litt usikker på om jeg bruker alle begreper riktig i dette avsnittet} Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to ground \cite**{Martinsen2008}. For recording electrodes to accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very high conductivity so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside the electrode surface is in practice homogeneous. The amplifier must however have a near zero conductivity, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Moulin2008,Ishai2013,Martinsen2008}. 
+The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Ness2015,Vermaas2020}\tvnnote{Bør finne lærebok-referanse til dette?}. \ghnote{Det finnes to Vermaas2020-refs, a og b.}
 A possible concern is whether the electrode impedance or other electrode properties can distort measured extracellular potentials, through introducing unintentional temporal filtering effects on the recorded potentials. Effectively, this would amount to the potential on the inside of the electrode surface being different from the (spatial average of the) potential on the outside of the electrode, and therefore not represent the "true" extracellular potential.
-  It has however been convincingly argued that, provided that the proper recording equipment is used, such effects should not substantially distort recorded potentials \cite{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}. Note that this only applies to recording electrodes, and that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization \cite{McIntyre2001,Martinsen2008,Joucla2012}.
-  Modelling electrode polarization effects will often require numerically comprehensive approaches, like the Finite Element Method (FEM) \index{Finite Element Method}\cite{Buitenweg2003,Moulin2008,Joucla2014}, and/or careful calibration to experimental recordings \cite{Gabriel1996,Martinsen2008,Miceli2017},
+  It has however been convincingly argued that, provided that the proper recording equipment is used, such effects should not substantially distort recorded potentials \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}. Note that this only applies to recording electrodes, and that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization \cite**{McIntyre2001,Martinsen2008,Joucla2012}.
+  Modelling electrode polarization effects will often require numerically comprehensive approaches, like the Finite Element Method (FEM) \index{Finite Element Method}\cite**{Buitenweg2003,Moulin2008,Joucla2014}, and/or careful calibration to experimental recordings \cite**{Gabriel1996,Martinsen2008,Miceli2017},
 and this topic is not covered here.
 
-Under the assumption that the proper recording equipment is used \cite{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite{Moulin2008}\tvnnote{Bør dette med, og skal vi i så fall lage enkel figur? Kanskje bra og enkelt eksempel for computational essay.}.
+Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moulin2008}\tvnnote{Bør dette med, og skal vi i så fall lage enkel figur? Kanskje bra og enkelt eksempel for computational essay.}.
 
 \subsection{\orange{Point-electrode approximation}}
 \index{Point-electrode}
 The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to  
-ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite{Ness2015,Buccino2019b}\tvnnote{Legg til sitering fra ikke-oss}.
+ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite**{Ness2015,Buccino2019b}\tvnnote{Legg til sitering fra ikke-oss}.
 
 \ghnote{Tror vi maa forklare at punktet vaart er et punkt i en coarse-grained beskrivelse av tissue. "Punktet" i vaar utregning tilsvarer en midling over et mikrometerstort omraade rundt punktet s.a. utslaget ikke er avhengiv av hvorvidt det er 1, 2, 3 eller 40 nm til naermeste membran. Den samme midlingen gjoeres av smaa elektroder. Saa "point" betyr i denne sammenhengen at vi allokerer elektrodemaalingen til punktet i sentrum av elektroden, og at elektrodens tilstedevaerelse ikke paavirker hva midlingen over dette omraadet vil vaere?}
 
 \subsection{\orange{Disc-electrode approximation}}
 \index{Disc-electrode approximation}
-In some cases recording electrodes are large enough that the extracellular potential varies substantially across the electrode surface. In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential. This is typically referred to as the disc-electrode approximation \cite{Linden2014,Ness2015}. 
+In some cases recording electrodes are large enough that the extracellular potential varies substantially across the electrode surface. In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential. This is typically referred to as the disc-electrode approximation \cite**{Linden2014,Ness2015}. 
 
 By taking into account the physical extent of the electrodes, the disc-electrode approximation can account for spatial filtering effects. However, very close to electrodes the electrodes can themselves affect the close-by extracellular potential, since they represent a region of a highly conductive material in contact with the tissue being measured from. 
-The effect of the presence of highly conductive electrodes can be investigated using FEM, and \cite{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode.
+The effect of the presence of highly conductive electrodes can be investigated using FEM, and \cite**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode.
 
-In certain cases, like in ECoG \index{ECoG} measurements from the cortical surface, the recording electrodes are both large ($\sim$~2-5~mm diameter) and close to the neuronal sources (the thickness of the human cortex is $\sim$3~mm). In such cases the electrode properties can therefore be expected to have large effect on measured potentials, see for example  \cite{Vermaas2020b,Rogers2020}.
+In certain cases, like in ECoG \index{ECoG} measurements from the cortical surface, the recording electrodes are both large ($\sim$~2-5~mm diameter) and close to the neuronal sources (the thickness of the human cortex is $\sim$3~mm). In such cases the electrode properties can therefore be expected to have large effect on measured potentials, see for example  \cite**{Vermaas2020b,Rogers2020}.
 
 \subsection{\red{Effect of the electrode probes}}
 
-Large multi-contact electrode probes can be expected to have a substantial effect on close-by extracellular potentials, since it represents a large non-conducting volume \cite{Mechler2012}. \cite{Buccino2019b} found that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank.
+Large multi-contact electrode probes can be expected to have a substantial effect on close-by extracellular potentials, since it represents a large non-conducting volume \cite**{Mechler2012}. \cite**{Buccino2019b} found that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank.
 
-\cite{Ness2015,Moffitt2005,Buccino2019b}
+\cite**{Ness2015,Moffitt2005,Buccino2019b}
 
 \ghnote{GH:Teksten under er klippet inn fra bokkapittelet.} 
 
@@ -317,7 +317,7 @@ where $\mu$ and $\epsilon$ are the permeability and permittivity of the medium r
 {\bf E} = \nabla \cdot \phi.
 \label{VC:eq:conservative}
 \end{equation}
-The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \cite{Nunez2006,Grodzinsky2011}.
+The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \cite**{Nunez2006,Grodzinsky2011}.
 
 
 \subsection{\blue{Linear extracellular medium} }
@@ -329,7 +329,7 @@ In a linear extracellular medium, the relationship between the current density a
 {\bf i} = \sigma {\bf E}.
 \label{VC:eq:bertil}
 \end{equation}
-This relation is constitutive, meaning that it is observed in nature rather than derived from any physical principle \cite{Nunez2006,Pettersen2012}. It is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions), inhomogeneous (position dependent), and complex (accounting for capacitive effects). We note that eq. \ref{VC:eq:bertil} is generally only valid in the frequency domain, while in the time domain, ${\bf i}$ must be given as a temporal convolution of $\sigma$ and ${\bf E}$ \cite{Bedard2009}. However, if $\sigma$ is frequency independent (this assumption is discussed further below), eq. \ref{VC:eq:bertil} will also be valid in the time domain.
+This relation is constitutive, meaning that it is observed in nature rather than derived from any physical principle \cite**{Nunez2006,Pettersen2012}. It is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions), inhomogeneous (position dependent), and complex (accounting for capacitive effects). We note that eq. \ref{VC:eq:bertil} is generally only valid in the frequency domain, while in the time domain, ${\bf i}$ must be given as a temporal convolution of $\sigma$ and ${\bf E}$ \cite**{Bedard2009}. However, if $\sigma$ is frequency independent (this assumption is discussed further below), eq. \ref{VC:eq:bertil} will also be valid in the time domain.
 
 Eq. \ref{VC:eq:bertil} is essentially Ohm's law for a volume conductor. If we combine it with the quasi-static approximation (i.e., with eq. \ref{VC:eq:conservative}), we get a current density given by ${\bf i} = \sigma \nabla \phi$, which is what we assumed for extracellular tissue currents in the beginning of this chapter (eq. \ref{VC:eq:ohmici}).
 
@@ -355,18 +355,18 @@ is the current that arises in a bulk solution if the solution has a charge densi
 \end{equation}
 represents the capacitive effect of a medium that allows local charge accumulation, so that $\rho$ can vary with time.  
 
-For the physiological conditions of the extracellular solution, the charge relaxation time, i.e., the time it takes for $d\rho/dt$ to decay to zero when responding to a change in the electric field, is in the order of 1 ns \cite{Grodzinsky2011,Gratiy2017}. This means that the displacement current (eq. \ref{VC:eq:idis}) will mainly be important under conditions when the electrical field varies with frequencies in the GHz range. As the relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this, the displacement current can safely be neglected. Related to this, the actual charge accumulation that takes place during a relaxation time of 1 ns is very small. For most practical purposes it is a therefore good approximation to assume that the extracellular medium is electroneutral \cite{Solbra2018}, which means that $\rho = 0$ so that the advective current becomes zero. Hence, for practical purposes, it is safe to assume that both the displacement current (eq. \ref{VC:eq:idis}) and the advective current (eq. \ref{VC:eq:iadv}) give negligible contributions to extracellular dynamics. A more physically rigorous argument for this was given in \cite{Gratiy2017}. 
+For the physiological conditions of the extracellular solution, the charge relaxation time, i.e., the time it takes for $d\rho/dt$ to decay to zero when responding to a change in the electric field, is in the order of 1 ns \cite**{Grodzinsky2011,Gratiy2017}. This means that the displacement current (eq. \ref{VC:eq:idis}) will mainly be important under conditions when the electrical field varies with frequencies in the GHz range. As the relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this, the displacement current can safely be neglected. Related to this, the actual charge accumulation that takes place during a relaxation time of 1 ns is very small. For most practical purposes it is a therefore good approximation to assume that the extracellular medium is electroneutral \cite**{Solbra2018}, which means that $\rho = 0$ so that the advective current becomes zero. Hence, for practical purposes, it is safe to assume that both the displacement current (eq. \ref{VC:eq:idis}) and the advective current (eq. \ref{VC:eq:iadv}) give negligible contributions to extracellular dynamics. A more physically rigorous argument for this was given in \citeasnoun**{Gratiy2017}. 
 
 The diffusive current \index{Diffusive current},
 \begin{equation}
 {\bf i^{dif}} = -F \sum_k z_k D_k \nabla c_k,
 \label{VC:eq:idif}
 \end{equation}
-represents the current that arrises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along extracellular concentration gradients ($\nabla c_k$), and carry along with them a net charge. Diffusive currents are neglected in standard VC theory under the assumption that they are much smaller than Ohmic drift currents at the coarse grained scale of brain tissue. By estimates, the effect of diffusion on $\phi$ is most likely small under normal conditions, so that one might generally make quite good predictions with a VC theory that neglects them \cite{Halnes2016,Gratiy2017}. 
+represents the current that arrises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along extracellular concentration gradients ($\nabla c_k$), and carry along with them a net charge. Diffusive currents are neglected in standard VC theory under the assumption that they are much smaller than Ohmic drift currents at the coarse grained scale of brain tissue. By estimates, the effect of diffusion on $\phi$ is most likely small under normal conditions, so that one might generally make quite good predictions with a VC theory that neglects them \cite**{Halnes2016,Gratiy2017}. 
 
-However, diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite{Halnes2016,Gratiy2017}. Diffusive effects on $\phi$ may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite{Somjen2001,Frohlich2008,Wei2014,Ayata2015}). 
+However, diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite**{Halnes2016,Gratiy2017}. Diffusive effects on $\phi$ may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite**{Somjen2001,Frohlich2008,Wei2014,Ayata2015}). 
 
-To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \cite{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:Eldiff}.
+To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \cite**{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:Eldiff}.
 
 
 \subsection{\orange{No ephaptic effects} }
