@@ -9,13 +9,13 @@ Extracellular potentials measured in neural tissue reflects extracellular spikes
 \subsection{Single-neuron LFPs}
 The LFP is thought to reflect synaptic inputs to thousands of pyramidal neurons, and the contribution to the LFP from any single neuron is typically considered negligible. However, a lot of qualitatively important insights about the biophysical origin of the LFP can still be gained from considering synaptic input to single neurons. 
 
-One of the defining features of the LFP is its dipolar nature. This stems from current conservation, implying that current going into the cell at one location is exactly balanced by current going out of the cell at other locations, so that synaptic input always gives rise to a balanced set of current sources and sinks. The LFP in the vicinity of a neuron stemming from a single synaptic input can be highly irregular in shape due to the morphological details of the cell. For example, different locations of a single excitatory synaptic inputs to the basal dendrite of a pyramidal cell can not be expected to result in similar LFPs, and will not necessarily be dipolar in shape (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf A-C}). However, for many simultaneous excitatory synaptic inputs to the basal dendrite of a pyramidal cell, we can expect that the irregularities largely cancel, and that the resulting LFP will be dominated by a basal sink (excitatory input gives negative transmembrane currents), and an apical source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf D}). Similarly, many excitatory synaptic inputs to the apical dendrite of a pyramidal cell can be expected to result in an apical sink and a basal source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf E}). Finally, synaptic input that is uniformly spread out over an entire neuronal morphology will tend to cause a more or less random distribution of current sources and sinks, leading to strong cancellations in the LFP and not in a dipolar shape of the LFP (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf F}) (but see also sec. XX (Ih)). Note that this applies equally well to populations of cells.
+One of the defining features of the LFP is its dipolar nature. This stems from current conservation, implying that current going into the cell at one location is exactly balanced by current going out of the cell at other locations, so that synaptic input always gives rise to a balanced set of current sources and sinks (see Chap). The simulated LFP in the vicinity of a neuron stemming from a single synaptic input can be highly irregular in shape due to the morphological details of the cell. For example, different locations of a single excitatory synaptic inputs to the basal dendrite of a pyramidal cell can not be expected to result in similar LFPs, and will not necessarily be dipolar in shape (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf A-C}). However, for many simultaneous excitatory synaptic inputs to the basal dendrite of a pyramidal cell, we can expect that the irregularities largely cancel, and that the resulting LFP will be dominated by a basal sink (excitatory input gives negative transmembrane currents), and an apical source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf D}). Similarly, many excitatory synaptic inputs to the apical dendrite of a pyramidal cell can be expected to result in an apical sink and a basal source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf E}). Finally, synaptic input that is uniformly spread out over an entire neuronal morphology will tend to cause a more or less random distribution of current sources and sinks, leading to strong cancellations in the LFP and not in a dipolar shape of the LFP (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf F}) (but see also sec. XX (Ih)). 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=.6\textwidth]{Figures/LFP/fig_chosen_dipoles.pdf}
 \end{center}
-\caption{\textbf{LFPs from synaptic inputs}
+\caption{\textbf{LFPs from synaptic inputs to pyramidal cell}
 Snapshot of the LFP around a neuron model from synaptic input (cyan dots). LFPs stemming from different synaptic input locations can be highly variable ({\bf A-C}), but many synaptic inputs to specific cell regions give more standardized LFP responses ({\bf D-E}). Uniformly distributed synaptic inputs will tent to lead to more or less random source/sink distributions, and much weaker LFPs.
 }
 \label{LFP:fig:LFP_dipoles}
@@ -24,11 +24,9 @@ Snapshot of the LFP around a neuron model from synaptic input (cyan dots). LFPs 
 
 \subsection{Strong LFP signals require asymmetry}
 From the simple analysis in the previous paragraph, we can draw important conclusions about the origin of the LFP. 
-Some kind of asymmetry is needed.
-
-Firstly, synaptic inputs to a population of neurons will cause much stronger LFP signals if the synaptic input is asymetrically distributed on the neurons. This can happen if a given pre-synaptic neural population has a preferential synaptic target region on a given post-synaptic population. It is for example known that the inhibitory cortical Martinotti cells tend to make synaptic contacts on the distal apical dendrites of pyramidal neurons. Second, a certain geometrical alignment of neurons with distinct cell regions is needed, otherwise 
-
-
+Firstly, synaptic inputs to a population of neurons will cause much stronger LFP signals if the synaptic input is asymetrically distributed on the neurons. 
+This can happen if a given pre-synaptic neural population has a preferential synaptic target region on a given post-synaptic population. It is for example known that the inhibitory cortical Martinotti cells tend to make synaptic contacts on the distal apical dendrites of pyramidal neurons. 
+Note that this can only happen if the post-synaptic population has a certain geometrical alignment of its neurons with distinct cell regions, like basal and apical dendrites. In cortex, the inhibitory interneurons and excitatory layer 4 stellate cells tend to be more symmetrical than pyramidal cells, and their morphologies are not as clearly separated into different cell regions. This prevents the asymmetric distribution of synapses that is needed for generating strong LFP signals, see also \cite{Linden2011, Hagen2016, Naess2020}.
 
 
 \begin{figure}[!ht]
@@ -72,24 +70,23 @@ dendritic stick.
 \label{LFP:fig:intrinsic_dendritic_filt}
 \end{figure}
 
+
+\subsection{\red{TVN:Effect of subthreshold active conductances}}
+
+
+
+
+\subsection{\red{TVN: Other approaches}}
 \begin{itemize}
-\item Passive dendrites \citep{Linden2010}
-\item Active dendrites \citep{Ness2016}
+\item "Magic" simple formula \citep{Mazzoni2015}
+\item Kernel trick \citep{Hagen2015, Skaar2020}}
 \end{itemize}
-
-
 
 \subsection{\red{TBV:Population LFPs}}
 \begin{itemize}
-\item Passive dendrites 
-\begin{itemize}
 \item Full simulations \citep{Linden2011,Leski2013}
 \item Analytical results~\citep{Einevoll2013a}
-\item "Magic" simple formula \citep{Mazzoni2015}
-\end{itemize}
-\item Active dendrites \citep{Ness2018}
 \item Effect of correlations
-\item Kernel trick? 
 \end{itemize}
 
 \subsubsection{\red{TBV:Effect of synaptic correlations}}
