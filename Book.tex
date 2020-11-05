@@ -1,10 +1,12 @@
 
 
 %%%%%% PAKKENE TIL CAMBRIDGE %%%%%%%%%%%%%%%%%
+  \NeedsTeXFormat{LaTeX2e}[1996/06/01]
 \documentclass[prodtf]{EngC}
 \usepackage[rightcaption,raggedright]{sidecap}% for side captions
 \usepackage{framed}         % for floatingboxes
-\usepackage{soul}           % for letterspacing in theorem-style headings
+%			\usepackage{soul}           % for letterspacing in theorem-style headings
+\usepackage{soulutf8}
 \usepackage[agsm]{harvard} % for the Harvard author-date referencing system
 \usepackage[figuresright]{rotating}
 \usepackage{floatpag}
@@ -23,6 +25,9 @@
 % for a single index
  \usepackage{makeidx}
  \makeindex
+\usepackage{glossaries}
+\makeglossaries
+\input glossaries.tex
 
 
 %%% V�RE OPPRINNELIGE PAKKER %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -57,6 +62,20 @@
 %\usepackage{soulutf8}
 %\usepackage{placeins}
 
+
+%%%%% NOE CAMBRIDGE GREIER JEG IKKE FORSTAAR
+  \hyphenation{line-break line-breaks docu-ment triangle cambridge amsthdoc
+    cambridgemods baseline-skip author authors cambridgestyle en-vir-on-ment polar}
+  \setcounter{tocdepth}{2}% the toc normally lists sections;
+% for the purposes of this document, this has been extended to subsections
+\makeatletter
+\def\TeX{TeX}
+\renewcommand{\LaTeX}{La\TeX}
+\renewcommand{\LaTeXe}{La\TeX2e}
+\makeatother
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%% NOEN DEFINISJONER OG VALG
 \numberwithin{equation}{chapter}
@@ -106,63 +125,123 @@
 \newcommand{\sntxt}[1]{{\color{Purple}#1}}
 \newcommand{\slntxt}[1]{{\color{RoyalPurple}#1}}
 
-%\newcommand{\ul}[1]{{\underline{#1}}
-
-%
-%\ifpdf
-%    \usepackage[pdftex,bookmarks=true]{hyperref}
-%   \hypersetup{
-%        colorlinks = False,
- %       linkcolor = blue,
- %       anchorcolor = blue,
-  %      citecolor = blue,
-   %     filecolor = blue,
-     %   pagecolor = blue,
-       % urlcolor = blue
-%    }
-%\else
-  %  \usepackage[hypertex,bookmarks=true]{hyperref}
-     %   \hypersetup{
-       % colorlinks = true,
-     %   linkcolor = blue,
-       % anchorcolor = blue,
-        %citecolor = blue,
-        %filecolor = blue,
-        %pagecolor = blue,
-        %urlcolor = blue
-%    }
-%\fi
 
 
-
-%\makeatletter
-%\def\ps@pprintTitle{%
-%  \let\@oddhead\@empty
-%  \let\@evenhead\@empty
-%  \def\@oddfoot{\reset@font\hfil\thepage\hfil}
-%  \let\@evenfoot\@oddfoot
-%}
-%\makeatother
-
-%\journal{...}
-
-%\definecolor{newtextcolor}{cmyk}{0,1,1,0} %% color for new text
-%\newcommand{\newtext}[1]{{\color{newtextcolor}#1}}
 
 \begin{document}
 %\linenumbers
 
-\begin{frontmatter}
 
-\author{Geir Halnes, Torbjorn V. Ness, Solveig N\ae ss, Klas H. Pettersen, Gaute T. Einevoll}
+%%%%% FRONTMATTER FROM CAMBRIDGE
+\frontmatter
 
-\title{Book about electrical fields in the brain - \today}
+%%%%% HALFTITLEPAGE
+\begin{halftitlepage}
+\halftitle{Book about electrical fields in the brain}
+\halfsubtitle{From neurons to extracellular potentials}
 
-\end{frontmatter}
+%\vskip\baselineskip
 
-{\huge Things to consider}
+\halftitleblurb{This book is about this and that. There will be computational essays. }
+
+%\vskip\baselineskip
+
+\halftitleauthor{Geir Halnes} is me.\\
+\halftitleauthor{Torbj{\o}rn Ness} is somebody else.\\
+\halftitleauthor{Solveig N{\ae}ss} is the third person. \\
+\halftitleauthor{Espen Hagen} is number four. \\
+\halftitleauthor{Klas H. Pettersen} is not me. \\
+\halftitleauthor{Gaute T. Einevoll} is the last author. \\
+\end{halftitlepage}
+
+\cleardoublepage
+
+%%%%%%% TITLEPAGE 
+\begin{titlepage}
+\fmtitle{Book about electrical fields in the brain}
+\fmsubtitle{From neurons to extracellular potentials}
+
+\fmtitleauthor{Geir Halnes}
+\fmtitleaffil{Norwegian University of Life Sciences, Norway}
+\fmtitleauthor{Torbj{\o}rn Ness}
+\fmtitleaffil{Norwegian University of Life Sciences, Norway}
+\fmtitleauthor{Solveig N{\ae}ss}
+\fmtitleaffil{University of Oslo, Norway}
+\fmtitleauthor{Espen Hagen}
+\fmtitleaffil{Norwegian University of Life Sciences, Norway}
+\fmtitleauthor{Klas H. Pettersen}
+\fmtitleaffil{NORA - The Norwegian Artificial Intelligence Research Consortium, Norway}
+\fmtitleauthor{Gaute T. Einevoll}
+\fmtitleaffil{Norwegian University of Life Sciences, Norway}
+
+% \cuplogo % This is supposed to insert some cambridge logo which was not included in the template. 
+\end{titlepage}
+
+
+%%%%%%%% COPYRIGHTPAGE 
+\begin{copyrightpage}
+%\copyrightlogo\par\vskip\baselineskip % % This is supposed to insert some cambridge logo which was not included in the template. 
+{\Large Cambridge University Press} \par\vskip1.5\baselineskip
+University Printing House, Cambridge CB2 8BS, United Kingdom\par\vskip0.5\baselineskip
+One Liberty Plaza, 20th Floor, New York, NY 10006, USA\par\vskip0.5\baselineskip
+477 Williamstown Road, Port Melbourne, VIC 3207, Australia\par\vskip0.5\baselineskip
+4843/24, 2nd Floor, Ansari Road, Daryaganj, Delhi -- 110002, India\par\vskip0.5\baselineskip
+79 Anson Road, \#06-04/06, Singapore 079906\par\vskip\baselineskip
+
+Cambridge University Press is part of the University of Cambridge.\par\vskip0.5\baselineskip
+
+It furthers the University's mission by disseminating knowledge in the pursuit of\par
+education, learning, and research at the highest international levels of excellence.\par\vskip\baselineskip
+
+www.cambridge.org\par
+Information on this title: www.cambridge.org/9781107164680\par
+DOI: 10.1017/9781316691175\par\vskip0.5\baselineskip
+
+\textcopyright\ Geir Halnes et al. 2021 \par\vskip0.5\baselineskip
+
+This publication is in copyright. Subject to statutory exception\par
+and to the provisions of relevant collective licensing agreements,\par
+no reproduction of any part may take place without the written\par
+permission of Cambridge University Press.\par\vskip0.5\baselineskip
+
+First published 2021\par\vskip0.5\baselineskip
+
+Printed in $<$country$>$ by $<$printer$>$\par\vskip0.5\baselineskip
+
+\textit{A catalogue record for this publication is available from the British Library.}\par\vskip0.5\baselineskip
+
+\textit{Library of Congress Cataloging-in-Publication Data}\par\vskip0.5\baselineskip
+
+ISBN 978-1-107-16468-0 Hardback\par
+ISBN 978-1-316-61649-9 Paperback\par\vskip0.5\baselineskip
+
+Cambridge University Press has no responsibility for the persistence or accuracy of\par
+URLs for external or third-party Internet Web sites referred to in this publication\par
+ and does not guarantee that any content on such Web sites is, or will remain,\par
+accurate or appropriate.
+\end{copyrightpage}
+
+
+%%%%%%%%% DEDICATIONPAGE
+\begin{dedication}
+For\\
+your eyes only
+\end{dedication}
+
+
+%%%%%%%%%  CONTENT LISTS ETC....
+\tocmax{2.10}{2.8.8}{}
+\tableofcontents
+%\listoffigures
+%\listoftables
+%\listoffloatingboxes
+
+\cleardoublepage
+
+
+%%%%%%%% PREFACE
+\chapter*{Preface}
 \begin{itemize}
-
 \item Structure plan on: https://www.overleaf.com/2551421161hjxkhwwvjrqk
 \item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template.
 \item Reference style: 
@@ -184,23 +263,40 @@
 \item Real booky-books tend to have an Index at the end. Add \verb|\index| around words to add them to Index
 \item Boxes as in: https://tex.stackexchange.com/questions/371007/how-to-make-a-box-in-the-sense-of-see-box-1. 
 \end{itemize}
+\begin{flushright}\vskip-0.5\baselineskip
+%\textit{Ali Woollatt}\\
+%\textit{Author locator}
+\end{flushright}
+
+\def\acrodef#1#2{\noindent\hbox to 38.5pt{\textbf{#1}} #2\par}
+
+\chapter*{Abbreviations}
+\acrodef{WWWOTL}{We Will Work On This List}
+\acrodef{AIWSBC}{And It Will Soon Be Completed}
 
 
-\tableofcontents
+% \editedlistofcontributors
+\include{notation}
+
+
+%%%%%%% END OF FRONTMATTER FROM CAMBRIDGE
 
 
 \mainmatter
-\newpage
-{\huge Part 1}
+
+\part{Getting started}
 \include{Ch-Intro}
 \include{Ch-Basics}
+
+\part{Theory}
 \include{Ch-Neuron}
 \include{Ch-VC}
 \include{Ch-Sigma}
 \include{Ch-LFPy}
+\include{Ch-Eldiff}
 
 %\newpage
-{\huge Part 2}
+\part{Applications}
 \include{Ch-Spikes}
 \include{Ch-LFP}
 \include{Ch-ECoG}
@@ -208,20 +304,16 @@
 \include{Ch-MEG}
 \include{Ch-Stim}
 
-
-{\huge Part 3}
+\part{Outlook}
 %\include{Ch-ephaptic}
 %\include{Ch-Schemes}
-\include{Ch-Eldiff}
 \include{Ch-Tech}
 \include{Ch-Last}
 
-
-%
-{\huge Appendices}
+\backmatter
 
 \appendix
-\section{Derivation of four-sphere model}
+\chapter{Derivation of four-sphere model}
 \tvnnote{Paste from LFPy 2.0 paper?}
 %\tvnnote{Solveigs utledning av når strømdipol-approksimasjonen er gyldig?}
 \include{AppB-multipole}
@@ -229,12 +321,18 @@
 %\subsection{Chemical synapses:  postsynaptic response}
 %\subsection{Chemical synapses:  synaptic plasticity}
 %\subsection{Electrical synapses: gap junctions}
-
 %\section*{References}
 %\bibliographystyle{plainnat}
 %\bibliographystyle{apalike}
+\endappendix
+
+%%%%% FOR END NOTES: DON'T THINK THAT WE WANT THAT
+% insert a blank line to the toc list
+%  \addtocontents{toc}{\vspace{\baselineskip}}
+%  \theendnotes
 
 \bibliography{ECS_book}\label{refs}
+\cleardoublepage
 
 %\section*{Index}
 \printindex

@@ -1,4 +1,4 @@
-\section{Derivation of the current dipole approximation}
+\chapter{Derivation of the current dipole approximation}
 \label{app:dipoleappendix}
 A volume containing a set of current sinks and sources will set up an electric potential given by the following equation:
 \begin{equation}\label{eq:point_source}
@@ -8,7 +8,7 @@ where $I_k$ is the current in location ${\bf r}_k$ giving the electric potential
 
 From this, we outline the current dipole approximation, as an approximate alternative to the precise equation above.
 
-\subsection{Current multipole expansion}
+\section{Current multipole expansion}
 Analogous to how we can formulate the electric potential from a set of electric charges with the charge multipole expansion, we can similarly derive the current multipole expansion for a set of currents.
 
 We picture $N$ currents $I_k$ located at $\mathbf{r}_k$ in a volume centered around position $\mathbf{r}_c = \sum_{k = 1}^N \frac{\mathbf{r}_k}{N}$. Our measurement electrode is positioned a distance $R = |\mathbf{R}| = |\mathbf{r}_c - \mathbf{r}|$ away from the current distribution, see Fig.~\ref{fig:current_volume}.
@@ -90,14 +90,14 @@ Here, the first four terms are known as the monopole $\Phi^{\mathrm{mono}}$, dip
 
 Now, we are going to take a look at how the first four terms of the current multipole expansion contribute to the extracellular potential in neural tissue.
 
-\subsection{Monopole contribution in neural tissue}\label{subsec:mono}
+\section{Monopole contribution in neural tissue}\label{subsec:mono}
 Due to current conservation in neural tissue, the transmembrane current sinks and sources for a whole number of neurons will always sum to zero: $\sum_k I_k = 0$. This means that the monopole contribution term will always be zero in neural tissue:
 
 \begin{equation*}
 \Phi^{\mathrm{monopole}} = \frac{1}{4 \pi \sigma} \frac{1}{R} \sum_k I_k = 0
 \end{equation*}
 
-\subsection{Dipole contribution in neural tissue/ the current dipole approximation}
+\section{Dipole contribution in neural tissue/ the current dipole approximation}
 The dipole contribution is given as 
 \begin{equation*}
 \Phi^{\mathrm{dipole}} = \frac{1}{4 \pi \sigma} \frac{1}{R^2} \sum_k I_k r_{ck} \cos \theta_k
@@ -119,7 +119,7 @@ Here, $\theta$ is the angle between ${\bf p}$ and ${\bf R}$. Since the current d
 
 In \ref{subsec:mono}, we saw that there are no monopole contributions to electric potentials from a whole number of neurons. However, applying the current-dipole approximation, we neglect the higher-order terms in the current multipole expansion, which calls for stricter constraints: $R >> r_ck$. In order to get an intuition about when $R$ is "large enough", we will look into the quadrupole and octopole contributions ($\Phi^{\mathrm{quadrupole}}$, $\Phi^{\mathrm{octopole}}$) from a single current sink and a current source.
 
-\subsection{Quadrupole contribution from a single current sink source pair}\label{subsec:quad}
+\section{Quadrupole contribution from a single current sink source pair}\label{subsec:quad}
 
 From Eq.~\ref{eq:multipole}, we see that the quadrupole contribution for a current sink $I_1$ at $r_1$ and a current source $I_2$ at $r_2$ is
 
@@ -139,7 +139,7 @@ Inserting this into \eqref{eq:phi_quad}, we see that $\Phi^{\mathrm{quadrupole}}
 
 Since all terms of Legendre polynomials for $l = 4, 6, 8, ...$ contain $\cos \theta_k$ raised to the power of an even number, multipole expansion term number 3, 5, 7, 9, etc are all equal zero for a sink-source pair.
 
-\subsection{Octopole contribution from a single current sink source pair}\label{subsec:octo}
+\section{Octopole contribution from a single current sink source pair}\label{subsec:octo}
 
 For a sink-source current pair, $I_1$ at ${\bf r}_1$ and $I_2$ at ${\bf r}_2$, we have the following octopole contribution:
 
@@ -179,7 +179,7 @@ Including the octopole contribution when estimating the extracellular potential 
 \big| \frac{\Phi^{\mathrm{octopole}}}{\Phi^{\mathrm{quad}}} \big|_{\mathrm{max}} = \big|\frac{d^2}{R^2} \frac{5 \cos^2 \theta - 3}{8}\big|_{\mathrm{max}} = \frac{3}{8} \frac{d^2}{R^2}
 \end{equation*}
 
-In \cite{Nunez2006}, it is suggested that the current dipole approximation is applicable when $R > 3d$ or $R > 4d$.
+In \cite**{Nunez2006}, it is suggested that the current dipole approximation is applicable when $R > 3d$ or $R > 4d$.
 
 For a sink-source pair, the octopole contribution is maximum $\Phi^{\mathrm{octo}}(R = 3d) = \frac{1}{24} \Phi^{\mathrm{dipole}}$ and $\Phi^{\mathrm{octo}}(R = 4d) = \frac{3}{128} \Phi^{\mathrm{dipole}}$.
 
@@ -217,14 +217,14 @@ For a sink-source pair, the octopole contribution is maximum $\Phi^{\mathrm{octo
 %	
 %	where $\mathbf{d}$ is the distance vector between the current sink and the current source, giving the length and direction of the dipole.
 %	
-%	Applying the current dipole approximation, we neglect the quadrupole and higher-order contributions to the electric potential. This is a good approximation in the far-field limit, that is when $R$ is much larger than the dipole length $d$, $R > 3d$ or $R > 4d$, since the higher-order terms decay rapidly with increasing distance \cite{Nunez2006}.
+%	Applying the current dipole approximation, we neglect the quadrupole and higher-order contributions to the electric potential. This is a good approximation in the far-field limit, that is when $R$ is much larger than the dipole length $d$, $R > 3d$ or $R > 4d$, since the higher-order terms decay rapidly with increasing distance \cite**{Nunez2006}.
 %}
 %
 %\snnote{To be included for both suggestions:}
 %
 %\sntxt{
 %	
-%	It is important to note that when computing the electric potential in the far-field limit from a distribution of transmembrane currents in neural tissue, the dipole contribution will be the dominating term \cite{Nunez2006}. By computing the total current dipole moment from a distribution of current sources
+%	It is important to note that when computing the electric potential in the far-field limit from a distribution of transmembrane currents in neural tissue, the dipole contribution will be the dominating term \cite**{Nunez2006}. By computing the total current dipole moment from a distribution of current sources
 %	\begin{equation}
 %	\mathbf{p} = \sum_{k=1}^N I_k \mathbf{r}_k,
 %	\end{equation}
