@@ -86,7 +86,20 @@ Can definitely be expected to contribute somewhat to LFP PSDs.
 
 
 \subsection{\red{TVN: Effect of subthreshold active conductances}}
-Since the LFP is thought to mainly originate from large numbers of synaptic inputs and the resulting return currents, it is reasonable to expect that any ion channel on the cellular membrane that might affect the transmembrane currents, would also affect the LFP. Note that most ion channels are closed at the cells resting potential, and only becomes active during spiking.
+Since the LFP is thought to mainly originate from large numbers of synaptic inputs and the resulting return currents, it is reasonable to expect that any ion channel on the cellular membrane that might affect the transmembrane currents, would also affect the LFP. Note that most ion channels are closed at the cells resting potential, and only becomes active during spiking. This is illustrated for a rat layer 5 pyramidal cell model from  \citeasnoun**{Hay2011} in Fig.~\ref{LFP:fig:subtheshold_linear},
+where we see that the simulated somatic membrane potential response to an injected current was almost perfectly linear for a wide range of different subthreshold current amplitudes, and only deviates from this for suprathreshold current input. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.8\textwidth]{Figures/LFP/fig_hay_subthresh_linearity_test.pdf}
+\end{center}
+\caption{\textbf{Subthreshold response to somatic current injection is close to linear.}
+The somatic membrane potential of the rat pyramidal layer 5 neuron model from cite Hay2011 from exhibits an almost perfectly linear I-V response for somatic subthreshold current injections. Red dashed line is linear.}
+\label{LFP:fig:subtheshold_linear}
+\end{figure}
+
+There are however certain active conductances that can be expected to affect the LFP, in particular the hyperpolarization-activated cation current $I_{\rm h}$ \index{$I_{\rm h}$}.
+In cortical pyramidal cells, the $I_{\rm h}$-conductance is concentrated in the apical dendrite \cite**{Harnett2015, Kalmbach2018}, and for apical synaptic input it was demonstrated in a simulation study to be able to substantially decrease LFP power at frequencies lower than $\sim$30~Hz, causing an apparent resonance peak in the LFP power spectrum \cite**{Ness2016, Ness2018}.
 
 \subsection{\red{TVN: Other approaches}}
 \begin{itemize}
@@ -96,7 +109,7 @@ Since the LFP is thought to mainly originate from large numbers of synaptic inpu
 
 \subsection{\red{TBV:Population LFPs}}
 \begin{itemize}
-\item Full simulations \cite**{Linden2011,Leski2013}
+\item Full simulations \cite**{Linden2011, Leski2013}
 \item Analytical results~\cite**{Einevoll2013a}
 \item Active dendrites \cite**{Ness2018}
 \item Effect of correlations

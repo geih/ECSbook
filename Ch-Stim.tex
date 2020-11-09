@@ -55,11 +55,12 @@ c_m\frac{dV^1}{dt} + g_L (V^1 - E_L) &=& \frac{-\Delta V_m - \Delta u_e}{4 R_a L
 \end{eqnarray}
 If we now assume as initial conditions that the cell is at rest, $V_m^0 = V_m^1 = E_L$, then we can find expressions for the initial response to an extracellular current stimuli:
 \begin{eqnarray}
-c_m\frac{dV^0}{dt} &=& \frac{\Delta u_e}{4 R_a L / (\pi d^2)} =  \frac{1}{4 R_a L / (\pi d^2)} \frac{I_{EC}}{4\pi \sigma_e} \left(\frac{r_0 - r_1}{r_0 r_1} \right)\\
-c_m\frac{dV^1}{dt} &=& \frac{- \Delta u_e}{4 R_a L / (\pi d^2)} =  \frac{1}{4 R_a L / (\pi d^2)} \frac{-I_{EC}}{4\pi \sigma_e} \left(\frac{r_0 - r_1}{r_0 r_1} \right), \\
+\label{Stim:eq:initial_response}
+c_m\frac{dV^0}{dt} &=& \frac{\Delta u_e}{4 R_a L / (\pi d^2)} =  \frac{d^2}{4 R_a L} \frac{I_{EC}}{4\sigma_e} \left(\frac{r_0 - r_1}{r_0 r_1} \right) \\
+c_m\frac{dV^1}{dt} &=& \frac{- \Delta u_e}{4 R_a L / (\pi d^2)} =  \frac{d^2}{4 R_a L} \frac{-I_{EC}}{4 \sigma_e} \left(\frac{r_0 - r_1}{r_0 r_1} \right),
 \end{eqnarray}
 where we have used the expression for the extracellular potential resulting from a single current source (Eq.~\ref{VC:eq:pointsource}).
-Notice that (i) the effect on the membrane potential in the two compartments will be equal in magnitude but of opposite sign, (ii) except for the special case when $r_0=r_1$, in which case there will be no effect of the extracellular current. Further, (iii) only the change of the external potential along the cell matters, meaning that a uniform potential will have no effect, irregardless of the magnitude. 
+Notice that (i) the effect on the membrane potential in the two compartments will be equal in magnitude but of opposite sign, (ii) except for the special case when $r_0=r_1$, in which case there will be no effect of the extracellular current (this can happen if the stick is oriented tangentially with respect to the extracellular potential from the extracellular current source). Further, (iii) only the change of the external potential along the cell matters, meaning that a uniform potential will have no effect, irregardless of the magnitude. 
 If we assume $r_1 > r_0$, we see that
 \begin{equation}
  \begin{aligned}
@@ -84,7 +85,10 @@ and
         \frac{dV^1}{dt}<0.
      \end{aligned}
 \end{equation}
-In words, this means that a positive extracellular current ($I_{EC} > 0$), often referred to as an anode, will lead to the closest compartment being hyperpolarized ($\frac{dV^0}{dt}<0$), and the more distant compartment being depolarized ($\frac{dV^0}{dt}>0$). A negative extracellular current, often referred to as a catode, will have the opposite effect.
+In words, this means that a positive extracellular current ($I_{EC} > 0$), often referred to as an anode, will lead to the closest compartment being hyperpolarized ($\frac{dV^0}{dt}<0$), and the more distant compartment being depolarized ($\frac{dV^0}{dt}>0$). A negative extracellular current, often referred to as a cathode, will have the opposite effect.
+
+Going back to Eq.~\ref{Stim:eq:initial_response}, we see that the magnitude of the membrane potential response to the extracellular current source is proportional to the square of the stick diameter, $d^2$, implying that neurites of larger diameters are substantially more affected by extracellular current stimulations.
+
 
 \section{Cable equation in externally applied potentials}
 In the previous section we derived mathematical expressions for the membrane potential of a two-compartment neuron model in an externally applied extracellular potential. The derivation can however easily be generalized to obtain the corresponding cable equation (see also Eq.~\ref{Neuron:eq:cable}), 
