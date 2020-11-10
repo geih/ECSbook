@@ -1,0 +1,10 @@
+\frac{1}{4 \pi \sigma} \sum_n \frac{ {\color{Red}I^t_n }}{|{{\bf r} - { \color{Orange}{\bf r}^t_n}}| \cos \theta} \\
+\frac{1}{4 \pi \sigma} \sum_n \frac{ |{\color{Blue}I^a_n {\bf d}_n}|}{|{\bf r} - {\color{Cyan}{\bf r}^a_n}|} 
+\frac{1}{4 \pi \sigma}  \frac{ | \sum_n {\color{Brown}I^a_n {\bf d}_n}|\cos \theta}{|{\bf r} - {\color{Apricot}{\bf r}^s}|}
+
+{\color{Red}I^t_1} = - {\color{Blue}I^a_1}\\
+{\color{Red}I^t_2} = {\color{Blue}I^a_1} - {\color{Blue}I^a_2} \\
+{\color{Red}I^t_3} = - {\color{Blue}I^a_2}\\
+{\color{Red}I^t_1} + {\color{Red}I^t_2} + {\color{Red}I^t_3} = 0
+
+https://www.codecogs.com/latex/eqneditor.php?latex=D
