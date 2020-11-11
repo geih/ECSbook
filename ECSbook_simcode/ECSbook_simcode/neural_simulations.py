@@ -63,6 +63,7 @@ def return_hay_cell(tstop, dt, make_passive=False):
             'tstart': -1,
             'tstop': tstop,
             'v_init': -70,
+            'pt3d': True,
         }
 
         cell = LFPy.Cell(**cell_params)

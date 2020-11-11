@@ -153,8 +153,16 @@ Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the lo
 \label{VC:eq:linesources}
 \end{equation}
 
-The line-source approximation is believed to give a better prediction of $\phi$ than the point-source approximation at points in space that are very near neuronal membranes, especially when it comes to predicting rapid fluctuations in $\phi$, such as the extracellular action potential signature \cite**{Holt1999}. At points further away from membranes, the two approaches give converging predictions.
-\tvnnote{Lage figur med LFPy som sammenligner metodene?}
+The line-source approximation can be expected to give a better prediction of $\phi$ than the point-source approximation at points in space that are very near neuronal membranes, especially when it comes to predicting rapid fluctuations in $\phi$, such as the extracellular action potential signature \cite**{Holt1999}. At points further away from membranes, the two approaches give converging predictions, see Fig.~\ref{VC:fig:point_vs_linesource}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{Figures/VC/fig_point_versus_linesource.png}
+\end{center}
+\caption[]{\textbf{Point- versus line-source approximation.}
+}
+\label{VC:fig:point_vs_linesource}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Current-source-density description}}
@@ -262,7 +270,17 @@ A possible concern is whether the electrode impedance or other electrode propert
   Modelling electrode polarization effects will often require numerically comprehensive approaches, like the Finite Element Method (FEM) \index{Finite Element Method}\cite**{Buitenweg2003,Moulin2008,Joucla2014}, and/or careful calibration to experimental recordings \cite**{Gabriel1996,Martinsen2008,Miceli2017},
 and this topic is not covered here.
 
-Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moulin2008}\tvnnote{Bør dette med, og skal vi i så fall lage enkel figur? Kanskje bra og enkelt eksempel for computational essay.}.
+Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moulin2008}, see Fig.~\ref{VC:fig:electrode_size}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{Figures/VC/fig_elec_size_effect.pdf}
+\end{center}
+\caption[]{\textbf{Effect of electrode size.}
+Bigger recording electrodes can cause smaller and broader EAPs.
+}
+\label{VC:fig:electrode_size}
+\end{figure}
 
 \subsection{\orange{Point-electrode approximation}}
 \index{Point-electrode}

@@ -113,8 +113,7 @@ def make_figure():
 
     plt.close("all")
     fig = plt.figure(figsize=[7, 7.])
-    # fig.subplots_adjust(bottom=0.22, top=0.9, right=0.99,
-    #                     left=0.0)
+
     tstop = 10
     dt = 2**-4
 
@@ -140,7 +139,6 @@ def make_figure():
         method = 'linesource'
     )
 
-
     lateral_elec_params["method"] = "pointsource"
     lat_elec_ps = LFPy.RecExtElectrode(cell, **lateral_elec_params)
     lat_elec_ps.calc_lfp()
@@ -154,7 +152,6 @@ def make_figure():
     max_amp_LFP = np.max(np.abs(lat_elec_ps.LFP))
     if not max_amp_LFP == np.abs(lat_elec_ps.LFP[max_amp_elec_idx, max_amp_t_idx]):
         raise RuntimeError("Wrong with chosen max value")
-
 
     ax_ps_1 = fig.add_axes([0.03, 0.55, 0.35, 0.4], title="point source\nzoom-in", **ax_lfp_dict_zoom)
     ax_ps_2 = fig.add_axes([0.03, 0.05, 0.35, 0.4], title="point source\nzoom-out", **ax_lfp_dict)
@@ -213,6 +210,5 @@ def make_figure():
 
 
 if __name__ == '__main__':
-    # make_all_basal_dipoles()
     make_figure()
 

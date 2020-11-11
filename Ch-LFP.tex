@@ -6,6 +6,16 @@
 %\subsection{\red{Introduction to Local Field Potentials}}
 Extracellular potentials measured in neural tissue reflects extracellular spikes, vast numbers of synaptic inputs, as well as different types of noise. The Local Field Potential (LFP) is the low-frequency part of these extracellular potentials, found by low-pass filtering the recorded signals below $\lesssim$ 500~Hz. The LFP is thought to primarily reflect synaptic inputs to populations of geometrically aligned pyramidal cells.
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.7\textwidth]{Figures/LFP/population_LFP.png}
+\end{center}
+\caption{\textbf{Illustration the origin of the LFP.}
+Synaptic input to a population of 10 000 pyramidal cells.
+}
+\label{LFP:fig:LFP_pop_origin}
+\end{figure}
+
 \section{Single-neuron LFPs}
 The LFP is thought to reflect synaptic inputs to thousands of pyramidal neurons, and the contribution to the LFP from any single neuron is typically considered negligible. However, a lot of qualitatively important insights about the biophysical origin of the LFP can still be gained from considering synaptic input to single neurons. 
 
@@ -101,7 +111,17 @@ The somatic membrane potential of the rat pyramidal layer 5 neuron model from ci
 There are however certain active conductances that can be expected to affect the LFP, in particular the hyperpolarization-activated cation current $I_{\rm h}$ \index{$I_{\rm h}$}.
 In cortical pyramidal cells, the $I_{\rm h}$-conductance is concentrated in the apical dendrite \cite**{Harnett2015, Kalmbach2018}, and for apical synaptic input it was demonstrated in a simulation study to be able to substantially decrease LFP power at frequencies lower than $\sim$30~Hz, causing an apparent resonance peak in the LFP power spectrum \cite**{Ness2016, Ness2018}.
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.8\textwidth]{Figures/LFP/effect_of_Ih.pdf}
+\end{center}
+\caption{\textbf{Affect of Ih on LFP.}
+The $I_{\rm h}$-current can affect the LFP.}
+\label{LFP:fig:Ih_effect}
+\end{figure}
+
 \subsection{\red{TVN: Other approaches}}
+
 \begin{itemize}
 \item "Magic" simple formula \cite**{Mazzoni2015}
 \item Kernel trick \cite**{Hagen2015, Skaar2020}
