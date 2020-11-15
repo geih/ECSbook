@@ -291,6 +291,53 @@ eq. \ref{Schemes:eq:electroneutral2} for the bulk solution and eq. \ref{Schemes:
 
 
 
+\ghnote{Maybe make this a box?}
+\begin{floatingbox}[h]
+\caption{Hodgkin-Huxley model}
+\begin{equation}
+c_m \frac{dV_m}{dt} = -\bar{g}_L(V_m-E_L) - \bar{g}_{Na} m^3 h (V_m - E_{Na}) - \bar{g}_{K} n^4 (V_m - E_{K}).
+\label{Neuron:eq:HHfull}
+\end{equation}
+\begin{equation}
+\frac{dx(V_m,t)}{dt} = \frac{x_{\infty}(V_m) - x}{\tau_x(V_m)},  \, \text{for } x = \{m,h,n\}.
+\label{Neuron:eq:HHgates}
+\end{equation}
+
+\begin{table}[h!]
+    \caption{\textbf{The Hodgkin-Huxley model.}}
+    \label{Neuron:tab:HH}
+\begin{center}
+    \begin{tabular}{l}
+    \hline
+    $x_{\infty}(V_m) = \frac{\alpha_x(V_m)}{\alpha_x(V_m) + \beta_x(V_m)}$ for $x = m,n,h$ \\ \hline
+    $ \alpha_n = \frac{0.01 \mathrm{ms}^{-1} V_m+55 \mathrm{mV}}{1-e^{-(V_m+55 \mathrm{mV})/10 \mathrm{mV}}}$  \\ \hline
+    $ \beta_n = 0.125 \mathrm{ms}^-1 e^{-(V_m+65 \mathrm{mV})/80 \mathrm{mV}} $  \\ \hline
+    $ \alpha_m = \frac{0.1 \mathrm{ms}^{-1} V_m+ 40 \mathrm{mV}} {1-e^{-(V_m+40 \mathrm{mV})/10 \mathrm{mV}}}$  \\ \hline
+    $\beta_m = 4 \mathrm{ms}^{-1} e^{-(V_m+65  \mathrm{mV})/18 \mathrm{mV}} $  \\ \hline
+    $\alpha_h = 0.07 \mathrm{ms}^{-1} e^{-(V_m+65 \mathrm{mV})/20 \mathrm{mV}}$  \\ \hline
+    $\beta_h = \frac{1 \mathrm{ms}^{-1}}{1+e^{-(V_m+35 \mathrm{mV}))/10 \mathrm{mV})}} $  \\ \hline
+    $c_m = 1.0 \mu $F/cm$^2$ \\ \hline
+    $\bar{g}{Na} = 120\times 10^{-9}$ m$^2$/s\\ \hline
+    $\bar{g}_{K} = 36$ mS/cm$^2$ \\ \hline
+    $\bar{g}_{L} = 0.3$ mS/cm$^2$ \\ \hline
+    $E_{Na} = 50$ mV \\ \hline
+    $E_{K} = -77$ mV \\ \hline
+    $E_{L} = -54.4$ mV \\ \hline
+    \end{tabular}
+    \end{center}
+\end{table}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Neuron/HHmodel.png}
+\end{center}
+\caption{\textbf{Hodgkin Huxley model.}}
+\label{Neuron:fig:HHcircuit}
+\end{figure}
+\label{box:Neuron:HH}
+\end{floatingbox}
+
+
 
 
 
