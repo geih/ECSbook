@@ -1,5 +1,67 @@
-\chapter{GTE: Spikes}
+\chapter{Spikes}
 \label{sec:Spikes}
+
+\begin{itemize}
+\item 8. Intro
+\begin{itemize}
+\item High-frequency part of extracellular signal
+\item Measure spiking of neuron in vicinity of electrode
+\item Used first by Adrian
+\item Intracellular and extracellular APs quite different (Fig.~\ref{Spikes:fig:Henze})
+\item Example spike from multicompartmental modeling (Fig.~\ref{Spikes:fig:MultiCompartment})
+\item Detailed spike shape not so important for detecting spikes, amplitude more important
+\item Spike shape can be used to separate neuron types    
+\end{itemize}
+\item 8.1  Spikes do also contain low frequencies
+\begin{itemize}
+\item Figure~\ref{Spikes:fig:freq_dep}
+\item Refer to litterature
+\end{itemize}
+\item 8.2 Spikes in two-compartment models
+\item 8.3 Spikes in ball-and-stick neurons
+\item 8.4 Spikes with active dendritic conductances
+\item 8.5 Spikes initiated in axons
+\item 8.6 Spikes recorded in MEAs
+\item 8.6 Multi-unit activity (MUA)
+\end{itemize} 
+
+%%%%%%%%%%
+% Figure: Intracellular and extracellular action potentials
+%%%%%%%%%%
+%\begin{cnfigure}{Figures/mm/EP-spike-Henze-w100-r150}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{Figures/Spikes/Spikes-Henze-w100-r150}
+\end{center}
+\caption[Intracellular and extracellular action potentials]{\textbf{Simultaneous recording of intracellular and extracellular action potentials (`spikes').}
+Adapted from \citeasnoun**{Henze2000}.
+\gen{Figure + caption to be updated}
+}
+\label{Spikes:fig:Henze}
+\end{figure}
+%%%%%%%%%%%
+
+%%%%%%%%%%
+% Figure: Spike from multi-compartment model
+%%%%%%%%%%
+%\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{Figures/Spikes/Spikes-MultiCompartment-w100-r150}
+\end{center}
+\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model}. Active sodium
+and potassium conductances in the soma compartment and computed from 
+Equation~\ref{XX:equation:Ve-multi-compartment}.
+Left panel shows the EP at different spatial positions, while right panel shows the corresponding
+soma membrane potential during the action potential. 
+\gen{Figure + caption to be updated. Change to Hay-model,}
+}
+\label{Spikes:fig:MultiCompartment}
+%\figpermOurs
+\end{figure}
+
+
+
 \ghnote{GH: Tekst nedenfor er sakset inn fra Gautes Sterratt-stoff. Maa omskrives for aa unngaa selv-plagiat. Tenker at vi ogsaa trenger en intro som bringer oss inn i stoffet.}
 
 Extracellular potentials measured within neural tissue are often split into two separate frequency domains, which reflect different aspects of the underlying neural activity. The low frequency part, the local field potential (LFP), is thought to mostly reflect synaptic input to populations of pyramidal cells, while the high-frequency part, the multi-unit activity (MUA), reflects the population spiking activity (Fig.~\ref{XX:fig:LFP_MUA}).
@@ -24,21 +86,7 @@ Common misconception that spikes only have frequency content above a few hundred
 %Then show extracellular signatures.
 
 
-%%%%%%%%%%
-% Figure: Intracellular and extracellular action potentials
-%%%%%%%%%%
-%\begin{cnfigure}{Figures/mm/EP-spike-Henze-w100-r150}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics{Figures/Spikes/Spikes-Henze-w100-r150}
-\end{center}
-\caption[Intracellular and extracellular action potentials]{\textbf{Simultaneous recording of intracellular and extracellular action potentials (`spikes').}
-Adapted from \citeasnoun**{Henze2000}.
-\gen{Figure + caption to be updated}
-}
-\label{Spikes:fig:Henze}
-\end{figure}
-%%%%%%%%%%%
+
 
 
 %The recording of spikes, the EPs corresponding to action potentials in individual neurons, has been
@@ -102,24 +150,7 @@ high-frequency components compared to the EP close to the soma. This filtering e
 two-compartment neuron model, and reflects that the cable properties of dendrites are important in determining 
 also the shape of recorded spikes.   
 
-%%%%%%%%%%
-% Figure: Spike from multi-compartment model
-%%%%%%%%%%
-%\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics{Figures/Spikes/Spikes-MultiCompartment-w100-r150}
-\end{center}
-\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model}. Active sodium
-and potassium conductances in the soma compartment and computed from 
-Equation~\ref{XX:equation:Ve-multi-compartment}.
-Left panel shows the EP at different spatial positions, while right panel shows the corresponding
-soma membrane potential during the action potential. 
-\gen{Figure + caption to be updated. Change to Hay-model,}
-}
-\label{Spikes:fig:MultiCompartment}
-%\figpermOurs
-\end{figure}
+
 
 %%%
 \section{\orange{Spikes from ball-and-stick neurons}}
