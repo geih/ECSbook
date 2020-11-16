@@ -258,19 +258,34 @@ For example, if we have a simple two-compartmental (and purely dipolar) neuron w
 As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is though to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \cite**{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \cite**{naess2020biophysical}.
 
 
-\section{\red{TVN: Modelling recording electrodes}}
+\section{\orange{TVN: Modelling recording electrodes}}
 \label{sec:VC:electrodes}
 \index{Electrode model}
 We have demonstrated how we can use volume conductor theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. Here we present a short review of different approaches to model such effects.
 
-\tvnnote{Litt usikker på om jeg bruker alle begreper riktig i dette avsnittet} Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to ground \cite**{Martinsen2008}. For recording electrodes to accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very high conductivity so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside the electrode surface is in practice homogeneous. The amplifier must however have a near zero conductivity, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Moulin2008,Ishai2013,Martinsen2008}. 
-The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Ness2015,Vermaas2020}\tvnnote{Bør finne lærebok-referanse til dette?}. \ghnote{Det finnes to Vermaas2020-refs, a og b.}
+\tvnnote{Litt usikker på om jeg bruker alle begreper riktig i dette avsnittet} Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to ground or a reference electrode \cite**{Martinsen2008}, see Fig.~\ref{VC:fig:elec_circuit}. For recording electrodes to accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very high conductivity so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside the electrode surface is in practice homogeneous. The amplifier must however have a near zero conductivity, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Moulin2008,Ishai2013,Martinsen2008}. 
+The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Ness2015,Vermaas2020b}\tvnnote{Bør finne lærebok-referanse til dette?}. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.4\textwidth]{Figures/VC/rec_elec_circuit.png}
+\end{center}
+\caption[]{\textbf{Illustration of recording circuit}
+Electric potential is measured between recording electrode and reference electrode, and represents the energy required to move a positive test charge from the reference electrode and to the measurement electrode. If, say, positive ions are leaving the extracellular medium (and entering a cell) in the vicinity of the recording electrode, then the energy needed to move a positive charge to the measurement electrode is negative, that is, one can gain energy by moving the charge there.  
+}
+\label{VC:fig:elec_circuit}
+\end{figure}
+
 A possible concern is whether the electrode impedance or other electrode properties can distort measured extracellular potentials, through introducing unintentional temporal filtering effects on the recorded potentials. Effectively, this would amount to the potential on the inside of the electrode surface being different from the (spatial average of the) potential on the outside of the electrode, and therefore not represent the "true" extracellular potential.
-  It has however been convincingly argued that, provided that the proper recording equipment is used, such effects should not substantially distort recorded potentials \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}. Note that this only applies to recording electrodes, and that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization \cite**{McIntyre2001,Martinsen2008,Joucla2012}.
-  Modelling electrode polarization effects will often require numerically comprehensive approaches, like the Finite Element Method (FEM) \index{Finite Element Method}\cite**{Buitenweg2003,Moulin2008,Joucla2014}, and/or careful calibration to experimental recordings \cite**{Gabriel1996,Martinsen2008,Miceli2017},
+For example, note that recording electrodes are typically unable to measure static (DC) potentials, or capture changes slower than $\sim$ 0.1 Hz. Such DC potentials can be present in neural tissue, and can often arise in simulated extracellular potentials from cell models with active conductances, for example because of the $I_{\rm h}$-current \cite**{Ness2016}. In such cases, the simulated baseline (or mean) extracellular potential is typically subtracted from the extracellular potentials to effectively remove the unobservable DC-potential.
+
+Apart from this, it has been convincingly argued that, provided that the proper recording equipment is used, electrode impedance or other electrode properties should not substantially distort recorded potentials \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}. 
+  Note that this only applies to recording electrodes, and that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization \cite**{McIntyre2001,Martinsen2008,Joucla2012}.
+In essence, the complication stems from that in electronics the electric charge is carried by electrons, while in neural tissue the electric charge is carried by positive and negative ions. For low frequencies, which do not favor capacitive currents, this change of charge carrier can be problematic, resulting in electrode polarization. 
+  Modelling electrode polarization effects will often require numerically comprehensive approaches, like the Finite Element Method (FEM) \index{Finite Element Method}\cite**{Buitenweg2003,Moulin2008,Joucla2014,Vermaas2020a}, and/or careful calibration to experimental recordings \cite**{Gabriel1996,Martinsen2008,Miceli2017},
 and this topic is not covered here.
 
-Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moulin2008}, see Fig.~\ref{VC:fig:electrode_size}.
+Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008}, see Fig.~\ref{VC:fig:electrode_size}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -294,22 +309,13 @@ ignoring any potential effect from recording electrodes or electrode shanks, and
 In some cases recording electrodes are large enough that the extracellular potential varies substantially across the electrode surface. In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential. This is typically referred to as the disc-electrode approximation \cite**{Linden2014,Ness2015}. 
 
 By taking into account the physical extent of the electrodes, the disc-electrode approximation can account for spatial filtering effects. However, very close to electrodes the electrodes can themselves affect the close-by extracellular potential, since they represent a region of a highly conductive material in contact with the tissue being measured from. 
-The effect of the presence of highly conductive electrodes can be investigated using FEM, and \cite**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode.
+The effect of the presence of highly conductive electrodes can be investigated using FEM, and \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode.
 
 In certain cases, like in ECoG \index{ECoG} measurements from the cortical surface, the recording electrodes are both large ($\sim$~2-5~mm diameter) and close to the neuronal sources (the thickness of the human cortex is $\sim$3~mm). In such cases the electrode properties can therefore be expected to have large effect on measured potentials, see for example  \cite**{Vermaas2020b,Rogers2020}.
 
-\subsection{\red{Effect of the electrode probes}}
+\subsection{\orange{Effect of the electrode probes}}
 
-Large multi-contact electrode probes can be expected to have a substantial effect on close-by extracellular potentials, since it represents a large non-conducting volume \cite**{Mechler2012}. \cite**{Buccino2019b} found that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank.
-
-\cite**{Ness2015,Moffitt2005,Buccino2019b}
-
-\ghnote{GH:Teksten under er klippet inn fra bokkapittelet.} 
-
-
-
-
-
+Large multi-contact electrode probes can be expected to have a substantial effect on close-by extracellular potentials, since it represents a large non-conducting volume \cite**{Mechler2012,Buccino2019b}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019b}.
 
 %%%%%%
 \section{\blue{Approximations used in VC theory}}

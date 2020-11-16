@@ -27,7 +27,7 @@ When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}
 \label{Sigma:fig:ECS}
 \end{figure}
 
-At the microscopic scale, the conductivity \index{Conductivity} $\sigma$ in the brain tissue is thus highly non-homogeneous. For example, it will be very high at a cellular membrane and much lower in the extracellular space between membranes. Accordingly, electric potentials can vary greatly over tiny distances, and become very large near cell membranes. When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. In practice, the electrodes used in experimental recordings perform such an averaging. Sizes of electrodes used to record extracellular potentials typically range from 5 $\mu$m to 125 $\mu$m in diameter\cite**{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). Experimental recordings thus give us the average potential over a region in space that typically spans over both extracellular space and several neural and glial processes. It is thus the dynamics at this coarse grained spatial scale that we will focus on.
+At the microscopic scale, the conductivity \index{Conductivity} $\sigma$ in the brain tissue is thus highly non-homogeneous. For example, it will be very high at a cellular membrane and much lower in the extracellular space between membranes. Accordingly, electric potentials can vary greatly over tiny distances, and become very large near cell membranes. When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. In practice, the electrodes used in experimental recordings perform such an averaging. Sizes of electrodes used to record extracellular potentials typically range from 5 $\mu$m to 125 $\mu$m in diameter \cite**{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). Experimental recordings thus give us the average potential over a region in space that typically spans over both extracellular space and several neural and glial processes. It is thus the dynamics at this coarse grained spatial scale that we will focus on.
 
 At the coarse grained spatial scale, it is reasonable to assume that microscale inhomogeneities average out, and that the brain tissue can be treated as a continuous medium \cite**{Gratiy2017}. The VC theory presented in the previous chapter was based on the continuous medium approximation, and thus describes the extracellular dynamics on a coarse grained spatial scale, with a spatial resolution larger than a micrometer. 
 
@@ -47,13 +47,13 @@ The (macroscopic) extracellular conductivity $\sigma_t$ (S/m) \index{Conductivit
 In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma_t$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma_t$. If we use the point source approximation (eq. \ref{VC:eq:pointsources}), and denote the conductivity in the different spatial directions $\sigma_{tx}$, $\sigma_{ty}$ and $\sigma_{tz}$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \cite**{nicholson1975,Pettersen2012}:
 
 \begin{equation}
-\phi(x,y,z) = \sum_k \frac{I_k}{4\pi(\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2)}.
+\phi(x,y,z) = \sum_k \frac{I_k}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}}.
 \label{Sigma:eq:Panisos}
 \end{equation}
 If we use the CSD-description of the sources (eq. \ref{VC:eq:csds}, the corresponding expression is:
 
 \begin{equation}
-\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi(\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2)} \, dV, 
+\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}} \, dV, 
 \label{Sigma:eq:Canisos}
 \end{equation}
 
