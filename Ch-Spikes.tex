@@ -20,7 +20,6 @@ Adapted from \citeasnoun**{Henze2000}.
 \end{figure}
 %%%%%%%%%%%
 
-Operationally, the spike is found in experiments by high-pass filtering extracellularly recorded signals, with a lower cut-off set at 500~Hz or so.
 While the amplitude of intracellular the action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. 
 Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (Fig.~\ref{Spikes:fig:Henze}).
 These differences are illustrated in Fig.~\ref{Spikes:fig:MultiCompartment} showing computed spikes at various positions around a neuron
@@ -47,19 +46,64 @@ soma membrane potential during the action potential.
 %\figpermOurs
 \end{figure}
 
-The main issue for detection of spikes is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}$\mu$V \gen{Har vi et godt tall med medh¯rende referanse her?}. For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
+The main issue for detection of spikes is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. 
+\gen{Har vi et godt tall med medh¯rende referanse her?} For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
 
 Spikes shapes are also used to distinguish spikes from different neuron types. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes). But a more detailed separation is also possible~\cite**{Buccino2018}.
 
 Detailed modeling of spikes are important for several reasons: to
 (i) understand what the single-neuron properties can tell us about spike shapes (and the other way around) \cite**{Holt1999,Gold2006,Pettersen2008a}
-(ii) estimate biases regarding which types of neurons preferentially generate the spikes recorded by electrodes, and (iii) provide benchmarking data for development and testing of methods for spike sorting or spike-bases neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}
+(ii) estimate biases regarding which types of neurons preferentially generate the spikes recorded by electrodes, and (iii) provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}
+
+
+%%%
+\section{\orange{Recording of spikes}}
+\label{Spikes:sec:recording}
+Spikes are typically recorded in living brains. Here the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at 500~Hz or so.
+The low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013}. 
+A common misunderstanding is that a spike only consists of high-frequency components as it lasts only a couple of milliseconds and an oscillation with a period of
+2 milliseconds corresponds to a frequency of 500 hertz. But this is not generally correct. As illustrated in Figure~\ref{Spikes:fig:freq_dep}, a narrow pulse such as the spike also contain low-frequency components. In fact, a so-called $\delta$-function pulse which essentially has zero width, is built up of equal amounts of frequency components for all frequencies.
+Thus high-pass filtering of the extracellular signal also distorts the extracellular spike. The rational for such high-pass filtering is rather to remove the LFP part of the signal which typically dominates in terms of overall power, but has very little power above a few hundred hertz~\cite**{Einevoll2013}.
+
+ 
+%Contributions to LFPs from other sources
+%Although synaptic input and the associated return currents may dominate cortical LFPs7,19,49, spikes also contribute to the signal49,50,77,78. Even fast sodium spikes contribute to extracellular potentials with frequencies as low as 100 Hz48, and slower phenomena such as calcium spikes79 and spike afterhyperpolarization80 further contribute to low-frequency LFP components81. As any transmembrane current will generate an extracellular potential, glia cells may also contribute to the LFP. However, their contribution is expected mainly at very low frequencies (less than 0.1 Hz81). Again, biophysical modelling will be essential in assessing these contributions to observed cortical LFPs across the various frequency bands.
+
+ 
+%48  Pettersen, K. H. & Einevoll, G. T. Amplitude variability and extracellular low-pass filtering of neuronal spikes. Biophys. J. 94, 784?802 (2008).
+%49. Pettersen, K. H., Hagen, E. & Einevoll, G. T. Estimation of population firing rates and current source densities from laminar electrode recordings. J. Comput. Neurosci. 24, 291?313 (2008).
+%50. Schomburg, E. W., Anastassiou, C. A., Buzsaki, G. & Koch, C. The spiking component of oscillatory extracellular potentials in the rat hippocampus. J.
+%77. Ray, S. & Maunsell, J. H. Different origins of gamma rhythm and high-gamma activity in macaque visual cortex. PLoS Biol. 9, e1000610 (2011). A study using careful manipulations of visual stimuli and matching pursuit spectral analysis techniques to show how to separate contributions to the LFP of genuine gamma-band rhythms from the contribution of spike-related transients that could be incorrectly decomposed as rhythms using traditional signal-processing methods.
+%78. Scheffer-Teixeira, R., Belchior, H., Leao, R. N., Ribeiro, S. & Tort, A. B. On high-frequency field oscillations (>100 Hz) and the spectral leakage of spiking activity. J. Neurosci. 33, 1535?1539 (2013).
+%79. Stuart, G., Spruston, N. & H‰usser, M. Dendrites 2nd edn (Oxford Univ. Press, 2007).
+%80. Buzsaki, G. et al. Nucleus basalis and thalamic control of neocortical activity in the freely moving rat. J. Neurosci. 8, 4007?4026 (1988)
+%81. Buzsaki, G., Anastassiou, C. A. & Koch, C. The origin of extracellular fields and currents ? EEG, ECoG, LFP and spikes. Nature Rev. Neurosci. 13, 407?420 (2012).
+ 
+ 
+%%%%%%%%%
+% Figure
+%%%%%%%%%
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
+\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-LFP_spike_effect_test_300Hz.png}
+\end{center}
+\caption{\textbf{Potential EAP figures} 
+\gen{Kanskje denne figuren kan gj{\o}res ganske enkel? Kun vise spiken i A i (1) full versjon, (2) high-pass versjon og (3) low-pass versjon?
+Og ogsaa de samme 3 variantene i frekvensrommet?}}
+\label{Spikes:fig:freq_dep}
+\end{figure}
+
+ 
+
+
+
  
  \begin{itemize}
 \item 8.1  Spikes do also contain low frequencies
 \begin{itemize}
 \item Common misunderstanding: Only high frequencies in spikes
-\item Figure~\ref{Spikes:fig:freq_dep}
+\item 
 \item Refer to litterature
 \end{itemize}
 
@@ -76,28 +120,10 @@ Detailed modeling of spikes are important for several reasons: to
 \end{itemize} 
 
 
-
-
-
-
-
-\ghnote{GH: Tekst nedenfor er sakset inn fra Gautes Sterratt-stoff. Maa omskrives for aa unngaa selv-plagiat. Tenker at vi ogsaa trenger en intro som bringer oss inn i stoffet.}
-\tvnnote{Legge til hvor viktig EAPs har v√¶rt for nevrovitenskap kanskje? Hubel and Wiesel, Jennifer Aniston-neuron, place- og grid-cells etc?}
-
-Extracellular potentials measured within neural tissue are often split into two separate frequency domains, which reflect different aspects of the underlying neural activity. The low frequency part, the local field potential (LFP), is thought to mostly reflect synaptic input to populations of pyramidal cells, while the high-frequency part, the multi-unit activity (MUA), reflects the population spiking activity (Fig.~\ref{XX:fig:LFP_MUA}).
-%%%%%%%%%
-% Figure
-%%%%%%%%%
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
-\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-LFP_spike_effect_test_300Hz.png}
-\end{center}
-\caption{\textbf{Potential EAP figures} 
-Common misconception that spikes only have frequency content above a few hundred Hz. Delta pulse have flat frequency spectrum.}
-\label{Spikes:fig:freq_dep}
-\end{figure}
-
+%\ghnote{GH: Tekst nedenfor er sakset inn fra Gautes Sterratt-stoff. Maa omskrives for aa unngaa selv-plagiat. Tenker at vi ogsaa trenger en intro som bringer oss inn i stoffet.}
+%\tvnnote{Legge til hvor viktig EAPs har v√¶rt for nevrovitenskap kanskje? Hubel and Wiesel, Jennifer Aniston-neuron, place- og grid-cells etc?}
+%
+%Extracellular potentials measured within neural tissue are often split into two separate frequency domains, which reflect different aspects of the underlying neural activity. The low while the high-frequency part, the multi-unit activity (MUA), reflects the population spiking activity (Fig.~\ref{XX:fig:LFP_MUA}).
 %\section{\orange{Spikes in neurons with passive dendrites}}
 %\label{Spikes:sec:EP-spikes}
 %Kjernereferanse: \cite**{Pettersen2008a}
