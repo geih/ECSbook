@@ -1,29 +1,8 @@
 \chapter{Spikes}
 \label{sec:Spikes}
 
-\begin{itemize}
-\item 8. Intro
-\begin{itemize}
-\item High-frequency part of extracellular signal
-\item Measure spiking of neuron in vicinity of electrode
-\item Used first by Adrian
-\item Intracellular and extracellular APs quite different (Fig.~\ref{Spikes:fig:Henze})
-\item Example spike from multicompartmental modeling (Fig.~\ref{Spikes:fig:MultiCompartment})
-\item Detailed spike shape not so important for detecting spikes, amplitude more important
-\item Spike shape can be used to separate neuron types    
-\end{itemize}
-\item 8.1  Spikes do also contain low frequencies
-\begin{itemize}
-\item Figure~\ref{Spikes:fig:freq_dep}
-\item Refer to litterature
-\end{itemize}
-\item 8.2 Spikes in two-compartment models
-\item 8.3 Spikes in ball-and-stick neurons
-\item 8.4 Spikes with active dendritic conductances
-\item 8.5 Spikes initiated in axons
-\item 8.6 Spikes recorded in MEAs
-\item 8.6 Multi-unit activity (MUA)
-\end{itemize} 
+If a neuroscientist is asked by a layman about what we have learned about brain networks from electrical recordings, there is a high chance she first highlights
+the studies of Hubel and Wiesel in the 1950s and 60s of neural representations in the primary visual cortex. In their pioneering studies, they measured spikes, the extracellular signatures of action potentials, of cortical cells by use of sharp recording electrodes. They found, for example, that many of the cells responded most vigorously, that is, with the highest number of spikes to bar-like stimuli oriented in specific directions~\cite**{Hubel1959}. Later, the same approach has been used throughout the nervous system to map out how different neurons encode information on sensory stimuli, objects, spatial positions and more. Thus, the spike has arguably been the most important brain signal in systems neuroscience.
 
 %%%%%%%%%%
 % Figure: Intracellular and extracellular action potentials
@@ -41,7 +20,15 @@ Adapted from \citeasnoun**{Henze2000}.
 \end{figure}
 %%%%%%%%%%%
 
-%%%%%%%%%%
+Operationally, the spike is found in experiments by high-pass filtering extracellularly recorded signals, with a lower cut-off set at 500~Hz or so.
+While the amplitude of intracellular the action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. 
+Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (Fig.~\ref{Spikes:fig:Henze}).
+These differences are illustrated in Fig.~\ref{Spikes:fig:MultiCompartment} showing computed spikes at various positions around a neuron
+during firing of an action potential. Here the scheme described in \gex{XX} is used with an biophysically detailed neuron model for a layer-5 pyramidal cell.
+One striking features is the rapid decay of spike amplitude with distance from the soma. Another is ...
+\gen{Skriver mer naar figuren er klar}
+
+ %%%%%%%%%%
 % Figure: Spike from multi-compartment model
 %%%%%%%%%%
 %\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
@@ -59,6 +46,38 @@ soma membrane potential during the action potential.
 \label{Spikes:fig:MultiCompartment}
 %\figpermOurs
 \end{figure}
+
+The main issue for detection of spikes is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}$\mu$V \gen{Har vi et godt tall med medhørende referanse her?}. For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
+
+Spikes shapes are also used to distinguish spikes from different neuron types. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes). But a more detailed separation is also possible~\cite**{Buccino2018}.
+
+Detailed modeling of spikes are important for several reasons: to
+(i) understand what the single-neuron properties can tell us about spike shapes (and the other way around) \cite**{Holt1999,Gold2006,Pettersen2008a}
+(ii) estimate biases regarding which types of neurons preferentially generate the spikes recorded by electrodes, and (iii) provide benchmarking data for development and testing of methods for spike sorting or spike-bases neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}
+ 
+ \begin{itemize}
+\item 8.1  Spikes do also contain low frequencies
+\begin{itemize}
+\item Common misunderstanding: Only high frequencies in spikes
+\item Figure~\ref{Spikes:fig:freq_dep}
+\item Refer to litterature
+\end{itemize}
+
+\item 8.2 Spikes in two-compartment models
+\item 8.3 Spikes in ball-and-stick neurons
+\item 8.4 Spikes with active dendritic conductances
+\item 8.5 Spikes initiated in axons
+\item 8.6 Beyond infinite volume conductor
+\begin{itemize}
+\item MEA
+\item Probe-effects
+\end{itemize}
+\item 8.6 Multi-unit activity (MUA)
+\end{itemize} 
+
+
+
+
 
 
 
@@ -79,8 +98,8 @@ Common misconception that spikes only have frequency content above a few hundred
 \label{Spikes:fig:freq_dep}
 \end{figure}
 
-\section{\orange{Spikes in neurons with passive dendrites}}
-\label{Spikes:sec:EP-spikes}
+%\section{\orange{Spikes in neurons with passive dendrites}}
+%\label{Spikes:sec:EP-spikes}
 %Kjernereferanse: \cite**{Pettersen2008a}
 %
 %Perhaps start this by showing membrane potentials for cells with passive dendrites. 
@@ -92,12 +111,12 @@ Common misconception that spikes only have frequency content above a few hundred
 
 %The recording of spikes, the EPs corresponding to action potentials in individual neurons, has been
 %key for learning about how neurons and neural networks function in live brains. 
-When a sharp electrode is placed close to the soma of a neuron, an intracellular action potential will be seen
-extracellularly as a sharp `spike' in the EP (Figure~\ref{Spikes:fig:Henze}). The magnitudes of these signals are quite different. While intracellular action potentials have amplitudes of $\sim$100~mV, the amplitudes of extracellular
-spikes are typically less than 1~mV. Nevertheless, the detection of these spiking events from the recorded signal is relatively easily, and faithful records of the firing activity of neurons can be obtained. Such measurements have been instrumental in learning about \index{neural representations}, that is, how neurons in different parts of the brain, for example, encode information about visual and other sensory input. 
+%When a sharp electrode is placed close to the soma of a neuron, an intracellular action potential will be seen
+%extracellularly as a sharp `spike' in the EP (Figure~\ref{Spikes:fig:Henze}). The magnitudes of these signals are quite different. While intracellular action potentials have amplitudes of $\sim$100~mV, the amplitudes of extracellular
+%spikes are typically less than 1~mV. Nevertheless, the detection of these spiking events from the recorded signal is relatively easily, and faithful records of the firing activity of neurons can be obtained. Such measurements have been instrumental in learning about \index{neural representations}, that is, how neurons in different parts of the brain, for example, encode information about visual and other sensory input. 
 
 %%%
-\subsection{\orange{Spikes from two-compartment neuron models}}
+\section{\orange{Spikes from two-compartment neuron models}}
 \label{Spikes:sec:EP-spikes-two-compartment}
 %%%
 Intracellular potentials can be modelled with a single-compartment neuron model as described in Chapter~3.
