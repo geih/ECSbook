@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg6166"
+   sodipodi:docname="Circuit_diagrams_for_neurons.svg"
+   inkscape:version="1.0.1 (c497b03c, 2020-09-10)">
+  <defs
+     id="defs6160">
+    <marker
+       style="overflow:visible"
+       id="marker1670"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1668" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1444"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1442" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker1144"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1142" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker6874"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6872" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker6824"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6822" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path2066" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Mend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path2072" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path2066-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path2072-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker6874-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path6872-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-2-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path2066-0-7" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.76578219"
+     inkscape:cx="448.04752"
+     inkscape:cy="572.6084"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:snap-global="false"
+     inkscape:snap-text-baseline="true"
+     inkscape:window-width="1792"
+     inkscape:window-height="1120"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata6163">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Lag 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2037"
+       width="150.68608"
+       height="73.383774"
+       x="1.2468116"
+       y="105.26653"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2035"
+       width="176.33478"
+       height="78.549126"
+       x="2.3155072"
+       y="14.961739"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 77.431688,31.181177 20.073671,31.299275 V 85.018726"
+       id="path6170"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 20.073671,85.018726 77.74747,84.937804"
+       id="path6189"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;stroke:#000000;stroke-width:0.25;stroke-linecap:butt;stroke-miterlimit:1;stroke-dasharray:none"
+       id="path6195"
+       cx="19.971136"
+       cy="58.216511"
+       rx="6.6570449"
+       ry="6.7875748"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="2.9891143"
+       y="59.784275"
+       id="text6199-7"
+       transform="skewY(-5.1685572)"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan6197-9"
+         x="2.9891143"
+         y="59.784275"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">i<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:sub;stroke-width:0.264583"
+   id="tspan6201-0">e</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.226937px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 20.101663,52.995292 v 9.98696"
+       id="path6226"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 45.163479,55.866959 H 57.172266"
+       id="path6294"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 45.163479,61.088169 H 57.172266"
+       id="path6313"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="34.506992"
+       y="63.418362"
+       id="text6199-76"
+       transform="skewY(-5.1685572)"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan6197-7"
+         x="34.506992"
+         y="63.418362"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">c<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6336">m</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 51.300209,55.411009 V 31.132377"
+       id="path6340"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 51.167871,61.088174 V 85.046808"
+       id="path6344"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 71.950894,70.61718 H 83.959681"
+       id="path6294-9"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 74.50084,74.780056 h 6.677081"
+       id="path6313-9"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <g
+       id="g6592"
+       transform="matrix(1.4381898,0,0,1.4381898,-34.632291,-24.785785)"
+       style="stroke-width:0.34765926"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.624859,50.064975 5.900624,1.114454"
+         id="path1283-2-6" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 75.653369,52.298405 81.554,51.183952"
+         id="path1283-7-50-2" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.640831,52.310603 5.900637,1.114453"
+         id="path1283-8-1-3" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.669354,54.544032 5.900631,-1.114453"
+         id="path1283-7-5-6-1" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.63224,50.052087 5.900631,-1.114453"
+         id="path1283-7-4-3-7" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.672222,54.580785 5.900624,1.114465"
+         id="path1283-8-4-9-8" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.920004,56.319172 3.652203,-0.603684"
+         id="path1283-7-5-4-36-9"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.883739,48.315451 3.652197,0.603681"
+         id="path1283-7-5-4-3-3-1"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.92016,38.914865 -0.0092,9.407677"
+         id="path1395-9-7"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.941805,56.341141 0.07139,9.971823"
+         id="path1395-3-5-4"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 78.139729,69.22919 v 7.063653"
+         id="path6594"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 64.144905,45.817789 h 3.907989"
+       id="path6642"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 150.58424,116.576 H 19.475842 v 53.71945"
+       id="path6170-4"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 19.475842,170.29545 H 150.58424"
+       id="path6189-2"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 150.58424,116.576 v 53.71945"
+       id="path6193-6"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;stroke:#000000;stroke-width:0.25;stroke-linecap:butt;stroke-miterlimit:1;stroke-dasharray:none"
+       id="path6195-8"
+       cx="19.373306"
+       cy="143.49323"
+       rx="6.6570449"
+       ry="6.7875748"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="2.3912847"
+       y="145.00693"
+       id="text6199-7-4"
+       transform="skewY(-5.1685572)"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan6197-9-8"
+         x="2.3912847"
+         y="145.00693"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">i<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:sub;stroke-width:0.264583"
+   id="tspan6201-0-4">e</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.226937px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-2)"
+       d="m 19.503834,138.27201 v 9.98696"
+       id="path6226-8"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 44.565649,141.14368 H 56.574437"
+       id="path6294-3"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 44.565649,146.36489 H 56.574437"
+       id="path6313-2"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="33.909164"
+       y="148.64101"
+       id="text6199-76-7"
+       transform="skewY(-5.1685572)"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan6197-7-1"
+         x="33.909164"
+         y="148.64101"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">c<tspan
+   style="font-size:5.67529px;baseline-shift:sub;stroke-width:0.264583"
+   id="tspan6336-11">m</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 50.70238,140.68773 V 116.4091"
+       id="path6340-5"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.570043,146.36489 v 23.95864"
+       id="path6344-8"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 71.353067,155.8939 H 83.361854"
+       id="path6294-9-1"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 73.903013,160.05678 h 6.67708"
+       id="path6313-9-4"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <g
+       id="g6592-0"
+       transform="matrix(1.4381898,0,0,1.4381898,-35.230119,60.490935)"
+       style="stroke-width:0.34765926"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.624859,50.064975 5.900624,1.114454"
+         id="path1283-2-6-9" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 75.653369,52.298405 81.554,51.183952"
+         id="path1283-7-50-2-5" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.640831,52.310603 5.900637,1.114453"
+         id="path1283-8-1-3-8" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.669354,54.544032 5.900631,-1.114453"
+         id="path1283-7-5-6-1-6" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.63224,50.052087 5.900631,-1.114453"
+         id="path1283-7-4-3-7-0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.672222,54.580785 5.900624,1.114465"
+         id="path1283-8-4-9-8-9" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.920004,56.319172 3.652203,-0.603684"
+         id="path1283-7-5-4-36-9-6"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.883739,48.315451 3.652197,0.603681"
+         id="path1283-7-5-4-3-3-1-0"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.92016,38.914865 -0.0092,9.407677"
+         id="path1395-9-7-9"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.941805,56.341141 0.07139,9.971823"
+         id="path1395-3-5-4-0"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.34765926;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 78.139729,69.22919 v 7.063653"
+         id="path6594-5"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.164223px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="M 109.55431,55.672626 V 31.795265"
+       id="path6820"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.168703px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6874)"
+       d="m 109.55431,55.672626 h 67.63127"
+       id="path6870"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.164223px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend-2)"
+       d="M 109.77395,84.610596 V 60.733235"
+       id="path6820-0"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.168482px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6874-5)"
+       d="M 109.77395,84.521538 H 177.228"
+       id="path6870-9"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 109.55431,55.672624 17.34676,-0.06429 V 44.40519 h 29.73925 v 11.203143 l 17.00084,0.06429"
+       id="path7090"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 109.77395,84.610595 16.92343,-0.07778 c 2.36038,-5.975552 4.26064,-10.510892 11.81423,-10.999451 l 17.92502,-1e-6 c 1.44775,5.29167 5.35126,9.493922 8.96252,10.999452 l 8.46165,0.07778"
+       id="path7098"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="99.792587"
+       y="53.068062"
+       id="text6199-7-8"
+       transform="skewY(-5.1685572)"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan6197-9-3"
+         x="99.792587"
+         y="53.068062"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">i<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:sub;stroke-width:0.264583"
+   id="tspan6201-0-9">e</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05556px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="116.75711"
+       y="68.05584"
+       id="text7183"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7181"
+         x="116.75711"
+         y="68.05584"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">τ<tspan
+   style="font-size:7.05556px;baseline-shift:sub"
+   id="tspan7185">m</tspan>=c<tspan
+   style="font-size:7.05556px;baseline-shift:sub"
+   id="tspan7187">m</tspan>/g<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan260">L</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="59.274818"
+       y="75.366608"
+       id="text7193"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7191"
+         x="59.274818"
+         y="75.366608"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">E<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:sub"
+   id="tspan7195">m</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="59.071125"
+       y="161.28543"
+       id="text7201"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7199"
+         x="59.071125"
+         y="161.28543"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">E<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:sub"
+   id="tspan7197">m</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="97.057556"
+       y="71.423325"
+       id="text7201-3"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7199-8"
+         x="97.057556"
+         y="71.423325"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">V<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:sub;stroke-width:0.264583"
+   id="tspan7197-2">m</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1144)"
+       d="m 121.85424,71.052741 6.08154,7.003248"
+       id="path264"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="143.31308"
+       y="105.17046"
+       id="text6199-7-7"
+       transform="skewY(-5.1685572)"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan6197-9-7"
+         x="143.31308"
+         y="105.17046"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">t</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 98.961038,155.8939 H 110.96982"
+       id="path1257"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 101.51098,160.05678 h 6.67708"
+       id="path1259"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <g
+       id="g1283"
+       transform="matrix(1.4381898,0,0,1.4381898,-7.6221479,60.490935)"
+       style="stroke-width:0.347659"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.624859,50.064975 5.900624,1.114454"
+         id="path1261" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 75.653369,52.298405 81.554,51.183952"
+         id="path1263" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.640831,52.310603 5.900637,1.114453"
+         id="path1265" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.669354,54.544032 5.900631,-1.114453"
+         id="path1267" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.63224,50.052087 5.900631,-1.114453"
+         id="path1269" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.672222,54.580785 5.900624,1.114465"
+         id="path1271" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.920004,56.319172 3.652203,-0.603684"
+         id="path1273"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.883739,48.315451 3.652197,0.603681"
+         id="path1275"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.92016,38.914865 -0.0092,9.407677"
+         id="path1277"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.941805,56.341141 0.07139,9.971823"
+         id="path1279"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 78.139729,69.22919 v 7.063653"
+         id="path1281"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.92524,156.07202 h 12.00879"
+       id="path1285"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 129.47519,160.2349 h 6.67708"
+       id="path1287"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <g
+       id="g1311"
+       transform="matrix(1.4381898,0,0,1.4381898,20.342055,60.669051)"
+       style="stroke-width:0.347659"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.624859,50.064975 5.900624,1.114454"
+         id="path1289" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 75.653369,52.298405 81.554,51.183952"
+         id="path1291" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.640831,52.310603 5.900637,1.114453"
+         id="path1293" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.669354,54.544032 5.900631,-1.114453"
+         id="path1295" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.63224,50.052087 5.900631,-1.114453"
+         id="path1297" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 75.672222,54.580785 5.900624,1.114465"
+         id="path1299" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.920004,56.319172 3.652203,-0.603684"
+         id="path1301"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.883739,48.315451 3.652197,0.603681"
+         id="path1303"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.92016,38.914865 -0.0092,9.407677"
+         id="path1305"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 77.941805,56.341141 0.07139,9.971823"
+         id="path1307"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.347659;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 78.139729,69.22919 v 7.063653"
+         id="path1309"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1444)"
+       d="m 100.10116,145.39101 12.46812,-19.78334"
+       id="path6226-8-8"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1670)"
+       d="m 127.70913,144.50043 12.46812,-19.78334"
+       id="path1518"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="90.431572"
+       y="144.58395"
+       id="text1710"
+       transform="skewY(-5.1685572)"><tspan
+         sodipodi:role="line"
+         id="tspan1708"
+         x="90.431572"
+         y="144.58395"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="91.491707"
+       y="76.081131"
+       id="text6199-7-8-2"
+       transform="skewY(-5.1685572)"><tspan
+         sodipodi:role="line"
+         id="tspan6197-9-3-1"
+         x="91.491707"
+         y="76.081131"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="63.753349"
+       y="50.948105"
+       id="text7201-9"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7199-2"
+         x="63.753349"
+         y="50.948105"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">g<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1756">L</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 64.347989,130.73896 h 3.907989"
+       id="path6642-7"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="63.956432"
+       y="135.86928"
+       id="text7201-9-2"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7199-2-3"
+         x="63.956432"
+         y="135.86928"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">g<tspan
+   style="font-size:5.67529px;baseline-shift:sub;stroke-width:0.264583"
+   id="tspan1756-7">L</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="89.086319"
+       y="135.86928"
+       id="text1797"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1795"
+         x="89.086319"
+         y="135.86928"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">g<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1799">Na</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58329999999999949px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="89.086319"
+       y="135.86928"
+       id="text1805"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1803"
+         x="89.086319"
+         y="135.86928"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">g<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1801">Na</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="118.63283"
+       y="135.34012"
+       id="text1811"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1809"
+         x="118.63283"
+         y="135.34012"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">g<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1813">K</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="86.908424"
+       y="161.37999"
+       id="text7201-1"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7199-5"
+         x="86.908424"
+         y="161.37999"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1836">Na</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="117.9669"
+       y="161.39339"
+       id="text7201-1-9"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7199-5-6"
+         x="117.9669"
+         y="161.39339"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.73122px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1895">K</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="29.567247"
+       y="92.264061"
+       id="text1905"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1903"
+         x="29.567247"
+         y="92.264061"
+         style="font-size:7.05556px;stroke-width:0.264583">intracellular</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="29.148838"
+       y="28.809931"
+       id="text1905-1"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1903-8"
+         x="29.148838"
+         y="28.809931"
+         style="font-size:7.05556px;stroke-width:0.264583">extracellular</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="67.443764"
+       y="177.89297"
+       id="text1905-8"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1903-0"
+         x="67.443764"
+         y="177.89297"
+         style="font-size:7.05556px;stroke-width:0.264583">intracellular</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="63.905582"
+       y="113.94935"
+       id="text1905-1-3"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/HHmodel.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1903-8-1"
+         x="63.905582"
+         y="113.94935"
+         style="font-size:7.05556px;stroke-width:0.264583">extracellular</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="6.0559421"
+       y="23.694595"
+       id="text1975"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1973"
+         x="6.0559421"
+         y="23.694595"
+         style="stroke-width:0.264583">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="105.44463"
+       y="23.694595"
+       id="text1979"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Neuron/RCneuron.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1977"
+         x="105.44463"
+         y="23.694595"
+         style="stroke-width:0.264583">B</tspan></text>
+  </g>
+</svg>
