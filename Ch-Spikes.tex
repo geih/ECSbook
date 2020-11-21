@@ -22,39 +22,15 @@ Adapted from \citeasnoun**{Henze2000}.
 
 While the amplitude of intracellular the action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. 
 Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (Fig.~\ref{Spikes:fig:Henze}).
-These differences are illustrated in Fig.~\ref{Spikes:fig:MultiCompartment} showing computed spikes at various positions around a neuron
-during firing of an action potential. Here the scheme described in \gex{XX} is used with an biophysically detailed neuron model for a layer-5 pyramidal cell.
-One striking features is the rapid decay of spike amplitude with distance from the soma. Another is ...
-\gen{Skriver mer naar figuren er klar}
-
- %%%%%%%%%%
-% Figure: Spike from multi-compartment model
-%%%%%%%%%%
-%\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics{Figures/Spikes/Spikes-MultiCompartment-w100-r150}
-\end{center}
-\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model}. Active sodium
-and potassium conductances in the soma compartment and computed from 
-Equation~\ref{XX:equation:Ve-multi-compartment}.
-Left panel shows the EP at different spatial positions, while right panel shows the corresponding
-soma membrane potential during the action potential. 
-\gen{Figure + caption to be updated. Change to Hay-model,}
-}
-\label{Spikes:fig:MultiCompartment}
-%\figpermOurs
-\end{figure}
 
 The main issue for detection of spikes is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. 
 \gen{Har vi et godt tall med medh¯rende referanse her?} For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
-
 Spikes shapes are also used to distinguish spikes from different neuron types. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes). But a more detailed separation is also possible~\cite**{Buccino2018}.
 
-Detailed modeling of spikes are important for several reasons: to
+Detailed modeling of spikes are important for several reasons: for example, to
 (i) understand what the single-neuron properties can tell us about spike shapes (and the other way around) \cite**{Holt1999,Gold2006,Pettersen2008a}
-(ii) estimate biases regarding which types of neurons preferentially generate the spikes recorded by electrodes, and (iii) provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}
-
+(ii) estimate biases regarding which types of neurons preferentially generate the spikes recorded by electrodes, 
+and (iii) provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}
 
 %%%
 \section{\orange{Recording of spikes}}
@@ -62,24 +38,12 @@ Detailed modeling of spikes are important for several reasons: to
 Spikes are typically recorded in living brains. Here the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at 500~Hz or so.
 The low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013}. 
 A common misunderstanding is that a spike only consists of high-frequency components as it lasts only a couple of milliseconds and an oscillation with a period of
-2 milliseconds corresponds to a frequency of 500 hertz. But this is not generally correct. As illustrated in Figure~\ref{Spikes:fig:freq_dep}, a narrow pulse such as the spike also contain low-frequency components. In fact, a so-called $\delta$-function pulse which essentially has zero width, is built up of equal amounts of frequency components for all frequencies.
-Thus high-pass filtering of the extracellular signal also distorts the extracellular spike. The rational for such high-pass filtering is rather to remove the LFP part of the signal which typically dominates in terms of overall power, but has very little power above a few hundred hertz~\cite**{Einevoll2013}.
+2 milliseconds corresponds to a frequency of 500 hertz. But this is not generally correct~\cite**{Pettersen2008,Schomburg2012,Ray2011,Scheffer-Teixeira2013}. 
+Even a fast sodium spike contain frequency components with frequencies as low as 100 Hz \cite**{Pettersen2008a}.
+This is illustrated in Figure~\ref{Spikes:fig:freq_dep} showing that even a very narrow spike contains low-frequency components.
+In fact, a so-called $\delta$-function pulse which essentially has zero width, is built up of equal amounts of frequency components for all frequencies.
+And slower phenomena such as calcium spikes~\cite**{Stuart2007} and spike afterhyperpolarization \cite**{Buzsaki1988} further contribute to low-frequency components~\cite**{Buzsaki2012}. 
 
- 
-%Contributions to LFPs from other sources
-%Although synaptic input and the associated return currents may dominate cortical LFPs7,19,49, spikes also contribute to the signal49,50,77,78. Even fast sodium spikes contribute to extracellular potentials with frequencies as low as 100 Hz48, and slower phenomena such as calcium spikes79 and spike afterhyperpolarization80 further contribute to low-frequency LFP components81. As any transmembrane current will generate an extracellular potential, glia cells may also contribute to the LFP. However, their contribution is expected mainly at very low frequencies (less than 0.1 Hz81). Again, biophysical modelling will be essential in assessing these contributions to observed cortical LFPs across the various frequency bands.
-
- 
-%48  Pettersen, K. H. & Einevoll, G. T. Amplitude variability and extracellular low-pass filtering of neuronal spikes. Biophys. J. 94, 784?802 (2008).
-%49. Pettersen, K. H., Hagen, E. & Einevoll, G. T. Estimation of population firing rates and current source densities from laminar electrode recordings. J. Comput. Neurosci. 24, 291?313 (2008).
-%50. Schomburg, E. W., Anastassiou, C. A., Buzsaki, G. & Koch, C. The spiking component of oscillatory extracellular potentials in the rat hippocampus. J.
-%77. Ray, S. & Maunsell, J. H. Different origins of gamma rhythm and high-gamma activity in macaque visual cortex. PLoS Biol. 9, e1000610 (2011). A study using careful manipulations of visual stimuli and matching pursuit spectral analysis techniques to show how to separate contributions to the LFP of genuine gamma-band rhythms from the contribution of spike-related transients that could be incorrectly decomposed as rhythms using traditional signal-processing methods.
-%78. Scheffer-Teixeira, R., Belchior, H., Leao, R. N., Ribeiro, S. & Tort, A. B. On high-frequency field oscillations (>100 Hz) and the spectral leakage of spiking activity. J. Neurosci. 33, 1535?1539 (2013).
-%79. Stuart, G., Spruston, N. & H‰usser, M. Dendrites 2nd edn (Oxford Univ. Press, 2007).
-%80. Buzsaki, G. et al. Nucleus basalis and thalamic control of neocortical activity in the freely moving rat. J. Neurosci. 8, 4007?4026 (1988)
-%81. Buzsaki, G., Anastassiou, C. A. & Koch, C. The origin of extracellular fields and currents ? EEG, ECoG, LFP and spikes. Nature Rev. Neurosci. 13, 407?420 (2012).
- 
- 
 %%%%%%%%%
 % Figure
 %%%%%%%%%
@@ -93,110 +57,105 @@ Thus high-pass filtering of the extracellular signal also distorts the extracell
 Og ogsaa de samme 3 variantene i frekvensrommet?}}
 \label{Spikes:fig:freq_dep}
 \end{figure}
+%%%%%
 
- 
+The high-pass filtering of the extracellular signal typically used in extraction of spikes from extracellular recordings, thus changes the shape of the 
+extracellular. The rationale for such high-pass filtering is rather to isolate the spikes from the the signal by removing the LFP part. The LFP
+signal typically dominates in terms of overall power, but has very little power above a few hundred hertz~\cite**{Pettersen2008,Einevoll2013}.
 
-
-
- 
- \begin{itemize}
-\item 8.1  Spikes do also contain low frequencies
-\begin{itemize}
-\item Common misunderstanding: Only high frequencies in spikes
-\item 
-\item Refer to litterature
-\end{itemize}
-
-\item 8.2 Spikes in two-compartment models
-\item 8.3 Spikes in ball-and-stick neurons
-\item 8.4 Spikes with active dendritic conductances
-\item 8.5 Spikes initiated in axons
-\item 8.6 Beyond infinite volume conductor
-\begin{itemize}
-\item MEA
-\item Probe-effects
-\end{itemize}
-\item 8.6 Multi-unit activity (MUA)
-\end{itemize} 
-
-
-%\ghnote{GH: Tekst nedenfor er sakset inn fra Gautes Sterratt-stoff. Maa omskrives for aa unngaa selv-plagiat. Tenker at vi ogsaa trenger en intro som bringer oss inn i stoffet.}
-%\tvnnote{Legge til hvor viktig EAPs har v√¶rt for nevrovitenskap kanskje? Hubel and Wiesel, Jennifer Aniston-neuron, place- og grid-cells etc?}
-%
-%Extracellular potentials measured within neural tissue are often split into two separate frequency domains, which reflect different aspects of the underlying neural activity. The low while the high-frequency part, the multi-unit activity (MUA), reflects the population spiking activity (Fig.~\ref{XX:fig:LFP_MUA}).
-%\section{\orange{Spikes in neurons with passive dendrites}}
-%\label{Spikes:sec:EP-spikes}
-%Kjernereferanse: \cite**{Pettersen2008a}
-%
-%Perhaps start this by showing membrane potentials for cells with passive dendrites. 
-%Then show extracellular signatures.
-
-
-
-
-
-%The recording of spikes, the EPs corresponding to action potentials in individual neurons, has been
-%key for learning about how neurons and neural networks function in live brains. 
-%When a sharp electrode is placed close to the soma of a neuron, an intracellular action potential will be seen
-%extracellularly as a sharp `spike' in the EP (Figure~\ref{Spikes:fig:Henze}). The magnitudes of these signals are quite different. While intracellular action potentials have amplitudes of $\sim$100~mV, the amplitudes of extracellular
-%spikes are typically less than 1~mV. Nevertheless, the detection of these spiking events from the recorded signal is relatively easily, and faithful records of the firing activity of neurons can be obtained. Such measurements have been instrumental in learning about \index{neural representations}, that is, how neurons in different parts of the brain, for example, encode information about visual and other sensory input. 
 
 %%%
-\section{\orange{Spikes from two-compartment neuron models}}
+\section{\orange{Spikes from multi-compartment neuron models}}
+\label{Spikes:sec:EP-spikes-multi-compartment}
+%%%
+Unlike the intracellular somatic action potential which has a quite standardized appearance, the spike shapes and amplitudes can vary
+strongly depending on the position at which it is recorded.  This is illustrated in Fig.~\ref{Spikes:fig:MultiCompartment} showing computed spikes at various 
+positions around a neuron during the firing of an action potential. 
+Here the scheme described in \gex{XX} is used with an biophysically detailed neuron model for a layer-5 pyramidal cell.
+One striking features is the rapid decay of spike amplitude with distance from the soma. Another is ...
+\gen{Skriver mer naar figur er klar}
+
+
+%A more detailed picture of spike shapes is obtained by considering a detailed multi-compartmental neuron model
+%with a comprehensive branching structure typical for real neurons as in Figure~\ref{Spikes:fig:MultiCompartment}.
+%With this dendritic morphology the membrane currents through the dendrites are spread over a larger membrane area.
+%As a result, Equation~\ref{XX:equation:Ve-multi-compartment} predicts that the largest EP spikes will be seen
+%around the soma for the example pyramidal neuron in Figure~\ref{Spikes:fig:MultiCompartment}.  
+%Around the apical dendrites, the spikes will still have an inverted shape compared to spikes close to the soma. 
+%However, their amplitudes will be small, only a few microvolts, so they will not be seen in most experiments.
+%
+%As for the two-compartment spike model, the spike amplitude in Figure~\ref{Spikes:fig:MultiCompartment} 
+%decays sharply with distance from the neuron. In addition, the spike width increases
+%with distance as demonstrated by the insets at two example positions. For the large spike recorded next to
+%the soma the half-width of the spike is $\sim$0.6~ms, while at the position outside the dendrite, the half-width is increased to
+%$\sim$0.7~ms. This corresponds to a low-pass filtering in the sense that the distant EP has lost some 
+%high-frequency components compared to the EP close to the soma. This filtering effect is absent for the spike generated by the 
+%two-compartment neuron model, and reflects that the cable properties of dendrites are important in determining 
+%also the shape of recorded spikes.   
+%
+%*******
+
+
+ %%%%%%%%%%
+% Figure: Spike from multi-compartment model
+%%%%%%%%%%
+%\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{Figures/Spikes/Spikes-MultiCompartment-w100-r150}
+\end{center}
+\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model}. 
+Her er det vel naturlig aa bruke Hay-modellen?
+%Active sodium
+%and potassium conductances in the soma compartment and computed from 
+%Equation~\ref{XX:equation:Ve-multi-compartment}.
+%Left panel shows the EP at different spatial positions, while right panel shows the corresponding
+%soma membrane potential during the action potential. 
+%\gen{Figure + caption to be updated. Change to Hay-model,}
+}
+\label{Spikes:fig:MultiCompartment}
+%\figpermOurs
+\end{figure}
+
+%%%
+\section{\orange{Spikes from two-compartment neuron model}}
 \label{Spikes:sec:EP-spikes-two-compartment}
 %%%
-Intracellular potentials can be modelled with a single-compartment neuron model as described in Chapter~3.
-However, as described in the previous section, 
-a two-compartment neuron model is the simplest model that can produce an extracellular potential such as a 
-spike. An example of this is provided in Figure~\ref{Spikes:fig:TwoCompartment} where active sodium and potassium conductances are added to the  soma compartment of an otherwise passive neuron model. 
-The membrane potential during a spike is illustrated in the right panel, and the  
-corresponding EP is computed from Equation~\ref{XX:equation:Ve-two-compartment}. Around the soma a characteristic
-EP spike with a sharp negative peak followed by a slower positive hump is seen, in accordance with typical experimental
-spike recordings as exemplified by Figure~\ref{Spikes:fig:Henze}. Around the dendrite compartment inverted
-spikes of the same sizes are seen, but such inverted spikes are rarely, if ever, seen in experiments. This suggests that
+While intracellularly recorded action potentials  can be modelled with a single-compartment neuron model, the two-compartment model
+model is the simplest neuron model that can provide an extracellular spike. An example of a spike generated by such a model is shown in
+Figure~\ref{Spikes:fig:DifferentNeuronModels}(left). Around the soma characteristic
+spikes with a sharp negative peak followed by a slower positive hump is seen, in accordance with typical experimental
+spike recordings as exemplified by Figure~\ref{Spikes:fig:Henze}. The same spikes, though inverted, are observed outside
+the dendrite compartment. Such inverted spikes are rarely, if ever, seen in experiments, however. This suggests that while the two-compartment
+model can account for large spikes recorded next to the soma, it generally fails to 
 modelling dendrites as a single compartment is inadequate when one is interested in predicting the detailed spatial pattern of 
-spike shapes that would be recorded by an electrode at different positions around a neuron.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+spike shapes that would be recorded by an electrode at different positions around a neuron.        
+
+\gen{Skriver mer naar figuren er klar:}
+\begin{itemize}
+\item Compare with multicompartmental model results in Figure~\ref{Spikes:fig:DifferentNeuronModels}(left)
+\item This filtering effect is absent for the spike generated by the two-compartment neuron model, 
+and reflects that the cable properties of dendrites are important in determining 
+also the shape of recorded spikes.   
+\item New analytical results from Klas? (Similar to what was done for ball-ans-stick in \citeasnoun**{Pettersen2008a}) 
+\end{itemize}
+
 
 %%%%%%%%%%
-% Figure: Spike from two-compartment model
+% Figure: Spikes from two-compartment, ball-and-stick and multicompartment
 %%%%%%%%%%
 %\begin{cnfigure}{Figures/mm/EP-spike-TwoCompartment-w100-r150}
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics{Figures/Spikes/Spikes-TwoCompartment-w100-r150}
 \end{center}
-\caption{\textbf{EP (spike) from action potential for a two-compartment neuron model with active sodium
-and potassium conductances in the soma compartment}. Computed from 
-Equation~\ref{XX:equation:Ve-two-compartment}.
-Left panel shows the EP at different spatial positions, while right panel shows the corresponding
-soma membrane potential during the action potential. 
-\gen{Figure + caption to be updated}
+\caption{\textbf{EP (spike) from action potential for a two-compartment neuron model (left), ball-and-stick-model (center),
+multicompartment model (right).}
+Her kunne vi kanskje bruke passive dendritter og clampe soma-spenningen til en bestemt form slik at resultatene fra de
+tre modellene blir mer sammenlignbare?
 }
-\label{Spikes:fig:TwoCompartment}
+\label{Spikes:fig:DifferentNeuronModels}
 \end{figure}
-
-%%%
-\section{\orange{Spikes from multi-compartment neuron models}}
-\label{Spikes:sec:EP-spikes-multi-compartment}
-%%%
-A more detailed picture of spike shapes is obtained by considering a detailed multi-compartmental neuron model
-with a comprehensive branching structure typical for real neurons as in Figure~\ref{Spikes:fig:MultiCompartment}.
-With this dendritic morphology the membrane currents through the dendrites are spread over a larger membrane area.
-As a result, Equation~\ref{XX:equation:Ve-multi-compartment} predicts that the largest EP spikes will be seen
-around the soma for the example pyramidal neuron in Figure~\ref{Spikes:fig:MultiCompartment}.  
-Around the apical dendrites, the spikes will still have an inverted shape compared to spikes close to the soma. 
-However, their amplitudes will be small, only a few microvolts, so they will not be seen in most experiments.
-
-As for the two-compartment spike model, the spike amplitude in Figure~\ref{Spikes:fig:MultiCompartment} 
-decays sharply with distance from the neuron. In addition, the spike width increases
-with distance as demonstrated by the insets at two example positions. For the large spike recorded next to
-the soma the half-width of the spike is $\sim$0.6~ms, while at the position outside the dendrite, the half-width is increased to
-$\sim$0.7~ms. This corresponds to a low-pass filtering in the sense that the distant EP has lost some 
-high-frequency components compared to the EP close to the soma. This filtering effect is absent for the spike generated by the 
-two-compartment neuron model, and reflects that the cable properties of dendrites are important in determining 
-also the shape of recorded spikes.   
-
-
 
 %%%
 \section{\orange{Spikes from ball-and-stick neurons}}
@@ -278,7 +237,7 @@ effectively identical to the long-stick results in the figure~\cite**{Pettersen2
 \includegraphics{Figures/Spikes/Spikes-ball-and-stick-neuron-models-w43-r300}
 \end{center}
 \caption[]{\textbf{Neuron models considered in results in Figure~\ref{Spikes:fig:ball-and-stick-results}}. 
-\gen{Figure + caption to be updated.}
+\gen{Mulig vi ikke trenger en slik figur lenger pga Fig 8.3}
 Adapted from \citeasnoun**{Pettersen2008}.
 }
 \label{Spikes:fig:ball-and-stick-neuron-models}
@@ -581,6 +540,16 @@ EP spike ($\hat{V}_\mathrm{e,near}(f,\vec{r})$ and $\hat{V}_\mathrm{e,far}(f,\ve
 %\end{boxfloat}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{itemize}
+\item 8.4 Spikes with active dendritic conductances
+\item 8.5 Spikes initiated in axons
+\item 8.6 Beyond infinite volume conductor
+\begin{itemize}
+\item MEA
+\item Probe-effects
+\end{itemize}
+\item 8.6 Multi-unit activity (MUA)
+\end{itemize} 
 
 
 %%%%%%%%%%
