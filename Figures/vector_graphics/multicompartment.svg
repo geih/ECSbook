@@ -29,7 +29,7 @@
        inkscape:isstock="true">
       <path
          transform="scale(0.2)"
-         style="fill-rule:evenodd;stroke:#37c837;stroke-width:1pt;stroke-opacity:1;fill:#37c837;fill-opacity:1"
+         style="fill-rule:evenodd;stroke:#ff7f2a;stroke-width:1pt;stroke-opacity:1;fill:#ff7f2a;fill-opacity:1"
          d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
          id="path4453" />
     </marker>
@@ -43,7 +43,7 @@
        inkscape:isstock="true">
       <path
          transform="scale(0.2)"
-         style="fill:#37c837;fill-opacity:1;fill-rule:evenodd;stroke:#37c837;stroke-width:1pt;stroke-opacity:1"
+         style="fill:#ff7f2a;fill-opacity:1;fill-rule:evenodd;stroke:#ff7f2a;stroke-width:1pt;stroke-opacity:1"
          d="M 5.77,0 -2.88,5 V -5 Z"
          id="path4283" />
     </marker>
@@ -72,7 +72,7 @@
        inkscape:collect="always">
       <path
          transform="scale(0.2)"
-         style="fill:#37c837;fill-opacity:1;fill-rule:evenodd;stroke:#37c837;stroke-width:1pt;stroke-opacity:1"
+         style="fill:#ff7f2a;fill-opacity:1;fill-rule:evenodd;stroke:#ff7f2a;stroke-width:1pt;stroke-opacity:1"
          d="M 5.77,0 -2.88,5 V -5 Z"
          id="path3919" />
     </marker>
@@ -86,7 +86,7 @@
        inkscape:isstock="true">
       <path
          transform="scale(0.2)"
-         style="fill:#37c837;fill-opacity:1;fill-rule:evenodd;stroke:#37c837;stroke-width:1pt;stroke-opacity:1"
+         style="fill:#ff7f2a;fill-opacity:1;fill-rule:evenodd;stroke:#ff7f2a;stroke-width:1pt;stroke-opacity:1"
          d="M 5.77,0 -2.88,5 V -5 Z"
          id="path3767" />
     </marker>
@@ -257,10 +257,36 @@
        inkscape:collect="always">
       <path
          transform="scale(0.2)"
-         style="fill:#37c837;fill-opacity:1;fill-rule:evenodd;stroke:#37c837;stroke-width:1pt;stroke-opacity:1"
+         style="fill:#ff7f2a;fill-opacity:1;fill-rule:evenodd;stroke:#ff7f2a;stroke-width:1pt;stroke-opacity:1"
          d="M 5.77,0 -2.88,5 V -5 Z"
          id="path2211-9-1" />
     </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3985"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutS"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.2)"
+         style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#ffe680;stroke-width:1pt;stroke-opacity:1"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path3983" />
+    </marker>
+    <rect
+       x="138.45071"
+       y="184.91383"
+       width="26.51683"
+       height="12.906422"
+       id="rect4249" />
+    <rect
+       x="138.45071"
+       y="184.91383"
+       width="26.51683"
+       height="12.906422"
+       id="rect2474" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -270,8 +296,8 @@
      inkscape:pageopacity="0.36862745"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70991913"
-     inkscape:cx="331.08632"
-     inkscape:cy="578.62531"
+     inkscape:cx="216.28451"
+     inkscape:cy="206.75197"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -282,10 +308,10 @@
      inkscape:snap-global="true"
      inkscape:object-nodes="false"
      inkscape:snap-bbox="true"
-     inkscape:window-width="1792"
-     inkscape:window-height="1120"
+     inkscape:window-width="1536"
+     inkscape:window-height="852"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="23"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="true" />
   <metadata
@@ -296,7 +322,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -304,6 +330,13 @@
      inkscape:label="Lag 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.249305;stroke-opacity:1"
+       id="rect3539"
+       width="190.44716"
+       height="133.42552"
+       x="3.3542554"
+       y="0.74469692" />
     <path
        id="rect203-6-1-3-7-5"
        style="fill:#6f8a91;stroke:#000000;stroke-width:0.231301"
@@ -811,23 +844,23 @@
        d="m 161.39138,34.710555 6.3119,-8.35253"
        id="path3440" />
     <path
-       style="fill:#37c837;stroke:#37c837;stroke-width:1.44109;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutS-0-2)"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1.44109;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutS-0-2);fill-opacity:1"
        d="m 161.01727,48.860558 11.01554,-5.1e-4"
        id="path2696-6-4" />
     <path
-       style="fill:#37c837;stroke:#37c837;stroke-width:1.5957;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3769)"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1.5957;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3769);fill-opacity:1"
        d="m 162.13849,87.355763 13.50596,-5.15e-4"
        id="path3765" />
     <path
-       style="fill:#37c837;stroke:#37c837;stroke-width:1.16658;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3921)"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1.16658;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3921);fill-opacity:1"
        d="m 171.48199,21.764418 7.21864,-5.11e-4"
        id="path3917" />
     <path
-       style="fill:#37c837;stroke:#37c837;stroke-width:1.16658;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4285)"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1.16658;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4285);fill-opacity:1"
        d="m 150.36875,22.511374 -7.21863,5.4e-4"
        id="path4281" />
     <path
-       style="fill:#37c837;stroke:#37c837;stroke-width:1.93651;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4455)"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1.93651;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4455);fill-opacity:1"
        d="m 189.51537,118.29497 -19.8912,5.4e-4"
        id="path4451" />
     <text
