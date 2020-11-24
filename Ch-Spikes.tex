@@ -162,6 +162,9 @@ tre modellene blir mer sammenlignbare?
 \section{\orange{Spikes from ball-and-stick neuron}}
 \label{Spikes:sec:ball-and-stick}
 
+\gen{Note that this topic was discussed in more detail in Pettersen2012. Maybe expand present text? Will consider
+after new figures have been made.}
+
 Just like for people, some neurons are louder than others and generate spikes with larger
 amplitudes.Thus when a recording electrode is lowered into the brain, there will be a bias regarding which
 neurons will be recorded from, that is, the sampling will be skewed towards the large-spike neurons.
@@ -197,7 +200,9 @@ In right panels guidelines illustrating the power-law decays $1/r$ and
 $1/r^{2}$ have been added. 
 For further details see \citeasnoun[Figure 6]{Pettersen2008}.
 \gen{Figure + caption to be updated.} 
-Adapted from \citeasnoun**{Pettersen2008}.
+Adapted from \citeasnoun**{Pettersen2008}. 
+\gen{Her kunne man jo kjoert ut nye resultater for Hay-modellen, men det er vel like greit aa bare bruke figurene fra 
+Pettersen2008?}
 }
 \label{Spikes:fig:ball-and-stick-results}
 %\figpermOurs
@@ -236,9 +241,16 @@ To understand the physical origin of these results it is easier to consider each
 component of the action potential separately. From Fourier theory it follows that any signal
 such as the time course of a spike $V_\mathrm{e}(t)$, can be written as a sum of waves with different frequencies.
 Such a Fourier sum can be constructed in various ways. The derivations presented below 
-building on \citeasnoun**{Pettersen2008}, use the convention that a time signal $S(t)$ is the real part of the complex 
-sum $\sum_{f}  \hat{S}(f) \exp (j 2 \pi f t)$. Here $j$ is the unit of imaginary numbers, and  $\hat{S}(f)$ is in general a 
-complex number. 
+building on \citeasnoun**{Pettersen2008}, use the convention that a time signal $S(t)$ can be written as
+%%%
+\begin{equation}
+S(t) = Re \{ \sum_{f}  \hat{S}(f) \exp (j 2 \pi f t) \}
+\label{Spikes:equation:Fourier_sum}
+\end{equation}
+%%%
+where $Re\{z\}$ represents the real part of the complex number $z$.  
+Here $j$ is the unit of imaginary numbers, $f$ is the frequency, and the weight $\hat{S}(f)$ is in general  
+complex. 
 
 Figure~\ref{Spikes:fig:ball-and-stick-frequency} illustrate the Fourier decomposition of the
 intracellular action potential (membrane potential) and extracellular spike, respectively.
@@ -273,6 +285,8 @@ amplitude and is 0.44~ms for the example spike.
 The amplitude (peak-to-peak value) of the spike is $56~\mu$V  
 \gen{Figure + caption to be updated. Will only include standard AP in final figure.} 
 Adapted from \citeasnoun**{Pettersen2008}.}
+\gen{Her kunne man jo kjoert ut nye resultater for Hay-modellen, men det er vel like greit aa bare bruke figurene fra 
+Pettersen2008?}
 \label{Spikes:fig:ball-and-stick-frequency}
 %\figpermOurs
 \end{figure}
@@ -374,7 +388,7 @@ stick, $C_\mathrm{m}$ is the specific membrane capacitance, and $R_\mathrm{a}$ i
 %\begin{cnfigure}{Figures/mm/EP-spike-ball-and-stick-sketch-w70-r300}
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics{Figures/Spikes/Spikes-ball-and-stick-sketch-w70-r300}
+\includegraphics{Figures/Spikes/Spikes-ball-and-stick-sketch-w70-r150}
 \end{center}
 \caption[]{Illustration of ball-and-stick neuron and its frequency-dependent 
 distribution of dendritic return currents following injection of a sinusoidal current into the soma.
@@ -539,14 +553,14 @@ Figure~\ref{Spikes:fig:ball-and-stick-results}.
 %\todo{This has also been seen in experiments, but I don't have a reference right off the bat}.
 
 %\paragraph{Generalisation of findings to other neuron models}
-\subsection{\orange{Generalisation of findings to other neuron models}}
+\subsection{\orange{Generalisation of findings to other neuron morphologies}}
 While the formulae above were derived for a neuron model with a single passive dendritic stick, similar expressions can be derived for 
 more complicated neuron models where several passive sticks protrude from the soma, see \citeasnoun**{Pettersen2008}.
 The main conclusions above hold also for these neuron models, in particular that spike widths always increase with distance and that
 the amplitude of a spike is proportional to $d^{k}$ where $k\sim1.5-2$. For neurons with many dendrites attached to the 
 soma, the contributions to the spike amplitude roughly add up. A simple rule of thumb is that a neuron's spike amplitude is 
-roughly proportional to the sum of the cross-sectional areas for all dendrite branches attached directly onto the soma. Neurons with many thick
-dendritic branches attached to the soma will thus generate the largest spikes. See~\citeasnoun**{Pettersen2008} for further discussion.
+roughly proportional to the sum of the cross-sectional areas for all dendrite branches attached directly onto the soma. Neurons with many thick dendritic branches attached to the soma will thus generate the largest spikes. See~\citeasnoun**{Pettersen2008} for further discussion.
+\gen{Kunne eventuelt aa vise noen resultater fra Jorgens thesis her}
 
 
 
@@ -594,11 +608,25 @@ dendritic branches attached to the soma will thus generate the largest spikes. S
 %account in the sum in Equation~\ref{XX:equation:Ve-multi-compartment}. 
 
 \section{\red{Spikes in neurons with active dendrites}} 
-\begin{itemize}
-\item Kjernereferanse: \cite**{Gold2006}
-\item Perhaps start this by showing membrane potentials for cells with active dendrites. 
-\item Then show extracellular signatures.
-\end{itemize}
+
+\gen{This text is adapted from Pettersen2012. Should we add something, for example, a figure?}
+
+In the above investigation of the ball-and-stick neuron, the assumption of an electrically passive dendritic stick was
+essential. This assumption made the problem of relating intracellular potentials recorded in the soma to extracellular potentials recorded outside the neuron \emph{linear} and essentially independent of the detailed shape of the intracellular action potential:
+the shape of the intracellular action potential only affected the weight of each frequency component in the Fourier sum.
+Thus the above analytical insights apply in principle to all intracellular action-potential waveforms.
+
+However, real neurons have active conductances also in the dendrites \cite{Stuart2007}, making 
+the problem nonlinear. The assumption of independent frequency component then no longer hold, and 
+instead one has to resort to numerical investigations using the general formula in Equation \gex{XX} where
+all active conductances are included explicitly. 
+
+Using this scheme, Gold and coworkers \cite{Gold2006,Gold2007} performed thorough investigations of the extracellular signatures 
+of spikes from pyramidal neurons in hippocampus CA1 where active dendritic conductances were included in the model.
+Their results were in qualitative agreement with many of the observations seen above 
+for neurons with passive dendrites: (i) the spike width was seen increase with distance from the soma (cf.~Fig.~5A in Ref.~\cite{Gold2006}), (ii) the spike amplitude was seen to decay with distance from the soma with a power between 1 and 2 for distances less than 50 $\mu$m (cf.~Fig.~14 in Ref.~\cite{Gold2006}), and (iii) the spike amplitude was also seen to change significantly to varying intracellular resistivity $R_i$ and capacitance $C_m$, but not so much to varying membrane resistivity \cite{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models \cite{Gold2007}.
+
+
 
 \section{\red{Axonal contributions to spikes}}
 \begin{itemize}
