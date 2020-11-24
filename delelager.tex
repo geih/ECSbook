@@ -338,6 +338,22 @@ c_m \frac{dV_m}{dt} = -\bar{g}_L(V_m-E_L) - \bar{g}_{Na} m^3 h (V_m - E_{Na}) - 
 \end{floatingbox}
 
 
+\subsection{\orange{GH: Temporal solutions of cable equation}}
+\label{sec:Neuron:cabletemp}
+In Fig. \ref{Neuron:fig:Semiinf}A we simulated numerically the response of a cylindrical neuron to a  synaptic input in one end. It is possible to derive some analytical results also for the temporal solution of $V$ in a passive cable is \cite**{rall1969}:
+\begin{equation}
+V(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + C_2(x) e^{-t/\tau_2} + \ldots, 
+\label{Neuron:eq:cabletemporal}
+\end{equation}
+where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_m = R_m C_m$ is the \emph{membrane time constant} (eq. \ref{Neuron:eq:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). 
+
+
+The simulation showed that the synaptic input lead to a peak response in $V$ that was smaller in amplitude and arrived later the further away from the injection site
+
+
+ However, the potential is about the same at all points along the cable a few milliseconds after the stimulus was delivered. After this, $V$  decays. 
+ This decay takes place at the slower time scale of the membrane time constant, which in this simulation was 10~ms ($R_m=10\,\text{k}\Omega \text{cm}^2$, and $c_m=1\,\mu\text{F}/\text{cm}^2$). 
+
 
 
 
