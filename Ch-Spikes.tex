@@ -607,7 +607,7 @@ roughly proportional to the sum of the cross-sectional areas for all dendrite br
 %For recording positions further away from the soma, the contribution from return membrane currents must be taken into
 %account in the sum in Equation~\ref{XX:equation:Ve-multi-compartment}. 
 
-\section{\red{Spikes in neurons with active dendrites}} 
+\section{\orange{Spikes in neurons with active dendrites}} 
 
 \gen{This text is adapted from Pettersen2012. Should we add something, for example, a figure?}
 
@@ -636,50 +636,31 @@ strong negative sodium peak. Model simulations have indeed confirmed that this i
 positive peak can be seen prior to the negative sodium peak for recording close to the soma~\cite**{Telenczuk2018}.
 Interestingly, detailed experimental studies of the shape and amplitude of extracellular spikes recorded simultaneously around the soma and along the axon has now become possible by means of 
 high-density microelectrode arrays (HD-MEAs)~\cite**{Emmenegger2019}.
+\gen{Comment on axon-representations in Hay-model and Mainen-model.}
+
+\section{\red{Effects of recording electrode on spike shape}}
 
 \begin{itemize}
-\item 8.6 Beyond infinite volume conductor
-\begin{itemize}
-\item MEA
-\item Probe-effects
+\item Until now: point-electrode approximation
+\item Modeling electrode-size effect with disc-electrode approximation (Fig.~\ref{Spikes:fig:electrode_size})
+\item Spikes in MEA
 \end{itemize}
-\item 8.6 Multi-unit activity (MUA)
-\end{itemize} 
 
-
-%%%%%%%%%%%
-%% Box: Spike sorting
-%%%%%%%%%%%
-%%\begin{boxfloat}{Spike sorting}
-%%  \label{mm:box:spike-sorting}
-%\subsection{\red{Box: Spike-sorting}}
-%\gen{This was a Box in the Sterratt chapter}
-%%
-%\centerline{\includegraphics{Figures/Spikes/Spikes-sorting-w35-r300}}\vspace*{6pt}
-%%
-%A sharp electrode placed in brain tissue will pick up spiking signals from several neurons. 
-%However, the shapes of the spikes will be different for the different neurons, and this can be used to sort the spikes according to their neurons of origin. This is referred to as \index{spike sorting}, 
-%and is a problem of great practical importance both for neuroscience research and development of neuroprosthetic devices. 
-%
-%In the present day with electrodes with hundreds or thousands of electrode recording contacts, fast and accurate automatic spike-sporting methods are needed to replace time-consuming manual spike-sorting methods~\cite**{Quiroga2007}. To develop and test such automatic methods, one needs
-%benchmarking spiking data where the `ground truth', that is, the actual spiking times for the contributing neurons, is known~\cite**{Einevoll2012}.
-%One use of the EP modelling scheme for spikes has been to generate such benchmarking data~\cite**{CamunasMesa2013,Hagen2015,MondragonGonzalez2017}. 
-%
-%Modern electrodes have numerous recording contacts, often placed only some micrometers apart. Thus a spike can be measured at several contacts
-%simultaneously, each contact recording a slightly different shape reflecting the different positions of the contacts relative to the spiking neuron. 
-%This not only allows for accurate spike sorting, but also for estimation of the spatial position of the neuron. Likewise, the spatial variation of the 
-%spike shape around the neuronal soma (see Figure~\ref{Spikes:fig:MultiCompartment}) 
-%depends on the details of the intracellular action potential and dendritic morphology thus also allowing for the 
-%identification of neuron type~\cite**{Buccino2018}.    
-%\gen{Figure to be adapted from Quiroga (2007).}
-%%\end{boxfloat}
-%%%%
-
+%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{Figures/VC/fig_elec_size_effect.pdf}
+\end{center}
+\caption[]{\textbf{Effect of electrode size.}Bigger recording electrodes can cause smaller and broader EAPs.  \ghnote{Flott. Kursivere $r$? Forklare simuleringen?}
+\gen{Veldig fin figur, som kanskje kan passe enda bedre here enn i VC-kapitlet "spikes" kapitlet. Hva tenker dere?}}
+\label{Spikes:fig:electrode_size}
+\end{figure}
+%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Box: Spike i MEA
 %%%%%%%%%%    
-\subsection{\red{Box:Spikes in microelectrode arrays (MEAs)}}
+%\subsection{\red{Box:Spikes in microelectrode arrays (MEAs)}}
 \gen{This was a box in Sterratt book chapter}
 %\begin{boxfloat}{Spikes in microelectrode arrays (MEAs)}
 %  \label{mm:box:spike-MEA}
@@ -717,6 +698,44 @@ Figure is adapted from \citeasnoun**{Ness2015}.
 %\todo{DW: Too small.}
 %\end{boxfloat}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{\red{Multi-unit activitiy}}
+
+\begin{itemize}
+\item \cite{Pettersen2008}
+\item New figure showing cancellation
+\end{itemize} 
+
+
+%%%%%%%%%%%
+%% Box: Spike sorting
+%%%%%%%%%%%
+%%\begin{boxfloat}{Spike sorting}
+%%  \label{mm:box:spike-sorting}
+%\subsection{\red{Box: Spike-sorting}}
+%\gen{This was a Box in the Sterratt chapter}
+%%
+%\centerline{\includegraphics{Figures/Spikes/Spikes-sorting-w35-r300}}\vspace*{6pt}
+%%
+%A sharp electrode placed in brain tissue will pick up spiking signals from several neurons. 
+%However, the shapes of the spikes will be different for the different neurons, and this can be used to sort the spikes according to their neurons of origin. This is referred to as \index{spike sorting}, 
+%and is a problem of great practical importance both for neuroscience research and development of neuroprosthetic devices. 
+%
+%In the present day with electrodes with hundreds or thousands of electrode recording contacts, fast and accurate automatic spike-sporting methods are needed to replace time-consuming manual spike-sorting methods~\cite**{Quiroga2007}. To develop and test such automatic methods, one needs
+%benchmarking spiking data where the `ground truth', that is, the actual spiking times for the contributing neurons, is known~\cite**{Einevoll2012}.
+%One use of the EP modelling scheme for spikes has been to generate such benchmarking data~\cite**{CamunasMesa2013,Hagen2015,MondragonGonzalez2017}. 
+%
+%Modern electrodes have numerous recording contacts, often placed only some micrometers apart. Thus a spike can be measured at several contacts
+%simultaneously, each contact recording a slightly different shape reflecting the different positions of the contacts relative to the spiking neuron. 
+%This not only allows for accurate spike sorting, but also for estimation of the spatial position of the neuron. Likewise, the spatial variation of the 
+%spike shape around the neuronal soma (see Figure~\ref{Spikes:fig:MultiCompartment}) 
+%depends on the details of the intracellular action potential and dendritic morphology thus also allowing for the 
+%identification of neuron type~\cite**{Buccino2018}.    
+%\gen{Figure to be adapted from Quiroga (2007).}
+%%\end{boxfloat}
+%%%%
+
 
 
 %While the formulae above were derived for a neuron model with a single passive dendritic stick, similar expressions can be derived for 
