@@ -274,21 +274,28 @@ Electric potential is measured between recording electrode and reference electro
 \label{VC:fig:elec_circuit}
 \end{figure}
 
-A possible concern is whether the electrode impedance or other electrode properties can distort measured extracellular potentials, through introducing unintentional temporal filtering effects on the recorded potentials. Effectively, this would amount to the potential on the inside of the electrode surface being different from the (spatial average of the) potential on the outside of the electrode, and therefore not represent the "true" extracellular potential. For example, note that recording electrodes are typically unable to measure static (DC) potentials, or capture changes slower than $\sim$ 0.1 Hz. Such DC potentials can be present in neural tissue, and can often arise in simulated extracellular potentials from cell models with active conductances, for example because of the $I_{\rm h}$-current \cite**{Ness2016}. In such cases, the simulated baseline (or mean) extracellular potential is typically subtracted from the extracellular potentials to effectively remove the unobservable DC-potential.
+A possible concern is whether the electrode impedance or other electrode properties can distort measured extracellular potentials, through introducing unintentional temporal filtering effects on the recorded potentials. Effectively, this would amount to the potential on the inside of the electrode surface being different from the (spatial average of the) potential on the outside of the electrode, and therefore not represent the "true" extracellular potential. For example, note that \gex{metallic} 
+recording electrodes are typically unable to measure static (DC) potentials, or capture changes slower than $\sim$ 0.1 Hz.
+\gen{Hvor har vi dette tallet fra?} Such DC potentials can be present in neural tissue, and can often arise in simulated extracellular potentials from cell models with active conductances, for example because of the $I_{\rm h}$-current \cite**{Ness2016}. In such cases, the simulated baseline (or mean) extracellular potential is typically subtracted from the extracellular potentials to effectively remove the unobservable DC-potential.
 
 Apart from this, it has been convincingly argued that, provided that the proper recording equipment is used, electrode impedance or other electrode properties should not substantially distort recorded potentials \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}. 
   Note that this only applies to recording electrodes, and that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization \cite**{McIntyre2001,Martinsen2008,Joucla2012}.
 In essence, the complication stems from that in electronics the electric charge is carried by electrons, while in neural tissue the electric charge is carried by positive and negative ions. For low frequencies, which do not favor capacitive currents, this change of charge carrier can be problematic, resulting in electrode polarization. 
   Modelling electrode polarization effects will often require numerically comprehensive approaches, like the Finite Element Method (FEM) \index{Finite Element Method}\cite**{Buitenweg2003,Moulin2008,Joucla2014,Vermaas2020a}, and/or careful calibration to experimental recordings \cite**{Gabriel1996,Martinsen2008,Miceli2017},
 and this topic is not covered here.
+\gen{Electrode polarization hadde vel passet best i en section om "Modeling of stimulation electrodes" ikke i naavaerende 
+"Modeling of recording electrodes". Og siden vi vel skal ha med tekst om elektrisk stimulering senere saa hadde det kanskje vaert greit med en liten separat section om dette?}
 
-Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008}, see Fig.~\ref{VC:fig:electrode_size}.
+Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. For example, if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. 
+\gen{Her maa vi vaere presise. Potensialet paa selve elektroden vil vaere det samme, det som vil variere er hva potensialet ville vaert paa denne "virtuelle" flaten hvis det ikke hadde vaert en metallisk elektrode der.}
+In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008}, see Fig.~\ref{VC:fig:electrode_size}.
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/VC/fig_elec_size_effect.pdf}
 \end{center}
-\caption[]{\textbf{Effect of electrode size.}Bigger recording electrodes can cause smaller and broader EAPs.  \ghnote{Flott. Kursivere $r$? Forklare simuleringen?}}
+\caption[]{\textbf{Effect of electrode size.}Bigger recording electrodes can cause smaller and broader EAPs.  \ghnote{Flott. Kursivere $r$? Forklare simuleringen?}
+\gen{Veldig fin figur, men jeg synes den kan passe enda bedre i "spikes" kapitlet. Hva tenker dere?}}
 \label{VC:fig:electrode_size}
 \end{figure}
 
@@ -298,17 +305,19 @@ The most straightforward and also most common approach when modeling extracellul
 ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite**{Ness2015,Buccino2019b}\tvnnote{Legg til sitering fra ikke-oss}.
 
 \ghnote{Tror vi maa forklare at punktet vaart er et punkt i en coarse-grained beskrivelse av tissue. "Punktet" i vaar utregning tilsvarer en midling over et mikrometerstort omraade rundt punktet s.a. utslaget ikke er avhengiv av hvorvidt det er 1, 2, 3 eller 40 nm til naermeste membran. Den samme midlingen gjoeres av smaa elektroder. Saa "point" betyr i denne sammenhengen at vi allokerer elektrodemaalingen til punktet i sentrum av elektroden, og at elektrodens tilstedevaerelse ikke paavirker hva midlingen over dette omraadet vil vaere?}
+\gen{Kan vi ikke ogsaa tenke paa maalingen som maaling av potensialet i et lite punkt i ECS (selv om vi bruker coarse-grained beskrivelse)?}
+
 
 \subsection{\orange{Disc-electrode approximation}}
 \index{Disc-electrode approximation}
 In some cases recording electrodes are large enough that the extracellular potential varies substantially across the electrode surface. In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential. This is typically referred to as the disc-electrode approximation \cite**{Linden2014,Ness2015}. 
 
 By taking into account the physical extent of the electrodes, the disc-electrode approximation can account for spatial filtering effects. However, very close to electrodes the electrodes can themselves affect the close-by extracellular potential, since they represent a region of a highly conductive material in contact with the tissue being measured from. 
-The effect of the presence of highly conductive electrodes can be investigated using FEM, and \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode.
+The effect of the presence of highly conductive electrodes can be investigated using FEM, and \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode. \gen{Kanskje ha med en figur om dette, tilpasset fra Ness2015?}
 
 In certain cases, like in ECoG \index{ECoG} measurements from the cortical surface, the recording electrodes are both large ($\sim$~2-5~mm diameter) and close to the neuronal sources (the thickness of the human cortex is $\sim$3~mm). In such cases the electrode properties can therefore be expected to have large effect on measured potentials, see for example  \cite**{Vermaas2020b,Rogers2020}.
 
-\subsection{\orange{Effect of the electrode probes}}
+\subsection{\orange{Effect of the electrode probes (shaft?}}
 
 Large multi-contact electrode probes can be expected to have a substantial effect on close-by extracellular potentials, since it represents a large non-conducting volume \cite**{Mechler2012,Buccino2019b}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019b}.
 
@@ -420,7 +429,9 @@ To account for diffusive effects, one needs to compute not only the electrical p
 \label{sec:VC:ephaptic}
 \index{Ephaptic effects}
 The standard workflow when modeling the extracellular potential ($\phi$) involves two steps: In Step 1 one uses the multicompartment (MC) formalism (cf. Chapter \ref{sec:Neuron}) to compute the transmembrane currents in all neuronal compartments. In Step 2, one uses VC theory (eq. \ref{VC:eq:pointsources}) to estimate the resulting $\phi$. Since the fundamental equation in the MC formalism (eq. \ref{Neuron:eq:multimain}) was derived under the assumption that $\phi=0$, this two-step approach is evidently inconsistent. 
+\gen{Jeg forbinder "ephaptic" mest med at EP satt opp av en celle paavirker en annen. Dette er mer "self-ephaptic" ...}
 
 In reality, the activity of a neuron will affect the membrane potential of both neighboring neurons and itself through the extracellular potential that it creates. Such effects of the extracellular potential on the neurodynamics are called \textit{ephaptic}. As we discussed in Section \ref{sec:Neuron:HHCassumptions}, $\phi$ is typically much smaller than the membrane potential, and ephaptic effects are therefore commonly assumed to be negligibly small. Provided that this is true, the two-step approach works well. 
+\gen{Paa side 22 i "Principles of neural coding (2013)" sies det at Gold et al (2006) har proevd et iterative scheme, uten at det gav en stor forskjell. Kan vaere fint aa nevne.}
 
 Importantly, the negligence of ephaptic effects when using the two-step scheme is implicit in the way that the neurons are modeled (Step 1), and not in the physical fundament of the VC theory (Step 2). The VC theory does not in itself make any assumption regarding ephaptic effects being present or not. Hence, the the extracellular potential should satisfy eq. \ref{VC:eq:pointsources} or \ref{VC:eq:csds} regardless of whether or not ephaptic effects were accounted for when the neural current sources were computed. As our main focus is on the extracellular potential, we will therefore stick with the two-step scheme throughout most of this book.
