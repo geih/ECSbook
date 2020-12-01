@@ -290,16 +290,19 @@ Under the assumption that the proper recording equipment is used \cite**{Nelson2
 \gen{Her maa vi vaere presise. Potensialet paa selve elektroden vil vaere det samme, det som vil variere er hva potensialet ville vaert paa denne "virtuelle" flaten hvis det ikke hadde vaert en metallisk elektrode der.}
 In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008}, see Fig.~\ref{VC:fig:electrode_size}.
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.6\textwidth]{Figures/VC/fig_elec_size_effect.pdf}
-\end{center}
-\caption[]{\textbf{Effect of electrode size.}Bigger recording electrodes can cause smaller and broader EAPs.  \ghnote{Flott. Kursivere $r$? Forklare simuleringen?}
-\gen{Veldig fin figur, men jeg synes den kan passe enda bedre i "spikes" kapitlet. Hva tenker dere?}}
-\label{VC:fig:electrode_size}
-\end{figure}
+\gen{Har flyttet figuren "Bigger recording electrodes can cause smaller and broader EAPs" til Spikes kapitlet}
+
+%\begin{figure}[!ht]
+%\begin{center}
+%\includegraphics[width=0.6\textwidth]{Figures/VC/fig_elec_size_effect.pdf}
+%\end{center}
+%\caption[]{\textbf{Effect of electrode size.}Bigger recording electrodes can cause smaller and broader EAPs.  \ghnote{Flott. Kursivere $r$? Forklare simuleringen?}
+%\gen{Veldig fin figur, men jeg synes den kan passe enda bedre i "spikes" kapitlet. Hva tenker dere?}}
+%\label{VC:fig:electrode_size}
+%\end{figure}
 
 \subsection{\orange{Point-electrode approximation}}
+\label{VC:sec:point-electrode}
 \index{Point-electrode}
 The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to  
 ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite**{Ness2015,Buccino2019b}\tvnnote{Legg til sitering fra ikke-oss}.
@@ -309,6 +312,7 @@ ignoring any potential effect from recording electrodes or electrode shanks, and
 
 
 \subsection{\orange{Disc-electrode approximation}}
+\label{VC:sec:disc-electrode}
 \index{Disc-electrode approximation}
 In some cases recording electrodes are large enough that the extracellular potential varies substantially across the electrode surface. In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential. This is typically referred to as the disc-electrode approximation \cite**{Linden2014,Ness2015}. 
 
