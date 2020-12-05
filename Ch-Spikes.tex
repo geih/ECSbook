@@ -616,7 +616,7 @@ essential. This assumption made the problem of relating intracellular potentials
 the shape of the intracellular action potential only affected the weight of each frequency component in the Fourier sum.
 Thus the above analytical insights apply in principle to all intracellular action-potential waveforms.
 
-However, real neurons have active conductances also in the dendrites \cite{Stuart2007}, making 
+However, real neurons have active conductances also in the dendrites \cite**{Stuart2007}, making 
 the problem nonlinear. The assumption of independent frequency component then no longer hold, and 
 instead one has to resort to numerical investigations using the general formula in Equation \gex{XX} where
 all active conductances are included explicitly. 
@@ -624,7 +624,8 @@ all active conductances are included explicitly.
 Using this scheme, Gold and coworkers \cite**{Gold2006,Gold2007} performed thorough investigations of the extracellular signatures 
 of spikes from pyramidal neurons in hippocampus CA1 where active dendritic conductances were included in the model.
 Their results were in qualitative agreement with many of the observations seen above 
-for neurons with passive dendrites: (i) the spike width was seen increase with distance from the soma (cf.~Fig.~5A in Ref.~\cite**{Gold2006}), (ii) the spike amplitude was seen to decay with distance from the soma with a power between 1 and 2 for distances less than 50 $\mu$m (cf.~Fig.~14 in Ref.~\cite**{Gold2006}), and (iii) the spike amplitude was also seen to change significantly to varying intracellular resistivity $R_i$ and capacitance $C_m$, but not so much to varying membrane resistivity \cite**{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models \cite**{Gold2007}.
+for neurons with passive dendrites: (i) the spike width was seen increase with distance from the soma (cf.~Fig.~5A in Ref.~\citeasnoun**{Gold2006}), (ii) the spike amplitude was seen to decay with distance from the soma with a power between 1 and 2 for distances less than 50 $\mu$m (cf.~Fig.~14 in 
+Ref.~\citeasnoun**{Gold2006}), and (iii) the spike amplitude was also seen to change significantly to varying intracellular resistivity $R_i$ and capacitance $C_m$, but not so much to varying membrane resistivity \citeasnoun**{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models \citeasnoun**{Gold2007}.
 
 
 
@@ -654,7 +655,8 @@ Most electrodes used for extracellular recordings inside the brain consists of e
 highly conductive materials embedded in electrically insulating electrode shaft. The amplitudes and shapes of 
 recorded spikes are affected by the size of the electrode contacts, and as discussed in Sec.~\ref{VC:sec:disc-electrode}
 this effect can be modelled by use of the disc-electrode approximation. In this approximation the spike potential is computed
-by averaging results from using the point approximation across the surface of the electrode. An example of its 
+by averaging results from using the point approximation across the surface of the electrode, and it is thus straightforward to implement.
+ An example of its use
 is provided by Fig.~\ref{Spikes:fig:electrode_size}) showing spikes recorded with circular electrodes of different radii.
 For one, the spike amplitude is seen to be reduced with increasing contact sizes (panel B). The shape is also affected as the 
 averaging of the potentials across the contact surface will reduce high-frequency components of the spike (panel C).
@@ -672,6 +674,8 @@ av økt avstand fra soma)}
 \end{figure}
 %%%
 
+The insulation electrode shaft effectively act to shadow spikes from neurons placed on the 'non-contact' side of the electrode.
+Detailed studies of this requires comprehensive numerical investigations by use of FEM modeling~\cite**{Mechler2011,Mechler2012,Buccino2019}.
 
 \subsection{\red{Microelectrode arrays (MEAs)}}
 
