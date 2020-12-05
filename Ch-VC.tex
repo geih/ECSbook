@@ -260,6 +260,11 @@ As we mentioned above, the current dipole approximation is only applicable when 
 \section{\orange{TVN: Modelling recording electrodes}}
 \label{sec:VC:electrodes}
 \index{Electrode model}
+
+\gen{Kanskje det kunne være en ide å også beskrive methods-of-imaging og modellering i MEAs her?
+Hadde først tenkt å ta det med i Spikes-kapitlet. Men den gjelder jo like mye for LFP og har blitt brukt av oss i denne 
+sammenheng i flere prosjekter med  Ness eller Pettersen som førsteforfatter.}
+
 We have demonstrated how we can use VC theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. Here we present a short review of different approaches to model such effects.
 
 \tvnnote{Litt usikker pÃ¥ om jeg bruker alle begreper riktig i dette avsnittet} Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to a reference electrode \cite**{Martinsen2008}, see Fig.~\ref{VC:fig:elec_circuit}. For recording electrodes to accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very high conductivity so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside of the electrode surface is in practice homogeneous. The amplifier must however have a near zero conductivity, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Martinsen2008,Moulin2008,Ishai2013}. The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Ness2015,Vermaas2020b}\tvnnote{BÃ¸r finne lÃ¦rebok-referanse til dette?}. 
@@ -402,6 +407,7 @@ When basing the VC theory on eq. \ref{VC:eq:ohmici}, we assumed that extracellul
 {\bf i} = {\bf i^{ohm}} + {\bf i^{dif}} + {\bf i^{adv}} + {\bf i^{dis}}, 
 \label{VC:eq:generalcurrent}
 \end{equation}
+\gen{Synes ikke "superscripts" eller "subscripts" skal være bold}
 
 The advective current, 
 \begin{equation}
