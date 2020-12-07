@@ -24,7 +24,9 @@ To present the MC framework, we will start by presenting a framework for modelin
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive  (iv) external stimuli ($i_{stim}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). 
+\ehnote{Notasjon boer ryddes opp i. Kursiv subfix boer representere index, mens subfix som er en forkortelse (c-capacitance, m-membrane etc.) skal ikke vaere kursiv men normal font: $i_\mathrm{m}$.}
+In addition, a neuron may receive  (iv) external stimuli ($i_{stim}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
 
 \begin{equation}
 i_c + i_L + \sum_x{i_x} +  i_{stim} = 0.
