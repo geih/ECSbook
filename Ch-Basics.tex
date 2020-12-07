@@ -12,7 +12,7 @@ Most of the physics that we will go through is summarized in, and follows from, 
 \label{Sec:Basics:Charge} \index{Charge}
 Let us begin with the fundamental quantity for electricity, the electric charge. Nature's fundamental charges are those carried by the protons and electrons that build up the atoms that build up the material world. The proton carries the charge $e$, while the electron has carries the charge $-e$, where $e = 1.602\times10^{-19}$ Coulomb (C) is called the \textit{unit charge} \index{Unit charge}. 
 
-Since atoms contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper cable, such as that powering a lamp in a in a normal house, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt-water, the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$, and calcium ions (Ca$^{2+}$ with charge $2e$).
+Since atoms contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper cable, such as that powering a lamp in a in a normal house, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt-water, the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
 
 At a fundamental, microscopic level, electricity is largely due to the interactions between individual charges. A pair of charges, $q$ and $q'$, 
 \ehnote{Inkonsistent notasjon med det som kommer etter. 
@@ -105,12 +105,127 @@ U_E = q\phi.
 
 \section{\orange{GH: Electric current}}
 \label{sec:Basics:Current} \index{Electric current}
+As we have emphasized several times, we do not want to study the brain by keeping track of individual charges. We are instead interested in the net movement of charge at a coarse-grained (space averaged) scale. Such a movement of charge gives rise to an electric current $I$ (units Ampere: A = C/s), defined as the amount of charge that moves through some reference cross-section area per second. 
+
+\subsection{\orange{GH: Conductive currents}}
+
+
+In standard electric circuits, the reference cross-section area is typically taken to be that of "a whole cable", so that the current simply represents the total current through the cable. A simple example is shown in Fig. \ref{Basics:fig:Currents}A, where a current passes through a cable with a resistor. The current is then given by Ohm's law:
+\begin{equation}
+I = - \frac{\Delta \phi}{R}, 
+\label{Basics:eq:Ohm_R}
+\end{equation}
+where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference over the resistor, and $R$ (units Ohm ($\Omega$)) its resistance. The cable itself was assumed to have a zero resistance. That means that the entire resistance in the system, and the entire voltage drop, was that over the resistor. We then only needed to consider the potential at two locations, A and B, representing the two sides of the resistor. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Basics/Currents.png}
+\end{center}
+\caption{{\bf Ohms law for currents and current densities.} {\bf (A)} Current through cable with resistor with resistance $R$ ($\Omega$): $I = (\phi_B-\phi_A)/R$. {\bf (B)} Current in cable with specific axial resistance per unit length $r_a$ ($\Omega$/m).  $I=- (1/r_a) d\phi/dx$. {\bf (C)} Current density (units A/m$^2$) in a volume conductor with conductivity $\sigma$ (Sm): ${\bf i} = \sigma {\bf E} = - \sigma \nabla \phi$.}
+\label{Basics:fig:Currents}
+\end{figure}
+
+In reality, the resistance of the cable is not strictly zero, although for most electrical circuits this is an excellent approximation. However, in some applications, for example for very long cables, for cables of less conducting materials, it is necessary to treat cables as continuous resistors. If we define the specific axial resistance per unit length $r_{a}$ ($\Omega$/m), Ohm's law becomes: 
+\begin{equation}
+I = - \frac{1}{r_a}\frac{d\phi}{dx}, 
+\label{Basics:eq:Ohm_r}
+\end{equation}
+where $r_a=r_a(x)$ may in principle vary along the cable (Fig. \ref{Basics:fig:Currents}B). With eq. \ref{Basics:eq:Ohm_r}, the potential $\phi(x)$ will vary gradually along the cable. If $r_a$ is constant along the cable, and the cable has length $L$, it is related to the resistance of the total cable through $r_a=R/L$.
+
+Both examples above were one-dimensional in the sense that the current was restricted to run exclusively in the direction defined by the cable. In a three dimensional volume, such as for example brain tissue, currents may run in all spatial directions (Fig. \ref{Basics:fig:Currents}C). It is then convenient to describe them in terms of a current density, ${\bf i}$,  a vector which defines the current per unit cross section area (units A/(m$^2$) and its spatial direction. The current density can be defined in all points in 3D space, and is not dependent on any particular and predefined cross-section area. The conductive properties of a material can be specified either through its resistivity $r$ ($\Omega$ m), or its inverse, the conductivity $\sigma$ (S/m), both being material properties. We shall here use the latter convention, and with that, Ohms law can be written as:
+\begin{equation}
+{\bf i} = - \sigma \nabla \phi
+\label{Basics:eq:Ohm_3D_phi}
+\end{equation}
+
+On a more general form, Ohms law states that:
+\begin{equation}
+{\bf i} = \sigma {\bf E}, 
+\label{Basics:eq:Ohm_general}
+\end{equation}
+while eqns. \label{Basics:eq:Ohm_R}-\ref{Basics:eq:Ohm_3D_phi} hold only in the case where the electric field ${\bf E}$ is conservative (cf. eq. \ref{Basics:eq:EV}), which we shall assume throughout this book, and which we discuss further in Section \ref{sec:VC:quasistatic}. We note however, that Ohms law applies specifically to \textit{conductive} currents, and that there exist other forms of electric currents not described by it.
+
+\subsection{\orange{GH: Capacitive currents}}
+
+
+In the theory of electric circuits, a common circuit element is the capacitor. 
+
+
+The capacitor is a device that can store electrical energy in terms of an electric field. 
+
+
+
+Most capacitors contain at least two electrical conductors often in the form of metallic plates or surfaces separated by a dielectric medium. 
+
+
+
+
+
+The effect of a capacitor is known as capacitance. While some capacitance exists between any two electrical conductors in proximity in a circuit, a capacitor is a component designed to add capacitance to a circuit. The capacitor was originally known as a condenser or condensator.[1] This name and its cognates are still widely used in many languages, but rarely in English, one notable exception being condenser microphones, also called capacitor microphones.
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Basics/Capacitor.png}
+\end{center}
+\caption{{\bf Capacitor}. 
+}
+\label{Basics:fig:Capacitor}
+\end{figure}
+
+
+\subsection{\orange{GH: Diffusive currents}}
+
+
+\section{\orange{GH: Electric currents in the brain}}
+\ghnote{So far a mess.... Work in progress.}
+
+We may think of currents in brain tissue as existing in one of three different kinds of mediums, running through either: 
+\begin{itemize}
+\item the intracellular saline solution (cytosol)
+\item the extracellular saline solution
+\item a cellular (neuronal or glial) membrane
+\end{itemize}
+
+Among these, the membrane currents are the odd ones out. A bit cartoonishly, we may think of the cellular membrane as an insulator (dielectric medium) with small holes \index{Dielectricum}. By definition, a dielectric medium is one where charges are bound to stay in confined regions of space. An electric field only will slightly shift their average equilibrium positions, causing a polarization of the material. In the membrane, this polarization can be expressed in terms of a \textit{capacitive} membrane current, which charges up the membrane and changes the membrane potential. The additional holes represent various kinds of ion channels, which are pores in the membrane that allow ions to pass through them. This flow of ions can give rise to a net electric ionic current through the membrane, which comes in addition to the capacitive current. The transmembrane ionic currents generally depend both voltage differences and ion concentration differences between the inside and outside of the membrane. A standard framework for modeling the electrodynamics of neural membranes is presented in Chapter \ref{sec:Neuron}. 
+
+The intracellular and extracellular currents run through the saline solutions that fill up the intra- and extracellular spaces, respectively. The saline solutions are predominantly conductive in their nature \index{Conductor}, which means that charges can move freely through them when exposed to an electric field. For most parts of this book, we shall assume that they are \textit{linear} conductors, which makes the intra- and extracellular currents simpler than the membrane currents. 
+
+Pakken ...
+
+which makes the intra- and extracellular currents 
+
+
+which means that current densities within them are given by the formula:
+\begin{equation}
+{\bf i} = \sigma{\bf E},
+\label{Basics:eq:i}
+\end{equation}
+Eq. \ref{Basics:eq:i} is a version of Ohm's law. It states that the current density will be proportional to the electric field and the conductivity of the medium, $\sigma$, which has units Siemens per square meters (S/m$^2$). 
+
+
+
+
+
+
+
+In neural models, the dielectric membrane is normally modeled as a capacitor. 
+
+The conductivity is a material property, and in brain tissue, it is often assumed to be a constant, at least within a given brain region. 
+
+As currents that pass through brain tissue predominantly move through the extracellular part of it, we shall represent the tissue as a conductor. 
+
+
+
+
+Such movements are described in terms of electric currents, where a current ($I$ (A))
+
+
 As we have emphasized several times, we do not want to study the brain by keeping track of individual charges. We are rather interested in the net movement of charge at a coarse-grained (space averaged) scale. In an electrical copper cable, the movement of charge is normally described in terms of an electrical current $I$, which represents the total current through the cable as a whole, and has units Ampere (A = C/s). For currents in a three dimensional volume, such as brain tissue, it is more convenient to work with current densities, 
 ${\bf i}$  
 \ehnote{Er ikke $\mathbf{J}$ et mer typisk symbolvalg (Hamalainen '93 f.eks)?}
 which is defined as the current per unit cross section area, and has units A/(m$^2$).
 
-Before defining the current density further, we need to say some words about the medium that it runs through. A bit simplistically, we may think of the brain as consisting of the intracellular saline solution, the extracellular saline solution, and the neuronal and glial membranes separating the two. Neural and glial membranes are largely dielectric (insulating) \index{Dielectricum} in their nature. In a dielectric medium, charges are bound to stay in confined regions of space, and an electric field only will slightly shift their average equilibrium positions, causing a polarization of the material. It is such a polarization that gives rise to the neuronal and glial membrane potentials. 
 
 Unlike the dielectric membrane, the saline solutions that fill up the intra- and extracellular spaces are predominantly of conductive nature \index{Conductor}, which means that charges move rather freely through them when exposed to an electric field. As currents that pass through brain tissue predominantly move through the extracellular part of it, we shall represent the tissue as a conductor. 
 
@@ -154,7 +269,7 @@ were $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densit
 \nabla\cdot {\bf E} & = & \frac{\rho}{\epsilon}. \label{Basics:eq:Max1} \\
 \nabla \cdot {\bf B} & = & 0.  \label{Basics:eq:Max2} \\
 \nabla \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{Basics:eq:Max3} \\
-\nabla \times {\bf H} & = & \mu\bf{i^{free}} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{Basics:eq:Max4}
+\nabla \times {\bf B} & = & \mu\bf{i^{free}} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{Basics:eq:Max4}
 \end{eqnarray}
 
 \ehnote{Kanskje du boer ta en ekstra titt paa likning 6 spesielt i Hamalainen '93 igjen?}
@@ -162,11 +277,17 @@ Eq. \ref{Basics:eq:Max1} is Gauss's law (for electricity). The free charge densi
 
 Eq. \ref{Basics:eq:Max2} is Gauss's law for magnetism, and is the magnetic equivalent to eq. \ref{Basics:eq:Max1}. Whereas eq. \ref{Basics:eq:Max1} allows a spatial gradient of the electric field due to a local charge density $\rho$, eq. \ref{Basics:eq:Max1} disallows the corresponding gradient in the magnetic induction field. That is because magnetic monopoles do not exist. 
 
-Eq. \ref{Basics:eq:Max3} is the Maxwell-Faraday equation for electric induction. The cross product $\nabla \times {\bf E}$ represents a certain kind of change in the electric field called the \textit{curl}. The equation tells us that such a change will be induced if there is a temporal variation in the magnetic induction field. 
+Eq. \ref{Basics:eq:Max3} is the Maxwell-Faraday equation for electric induction. The cross product $\nabla \times {\bf E}$ represents a certain kind of change in the electric field called the \textit{curl}. The equation tells us that such a change will be induced if there is a temporal variation in the magnetic field. 
 
 Eq.  \ref{Basics:eq:Max4} is Ampere's circuital law, and is the magnetic equivalent to eq. \ref{Basics:eq:Max3}. According to eq. \ref{Basics:eq:Max4}, a magnetic field will be induced either by an electric current of free charges going through the medium (first term on the right), or by a temporal change in the displacement field (second term on the right). 
 
-Together, eq. \ref{Basics:eq:Max1} and \ref{Basics:eq:Max3} show that an electric field can originate either from electric charges, or from time-varying magnetic fields. However, for brain tissue, we assume that the electro-quasi-static approximation of Maxwell's equations is warranted, which means that the temporal derivative of the magnetic field is small and has a negligible impact on ${\bf E}$. This assumption was implicit when we earlier expressed {\bf E} as a function of charges in eq. \ref{Basics:eq:CoulombEN}. In the quasi-static case we also get from eq. \ref{Basics:eq:Max3} that $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{Basics:eq:EV}). 
+
+Eq. \ref{Basics:eq:Max3} tells us that a temporal change the magnetic field induces an electric field.
+
+
+Together, eq. \ref{Basics:eq:Max1} and \ref{Basics:eq:Max3} show that an electric field can originate either from electric charges, or from time-varying magnetic fields. 
+
+However, for brain tissue, we assume that the electro-quasi-static approximation of Maxwell's equations is warranted, which means that the temporal derivative of the magnetic field is small and has a negligible impact on ${\bf E}$. This assumption was implicit when we earlier expressed {\bf E} as a function of charges in eq. \ref{Basics:eq:CoulombEN}. In the quasi-static case we also get from eq. \ref{Basics:eq:Max3} that $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{Basics:eq:EV}). 
 
 From eqns. \ref{Basics:eq:Max1} and  \ref{Basics:eq:Max4} we can derive the concept of charge conservation. If compute the divergence (take $\nabla \cdot$) of both sides of \ref{Basics:eq:Max4}:
 \begin{equation}
