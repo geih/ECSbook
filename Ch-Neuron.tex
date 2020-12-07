@@ -24,7 +24,9 @@ To present the MC framework, we will start by presenting a framework for modelin
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive  (iv) external stimuli ($i_{stim}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_c$), (ii) a the leakage current density ($i_L$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). 
+\ehnote{Notasjon boer ryddes opp i. Kursiv subfix boer representere index, mens subfix som er en forkortelse (c-capacitance, m-membrane etc.) skal ikke vaere kursiv men normal font: $i_\mathrm{m}$.}
+In addition, a neuron may receive  (iv) external stimuli ($i_{stim}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
 
 \begin{equation}
 i_c + i_L + \sum_x{i_x} +  i_{stim} = 0.
@@ -184,6 +186,10 @@ Typical choices for $g_\text{syn}(t)$ are \index{Synapse models}:
 \label{Neuron:eq:synapseforms}
 \end{align}
 where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $\Theta(t< 0)=0$, and where parameters like $\gamma$,  $\tau$, $\tau_1$ and $\tau_2$ must be tuned to experimental data from the particular synapse type that one wants to model. Simple waveform (cf., (i)--(iii) above) typically used for AMPA  and GABA synapses, while the waveform (iv), is mainly relevant for NMDA-synapses, where the conductance is influenced by membrane voltage and concentration of extracellular magnesium. 
+
+\ehnote{Ville lagt til et avsnitt her om stroembaserte synapser her som en forenklet (lineaer) versjon av ovenstaaende som svarer til approksimasjonen} 
+$i_\mathrm{syn}(t)=\overline{g}_\mathrm{syn} f(t) (V-E_\mathrm{syn} \overset{(V-E_\mathrm{syn})\approx \mathrm{const.}}{\approx} \overline{i}_\mathrm{syn} f(t)$
+\ehnote{da dette vil vaere relevant for hybrid scheme og er ellers en del brukt i punktnettverk.}
 
 In addition to the chemical synapses, some neurons may also be connected directly by electrical synapses called \underline{gap junctions}, where the current from one neural process into the other is simply a function of the voltage difference between them and the conductance: 
 
@@ -390,6 +396,20 @@ V(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + C_2(x) e^{-t/\tau_2} + \l
 \label{Neuron:eq:cabletemporal}
 \end{equation}
 where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_m = R_m c_m$ is the \emph{membrane time constant} (eq. \ref{Neuron:eq:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). We will not here present these analytical results in any further detail, but note that the final decay phase, i.e., when $V$ at all locations have coincided, takes place at the slower time scale of the membrane time constant, $\tau_m$ which in the simulation in Fig. \ref{Neuron:fig:Semiinf}A  was 10~ms ($R_m=10\,\text{k}\Omega \text{cm}^2$, and $c_m=1\,\mu\text{F}/\text{cm}^2$). 
+
+
+%%%%%%%%%%
+
+\subsection{\ehtxt{Axial and transmembrane currents}}
+
+\ehnote{Siden denne boken bygger opp til ekstracellulaere maalinger av aktivitet, er det litt snaalt aa ikke legge til noe om analytiske relasjoner for aksiale og transmembrane stroemmer her fra Pettersen2014 for eksempel:}
+
+\begin{eqnarray}
+I_i(x,t) &=& - \frac{1}{r_i} \frac{\partial V(x,t)}{\partial x} \\
+i_m(x, t) &=& - \frac{\partial I_i (x, t)}{\partial x} = \frac{1}{r_i} \frac{\partial^2 V(x,t)}{\partial x^2}
+\end{eqnarray}
+
+
 
 
 
