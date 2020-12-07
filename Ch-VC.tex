@@ -260,6 +260,11 @@ As we mentioned above, the current dipole approximation is only applicable when 
 \section{\orange{TVN: Modelling recording electrodes}}
 \label{sec:VC:electrodes}
 \index{Electrode model}
+
+\gen{Kanskje det kunne være en ide å også beskrive methods-of-imaging og modellering i MEAs her?
+Hadde først tenkt å ta det med i Spikes-kapitlet. Men den gjelder jo like mye for LFP og har blitt brukt av oss i denne 
+sammenheng i flere prosjekter med  Ness eller Pettersen som førsteforfatter.}
+
 We have demonstrated how we can use VC theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. Here we present a short review of different approaches to model such effects.
 
 \tvnnote{Litt usikker pÃ¥ om jeg bruker alle begreper riktig i dette avsnittet} Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to a reference electrode \cite**{Martinsen2008}, see Fig.~\ref{VC:fig:elec_circuit}. For recording electrodes to accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very high conductivity so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside of the electrode surface is in practice homogeneous. The amplifier must however have a near zero conductivity, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Martinsen2008,Moulin2008,Ishai2013}. The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Ness2015,Vermaas2020b}\tvnnote{BÃ¸r finne lÃ¦rebok-referanse til dette?}. 
@@ -305,7 +310,7 @@ In practice, this means for example that extracellular action potentials (which 
 \label{VC:sec:point-electrode}
 \index{Point-electrode}
 The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to  
-ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite**{Ness2015,Buccino2019b}\tvnnote{Legg til sitering fra ikke-oss}.
+ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite**{Ness2015,Buccino2019}\tvnnote{Legg til sitering fra ikke-oss}.
 
 \ghnote{Tror vi maa forklare at punktet vaart er et punkt i en coarse-grained beskrivelse av tissue. "Punktet" i vaar utregning tilsvarer en midling over et mikrometerstort omraade rundt punktet s.a. utslaget ikke er avhengiv av hvorvidt det er 1, 2, 3 eller 40 nm til naermeste membran. Den samme midlingen gjoeres av smaa elektroder. Saa "point" betyr i denne sammenhengen at vi allokerer elektrodemaalingen til punktet i sentrum av elektroden, og at elektrodens tilstedevaerelse ikke paavirker hva midlingen over dette omraadet vil vaere?}
 \gen{Kan vi ikke ogsaa tenke paa maalingen som maaling av potensialet i et lite punkt i ECS (selv om vi bruker coarse-grained beskrivelse)?}
@@ -402,6 +407,7 @@ When basing the VC theory on eq. \ref{VC:eq:ohmici}, we assumed that extracellul
 {\bf i} = {\bf i^{ohm}} + {\bf i^{dif}} + {\bf i^{adv}} + {\bf i^{dis}}, 
 \label{VC:eq:generalcurrent}
 \end{equation}
+\gen{Synes ikke "superscripts" eller "subscripts" skal være bold}
 
 The advective current, 
 \begin{equation}

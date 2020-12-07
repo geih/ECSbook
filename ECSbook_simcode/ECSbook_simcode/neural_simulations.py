@@ -156,6 +156,157 @@ def return_stick_cell(tstop, dt):
     cell.set_pos(x=-cell.xstart[0])
     return cell
 
+
+def return_ball_and_stick_cell(tstop, dt):
+
+    h("forall delete_section()")
+    h("""
+    proc celldef() {
+      topol()
+      subsets()
+      geom()
+      biophys()
+      geom_nseg()
+    }
+
+    create soma[1], dend[1]
+
+    proc topol() { local i
+      basic_shape()
+      connect dend(0), soma(1)
+    }
+    proc basic_shape() {
+      soma[0] {pt3dclear()
+      pt3dadd(0, 0, -10., 20.)
+      pt3dadd(0, 0, 10., 20.)}
+      dend[0] {pt3dclear()
+      pt3dadd(0, 0, 10., 5)
+      pt3dadd(0, 0, 1000, 5)}
+    }
+
+    objref all
+    proc subsets() { local i
+      objref all
+      all = new SectionList()
+        soma[0] all.append()
+        dend[0] all.append()
+
+    }
+    proc geom() {
+    }
+    proc geom_nseg() {
+    soma[0] {nseg = 1}
+    dend[0] {nseg = 200}
+    }
+    proc biophys() {
+    }
+    celldef()
+
+    Ra = 150.
+    cm = 1.
+    Rm = 30000.
+
+    forall {
+        insert pas // 'pas' for passive, 'hh' for Hodgkin-Huxley
+        g_pas = 1 / Rm
+        }
+    """)
+    cell_params = {
+                'morphology': h.all,
+                'delete_sections': False,
+                'v_init': -70.,
+                'passive': False,
+                'nsegs_method': None,
+                'dt': dt,
+                'tstart': -10.,
+                'tstop': tstop,
+                'pt3d': True,
+            }
+    cell = LFPy.Cell(**cell_params)
+    # cell.set_pos(x=-cell.xstart[0])
+    return cell
+
+def return_two_comp_cell(tstop, dt):
+
+    h("forall delete_section()")
+    h("""
+    proc celldef() {
+      topol()
+      subsets()
+      geom()
+      biophys()
+      geom_nseg()
+    }
+
+    create soma[1], dend[1]
+
+    proc topol() { local i
+      basic_shape()
+      connect dend(0), soma(1)
+    }
+    proc basic_shape() {
+      soma[0] {pt3dclear()
+      pt3dadd(0, 0, -10.0, 20)
+      pt3dadd(0, 0, 10., 20)}
+      dend[0] {pt3dclear()
+      pt3dadd(0, 0, 10.0, 20)
+      pt3dadd(0, 0, 30.0, 20)}
+    }
+
+    objref all
+    proc subsets() { local i
+      objref all
+      all = new SectionList()
+        soma[0] all.append()
+        dend[0] all.append()
+
+    }
+    proc geom() {
+    }
+    proc geom_nseg() {
+    soma[0] {nseg = 1}
+    dend[0] {nseg = 1}
+    }
+    proc biophys() {
+    }
+    celldef()
+
+    Ra = 150.
+    cm = 1.
+    Rm = 30000.
+
+    forall {
+        insert pas // 'pas' for passive, 'hh' for Hodgkin-Huxley
+        g_pas = 1 / Rm
+        }
+    """)
+    cell_params = {
+                'morphology': h.all,
+                'delete_sections': False,
+                'v_init': -70.,
+                'passive': False,
+                'nsegs_method': None,
+                'dt': dt,
+                'tstart': -10.,
+                'tstop': tstop,
+                'pt3d': True,
+            }
+    cell = LFPy.Cell(**cell_params)
+    # cell.set_pos(x=-cell.xstart[0])
+    return cell
+
+def remove_active_mechanisms(remove_list, cell):
+    # remove_list = ["Nap_Et2", "NaTa_t", "NaTs2_t", "SKv3_1",
+    # "SK_E2", "K_Tst", "K_Pst",
+    # "Im", "Ih", "CaDynamics_E2", "Ca_LVAst", "Ca", "Ca_HVA"]
+    mt = h.MechanismType(0)
+    for sec in h.allsec():
+        for seg in sec:
+            for mech in remove_list:
+                mt.select(mech)
+                mt.remove(sec=sec)
+    return cell
+
 def return_freq_and_psd(tvec, sig):
     """ Returns the power and freqency of the input signal"""
     import scipy.fftpack as ff

@@ -1,7 +1,9 @@
 \chapter{Theory: Neural dynamics}
 \label{sec:Neuron}
 \index{Multicompartmental neuron model}
-The main contribution to extracellular potentials comes from the electrical activity of neurons. To model extracellular potentials, we therefore first need a model of the neurons generating them. Moreover, a neuron's contribution to the extracellular potential depends strongly on its morphology, meaning that we will need multicomparmental neuron models \index{Multicompartment model} that account for the neuron's spatial extension.
+The main contribution to extracellular potentials comes from the electrical activity of neurons. To model extracellular potentials, we therefore first need a model of the neurons generating them. Moreover, a neuron's contribution to the extracellular potential depends strongly on its morphology, 
+meaning that we will need multicompar\ehtxt{t}mental 
+neuron models \index{Multicompartment model} that account for the neuron's spatial extension.
 
 Modeling of neurons is at the core of computational neuroscience. There exist many types of frameworks for constructing neuronal models at various levels of detail and abstraction, and the topic has been treated in detail in several text books (see e.g.,\cite**{johnston1994foundations,KockSegev1998,Koch1999,DeSchutter2000,Hille2001,Dayan2005,Izhikevich2007,Sterratt2011,Miller2018}). We shall here give only a rather brief introduction to the topic, and we shall limit ourselves to present the most standard kind multicompartmental neuron model, based on a framework which combines a so-called Hodgkin-Huxley type description of the neural membrane mechanisms (see e.g., \cite**{Hodgkin1952,KockSegev1998,Pospischil2008}) with cable theory to predict how signals propagate spatially in dendrites and axons (see, e.g., \cite**{Koch1999,rall2011}). We shall refer to this framework simply as the multicompartment (MC) framework. The MC framework has become the gold standard for biophysically detailed neuronal simulations on the cellular and network level, and has been used for simulating the dynamics of large neuronal networks (see e.g., \cite**{traub2005,markram2015,arkhipov2018}).
 
