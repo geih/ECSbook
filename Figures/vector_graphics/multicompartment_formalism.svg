@@ -132,17 +132,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.62362772"
-     inkscape:cx="405.80269"
-     inkscape:cy="487.31588"
+     inkscape:cx="372.12875"
+     inkscape:cy="537.02502"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:snap-global="false"
      inkscape:window-width="1536"
-     inkscape:window-height="852"
+     inkscape:window-height="934"
      inkscape:window-x="0"
-     inkscape:window-y="23"
+     inkscape:window-y="26"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata2132">
@@ -160,6 +160,13 @@
      inkscape:label="Lag 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#ffffff;stroke-width:1"
+       id="rect2447"
+       width="205.76846"
+       height="189.64639"
+       x="0.8485297"
+       y="0.8485297" />
     <rect
        style="fill:#ffcc00;fill-opacity:1;stroke:#ffcc00;stroke-width:0.499999"
        id="rect4152"

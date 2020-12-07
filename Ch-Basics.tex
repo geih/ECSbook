@@ -126,23 +126,7 @@ The Coulomb force also gives rise to a phenomenon called Debye shielding \cite**
 
 Of course, a non-zero electric field or potential does require some charge separation somewhere. In the brain, this predominantly happens at neuronal membranes, and then on a very small spatial scale. Working as a parallel plate capacitor, a patch of membrane separates a charge $Q$ on the interior side from a charge $-Q$ on the exterior side. These two charges are equal in magnitude and opposite in sign, and are distributed in nanometer-thick sheaths on the interior and exterior membrane, called Debye layers. This charge separation gives rise to the membrane potential $V_m = Q/C_m$, where $C_m$ is the capacitance (with units Fahrad (F)) of the patch of membrane. We will speak more of the membrane capacitance in Chapter \ref{sec:Neuron}, but the point that we wanted to make here is that, since the membrane is just some nanometers thick, the two charges $-Q$ and $Q$ are very close in space, and will shield each others' contributions to extracellular fields measured at some distance from the membrane. 
 
-
-\section{\orange{GH: Neurons as current sources}}
-\label{sec:Basics:C} 
-\index{Current source density}
-The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint that there should be no charge accumulation anywhere in the extracellular space. 
-
-As we shall explain further in Chapter \ref{sec:VC}, the sources for the extracellular potential (of field) will then exclusively be the electric \textit{currents} entering or leaving the extracellular space through neural membranes. Mathematically, we can express this through the continuity equation:
-\begin{equation}
-\nabla \cdot {\bf i_t} = -C.
-\label{Basics:eq:continuity1}
-\end{equation}
-where the source term, $C$, is called the current source density (units A/m$^3$), and represents  
-the transmembrane output currents from neurons per tissue volume. We recall that ${\bf i_t}$ here is the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents. 
-
-Eq. \ref{Basics:eq:continuity1} tells us that in a volume of space where there is no neuronal membrane ($C = 0$), we have that $\nabla \cdot {\bf i_t} = 0$. This means that there will be no net current entering or leaving such a volume. Importantly, this does not mean that the current must be zero. Currents can and will still run \textit{through} the volume.
-
-In a volume that \textit{does} receive a neuronal output, eq. \ref{Basics:eq:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume in terms of an extracellular tissue current. As we shall show in Chapter \ref{sec:VC}, this conservation law shall be the fundament for modeling extracellular potentials surrounding active neurons.
+The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint that there should be no charge accumulation anywhere in the extracellular space. As we shall explain further in Chapter \ref{sec:VC}, the sources for the extracellular potential (of field) will then exclusively be the electric \textit{currents} entering or leaving the extracellular space through neural membranes.
 
 
 \section{\orange{GH: Maxwell's equations}}
@@ -150,38 +134,92 @@ In a volume that \textit{does} receive a neuronal output, eq. \ref{Basics:eq:con
 Most of the physics that we have gone through so far follows from Maxwell's equations, so we will summarize this chapter by going briefly through these. The equations come in two versions, referred to as the microscopic and macroscopic versions. The microscopic version is the most fundamental, but using it requires knowledge of the positions of all individual charges, which is unfeasible when any medium at a macroscopic level. We therefore only list up the macroscopic set of equations: 
 
 \begin{eqnarray}
-\nabla\cdot {\bf D} & = & \rho. \label{Basics:eq:Max1} \\
-\nabla \cdot {\bf B} & = & 0.  \label{Basics:eq:Max2} \\
-\nabla \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{Basics:eq:Max3} \\
-\nabla \times {\bf H} & = & \bf{i} + \frac{\partial {\bf D}}{\partial t}.  \label{Basics:eq:Max4}
+\nabla\cdot {\bf D} & = & \rho. \label{Basics:eq:Max11} \\
+\nabla \cdot {\bf B} & = & 0.  \label{Basics:eq:Max22} \\
+\nabla \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{Basics:eq:Max33} \\
+\nabla \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{Basics:eq:Max44}, 
 \end{eqnarray}
 
-Eq. \ref{Basics:eq:Max1} is called Gauss's law (for electricity). The variable ${\bf D}$ is called the \textit{displacement field}, and $\rho$ is the free (unbound) charge density, which generally can be non-zero, although we argued earlier that brain tissue for practical purposes can be assumed to be electroneutral at the coarse-grained scale. ${\bf D}$ is tightly related to the total electric field ${\bf E}$ that we have introduced earlier. In a linear dielectric medium (and we will in this book assume that our mediums are linear), it holds that ${\bf D} = \epsilon {\bf E}$, where $\epsilon$ is the electric permittivity of the medium. 
+were $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densities. For linear mediums, the auxillary fields (${\bf H}$ and ${\bf D}$) can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ is the magnetic permeability of the medium and $\epsilon$ the electric permittivity of the medium. This is an excellent approximation for brain tissue, so that we may write the Maxwell equations at the form:
 
-Eq. \ref{Basics:eq:Max2} is Gauss's law for magnetism, and is the magnetic equivalent to eq. \ref{Basics:eq:Max1}, with {\bf B} being the magnetic induction field.  Whereas eq. \ref{Basics:eq:Max1} states that there can be a spatial gradient of the electric field due to a local charge density $\rho$, eq. \ref{Basics:eq:Max1} disallows the corresponding gradient in the magnetic induction field, simply because magnetic monopoles do not exist. 
+\begin{eqnarray}
+\nabla\cdot {\bf E} & = & \frac{\rho}{\epsilon}. \label{Basics:eq:Max1} \\
+\nabla \cdot {\bf B} & = & 0.  \label{Basics:eq:Max2} \\
+\nabla \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{Basics:eq:Max3} \\
+\nabla \times {\bf H} & = & \mu\bf{i^{free}} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{Basics:eq:Max4}
+\end{eqnarray}
+
+
+Eq. \ref{Basics:eq:Max1} is Gauss's law (for electricity). The free charge density, $\rho$, can generally be non-zero, although we argued earlier that brain tissue for practical purposes can be assumed to be electroneutral at the coarse-grained scale. 
+
+Eq. \ref{Basics:eq:Max2} is Gauss's law for magnetism, and is the magnetic equivalent to eq. \ref{Basics:eq:Max1}. Whereas eq. \ref{Basics:eq:Max1} allows a spatial gradient of the electric field due to a local charge density $\rho$, eq. \ref{Basics:eq:Max1} disallows the corresponding gradient in the magnetic induction field. That is because magnetic monopoles do not exist. 
 
 Eq. \ref{Basics:eq:Max3} is the Maxwell-Faraday equation for electric induction. The cross product $\nabla \times {\bf E}$ represents a certain kind of change in the electric field called the \textit{curl}. The equation tells us that such a change will be induced if there is a temporal variation in the magnetic induction field. 
 
-Eq.  \ref{Basics:eq:Max4} is Ampere's circuital law, and is the magnetic equivalent to eq. \ref{Basics:eq:Max3}. Here, the magnetic field ${\bf H}$ is related to the magnetic induction field ${\bf B}$ in a way equivalent to how the electric field ${\bf E}$ is related to the displacement field ${\bf D}$, and in a linear medium, ${\bf B} = \mu{\bf H}$, with the proportionality constant $\mu$ being the magnetic permeability of the medium. According to eq. \ref{Basics:eq:Max4}, a magnetic field will be induced either by an electric current of free charges going through the medium (first term on the right), or by a temporal change in the displacement field (second term on the right). 
+Eq.  \ref{Basics:eq:Max4} is Ampere's circuital law, and is the magnetic equivalent to eq. \ref{Basics:eq:Max3}. According to eq. \ref{Basics:eq:Max4}, a magnetic field will be induced either by an electric current of free charges going through the medium (first term on the right), or by a temporal change in the displacement field (second term on the right). 
 
-Together, eq. \ref{Basics:eq:Max1} and \ref{Basics:eq:Max3} show that an electric field can originate either from electric charges, or from time-varying magnetic fields. However, for brain tissue, we shall assume that the quasi-static approximation of Maxwell's equations are warranted, which means that the terms with temporal derivatives of the electric and magnetic fields are neglected in eqns. \ref{Basics:eq:Max3} and  \ref{Basics:eq:Max4}. This assumption was implicit when we earlier expressed {\bf E} as a function of charges in eq. \ref{Basics:eq:CoulombEN}. In the quasi-static case we also get from eq. \ref{Basics:eq:Max3} that $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{Basics:eq:EV}). For the magnetic field, we get from eq. \ref{Basics:eq:Max4} that $\nabla \times {\bf H} = \bf{i}$. This allows us to predict magnetic fields from electric tissue currents, and is the fundamental relation for interpreting magetoencephalohy data (see Chapter \ref{sec:MEG}).
+Together, eq. \ref{Basics:eq:Max1} and \ref{Basics:eq:Max3} show that an electric field can originate either from electric charges, or from time-varying magnetic fields. However, for brain tissue, we assume that the electro-quasi-static approximation of Maxwell's equations is warranted, which means that the temporal derivative of the magnetic field is small and has a negligible impact on ${\bf E}$. This assumption was implicit when we earlier expressed {\bf E} as a function of charges in eq. \ref{Basics:eq:CoulombEN}. In the quasi-static case we also get from eq. \ref{Basics:eq:Max3} that $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{Basics:eq:EV}). 
 
-Also the concept of charge conservation follows from Maxwell's equations. We can see this if we 
-compute the divergence (take $\nabla \cdot$) of both sides of \ref{Basics:eq:Max4}:
+From eqns. \ref{Basics:eq:Max1} and  \ref{Basics:eq:Max4} we can derive the concept of charge conservation. If compute the divergence (take $\nabla \cdot$) of both sides of \ref{Basics:eq:Max4}:
 \begin{equation}
-- \nabla \cdot \bf{i} =  \frac{\partial {\bf \nabla \cdot D}}{\partial t}, 
+- \nabla \cdot {\bf i^{free}} =  \epsilon \frac{\partial (\nabla \cdot {\bf E})}{\partial t}, 
 \label{Basics:eq:Max4dot}
 \end{equation}
-and insert \ref{Basics:eq:Max1} on the right hand side, to get:
+and insert eq. \ref{Basics:eq:Max1} on the right hand side, we get:
 \begin{equation}
-- \nabla \cdot {\bf i} =  \frac{\partial \rho}{\partial t},
+- \nabla \cdot {\bf i^{free}} =  \frac{\partial \rho}{\partial t},
 \label{Basics:eq:Max4dot1}
 \end{equation}
-If the left hand side in nonzero, it means that there will be a net influx of current into a volume, and if that is the case, we must have an accumulation of charge there, as described by the right hand side of the equation. In the case of electroneutrality ($\rho = 0$), eq. \ref{Basics:eq:Max4dot1} reduces to:
+If the left hand side in nonzero, it means that there will be a net influx of current into a volume, and if that is the case, we must have an accumulation of charge there, as described by the right hand side of the equation. 
+
+
+\section{\orange{GH: Neurons as current sources}}
+\label{sec:Basics:C} 
+\index{Current source density}
+ Mathematically, we can express this through the continuity equation:
+\begin{equation}
+\nabla \cdot {\bf i_t} = -C.
+\label{Basics:eq:continuity1}
+\end{equation}
+where the source term, $C$, is called the current source density (units A/m$^3$), and represents  the transmembrane output currents from neurons per tissue volume. We recall that ${\bf i_t}$ here is the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents. 
+
+Eq. \ref{Basics:eq:continuity1} tells us that in a volume of space where there is no neuronal membrane ($C = 0$), we have that $\nabla \cdot {\bf i_t} = 0$. This means that there will be no net current entering or leaving such a volume. Importantly, this does not mean that the current must be zero. Currents can and will still run \textit{through} the volume.
+
+In a volume that \textit{does} receive a neuronal output, eq. \ref{Basics:eq:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume in terms of an extracellular tissue current. As we shall show in Chapter \ref{sec:VC}, this conservation law shall be the fundament for modeling extracellular potentials surrounding active neurons.
+
+
+
+The link between eq. \ref{Basics:eq:Max4dot} and the fundamental equation for modeling extracellular potentials (eq. \ref{Basics:eq:continuity1}) is easier to recognize if we define a total current density ${\bf i} = \bf{i^{free}} +\epsilon\partial{\bf E}/\partial{t}$. 
+
+With the displacement current "baked into" a total current in this way, charge conservation implies current continuity:
+
+\begin{equation}
+\nabla \cdot {\bf i} =  0,
+\label{Basics:eq:Max4dot1}
+\end{equation}
+Further, we may make a decomposition of ${\bf i} = {\bf i_t} + {\bf i_p}$ into an extracellular tissue component and a primary cellular (intra-cellular + membrane) component. 
+
+\begin{equation}
+\nabla \cdot {\bf i_t} =  -\nabla \cdot {\bf i_p},
+\label{Basics:eq:Max4dot1}
+\end{equation}
+
+Since the currents ${\bf i_t}$ and  ${\bf i_p}$ do not exist at the same point in space (except at the membrane boundary), this equation
+
+
+$- \nabla \cdot \bf{i^{free}} =  \epsilon \frac{\partial {\bf \nabla \cdot E}}{\partial t}, $
+
+
+In the case of electroneutrality ($\rho = 0$), eq. \ref{Basics:eq:Max4dot1} reduces to:
 \begin{equation}
 - \nabla \cdot {\bf i} =  0.
 \label{Basics:eq:MaxElectroneutral}
 \end{equation}
 
+
 In the previous subsection, we said that eq. \ref{Basics:eq:continuity1} will be our fundamental equation for modeling extracellular potentials. It is therefore important to point out that it is not in disagreement with Maxwell's equations, although eq. \ref{Basics:eq:continuity1} and eq. \ref{Basics:eq:MaxElectroneutral} at a first glimpse may look a bit different. Comparing the two, we we see that in \ref{Basics:eq:continuity1}, ${\bf i}$ has been replaced with ${\bf i_t}$, and a source term $C$ has been added on the right hand side. Essentially, eq. \ref{Basics:eq:continuity1} thus follows from decomposing the total current ${\bf i}$ in eq. \ref{Basics:eq:MaxElectroneutral} into the part of it ($\bf{i_t}$) that runs extracellularly through the tissue and the part of it ($C$) that enters the extracellular space through neural membranes. The reason for making this decomposition is practical. As we shall see in Chapter \ref{sec:VC}, it makes computations easier.
+
+
+
+
 

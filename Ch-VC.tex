@@ -260,6 +260,11 @@ As we mentioned above, the current dipole approximation is only applicable when 
 \section{\orange{TVN: Modelling recording electrodes}}
 \label{sec:VC:electrodes}
 \index{Electrode model}
+
+\gen{Kanskje det kunne være en ide å også beskrive methods-of-imaging og modellering i MEAs her?
+Hadde først tenkt å ta det med i Spikes-kapitlet. Men den gjelder jo like mye for LFP og har blitt brukt av oss i denne 
+sammenheng i flere prosjekter med  Ness eller Pettersen som førsteforfatter.}
+
 We have demonstrated how we can use VC theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. Here we present a short review of different approaches to model such effects.
 
 \tvnnote{Litt usikker pÃ¥ om jeg bruker alle begreper riktig i dette avsnittet} Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to a reference electrode \cite**{Martinsen2008}, see Fig.~\ref{VC:fig:elec_circuit}. For recording electrodes to accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very high conductivity so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside of the electrode surface is in practice homogeneous. The amplifier must however have a near zero conductivity, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Martinsen2008,Moulin2008,Ishai2013}. The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Ness2015,Vermaas2020b}\tvnnote{BÃ¸r finne lÃ¦rebok-referanse til dette?}. 
@@ -290,25 +295,29 @@ Under the assumption that the proper recording equipment is used \cite**{Nelson2
 \gen{Her maa vi vaere presise. Potensialet paa selve elektroden vil vaere det samme, det som vil variere er hva potensialet ville vaert paa denne "virtuelle" flaten hvis det ikke hadde vaert en metallisk elektrode der.}
 In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008}, see Fig.~\ref{VC:fig:electrode_size}.
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.6\textwidth]{Figures/VC/fig_elec_size_effect.pdf}
-\end{center}
-\caption[]{\textbf{Effect of electrode size.}Bigger recording electrodes can cause smaller and broader EAPs.  \ghnote{Flott. Kursivere $r$? Forklare simuleringen?}
-\gen{Veldig fin figur, men jeg synes den kan passe enda bedre i "spikes" kapitlet. Hva tenker dere?}}
-\label{VC:fig:electrode_size}
-\end{figure}
+\gen{Har flyttet figuren "Bigger recording electrodes can cause smaller and broader EAPs" til Spikes kapitlet}
+
+%\begin{figure}[!ht]
+%\begin{center}
+%\includegraphics[width=0.6\textwidth]{Figures/VC/fig_elec_size_effect.pdf}
+%\end{center}
+%\caption[]{\textbf{Effect of electrode size.}Bigger recording electrodes can cause smaller and broader EAPs.  \ghnote{Flott. Kursivere $r$? Forklare simuleringen?}
+%\gen{Veldig fin figur, men jeg synes den kan passe enda bedre i "spikes" kapitlet. Hva tenker dere?}}
+%\label{VC:fig:electrode_size}
+%\end{figure}
 
 \subsection{\orange{Point-electrode approximation}}
+\label{VC:sec:point-electrode}
 \index{Point-electrode}
 The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to  
-ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite**{Ness2015,Buccino2019b}\tvnnote{Legg til sitering fra ikke-oss}.
+ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential  at single points. For relatively small micro-electrodes inserted into neural tissue, this has been found to be a reasonable approximation \cite**{Ness2015,Buccino2019}\tvnnote{Legg til sitering fra ikke-oss}.
 
 \ghnote{Tror vi maa forklare at punktet vaart er et punkt i en coarse-grained beskrivelse av tissue. "Punktet" i vaar utregning tilsvarer en midling over et mikrometerstort omraade rundt punktet s.a. utslaget ikke er avhengiv av hvorvidt det er 1, 2, 3 eller 40 nm til naermeste membran. Den samme midlingen gjoeres av smaa elektroder. Saa "point" betyr i denne sammenhengen at vi allokerer elektrodemaalingen til punktet i sentrum av elektroden, og at elektrodens tilstedevaerelse ikke paavirker hva midlingen over dette omraadet vil vaere?}
 \gen{Kan vi ikke ogsaa tenke paa maalingen som maaling av potensialet i et lite punkt i ECS (selv om vi bruker coarse-grained beskrivelse)?}
 
 
 \subsection{\orange{Disc-electrode approximation}}
+\label{VC:sec:disc-electrode}
 \index{Disc-electrode approximation}
 In some cases recording electrodes are large enough that the extracellular potential varies substantially across the electrode surface. In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential. This is typically referred to as the disc-electrode approximation \cite**{Linden2014,Ness2015}. 
 
@@ -327,27 +336,50 @@ Large multi-contact electrode probes can be expected to have a substantial effec
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The VC theory presented in this chapter relies on several assumptions and approximations. Firstly, the theory is based on the quasi-static approximation of Maxwell's equations (see Section \ref{sec:VC:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:VC:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:VC:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:VC:ephaptic} for more on this). Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Chapter \ref{sec:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
 
-\subsection{\blue{Quasi-static approximation of Maxwell's equations}}
+\subsection{\blue{Electro-quasistatic approximation of Maxwell's equations}}
 \label{sec:VC:quasistatic}
 \index{Quasi-static approximation to Maxwell's equations}
-In the quasi-static approximation to Maxwell's equations, one neglects terms with the time derivatives of the electric (${\bf E}$) and magnetic (${\bf B}$) fields. 
-
-For linear materials with instantaneous response properties, Maxwell's (macroscopic) equation for the curl of the electric field (eq.  \ref{Basics:eq:Max3}) can then be simplified to:
+For fields in the brain, the typical temporal frequencies are so low that the magnetic induction term, i.e., the time derivative of ${\bf B}$, has a negligible impact on the electric field ${\bf E}$ \cite**{plonsey1967,Gratiy2017}. Maxwell's (macroscopic) equation for the curl of the electric field (eq.  \ref{Basics:eq:Max3}) can then be simplified to:
 \begin{equation}
 \nabla \times {\bf E} = - \frac{\partial {\bf B}}{\partial t}  \approx 0, 
 \label{VC:eq:maxE}
 \end{equation}
-It follows from eq. \ref{VC:eq:maxE} that the static electric field is conservative, and related to an extracellular potential through,
+This is called the electro-quasistatic approximation, and it follows from eq. \ref{VC:eq:maxE} that the quasi-static electric field is conservative, which is a criterion for relating it to an extracellular potential through:
 \begin{equation}
-{\bf E} = \nabla \cdot \phi.
+{\bf E} = \nabla \cdot \phi,
 \label{VC:eq:conservative}
 \end{equation}
-Likewise, Maxwell's (macroscopic) equation for the curl of the magnetic field (eq. \ref{Basics:eq:Max4}) simplifies to:
+as we postulated earlier (eq. \ref{Basics:eq:EV}). 
+
+In contrast, the displacement current term $\partial E/\partial t$ in Maxwell's (macroscopic) equation for the curl of the magnetic field (eq. \ref{Basics:eq:Max4}) is responsible for the charging up of capacitive neural membranes. Therefore, we can not as a generality assume that brain tissue is magneto-quasistatic. However, in shall assume that the extracellular currents are (see Section \ref{sec:VC:onlyohmic}).
+
+
 \begin{equation}
-\nabla \times {\bf B} = \mu{\bf i} + \mu \epsilon \frac{\partial {\bf E}}{\partial t} \approx  \mu {\bf i} ,
+\nabla \times {\bf H} = {\bf i_t} + \frac{\partial {\bf D}}{\partial t} \approx {\bf i_t},
 \label{VC:eq:maxB}
 \end{equation}
-where $\mu$ and $\epsilon$ are the permeability and permittivity of the medium respectively. 
+which is the quasi-\textit{magnetoelectrostatic} approximation. We have here inserted the tissue volume current density ${\bf i_t}$, and not a general current density ${\bf i}$, which might include neuronal curre
+
+since we have excluded the possible membrane current sources.
+
+We may recall the constitutive relations ${\bf D} = \epsilon{\bf E}$ and $\mu{\bf H} = {\bf B}$, with $\mu$ and $\epsilon$ being the permeability and permittivity of the medium, respectively. The assumption behind eq. \ref{VC:eq:maxB} it is that the time variations in the electric field are too slow to affect the magnetic field. If we take the gradient of both sides of this equation, we get that (since the gradient of a curl is zero): 
+\begin{equation}
+\nabla\cdot {\bf i} = 0, 
+\label{VC:eq:maxBstatic}
+\end{equation}
+which we have also postulated earlier (eq. \ref{Basics:eq:MaxElectroneutral}). 
+
+ For linear materials with instantaneous response properties, 
+
+
+
+\begin{equation}
+\nabla \cdot {\bf i_t}({\bf r}, t) = - C({\bf r}, t),
+\label{VC:eq:CSD1}
+\end{equation}
+
+
+In the previous subsection, we said that eq. \ref{Basics:eq:continuity1} will be our fundamental equation for modeling extracellular potentials. It is therefore important to point out that it is not in disagreement with Maxwell's equations, although eq. \ref{Basics:eq:continuity1} and eq. \ref{Basics:eq:MaxElectroneutral} at a first glimpse may look a bit different. Comparing the two, we we see that in \ref{Basics:eq:continuity1}, ${\bf i}$ has been replaced with ${\bf i_t}$, and a source term $C$ has been added on the right hand side. Essentially, eq. \ref{Basics:eq:continuity1} thus follows from decomposing the total current ${\bf i}$ in eq. \ref{Basics:eq:MaxElectroneutral} into the part of it ($\bf{i_t}$) that runs extracellularly through the tissue and the part of it ($C$) that enters the extracellular space through neural membranes. The reason for making this decomposition is practical. As we shall see in Chapter \ref{sec:VC}, it makes computations easier.
 
 The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \cite**{Nunez2006,Grodzinsky2011}.
 
@@ -375,6 +407,7 @@ When basing the VC theory on eq. \ref{VC:eq:ohmici}, we assumed that extracellul
 {\bf i} = {\bf i^{ohm}} + {\bf i^{dif}} + {\bf i^{adv}} + {\bf i^{dis}}, 
 \label{VC:eq:generalcurrent}
 \end{equation}
+\gen{Synes ikke "superscripts" eller "subscripts" skal være bold}
 
 The advective current, 
 \begin{equation}
