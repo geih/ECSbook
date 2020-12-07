@@ -14,7 +14,10 @@ Let us begin with the fundamental quantity for electricity, the electric charge.
 
 Since atoms contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper cable, such as that powering a lamp in a in a normal house, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt-water, the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$, and calcium ions (Ca$^{2+}$ with charge $2e$).
 
-At a fundamental, microscopic level, electricity is largely due to the interactions between individual charges. A pair of charges, $q$ and $q'$, will act on each others with a force $F$, with units Newton (N) given by Coulomb's law:
+At a fundamental, microscopic level, electricity is largely due to the interactions between individual charges. A pair of charges, $q$ and $q'$, 
+\ehnote{Inkonsistent notasjon med det som kommer etter. 
+Ville valgt $q_1$, $q_2$ ogsaa her.}
+will act on each others with a force $F$, with units Newton (N) given by Coulomb's law:
 \begin{equation}
 F = k_e qq' \frac{1}{r^2}, 
 \label{Basics:eq:CoulombF}
@@ -28,7 +31,9 @@ We can express the direction of the force mathematically by use of a vector nota
 \end{equation}
 Here, $|{\bf r}-{\bf r'}|$ denotes the length of the vector ${\bf r}-{\bf r'}$, i.e., the distance between the two charges, cf., $r$ in eq. \ref{Basics:eq:CoulombF}. In the rightmost expression, we have tried to illustrate the similarity to \ref{Basics:eq:CoulombF} expressing the splitting the magnitude and the direction of the force into two factors. The scalar factor $(k_e qq')/|{\bf r}-{\bf r'}|^2$ determines the force magnitude, and is the same as in eq. \ref{Basics:eq:CoulombF}. The remaining factor, $({\bf r}-{\bf r'})/|{\bf r}-{\bf r'}|$ is the division of a vector by its own length, and defines a \textit{unit vector}, a vector with length 1 defining the direction between the positions ${\bf r}$ and ${\bf r'}$, and thus of the force. 
 
-If there are several ($N$) point charges present, the contribution from each of them sum up linearly. If we have a charge $q$ in a position ${\bf r}$, the force acting on it by the $N-1$ other charges $q_1, q_2, q_3 ... q_{N-1}$ in positions ${\bf r_1}, {\bf r_2}, {\bf r_3} ... {\bf r_{N-1}}$ will then be:
+If there are several ($N$) point charges present, the contribution from each of them sum up linearly. If we have a charge $q$ in a position ${\bf r}$, the force acting on it by the $N-1$ other charges $q_1, q_2, q_3 ... q_{N-1}$ in positions ${\bf r_1}, {\bf r_2}, {\bf r_3} ... {\bf r_{N-1}}$ 
+\ehnote{subfix skal ikke vaere boldfont.} 
+will then be:
 \begin{equation}
 {\bf F}({\bf r}) = \sum_{n=1}^{N-1} k_e q q_n \frac{{\bf r}-{\bf r_n}}{|{\bf r}-{\bf r_n}|^3}.
 \label{Basics:eq:CoulombFN}
@@ -100,7 +105,10 @@ U_E = q\phi.
 
 \section{\orange{GH: Electric current}}
 \label{sec:Basics:Current} \index{Electric current}
-As we have emphasized several times, we do not want to study the brain by keeping track of individual charges. We are rather interested in the net movement of charge at a coarse-grained (space averaged) scale. In an electrical copper cable, the movement of charge is normally described in terms of a electrical current $I$, which represents the total current through the cable as a whole, and has units Ampere (A = C/s). For currents in a three dimensional volume, such as brain tissue, it is more convenient to work with current densities, ${\bf i}$  which is defined as the current per unit cross section area, and has units A/(m$^2$).
+As we have emphasized several times, we do not want to study the brain by keeping track of individual charges. We are rather interested in the net movement of charge at a coarse-grained (space averaged) scale. In an electrical copper cable, the movement of charge is normally described in terms of an electrical current $I$, which represents the total current through the cable as a whole, and has units Ampere (A = C/s). For currents in a three dimensional volume, such as brain tissue, it is more convenient to work with current densities, 
+${\bf i}$  
+\ehnote{Er ikke $\mathbf{J}$ et mer typisk symbolvalg (Hamalainen '93 f.eks)?}
+which is defined as the current per unit cross section area, and has units A/(m$^2$).
 
 Before defining the current density further, we need to say some words about the medium that it runs through. A bit simplistically, we may think of the brain as consisting of the intracellular saline solution, the extracellular saline solution, and the neuronal and glial membranes separating the two. Neural and glial membranes are largely dielectric (insulating) \index{Dielectricum} in their nature. In a dielectric medium, charges are bound to stay in confined regions of space, and an electric field only will slightly shift their average equilibrium positions, causing a polarization of the material. It is such a polarization that gives rise to the neuronal and glial membrane potentials. 
 
@@ -149,7 +157,7 @@ were $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densit
 \nabla \times {\bf H} & = & \mu\bf{i^{free}} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{Basics:eq:Max4}
 \end{eqnarray}
 
-
+\ehnote{Kanskje du boer ta en ekstra titt paa likning 6 spesielt i Hamalainen '93 igjen?}
 Eq. \ref{Basics:eq:Max1} is Gauss's law (for electricity). The free charge density, $\rho$, can generally be non-zero, although we argued earlier that brain tissue for practical purposes can be assumed to be electroneutral at the coarse-grained scale. 
 
 Eq. \ref{Basics:eq:Max2} is Gauss's law for magnetism, and is the magnetic equivalent to eq. \ref{Basics:eq:Max1}. Whereas eq. \ref{Basics:eq:Max1} allows a spatial gradient of the electric field due to a local charge density $\rho$, eq. \ref{Basics:eq:Max1} disallows the corresponding gradient in the magnetic induction field. That is because magnetic monopoles do not exist. 
