@@ -22,7 +22,10 @@ Adapted from \citeasnoun**{Henze2000}.
 
 While the amplitude of intracellular the action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. 
 Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (Fig.~\ref{Spikes:fig:Henze}).
-When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. \gen{Har vi et godt tall med medhoerende referanse her?} For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
+When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. 
+\gen{Har vi et godt tall med medhoerende referanse her?} 
+\ehnote{Tja. Ambient noise er jo veldig avhengig av forskjellige faktorer, elektrode-type og impedans, in vivo vs. in vitro, vaaken vs. bedoevet tilstand osv, valg av filter, osv.}
+For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
 Spikes shapes are also used to distinguish spikes from different neuron types. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes). But a more detailed separation into subgroups is also possible~\cite**{Buccino2018}.
 
 Detailed modeling of spikes are important for several reasons: for example, 
@@ -107,7 +110,9 @@ One striking features is the rapid decay of spike amplitude with distance from t
 \begin{center}
 \includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_hay_eap_simpler}
 \end{center}
-\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model}. 
+\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model
+\ehnote{Figure adapted from Fig4. i Hagen2015 kanskje? Aksonet peker i "feil" retning ogsaa.}
+}. 
 %Active sodium
 %and potassium conductances in the soma compartment and computed from 
 %Equation~\ref{XX:equation:Ve-multi-compartment}.
