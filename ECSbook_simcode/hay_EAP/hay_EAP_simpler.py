@@ -16,14 +16,14 @@ def insert_synaptic_input(cell):
     synapse_parameters = dict(
                           idx = 0,
                           e = 0., # reversal potential
-                          weight = 0.1, # 0.001, # synapse weight
+                          weight = 0.07, # synapse weight
                           record_current = True, # record synapse current
                           syntype = 'Exp2Syn',
                           tau1 = 0.1, #Time constant, rise
                           tau2 = 1.0, #Time constant, decay
                           )
     synapse = LFPy.Synapse(cell, **synapse_parameters)
-    synapse.set_spike_times(np.array([2.]))
+    synapse.set_spike_times(np.array([1.]))
     return synapse, cell
 
 

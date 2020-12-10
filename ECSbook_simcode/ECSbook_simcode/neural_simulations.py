@@ -327,6 +327,25 @@ def return_freq_and_psd(tvec, sig):
     power = np.abs(Y)**2/Y.shape[1]
     return freqs, power
 
+def return_freq_and_amplitude(tvec, sig):
+    """ Returns the power and freqency of the input signal"""
+    import scipy.fftpack as ff
+    sig = np.array(sig)
+    if len(sig.shape) == 1:
+        sig = np.array([sig])
+    elif len(sig.shape) == 2:
+        pass
+    else:
+        raise RuntimeError("Not compatible with given array shape!")
+    timestep = (tvec[1] - tvec[0])/1000. if type(tvec) in [list, np.ndarray] else tvec
+    sample_freq = ff.fftfreq(sig.shape[1], d=timestep)
+    pidxs = np.where(sample_freq >= 0)
+    freqs = sample_freq[pidxs]
+
+    Y = ff.fft(sig, axis=1)[:, pidxs[0]]
+
+    amplitude = np.abs(Y)
+    return freqs, amplitude
 
 def make_WN_input(cell, max_freq):
     """ White Noise input ala Linden 2010 is made """
