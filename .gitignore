@@ -11,4 +11,5 @@
 *.gz
 *.toc
 *.sav
+*.glo
 .DS_Store
