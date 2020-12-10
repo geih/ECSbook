@@ -99,6 +99,8 @@
 \newcommand{\hlR}[2][red]{ {\sethlcolor{#1} \hl{#2}} }
 \newcommand{\hlp}[2][Purple]{ {\sethlcolor{#1} \hl{#2}} }
 \newcommand{\hlt}[2][Tealblue]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand{\hlP}[2][Periwinkle]{ {\sethlcolor{#1} \hl{#2}} }
+
 
 %\newcommand{\ghnote}[1]{{\color{red}#1}}
 
@@ -124,6 +126,11 @@
 \newcommand{\snnote}[1]{\color{white}{\hlp{SN: #1 }}\color{black}}
 \newcommand{\sntxt}[1]{{\color{Purple}#1}}
 \newcommand{\slntxt}[1]{{\color{RoyalPurple}#1}}
+
+
+\newcommand{\ehnote}[1]{\color{white}{\hlP{EH: #1 }}\color{black}}
+\newcommand{\ehtxt}[1]{{\color{Periwinkle}#1}}
+
 
 
 
@@ -243,6 +250,14 @@ your eyes only
 \chapter*{Preface}
 \begin{itemize}
 \item Structure plan on: https://www.overleaf.com/2551421161hjxkhwwvjrqk
+\item Convention: Use $\bf i$ for current density. As Espen noted, it is common to use $\bf J$ for this. However, $\bf J$ is commonly used for fluxes of all sorts. Since we cover electrodiffusion, we need symbols for particle fluxes and flux densities, and I thought it was best to use the $j$'s for that. I also prefer the convention of using the same letter (capitalized or not) for currents and current densities to keep them together:
+	\begin{itemize}
+	\item {$\bf  i$}: Current density (A/m$^2$)
+	\item {$\bf I$}: Current (A)
+	\item {$\bf  j_k$}: Flux density of ion $k$ (mol/m$^2$s)
+	\item {$\bf J_k$}: Flux of ion $k$ (mol/s)
+	\end{itemize}
+\ehnote{jeg vil foreslaa en komplett tabell et sted for symboler brukt gjennom hele denne boken. Ogsaa boer vi vaere obs paa forskjellen mellom skalarfelt og vektorfelt, $J(\mathbf{r})$ vs. $\mathbf{J}(\mathbf{r})$.}
 \item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template.
 \item Reference style: 
 	\begin{itemize} 
@@ -263,7 +278,6 @@ your eyes only
 	\item Orange for transmembrane currents: Incscape colorcode: ff7f2aff
 	\item Yellow for intracellular currents: Incscape colorcode: ffcc00ff
 	\end{itemize}
-
 \item When to include Units and not?
 \item How to make this a "computational essay"?
 \item Real booky-books tend to have an Index at the end. Add \verb|\index| around words to add them to Index
@@ -321,6 +335,7 @@ your eyes only
 \appendix
 \chapter{Derivation of four-sphere model}
 \tvnnote{Paste from LFPy 2.0 paper?}
+\ehnote{Solveig sin artikkel vel? Vi viste ikke denne utledningen i LFPy2.0-paperet.}
 %\tvnnote{Solveigs utledning av nÃ¥r strÃžmdipol-approksimasjonen er gyldig?}
 \include{AppB-multipole}
 %\section{Synapses \Comment{- Gaute}}

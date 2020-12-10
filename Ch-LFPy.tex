@@ -1,6 +1,6 @@
-\chapter{Schemes for computing extracellular potentials from neural activity}
+\chapter{\ehtxt{Numerical} schemes for computing extracellular potentials}
 \label{sec:LFPy}
-\ghnote{Torbjorn will write most this.}
+\ghnote{Torbjorn/Espen will write most this.}
 \ghnote{La inn forslag til intro her:}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -18,13 +18,14 @@ In most scenarios, ephaptic effects from extracellular potentials on neurodynami
 
 When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC. As we showed in Chapter \ref{sec:VC}, VC theory gave us an analytical expression for $\phi$ as a direct function of the neural current sources (Step 2), meaning that it is the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. Below, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}). We end the chapter with a brief introduction of an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).
 
-
+\ehnote{For meg gir det mer mening og organisere dette i reduksjonistisk rekkefoelge: (1) self-consistent; (2) MC+VC; (3) point-neuron spiking + MC + VC; (4) firing-rate + MC + VC. 
+Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4 endrer i prinsippet ingenting med MV+VC formalismen - man disassosierer bare simulering av nettverksaktivitet (korrelasjoner) fra (MC+VC)-formalismen.}
 
 
 
 %%%%%%
 
-\section{\red{TVN: Neurodynamics based on multicompartmental neuron models}}
+\section{\red{TVN/EH: Neurodynamics based on multicompartmental neuron models}}
 \label{sec:Schemes:LFPy}
 \index{Multicompartment models}
 
@@ -34,7 +35,7 @@ Same trick used earlier \cite**{Holt1999}.
 Same kind of thinking with LFPsim: \cite**{parasuram2016}
 
 
-\section{\red{TVN: Neurodynamics from point-neuron models}}
+\section{\red{TVN/EH: Neurodynamics from point-neuron models}}
 \label{sec:Schemes:HybridLFPy}
 \index{Point neuron model}
 
