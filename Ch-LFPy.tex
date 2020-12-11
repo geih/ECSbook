@@ -60,7 +60,7 @@ a more feasible approach is utilization of one of several different software too
 Such software greatly simplify the process of specifying the phenomenological or biophysically detailed model and choosing the appropriate numerical schemes for solving the resulting set of PDEs. 
 Such tools will also by default usually account for one of the main assumptions of standard cable theory, that is, 
 the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect 
-transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \ehnote{crossref} for details).
+transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \ehnote{crossref ch. 3} for details).
 
 
 The NEURON simulation environment \cite{Hines1997} (\href{https://neuron.yale.edu}{https://neuron.yale.edu}) presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, 
@@ -73,39 +73,93 @@ Another effort receiving funding from the EU Human Brain Project,
 named Arbor \ehnote{add citation, URL}, 
 aims to develop MC neuron simulation software from the ground up in order to fully exploit modern high-performance libraries and next generation hardware in the form of graphical processing units (GPUs) and massively parallel HPC facilities. 
 
+
+\subsubsection{Predicting axial and transmembrane currents}
+\label{chap:LFPy_Ia_Im}
+
 Here we will refrain from going into details on the inner workings of the above software tools, 
 but reiterate that both axial currents and transmembrane currents can be estimated if the set of PDEs can be solved numerically for the membrane voltage of the MC neuron model(s). 
+The membrane voltages of MC neuron models are typically assumed to be `measured' at the center of each compartment. 
 The axial and transmembrane currents of a non-branching piece of cable is given in continuous form by 
 %
 \begin{eqnarray}
-I_\mathrm{i}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V(x, t)}{\partial x} \text{~and} \\
-i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{i} (x, t)}{\partial x} = \frac{1}{r_\mathrm{i}} \frac{\partial^2 V(x,t)}{\partial x^2}\text{,}
+I_\mathrm{i}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V_\mathrm{m}(x, t)}{\partial x} \text{~and} \\
+I_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{i} (x, t)}{\partial x} = \frac{1}{r_\mathrm{i}} \frac{\partial^2 V_\mathrm{m}(x,t)}{\partial x^2}~,
 \label{eq:LFPy_ia_im_continuous}
 \end{eqnarray}
+\ehnote{note to self: upper or lower case $i$?}
 %
-where the intracellular resistance per unit length $r_i=4R_\mathrm{a}/\pi d^2$ in unit $\Omega / m$. 
-Here, $R_\mathrm{a}$  and $d$ is the axial resistivity and diameter of the compartment, respectively.  
-For spatially discretized cable models these currents can be estimated on a per-compartment basis by the central difference approximation as: 
+where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}. 
+Here, $R_\mathrm{a}$  and $d$ is the axial resistivity and diameter of the dendritic cable model, respectively \ehnote{crossref chap. 3}.  
+For spatially discretized cable models the axial currents can be estimated on a per-compartment basis with midpoint location $x_j$ by the central difference approximation as: 
 %
 \begin{eqnarray}
-I_\mathrm{i}(x, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V(x+\frac{h}{2}, t) - V(x-\frac{h}{2}, t)}{h} \nonumber \\
-		  &\overset{L=h}{=}& \frac{\pi d^2}{4 R_\mathrm{a}} \frac{V(x - \frac{h}{2}, t) - V(x + \frac{h}{2}, t)}{h}
-\label{eq:LFPy_ia_discrete
+I_\mathrm{i}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j+\frac{h}{2}, t) - V_\mathrm{m}(x_j-\frac{h}{2}, t)}{h} \nonumber \\
+		  &\overset{L_j=h}{=}& \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j}
+\label{eq:LFPy_ia_discrete}
 \end{eqnarray}
 %
 and 
 %
 \begin{eqnarray}
-I_\mathrm{m}(x, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V(x + \frac{h}{2}, t) - V(x, t)+ V(x - \frac{h}{2}, t)}{h^2 / 4} \nonumber \\
-		&\overset{L=h}{=}& \frac{\pi d^2}{R_\mathrm{a}} \frac{V(x + \frac{L}{2}, t) - V(x, t) + V(x - \frac{L}{2}, t)}{L^2}.
+I_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j + \frac{h}{2}, t) - V_\mathrm{m}(x_j, t)+ V_\mathrm{m}(x_j - \frac{h}{2}, t)}{h^2 / 4} \nonumber \\
+		&\overset{L_j=h}{=}& \frac{\pi d_j^2}{R_\mathrm{a}} \frac{V_\mathrm{m}(x_j + \frac{L_j}{2}, t) - V_\mathrm{m}(x_j, t) + V_\mathrm{m}(x_j - \frac{L_j}{2}, t)}{L_j^2}~.
 \label{eq:LFPy_im_discrete}
 \end{eqnarray} 
 %
-Here, the discretization constant $h$ is set equal to the compartment length $L$ 
-and the spatial location $x$ corresponds to its midpoint. 
-The diameter is typically assumed to be of fixed. 
-\ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D.}
-We next outline how the 
+Here, the discretization constant $h$ is set equal to the compartment length $L_j$. 
+Its diameter is typically assumed to be of fixed, 
+and the compartment is a straight along its length axis. 
+\ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D corresponding to electric compartments made up by series of conical frusta.}
+ 
+We next outline how the membrane potential can be estimated at the endpoints of each compartment $\in \{x_j-L_j/2, x_j+L_j/2\}$), 
+which may connected to none, one or several other end points of other compartments, 
+when the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment. 
+For terminating compartments (i.e., one or both ends has no connecting compartments) we may define
+%
+\begin{eqnarray}
+V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{or} \nonumber \\
+V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
+\end{eqnarray} 
+%
+depending on which end(s) has no electric connections.
+
+For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of a parent compartment (\Fref{fig:LFPy_cable_models}) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
+
+\begin{equation}
+V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^{N-1} 1 / R_{j+n}}~, 
+\end{equation}
+\label{eq:LFPy_V_connect_point}
+% 
+where the connecting node to mid point resistances $R_{j+n} = (4 R_\mathrm{a}/\pi d_{j+n}^2) / (L_{j+n} / 2) = 8R_\mathrm{a} / \pi d_{j+n}^2 L_{j+n}$. 
+\ehnote{Check! Should these resistive values rather be impedances?}
+
+For child compartments connecting to the mid point of the parent compartment, 
+the corresponding potential at the branch point seen by any number of child segments is per definition the same as the mid point potential of the parent, that is, 
+\begin{equation}
+V_\mathrm{m}(x_{j+n}-L_{j+1} / 2, t) \equiv V_\mathrm{m}(x_j, t) ~.
+\end{equation} 
+
+Up to this point, we have provided the basic `machinery' needed in order to compute the axial- and transmembrane currents in an MC neuron model, 
+independently of specific or non-specific ion-channel currents, synaptic currents, capacitive currents etc. which may be present in the membrane of biophysically detailed MC neuron models. 
+This machinery may appear as a bit of a hurdle to implement for the purpose of computing extracellular potentials or magnetic signals, 
+but thankfully MC neuron modeling software such as NEURON provides native support for computing the transmembrane current (\si{\ampere}) and/or transmembrane current density (\si{\ampere\metre^2}). 
+The current state is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite{Hagen2018}). 
+For now, we will only emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone. 
+
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width=0.8\textwidth]{Figures/LFPy/electric_circuits.png}
+\end{center}
+\caption{\textbf{Equivalent circuits for computing axial and transmembrane currents}. 
+({\bf A}) One-compartment cable model with sealed ends. 
+({\bf B}) Continuous piece of MC cable model.  
+({\bf C}) MC cable model with branch point.}
+\label{fig:LFPy_cable_models}
+\end{figure}
+
+
+
 
 
 
