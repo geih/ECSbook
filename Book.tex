@@ -269,7 +269,10 @@ your eyes only
 	\item {$\bf J_k$}: Flux of ion $k$ (mol/s)
 	\end{itemize}
 \ehnote{jeg vil foreslaa en komplett tabell et sted for symboler brukt gjennom hele denne boken. Ogsaa boer vi vaere obs paa forskjellen mellom skalarfelt og vektorfelt, $J(\mathbf{r})$ vs. $\mathbf{J}(\mathbf{r})$.}
-\item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template.
+\item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template. 
+	\ehnote{Jeg la til en import av fancyref over. Den definerer kommandoen {\textbackslash}Fref\{\} og skal kunne skjoenne forskjellen paa chapter og section utfra innhold i label (chap:*, sec:*, eq:*, etc.), og faa ting internt konsistent. Test:} 
+	\ehtxt{{\textbackslash}label\{sec:Intro\}: \Fref{sec:Intro}; {\textbackslash}label\{chap:Intro\}: \Fref{chap:Intro}}
+	\ehnote{En del labels er ikke riktig formattert naar det er sagt: {\textbackslash}label\{Basics:eq:UE\} vil ikke fungere for eksempel og boer endres til {\textbackslash}label\{eq:Basics:UE\} e.l.}
 \item Reference style: 
 	\begin{itemize} 
 	\item Harvard: Cambridge gave three choices: Harvard (author?date), Vancouver (numbered),
