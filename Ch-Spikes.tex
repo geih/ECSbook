@@ -25,6 +25,7 @@ Also, the shape of the spike is very different from the shape of intracellularly
 When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. 
 \gen{Har vi et godt tall med medhoerende referanse her?} 
 \ehnote{Tja. Ambient noise er jo veldig avhengig av forskjellige faktorer, elektrode-type og impedans, in vivo vs. in vitro, vaaken vs. bedoevet tilstand osv, valg av filter, osv.}
+\tvnnote{Alessio sa de typisk ikke tar med spikes med amplitude under 30 uV, og det var dette vi brukte i Buccino et al., 2018, J Neurophysiol, men han hadde ikke noe god kilde ellers}
 For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
 Spikes shapes are also used to distinguish spikes from different neuron types. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes). But a more detailed separation into subgroups is also possible~\cite**{Buccino2018}.
 
@@ -223,7 +224,7 @@ For further details see \citeasnoun[Figure 6]{Pettersen2008}.
 \gen{Figure + caption to be updated.} 
 Adapted from \citeasnoun**{Pettersen2008}. 
 \gen{Her kunne man jo kjoert ut nye resultater for Hay-modellen, men det er vel like greit aa bare bruke figurene fra 
-Pettersen2008?}
+Pettersen2008?} \tvnnote{Gaar jo forsaavidt fort aa lage paa nytt, og kan jo vaere fint at det blir en del av koden leserne har tilgjengelig?}
 }
 \label{Spikes:fig:ball-and-stick-results}
 %\figpermOurs
@@ -682,7 +683,7 @@ is provided by Fig.~\ref{Spikes:fig:electrode_size}) showing spikes recorded wit
 For one, the spike amplitude is seen to be reduced with increasing contact sizes (panel B). The shape is also affected as the 
 averaging of the potentials across the contact surface will reduce high-frequency components of the spike (panel C).
 \gen{Et eller annet sted bor vi kanskje nevne at dette er effekt nummer to som gjoer spiken mindre skarp (i tillegg til effekten
-av økt avstand fra soma)}
+av oekt avstand fra soma)}
 
 %%%
 \begin{figure}[!ht]
