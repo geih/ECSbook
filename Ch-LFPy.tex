@@ -21,7 +21,9 @@ There exist more complete and consistent schemes that account for both the ephap
 
 In most scenarios, ephaptic effects from extracellular potentials on neurodynamics are small, and ion concentrations tend to stay close to baseline. When this is true, the simplifying approximations applied in the two-step scheme do not critically affect the accuracy of its predictions. As the MC+VC scheme is far more computationally efficient than any of the more complete schemes, it remains the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the MC+VC-framework.
 
-When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC. As we showed in Chapter \ref{sec:VC}, 
+When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC. 
+\ehnote{Computational demands are linearly dependent on the total number of compartments, so this a "simple" problem to solve, just scale up your computer capability accordingly.}
+As we showed in Chapter \ref{sec:VC}, 
 VC theory gave us \ehtxt{linear} analytical expression\ehtxt{s} for $\phi$ as a direct function of the neural current sources (Step 2), meaning that it is \ehtxt{usually} the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. Below, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}). We end the chapter with a brief introduction of an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).
 
 \ehnote{For meg gir det mer mening og organisere dette i reduksjonistisk rekkefoelge: (1) self-consistent; (2) MC+VC; (3) point-neuron spiking + MC + VC; (4) firing-rate + MC + VC. 
@@ -64,14 +66,46 @@ transmembrane currents may have on the extracellular potential immediately outsi
 The NEURON simulation environment \cite{Hines1997} (\href{https://neuron.yale.edu}{https://neuron.yale.edu}) presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, 
 linux- and unix-based operating systems including MacOS, 
 and can be used with a GUI or in a programmatic fashion on laptops, desktop computers and in parallel on large-scale high-performance computing (HPC) facilities. 
-NEURON is also utilized as a simulator backend for other software such as PyNN, NetPyne, BMTK, LFPy \ehnote{add citations} etc.
+NEURON is also utilized as a simulator backend for other higher-level software such as PyNN, NetPyne, BMTK, LFPy \ehnote{add citations} etc.
 Alternatives to NEURON with partially overlapping feature sets have been developed in the past in form of MOOSE \ehnote{add citation, URL} and GENESIS \ehnote{add citation, URL}, 
 while software tailored for point-like neuron models such as Brian \ehnote{add citation, URL} recently received support for biophysically detailed MC neuron models.
 Another effort receiving funding from the EU Human Brain Project, 
 named Arbor \ehnote{add citation, URL}, 
 aims to develop MC neuron simulation software from the ground up in order to fully exploit modern high-performance libraries and next generation hardware in the form of graphical processing units (GPUs) and massively parallel HPC facilities. 
 
-Here we will refrain from going into details on the inner workings of the above software tools
+Here we will refrain from going into details on the inner workings of the above software tools, 
+but reiterate that both axial currents and transmembrane currents can be estimated if the set of PDEs can be solved numerically for the membrane voltage of the MC neuron model(s). 
+The axial and transmembrane currents of a non-branching piece of cable is given in continuous form by 
+%
+\begin{eqnarray}
+I_\mathrm{i}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V(x, t)}{\partial x} \text{~and} \\
+i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{i} (x, t)}{\partial x} = \frac{1}{r_\mathrm{i}} \frac{\partial^2 V(x,t)}{\partial x^2}\text{,}
+\label{eq:LFPy_ia_im_continuous}
+\end{eqnarray}
+%
+where the intracellular resistance per unit length $r_i=4R_\mathrm{a}/\pi d^2$ in unit $\Omega / m$. 
+Here, $R_\mathrm{a}$  and $d$ is the axial resistivity and diameter of the compartment, respectively.  
+For spatially discretized cable models these currents can be estimated on a per-compartment basis by the central difference approximation as: 
+%
+\begin{eqnarray}
+I_\mathrm{i}(x, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V(x+\frac{h}{2}, t) - V(x-\frac{h}{2}, t)}{h} \nonumber \\
+		  &\overset{L=h}{=}& \frac{\pi d^2}{4 R_\mathrm{a}} \frac{V(x - \frac{h}{2}, t) - V(x + \frac{h}{2}, t)}{h}
+\label{eq:LFPy_ia_discrete
+\end{eqnarray}
+%
+and 
+%
+\begin{eqnarray}
+I_\mathrm{m}(x, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V(x + \frac{h}{2}, t) - V(x, t)+ V(x - \frac{h}{2}, t)}{h^2 / 4} \nonumber \\
+		&\overset{L=h}{=}& \frac{\pi d^2}{R_\mathrm{a}} \frac{V(x + \frac{L}{2}, t) - V(x, t) + V(x - \frac{L}{2}, t)}{L^2}.
+\label{eq:LFPy_im_discrete}
+\end{eqnarray} 
+%
+Here, the discretization constant $h$ is set equal to the compartment length $L$ 
+and the spatial location $x$ corresponds to its midpoint. 
+The diameter is typically assumed to be of fixed. 
+\ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D.}
+We next outline how the 
 
 
 
