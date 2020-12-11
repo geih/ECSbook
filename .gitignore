@@ -1,3 +1,15 @@
 *.aux
 *.log
 *.out
+*.bbl
+*.blg
+*.fls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.gz
+*.toc
+*.sav
+*.glo
+.DS_Store
