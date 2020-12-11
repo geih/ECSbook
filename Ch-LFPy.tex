@@ -56,6 +56,10 @@ The numerical solution of geometrically detailed cable models entails a discreti
 While one could utilize general-purpose numerical solvers in order to compute resulting voltage fluctuations, transmembrane currents or axial currents, 
 a more feasible approach is utilization of one of several different software tools tailored for this purpose that have been developed in the past.
 Such software greatly simplify the process of specifying the phenomenological or biophysically detailed model and choosing the appropriate numerical schemes for solving the resulting set of PDEs. 
+Such tools will also by default usually account for one of the main assumptions of standard cable theory, that is, 
+the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect 
+transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \ehnote{crossref} for details).
+
 
 The NEURON simulation environment \cite{Hines1997} (\href{https://neuron.yale.edu}{https://neuron.yale.edu}) presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, 
 linux- and unix-based operating systems including MacOS, 
