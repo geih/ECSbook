@@ -83,42 +83,40 @@ The membrane voltages of MC neuron models are typically assumed to be `measured'
 The axial and transmembrane currents of a non-branching piece of cable is given in continuous form by 
 %
 \begin{eqnarray}
-I_\mathrm{i}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V_\mathrm{m}(x, t)}{\partial x} \text{~and} \\
-I_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{i} (x, t)}{\partial x} = \frac{1}{r_\mathrm{i}} \frac{\partial^2 V_\mathrm{m}(x,t)}{\partial x^2}~,
+I_\mathrm{a}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V_\mathrm{m}(x, t)}{\partial x} \text{~and} \\
+i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{a} (x, t)}{\partial x} = \frac{1}{r_\mathrm{i}} \frac{\partial^2 V_\mathrm{m}(x,t)}{\partial x^2}~,
 \label{eq:LFPy_ia_im_continuous}
 \end{eqnarray}
 \ehnote{note to self: upper or lower case $i$?}
 %
 where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}. 
 Here, $R_\mathrm{a}$  and $d$ is the axial resistivity and diameter of the dendritic cable model, respectively \ehnote{crossref chap. 3}.  
+The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere}, 
+while the transmembrane current is per unit length (\si{\ampere/\metre}).
+
 For spatially discretized cable models the axial currents can be estimated on a per-compartment basis with midpoint location $x_j$ by the central difference approximation as: 
 %
 \begin{eqnarray}
-I_\mathrm{i}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j+\frac{h}{2}, t) - V_\mathrm{m}(x_j-\frac{h}{2}, t)}{h} \nonumber \\
-		  &\overset{L_j=h}{=}& \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j}
+I_\mathrm{a}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j+\frac{h}{2}, t) - V_\mathrm{m}(x_j-\frac{h}{2}, t)}{h} \nonumber \\
+		  &\overset{L_j=h}{=}& \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j} ~.
 \label{eq:LFPy_ia_discrete}
 \end{eqnarray}
-%
-and 
-%
-\begin{eqnarray}
-I_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j + \frac{h}{2}, t) - V_\mathrm{m}(x_j, t)+ V_\mathrm{m}(x_j - \frac{h}{2}, t)}{h^2 / 4} \nonumber \\
-		&\overset{L_j=h}{=}& \frac{\pi d_j^2}{R_\mathrm{a}} \frac{V_\mathrm{m}(x_j + \frac{L_j}{2}, t) - V_\mathrm{m}(x_j, t) + V_\mathrm{m}(x_j - \frac{L_j}{2}, t)}{L_j^2}~.
-\label{eq:LFPy_im_discrete}
-\end{eqnarray} 
 %
 Here, the discretization constant $h$ is set equal to the compartment length $L_j$. 
 Its diameter is typically assumed to be of fixed, 
 and the compartment is a straight along its length axis. 
 \ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D corresponding to electric compartments made up by series of conical frusta.}
+Note that it is possible to swap the central difference approximation 
+by the forward and  backward difference approximation estimating axial currents for each half-compartment respectively as in \cite{Hagen2018}, 
+but we will not go into further detail here. 
  
-We next outline how the membrane potential can be estimated at the endpoints of each compartment $\in \{x_j-L_j/2, x_j+L_j/2\}$), 
+We next outline how the membrane potential can be estimated at the end points of each compartment $\in \{x_j-L_j/2, x_j+L_j/2\}$, 
 which may connected to none, one or several other end points of other compartments, 
 when the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment. 
 For terminating compartments (i.e., one or both ends has no connecting compartments) we may define
 %
 \begin{eqnarray}
-V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{or} \nonumber \\
+V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{and/or} \nonumber \\
 V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
 \end{eqnarray} 
 %
@@ -131,8 +129,13 @@ V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R
 \end{equation}
 \label{eq:LFPy_V_connect_point}
 % 
-where the connecting node to mid point resistances $R_{j+n} = (4 R_\mathrm{a}/\pi d_{j+n}^2) / (L_{j+n} / 2) = 8R_\mathrm{a} / \pi d_{j+n}^2 L_{j+n}$. 
-\ehnote{Check! Should these resistive values rather be impedances?}
+where the connecting node to mid point resistances
+%
+\begin{eqnarray}
+R_{j+n} &=& \frac{4 R_\mathrm{a}/\pi d_{j+n}^2}{L_{j+n} / 2} \nonumber \\
+		&=& \frac{8R_\mathrm{a}}{\pi d_{j+n}^2 L_{j+n}} ~.
+\end{eqnarray} 
+\ehnote{Check!}
 
 For child compartments connecting to the mid point of the parent compartment, 
 the corresponding potential at the branch point seen by any number of child segments is per definition the same as the mid point potential of the parent, that is, 
@@ -140,12 +143,25 @@ the corresponding potential at the branch point seen by any number of child segm
 V_\mathrm{m}(x_{j+n}-L_{j+1} / 2, t) \equiv V_\mathrm{m}(x_j, t) ~.
 \end{equation} 
 
-Up to this point, we have provided the basic `machinery' needed in order to compute the axial- and transmembrane currents in an MC neuron model, 
+Up to this point, we have provided the basic `machinery' needed in order to compute the discrete axial currents in a MC neuron model, 
 independently of specific or non-specific ion-channel currents, synaptic currents, capacitive currents etc. which may be present in the membrane of biophysically detailed MC neuron models. 
+%
+Also the transmembrane currents may be estimated on a per-compartment basis in a similar manner using the same central difference approximation to the 2nd derivative as 
+%
+\begin{eqnarray}
+i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j + \frac{h}{2}, t) - V_\mathrm{m}(x_j, t)+ V_\mathrm{m}(x_j - \frac{h}{2}, t)}{h^2 / 4} \nonumber \\
+		&\overset{L_j=h}{=}& \frac{\pi d_j^2}{R_\mathrm{a}} \frac{V_\mathrm{m}(x_j + \frac{L_j}{2}, t) - V_\mathrm{m}(x_j, t) + V_\mathrm{m}(x_j - \frac{L_j}{2}, t)}{L_j^2} ~.
+\label{eq:LFPy_im_discrete}
+\end{eqnarray} 
+
+
 This machinery may appear as a bit of a hurdle to implement for the purpose of computing extracellular potentials or magnetic signals, 
-but thankfully MC neuron modeling software such as NEURON provides native support for computing the transmembrane current (\si{\ampere}) and/or transmembrane current density (\si{\ampere\metre^2}). 
+but thankfully MC neuron modeling software such as NEURON provides native support for computing the transmembrane current (\si{\ampere}) and/or transmembrane current density per surface membrane area (\si{\ampere/\metre^2}) for each compartment. 
+Dependent on the implementation in the neural simulation software, 
+a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc \ehnote{crossref chap. 3}. 
+% 
 The current state is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite{Hagen2018}). 
-For now, we will only emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone. 
+For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -159,7 +175,75 @@ For now, we will only emphasize that typical extracellular measures of extracell
 \end{figure}
 
 
+Up to this point, the attentive reader of this chapter may have noticed that the axial currents (and transmembrane currents for that matter) is \textit{linearly} dependent on the midpoint membrane voltages of the MC model. 
+Thus, the full set of operations involved in computing the full set of axial current magnitudes can be rewritten as a linear matrix operation on the form
+%
+\begin{eqnarray}
+\begin{pmatrix}
+I_\mathrm{a}(\mathbf{r}_1, t)\\
+I_\mathrm{a}(\mathbf{r}_2, t)\\
+\vdots \\
+I_\mathrm{a}(\mathbf{r}_N, t)
+\end{pmatrix}
+&=& \mathbf{A}^{-1} 
+\begin{pmatrix}
+V_\mathrm{m}(\mathbf{r}_1, t)\\
+V_\mathrm{m}(\mathbf{r}_2, t)\\
+\vdots \\
+V_\mathrm{m}(\mathbf{r}_N, t)\\
+\end{pmatrix} ~,
+\end{eqnarray}
+%
+where $\mathbf{r}_j$ denotes the midpoint location of compartment $j$ while the elements of the shape $(N, N)$ matrix $\mathbf{A}$ effectively corresponds to intracellular resistances and the specific connectivity between compartments
+(recall Ohm's law for the current $I$ across a resistor $R$ given a voltage difference $\Delta V$: $I=R^{-1} \Delta V$). 
 
+For a two-compartment model connecting the end point of the root (parent) compartment with the start point of the child compartment, 
+it can be shown that 
+\ehnote{need to do some pen\&paper exercises to show matrix elements $a_{11}, a_{12}$ etc.}
+\begin{eqnarray}
+a_{11} &=&  
+\end{eqnarray
+
+So far the axial currents is represented as a scalar field. 
+For some applications, such as computing the magnetic field $\mathbf{H}(\mathbf{r}, t)}$, 
+the axial currents can be represented as a vector field by multiplication with the unit vectors along the center axis of each compartment:
+%
+\begin{equation}
+\begin{pmatrix}
+\mathbf{I}_\mathrm{a}(\mathbf{r}_1, t)\\
+\mathbf{I}_\mathrm{a}(\mathbf{r}_2, t)\\
+\vdots \\
+\mathbf{I}_\mathrm{a}(\mathbf{r}_N, t)
+\end{pmatrix}
+=
+\begin{pmatrix}
+I_\mathrm{a}(\mathbf{r}_1, t)\\
+I_\mathrm{a}(\mathbf{r}_2, t)\\
+\vdots \\
+I_\mathrm{a}(\mathbf{r}_N, t)
+\end{pmatrix}
+\begin{pmatrix}
+(\mathbf{r}_{\mathrm{f}1} - \mathbf{r}_{\mathrm{i}1}) / || \mathbf{r}_{\mathrm{f}1} - \mathbf{r}_{\mathrm{i}1} || \\
+(\mathbf{r}_{\mathrm{f}2} - \mathbf{r}_{\mathrm{i}2}) / || \mathbf{r}_{\mathrm{f}2} - \mathbf{r}_{\mathrm{i}2} || \\
+\vdots \\
+(\mathbf{r}_{\mathrm{f}N} - \mathbf{r}_{\mathrm{i}N}) / || \mathbf{r}_{\mathrm{f}N} - \mathbf{r}_{\mathrm{i}N} ||
+\end{pmatrix} ~,
+\end{equation}
+%
+where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start and end point coordinates of compartment $j$. 
+$||\mathbf{r}||$ denotes the norm of $\mathbf{r}$. 
+
+
+%%%%%%%%%%%
+
+\subsubsection{Linear forward model imp}
+
+
+%
+%\begin{eqnarray}
+%I_\mathrm{a}(\mathbf{r}_1, t) &=& V_\mathrm{m}(\mathbf{r}_1, t)   V_\mathrm{m}(\mathbf{r}_2, t) \\
+%I_\mathrm{a}(\mathbf{r}_2, t) &=& \\
+%\end{eqnarray}
 
 
 
@@ -182,7 +266,7 @@ Would make things even faster. Population firing-rate models  \cite**{Hagen2016}
 \ehnote{nytt:}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{\blue{GH: Self-consistent scheme for intra- and extracellular potentials} }
 \label{sec:VC:EMI}
