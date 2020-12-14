@@ -238,7 +238,7 @@ We note that in eq. \ref{Neuron:eq:axialcurrents}, $V_n$ is the \emph{intracellu
 
 
 %%%%%%%%%%%%
-\subsection{\blue{Active multicomparmtent models}}
+\subsection{\blue{Active multicompartment models}}
 \label{sec:Neuron:Active_multicomp}
 
 To specify our MC neuron model further, we write out the total membrane current as:
@@ -396,20 +396,6 @@ V(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + C_2(x) e^{-t/\tau_2} + \l
 \label{Neuron:eq:cabletemporal}
 \end{equation}
 where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_m = R_m c_m$ is the \emph{membrane time constant} (eq. \ref{Neuron:eq:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). We will not here present these analytical results in any further detail, but note that the final decay phase, i.e., when $V$ at all locations have coincided, takes place at the slower time scale of the membrane time constant, $\tau_m$ which in the simulation in Fig. \ref{Neuron:fig:Semiinf}A  was 10~ms ($R_m=10\,\text{k}\Omega \text{cm}^2$, and $c_m=1\,\mu\text{F}/\text{cm}^2$). 
-
-
-%%%%%%%%%%
-
-\subsection{\ehtxt{Axial and transmembrane currents}}
-
-\ehnote{Siden denne boken bygger opp til ekstracellulaere maalinger av aktivitet, er det litt snaalt aa ikke legge til noe om analytiske relasjoner for aksiale og transmembrane stroemmer her fra Pettersen2014 for eksempel:}
-
-\begin{eqnarray}
-I_i(x,t) &=& - \frac{1}{r_i} \frac{\partial V(x,t)}{\partial x} \\
-i_m(x, t) &=& - \frac{\partial I_i (x, t)}{\partial x} = \frac{1}{r_i} \frac{\partial^2 V(x,t)}{\partial x^2}
-\end{eqnarray}
-
-
 
 
 

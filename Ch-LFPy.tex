@@ -1,52 +1,266 @@
-\chapter{Schemes for computing extracellular potentials from neural activity}
+\chapter{\ehtxt{Numerical} schemes for computing extracellular potentials}
 \label{sec:LFPy}
-\ghnote{Torbjorn will write most this.}
+\ghnote{Torbjorn/Espen will write most this.}
 \ghnote{La inn forslag til intro her:}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The standard way of computing extracellular potentials is to use a two-step multicompartment + volume conduction (MC+VC) scheme, which can be summarized as: 
+The \ehtxt{established \sout{standard}} way of computing extracellular potentials is to use a two-step multicompartment + volume conduction (MC+VC) scheme, 
+which can be summarized as: 
 
 \begin{itemize}
 \item {\bf Step 1:} Compute the electrical activity of neurons using a the multicompartment (MC) framework presented in Chapter \ref{sec:Neuron}, assuming that it is unaffected by whatever goes on in the extracellular space. 
 \item {\bf Step 2:} Compute the extracellular potential $\phi$ resulting from the neural transmembrane currents computed in step 1, using Volume Conductor (VC) theory (Chapters \ref{sec:VC}-\ref{sec:Sigma}). 
 \end{itemize}
 
-The MC+VC scheme is not self-consistent, since Step 1 computes the neurodynamics under the assumption that $\phi$ is zero (grounded extracellular space), and Step 2 uses this neurodynamics to compute a non-zero extracellular potential. There exist more complete and consistent schemes that account for both the ephaptic effects from $\phi$ on neurodynamics as well as for effects of ion concentration dynamics on neuronal activity of extracelluar potentials. In general, these more complete schemes require numerical simulations of both the neural and extracellular dynamics using finite element or finite difference methods, and are very computationally expensive.
+The MC+VC scheme is not self-consistent, since Step 1 computes the neurodynamics under the assumption that $\phi$ is \ehtxt{unaffected by transmembrane currents \sout{zero (grounded extracellular space)}}, 
+and Step 2 uses this neurodynamics to compute a non-zero extracellular potential. 
+\ehnote{I wonder if we should elaborate more on pt. 1: It is entirely possible to impose potentials different from zero and time varying with the current scheme and simultaneously estimate transmembrane currents. The main problem is that cable theory is 1D while real neurons are 3D (with the exception of structures such as axonal tracts).
+Self-ephaptic effects should be entirely possible to account for using standard methods (NEURON) for cable models with 1D geometry (at least that's what I think!).}
+There exist more complete and consistent schemes that account for both the ephaptic effects from $\phi$ on neurodynamics as well as for effects of ion concentration dynamics on neuronal activity of extracelluar potentials. In general, these more complete schemes require numerical simulations of both the neural and extracellular dynamics using finite element or finite difference methods, and are very computationally expensive.
 
 In most scenarios, ephaptic effects from extracellular potentials on neurodynamics are small, and ion concentrations tend to stay close to baseline. When this is true, the simplifying approximations applied in the two-step scheme do not critically affect the accuracy of its predictions. As the MC+VC scheme is far more computationally efficient than any of the more complete schemes, it remains the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the MC+VC-framework.
 
-When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC. As we showed in Chapter \ref{sec:VC}, VC theory gave us an analytical expression for $\phi$ as a direct function of the neural current sources (Step 2), meaning that it is the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. Below, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}). We end the chapter with a brief introduction of an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).
+When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC. 
+\ehnote{Computational demands are linearly dependent on the total number of compartments, so this a "simple" problem to solve, just scale up your computer capability accordingly.}
+As we showed in Chapter \ref{sec:VC}, 
+VC theory gave us \ehtxt{linear} analytical expression\ehtxt{s} for $\phi$ as a direct function of the neural current sources (Step 2), meaning that it is \ehtxt{usually} the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. Below, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}). We end the chapter with a brief introduction of an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).
 
-
+\ehnote{For meg gir det mer mening og organisere dette i reduksjonistisk rekkefoelge: (1) self-consistent; (2) MC+VC; (3) point-neuron spiking + MC + VC; (4) firing-rate + MC + VC. 
+Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4 endrer i prinsippet ingenting med MV+VC formalismen - man disassosierer bare simulering av nettverksaktivitet (korrelasjoner) fra (MC+VC)-formalismen.}
 
 
 
 %%%%%%
 
-\section{\red{TVN: Neurodynamics based on multicompartmental neuron models}}
+\section{\red{TVN/EH: Neurodynamics based on multicompartmental neuron models}}
 \label{sec:Schemes:LFPy}
 \index{Multicompartment models}
 
+\ehnote{gammalt:}
 The standard way - what LFPy was originally designed for \cite**{Hagen2018}.
 Same trick used earlier \cite**{Holt1999}.
-
 Same kind of thinking with LFPsim: \cite**{parasuram2016}
 
+\ehnote{nytt:}
 
-\section{\red{TVN: Neurodynamics from point-neuron models}}
+
+\ehnote{main points:}
+\begin{itemize}
+\item Numerical solution of the cable equation and state variables for channels, synapses etc. (in short)
+\item Estimating the axial and transmembrane currents for each compartment
+\item Applying a linear forward model to transmembrane/axial currents
+\end{itemize}
+
+Most models aiming to mimic the dynamics of a particular neuron or neural system except the simplest ball and stick like models are too complex to be solved analytically (cf. \Fref{sec:Neuron}). 
+Thus the set of partial differential equations (PDEs) and initial conditions representing voltage- and concentration-dependent ion channels, synapses, plasticity, neuronal geometry etc. of the full model will have to be solved numerically on computers. 
+The numerical solution of geometrically detailed cable models entails a discretization of the geometry into multiple compartments (hence MC) wherein the states of variables and their derivatives are estimated on a temporal grid which may be fixed or irregular.
+While one could utilize general-purpose numerical solvers in order to compute resulting voltage fluctuations, transmembrane currents or axial currents, 
+a more feasible approach is utilization of one of several different software tools tailored for this purpose that have been developed in the past.
+Such software greatly simplify the process of specifying the phenomenological or biophysically detailed model and choosing the appropriate numerical schemes for solving the resulting set of PDEs. 
+Such tools will also by default usually account for one of the main assumptions of standard cable theory, that is, 
+the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect 
+transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \ehnote{crossref ch. 3} for details).
+
+
+The NEURON simulation environment \cite{Hines1997} (\href{https://neuron.yale.edu}{https://neuron.yale.edu}) presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, 
+linux- and unix-based operating systems including MacOS, 
+and can be used with a GUI or in a programmatic fashion on laptops, desktop computers and in parallel on large-scale high-performance computing (HPC) facilities. 
+NEURON is also utilized as a simulator backend for other higher-level software such as PyNN, NetPyne, BMTK, LFPy \ehnote{add citations} etc.
+Alternatives to NEURON with partially overlapping feature sets have been developed in the past in form of MOOSE \ehnote{add citation, URL} and GENESIS \ehnote{add citation, URL}, 
+while software tailored for point-like neuron models such as Brian \ehnote{add citation, URL} recently received support for biophysically detailed MC neuron models.
+Another effort receiving funding from the EU Human Brain Project, 
+named Arbor \ehnote{add citation, URL}, 
+aims to develop MC neuron simulation software from the ground up in order to fully exploit modern high-performance libraries and next generation hardware in the form of graphical processing units (GPUs) and massively parallel HPC facilities. 
+
+
+\subsubsection{Predicting axial and transmembrane currents}
+\label{chap:LFPy_Ia_Im}
+
+Here we will refrain from going into details on the inner workings of the above software tools, 
+but reiterate that both axial currents and transmembrane currents can be estimated if the set of PDEs can be solved numerically for the membrane voltage of the MC neuron model(s). 
+The membrane voltages of MC neuron models are typically assumed to be `measured' at the center of each compartment. 
+The axial and transmembrane currents of a non-branching piece of cable is given in continuous form by 
+%
+\begin{eqnarray}
+I_\mathrm{a}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V_\mathrm{m}(x, t)}{\partial x} \text{~and} \\
+i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{a} (x, t)}{\partial x} = \frac{1}{r_\mathrm{i}} \frac{\partial^2 V_\mathrm{m}(x,t)}{\partial x^2}~,
+\label{eq:LFPy_ia_im_continuous}
+\end{eqnarray}
+\ehnote{note to self: upper or lower case $i$?}
+%
+where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}. 
+Here, $R_\mathrm{a}$  and $d$ is the axial resistivity and diameter of the dendritic cable model, respectively \ehnote{crossref chap. 3}.  
+The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere}, 
+while the transmembrane current is per unit length (\si{\ampere/\metre}).
+
+For spatially discretized cable models the axial currents can be estimated on a per-compartment basis with midpoint location $x_j$ by the central difference approximation as: 
+%
+\begin{eqnarray}
+I_\mathrm{a}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j+\frac{h}{2}, t) - V_\mathrm{m}(x_j-\frac{h}{2}, t)}{h} \nonumber \\
+		  &\overset{L_j=h}{=}& \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j} ~.
+\label{eq:LFPy_ia_discrete}
+\end{eqnarray}
+%
+Here, the discretization constant $h$ is set equal to the compartment length $L_j$. 
+Its diameter is typically assumed to be of fixed, 
+and the compartment is a straight along its length axis. 
+\ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D corresponding to electric compartments made up by series of conical frusta.}
+Note that it is possible to swap the central difference approximation 
+by the forward and  backward difference approximation estimating axial currents for each half-compartment respectively as in \cite{Hagen2018}, 
+but we will not go into further detail here. 
+ 
+We next outline how the membrane potential can be estimated at the end points of each compartment $\in \{x_j-L_j/2, x_j+L_j/2\}$, 
+which may connected to none, one or several other end points of other compartments, 
+when the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment. 
+For terminating compartments (i.e., one or both ends has no connecting compartments) we may define
+%
+\begin{eqnarray}
+V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{and/or} \nonumber \\
+V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
+\end{eqnarray} 
+%
+depending on which end(s) has no electric connections.
+
+For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of a parent compartment (\Fref{fig:LFPy_cable_models}) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
+
+\begin{equation}
+V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^{N-1} 1 / R_{j+n}}~, 
+\end{equation}
+\label{eq:LFPy_V_connect_point}
+% 
+where the connecting node to mid point resistances
+%
+\begin{eqnarray}
+R_{j+n} &=& \frac{4 R_\mathrm{a}/\pi d_{j+n}^2}{L_{j+n} / 2} \nonumber \\
+		&=& \frac{8R_\mathrm{a}}{\pi d_{j+n}^2 L_{j+n}} ~.
+\end{eqnarray} 
+\ehnote{Check!}
+
+For child compartments connecting to the mid point of the parent compartment, 
+the corresponding potential at the branch point seen by any number of child segments is per definition the same as the mid point potential of the parent, that is, 
+\begin{equation}
+V_\mathrm{m}(x_{j+n}-L_{j+1} / 2, t) \equiv V_\mathrm{m}(x_j, t) ~.
+\end{equation} 
+
+Up to this point, we have provided the basic `machinery' needed in order to compute the discrete axial currents in a MC neuron model, 
+independently of specific or non-specific ion-channel currents, synaptic currents, capacitive currents etc. which may be present in the membrane of biophysically detailed MC neuron models. 
+%
+Also the transmembrane currents may be estimated on a per-compartment basis in a similar manner using the same central difference approximation to the 2nd derivative as 
+%
+\begin{eqnarray}
+i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j + \frac{h}{2}, t) - V_\mathrm{m}(x_j, t)+ V_\mathrm{m}(x_j - \frac{h}{2}, t)}{h^2 / 4} \nonumber \\
+		&\overset{L_j=h}{=}& \frac{\pi d_j^2}{R_\mathrm{a}} \frac{V_\mathrm{m}(x_j + \frac{L_j}{2}, t) - V_\mathrm{m}(x_j, t) + V_\mathrm{m}(x_j - \frac{L_j}{2}, t)}{L_j^2} ~.
+\label{eq:LFPy_im_discrete}
+\end{eqnarray} 
+
+
+This machinery may appear as a bit of a hurdle to implement for the purpose of computing extracellular potentials or magnetic signals, 
+but thankfully MC neuron modeling software such as NEURON provides native support for computing the transmembrane current (\si{\ampere}) and/or transmembrane current density per surface membrane area (\si{\ampere/\metre^2}) for each compartment. 
+Dependent on the implementation in the neural simulation software, 
+a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc \ehnote{crossref chap. 3}. 
+% 
+The current state is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite{Hagen2018}). 
+For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone. 
+
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width=0.8\textwidth]{Figures/LFPy/electric_circuits.png}
+\end{center}
+\caption{\textbf{Equivalent circuits for computing axial and transmembrane currents}. 
+({\bf A}) One-compartment cable model with sealed ends. 
+({\bf B}) Continuous piece of MC cable model.  
+({\bf C}) MC cable model with branch point.}
+\label{fig:LFPy_cable_models}
+\end{figure}
+
+
+Up to this point, the attentive reader of this chapter may have noticed that the axial currents (and transmembrane currents for that matter) is \textit{linearly} dependent on the midpoint membrane voltages of the MC model. 
+Thus, the full set of operations involved in computing the full set of axial current magnitudes can be rewritten as a linear matrix operation on the form
+%
+\begin{eqnarray}
+\begin{pmatrix}
+I_\mathrm{a}(\mathbf{r}_1, t)\\
+I_\mathrm{a}(\mathbf{r}_2, t)\\
+\vdots \\
+I_\mathrm{a}(\mathbf{r}_N, t)
+\end{pmatrix}
+&=& \mathbf{A}^{-1} 
+\begin{pmatrix}
+V_\mathrm{m}(\mathbf{r}_1, t)\\
+V_\mathrm{m}(\mathbf{r}_2, t)\\
+\vdots \\
+V_\mathrm{m}(\mathbf{r}_N, t)\\
+\end{pmatrix} ~,
+\end{eqnarray}
+%
+where $\mathbf{r}_j$ denotes the midpoint location of compartment $j$ while the elements of the shape $(N, N)$ matrix $\mathbf{A}$ effectively corresponds to intracellular resistances and the specific connectivity between compartments
+(recall Ohm's law for the current $I$ across a resistor $R$ given a voltage difference $\Delta V$: $I=R^{-1} \Delta V$). 
+
+For a two-compartment model connecting the end point of the root (parent) compartment with the start point of the child compartment, 
+it can be shown that 
+\ehnote{need to do some pen\&paper exercises to show matrix elements $a_{11}, a_{12}$ etc.}
+\begin{eqnarray}
+a_{11} &=&  
+\end{eqnarray}
+
+So far the axial currents is represented as a scalar field. 
+For some applications, such as computing the magnetic field $\mathbf{H}(\mathbf{r}, t)$, 
+the axial currents can be represented as a vector field by multiplication with the unit vectors along the center axis of each compartment:
+%
+\begin{equation}
+\begin{pmatrix}
+\mathbf{I}_\mathrm{a}(\mathbf{r}_1, t)\\
+\mathbf{I}_\mathrm{a}(\mathbf{r}_2, t)\\
+\vdots \\
+\mathbf{I}_\mathrm{a}(\mathbf{r}_N, t)
+\end{pmatrix}
+=
+\begin{pmatrix}
+I_\mathrm{a}(\mathbf{r}_1, t) (\mathbf{r}_{\mathrm{f}1} - \mathbf{r}_{\mathrm{i}1}) / || \mathbf{r}_{\mathrm{f}1} - \mathbf{r}_{\mathrm{i}1} || \\
+I_\mathrm{a}(\mathbf{r}_2, t) (\mathbf{r}_{\mathrm{f}2} - \mathbf{r}_{\mathrm{i}2}) / || \mathbf{r}_{\mathrm{f}2} - \mathbf{r}_{\mathrm{i}2} || \\
+\vdots \\
+I_\mathrm{a}(\mathbf{r}_N, t) (\mathbf{r}_{\mathrm{f}N} - \mathbf{r}_{\mathrm{i}N}) / || \mathbf{r}_{\mathrm{f}N} - \mathbf{r}_{\mathrm{i}N} ||
+\end{pmatrix} ~,
+\end{equation}
+%
+where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start and end point coordinates of compartment $j$. 
+$||\mathbf{r}||$ denotes the norm of $\mathbf{r}$. 
+
+
+%%%%%%%%%%%
+
+\subsubsection{Linear forward model imp}
+
+
+%
+%\begin{eqnarray}
+%I_\mathrm{a}(\mathbf{r}_1, t) &=& V_\mathrm{m}(\mathbf{r}_1, t)   V_\mathrm{m}(\mathbf{r}_2, t) \\
+%I_\mathrm{a}(\mathbf{r}_2, t) &=& \\
+%\end{eqnarray}
+
+
+
+\section{\red{TVN/EH: Neurodynamics from point-neuron models}}
 \label{sec:Schemes:HybridLFPy}
 \index{Point neuron model}
 
+\ehnote{gammalt:}
 Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)
 
+\ehnote{nytt:}
 
 \section{\red{EH: Neurodynamics using firing-rate models}}
 \label{sec:Schemes:KernelLFPy}
 \index{Firing rate model}
 
-Would make things even faster. Population firing-rate models  \cite**{Hagen2016}. Kernel trick (Ness et al, on-going project) 
+\ehnote{gammalt:}
+Would make things even faster. Population firing-rate models  \cite**{Hagen2016}. Kernel trick (Ness et al, on-going project)
 
+\ehnote{nytt:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{\blue{GH: Self-consistent scheme for intra- and extracellular potentials} }
 \label{sec:VC:EMI}

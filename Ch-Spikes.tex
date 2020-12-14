@@ -22,7 +22,10 @@ Adapted from \citeasnoun**{Henze2000}.
 
 While the amplitude of intracellular the action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. 
 Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (Fig.~\ref{Spikes:fig:Henze}).
-When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. \gen{Har vi et godt tall med medhoerende referanse her?} For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
+When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. 
+\gen{Har vi et godt tall med medhoerende referanse her?} 
+\ehnote{Tja. Ambient noise er jo veldig avhengig av forskjellige faktorer, elektrode-type og impedans, in vivo vs. in vitro, vaaken vs. bedoevet tilstand osv, valg av filter, osv.}
+For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
 Spikes shapes are also used to distinguish spikes from different neuron types. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes). But a more detailed separation into subgroups is also possible~\cite**{Buccino2018}.
 
 Detailed modeling of spikes are important for several reasons: for example, 
@@ -52,14 +55,29 @@ And slower phenomena such as calcium spikes~\cite**{Stuart2007} and spike afterh
 \begin{figure}[!ht]
 \begin{center}
 %\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
-\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-LFP_spike_effect_test_300Hz.png}
+\includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_spike_freq_content_amp.png}
 \end{center}
-\caption{\textbf{Potential EAP figures} 
-\gen{Kanskje denne figuren kan gj{\o}res ganske enkel? Kun vise spiken i A i (1) full versjon, (2) high-pass versjon og (3) low-pass versjon?
-Og ogsaa de samme 3 variantene i frekvensrommet?}}
+\caption{\textbf{Spike and frequency components}}
 \label{Spikes:fig:freq_dep}
 \end{figure}
 %%%%%
+
+%%%%%%%%%
+% Figure
+%%%%%%%%%
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
+\includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_delta_pulse_freq_content.png}
+\end{center}
+\caption{\textbf{Delta pulses and frequency components}}
+\label{Spikes:fig:freq_dep_delta}
+\end{figure}
+%%%
+
+
+
+
 
 The high-pass filtering of the extracellular signal typically used in extraction of spikes from extracellular recordings, thus changes the shape and reduces the signal power of the extracellular spike signal. 
 The rationale for this high-pass filtering is rather to isolate the spikes from the the signal by removing the LFP part. The LFP
@@ -107,7 +125,10 @@ One striking features is the rapid decay of spike amplitude with distance from t
 \begin{center}
 \includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_hay_eap_simpler}
 \end{center}
-\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model}. 
+\caption[]{\textbf{EP (spike) from action potential for a multi-compartmental neuron model
+\ehnote{Figure adapted from Fig4. i Hagen2015 kanskje? Aksonet peker i "feil" retning ogsaa. 
+Det boer nevnes hva som driver depolariseringen, ser ut som en step current?}
+}. 
 %Active sodium
 %and potassium conductances in the soma compartment and computed from 
 %Equation~\ref{XX:equation:Ve-multi-compartment}.
@@ -148,7 +169,7 @@ also the shape of recorded spikes.
 %\begin{cnfigure}{Figures/mm/EP-spike-TwoCompartment-w100-r150}
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=1.2\textwidth]{Figures/Spikes/Spikes-compare_hay_bns_2c_reformat}
+\includegraphics[width=1.2\textwidth]{Figures/Spikes/Spikes-compare_hay_bns_2c_reformat_2}
 \end{center}
 \caption{\textbf{EP (spike) from action potential for a two-compartment neuron model (left), ball-and-stick-model (center),
 multicompartment model (right).}
@@ -639,7 +660,7 @@ Interestingly, detailed experimental studies of the shape and amplitude of extra
 high-density microelectrode arrays (HD-MEAs)~\cite**{Emmenegger2019}.
 \gen{Comment on axon-representations in Hay-model and Mainen-model.}
 
-\section{\red{Effects of measurement device on spike recordings}}
+\section{\orange{Effects of measurement device on spike recordings}}
 
 In the above examples we have assumed an infinite volume conductor, that is, the extracellular conductivity
 has been assumed to be the same everywhere. We have also employed
@@ -677,78 +698,117 @@ av økt avstand fra soma)}
 The insulation electrode shaft effectively act to shadow spikes from neurons placed on the 'non-contact' side of the electrode.
 Detailed studies of this requires comprehensive numerical investigations by use of FEM modeling~\cite**{Mechler2011,Mechler2012,Buccino2019}.
 
-\subsection{\red{Microelectrode arrays (MEAs)}}
+\subsection{\orange{Microelectrode arrays (MEAs)}}
 
-\begin{itemize}
-\item Vise formel for "Method of images"?
-\item Kanskje egen section?
-\end{itemize}
-
-%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Box: Spike i MEA
-%%%%%%%%%%    
-%\subsection{\red{Box:Spikes in microelectrode arrays (MEAs)}}
-\gen{This was a box in Sterratt book chapter}
-%\begin{boxfloat}{Spikes in microelectrode arrays (MEAs)}
-%  \label{mm:box:spike-MEA}
-As an alternative to measuring spikes in living brains, small slices of brain tissue can be put in suitably arranged dishes
-where electrophysiological cellular properties can be studied for a few hours. Such \index{\emph{in vitro}} recordings
-allows for more detailed and better controlled investigations than what can be achieved in living brains. In one type of such recordings
-the brain tissue is placed on a \index{micro-electrode array (MEA)}. Here the bottom of the device contains a grid of electrode
-contacts picking up electrical potentials generated by the neural activity of the slice of  brain tissue placed on top of it. 
-The slice and the MEA are further covered with a liquid, typically saline, to keep the cells in the brain tissue functioning for the duration
-of the experiment,  see figure:
+Spikes are not only recorded in living brains. In \emph{in vitro} recordings, small slices of excised brain tissue are
+placed in suitably designed dishes where physiological properties of cells and networks can be probed in detail for hours.
+In so-called \emph{microelectrode arrays (MEAs)}, the bottom of the device is covered by a grid of electrode
+contacts that records electrical signals generated by the neurons above. The brain slice and the MEA are both
+covered with a liquid, typically saline, to protect the cells and keep them alive for the duration of the experiment, see
+Figure~\ref{Spikes:fig:MEA-setup}.
 
 %%%
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/Spikes/Spikes-MEA-1-w43-r300}
 \end{center}
-\caption[]{\textbf{MEA-setup}
+\caption[]{\textbf{MEA-setup.}
 Figure is adapted from \citeasnoun**{Ness2015}.}
 \label{Spikes:fig:MEA-setup}
 \end{figure}
 %%%
+
+In MEAs the electrode contacts are embedded in an insulating glass plate with very 
+low electrical conductivity, while the covering liquid typically has a higher electrical conductivity 
+than the brain slice it covers. Thus the extracellular conductivity around the signal-generating neurons
+will not be constant as assumed above, and this will affect the amplitude and shape of the recorded 
+spikes. 
+
+In general, FEM modeling will be required to solve the forward-modeling for situations such as this where
+the the conductivity $\sigma$ varies with position. However, if we assume that the MEA substrate, slice and saline
+all extend infinitely in the lateral directions so that $\sigma$ can be assumed to only have planar step-wise discontinuities, 
+formulas analogous to Equation~\ref{XX:equation:Vr} can be derived by use of the
+\emph{method of images} from electrostatics. \gen{Referer til section i VC.}
+
 
 %%%
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Figures/Spikes/Spikes-MEA-2-w43-r300}
 \end{center}
-\caption[]{\textbf{MEA-spikes}
+\caption[]{\textbf{MEA-spikes.}
 Figure is adapted from \citeasnoun**{Ness2015}.}
 \label{Spikes:fig:MEA-spikes}
 \end{figure}
 %%%
 
-
-
-In such measurements, the experimental set-up itself has an effect on recorded spikes. The microelectrode contacts are 
-embedded in an insulating glass plate with very low electrical conductivity, while the saline has
-a higher electrical conductivity than the brain slice it covers. 
-For such planar step-wise discontinuities in the conductivity (assuming for the moment the MEA substrate, slice and saline
-all are infinite planes) formulae analogous to Equation~\ref{XX:equation:Vr} can be derived by use of the
-\index{method of images} from electrostatics, see Box~\ref{XX:box:MOI}.
-
-While the largest effect on the recorded spike shape comes from the insulating 
-glass substrate which roughly doubles the size of the recorded spikes, the figure below illustrates the 
-effect from the saline covering the brain slice. As seen in the example results, the highly-conductive 
-saline cover reduces the size of the recorded spike compared to the hypothetical 
+An example result is shown in Figure~\ref{Spikes:fig:MEA-spikes}.
+The largest effect comes from the insulating glass substrate which roughly doubles the size of the 
+recorded spikes. However, also the highly-conductive 
+saline cover employed in the example has an effect. More specifically, it
+reduces the size of the spike compared to the hypothetical 
 situation where the saline had the same value of the electrical conductivity as the brain slice.
-
-
-
-
 
 
 \section{\red{Multi-unit activity (MUA)}}
 
 \begin{itemize}
-\item \cite{Pettersen2008}
-\item New figure showing cancellation
+\item One way: MUA from spike-sorted data
+\begin{itemize}
+\item How many neurons can be recorded from?
+\end{itemize}
+\item Another way: High-pass+ rectified
+\begin{itemize}
+\item Origin: \cite**{Ulbert2001}
+\item Use: \cite**{Einevoll2007,Blomquist2009} 
+\item Testing: \cite**{Pettersen2008,Glabska2016}
+\item New figure showing all steps in process?
+\end{itemize}  
 \end{itemize} 
+
+%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-2}
+\end{center}
+\caption[]{\textbf{MUA}}
+\label{Spikes:fig:MUA-A}
+\end{figure}
+%%%
+
+%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-3} \\
+\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-4} \\
+\includegraphics[width=0.4\textwidth]{Figures/Spikes/MUA-5} 
+\end{center}
+\caption[]{\textbf{MUA}}
+\label{Spikes:fig:MUA-B}
+\end{figure}
+%%%
+
+%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.4\textwidth]{Figures/Spikes/MUA-6}\\
+\includegraphics[width=0.4\textwidth]{Figures/Spikes/MUA-7}
+\end{center}
+\caption[]{\textbf{MUA}}
+\label{Spikes:fig:MUA-C}
+\end{figure}
+%%%
+
+%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-8}
+\end{center}
+\caption[]{\textbf{MUA}}
+\label{Spikes:fig:MUA-D}
+\end{figure}
+%%%
+
 
 \section{\red{Insights from MUA studies}} 
 \ghnote{I added this kind of subsection to most of the Part 2 - sections. I thought it might be an idea to finish the MUA, LFP, ECoG and EEG sections with summaries of what these modalities typically tell us, i.e. in terms of (i) what aspects of neural activity they reflect (spikes, synaptic inputs, dendritic ion channels, which ion channels, which kind of neurons, something on network structure, cell orientation, cortical folding etc.), and what what they can tell us about cognitive states (attentive, drowsy etc.). I am not sure about this idea, though. Maybe it will be too challenging to get an overview over the literature - we dont want to put the entire Nunez-book into the EEG-chapter.}

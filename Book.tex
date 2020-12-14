@@ -102,6 +102,20 @@
 \newcommand{\hlP}[2][Periwinkle]{ {\sethlcolor{#1} \hl{#2}} }
 
 
+% define \sout{} etc.
+\usepackage[normalem]{ulem}
+
+% SI units defines \SI{10}{\kilo\metre}, \si{\newton} etc.
+\usepackage{siunitx}
+
+% fancyrefs and hyperrefs
+\usepackage[plain]{fancyref}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
 %\newcommand{\ghnote}[1]{{\color{red}#1}}
 
 
@@ -246,18 +260,23 @@ your eyes only
 \cleardoublepage
 
 
-%%%%%%%% PREFACE
-\chapter*{Preface}
+%%%%%%%% WORK NOTES
+\chapter*{Work notes}
 \begin{itemize}
 \item Structure plan on: https://www.overleaf.com/2551421161hjxkhwwvjrqk
 \item Convention: Use $\bf i$ for current density. As Espen noted, it is common to use $\bf J$ for this. However, $\bf J$ is commonly used for fluxes of all sorts. Since we cover electrodiffusion, we need symbols for particle fluxes and flux densities, and I thought it was best to use the $j$'s for that. I also prefer the convention of using the same letter (capitalized or not) for currents and current densities to keep them together:
 	\begin{itemize}
-	\item {$\bf  i$}: Current density (A/m$^2$)
-	\item {$\bf I$}: Current (A)
-	\item {$\bf  j_k$}: Flux density of ion $k$ (mol/m$^2$s)
-	\item {$\bf J_k$}: Flux of ion $k$ (mol/s)
+	\item $\mathbf{i}$: Current density (A/m$^2$)
+	\item $\mathbf{I}$: Current (A)
+	\item $\mathbf{j}_k$: Flux density of ion $k$ (mol/m$^2$s)
+	\item $\mathbf{J}_k$: Flux of ion $k$ (mol/s)
 	\end{itemize}
-\item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template.
+\gen{Subscripts og superscripts skal ikke v�re i bold.}
+\ehnote{jeg vil foreslaa en komplett tabell et sted for symboler brukt gjennom hele denne boken. Ogsaa boer vi vaere obs paa forskjellen mellom skalarfelt og vektorfelt, $J(\mathbf{r})$ vs. $\mathbf{J}(\mathbf{r})$.}
+\item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template. 
+	\ehnote{Jeg la til en import av fancyref over. Den definerer kommandoen {\textbackslash}Fref\{\} og skal kunne skjoenne forskjellen paa chapter og section utfra innhold i label (chap:*, sec:*, eq:*, etc.), og faa ting internt konsistent. Test:} 
+	\ehtxt{{\textbackslash}label\{sec:Intro\}: \Fref{sec:Intro}; {\textbackslash}label\{chap:Intro\}: \Fref{chap:Intro}}
+	\ehnote{En del labels er ikke riktig formattert naar det er sagt: {\textbackslash}label\{Basics:eq:UE\} vil ikke fungere for eksempel og boer endres til {\textbackslash}label\{eq:Basics:UE\} e.l.}
 \item Reference style: 
 	\begin{itemize} 
 	\item Harvard: Cambridge gave three choices: Harvard (author?date), Vancouver (numbered),
@@ -287,11 +306,24 @@ your eyes only
 %\textit{Author locator}
 \end{flushright}
 
-\def\acrodef#1#2{\noindent\hbox to 38.5pt{\textbf{#1}} #2\par}
 
+%%%%%%%% PREFACE
+\chapter*{Preface}
+
+
+
+\def\acrodef#1#2{\noindent\hbox to 38.5pt{\textbf{#1}} #2\par}
 \chapter*{Abbreviations}
-\acrodef{WWWOTL}{We Will Work On This List}
-\acrodef{AIWSBC}{And It Will Soon Be Completed}
+%\acrodef{WWWOTL}{We Will Work On This List}
+%\acrodef{AIWSBC}{And It Will Soon Be Completed}
+\acrodef{LFP}{Local Field Potential}
+\acrodef{EEG}{...}
+\acrodef{ECoG}{...}
+\acrodef{MEG}{...}
+\acrodef{MUA}{Multiunit Activity}
+\acrodef{MEA}{...}
+\acrodef{FEM}{...}
+
 
 
 % \editedlistofcontributors
@@ -334,6 +366,7 @@ your eyes only
 \appendix
 \chapter{Derivation of four-sphere model}
 \tvnnote{Paste from LFPy 2.0 paper?}
+\ehnote{Solveig sin artikkel vel? Vi viste ikke denne utledningen i LFPy2.0-paperet.}
 %\tvnnote{Solveigs utledning av nÃ¥r strÃžmdipol-approksimasjonen er gyldig?}
 \include{AppB-multipole}
 %\section{Synapses \Comment{- Gaute}}

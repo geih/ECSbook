@@ -175,7 +175,9 @@ The forward modelling formulas in Eq. \ref{VC:eq:pointsources} and \ref{VC:eq:li
 \label{VC:eq:CSD4}
 \end{equation}
 
-Since this is a linear differential equation, we may solve it by first finding its Green's function, i.e., the solution to an impulse response $C({\bf r}) = I' \delta^3({\bf r-r'})$, where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, and $I'$ is the current source at this location. The general solution can then be expressed as a convolution over such Green's functions. Thus, we first seek the solution to: 
+Since this is a linear differential equation, we may solve it by first finding its Green's function, i.e., the solution to an impulse response $C({\bf r}) = I' \delta^3({\bf r-r'})$, 
+\ehnote{lite fan av notasjon med $'$, siden dette oftest brukes om den deriverte.}
+where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, and $I'$ is the current source at this location. The general solution can then be expressed as a convolution over such Green's functions. Thus, we first seek the solution to: 
 
 \begin{equation}
 \nabla^2 \phi({\bf r}) = - \frac{I' \delta^3({\bf r-r'})}{\sigma_t}.
@@ -230,6 +232,7 @@ where the volume integral runs over all sources. Here, $C$ represents whatever a
 \section{\orange{SN: Dipole approximation}}
 \label{sec:VC:dipole}
 \ghnote{GH: Jeg skrev en skisse til dette kapittelet, men fint om SN kan gaa gjennom.}
+\ehnote{Jeg ville skrevet dette ut fullt likt som under "Spherical form" paa Wikipedia https://en.wikipedia.org/wiki/Multipole\_expansion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The \textit{dipole approximation} \index{Dipole approximation} is an alternative to eq. \ref{VC:eq:pointsources} for predicting the extracellular potential. The approximation is good provided that the "measuring point" for $\phi$ is far away from the source-sink distribution that it originates from, like in the case of EEG.
 
@@ -281,7 +284,9 @@ Electric potential is measured between recording electrode and reference electro
 
 A possible concern is whether the electrode impedance or other electrode properties can distort measured extracellular potentials, through introducing unintentional temporal filtering effects on the recorded potentials. Effectively, this would amount to the potential on the inside of the electrode surface being different from the (spatial average of the) potential on the outside of the electrode, and therefore not represent the "true" extracellular potential. For example, note that \gex{metallic} 
 recording electrodes are typically unable to measure static (DC) potentials, or capture changes slower than $\sim$ 0.1 Hz.
-\gen{Hvor har vi dette tallet fra?} Such DC potentials can be present in neural tissue, and can often arise in simulated extracellular potentials from cell models with active conductances, for example because of the $I_{\rm h}$-current \cite**{Ness2016}. In such cases, the simulated baseline (or mean) extracellular potential is typically subtracted from the extracellular potentials to effectively remove the unobservable DC-potential.
+\gen{Hvor har vi dette tallet fra?} 
+\ehnote{jeg er ogsaa overrasket over at metallelektroder ikke kan maale konstante potensialforskjeller i en loesning (i all den tid det finnes frie ioner i loesningen)?}
+Such DC potentials can be present in neural tissue, and can often arise in simulated extracellular potentials from cell models with active conductances, for example because of the $I_{\rm h}$-current \cite**{Ness2016}. In such cases, the simulated baseline (or mean) extracellular potential is typically subtracted from the extracellular potentials to effectively remove the unobservable DC-potential.
 
 Apart from this, it has been convincingly argued that, provided that the proper recording equipment is used, electrode impedance or other electrode properties should not substantially distort recorded potentials \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}. 
   Note that this only applies to recording electrodes, and that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization \cite**{McIntyre2001,Martinsen2008,Joucla2012}.
@@ -320,6 +325,7 @@ ignoring any potential effect from recording electrodes or electrode shanks, and
 \label{VC:sec:disc-electrode}
 \index{Disc-electrode approximation}
 In some cases recording electrodes are large enough that the extracellular potential varies substantially across the electrode surface. In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential. This is typically referred to as the disc-electrode approximation \cite**{Linden2014,Ness2015}. 
+\ehnote{Camunas-Mesa and Quiroga (2013) gjorde dette foer oss, og tok i tillegg med kapasitive effekter pluss impedanse for electrode-saline interface basert paa noe teori fra Robinson1968.}
 
 By taking into account the physical extent of the electrodes, the disc-electrode approximation can account for spatial filtering effects. However, very close to electrodes the electrodes can themselves affect the close-by extracellular potential, since they represent a region of a highly conductive material in contact with the tissue being measured from. 
 The effect of the presence of highly conductive electrodes can be investigated using FEM, and \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode. \gen{Kanskje ha med en figur om dette, tilpasset fra Ness2015?}
@@ -333,6 +339,9 @@ Large multi-contact electrode probes can be expected to have a substantial effec
 %%%%%%
 \section{\blue{Approximations used in VC theory}}
 \label{sec:VC:approximations}
+
+\ehnote{For meg fremstaar det som litt rart aa ha disse kapitlene \emph{etter} aa ha introdusert kabellikning, punktkildepotensial, elektrodemodeller etc. Skulle ikke dette vaert i kapt 2?}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The VC theory presented in this chapter relies on several assumptions and approximations. Firstly, the theory is based on the quasi-static approximation of Maxwell's equations (see Section \ref{sec:VC:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:VC:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:VC:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:VC:ephaptic} for more on this). Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Chapter \ref{sec:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
 
@@ -380,9 +389,10 @@ which we have also postulated earlier (eq. \ref{Basics:eq:MaxElectroneutral}).
 
 
 In the previous subsection, we said that eq. \ref{Basics:eq:continuity1} will be our fundamental equation for modeling extracellular potentials. It is therefore important to point out that it is not in disagreement with Maxwell's equations, although eq. \ref{Basics:eq:continuity1} and eq. \ref{Basics:eq:MaxElectroneutral} at a first glimpse may look a bit different. Comparing the two, we we see that in \ref{Basics:eq:continuity1}, ${\bf i}$ has been replaced with ${\bf i_t}$, and a source term $C$ has been added on the right hand side. Essentially, eq. \ref{Basics:eq:continuity1} thus follows from decomposing the total current ${\bf i}$ in eq. \ref{Basics:eq:MaxElectroneutral} into the part of it ($\bf{i_t}$) that runs extracellularly through the tissue and the part of it ($C$) that enters the extracellular space through neural membranes. The reason for making this decomposition is practical. As we shall see in Chapter \ref{sec:VC}, it makes computations easier.
+\ehnote{Er vi ikke allerede i kapittel 4? ;-)}
+
 
 The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \cite**{Nunez2006,Grodzinsky2011}.
-
 
 
 \subsection{\blue{Linear extracellular medium} }
@@ -440,6 +450,8 @@ To account for diffusive effects, one needs to compute not only the electrical p
 \index{Ephaptic effects}
 The standard workflow when modeling the extracellular potential ($\phi$) involves two steps: In Step 1 one uses the multicompartment (MC) formalism (cf. Chapter \ref{sec:Neuron}) to compute the transmembrane currents in all neuronal compartments. In Step 2, one uses VC theory (eq. \ref{VC:eq:pointsources}) to estimate the resulting $\phi$. Since the fundamental equation in the MC formalism (eq. \ref{Neuron:eq:multimain}) was derived under the assumption that $\phi=0$, this two-step approach is evidently inconsistent. 
 \gen{Jeg forbinder "ephaptic" mest med at EP satt opp av en celle paavirker en annen. Dette er mer "self-ephaptic" ...}
+\ehnote{det boer nevnes et sted at antagelsen om $\phi=0$ er ekvivalent med antatt null-resistans utenfor cellen - ekstracellulaer konduktivitet er mye hoyere en konduktans over cellemembranen.
+Man kan ogsaa i kabelformalismen bygge inn ekstracellulaer konduktans (extracellular mechanism i NEURON), men dette faller sammen for 2/3D geometrier.}
 
 In reality, the activity of a neuron will affect the membrane potential of both neighboring neurons and itself through the extracellular potential that it creates. Such effects of the extracellular potential on the neurodynamics are called \textit{ephaptic}. As we discussed in Section \ref{sec:Neuron:HHCassumptions}, $\phi$ is typically much smaller than the membrane potential, and ephaptic effects are therefore commonly assumed to be negligibly small. Provided that this is true, the two-step approach works well. 
 \gen{Paa side 22 i "Principles of neural coding (2013)" sies det at Gold et al (2006) har proevd et iterative scheme, uten at det gav en stor forskjell. Kan vaere fint aa nevne.}
