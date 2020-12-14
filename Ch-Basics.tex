@@ -76,6 +76,7 @@ The electric field can be expressed as the spatial derivative, or gradient, of t
 \end{equation}
 The operator $\nabla$ computes a property's spatial rate of change in the various spatial directions, and ${\bf e_x}$, ${\bf e_y}$ and  ${\bf e_z}$ are the unit vectors in the three spatial directions $x$, $y$ and $z$, respectively. Unlike ${\bf E}$, which is a vector-field, $\phi$ is a scalar function, and as such, it tends to be easier to deal with. We note that eq. \ref{Basics:eq:EV} rests on something called the \textit{quasi-static approximation} of Maxwell's equations, which we explain further in Section \label{sec:Basics:Maxwell}. 
 
+\subsection{\orange{GH: Electric ground}}
 To get an intuitive understanding of the relationship between ${\bf E}$ and $\phi$, it helps to consider an idealized one-dimensional scenario with a constant field in the $x$-direction. Then, eq. \ref{Basics:eq:EV} simplifies to,
 \begin{equation}
 E = -\frac{d\phi(x)}{dx} = -\frac{\Delta \phi}{\Delta x} = -\frac{\phi(x_b)-\phi(x_a)}{x_b-x_a},
@@ -103,19 +104,21 @@ U_E = q\phi.
 \end{equation}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\orange{GH: Electric current}}
 \label{sec:Basics:Current} \index{Electric current}
-As we have emphasized several times, we do not want to study the brain by keeping track of individual charges. We are instead interested in the net movement of charge at a coarse-grained (space averaged) scale. Such a movement of charge gives rise to an electric current $I$ (units Ampere: A = C/s), defined as the amount of charge that moves through some reference cross-section area per second. 
+As we have emphasized several times, we normally do not want to study a macroscopic system by keeping track of individual charges. We are instead interested in the electric currents, $I$ (units Ampere: A = C/s), which represents the net movement of charge at a coarse-grained (space averaged) scale. There exist various kinds of electric currents, differing in terms of what drive them. Here, we shall briefly introduce three kinds, the conductive current, the capacitive current and the diffusive current.
+
 
 \subsection{\orange{GH: Conductive currents}}
+A conductive material  \index{Conductor} is one which charges can move freely through when exposed to an electric field. The conductive current is then defined as the amount of charge that moves through some reference cross-section area per second. 
 
-
-In standard electric circuits, the reference cross-section area is typically taken to be that of "a whole cable", so that the current simply represents the total current through the cable. A simple example is shown in Fig. \ref{Basics:fig:Currents}A, where a current passes through a cable with a resistor. The current is then given by Ohm's law:
+When dealing with an electric circuit, currents are essentially one dimensional, running in the directions defined by the electric cables. The reference cross-section area is then typically taken to be that of "a whole cable", so that the current simply represents the total current through the cable. A simple example is shown in Fig. \ref{Basics:fig:Currents}A, where a current passes through a cable with a resistor. The current is then given by Ohm's law:
 \begin{equation}
 I = - \frac{\Delta \phi}{R}, 
 \label{Basics:eq:Ohm_R}
 \end{equation}
-where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference over the resistor, and $R$ (units Ohm ($\Omega$)) its resistance. The cable itself was assumed to have a zero resistance. That means that the entire resistance in the system, and the entire voltage drop, was that over the resistor. We then only needed to consider the potential at two locations, A and B, representing the two sides of the resistor. 
+where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference across the resistor, and $R$ (units Ohm ($\Omega$)) its resistance. The cable itself was assumed to have a zero resistance. That means that the entire resistance in the system, and the entire voltage drop, was that over the resistor. To describe this system, we then only needed to consider the potential at two locations, A and B, representing the two sides of the resistor. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -125,12 +128,12 @@ where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference over the resistor,
 \label{Basics:fig:Currents}
 \end{figure}
 
-In reality, the resistance of the cable is not strictly zero, although for most electrical circuits this is an excellent approximation. However, in some applications, for example for very long cables, for cables of less conducting materials, it is necessary to treat cables as continuous resistors. If we define the specific axial resistance per unit length $r_{a}$ ($\Omega$/m), Ohm's law becomes: 
+In reality, the resistance of the cable is not strictly zero, although for most electrical circuits this is an excellent approximation. However, in some applications, for example for very long and thin cables, or for cables of less conducting materials, it may be necessary to treat cables as continuous resistors. If we define the specific axial resistance per unit length $r_{a}$ ($\Omega$/m), Ohm's law becomes: 
 \begin{equation}
 I = - \frac{1}{r_a}\frac{d\phi}{dx}, 
 \label{Basics:eq:Ohm_r}
 \end{equation}
-where $r_a=r_a(x)$ may in principle vary along the cable (Fig. \ref{Basics:fig:Currents}B). With eq. \ref{Basics:eq:Ohm_r}, the potential $\phi(x)$ will vary gradually along the cable. If $r_a$ is constant along the cable, and the cable has length $L$, it is related to the resistance of the total cable through $r_a=R/L$.
+where $r_a=r_a(x)$ may in principle vary along the cable (Fig. \ref{Basics:fig:Currents}B). With eq. \ref{Basics:eq:Ohm_r}, the potential $\phi(x)$ will vary gradually along the cable. If $r_a$ is constant along the cable, and the cable has length $L$, it is related to the resistance of the total cable through $r_a=R/L$. Conductive currents running axially through neural dendrites and axons are typically modeled in this manner. 
 
 Both examples above were one-dimensional in the sense that the current was restricted to run exclusively in the direction defined by the cable. In a three dimensional volume, such as for example brain tissue, currents may run in all spatial directions (Fig. \ref{Basics:fig:Currents}C). It is then convenient to describe them in terms of a current density, ${\bf i}$,  a vector which defines the current per unit cross section area (units A/(m$^2$) and its spatial direction. The current density can be defined in all points in 3D space, and is not dependent on any particular and predefined cross-section area. The conductive properties of a material can be specified either through its resistivity $r$ ($\Omega$ m), or its inverse, the conductivity $\sigma$ (S/m), both being material properties. We shall here use the latter convention, and with that, Ohms law can be written as:
 \begin{equation}
@@ -145,24 +148,11 @@ On a more general form, Ohms law states that:
 \end{equation}
 while eqns. \label{Basics:eq:Ohm_R}-\ref{Basics:eq:Ohm_3D_phi} hold only in the case where the electric field ${\bf E}$ is conservative (cf. eq. \ref{Basics:eq:EV}), which we shall assume throughout this book, and which we discuss further in Section \ref{sec:VC:quasistatic}. We note however, that Ohms law applies specifically to \textit{conductive} currents, and that there exist other forms of electric currents not described by it.
 
+
 \subsection{\orange{GH: Capacitive currents}}
+In the theory of electric circuits, a common circuit element is the capacitor. Capacitors are devices that can store electrical energy in terms of an electric field. The simplest form of a capacitor consists of two electrical metallic plates or surfaces separated by an insulating (dielectric) medium \index{Dielectricum}.  By definition, a dielectric medium is one where charges are bound to stay in confined regions of space. An electric field only will slightly shift their average equilibrium positions, causing a polarization of the material.
 
-
-In the theory of electric circuits, a common circuit element is the capacitor. 
-
-
-The capacitor is a device that can store electrical energy in terms of an electric field. 
-
-
-
-Most capacitors contain at least two electrical conductors often in the form of metallic plates or surfaces separated by a dielectric medium. 
-
-
-
-
-
-The effect of a capacitor is known as capacitance. While some capacitance exists between any two electrical conductors in proximity in a circuit, a capacitor is a component designed to add capacitance to a circuit. The capacitor was originally known as a condenser or condensator.[1] This name and its cognates are still widely used in many languages, but rarely in English, one notable exception being condenser microphones, also called capacitor microphones.
-
+An illustration of a capacitor is given in Fig. \ref{Basics:fig_Capacitor}. When an electric current $I_{left}$ enters the capacitor from the left, it leads to an accumulation of charge $+q$ on the metal plate on the left hand side of the capacitor. This, in turn, evokes an electric field $\bf E$ across the dielectric material that separates the plates, which drives positive charges away from the rightmost metal plate, leaving it negatively charged $-q$. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -173,61 +163,86 @@ The effect of a capacitor is known as capacitance. While some capacitance exists
 \label{Basics:fig:Capacitor}
 \end{figure}
 
+Whereas the conductive currents $I_{left}$ and $I_{right}$ are mediated by charges moving freely through the cable, no charges actually move across the capacitor itself. However, temporal rate of change of the electric field amounts to a so-called capacitive current  ($I_{cap}$), which is so that current continuity is preserved, i.e., so that $I_{left} = I_{cap} = I_{right}$. The capacitive current is given by: 
+
+\begin{equation}
+I_{cap} = C\frac{d\phi}{dt}, 
+\label{Basics:eq:Icap}
+\end{equation}
+where $C$ (units Farad (F=C/V)) is the capacitance. Although $I_{cap}$ differs from conductive currents in the sense that it does not involve free transfer of charge through a medium, it has the same units (A). 
+
+The capacitive current was introduced here because neural membranes have capacitive properties, which causes the neural membrane potential to changes when currents go in or out through the membrane. It custom to express the capacitive membrane current in terms of a current density: 
+
+\begin{equation}
+i_{cap} = c_m\frac{d\phi_m}{dt}, 
+\label{Basics:eq:Icap_mem}
+\end{equation}
+where $c_m$ (F/m$^2$) is the capacitance per unit membrane area. In this case, the current density is one-dimensional and in the direction normal to the membrane.
+
 
 \subsection{\orange{GH: Diffusive currents}}
+\index{Diffusion} \index{Electrodiffusion}
+The charge carriers in the brain are ions floating around in the salt water solutions that fill up the intra- and extracellular spaces. Ions in salt water will, like electrons in a metal conductor, be accelerated by the presence of an electric field, and will thus carry conductive currents. However, unlike electrons in the metal conductor, ions in water may also move due to diffusion. 
+
+The electrodiffusive nature of ionic motion is described by the Nernst-Planck equation:
+\begin{equation}
+{\bf j_k} = - D_k {\bf \nabla} c_{k} - \frac{D_k z_k c_k}{\psi} {\bf \nabla} \phi,
+\label{Basics:eq:JNP}
+\end{equation}
+for the flux density, ${\bf j_k}$ (units $mol/\mathrm{m^2s}$), of an ion species $k$. 
+
+The first term on the right hand side of eq. \ref{Basics:eq:JNP} is Fick's law for diffusion. It states that the diffusive flux of ion species $k$ is proportional to the diffusion constant ${D}_k$ (units $\mathrm{m^2/s}$) times the concentration gradient ${\bf \nabla} c_{k}$. ${D}_k$ is generally a property of the medium that the ion diffuses through, and determines how "easy" it is for the ion $k$ to move through the medium. The second term on the right hand side of eq. \ref{Basics:eq:JNP} accounts for ionic drift due to the electric field. The factor $D_k/\psi$ is the electrical mobility of the ions, which is linearly related to their diffusion constant. This linear relationship is called the Einstein relation\index{Einstein relation}. It does not apply generally, but is valid for dilute solutions such as the saline solutions in the brain \cite**{Grodzinsky2011}. $z_{k}$ is the valency, i.e., the number of unit charges associated with of ion species $k$. The factor $\psi=RT/F$ (units V) is defined by the gas constant ($R$), Faraday's constant ($F$) and the temperature ($T$). 
+
+Faraday's constant, $F$, has units C/mol, and is defined as the charge per mol of unit charges. A flux density ${\bf j_k}$ can thus be converted to a current density by multiplying it with $Fz_k$. A salt water solution is composed of several ions, and to obtain the net electric current, we must sum over the contributions from all of them to obtain the total current density: 
+\begin{equation}
+{\bf i} = \sum_k z_k F {\bf j_k} = -\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}} - F\sum_{k} \frac{\tilde{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi}.
+\label{Basics:eq:iNP}
+\end{equation}
+
+The last term on the right hand side is the drift current density, 
+\begin{equation}
+{\bf i}^{drift} = - F\sum_{k} \frac{\tilde{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi} = - \sigma {\bf \nabla}{\phi}.
+\label{Basics:eq:idrift}
+\end{equation}
+As we indicated with the last equality, the drift current density is the same as the Ohmic current that we defined in eq. \ref{Basics:eq:Ohm_3D_phi}, which means that we can identify the conductivity $\sigma$ of a salt water solution as \cite**{Koch1999}:
+\begin{equation}
+\sigma = \frac{F}{\psi}\sum_{k} \tilde{D}_k z_{k}^2 c_{k},
+\label{Basics:eq:sigma_conc}
+\end{equation}
+
+The first term on the right hand side of eq. \ref{Basics:eq:iNP} is the diffusive current density, 
+\begin{equation}
+{\bf i}^{diff}  = -\sum_k{F z_k \tilde{D_k}{\bf \nabla} c_{k}}.
+\label{Basics:eq:idiff}
+\end{equation}
+Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. In many cases, the total current will be dominated by the drift component, and it is common to assume that the diffusive component is negligible. 
 
 
 \section{\orange{GH: Electric currents in the brain}}
-\ghnote{So far a mess.... Work in progress.}
-
-We may think of currents in brain tissue as existing in one of three different kinds of mediums, running through either: 
+Having introduced three different kinds of currents in the previous section, we are now ready give a summary of the role that they play within a brain-specific context. We may think of currents in brain tissue as existing in one of three different kinds of mediums, running through either: 
 \begin{itemize}
 \item the intracellular saline solution (cytosol)
 \item the extracellular saline solution
-\item a cellular (neuronal or glial) membrane
+\item the cellular (neuronal or glial) membrane
 \end{itemize}
 
-Among these, the membrane currents are the odd ones out. A bit cartoonishly, we may think of the cellular membrane as an insulator (dielectric medium) with small holes \index{Dielectricum}. By definition, a dielectric medium is one where charges are bound to stay in confined regions of space. An electric field only will slightly shift their average equilibrium positions, causing a polarization of the material. In the membrane, this polarization can be expressed in terms of a \textit{capacitive} membrane current, which charges up the membrane and changes the membrane potential. The additional holes represent various kinds of ion channels, which are pores in the membrane that allow ions to pass through them. This flow of ions can give rise to a net electric ionic current through the membrane, which comes in addition to the capacitive current. The transmembrane ionic currents generally depend both voltage differences and ion concentration differences between the inside and outside of the membrane. A standard framework for modeling the electrodynamics of neural membranes is presented in Chapter \ref{sec:Neuron}. 
+In the list above, the membrane currents are the odd ones out. A bit cartoonishly, we may think of the cellular membrane as an insulator (dielectric medium) with small holes \index{Dielectricum}. Due to the dielectric properties of the membrane, it can store charges in so-called Debye-layers on its the in- and outside in a way equivalent to how charges are stored on the metal plates in a capacitor (cf. Fig.\ref{Basics:fig:Capacitor}). The capacitive properties of the membrane can be described in terms of a capacitive current like that defined in eq. \ref{Basics:eq:Icap_mem}, which causes the membrane potential to vary. The holes represent various kinds of ion channels, which are conductive pores in the membrane that allow ions to pass through them. The ionic current through the ion channels comes in addition to the capacitive current. Both are essentially one-dimensional, i.e., in the direction perpendicular to the membrane. The ionic currents generally depend both voltage- and ion concentration differences between the inside and outside of the membrane, and are thus electrodiffusive in their nature (cf. eq. \ref{Basics:eq:iNP}, but with $\nabla$ replaced with the one-dimensional differential operator $d/dz$. 
 
-The intracellular and extracellular currents run through the saline solutions that fill up the intra- and extracellular spaces, respectively. The saline solutions are predominantly conductive in their nature \index{Conductor}, which means that charges can move freely through them when exposed to an electric field. For most parts of this book, we shall assume that they are \textit{linear} conductors, which makes the intra- and extracellular currents simpler than the membrane currents. 
-
-Pakken ...
-
-which makes the intra- and extracellular currents 
+The intra- and extracellular currents are generally three dimensional electrodiffusive volume currents through the conductive saline solutions that fill up the intra- and extracellular spaces (cf. eq. \ref{Basics:eq:iNP}). However, as concentration gradients within the intracellular and extracellular spaces tend to be small, it is common to neglect the diffusive component, and approximate these currents as purely Ohmic (cf. eq. \ref{Basics:eq:Ohm_3D_phi}). 
 
 
-which means that current densities within them are given by the formula:
-\begin{equation}
-{\bf i} = \sigma{\bf E},
-\label{Basics:eq:i}
-\end{equation}
-Eq. \ref{Basics:eq:i} is a version of Ohm's law. It states that the current density will be proportional to the electric field and the conductivity of the medium, $\sigma$, which has units Siemens per square meters (S/m$^2$). 
+For the intracellular component, it is common to make the further simplification that it can be approximated as a one-dimensional current through a "cable" (cf. eq. \ref{Basics:eq:Ohm_r}). This approximation is motivated by the morphological structure of neurons, 
 
 
+Generally, these currents will be propelled both by electric drift and diffusion (cf. eq. \ref{Basics:eq:iNP}). However, the most dramatic concentration gradients in the brain are those across the membranes, and it is common to assume that the concentration gradients within the intracellular and extracellular spaces are so small that diffusion give a negligible contribution to the net electric current. The intra- and extrallular current are can then be approximated as Ohmic volume currents (cf. eq. \ref{Basics:eq:Ohm_3D_phi}). 
+
+The intracellular current is often further simplified 
 
 
+They are sometimes referred to as
 
-
-
-In neural models, the dielectric membrane is normally modeled as a capacitor. 
-
-The conductivity is a material property, and in brain tissue, it is often assumed to be a constant, at least within a given brain region. 
 
 As currents that pass through brain tissue predominantly move through the extracellular part of it, we shall represent the tissue as a conductor. 
-
-
-
-
-Such movements are described in terms of electric currents, where a current ($I$ (A))
-
-
-As we have emphasized several times, we do not want to study the brain by keeping track of individual charges. We are rather interested in the net movement of charge at a coarse-grained (space averaged) scale. In an electrical copper cable, the movement of charge is normally described in terms of an electrical current $I$, which represents the total current through the cable as a whole, and has units Ampere (A = C/s). For currents in a three dimensional volume, such as brain tissue, it is more convenient to work with current densities, 
-${\bf i}$  
-\ehnote{Er ikke $\mathbf{J}$ et mer typisk symbolvalg (Hamalainen '93 f.eks)?}
-which is defined as the current per unit cross section area, and has units A/(m$^2$).
-
-
-Unlike the dielectric membrane, the saline solutions that fill up the intra- and extracellular spaces are predominantly of conductive nature \index{Conductor}, which means that charges move rather freely through them when exposed to an electric field. As currents that pass through brain tissue predominantly move through the extracellular part of it, we shall represent the tissue as a conductor. 
 
 For most parts of this book, we shall approximate brain tissue as a \textit{linear} conductor, which means that the tissue current densities are given by the formula:
 \begin{equation}
