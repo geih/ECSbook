@@ -125,7 +125,7 @@ depending on which end(s) has no electric connections.
 For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
 
 \begin{equation}
-V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^{N-1} 1 / R_{j+n}}~, 
+V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^N V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^N 1 / R_{j+n}}~, 
 \end{equation}
 \label{eq:LFPy_V_connect_point}
 % 
@@ -181,19 +181,19 @@ Up to this point, the attentive reader of this chapter may have noticed that the
 Thus, the full set of operations involved in computing the full set of axial current magnitudes can be rewritten as a linear combination on the form
 %
 \begin{eqnarray}
-\begin{pmatrix}
+\begin{bmatrix}
 I_\mathrm{a}(\mathbf{r}_1, t)\\
 I_\mathrm{a}(\mathbf{r}_2, t)\\
 \vdots \\
 I_\mathrm{a}(\mathbf{r}_N, t)
-\end{pmatrix}
+\end{bmatrix}
 &=& \mathbf{A}^{-1} 
-\begin{pmatrix}
+\begin{bmatrix}
 V_\mathrm{m}(\mathbf{r}_1, t)\\
 V_\mathrm{m}(\mathbf{r}_2, t)\\
 \vdots \\
 V_\mathrm{m}(\mathbf{r}_N, t)\\
-\end{pmatrix} ~,
+\end{bmatrix} ~,
 \label{eq:LFPy_linear_combination}
 \end{eqnarray}
 %
@@ -213,20 +213,20 @@ I_\mathrm{a}(\mathbf{r}_1, t) = I_\mathrm{a}(\mathbf{r}_2, t) =
 which can be rewritten as the linear combination
 % 
 \begin{eqnarray}
-\begin{pmatrix}
+\begin{bmatrix}
 I_\mathrm{a}(\mathbf{r}_1, t)\\
 I_\mathrm{a}(\mathbf{r}_2, t)
-\end{pmatrix} 
+\end{bmatrix} 
 =
 - \frac{\pi d_{1}^{2} d_{2}^{2}}{4 R_{a} \left(L_{1} d_{2}^{2} + L_{2} d_{1}^{2}\right)}
-\begin{pmatrix}
+\begin{bmatrix}
 1 & -1 \\ 
 1 & -1 
-\end{pmatrix}
-\begin{pmatrix}
+\end{bmatrix}
+\begin{bmatrix}
 V_\mathrm{m}(\mathbf{r}_1, t) \\
 V_\mathrm{m}(\mathbf{r}_2, t) ~, 
-\end{pmatrix}
+\end{bmatrix}
 \end{eqnarray}
 %
 that is, similar to \Fref{eq:LFPy_linear_combination}. 
@@ -239,19 +239,19 @@ the axial currents can be represented as a vector field by multiplication with t
 %
 \begin{equation}
 \mathcal{I}_\mathrm{a}(t) \equiv
-\begin{pmatrix}
+\begin{bmatrix}
 \mathbf{I}_\mathrm{a}(\mathbf{r}_1, t)\\
 \mathbf{I}_\mathrm{a}(\mathbf{r}_2, t)\\
 \vdots \\
 \mathbf{I}_\mathrm{a}(\mathbf{r}_N, t)
-\end{pmatrix}
+\end{bmatrix}
 =
-\begin{pmatrix}
+\begin{bmatrix}
 I_\mathrm{a}(\mathbf{r}_1, t) \mathbf{d}_1 \\
 I_\mathrm{a}(\mathbf{r}_2, t) \mathbf{d}_2 \\
 \vdots \\
 I_\mathrm{a}(\mathbf{r}_N, t) \mathbf{d}_N
-\end{pmatrix} ~,
+\end{bmatrix} ~,
 \end{equation}
 %
 For compactness we introduced $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$, 
@@ -261,15 +261,15 @@ we let the `location' of each axial current be the mid-point $\mathbf{r}_j$ of e
 In a similar manner we will represent the total transmembrane current per compartment as a matrix
 \begin{equation}
 \mathbf{I}_\mathrm{m}(t) = 
-\begin{pmatrix}
-i_\mathrm{m}(x_1, t) || \mathbf{d}_1 || \\
-i_\mathrm{m}(x_2, t) || \mathbf{d}_2 || \\
+\begin{bmatrix}
+i_\mathrm{m}(\mathbf{r}_1, t) \Vert \mathbf{d}_1 \Vert \\
+i_\mathrm{m}(\mathbf{r}_2, t) \Vert \mathbf{d}_2 \Vert \\
 \vdots \\
-i_\mathrm{m}(x_N, t) || \mathbf{d}_N ||
-\end{pmatrix} ~,
+i_\mathrm{m}(\mathbf{r}_N, t) \Vert \mathbf{d}_N \Vert
+\end{bmatrix} ~,
 \end{equation}
 under the assumption that the transmembrane current density $i_\mathrm{m}(x_j, t)$ is constant along the compartment axis. 
-Here, $||\mathbf{d}_j ||$ denotes the norm of $\mathbf{d}_j$. 
+Here, $\Vert\mathbf{d}_j \Vert$ denotes the norm of $\mathbf{d}_j$. 
 Note that $\mathcal{I}_\mathrm{a}(t)$ is a 4D tensor with unit \si{\ampere \metre} where the different axes correspond to $(x_j, y_j, z_j, t)$ respectively, 
 while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} where the different axes correspond to $(j, t)$ for $j\in\{1, N\}$. 
 
@@ -279,6 +279,61 @@ while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} where the diffe
 \subsubsection{Application of linear volume conductor models}
 
 \ehnote{Make extracellular predictions $\mathbf{y}$ as linear systems $\mathbf{y} = \mathbf{Mx}$}
+
+As derived from \textit{volume conductor theory} \ehnote{crossref Chap. 4}, 
+the different electric and magnetic signals that can be computed from the electric activity of brain cells are \textit{linearly} dependent on either transmembrane currents or axial currents. 
+Thus, some arbitrary signals $v(\mathbf{R}_i, t)$ in $M$ different spatial locations from the $N$ compartmental sources located at $r_j$ can be computed as 
+%
+\begin{eqnarray}
+\begin{bmatrix}
+v(\mathbf{R}_1, t) \\
+v(\mathbf{R}_2, t) \\
+\vdots \\
+v(\mathbf{R}_M, t) 
+\end{bmatrix}
+&=& \mathbf{F}
+\begin{bmatrix}
+w(\mathbf{r}_1, t) \\
+w(\mathbf{r}_2, t) \\
+\vdots \\
+w(\mathbf{r}_N, t)
+\end{bmatrix} ~,
+\end{eqnarray}
+%
+where $\mathbf{F}$ is a matrix with dimensions $(M, N)$ wherein each element $f_{ij}$ is the chosen forward solution mapping the contribution from each source to the corresponding measurement. 
+A simple linear forward model mapping transmembrane currents of an $N$-compartment model to extracellular potentials in $M$ locations would be the point-source formalism, 
+which models neuronal sources \textit{and} measurement sites as infinitesimally small points a conductive medium \ehnote{add crossref}. 
+The point-source formula results in 
+%
+\begin{equation}
+f_{ij} = - \frac{1}{4\pi\sigma_\mathrm{e}}\frac{1}{\Vert\mathbf{R}_i + \mathbf{r}_j\Vert}  ~.
+\end{equation}
+% 
+The full linear system may be written out as
+% 
+\begin{equation}
+\begin{bmatrix}
+\phi(\mathbf{R}_1, t) \\
+\phi(\mathbf{R}_2, t) \\
+\vdots \\
+\phi(\mathbf{R}_M, t) 
+\end{bmatrix}
+= - \frac{1}{4\pi\sigma_\mathrm{e}}
+\begin{bmatrix}
+\frac{1}{\Vert\mathbf{R}_1 + \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_1 + \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_1 + \mathbf{r}_N\Vert} \\
+\frac{1}{\Vert\mathbf{R}_2 + \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_2 + \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_2 + \mathbf{r}_N\Vert} \\
+\vdots & \vdots & \cdots & \vdots \\
+\frac{1}{\Vert\mathbf{R}_M + \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_M + \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_M + \mathbf{r}_N\Vert}
+\end{bmatrix}
+\begin{bmatrix}
+i_\mathrm{m}(\mathbf{r}_1, t) \Vert \mathbf{d}_1 \Vert \\
+i_\mathrm{m}(\mathbf{r}_2, t) \Vert \mathbf{d}_2 \Vert \\
+\vdots \\
+i_\mathrm{m}(\mathbf{r}_N, t) \Vert \mathbf{d}_N \Vert
+\end{bmatrix} ~.
+\end{equation}
+
+
 
 
 %
