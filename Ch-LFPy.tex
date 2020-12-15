@@ -87,7 +87,6 @@ I_\mathrm{a}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V_\mathrm{m}(x, t)
 i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{a} (x, t)}{\partial x} = \frac{1}{r_\mathrm{i}} \frac{\partial^2 V_\mathrm{m}(x,t)}{\partial x^2}~,
 \label{eq:LFPy_ia_im_continuous}
 \end{eqnarray}
-\ehnote{note to self: upper or lower case $i$?}
 %
 where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}. 
 Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (\si{\ohm\metre}) and diameter (\si{\metre}) of the dendritic cable model, respectively \ehnote{crossref chap. 3}.  
@@ -99,22 +98,22 @@ For spatially discretized cable models the axial currents can be estimated on a 
 %
 \begin{eqnarray}
 I_\mathrm{a}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j+\frac{h}{2}, t) - V_\mathrm{m}(x_j-\frac{h}{2}, t)}{h} \nonumber \\
-		  &\overset{L_j=h}{=}& \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j} ~.
+		  &\overset{L_j=h}{=}& - \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j} ~.
 \label{eq:LFPy_ia_discrete}
 \end{eqnarray}
 %
 Here, the discretization constant $h$ is set equal to the compartment length $L_j$. 
-Its diameter is typically assumed to be of fixed, 
-and the compartment is a straight along its length axis. 
+Its diameter is typically assumed to be constant, 
+and the cylindrical compartment is a straight along its length axis. 
 \ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D corresponding to electric compartments made up by series of conical frusta.}
 Note that it is possible to swap the central difference approximation 
 by the forward and  backward difference approximation estimating axial currents for each half-compartment respectively as in \cite{Hagen2018}, 
 but we will not go into further detail here. 
  
-We next outline how the membrane potential can be estimated at the end points of each compartment $\in \{x_j-L_j/2, x_j+L_j/2\}$, 
+We next outline how the membrane potential can be estimated at the end points of each compartment $x \in \{x_j-L_j/2, x_j+L_j/2\}$, 
 which may connected to none, one or several other end points of other compartments, 
 when the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment. 
-For terminating compartments (i.e., one or both ends has no connecting compartments) we may define
+For terminating compartments (i.e., one or both ends has no connecting compartments and sealed ends) we may define
 %
 \begin{eqnarray}
 V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{and/or} \nonumber \\
@@ -123,7 +122,7 @@ V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
 %
 depending on which end(s) has no electric connections.
 
-For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of a parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
+For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
 
 \begin{equation}
 V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^{N-1} 1 / R_{j+n}}~, 
@@ -133,10 +132,8 @@ V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R
 where the connecting node to mid point resistances
 %
 \begin{eqnarray}
-R_{j+n} &=& \frac{4 R_\mathrm{a}}{\pi d_{j+n}^2} \frac{L_{j+n}}{2} \nonumber \\
-		&=& \frac{2 R_\mathrm{a}L_{j+n}}{\pi d_{j+n}^2} ~.
+R_{j+n} &=& \frac{2 R_\mathrm{a}L_{j+n}}{\pi d_{j+n}^2} ~.
 \end{eqnarray} 
-\ehnote{Check!}
 
 For child compartments connecting to the mid point of the parent compartment, 
 the corresponding potential at the branch point seen by any number of child segments is per definition the same as the mid point potential of the parent, that is, 
@@ -145,9 +142,13 @@ V_\mathrm{m}(x_{j+n}-L_{j+n} / 2, t) \equiv V_\mathrm{m}(x_j, t) ~.
 \end{equation} 
 
 Up to this point, we have provided the basic `machinery' needed in order to compute the discrete axial currents in a MC neuron model, 
-independently of specific or non-specific ion-channel currents, synaptic currents, capacitive currents etc. which may be present in the membrane of biophysically detailed MC neuron models. 
+independently of specific and non-specific ion-channel currents, synaptic currents, capacitive currents etc. which may be present in the membrane of biophysically detailed MC neuron models. 
+By our application of the central difference approximation to the first derivative, 
+it is in these derivations then implicitly assumed that the axial current is approximately constant along the entire length of the compartment, 
+which in turn imply that the the membrane voltage varies approximately linearly with position. 
+The naïve computational neuroscientist should remind her/himself that this assumption is likely to be violated if the spatial discretization chosen for the model neuron(s) is too coarse. 
 %
-Also the transmembrane currents may be estimated on a per-compartment basis in a similar manner using the same central difference approximation to the 2nd derivative as 
+Also the transmembrane currents may be estimated on a per-compartment basis in a similar manner using the central difference approximation to the 2nd derivative as 
 %
 \begin{eqnarray}
 i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j + \frac{h}{2}, t) - V_\mathrm{m}(x_j, t)+ V_\mathrm{m}(x_j - \frac{h}{2}, t)}{h^2 / 4} \nonumber \\
@@ -177,7 +178,7 @@ For now, we will emphasize that typical extracellular measures of extracellular 
 
 
 Up to this point, the attentive reader of this chapter may have noticed that the axial currents (and transmembrane currents for that matter) is \textit{linearly} dependent on the midpoint membrane voltages of the MC model. 
-Thus, the full set of operations involved in computing the full set of axial current magnitudes can be rewritten as a linear matrix operation on the form
+Thus, the full set of operations involved in computing the full set of axial current magnitudes can be rewritten as a linear combination on the form
 %
 \begin{eqnarray}
 \begin{pmatrix}
@@ -193,17 +194,44 @@ V_\mathrm{m}(\mathbf{r}_2, t)\\
 \vdots \\
 V_\mathrm{m}(\mathbf{r}_N, t)\\
 \end{pmatrix} ~,
+\label{eq:LFPy_linear_combination}
 \end{eqnarray}
 %
 where $\mathbf{r}_j$ denotes the midpoint location of compartment $j$ while the elements of the shape $(N, N)$ matrix $\mathbf{A}$ effectively corresponds to intracellular resistances and the specific connectivity between compartments
 (recall Ohm's law for the current $I$ across a resistor $R$ given a voltage difference $\Delta V$: $I=R^{-1} \Delta V$). 
-
+$\mathbf{A}$ may in practise be non-invertible, 
+but it can be demonstrated that a matrix $\mathbf{G}\equiv \mathbf{A}^{-1}$ can be computed directly. 
+%
 For a two-compartment model connecting the end point of the root (parent) compartment with the start point of the child compartment, 
-it can be shown that 
-\ehnote{need to do some pen\&paper exercises to show matrix elements $a_{11}, a_{12}$ etc.}
+it can be shown with some arithmetics that the axial current in each compartment is \ehnote{derived in /sympycodes/Ch6\_calc\_iaxial.ipynb}
+%
+\begin{equation}
+I_\mathrm{a}(\mathbf{r}_1, t) = I_\mathrm{a}(\mathbf{r}_2, t) = 
+	- \frac{\pi d_{1}^{2} d_{2}^{2} \left(V_\mathrm{m}(\mathbf{r}_1, t) - V_\mathrm{m}(\mathbf{r}_2, t) \right)}{4 R_{a} \left(L_{1} d_{2}^{2} + L_{2} d_{1}^{2}\right)} ~,
+\end{equation}
+%
+which can be rewritten as the linear combination
+% 
 \begin{eqnarray}
-a_{11} &=&  
+\begin{pmatrix}
+I_\mathrm{a}(\mathbf{r}_1, t)\\
+I_\mathrm{a}(\mathbf{r}_2, t)
+\end{pmatrix} 
+=
+- \frac{\pi d_{1}^{2} d_{2}^{2}}{4 R_{a} \left(L_{1} d_{2}^{2} + L_{2} d_{1}^{2}\right)}
+\begin{pmatrix}
+1 & -1 \\ 
+1 & -1 
+\end{pmatrix}
+\begin{pmatrix}
+V_\mathrm{m}(\mathbf{r}_1, t) \\
+V_\mathrm{m}(\mathbf{r}_2, t) ~, 
+\end{pmatrix}
 \end{eqnarray}
+%
+that is, similar to \Fref{eq:LFPy_linear_combination}. 
+We encourage the interested reader of this book to show that the same approach hold for other model configurations, such 
+as 3-compartment models without and with branching points.  
 
 So far the axial currents is represented as a scalar field. 
 For some applications, such as computing the magnetic field $\mathbf{H}(\mathbf{r}, t)$, 
@@ -230,7 +258,7 @@ For compactness we introduced $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r
 where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start and end point coordinates of compartment $j$. 
 Consistent with the point-source formalism \ehnote{crossref eq in sec 3}, 
 we let the `location' of each axial current be the mid-point $\mathbf{r}_j$ of each cylindrical compartment $j$. 
-In a similar manner we will represent the total transmembrane currents per compartment as a matrix
+In a similar manner we will represent the total transmembrane current per compartment as a matrix
 \begin{equation}
 \mathbf{I}_\mathrm{m}(t) = 
 \begin{pmatrix}
@@ -242,8 +270,9 @@ i_\mathrm{m}(x_N, t) || \mathbf{d}_N ||
 \end{equation}
 under the assumption that the transmembrane current density $i_\mathrm{m}(x_j, t)$ is constant along the compartment axis. 
 Here, $||\mathbf{d}_j ||$ denotes the norm of $\mathbf{d}_j$. 
-Note that $\mathcal{I}_\mathrm{a}(t)$ is a 4D tensor where the different axes correspond to $(x_j, y_j, z_j, t)$ respectively, 
-while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix where the different axes correspond to $(j, t)$ for $j\in\{1, N\}$.
+Note that $\mathcal{I}_\mathrm{a}(t)$ is a 4D tensor with unit \si{\ampere \metre} where the different axes correspond to $(x_j, y_j, z_j, t)$ respectively, 
+while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} where the different axes correspond to $(j, t)$ for $j\in\{1, N\}$. 
+
 
 %%%%%%%%%%%
 
