@@ -90,9 +90,10 @@ i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{a} (x, t)}{\partial x} = \frac
 \ehnote{note to self: upper or lower case $i$?}
 %
 where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}. 
-Here, $R_\mathrm{a}$  and $d$ is the axial resistivity and diameter of the dendritic cable model, respectively \ehnote{crossref chap. 3}.  
+Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (\si{\ohm\metre}) and diameter (\si{\metre}) of the dendritic cable model, respectively \ehnote{crossref chap. 3}.  
 The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere}, 
 while the transmembrane current is per unit length (\si{\ampere/\metre}).
+The location $x$ denotes the position along the piece of cable in one dimension (the cable equation is by definition 1D even if the different parts of a neuron may be assigned locations in 3D space). 
 
 For spatially discretized cable models the axial currents can be estimated on a per-compartment basis with midpoint location $x_j$ by the central difference approximation as: 
 %
@@ -122,7 +123,7 @@ V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
 %
 depending on which end(s) has no electric connections.
 
-For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of a parent compartment (\Fref{fig:LFPy_cable_models}) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
+For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of a parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
 
 \begin{equation}
 V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^{N-1} 1 / R_{j+n}}~, 
@@ -132,15 +133,15 @@ V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^{N-1} V_\mathrm{m}(x_{j+n}, t) / R
 where the connecting node to mid point resistances
 %
 \begin{eqnarray}
-R_{j+n} &=& \frac{4 R_\mathrm{a}/\pi d_{j+n}^2}{L_{j+n} / 2} \nonumber \\
-		&=& \frac{8R_\mathrm{a}}{\pi d_{j+n}^2 L_{j+n}} ~.
+R_{j+n} &=& \frac{4 R_\mathrm{a}}{\pi d_{j+n}^2} \frac{L_{j+n}}{2} \nonumber \\
+		&=& \frac{2 R_\mathrm{a}L_{j+n}}{\pi d_{j+n}^2} ~.
 \end{eqnarray} 
 \ehnote{Check!}
 
 For child compartments connecting to the mid point of the parent compartment, 
 the corresponding potential at the branch point seen by any number of child segments is per definition the same as the mid point potential of the parent, that is, 
 \begin{equation}
-V_\mathrm{m}(x_{j+n}-L_{j+1} / 2, t) \equiv V_\mathrm{m}(x_j, t) ~.
+V_\mathrm{m}(x_{j+n}-L_{j+n} / 2, t) \equiv V_\mathrm{m}(x_j, t) ~.
 \end{equation} 
 
 Up to this point, we have provided the basic `machinery' needed in order to compute the discrete axial currents in a MC neuron model, 
@@ -165,13 +166,13 @@ For now, we will emphasize that typical extracellular measures of extracellular 
 
 \begin{figure}[!ht]
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{Figures/LFPy/electric_circuits.png}
+\includegraphics[width=0.8\textwidth]{Figures/Ch-LFPy/circuits.png}
 \end{center}
 \caption{\textbf{Equivalent circuits for computing axial and transmembrane currents}. 
 ({\bf A}) One-compartment cable model with sealed ends. 
 ({\bf B}) Continuous piece of MC cable model.  
 ({\bf C}) MC cable model with branch point.}
-\label{fig:LFPy_cable_models}
+\label{fig:LFPy_circuits}
 \end{figure}
 
 
@@ -206,9 +207,10 @@ a_{11} &=&
 
 So far the axial currents is represented as a scalar field. 
 For some applications, such as computing the magnetic field $\mathbf{H}(\mathbf{r}, t)$, 
-the axial currents can be represented as a vector field by multiplication with the unit vectors along the center axis of each compartment:
+the axial currents can be represented as a vector field by multiplication with the path vectors along the center axis of each compartment:
 %
 \begin{equation}
+\mathcal{I}_\mathrm{a}(t) \equiv
 \begin{pmatrix}
 \mathbf{I}_\mathrm{a}(\mathbf{r}_1, t)\\
 \mathbf{I}_\mathrm{a}(\mathbf{r}_2, t)\\
@@ -217,20 +219,37 @@ the axial currents can be represented as a vector field by multiplication with t
 \end{pmatrix}
 =
 \begin{pmatrix}
-I_\mathrm{a}(\mathbf{r}_1, t) (\mathbf{r}_{\mathrm{f}1} - \mathbf{r}_{\mathrm{i}1}) / || \mathbf{r}_{\mathrm{f}1} - \mathbf{r}_{\mathrm{i}1} || \\
-I_\mathrm{a}(\mathbf{r}_2, t) (\mathbf{r}_{\mathrm{f}2} - \mathbf{r}_{\mathrm{i}2}) / || \mathbf{r}_{\mathrm{f}2} - \mathbf{r}_{\mathrm{i}2} || \\
+I_\mathrm{a}(\mathbf{r}_1, t) \mathbf{d}_1 \\
+I_\mathrm{a}(\mathbf{r}_2, t) \mathbf{d}_2 \\
 \vdots \\
-I_\mathrm{a}(\mathbf{r}_N, t) (\mathbf{r}_{\mathrm{f}N} - \mathbf{r}_{\mathrm{i}N}) / || \mathbf{r}_{\mathrm{f}N} - \mathbf{r}_{\mathrm{i}N} ||
+I_\mathrm{a}(\mathbf{r}_N, t) \mathbf{d}_N
 \end{pmatrix} ~,
 \end{equation}
 %
+For compactness we introduced $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$, 
 where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start and end point coordinates of compartment $j$. 
-$||\mathbf{r}||$ denotes the norm of $\mathbf{r}$. 
-
+Consistent with the point-source formalism \ehnote{crossref eq in sec 3}, 
+we let the `location' of each axial current be the mid-point $\mathbf{r}_j$ of each cylindrical compartment $j$. 
+In a similar manner we will represent the total transmembrane currents per compartment as a matrix
+\begin{equation}
+\mathbf{I}_\mathrm{m}(t) = 
+\begin{pmatrix}
+i_\mathrm{m}(x_1, t) || \mathbf{d}_1 || \\
+i_\mathrm{m}(x_2, t) || \mathbf{d}_2 || \\
+\vdots \\
+i_\mathrm{m}(x_N, t) || \mathbf{d}_N ||
+\end{pmatrix} ~,
+\end{equation}
+under the assumption that the transmembrane current density $i_\mathrm{m}(x_j, t)$ is constant along the compartment axis. 
+Here, $||\mathbf{d}_j ||$ denotes the norm of $\mathbf{d}_j$. 
+Note that $\mathcal{I}_\mathrm{a}(t)$ is a 4D tensor where the different axes correspond to $(x_j, y_j, z_j, t)$ respectively, 
+while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix where the different axes correspond to $(j, t)$ for $j\in\{1, N\}$.
 
 %%%%%%%%%%%
 
-\subsubsection{Linear forward model imp}
+\subsubsection{Application of linear volume conductor models}
+
+\ehnote{Make extracellular predictions $\mathbf{y}$ as linear systems $\mathbf{y} = \mathbf{Mx}$}
 
 
 %
