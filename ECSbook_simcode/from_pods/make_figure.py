@@ -51,25 +51,25 @@ vmax = np.max(np.abs(Z))
 # print(vmax)
 levels = np.linspace(-vmax, vmax, 32)
 
-ax = fig.add_subplot(111, xlim=[2500000, 7500000], ylim=[-1, 6],
-                     xlabel="position along axon (nm)",
+ax = fig.add_subplot(111, xlim=[2.5, 7.5], ylim=[-6, 5],
+                     xlabel="position along axon (mm)",
                      ylabel="distance from\nmembrane surface (nm)")
-img = ax.contourf(X, Y - 505, Z, levels=levels, cmap=cmap,
+img = ax.contourf(X / 1e6, Y - 505, Z, levels=levels, cmap=cmap,
                   vmax=vmax, vmin=-vmax)
-ax.contour(X, Y - 505, Z, levels=levels, colors='k', vmax=vmax, vmin=-vmax)
-
+ax.contour(X / 1e6, Y - 505, Z, levels=levels, colors='k', vmax=vmax, vmin=-vmax)
 
 ax.axhspan(axon_radius - 505, axon_radius + membrane_thickness - 505,
            facecolor='0.8')
-ax.text(2600000, -0.1, "axon membrane", va="top")
+ax.axhspan(axon_radius - 505, -axon_radius - 505,
+           facecolor='0.6')
+
+ax.text(2.6, -0.1, "axon membrane", va="top")
+ax.text(2.6, -5.1, "axon interior", va="top")
 plotting_convention.simplify_axes(ax)
 
-ax.set_xticks([3e6, 4e6, 5e6, 6e6, 7e6])
-ax.set_xticklabels(["3$\cdot10^6$", "4$\cdot10^6$",
-                    "5$\cdot10^6$", "6$\cdot10^6$", "7$\cdot10^6$"])
+ax.set_xticks([3, 4, 5, 6, 7])
+ax.set_xticklabels(["3", "4",
+                    "5", "6", "7"])
 cax = fig.add_axes([0.87, 0.15, 0.01, 0.7])
 plt.colorbar(img, cax=cax, ticks=[-200, -100, 0, 100, 200], label="µV")
 plt.savefig("fig_PNP.png")
-
-
-# plt.show()
