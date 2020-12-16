@@ -49,14 +49,21 @@ the spatial variation in membrane voltage across the entire morphology can be co
 transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).
 
 
-The NEURON simulation environment \cite{Hines1997} (\href{https://neuron.yale.edu}{https://neuron.yale.edu}) presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, 
+The NEURON simulation environment\footnote{\href{https://neuron.yale.edu}{https://neuron.yale.edu}} \cite{Hines1997} presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, 
 linux- and unix-based operating systems including MacOS, 
 and can be used with a GUI or in a programmatic fashion on laptops, desktop computers and in parallel on large-scale high-performance computing (HPC) facilities. 
-NEURON is also utilized as a simulator backend for other higher-level software such as PyNN, NetPyne, BMTK, LFPy \ehnote{add citations} etc.
-Alternatives to NEURON with partially overlapping feature sets have been developed in the past in form of MOOSE \ehnote{add citation, URL} and GENESIS \ehnote{add citation, URL}, 
-while software tailored for point-like neuron models such as Brian \ehnote{add citation, URL} recently received support for biophysically detailed MC neuron models.
+NEURON is also utilized as a simulator backend for other higher-level software such as 
+PyNN\footnote{\href{https://neuralensemble.org/PyNN/}{https://neuralensemble.org/PyNN/}} \cite{Davison2008}, 
+NetPyne\footnote{\href{http://www.netpyne.org}{http://www.netpyne.org}} \cite{Dura_Bernal_2019}, 
+BMTK\footnote{\href{https://alleninstitute.github.io/bmtk/}{https://alleninstitute.github.io/bmtk/}} \cite{Dai2020}, 
+LFPy\footnote{\href{https://lfpy.readthedocs.io}{https://lfpy.readthedocs.io}} \cite{Linden2014,Hagen2018} etc.
+Alternatives to NEURON with partially overlapping feature sets have been developed in the past in form of 
+MOOSE\footnote{\href{https://moose.ncbs.res.in}{https://moose.ncbs.res.in}} \cite{Bhalla2008} and 
+GENESIS\footnote{\href{http://genesis-sim.org}{http://genesis-sim.org}} \cite{Bower1998}, 
+while software tailored for point-like neuron models such as 
+Brian\footnote{\href{https://briansimulator.org/}{https://briansimulator.org/}} \cite{Stimberg2019} recently received support for biophysically detailed MC neuron models.
 Another effort receiving funding from the EU Human Brain Project, 
-named Arbor \ehnote{add citation, URL}, 
+named Arbor\footnote{\href{https://arbor.readthedocs.io}{https://arbor.readthedocs.io}} \cite{Akar2019}, 
 aims to develop MC neuron simulation software from the ground up in order to fully exploit modern high-performance libraries and next generation hardware in the form of graphical processing units (GPUs) and massively parallel HPC facilities. 
 
 
@@ -272,7 +279,7 @@ $N_t$ is here the number of discrete time steps of the current segments.
 
 %%%%%%%%%%%
 
-\subsubsection{Application of linear volume conductor models}
+\subsubsection{Application of linear volume conductor models for extracellular potentials and magnetic fields}
 
 \ehnote{Make extracellular predictions $\mathbf{y}$ as linear systems $\mathbf{y} = \mathbf{Mx}$}
 
@@ -354,9 +361,16 @@ z_j
 \end{bmatrix} ~.
 \end{equation}
 
-Another example is computing the \textit{ground truth} current source density, 
-that is, assigning the contribution of different compartments' transmembrane current to $M$ different volumes
-
+Another example is computing the \textit{ground truth} current source density (CSD) \cite{Pettersen2008,Hagen2016,Hagen2017}, 
+that is, assigning the contribution of different compartments' transmembrane current to $M$ different spatial domains $\Omega_j$ as 
+%
+\begin{equation}
+f_{ij} = \frac{\Delta s_{ij\in \Omega_j}}{\Delta s_{ij} V_{\Omega_j}} ~,
+\label{eq:LFPy:gtCSD}
+\end{equation}
+%
+where $(\Delta s_{ij\in \Omega_j} / \Delta s_{ij}) \in [0, 1]$ denotes the fraction of the length of the segment within the domain $\Omega_j$ and 
+$V_{\Omega_j}$ the volume of the spatial domain. 
 
 The formalism also holds for higher-dimensional sources, that is, 
 the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context is represented by a 3D tensor array with shape $(3, N, N_t)$. 
