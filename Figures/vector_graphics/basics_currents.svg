@@ -19,6 +19,41 @@
    sodipodi:docname="basics_currents.svg">
   <defs
      id="defs3221">
+    <marker
+       style="overflow:visible;"
+       id="marker1722"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1720" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker1484"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1482" />
+    </marker>
+    <rect
+       x="32.941201"
+       y="219.16879"
+       width="21.082369"
+       height="12.298048"
+       id="rect1266" />
     <rect
        x="58.854946"
        y="213.8982"
@@ -32,7 +67,8 @@
        refY="0.0"
        orient="auto"
        inkscape:stockid="Arrow1Mend"
-       inkscape:isstock="true">
+       inkscape:isstock="true"
+       inkscape:collect="always">
       <path
          transform="scale(0.4) rotate(180) translate(10,0)"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
@@ -180,6 +216,35 @@
          d="M 0,0 5,-5 -12.5,0 5,5 Z"
          id="path4536-2-9-96-2" />
     </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1072-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker4322-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4320-6" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -189,8 +254,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.6023991"
-     inkscape:cx="573.95129"
-     inkscape:cy="454.65023"
+     inkscape:cx="137.36366"
+     inkscape:cy="647.17024"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -209,7 +274,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -218,16 +283,32 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
+       style="fill:#cccccc;stroke:none;stroke-width:0.220696"
+       id="rect332"
+       width="22.427874"
+       height="33.408276"
+       x="68.503769"
+       y="248.14314"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <rect
        style="opacity:0.98;fill:#93a7ac;fill-opacity:1;stroke-width:1.55036;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000"
        id="rect4073"
        width="108.04714"
        height="72.470642"
        x="25.035315"
-       y="108.48634" />
+       y="108.48634"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        id="path3886"
        style="fill:#6f8a91;stroke:#000000;stroke-width:0.585023"
-       d="m 128.96966,79.162912 -0.2063,-14.002724 -100.721988,0.0778 a 7.0026195,3.8979177 88.739345 0 0 -0.409582,-0.03878 7.0026195,3.8979177 88.739345 0 0 -3.790215,7.004761 7.0026195,3.8979177 88.739345 0 0 3.772161,6.985347 l 0.0017,0.05159 z" />
+       d="m 128.96966,79.162912 -0.2063,-14.002724 -100.721988,0.0778 a 7.0026195,3.8979177 88.739345 0 0 -0.409582,-0.03878 7.0026195,3.8979177 88.739345 0 0 -3.790215,7.004761 7.0026195,3.8979177 88.739345 0 0 3.772161,6.985347 l 0.0017,0.05159 z"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <ellipse
        style="fill:#93a7ac;stroke:#000000;stroke-width:0.505757"
        id="ellipse3888"
@@ -235,73 +316,121 @@
        cy="-127.95296"
        rx="7.043509"
        ry="2.8966448"
-       transform="matrix(0.0107912,0.99994177,-0.99999945,0.00105205,0,0)" />
+       transform="matrix(0.0107912,0.99994177,-0.99999945,0.00105205,0,0)"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 86.165147,24.187484 -3.169733,16.49657"
-       id="path3890" />
+       id="path3890"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 79.812815,24.26719 3.169734,16.496591"
-       id="path3892" />
+       id="path3892"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 79.778123,24.232136 76.608389,40.728744"
-       id="path3894" />
+       id="path3894"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 73.42579,24.31188 3.169734,16.49659"
-       id="path3896" />
+       id="path3896"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 86.201804,24.20812 3.169734,16.49659"
-       id="path3898" />
+       id="path3898"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 73.321257,24.319897 70.151492,40.816468"
-       id="path3900" />
+       id="path3900"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 68.376928,30.604097 70.09393,40.814681"
        id="path3902"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 91.141154,30.50271 89.424161,40.713279"
        id="path3904"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#marker4322)"
        d="m 91.038478,31.054032 21.117322,-0.02337 20.5225,-0.02285"
        id="path3906"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#Arrow1Mend)"
        d="m 21.000269,30.663841 24.522506,-0.01186 22.921212,-0.01125"
        id="path3908"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.165;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4538-5)"
        d="m 60.13412,71.682173 35.576484,-3.2e-5"
-       id="path4534-3" />
+       id="path4534-3"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.769804;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4538-9-9)"
        d="M 91.044168,153.05343 111.34575,141.31035"
-       id="path4534-2" />
+       id="path4534-2"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.798808;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4538-9-9-8)"
        d="M 85.481547,148.28447 95.572138,126.18315"
        id="path4534-2-5"
        inkscape:transform-center-x="6.2587124"
-       inkscape:transform-center-y="1.8712198" />
+       inkscape:transform-center-y="1.8712198"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.769805;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4538-9-9-0)"
        d="m 58.636829,158.66212 23.04733,-4.34451"
-       id="path4534-2-1" />
+       id="path4534-2-1"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.769805;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4538-9-9-0-2)"
        d="m 37.779744,136.60124 14.64068,18.32225"
-       id="path4534-2-1-6" />
+       id="path4534-2-1-6"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
        id="text5466"
@@ -335,7 +464,10 @@
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="18.997313"
        y="21.262272"
-       id="text5515"><tspan
+       id="text5515"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5513"
          x="18.997313"
@@ -348,7 +480,10 @@
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="128.63063"
        y="21.580976"
-       id="text5515-3"><tspan
+       id="text5515-3"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5513-2"
          x="128.63063"
@@ -359,12 +494,15 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="129.70349"
+       x="113.82855"
        y="59.862171"
-       id="text5515-3-6"><tspan
+       id="text5515-3-6"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5513-2-4"
-         x="129.70349"
+         x="113.82855"
          y="59.862171"
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">φ(x)<tspan
    style="font-size:7.3378px;baseline-shift:sub;stroke-width:0.264583"
@@ -374,7 +512,10 @@
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="75.545151"
        y="50.949059"
-       id="text5576"><tspan
+       id="text5576"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5574"
          x="75.545151"
@@ -385,29 +526,40 @@
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="74.133034"
        y="89.93364"
-       id="text5576-1"><tspan
+       id="text5576-1"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5574-6"
          x="74.133034"
          y="89.93364"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">σ(x)</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">r<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan268">i</tspan>(x)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="70.788094"
-       y="191.84457"
-       id="text5576-1-6"><tspan
+       x="83.086143"
+       y="171.20142"
+       id="text5576-1-6"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5574-6-3"
-         x="70.788094"
-         y="191.84457"
+         x="83.086143"
+         y="171.20142"
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">σ(x,y,z)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="1.3176486"
        y="25.474516"
-       id="text5618"><tspan
+       id="text5618"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5616"
          x="1.3176486"
@@ -418,7 +570,10 @@
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="1.3258944"
        y="73.208229"
-       id="text5618-1"><tspan
+       id="text5618-1"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5616-0"
          x="1.3258944"
@@ -429,11 +584,131 @@
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="1.7651103"
        y="118.8867"
-       id="text5618-1-2"><tspan
+       id="text5618-1-2"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5616-0-7"
          x="1.7651103"
          y="118.8867"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">C</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="103.12592"
+       y="101.9748"
+       id="text5515-3-6-3"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Currents.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan5513-2-4-8"
+         x="103.12592"
+         y="101.9748"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">φ(x,y,z)<tspan
+   style="font-size:7.3378px;baseline-shift:sub;stroke-width:0.264583"
+   id="tspan5542-9-3" /></tspan></text>
+    <path
+       style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#marker4322-8)"
+       d="m 90.622541,265.4909 21.117329,-0.0234 20.52249,-0.0229"
+       id="path3906-3"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <path
+       style="opacity:0.98;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#Arrow1Mend-4)"
+       d="m 20.584337,265.10071 24.522507,-0.0119 22.921207,-0.0112"
+       id="path3908-9"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.065;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 68.597111,247.89774 v 33.81964"
+       id="path1258"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.065;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 90.292958,247.89774 v 33.81964"
+       id="path1260"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="53.584354"
+       y="252.98843"
+       id="text1272"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241"><tspan
+         sodipodi:role="line"
+         id="tspan1270"
+         x="53.584354"
+         y="252.98843"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">+<tspan
+   style="font-style:italic"
+   id="tspan1282">q</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="93.113792"
+       y="252.10999"
+       id="text1278"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241"><tspan
+         sodipodi:role="line"
+         id="tspan1276"
+         x="93.113792"
+         y="252.10999"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">-<tspan
+   style="font-style:italic"
+   id="tspan1284">q</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.789437;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4538)"
+       d="M 70.713776,277.50513 H 86.810365"
+       id="path1292"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.789437;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1484)"
+       d="M 70.713776,265.7257 H 86.810365"
+       id="path1480"
+       inkscape:transform-center-x="0.77786438"
+       inkscape:transform-center-y="5.7098082"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.789437;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1722)"
+       d="M 70.713776,251.75019 H 86.810365"
+       id="path1594"
+       inkscape:transform-center-x="0.77786438"
+       inkscape:transform-center-y="5.7098082"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="74.227509"
+       y="263.09039"
+       id="text1770"
+       inkscape:export-filename="/Users/geih/Documents/ECSbook/Figures/Basics/Capacitor.png"
+       inkscape:export-xdpi="91.366241"
+       inkscape:export-ydpi="91.366241"><tspan
+         sodipodi:role="line"
+         id="tspan1768"
+         x="74.227509"
+         y="263.09039"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">E</tspan></text>
   </g>
 </svg>
