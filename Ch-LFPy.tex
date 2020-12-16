@@ -113,9 +113,9 @@ If both ends terminate, the axial current will be zero as the voltage is assumed
 For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
 
 \begin{equation}
-V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^N V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^N 1 / R_{j+n}}~, 
-\end{equation}
+V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^N V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^N 1 / R_{j+n}}~, 
 \label{eq:LFPy_V_connect_point}
+\end{equation}
 % 
 where the connecting node to mid point resistances
 %
@@ -134,7 +134,7 @@ independently of specific and non-specific ion-channel currents, synaptic curren
 By our application of the central difference approximation to the first derivative, 
 it is in these derivations then implicitly assumed that the axial current is approximately constant along the entire length of the compartment, 
 which in turn imply that the the membrane voltage varies approximately linearly with position. 
-The naïve computational neuroscientist should remind her/himself that this assumption is likely to be violated if the spatial discretization chosen for the model neuron(s) is too coarse. 
+The naive computational neuroscientist should remind her/himself that this assumption is likely to be violated if the spatial discretization chosen for the model neuron(s) is too coarse. 
 %
 Also the transmembrane currents may be estimated on a per-compartment basis in a similar manner using the central difference approximation to the 2nd derivative as 
 %
