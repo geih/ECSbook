@@ -33,24 +33,10 @@ Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4
 
 %%%%%%
 
-\section{\red{TVN/EH: Neurodynamics based on multicompartmental neuron models}}
+\section{\ehnote{}\ehtxt{Forward-model predictions from multicompartment neuron models}}
 \label{sec:Schemes:LFPy}
 \index{Multicompartment models}
 
-\ehnote{gammalt:}
-The standard way - what LFPy was originally designed for \cite**{Hagen2018}.
-Same trick used earlier \cite**{Holt1999}.
-Same kind of thinking with LFPsim: \cite**{parasuram2016}
-
-\ehnote{nytt:}
-
-
-\ehnote{main points:}
-\begin{itemize}
-\item Numerical solution of the cable equation and state variables for channels, synapses etc. (in short)
-\item Estimating the axial and transmembrane currents for each compartment
-\item Applying a linear forward model to transmembrane/axial currents
-\end{itemize}
 
 Most models aiming to mimic the dynamics of a particular neuron or neural system except the simplest ball and stick like models are too complex to be solved analytically (cf. \Fref{sec:Neuron}). 
 Thus the set of partial differential equations (PDEs) and initial conditions representing voltage- and concentration-dependent ion channels, synapses, plasticity, neuronal geometry etc. of the full model will have to be solved numerically on computers. 
@@ -60,7 +46,7 @@ a more feasible approach is utilization of one of several different software too
 Such software greatly simplify the process of specifying the phenomenological or biophysically detailed model and choosing the appropriate numerical schemes for solving the resulting set of PDEs. 
 Such tools will also by default usually account for one of the main assumptions of standard cable theory, that is, 
 the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect 
-transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \ehnote{crossref ch. 3} for details).
+transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).
 
 
 The NEURON simulation environment \cite{Hines1997} (\href{https://neuron.yale.edu}{https://neuron.yale.edu}) presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, 
@@ -89,7 +75,7 @@ i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{a} (x, t)}{\partial x} = \frac
 \end{eqnarray}
 %
 where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}. 
-Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (\si{\ohm\metre}) and diameter (\si{\metre}) of the dendritic cable model, respectively \ehnote{crossref chap. 3}.  
+Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (\si{\ohm\metre}) and diameter (\si{\metre}) of the dendritic cable model, respectively (cf. \Fref{chap:Neuron}).  
 The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere}, 
 while the transmembrane current is per unit length (\si{\ampere/\metre}).
 The location $x$ denotes the position along the piece of cable in one dimension (the cable equation is by definition 1D even if the different parts of a neuron may be assigned locations in 3D space). 
@@ -120,7 +106,9 @@ V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{and/or} \nonu
 V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
 \end{eqnarray} 
 %
-depending on which end(s) has no electric connections.
+depending on which end(s) has no electric connections. 
+(This step effectively utilize the forward/backward difference approximation to first derivatives but only to terminating compartments. 
+If both ends terminate, the axial current will be zero as the voltage is assumed to be iso-potential along the compartment axis.)
 
 For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
 
@@ -160,7 +148,7 @@ i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\ma
 This machinery may appear as a bit of a hurdle to implement for the purpose of computing extracellular potentials or magnetic signals, 
 but thankfully MC neuron modeling software such as NEURON provides native support for computing the transmembrane current (\si{\ampere}) and/or transmembrane current density per surface membrane area (\si{\ampere/\metre^2}) for each compartment. 
 Dependent on the implementation in the neural simulation software, 
-a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc \ehnote{crossref chap. 3}. 
+a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}). 
 % 
 The current state is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite{Hagen2018}). 
 For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone. 
@@ -256,11 +244,18 @@ I_\mathrm{a}(\mathbf{r}_N, t) \mathbf{d}_N
 %
 For compactness we introduced $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$, 
 where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start and end point coordinates of compartment $j$. 
-Consistent with the point-source formalism \ehnote{crossref eq in sec 3}, 
+Consistent with the point-source formalism (cf. \Fref{sec:VC:pointsource}), 
 we let the `location' of each axial current be the mid-point $\mathbf{r}_j$ of each cylindrical compartment $j$. 
 In a similar manner we will represent the total transmembrane current per compartment as a matrix
 \begin{equation}
 \mathbf{I}_\mathrm{m}(t) = 
+\begin{bmatrix}
+I_\mathrm{m}(\mathbf{r}_1, t) \\
+I_\mathrm{m}(\mathbf{r}_2, t) \\
+\vdots \\
+I_\mathrm{m}(\mathbf{r}_N, t)
+\end{bmatrix}
+=
 \begin{bmatrix}
 i_\mathrm{m}(\mathbf{r}_1, t) \Vert \mathbf{d}_1 \Vert \\
 i_\mathrm{m}(\mathbf{r}_2, t) \Vert \mathbf{d}_2 \Vert \\
@@ -270,8 +265,9 @@ i_\mathrm{m}(\mathbf{r}_N, t) \Vert \mathbf{d}_N \Vert
 \end{equation}
 under the assumption that the transmembrane current density $i_\mathrm{m}(x_j, t)$ is constant along the compartment axis. 
 Here, $\Vert\mathbf{d}_j \Vert$ denotes the norm of $\mathbf{d}_j$. 
-Note that $\mathcal{I}_\mathrm{a}(t)$ is a 4D tensor with unit \si{\ampere \metre} where the different axes correspond to $(x_j, y_j, z_j, t)$ respectively, 
-while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} where the different axes correspond to $(j, t)$ for $j\in\{1, N\}$. 
+Note that $\mathcal{I}_\mathrm{a}(t)$ is a 3D tensor array with unit \si{\ampere \metre} and shape $(3, N, N_t)$, 
+while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} with shape $(N, N_t)$. 
+$N_t$ is here the number of discrete time steps of the current segments.
 
 
 %%%%%%%%%%%
@@ -280,7 +276,7 @@ while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} where the diffe
 
 \ehnote{Make extracellular predictions $\mathbf{y}$ as linear systems $\mathbf{y} = \mathbf{Mx}$}
 
-As derived from \textit{volume conductor theory} \ehnote{crossref Chap. 4}, 
+As derived from \textit{volume conductor theory} (\Fref{chap:VC}), 
 the different electric and magnetic signals that can be computed from the electric activity of brain cells are \textit{linearly} dependent on either transmembrane currents or axial currents. 
 Thus, some arbitrary signals $v(\mathbf{R}_i, t)$ in $M$ different spatial locations from the $N$ compartmental sources located at $r_j$ can be computed as 
 %
@@ -302,14 +298,14 @@ w(\mathbf{r}_N, t)
 %
 where $\mathbf{F}$ is a matrix with dimensions $(M, N)$ wherein each element $f_{ij}$ is the chosen forward solution mapping the contribution from each source to the corresponding measurement. 
 A simple linear forward model mapping transmembrane currents of an $N$-compartment model to extracellular potentials in $M$ locations would be the point-source formalism, 
-which models neuronal sources \textit{and} measurement sites as infinitesimally small points a conductive medium \ehnote{add crossref}. 
-The point-source formula results in 
+which models neuronal sources \textit{and} measurement sites as infinitesimally small points a conductive medium. 
+The point-source formula (\Fref{eq:VC:pointsource}) results in 
 %
 \begin{equation}
-f_{ij} = - \frac{1}{4\pi\sigma_\mathrm{e}}\frac{1}{\Vert\mathbf{R}_i + \mathbf{r}_j\Vert}  ~.
+f_{ij} = \frac{1}{4\pi\sigma_\mathrm{e}}\frac{1}{\Vert\mathbf{R}_i - \mathbf{r}_j\Vert}  ~.
 \end{equation}
 % 
-The full linear system may be written out as
+The full linear system for obtaining the extracellular potential may then be written out as the linear combination
 % 
 \begin{equation}
 \begin{bmatrix}
@@ -318,29 +314,63 @@ The full linear system may be written out as
 \vdots \\
 \phi(\mathbf{R}_M, t) 
 \end{bmatrix}
-= - \frac{1}{4\pi\sigma_\mathrm{e}}
+= \frac{1}{4\pi\sigma_\mathrm{e}}
 \begin{bmatrix}
-\frac{1}{\Vert\mathbf{R}_1 + \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_1 + \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_1 + \mathbf{r}_N\Vert} \\
-\frac{1}{\Vert\mathbf{R}_2 + \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_2 + \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_2 + \mathbf{r}_N\Vert} \\
+\frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_N\Vert} \\
+\frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_N\Vert} \\
 \vdots & \vdots & \cdots & \vdots \\
-\frac{1}{\Vert\mathbf{R}_M + \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_M + \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_M + \mathbf{r}_N\Vert}
+\frac{1}{\Vert\mathbf{R}_M - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_M - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_M - \mathbf{r}_N\Vert}
 \end{bmatrix}
 \begin{bmatrix}
-i_\mathrm{m}(\mathbf{r}_1, t) \Vert \mathbf{d}_1 \Vert \\
-i_\mathrm{m}(\mathbf{r}_2, t) \Vert \mathbf{d}_2 \Vert \\
+I_\mathrm{m}(\mathbf{r}_1, t) \\
+I_\mathrm{m}(\mathbf{r}_2, t) \\
 \vdots \\
-i_\mathrm{m}(\mathbf{r}_N, t) \Vert \mathbf{d}_N \Vert
+I_\mathrm{m}(\mathbf{r}_N, t)
+\end{bmatrix} ~.
+\end{equation}
+%
+Similarly, for line sources (\Fref{eq:VC:linesource}), the elements of $\mathbf{F}$ may be calculated as
+%
+\begin{equation}
+f_{ij} = \frac{1}{4\pi \sigma_\mathrm{e} \Delta s_{ij}} \log \left\Vert \frac{\sqrt{h_{ij}^2+\rho_{ij}^2}-h_{ij}}{\sqrt{\ell_i^2+\rho_{ij}^2}-\ell_{ij}} \right\Vert ~,
+\label{eq:LFPy:linesources}
+\end{equation}
+%
+where $\rho_{ij}$ is the distance perpendicular to line segment (compartment) $j$, 
+$h_{ij}$ the longitudinal distance from the end of the segment
+and $\ell_{ij} = \delta s_{ij} + h_{ij}$ the longitudinal distance from the start of the segment to some electrode contact located at $\mathbf{R}_i$. 
+
+The approach is applicable also to other types of measurements which are linearly dependent on the transmembrane current sources, 
+such as the current dipole moment (\Fref{eq:VC:dipole}). 
+For computing the current dipole moment the mapping matrix' columns are simply
+%
+\begin{equation}
+f_{j} = \mathbf{r}_j
+= 
+\begin{bmatrix}
+x_j \\
+y_j \\
+z_j
 \end{bmatrix} ~.
 \end{equation}
 
+Another example is computing the \textit{ground truth} current source density, 
+that is, assigning the contribution of different compartments' transmembrane current to $M$ different volumes
 
 
-
+The formalism also holds for higher-dimensional sources, that is, 
+the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context is represented by a 3D tensor array with shape $(3, N, N_t)$. 
+To compute the magnetic field outside the neuron arising from axial currents one can build up the forward model matrix $\mathbf{F}$ element by element using the relevant Biot-Savart law \cite{Blagoev2007, Hagen2018}
 %
-%\begin{eqnarray}
-%I_\mathrm{a}(\mathbf{r}_1, t) &=& V_\mathrm{m}(\mathbf{r}_1, t)   V_\mathrm{m}(\mathbf{r}_2, t) \\
-%I_\mathrm{a}(\mathbf{r}_2, t) &=& \\
-%\end{eqnarray}
+\begin{equation}
+f_{ij} = \frac{\mu_0}{4\pi} \frac{\Vert \mathbf{d}_j \Vert \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3}
+\end{equation}
+\ehnote{need to doublecheck}
+
+
+
+
+\ehnote{show code examples from LFPykit?}
 
 
 
