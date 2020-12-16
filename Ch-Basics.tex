@@ -9,7 +9,7 @@ Most of the physics that we will go through is summarized in, and follows from, 
 
 
 \section{\orange{GH: Electric charge}}
-\label{Sec:Basics:Charge} \index{Charge}
+\label{sec:Basics:Charge} \index{Charge}
 Let us begin with the fundamental quantity for electricity, the electric charge. Nature's fundamental charges are those carried by the protons and electrons that build up the atoms that build up the material world. The proton carries the charge $e$, while the electron has carries the charge $-e$, where $e = 1.602\times10^{-19}$ Coulomb (C) is called the \textit{unit charge} \index{Unit charge}. 
 
 Since atoms contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper cable, such as that powering a lamp in a in a normal house, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt-water, the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
@@ -105,7 +105,7 @@ U_E = q\phi.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\orange{GH: Electric current}}
+\section{\orange{GH: Electric currents}}
 \label{sec:Basics:Current} \index{Electric current}
 As we have emphasized several times, we normally do not want to study a macroscopic system by keeping track of individual charges. We are instead interested in the electric currents, $I$ (units Ampere: A = C/s), which represents the net movement of charge at a coarse-grained (space averaged) scale. There exist various kinds of electric currents, differing in terms of what drive them. Here, we shall briefly introduce three kinds, the conductive current, the capacitive current and the diffusive current.
 
@@ -122,7 +122,7 @@ where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference across the resisto
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{Figures/Basics/Currents.png}
+\includegraphics[width=0.6\textwidth]{Figures/Basics/Currents.png}
 \end{center}
 \caption{{\bf Ohms law for currents and current densities.} {\bf (A)} Current through cable with resistor with resistance $R$ ($\Omega$): $I = (\phi_B-\phi_A)/R$. {\bf (B)} Current in cable with specific axial resistance per unit length $r_a$ ($\Omega$/m).  $I=- (1/r_a) d\phi/dx$. {\bf (C)} Current density (units A/m$^2$) in a volume conductor with conductivity $\sigma$ (Sm): ${\bf i} = \sigma {\bf E} = - \sigma \nabla \phi$.}
 \label{Basics:fig:Currents}
@@ -156,9 +156,9 @@ An illustration of a capacitor is given in Fig. \ref{Basics:fig_Capacitor}. When
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{Figures/Basics/Capacitor.png}
+\includegraphics[width=0.6\textwidth]{Figures/Basics/Capacitor.png}
 \end{center}
-\caption{{\bf Capacitor}. 
+\caption{{\bf Capacitor}.  
 }
 \label{Basics:fig:Capacitor}
 \end{figure}
@@ -217,68 +217,100 @@ The first term on the right hand side of eq. \ref{Basics:eq:iNP} is the diffusiv
 \end{equation}
 Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. In many cases, the total current will be dominated by the drift component, and it is common to assume that the diffusive component is negligible. 
 
+\subsection{\orange{GH: A note on Ohms law}}
+It is important to remember that the current given by eq. \ref{Basics:eq:Ohm_3D_phi} represents the average movement of charge on a coarse-grained level, and does not apply on a microscopic scale. If we compare it with the microscopic fundament for this movement, it is easy to get confused, so let us dive into that confusion and try to clear it up. According to eq. \ref{Basics:eq:E}, an electric field will act on a reference charge $q$ by a constant force, which according to Newton's law (${\bf F} = m{\bf a}$) should give it a constant acceleration in the field-direction. Conversely, eq. \ref{Basics:eq:i} states that ${\bf E}$ gives rise not to a constant acceleration of charges, but rather a constant current, i.e., a constant average \textit{velocity} of charges. 
+
+The reason for the discrepancy between the microscopic (constant acceleration) and macroscopic (constant velocity) level is that the constant acceleration (eq. \ref{Basics:eq:E}) at the microscopic level will go on for only a tiny time period (called the charge relaxation-time) \index{Charge-relaxation} before our protagonist charge $q$ will bump into some other particle and be scattered out in some random direction. After the scattering event, the acceleration will start "from scratch", and go on until the next collision takes place, and so forth. Whereas the scattering events will tend to make the motion of $q$ a random walk (which should give it a zero average velocity in any preferred direction), the small periods of acceleration between collisions will at average give $q$ a net drift velocity in the field direction. As the same will happen for all other charges present, there will be a net drift of charge in the field direction. The current density given by Eq. \ref{Basics:eq:Ohm_3D_phi} is therefore often referred to as the drift current density. Admittedly, the explanation that we proposed here was somewhat hand-waving, and the fact that we get the linear (constant velocity) relationship in eq.\ref{Basics:eq:Ohm_3D_phi} is constitutive, meaning that it is observed experimentally rather than derived from first physical principles, and is found to be a good approximation for many mediums, brain tissue included, under many conditions \cite**{Nunez2006,Pettersen2012}. 
+
 
 \section{\orange{GH: Electric currents in the brain}}
-Having introduced three different kinds of currents in the previous section, we are now ready give a summary of the role that they play within a brain-specific context. We may think of currents in brain tissue as existing in one of three different kinds of mediums, running through either: 
+\label{Basics:braincurrents}
+Having introduced three different kinds of currents above, we are now ready to summarize the role that they play within a brain-specific context. It is useful to make a distinction between currents existing in one of three different mediums, running through either: 
 \begin{itemize}
 \item the intracellular saline solution (cytosol)
 \item the extracellular saline solution
 \item the cellular (neuronal or glial) membrane
 \end{itemize}
 
-In the list above, the membrane currents are the odd ones out. A bit cartoonishly, we may think of the cellular membrane as an insulator (dielectric medium) with small holes \index{Dielectricum}. Due to the dielectric properties of the membrane, it can store charges in so-called Debye-layers on its the in- and outside in a way equivalent to how charges are stored on the metal plates in a capacitor (cf. Fig.\ref{Basics:fig:Capacitor}). The capacitive properties of the membrane can be described in terms of a capacitive current like that defined in eq. \ref{Basics:eq:Icap_mem}, which causes the membrane potential to vary. The holes represent various kinds of ion channels, which are conductive pores in the membrane that allow ions to pass through them. The ionic current through the ion channels comes in addition to the capacitive current. Both are essentially one-dimensional, i.e., in the direction perpendicular to the membrane. The ionic currents generally depend both voltage- and ion concentration differences between the inside and outside of the membrane, and are thus electrodiffusive in their nature (cf. eq. \ref{Basics:eq:iNP}, but with $\nabla$ replaced with the one-dimensional differential operator $d/dz$. 
+Among these three, the membrane currents are the odd ones out. A bit cartoonishly, we may think of the cellular membrane as an insulator (dielectric medium) with small holes \index{Dielectricum}. Due to its dielectric properties, the membrane can store charges in so-called Debye-layers on its the in- and outside in a way equivalent to how charges are stored on the metal plates in a capacitor (cf. Fig.\ref{Basics:fig:Capacitor}). This charge-storage process can be described in terms of a capacitive current like that defined in eq. \ref{Basics:eq:Icap_mem}, which causes the membrane potential to vary. The holes represent various kinds of ion channels, which are conductive pores in the membrane that allow ions to pass through them. Ionic currents through the ion channels come in addition to the capacitive current. Both are essentially one-dimensional, i.e., in the direction perpendicular to the membrane. The ionic currents generally depend both voltage- and ion concentration differences between the inside and outside of the membrane, and are thus electrodiffusive in their nature (cf. eq. \ref{Basics:eq:iNP}, but in one dimension, i.e., $\nabla /rightarrow d/dz$.) 
 
-The intra- and extracellular currents are generally three dimensional electrodiffusive volume currents through the conductive saline solutions that fill up the intra- and extracellular spaces (cf. eq. \ref{Basics:eq:iNP}). However, as concentration gradients within the intracellular and extracellular spaces tend to be small, it is common to neglect the diffusive component, and approximate these currents as purely Ohmic (cf. eq. \ref{Basics:eq:Ohm_3D_phi}). 
+The intra- and extracellular currents are generally three dimensional electrodiffusive volume currents (cf. eq. \ref{Basics:eq:iNP}) through the conductive saline solutions that fill up the intra- and extracellular spaces. However, as concentration gradients within the intracellular and extracellular spaces typically are much smaller than those across membranes, it is common to neglect the diffusive component, and approximate that intra- and extracellular currents as being purely Ohmic (cf. eq. \ref{Basics:eq:Ohm_3D_phi}). For the intracellular current it is common to make the further simplification that it is well approximated as one-dimensional (cf. eq. \ref{Basics:eq:Ohm_r}). This is motivated by the morphological structure of neurons, which to a fair degree of accuracy can be represented as one-dimensional branching cables of varying diameter.
 
+An illustration of the involved currents in a small piece of tissue is given in Fig. \ref{Basics:fig:Twostep}A. As indicated there, currents travel in loops, so that the intracellular and extracellular currents are coupled through the transmembrane currents at the boundary. Of course, there are infinitely many such loops in the system, and only a few were included in the illustration. 
 
-For the intracellular component, it is common to make the further simplification that it can be approximated as a one-dimensional current through a "cable" (cf. eq. \ref{Basics:eq:Ohm_r}). This approximation is motivated by the morphological structure of neurons, 
-
-
-Generally, these currents will be propelled both by electric drift and diffusion (cf. eq. \ref{Basics:eq:iNP}). However, the most dramatic concentration gradients in the brain are those across the membranes, and it is common to assume that the concentration gradients within the intracellular and extracellular spaces are so small that diffusion give a negligible contribution to the net electric current. The intra- and extrallular current are can then be approximated as Ohmic volume currents (cf. eq. \ref{Basics:eq:Ohm_3D_phi}). 
-
-The intracellular current is often further simplified 
-
-
-They are sometimes referred to as
-
-
-As currents that pass through brain tissue predominantly move through the extracellular part of it, we shall represent the tissue as a conductor. 
-
-For most parts of this book, we shall approximate brain tissue as a \textit{linear} conductor, which means that the tissue current densities are given by the formula:
-\begin{equation}
-{\bf i_t} = \sigma_t {\bf E},
-\label{Basics:eq:i}
-\end{equation}
-where the index $t$ stands for tissue. Eq. \ref{Basics:eq:i} is a version of Ohm's law. It states that the current density will be proportional to the electric field and the conductivity of the medium, $\sigma_t$, which has units Siemens per square meters (S/m$^2$). The conductivity is a material property, and in brain tissue, it is often assumed to be a constant, at least within a given brain region. 
-
-It is important to remember that the current given by eq. \ref{Basics:eq:i} represents the average movement of charge on a coarse-grained level, and does not apply on a microscopic scale. If we compare it with the microscopic fundament for this movement, it is easy to get confused, so let us dive into that confusion and try to clear it up. According to eq. \ref{Basics:eq:E}, an electric field will act on a reference charge $q$ by a constant force, which according to Newton's law (${\bf F} = m{\bf a}$) should give it a constant acceleration in the field-direction. Conversely, eq. \ref{Basics:eq:i} states that ${\bf E}$ gives rise not to a constant acceleration of charges, but rather a constant current, i.e., a constant average \textit{velocity} of charges. 
-
-The reason for the discrepancy between the microscopic (constant acceleration) and macroscopic (constant velocity) level is that the constant acceleration (eq. \ref{Basics:eq:E}) at the microscopic level will go on for only a tiny time period (called the charge relaxation-time) \index{Charge-relaxation} before our protagonist charge $q$ will bump into some other particle and be scattered out in some random direction. After the scattering event, the acceleration will start "from scratch" again, and go on until the next collision takes place, and so forth. Whereas the scattering events will tend to make the motion of $q$ a random walk (which should give it a zero average velocity in any preferred direction), the small periods of acceleration between collisions will at average give $q$ a net drift velocity in the field direction. As the same will happen for all other charges present, there will be a net drift of charge in the field direction. The current density given by Eq. \ref{Basics:eq:i}, is therefore often referred to as the drift current density. Admittedly, the explanation that we proposed here was somewhat hand-waving, and the fact that we get the linear (constant velocity) relationship in eq. \ref{Basics:eq:i} is constitutive, meaning that it is observed experimentally rather than derived from first physical principles, and is found to be a good approximation for many mediums, brain tissue included, under many conditions \cite**{Nunez2006,Pettersen2012}. 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{Figures/Basics/Twostep.png}
+\end{center}
+\caption{{\bf Currents in brain tissue}. {\bf(A)} Illustration of currents involved in the brain, with intracellular volume currents (yellow), extracellular volume currents (red), and transmembrane currents (orange). Currents travel in closed loops. The entire space will be filled with currents, and only a paths was included in the illustration. {\bf(B)} A standard modeling strategy is to compute the intracellular and transmembrane currents on a framework independent of the extracellular dynamics. The neuron is approximated as a branching cable, and intracellular currents are one-dimensional along the cable, whereas transmembrane currents are perpendicular to the cable and distributed over the cable. {\bf(C)} The transmembrane currents computed in the framework {\bf(B)} can be used as output sources and sinks to the extracellular space, and can be used to compute the extracellular potential $\phi({\bf r})$. This will be the potential that is "needed" to complete all current loops. A few of which are illustrated with red, dashed arrows. 
+}
+\label{Basics:fig:Twostep}
+\end{figure}
 
 
-\section{\orange{GH: Electroneutrality of brain tissue}}
+\subsection{\orange{GH: Extracellular potentials}}
+\label{sec:Basics:ECSpot}
+The main focus in this book will be on the modeling and interpretation of extracellular potentials in the brain. In Section \ref{sec:Basics:Fields} we explained that electric fields, and thus electric potentials, ultimately are due to a distribution of charges. However, in neuroscience we rather see extracellular potentials as reflecting transmembrane currents from neurons (and glial cells). The following subchapters will provide some clarity as to why this is the case. 
+
+
+\subsection{\orange{GH: Electroneutrality of brain tissue}}
 \label{sec:Basics:Electroneutrality}
-Due to the Coulomb force (eq. \ref{Basics:eq:CoulombF}), positive charges will repel other positive charges, and attract negative charges. An effect of this is that positive charges will tend to surround themselves with negative charges, and vice versa. Consequently, the numbers of positive and negative charges in a finite volume of space tends to be in balance, and any finite reference volume of brain tissue will, on the coarse-grained scale, be practically electroneutral \cite**{Nunez2006,Grodzinsky2011}. If this were not the case, and a volume did contain a net charge density $\rho$, the very strong Coulomb-forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}, which in brain tissue is in the order of a nanosecond \cite**{Grodzinsky2011}. 
+Due to the Coulomb force (eq. \ref{Basics:eq:CoulombF}), positive charges will repel other positive charges, and attract negative charges. An effect of this is that positive charges in a conductive medium will tend to surround themselves with negative charges, and vice versa. Consequently, the numbers of positive and negative charges in a finite volume of space tends to be in balance, and any finite reference volume of brain tissue will, on the coarse-grained scale, be practically electroneutral \cite**{Nunez2006,Grodzinsky2011}. If this were not the case, and a volume did contain a net charge density $\rho$, the very strong Coulomb-forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}, which in brain tissue is in the order of a nanosecond \cite**{Grodzinsky2011}. 
 
 The Coulomb force also gives rise to a phenomenon called Debye shielding \cite**{Nunez2006}. As positive charges will tend to surround themselves with negative charges, and vice versa, they will tend to shield (cancel out) the electric fields from one another, so that neither of them give any contribution to the field measured at some distance away from the charges.
 
-Of course, a non-zero electric field or potential does require some charge separation somewhere. In the brain, this predominantly happens at neuronal membranes, and then on a very small spatial scale. Working as a parallel plate capacitor, a patch of membrane separates a charge $Q$ on the interior side from a charge $-Q$ on the exterior side. These two charges are equal in magnitude and opposite in sign, and are distributed in nanometer-thick sheaths on the interior and exterior membrane, called Debye layers. This charge separation gives rise to the membrane potential $V_m = Q/C_m$, where $C_m$ is the capacitance (with units Fahrad (F)) of the patch of membrane. We will speak more of the membrane capacitance in Chapter \ref{sec:Neuron}, but the point that we wanted to make here is that, since the membrane is just some nanometers thick, the two charges $-Q$ and $Q$ are very close in space, and will shield each others' contributions to extracellular fields measured at some distance from the membrane. 
+Of course, a non-zero electric field or potential does require some charge separation somewhere. In the brain, this predominantly happens at the capacitive neuronal membranes, and then on a very small spatial scale. As we described earlier, a patch of membrane has the capacity to separate a charge $q$ on the interior side from a charge $-q$ on the exterior side. However, since the membrane is just some nanometers thick, the two charges $-q$ and $q$ are very close in space, and will shield each others' contributions to extracellular fields measured at some distance from the membrane. 
 
-The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint that there should be no charge accumulation anywhere in the extracellular space. As we shall explain further in Chapter \ref{sec:VC}, the sources for the extracellular potential (of field) will then exclusively be the electric \textit{currents} entering or leaving the extracellular space through neural membranes.
+The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint that there should be no charge accumulation anywhere in the extracellular space. 
+
+
+\subsection{\orange{GH: Neurons as current sources}}
+\label{sec:Basics:C} 
+\index{Current source density}
+Due to the shielding effects explained above, the sources for the extracellular potential (of field) will exclusively be the electric \textit{currents} entering or leaving the extracellular space through neural membranes. Mathematically, we can express this through the continuity equation:
+\begin{equation}
+\nabla \cdot {\bf i_t} = -C.
+\label{Basics:eq:continuity1}
+\end{equation}
+where the source term, $C$, is called the current source density (units A/m$^3$), and represents  the transmembrane output currents from neurons per tissue volume. Here, we have let ${\bf i_t}$ denote the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents. 
+
+Eq. \ref{Basics:eq:continuity1} tells us that in a volume of space where there is no neuronal membrane ($C = 0$), we have that $\nabla \cdot {\bf i_t} = 0$. This means that there will be no net current entering or leaving such a volume. Importantly, this does not mean that the current must be zero. Currents can and will still run \textit{through} the volume, as long as the amount of current entering it and leaving it are in balance. 
+
+In a volume that \textit{does} receive a neuronal output, eq. \ref{Basics:eq:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume in terms of an extracellular tissue current. As we shall show in Chapter \ref{sec:VC}, this conservation law shall be the fundament for modeling extracellular potentials surrounding active neurons.
+
+For most parts of this book, we shall approximate brain tissue as a \textit{linear} Ohmic conductor, which means that the tissue current densities are given by eq. \ref{Basics:eq:Ohm_3D_phi}:
+\begin{equation}
+{\bf i_t} = - \sigma_t \nabla \phi, 
+\label{Basics:eq:i}
+\end{equation}
+where $\sigma_t$ is the tissue conductivity. Eq. \ref{Basics:eq:i} states that the current density will be proportional to the electric field and the conductivity of the medium, $\sigma_t$. The conductivity is a material property, and in brain tissue, it is often assumed to be a constant, at least within a given brain region. 
+
+
+\subsection{\orange{GH: Two-step approach for modeling extracellular potentials}}
+To compute extracellular potentials based on eq. \ref{Basics:eq:continuity1}, we off course need to know the neuronal output $C$. Generally, the transmembrane currents in neurons depend on the membrane potential $\phi_m$, which is defined as the difference between the intracellular ($\phi_i$) and the extracellular $\phi_e$ potentials immediately inside and outside the membrane. To compute intra- and extracellular potentials on a unified and spatially resolved framework is extremely computationally demanding, and unattainable for any large systems. Standard modeling approaches are therefore based on the simplifying assumption that the neurodynamics is independent of whatever goes on in the extracellular space. One may take a two-step approach to model the cellular and extracellular dynamics: 
+
+\begin{itemize}
+\item {\bf Step 1:} Compute the cellular dynamics (intracellular currents, membrane currents, and membrane potential) on a separate framework based on the assumption that this is independent on what goes on in the extracellular space (Fig. \ref{Basics:fig:Twostep}B). 
+
+\item {\bf Step 2:} Use the transmembrane currents computed in Step 1 as "external" input to the extracellular space (Fig. \ref{Basics:fig:Twostep}C). Based on current continuity (eq. \ref{Basics:eq:continuity1} with $C$ as boundary conditions obtained in Step 1, an analytical formula can then be derived for how the set of transmembrane currents give rise to an extracellular potential $\phi({\bf r})$. 
+\end{itemize}
+
+Throughout this book, we shall use this two-step approach to compute extracellular potentials, although we will briefly introduce the theory behind more advanced, alternative frameworks. The standard framework for completing Step 1 is presented in Chapter \ref{sec:Neuron}, and the standard framework for completing Step 2 is presented in Chapter \ref{sec:VC}. 
+
 
 
 \section{\orange{GH: Maxwell's equations}}
 \label{sec:Basics:Maxwell} \index{Maxwell's equations}
-Most of the physics that we have gone through so far follows from Maxwell's equations, so we will summarize this chapter by going briefly through these. The equations come in two versions, referred to as the microscopic and macroscopic versions. The microscopic version is the most fundamental, but using it requires knowledge of the positions of all individual charges, which is unfeasible when any medium at a macroscopic level. We therefore only list up the macroscopic set of equations: 
+Most of the physics that we have gone through so far follows from Maxwell's equations, so we will summarize this chapter by going briefly through these. The equations come in two versions, referred to as the microscopic and macroscopic versions. The microscopic version is the most fundamental, but using it requires knowledge of the positions of all individual charges. Since that is unfeasible when any medium at a macroscopic level, we therefore only list up the macroscopic set of equations: 
 
 \begin{eqnarray}
 \nabla\cdot {\bf D} & = & \rho. \label{Basics:eq:Max11} \\
 \nabla \cdot {\bf B} & = & 0.  \label{Basics:eq:Max22} \\
 \nabla \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{Basics:eq:Max33} \\
-\nabla \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{Basics:eq:Max44}, 
+\nabla \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{Basics:eq:Max44}.
 \end{eqnarray}
 
-were $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densities. For linear mediums, the auxillary fields (${\bf H}$ and ${\bf D}$) can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ is the magnetic permeability of the medium and $\epsilon$ the electric permittivity of the medium. This is an excellent approximation for brain tissue, so that we may write the Maxwell equations at the form:
+Here $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densities. For linear mediums , the auxillary fields (${\bf H}$ and ${\bf D}$) can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ is the magnetic permeability of the medium and $\epsilon$ the electric permittivity of the medium. This is an excellent approximation for brain tissue, so that we may write the Maxwell equations at the form:
 
 \begin{eqnarray}
 \nabla\cdot {\bf E} & = & \frac{\rho}{\epsilon}. \label{Basics:eq:Max1} \\
@@ -288,6 +320,8 @@ were $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densit
 \end{eqnarray}
 
 \ehnote{Kanskje du boer ta en ekstra titt paa likning 6 spesielt i Hamalainen '93 igjen?}
+\ghnote{Hva mener du? Var det den H-en som var problemet, eller ser du andre problemer?}
+
 Eq. \ref{Basics:eq:Max1} is Gauss's law (for electricity). The free charge density, $\rho$, can generally be non-zero, although we argued earlier that brain tissue for practical purposes can be assumed to be electroneutral at the coarse-grained scale. 
 
 Eq. \ref{Basics:eq:Max2} is Gauss's law for magnetism, and is the magnetic equivalent to eq. \ref{Basics:eq:Max1}. Whereas eq. \ref{Basics:eq:Max1} allows a spatial gradient of the electric field due to a local charge density $\rho$, eq. \ref{Basics:eq:Max1} disallows the corresponding gradient in the magnetic induction field. That is because magnetic monopoles do not exist. 
@@ -296,13 +330,40 @@ Eq. \ref{Basics:eq:Max3} is the Maxwell-Faraday equation for electric induction.
 
 Eq.  \ref{Basics:eq:Max4} is Ampere's circuital law, and is the magnetic equivalent to eq. \ref{Basics:eq:Max3}. According to eq. \ref{Basics:eq:Max4}, a magnetic field will be induced either by an electric current of free charges going through the medium (first term on the right), or by a temporal change in the displacement field (second term on the right). 
 
+Together, Maxwell's equations give a unified theory for electricity and magnetism, and laid the theoretical fundament for understanding electromagnetic radiation such as light. We can "see the light" by looking at eqns. \ref{Basics:eq:Max3} and \ref{Basics:eq:Max4}. Eq. \ref{Basics:eq:Max3} shows that a temporal change the magnetic field induces an electric field perpendicular to the change (perpendicular, because that is what the operation $\nabla \times$ does). while eq. \ref{Basics:eq:Max4} (last term) shows that a temporal change in the electric field induces magnetic field perpendicular to the change. Electromagnetic radiation is due to such an interplay where electric and magnetic fields act on each-others through a periodic series of inductions and cancellations that propagate as a wave through a medium. 
 
-Eq. \ref{Basics:eq:Max3} tells us that a temporal change the magnetic field induces an electric field.
+\subsection{\orange{GH: Quasi-electrostatic approximation}}
+For our studies of brain dynamics, electromagnetic radiation does not play an important role. Electric fields do not depend exclusively on magnetic induction, but can according to eq. \ref{Basics:eq:Max1} also be evoked also by the presence of electric charges. In the brain, this latter contribution is much larger than the contribution from magnetic field variations. When studying brain processes, we can therefore apply the so-called electro-quasi-static approximation of Maxwell's equations, which means that the temporal derivative of the magnetic field is assumed to be so small that it as a negligible impact on ${\bf E}$. This means that eq. \ref{Basics:eq:Max3} simplifies to $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{Basics:eq:EV}). This assumption was also implicit when we expressed {\bf E} as a function of charges in eq. \ref{Basics:eq:CoulombEN}. 
+
+\subsection{\orange{GH: Quasi-magnetostatic approximation}}
+The right hand side of eq. \ref{Basics:eq:Max4} is composed of a current of free charges (first term) plus a so-called displacement current (last term). The capacitive current that we introduced earlier (eq. \ref{Basics:eq:Icap_mem}) is an example of a displacement current, and the capacitance a function of $\epsilon$. The Ohmic current that we introduced earlier (cf. eq. \ref{Basics:eq:Ohm_general}) is an example of a current of free charges. For an idealized conductor, the displacement current is zero, while for an idealized capacitor, the current of free charges is zero. 
+
+Making the quasi-magnetostatic approximation means setting the last term in eq. \ref{Basics:eq:quasimag} to zero. If we assume that the first term is purely Ohmic (cf. eq. \ref{Basics:eq:Ohm_general}), we may write eq. \ref{Basics:eq:Max4}:
+
+\begin{equation}
+\nabla \times {\bf B} & = & \mu \left (\sigma {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t} \right). 
+\label{Basics:eq:quasimag}
+\end{equation}
+The quasi-magnetostatic approximation thus holds if 
 
 
-Together, eq. \ref{Basics:eq:Max1} and \ref{Basics:eq:Max3} show that an electric field can originate either from electric charges, or from time-varying magnetic fields. 
 
-However, for brain tissue, we assume that the electro-quasi-static approximation of Maxwell's equations is warranted, which means that the temporal derivative of the magnetic field is small and has a negligible impact on ${\bf E}$. This assumption was implicit when we earlier expressed {\bf E} as a function of charges in eq. \ref{Basics:eq:CoulombEN}. In the quasi-static case we also get from eq. \ref{Basics:eq:Max3} that $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{Basics:eq:EV}). 
+
+so that $\nabla \times {\bf B} & = & \mu\bf{i^{free}}$. This is a good approximation for the extracellular and intracellular currents, but not for the membrane currents, where the last, displacemen term
+
+
+In a perfect conductor, the last term is zero. 
+
+
+
+ while the 
+For a perfect conductor, the displacement current is zero, while for a perfect capacitor, the current of free charges is zero. 
+
+The displacement current is directly related to the capacitive cur
+
+
+
+
 
 From eqns. \ref{Basics:eq:Max1} and  \ref{Basics:eq:Max4} we can derive the concept of charge conservation. If compute the divergence (take $\nabla \cdot$) of both sides of \ref{Basics:eq:Max4}:
 \begin{equation}
@@ -316,20 +377,6 @@ and insert eq. \ref{Basics:eq:Max1} on the right hand side, we get:
 \end{equation}
 If the left hand side in nonzero, it means that there will be a net influx of current into a volume, and if that is the case, we must have an accumulation of charge there, as described by the right hand side of the equation. 
 
-
-\section{\orange{GH: Neurons as current sources}}
-\label{sec:Basics:C} 
-\index{Current source density}
- Mathematically, we can express this through the continuity equation:
-\begin{equation}
-\nabla \cdot {\bf i_t} = -C.
-\label{Basics:eq:continuity1}
-\end{equation}
-where the source term, $C$, is called the current source density (units A/m$^3$), and represents  the transmembrane output currents from neurons per tissue volume. We recall that ${\bf i_t}$ here is the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents. 
-
-Eq. \ref{Basics:eq:continuity1} tells us that in a volume of space where there is no neuronal membrane ($C = 0$), we have that $\nabla \cdot {\bf i_t} = 0$. This means that there will be no net current entering or leaving such a volume. Importantly, this does not mean that the current must be zero. Currents can and will still run \textit{through} the volume.
-
-In a volume that \textit{does} receive a neuronal output, eq. \ref{Basics:eq:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume in terms of an extracellular tissue current. As we shall show in Chapter \ref{sec:VC}, this conservation law shall be the fundament for modeling extracellular potentials surrounding active neurons.
 
 
 
