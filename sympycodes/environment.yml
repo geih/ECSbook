@@ -1,0 +1,10 @@
+name: sympy
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - sympy
+  - numpy
+  - jupyter
+  - jupyterlab
