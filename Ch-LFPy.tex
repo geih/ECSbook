@@ -362,23 +362,29 @@ z_j
 \end{equation}
 
 Another example is computing the \textit{ground truth} current source density (CSD) \cite{Pettersen2008,Hagen2016,Hagen2017}, 
-that is, assigning the contribution of different compartments' transmembrane current to $M$ different spatial domains $\Omega_j$ as 
+that is, assigning the contribution of different compartments' transmembrane current to $M$ different spatial domains $\Omega_i$ as 
 %
 \begin{equation}
-f_{ij} = \frac{\Delta s_{ij\in \Omega_j}}{\Delta s_{ij} V_{\Omega_j}} ~,
+f_{ij} = \frac{\Delta s_{ij\in \Omega_i}}{\Delta s_{ij} V_{\Omega_i}} ~,
 \label{eq:LFPy:gtCSD}
 \end{equation}
 %
-where $(\Delta s_{ij\in \Omega_j} / \Delta s_{ij}) \in [0, 1]$ denotes the fraction of the length of the segment within the domain $\Omega_j$ and 
-$V_{\Omega_j}$ the volume of the spatial domain. 
+where $(\Delta s_{ij\in \Omega_i} / \Delta s_{ij}) \in [0, 1]$ denotes the fraction of the length of the segment within the domain $\Omega_i$ and 
+$V_{\Omega_i}$ the volume of the spatial domain. 
 
 The formalism also holds for higher-dimensional sources, that is, 
-the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context is represented by a 3D tensor array with shape $(3, N, N_t)$. 
+the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context is represented by a 3D tensor array with shape $(3, N, N_t)$\ehnote{?}. 
 To compute the magnetic field outside the neuron arising from axial currents one can build up the forward model matrix $\mathbf{F}$ element by element using the relevant Biot-Savart law \cite{Blagoev2007,Hagen2018}
 %
 \begin{equation}
-f_{ij} = \frac{\mu_0}{4\pi} \frac{\mathbf{d}_j \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3}
+f_{ij} = \frac{1}{4\pi} \frac{I_3 \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~, 
 \end{equation}
+% 
+where $I_3$ is the shape $3 \times 3$ identity matrix, 
+thus the elements $f_{ij}$ are of shape $3 \times 3$. 
+
+which in the next step may be multiplied with the corresponding axial current magnitudes $[I_\mathrm{a}(\mathbf{r}_j, t)]$. 
+The magnetic permeability of tissue is approximately equal to  $\mu_0=$ 
 \ehnote{need to doublecheck some details}
 
 
