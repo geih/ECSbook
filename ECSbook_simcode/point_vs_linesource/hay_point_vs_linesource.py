@@ -67,16 +67,18 @@ def insert_synaptic_input(idx, cell):
 def plot_grid_LFP(cell, grid_elec_params, grid_x, grid_z, ax, synapses, scale_max=None):
 
     grid_electrode = LFPy.RecExtElectrode(cell, **grid_elec_params)
-    grid_electrode.calc_lfp()
+    M_elec_ps = grid_electrode.get_transformation_matrix()
+    lfp_ = M_elec_ps @ cell.imem * 1000
 
-    max_amp_elec_idx = np.argmax(np.max(np.abs(grid_electrode.LFP), axis=1))
-    max_amp_t_idx = np.argmax(np.abs(grid_electrode.LFP[max_amp_elec_idx, :]))
 
-    max_amp_LFP = np.max(np.abs(grid_electrode.LFP))
-    if not max_amp_LFP == np.abs(grid_electrode.LFP[max_amp_elec_idx, max_amp_t_idx]):
+    max_amp_elec_idx = np.argmax(np.max(np.abs(lfp_), axis=1))
+    max_amp_t_idx = np.argmax(np.abs(lfp_[max_amp_elec_idx, :]))
+
+    max_amp_LFP = np.max(np.abs(lfp_))
+    if not max_amp_LFP == np.abs(lfp_[max_amp_elec_idx, max_amp_t_idx]):
         raise RuntimeError("Wrong with chosen max value")
 
-    LFP = 1000 * grid_electrode.LFP[:, max_amp_t_idx].reshape(grid_x.shape)
+    LFP = lfp_[:, max_amp_t_idx].reshape(grid_x.shape)
 
     num = 15
     levels = np.linspace(0.01, 1, num=num)
@@ -92,12 +94,12 @@ def plot_grid_LFP(cell, grid_elec_params, grid_x, grid_z, ax, synapses, scale_ma
                        for i in range(len(levels_norm) -1)]
     colors_from_map[num - 1] = (1.0, 1.0, 1.0, 1.0)
 
-    [ax.plot([cell.xstart[idx], cell.xend[idx]],
-                 [cell.zstart[idx], cell.zend[idx]], lw=1, c='gray')
+    [ax.plot([cell.x[idx, 0], cell.x[idx, 1]],
+                 [cell.z[idx, 0], cell.z[idx, 1]], lw=1, c='gray')
      for idx in range(cell.totnsegs)]
 
-    [ax.plot(cell.xmid[syn.idx], cell.zmid[syn.idx], marker='o', c='cyan',
-                 ms=3, mec='k'
+    [ax.plot(cell.x[syn.idx].mean(), cell.z[syn.idx].mean(), marker='o', c='cyan',
+                 ms=5, mec='k'
              )
      for syn in synapses]
 
@@ -125,7 +127,7 @@ def make_figure():
     # Plot single-synapse dipoles
     cell = return_hay_cell(tstop=tstop, dt=dt, make_passive=True)
     idx = cell.get_closest_idx(x=0, y=0, z=syn_height)
-    syn_pos = cell.xmid[idx], cell.ymid[idx], cell.zmid[idx]
+    syn_pos = cell.x[idx].mean(), cell.y[idx].mean(), cell.z[idx].mean()
     syn, cell = insert_synaptic_input(idx, cell)
     cell.simulate(rec_imem=True)
 
@@ -141,16 +143,19 @@ def make_figure():
 
     lateral_elec_params["method"] = "pointsource"
     lat_elec_ps = LFPy.RecExtElectrode(cell, **lateral_elec_params)
-    lat_elec_ps.calc_lfp()
-    max_amp_elec_idx = np.argmax(np.max(np.abs(lat_elec_ps.LFP), axis=1))
-    max_amp_t_idx = np.argmax(np.abs(lat_elec_ps.LFP[max_amp_elec_idx, :]))
+    M_elec_ps = lat_elec_ps.get_transformation_matrix()
+    lfp_ps = M_elec_ps @ cell.imem * 1000
+
+    max_amp_elec_idx = np.argmax(np.max(np.abs(lfp_ps), axis=1))
+    max_amp_t_idx = np.argmax(np.abs(lfp_ps[max_amp_elec_idx, :]))
 
     lateral_elec_params["method"] = "linesource"
     lat_elec_ls = LFPy.RecExtElectrode(cell, **lateral_elec_params)
-    lat_elec_ls.calc_lfp()
+    M_elec_ls = lat_elec_ls.get_transformation_matrix()
+    lfp_ls = M_elec_ls @ cell.imem * 1000
 
-    max_amp_LFP = np.max(np.abs(lat_elec_ps.LFP))
-    if not max_amp_LFP == np.abs(lat_elec_ps.LFP[max_amp_elec_idx, max_amp_t_idx]):
+    max_amp_LFP = np.max(np.abs(lfp_ps))
+    if not max_amp_LFP == np.abs(lfp_ps[max_amp_elec_idx, max_amp_t_idx]):
         raise RuntimeError("Wrong with chosen max value")
 
     ax_ps_1 = fig.add_axes([0.03, 0.55, 0.35, 0.4], title="point source\nzoom-in", **ax_lfp_dict_zoom)
@@ -160,12 +165,20 @@ def make_figure():
     ax_diff = fig.add_axes([0.87, 0.1, 0.1, 0.15], xticks=[0, 25, 50], ylim=[0.2e-2, 5e0],
                            ylabel="relative difference", xlabel="µm")
 
-    rel_diff = (np.abs(lat_elec_ps.LFP[:, max_amp_t_idx] -
-                      lat_elec_ls.LFP[:, max_amp_t_idx]) /
-                np.max(np.abs(lat_elec_ls.LFP[:, max_amp_t_idx])))
+    rel_diff = (np.abs(lfp_ps[:, max_amp_t_idx] -
+                      lfp_ls[:, max_amp_t_idx]) /
+                np.max(np.abs(lfp_ls[:, max_amp_t_idx])))
 
-    ax_diff.semilogy(lat_elec_ps.x - syn_pos[0], rel_diff, c='r', lw=2, ls=":")
+    dist = lat_elec_ps.x - syn_pos[0]
+
+    ax_diff.semilogy(dist, rel_diff, c='r', lw=2, ls=":")
     ax_diff.set_yticks([1e-2, 1e-1, 1e0])
+
+    rel_err_10p = np.argmin(np.abs(rel_diff - 0.1))
+    rel_err_1p = np.argmin(np.abs(rel_diff - 0.01))
+
+    print(rel_diff[rel_err_10p], dist[rel_err_10p])
+    print(rel_diff[rel_err_1p], dist[rel_err_1p])
 
     ax_ps_1.plot(lat_elec_ps.x, lat_elec_ps.z, c='r', lw=2, ls=":")
 
@@ -197,7 +210,7 @@ def make_figure():
     cbar_zoom.set_label('$\phi$ (µV)', labelpad=0)
     cbar_zoom.set_ticks(np.array([np.arange(-scalemax_zoom, scalemax_zoom + 1)]))
 
-    cax = fig.add_axes([0.81, 0.35, 0.01, 0.2], frameon=False)
+    cax = fig.add_axes([0.75, 0.32, 0.01, 0.2], frameon=False)
     cbar = fig.colorbar(ep_intervals_ps2, cax=cax)
     cbar.set_label('$\phi$ (µV)', labelpad=0)
     cbar.set_ticks(np.array([np.arange(-scalemax, scalemax + 1)]))
@@ -205,8 +218,8 @@ def make_figure():
     axes_to_mark = [ax_ps_1, ax_ls_1, ax_ps_2, ax_ls_2, ax_diff]
     mark_subplots(axes_to_mark, xpos=0.0, ypos=1.1)
 
-    fig.savefig("fig_point_versus_linesource.png", dpi=300)
-    fig.savefig("fig_point_versus_linesource.pdf", dpi=300)
+    fig.savefig("fig_point_versus_linesource_2.png", dpi=300)
+    fig.savefig("fig_point_versus_linesource_2.pdf", dpi=300)
 
 
 if __name__ == '__main__':
