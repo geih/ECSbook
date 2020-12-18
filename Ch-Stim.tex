@@ -1,5 +1,5 @@
 \chapter{TVN: Electrical stimulation}
-\label{sec:Stim}
+\label{Ch:Stim}
 \tvnnote{Torbjørn skriver dette}
 
 \section{\red{TVN TO WRITE THIS}}
@@ -110,3 +110,13 @@ The second spatial derivative in the cable equation arises from axial currents b
 }
 \label{Stim:fig:current_stimulation_example}
 \end{figure}
+
+\section{Electrode models for current-carrying electrodes}
+\label{Sec:EPI}
+In Section~\ref{sec:VC:electrodes} we stated that modelling recording electrodes
+was quite easy, but that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization
+ \cite**{McIntyre2001,Martinsen2008,Joucla2012}.
+In essence, the complication stems from that in electronics the electric charge is carried by electrons, while in neural tissue the electric charge is carried by positive and negative ions. For low frequencies, which do not favor capacitive currents, this change of charge carrier can be problematic, resulting in electrode polarization. 
+  Modelling electrode polarization effects will often require numerically comprehensive approaches, like the Finite Element Method (FEM) \index{Finite Element Method}\cite**{Buitenweg2003,Moulin2008,Joucla2014,Vermaas2020a}, and/or careful calibration to experimental recordings \cite**{Gabriel1996,Martinsen2008,Miceli2017},
+and this topic is not covered here.
+
