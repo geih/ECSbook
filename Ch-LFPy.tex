@@ -87,7 +87,7 @@ The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere},
 while the transmembrane current is per unit length (\si{\ampere/\metre}).
 The location $x$ denotes the position along the piece of cable in one dimension (the cable equation is by definition 1D even if the different parts of a neuron may be assigned locations in 3D space). 
 
-For spatially discretized cable models the axial currents can be estimated on a per-compartment basis with midpoint location $x_j$ by the central difference approximation as: 
+For spatially discretized cable models the axial currents can be estimated per-compartment by the central difference approximation as
 %
 \begin{eqnarray}
 I_\mathrm{a}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j+\frac{h}{2}, t) - V_\mathrm{m}(x_j-\frac{h}{2}, t)}{h} \nonumber \\
@@ -95,7 +95,8 @@ I_\mathrm{a}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\
 \label{eq:LFPy_ia_discrete}
 \end{eqnarray}
 %
-Here, the discretization constant $h$ is set equal to the compartment length $L_j$. 
+Here, $x_j$ denotes midpoint location,
+and the discretization constant $h$ is set equal to the compartment length $L_j$. 
 Its diameter is typically assumed to be constant, 
 and the cylindrical compartment is a straight along its length axis. 
 \ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D corresponding to electric compartments made up by series of conical frusta.}
@@ -115,7 +116,7 @@ V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
 %
 depending on which end(s) has no electric connections. 
 (This step effectively utilize the forward/backward difference approximation to first derivatives but only to terminating compartments. 
-If both ends terminate, the axial current will be zero as the voltage is assumed to be iso-potential along the compartment axis.)
+If both ends terminate, the axial current will be zero as the voltage is implicitly assumed to be iso-potential along the compartment axis.)
 
 For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
 
@@ -249,7 +250,7 @@ I_\mathrm{a}(\mathbf{r}_N, t) \mathbf{d}_N
 \end{bmatrix} ~,
 \end{equation}
 %
-For compactness we introduced $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$, 
+For compactness we introduced the current displacement $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$, 
 where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start and end point coordinates of compartment $j$. 
 Consistent with the point-source formalism (cf. \Fref{sec:VC:pointsource}), 
 we let the `location' of each axial current be the mid-point $\mathbf{r}_j$ of each cylindrical compartment $j$. 
@@ -272,16 +273,14 @@ i_\mathrm{m}(\mathbf{r}_N, t) \Vert \mathbf{d}_N \Vert
 \end{equation}
 under the assumption that the transmembrane current density $i_\mathrm{m}(x_j, t)$ is constant along the compartment axis. 
 Here, $\Vert\mathbf{d}_j \Vert$ denotes the norm of $\mathbf{d}_j$. 
-Note that $\mathcal{I}_\mathrm{a}(t)$ is a 3D tensor array with unit \si{\ampere \metre} and shape $(3, N, N_t)$, 
+Note that $\mathcal{I}_\mathrm{a}(t)$ is a 3D tensor array with unit \si{\ampere \metre} and shape $(N, 3, N_t)$, 
 while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} with shape $(N, N_t)$. 
-$N_t$ is here the number of discrete time steps of the current segments.
+$N_t$ is here the number of discrete time steps in the simulated output signals.
 
 
 %%%%%%%%%%%
 
 \subsubsection{Application of linear volume conductor models for extracellular potentials and magnetic fields}
-
-\ehnote{Make extracellular predictions $\mathbf{y}$ as linear systems $\mathbf{y} = \mathbf{Mx}$}
 
 As derived from \textit{volume conductor theory} (\Fref{chap:VC}), 
 the different electric and magnetic signals that can be computed from the electric activity of brain cells are \textit{linearly} dependent on either transmembrane currents or axial currents. 
@@ -336,10 +335,11 @@ I_\mathrm{m}(\mathbf{r}_N, t)
 \end{bmatrix} ~.
 \end{equation}
 %
+Note that the constant terms have been moved out of the matrix multiplication. 
 Similarly, for line sources (\Fref{eq:VC:linesource}), the elements of $\mathbf{F}$ may be calculated as
 %
 \begin{equation}
-f_{ij} = \frac{1}{4\pi \sigma_\mathrm{e} \Delta s_{ij}} \log \left\Vert \frac{\sqrt{h_{ij}^2+\rho_{ij}^2}-h_{ij}}{\sqrt{\ell_i^2+\rho_{ij}^2}-\ell_{ij}} \right\Vert ~,
+f_{ij} = \frac{1}{4\pi \sigma_\mathrm{e} \Delta s_{ij}} \log \left| \frac{\sqrt{h_{ij}^2+\rho_{ij}^2}-h_{ij}}{\sqrt{\ell_i^2+\rho_{ij}^2}-\ell_{ij}} \right| ~,
 \label{eq:LFPy:linesources}
 \end{equation}
 %
@@ -360,7 +360,7 @@ y_j \\
 z_j
 \end{bmatrix} ~.
 \end{equation}
-
+%
 Another example is computing the \textit{ground truth} current source density (CSD) \cite{Pettersen2008,Hagen2016,Hagen2017}, 
 that is, assigning the contribution of different compartments' transmembrane current to $M$ different spatial domains $\Omega_i$ as 
 %
@@ -371,26 +371,54 @@ f_{ij} = \frac{\Delta s_{ij\in \Omega_i}}{\Delta s_{ij} V_{\Omega_i}} ~,
 %
 where $(\Delta s_{ij\in \Omega_i} / \Delta s_{ij}) \in [0, 1]$ denotes the fraction of the length of the segment within the domain $\Omega_i$ and 
 $V_{\Omega_i}$ the volume of the spatial domain. 
+The geometry of each volume is in principle arbitrary, 
+however they are typically assumed to be cylindrical or cubic. 
+Cylindrical volumes can be useful for computing the ground truth CSD alongside a laminar probe \cite{Pettersen2008,Hagen2016,Hagen2017}, 
+while the latter could be used to compute the ground truth CSD across evenly distributed voxels distributed in the full 3D space occupied by the neuronal sources. 
 
-The formalism also holds for higher-dimensional sources, that is, 
-the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context is represented by a 3D tensor array with shape $(3, N, N_t)$\ehnote{?}. 
-To compute the magnetic field outside the neuron arising from axial currents one can build up the forward model matrix $\mathbf{F}$ element by element using the relevant Biot-Savart law \cite{Blagoev2007,Hagen2018}
+The formalism may also be adapted for higher-dimensional source elements, that is, 
+the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context can be represented by a 3D tensor arrays with shape $(M, 3, N_t)$. 
+To compute the magnetic field outside the neuron arising from axial currents one can 
+either sum up the individual contributions using the relevant Biot-Savart law \cite{Blagoev2007,Hagen2018} as
 %
 \begin{equation}
-f_{ij} = \frac{1}{4\pi} \frac{I_3 \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~, 
+\mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^M \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
+\label{eq:LFPy_biotsavart1}
+\end{equation}
+%
+where the magnetic permeability $\mu \approx \mu_0=4\pi\times 10^7$~\si{\henry/\metre} that is, approximately equal to the permeability in vacuum.  
+Alternatively, 
+one can build up a forward model matrix $\mathbf{F}$ element by element as
+%
+\begin{equation}
+f_{ij} = \frac{1}{4\pi} \frac{-I_3 \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~, 
+\label{eq:LFPy_biotsavart2}
 \end{equation}
 % 
 where $I_3$ is the shape $3 \times 3$ identity matrix, 
-thus the elements $f_{ij}$ are of shape $3 \times 3$. 
+thus the elements $f_{ij}$ are of shape $3 \times 3$ and $\mathbf{F}$ will be of shape (N, M, 3, 3).
+Assuming that each compartmental axial current $\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t)$ is represented as a $3 \times N_t$ matrix, 
+the calculation of the magnetic field $\mathbf{B}$ in location $\mathbf{R}_i$ from all contributions is 
+% 
+\begin{equation}
+\mathbf{B}(\mathbf{R}_i, t) = \sum_{j=1}^M f_{ij} \cdot \mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) ~.
+\label{eq:LFPy_biotsavart3}
+\end{equation}
+%
+Note that application of \Fref{eq:LFPy_biotsavart1} or \Fref{eq:LFPy_biotsavart3} is interchangeable and context dependent. 
+In situations where axial currents ($I_\mathrm{a}(\mathbf{r}_j, t)$), 
+current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stored separately it may make sense to precompute the full $\mathbf{F}$-matrix for all $N$ measurement sites at once which may demand a lot of system memory. 
 
-which in the next step may be multiplied with the corresponding axial current magnitudes $[I_\mathrm{a}(\mathbf{r}_j, t)]$. 
-The magnetic permeability of tissue is approximately equal to  $\mu_0=$ 
-\ehnote{need to doublecheck some details}
+\ehnote{usikker paa hvor detaljert jeg skal gaa inn her. Python/numpy lar en gjoere en gjoere denne operasjonen for alle maaleposisjoner kompakt som} 
+\ehtxt{\url{B=(F @ I).sum(axis=1); B.shape=(N,3,Nt); F.shape=(N,M,3,3); I.shape=(M,3,Nt)}}
+\ehnote{ogsaa usikker paa notasjon for matriseprodukt med nD matriser som her.}
 
 
+\ehnote{add some on combining current dipole moment to distal measures of activity (EEG, MEG)}
 
 
 \ehnote{show code examples from LFPykit?}
+
 
 
 
