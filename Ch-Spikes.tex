@@ -819,9 +819,39 @@ As discussed in \Fref{sec:Spikes:electrode_size} large electrode contacts will t
 identify individual spikes from the recorded signal. Here an estimate of the total firing rate of the neurons surrounding the contact may be found in a different 
 way,  that is, by rectification of the high-pass filtered extracellular potential~\cite**{Schroeder1998,Schroeder2001,Ulbert2001}. 
 
-This approach was used to estimate firing rates of cortical populations of neuron in the rat somatosensory cortex based on multielectrode laminar 
-recordings~\cite**{Einevoll2007,Blomquist2009}. To test the validity of the approach, a parallel modeling study was pursued where an analogous virtual experiment 
-was done on a population of about 1000 layer-5 cortical neurons receiving synaptic inputs \cite**{Pettersen2008} . 
+This approach was used to estimate firing rates of cortical populations of neuron in the rat barrel (somatosensory) cortex based on multielectrode laminar 
+recordings~\cite**{Einevoll2007,Blomquist2009}. To test the validity of the approach, a modeling study was pursued where an analogous virtual (in silico) experiment 
+was performed~\cite**{Pettersen2008} . Specifically, about thousand layer-5 cortical pyramidal neurons with somas arranged in a cylindrical disc, 
+mimicking a neuronal population in rat barrel cortex, was considered (\Fref{fig:Spikes:MUA-population}). The neurons received synaptic inputs simulating the volley of activation following 
+sensory stimulation from flicking the appropriate whiskers. Extracellular potentials were computed for a set of contact positions along the central axis of the cylinder (panel B).
+
+%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-2}
+\end{center}
+\caption[]{
+From Pettersen 2008a: \textbf{Schematic illustration of neural population created from pyramidal layer-5 neuron templates.} (b) Somas of neuronal templates are placed randomly inside a cylindrical annulus with height h=0.4 mm, outer diameter d=0.4 mm, and inner diameter 0.1 mm. One thousand cells are non-spiking (dots), while 40 cells produce a single spike following synaptic stimulation
+(triangles). The electrode point contacts (stars) are aligned on the central axis of the cylindrical annulus. (c) Illustration of line-source method where the transmembrane currents passing through the 
+segments of the displayed branches are modeled as line segments with uniform current density.}
+\label{fig:Spikes:MUA-population}
+\end{figure}
+%%%
+
+%%%
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-3} \\
+\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-4} \\
+\includegraphics[width=0.4\textwidth]{Figures/Spikes/MUA-5} 
+\end{center}
+\caption[]{
+From Pettersen 2008a: \textbf{Extracellular potentials at electrode contacts 1-- 23 for apically stimulated population.} (a) Single-trial raw (unfiltered) extracellular potentials. (b) Frequency content, i.e., Fourier amplitudes, of raw potentials in (a). (e) MUA, i.e., high-pass filtered (750 -- 5.000 Hz) and rectified content of potentials in (a). (f) Frequency content of the MUA in (e) prior to rectification. The mean synaptic onset times are stochastically distributed around 20 ms with a standard deviation of $\sigma$=5 ms.
+"Lower" (e): MUA, i.e., high-pass filtered (750 -- 5.000 Hz), rectified and then trial-averaged signals for apically excited population. 
+}
+\label{fig:Spikes:MUA-ApicalSynapses}
+\end{figure}
+%%%
 
 
 
@@ -830,7 +860,7 @@ was done on a population of about 1000 layer-5 cortical neurons receiving synapt
 \item New figure showing all steps in process?
 \end{itemize} 
 
-
+%
 %%%%
 %\begin{figure}[!ht]
 %\begin{center}
@@ -841,17 +871,7 @@ was done on a population of about 1000 layer-5 cortical neurons receiving synapt
 %\end{figure}
 %%%%
 %
-%%%%
-%\begin{figure}[!ht]
-%\begin{center}
-%\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-3} \\
-%\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-4} \\
-%\includegraphics[width=0.4\textwidth]{Figures/Spikes/MUA-5} 
-%\end{center}
-%\caption[]{\textbf{MUA}}
-%\label{Spikes:fig:MUA-B}
-%\end{figure}
-%%%%
+
 %
 %%%%
 %\begin{figure}[!ht]
