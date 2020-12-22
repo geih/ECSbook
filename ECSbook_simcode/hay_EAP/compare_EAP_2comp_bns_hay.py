@@ -4,7 +4,6 @@ import matplotlib
 # matplotlib.use("AGG")
 import matplotlib.pyplot as plt
 from matplotlib.collections import PolyCollection
-from matplotlib.patches import Ellipse
 import LFPy
 import neuron
 from neuron import h

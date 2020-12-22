@@ -64,7 +64,8 @@ def insert_synaptic_input(idx, cell):
     return synapse, cell
 
 
-def plot_grid_LFP(cell, grid_elec_params, grid_x, grid_z, ax, synapses, scale_max=None):
+def plot_grid_LFP(cell, grid_elec_params, grid_x, grid_z,
+                  ax, synapses, scale_max=None):
 
     grid_electrode = LFPy.RecExtElectrode(cell, **grid_elec_params)
     M_elec_ps = grid_electrode.get_transformation_matrix()
@@ -98,9 +99,8 @@ def plot_grid_LFP(cell, grid_elec_params, grid_x, grid_z, ax, synapses, scale_ma
                  [cell.z[idx, 0], cell.z[idx, 1]], lw=1, c='gray')
      for idx in range(cell.totnsegs)]
 
-    [ax.plot(cell.x[syn.idx].mean(), cell.z[syn.idx].mean(), marker='o', c='cyan',
-                 ms=5, mec='k'
-             )
+    [ax.plot(cell.x[syn.idx].mean(), cell.z[syn.idx].mean(),
+             marker='o', c='cyan', ms=5, mec='k')
      for syn in synapses]
 
     ep_intervals = ax.contourf(grid_x, grid_z, LFP,
@@ -158,11 +158,16 @@ def make_figure():
     if not max_amp_LFP == np.abs(lfp_ps[max_amp_elec_idx, max_amp_t_idx]):
         raise RuntimeError("Wrong with chosen max value")
 
-    ax_ps_1 = fig.add_axes([0.03, 0.55, 0.35, 0.4], title="point source\nzoom-in", **ax_lfp_dict_zoom)
-    ax_ps_2 = fig.add_axes([0.03, 0.05, 0.35, 0.4], title="point source\nzoom-out", **ax_lfp_dict)
-    ax_ls_1 = fig.add_axes([0.45, 0.55, 0.35, 0.4], title="line source\nzoom-in", **ax_lfp_dict_zoom)
-    ax_ls_2 = fig.add_axes([0.45, 0.05, 0.35, 0.4], title="line source\nzoom-out", **ax_lfp_dict)
-    ax_diff = fig.add_axes([0.87, 0.1, 0.1, 0.15], xticks=[0, 25, 50], ylim=[0.2e-2, 5e0],
+    ax_ps_1 = fig.add_axes([0.03, 0.55, 0.35, 0.4],
+                           title="point source\nzoom-in", **ax_lfp_dict_zoom)
+    ax_ps_2 = fig.add_axes([0.03, 0.05, 0.35, 0.4],
+                           title="point source\nzoom-out", **ax_lfp_dict)
+    ax_ls_1 = fig.add_axes([0.45, 0.55, 0.35, 0.4],
+                           title="line source\nzoom-in", **ax_lfp_dict_zoom)
+    ax_ls_2 = fig.add_axes([0.45, 0.05, 0.35, 0.4],
+                           title="line source\nzoom-out", **ax_lfp_dict)
+    ax_diff = fig.add_axes([0.87, 0.1, 0.1, 0.15],
+                           xticks=[0, 25, 50], ylim=[0.2e-2, 5e0],
                            ylabel="relative difference", xlabel="µm")
 
     rel_diff = (np.abs(lfp_ps[:, max_amp_t_idx] -
@@ -183,15 +188,19 @@ def make_figure():
     ax_ps_1.plot(lat_elec_ps.x, lat_elec_ps.z, c='r', lw=2, ls=":")
 
     grid_elec_params_zoom["method"] = "pointsource"
-    ep_intervals_ps = plot_grid_LFP(cell, grid_elec_params_zoom, grid_x_zoom, grid_z_zoom, ax_ps_1,
+    ep_intervals_ps = plot_grid_LFP(cell, grid_elec_params_zoom,
+                                    grid_x_zoom, grid_z_zoom, ax_ps_1,
                                     [syn], scale_max=scalemax_zoom)
-    ep_intervals_ps2 = plot_grid_LFP(cell, grid_elec_params, grid_x, grid_z, ax_ps_2,
+    ep_intervals_ps2 = plot_grid_LFP(cell, grid_elec_params,
+                                     grid_x, grid_z, ax_ps_2,
                                     [syn], scale_max=scalemax)
 
     grid_elec_params_zoom["method"] = "linesource"
-    ep_intervals_ls = plot_grid_LFP(cell, grid_elec_params_zoom, grid_x_zoom, grid_z_zoom, ax_ls_1,
+    ep_intervals_ls = plot_grid_LFP(cell, grid_elec_params_zoom,
+                                    grid_x_zoom, grid_z_zoom, ax_ls_1,
                                     [syn], scale_max=scalemax_zoom)
-    ep_intervals_ls2 = plot_grid_LFP(cell, grid_elec_params, grid_x, grid_z, ax_ls_2,
+    ep_intervals_ls2 = plot_grid_LFP(cell, grid_elec_params, grid_x,
+                                     grid_z, ax_ls_2,
                                     [syn], scale_max=scalemax)
     cell.__del__()
 
