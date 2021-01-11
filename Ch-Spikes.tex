@@ -866,10 +866,19 @@ Here it can be seen that the frequencies up to 100 Hz dominates the signal compl
 \includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-3} \\
 \includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-4} \\
 \includegraphics[width=0.4\textwidth]{Figures/Spikes/MUA-5} 
+\includegraphics[width=0.4\textwidth]{Figures/Spikes/MUA-7} 
 \end{center}
 \caption[]{
-From Pettersen 2008a: \textbf{Extracellular potentials at electrode contacts 1-- 23 for apically stimulated population.} (a) Single-trial raw (unfiltered) extracellular potentials. (b) Frequency content, i.e., Fourier amplitudes, of raw potentials in (a). (e) MUA, i.e., high-pass filtered (750 -- 5.000 Hz) and rectified content of potentials in (a). (f) Frequency content of the MUA in (e) prior to rectification. The mean synaptic onset times are stochastically distributed around 20 ms with a standard deviation of $\sigma$=5 ms.
-"Lower" (e): MUA, i.e., high-pass filtered (750 -- 5.000 Hz), rectified and then trial-averaged signals for apically excited population. 
+From Pettersen 2008a: \textbf{Extracellular potentials at electrode contacts 1-- 23 for apically stimulated population.} 
+(a) Single-trial raw (unfiltered) extracellular potentials. 
+(b) Frequency content, i.e., Fourier amplitudes, of raw potentials in (a). 
+Middle left: "(e)" MUA, i.e., high-pass filtered (750 -- 5.000 Hz) and rectified content of potentials in (a). 
+Middle right "(f)" Frequency content of the MUA in (e) prior to rectification. The mean synaptic onset times are stochastically distributed around 20 ms with a standard deviation of $\sigma$=5 ms.
+Lower left: "(e)": MUA, i.e., high-pass filtered (750 -- 5.000 Hz), rectified and then trial-averaged signals for apically excited population. 
+Lower right: Comparison between estimated firing rates based on trial-averaged (40 trials) MUA-traces and the ?true? population firing rate (solid lines). 
+The amplitude of the estimated firing rates have been fitted to minimize the relative square error.
+Estimates ?r(t) for apically excited population based on average MUA signals from electrode contacts 13--17 (dashed line) and electrode contacts 14--16 (dotted line), cf 
+\cite**{Pettersen2008}.
 }
 \label{fig:Spikes:MUA-ApicalSynapses}
 \end{figure}
@@ -878,9 +887,21 @@ From Pettersen 2008a: \textbf{Extracellular potentials at electrode contacts 1--
 While the spikes are buried by the low-frequency in components in the raw signal, they can be extracted by high-pass filtering as seen in panels C and D in
 \Fref{fig:Spikes:MUA-population}. \gen{Panel labeling is wrong in present figures}
 The resulting signal after high-pass filtering and subsequent rectification for the example, as a function of time in panel C
-and in frequency space in panel D. A first observation in panel C is
+and in frequency space in panel D. A first observation of this MUA signal in panel C is
 that the remaining signal is confined to channels deeper in the cortex, that is, close to the somas of the neurons in the populations.
-This reflects that extracellular signatures of action potentials are typically confined to within 100~$\mu$m from the soma, cf. \Fref{fig:Spikes:DifferentNeuronModels}. A second observation in panel C is that the s
+This reflects that extracellular signatures of action potentials are typically confined to within 100~$\mu$m from the soma, cf. \Fref{fig:Spikes:DifferentNeuronModels}. A second observation in panel C is that the MUA signal 
+only last for about 20~ms, which turns out to be the time period in which the neurons in the model fire action potentials~\cite**{Pettersen2008}.
+A third observation is that the MUA signal is not smooth, but `noisy' in the sense that it
+consists of a collections of sharp peaks of different heights. This `noisyness' stems from the inherent randomness both the time of spiking 
+and somas position of the low number (40) of spiking neurons in the population. 
+
+In sensory systems it has been common to measure 
+trial-averaged responses, that is, the response averaged over many repetitions of the same stimulus. The rationale is that this procedure highlights the contributions from sensory input in that the effects of other inputs and noise to sensory neurons are reduced. The trial-averaged MUA found from averaging MUA results from forty trials is shown in panel E of \Fref{fig:Spikes:MUA-population}.
+
+
+
+
+
 
 
 \begin{itemize}
