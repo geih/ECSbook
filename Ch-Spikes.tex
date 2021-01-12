@@ -854,7 +854,7 @@ segments of the displayed branches are modeled as line segments with uniform cur
 \end{figure}
 %%%
 
-An example results is shown in \Fref{fig:Spikes:MUA-population}. Here panel A shows the total extracellular potential following the synaptic activation of the population. The signal
+An example result is shown in \Fref{fig:Spikes:MUA-ApicalSynapses}. Here panel A shows the total extracellular potential following the synaptic activation of the population. The signal
 is dominated by the low frequency response to the synaptic input, that is, the local-field potential (LFP). The spatial pattern of the signal across recording channels reflects the
 spatial distribution of synaptic inputs onto the pyramidal neurons. In this example, excitatory synapses are placed on the apical dendrites while inhibitory synapses are placed on the basal dendrites.
 The dominance of low frequencies in the signal is illustrated in panel B showing the Fourier transformed signal, that is, the amplitude of each frequency component, for three of the channels.
@@ -884,7 +884,7 @@ has been fitted to minimize the relative mean square deviation er  between the e
 %%%
 
 While the spikes are buried by the low-frequency in components in the raw signal, they can be extracted by high-pass filtering as seen in panels C and D in
-\Fref{fig:Spikes:MUA-population}. \gen{Panel labeling is wrong in present figures}
+\Fref{fig:Spikes:MUA-ApicalSynapses}. \gen{Panel labeling is wrong in present figures}
 The resulting signal after high-pass filtering and subsequent rectification for the example, as a function of time in panel C
 and in frequency space in panel D. A first observation of this MUA signal in panel C is
 that the remaining signal is confined to channels deeper in the cortex, that is, close to the somas of the neurons in the populations.
@@ -899,20 +899,16 @@ trial-averaged responses, that is, the response averaged over many repetitions o
 panel E of \Fref{fig:Spikes:MUA-population}, revealing a much less `noisy' signal. 
 
 The obvious next question is to what extent the resulting MUA signal gives a good measure of the population firing rate. Unlike in experiments, the true underlying firing rate is known in the model, allowing for a quantitative comparison. The question was studied in detail for the model in question in \citeasnoun**{Pettersen2008}, and a result for the present example 
-model is given in panel F in \Fref{fig:Spikes:MUA-population}. Here a firing-rate estimate based on the MUA signal from one of the recording channels positioned at a depth in the midst of
-somas of the population is compared with the true firing rate. As observed the overall agreement is quite good. One deviation is that the MUA signal predicts a non-zero firing rate prior to the onset of true firing, the reason being that the synaptic input current itself gives a contribution to the MUA signal. Another deviation is that the MUA-based firing rate predict a too low maximum firing rate, due to cancellation of signal from temporally overlapping spikes from different neurons. This latter effect increases with increasing firing rates and can be remedied by assuming a supralinear relationship between the MUA signal and firing rate \cite**{Pettersen2008}. 
-The accuracy of the population firing rate can also be improved by using MUA signal from several adjacent channels in the estimation \cite**{Pettersen2008}.  
+model is given in panel F in \Fref{fig:Spikes:MUA-ApicalSynapses}. Here a firing-rate estimate based on the MUA signal from one of the recording channels positioned at a depth in the midst of
+somas of the population is compared with the true, temporally smoothed firing rate.  
+As observed the overall agreement is quite good,
 
-
-
-
-
-
-
-\begin{itemize}
-\item Testing: \cite**{Glabska2016}
-\end{itemize} 
-
+ One deviation is that the MUA signal predicts a non-zero firing rate prior to the onset of true firing, the reason being that the synaptic input current itself gives a contribution to the MUA signal. Another deviation is that the MUA-based firing rate predict a too low maximum firing rate, due to cancellation of signal from temporally overlapping spikes from different neurons. This latter effect increases with increasing firing rates and can be remedied by assuming a supralinear relationship between the MUA signal and firing rate \cite**{Pettersen2008}.  The accuracy of the population firing rate can also be improved by using MUA signals from several adjacent recording channels in the estimation \cite**{Pettersen2008}.  
+ 
+The accuracy of the this MUA-based estimation of population firing rates will depend on the specific situation considered. In \citeasnoun**{Pettersen2008}, it was, for example, found
+that the prediction was slightly more accurate when the population in \Fref{fig:Spikes:MUA-population} is driven by excitatory inputs onto the basal dendrites rather than onto the
+apical dendrites as in \Fref{fig:Spikes:MUA-ApicalSynapses}.
+ 
 %
 %%%%
 %\begin{figure}[!ht]
