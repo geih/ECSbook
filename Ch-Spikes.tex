@@ -875,10 +875,9 @@ From Pettersen 2008a: \textbf{Extracellular potentials at electrode contacts 1--
 Middle left: "(e)" MUA, i.e., high-pass filtered (750 -- 5.000 Hz) and rectified content of potentials in (a). 
 Middle right "(f)" Frequency content of the MUA in (e) prior to rectification. The mean synaptic onset times are stochastically distributed around 20 ms with a standard deviation of $\sigma$=5 ms.
 Lower left: "(e)": MUA, i.e., high-pass filtered (750 -- 5.000 Hz), rectified and then trial-averaged signals for apically excited population. 
-Lower right: Comparison between estimated firing rates based on trial-averaged (40 trials) MUA-traces and the ?true? population firing rate (solid lines). 
-The amplitude of the estimated firing rates have been fitted to minimize the relative square error.
-Estimates ?r(t) for apically excited population based on average MUA signals from electrode contacts 13--17 (dashed line) and electrode contacts 14--16 (dotted line), cf 
-\cite**{Pettersen2008}.
+Lower right: "(e)": Spike histogram (bin width 0.5 ms), `true' population firing rate, and estimated firing rate from the MUA of electrode contact 15. The amplitude of the estimated firing rate
+has been fitted to minimize the relative mean square deviation er  between the estimated and `true' population firing rates. 
+\gen{Refer to Pettersen2008 for detailed explanation.}
 }
 \label{fig:Spikes:MUA-ApicalSynapses}
 \end{figure}
@@ -896,7 +895,13 @@ consists of a collections of sharp peaks of different heights. This `noisyness' 
 and somas position of the low number (40) of spiking neurons in the population. 
 
 In sensory systems it has been common to measure 
-trial-averaged responses, that is, the response averaged over many repetitions of the same stimulus. The rationale is that this procedure highlights the contributions from sensory input in that the effects of other inputs and noise to sensory neurons are reduced. The trial-averaged MUA found from averaging MUA results from forty trials is shown in panel E of \Fref{fig:Spikes:MUA-population}.
+trial-averaged responses, that is, the response averaged over many repetitions of the same stimulus. The rationale is that this procedure highlights the contributions from sensory input in that the effects of other inputs and noise to sensory neurons are reduced. The trial-averaged MUA found from averaging MUA results from forty model trials is shown in 
+panel E of \Fref{fig:Spikes:MUA-population}, revealing a much less `noisy' signal. 
+
+The obvious next question is to what extent the resulting MUA signal gives a good measure of the population firing rate. Unlike in experiments, the true underlying firing rate is known in the model, allowing for a quantitative comparison. The question was studied in detail for the model in question in \citeasnoun**{Pettersen2008}, and a result for the present example 
+model is given in panel F in \Fref{fig:Spikes:MUA-population}. Here a firing-rate estimate based on the MUA signal from one of the recording channels positioned at a depth in the midst of
+somas of the population is compared with the true firing rate. As observed the overall agreement is quite good. One deviation is that the MUA signal predicts a non-zero firing rate prior to the onset of true firing, the reason being that the synaptic input current itself gives a contribution to the MUA signal. Another deviation is that the MUA-based firing rate predict a too low maximum firing rate, due to cancellation of signal from temporally overlapping spikes from different neurons. This latter effect increases with increasing firing rates and can be remedied by assuming a supralinear relationship between the MUA signal and firing rate \cite**{Pettersen2008}. 
+The accuracy of the population firing rate can also be improved by using MUA signal from several adjacent channels in the estimation \cite**{Pettersen2008}.  
 
 
 
@@ -905,7 +910,7 @@ trial-averaged responses, that is, the response averaged over many repetitions o
 
 
 \begin{itemize}
-\item Testing: \cite**{Pettersen2008,Glabska2016}
+\item Testing: \cite**{Glabska2016}
 \end{itemize} 
 
 %
