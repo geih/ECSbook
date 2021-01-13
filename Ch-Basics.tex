@@ -214,9 +214,6 @@ The first term on the right hand side of eq. \ref{eq:Basics:iNP} is the diffusiv
 \end{equation}
 Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. In many cases, the total current will be dominated by the drift component, and it is common to assume that the diffusive component is negligible. 
 
-\subsection{\orange{GH: Advective currents}}
-
-
 
 \subsection{\orange{GH: A note on Ohms law}}
 It is important to remember that the current given by eq. \ref{eq:Basics:Ohm_3D_phi} represents the average movement of charge on a coarse-grained level, and does not apply on a microscopic scale. If we compare it with the microscopic fundament for this movement, it is easy to get confused, so let us dive into that confusion and try to clear it up. According to eq. \ref{eq:Basics:E}, an electric field will act on a reference charge $q$ by a constant force, which according to Newton's law (${\bf F} = m{\bf a}$) should give it a constant acceleration in the field-direction. Conversely, eq. \ref{eq:Basics:i} states that ${\bf E}$ gives rise not to a constant acceleration of charges, but rather a constant current, i.e., a constant average \textit{velocity} of charges. 
@@ -312,7 +309,7 @@ Most of the physics that we have gone through so far follows from Maxwell's equa
 \nabla \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{eq:Basics:Max44}.
 \end{eqnarray}
 
-Here $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densities. For linear mediums , the auxillary fields (${\bf H}$ and ${\bf D}$) can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ is the magnetic permeability of the medium and $\epsilon$ the electric permittivity of the medium. This is an excellent approximation for brain tissue, so that we may write the Maxwell equations at the form:
+Here $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densities. For linear mediums , the auxillary fields (${\bf H}$ and ${\bf D}$) can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ is the magnetic permeability of the medium and $\epsilon$ the electric permittivity of the medium. These are excellent approximations for brain tissue, and Maxwell equations then take the form:
 
 \begin{eqnarray}
 \nabla\cdot {\bf E} & = & \frac{\rho}{\epsilon}. \label{eq:Basics:Max1} \\
@@ -325,7 +322,7 @@ Eq. \ref{eq:Basics:Max1} is Gauss's law (for electricity). The free charge densi
 
 Eq. \ref{eq:Basics:Max2} is Gauss's law for magnetism, and is the magnetic equivalent to eq. \ref{eq:Basics:Max1}. Whereas eq. \ref{eq:Basics:Max1} allows a spatial gradient of the electric field due to a local charge density $\rho$, eq. \ref{eq:Basics:Max1} disallows the corresponding gradient in the magnetic induction field. That is because magnetic monopoles do not exist. 
 
-Eq. \ref{eq:Basics:Max3} is the Maxwell-Faraday equation for electric induction. The cross product $\nabla \times {\bf E}$ represents a certain kind of change in the electric field called the \textit{curl}. The equation tells us that such a change will be induced if there is a temporal variation in the magnetic field. 
+Eq. \ref{eq:Basics:Max3} is the Maxwell-Faraday equation for electromagnetic induction. The cross product $\nabla \times {\bf E}$ represents a certain kind of change in the electric field called the \textit{curl}. The equation tells us that such a change will be induced if there is a temporal variation in the magnetic field. 
 
 Eq.  \ref{eq:Basics:Max4} is Ampere's circuital law, and is the magnetic equivalent to eq. \ref{eq:Basics:Max3}. According to eq. \ref{eq:Basics:Max4}, a magnetic field will be induced either by an electric current of free charges going through the medium (first term on the right), or by a temporal change in the displacement field (second term on the right). The last term is often called the displacement current. An example of a current of free charges is the Ohmic current that we introduced earlier (cf. eq. \ref{eq:Basics:Ohm_general}). An example of a displacement current is the capacitive current that we introduced earlier (eq. \ref{eq:Basics:Icap_mem}), where the capacitance can be expressed as a function of $\epsilon$. 
 
@@ -333,68 +330,114 @@ Together, Maxwell's equations give a unified theory for electricity and magnetis
 
 Another fundamental physical principle that follows from Maxwell´s equations is that of charge conservation. To see this, we may start with taking the gradient ($\nabla \cdot$) of both sides of eq. \ref{eq:Basics:Max4}. Since the gradient of a cross product is always zero, eq. \ref{eq:Basics:Max4} then reduces to:
 \begin{equation}
-\nabla \cdot \left( {\bf i}^{free} +  \epsilon \frac{\partial (\nabla \cdot {\bf E})}{\partial t} \right) = 0.
+\nabla \cdot \left( {\bf i}^{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = 0.
 \label{eq:Basics:Max4dot}
 \end{equation}
-We can now insert eq. \ref{eq:Basics:Max1} for the last term on the right hand side to obtain:
+This states that the sum of all currents (of free charges plus displacement) into any volume of space must be zero. To see the charge conservation explicitly, we can insert eq. \ref{eq:Basics:Max1} for ${\bf E}$ to obtain:
 \begin{equation}
 - \nabla \cdot {\bf i^{free}} =  \frac{\partial \rho}{\partial t},
-\label{eq:Basics:Max4dot1}
+\label{eq:Basics:currentconservation}
 \end{equation}
-If the left hand side in nonzero, it means that there will be a net influx of current into a volume, and if that is the case, we must have an accumulation of charge there, as described by the right hand side of the equation. This equation also reveals that the displacement current defined above can be expressed in terms of a local accumulation of charge.
+Hence, if the left hand side in nonzero, there is a net influx of free charges into a volume, and if that is the case, there must be an accumulation of charge there, as described by the right hand side of the equation. This equation thus reveals that the displacement current defined above can be expressed in terms of a local accumulation of charge.
 
 
 \section{\orange{GH: Approximations used when studying brain dynamics}}
+
 \subsection{\orange{GH: Quasi-electrostatic approximation of Maxwell's equations}}
 \label{sec:Basics:Quasielectrostatic} \index{Quasi-electrostatic approximation}
-As we have seen, electric fields can arise from both magnetic induction and from the presence of electric charges (cf. eq. \ref{eq:Basics:Max1}). In the brain, this latter contribution is much larger than the contribution from magnetic field variations, and the electromagnetic radiation caused by the interplay between magnetic and electric fields does not play an important role for the workings of the brain. When studying brain processes, we therefore apply the so-called electro-quasi-static approximation of Maxwell's equations, which means that the temporal derivative of the magnetic field is set to zero.This means that eq. \ref{eq:Basics:Max3} simplifies to $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{eq:Basics:EV}). This assumption was also implicit when we expressed {\bf E} as a function of charges in eq. \ref{eq:Basics:CoulombEN}. 
+As we have seen, electric fields can arise from both magnetic induction and from the presence of electric charges (cf. eq. \ref{eq:Basics:Max1}). In the brain, this latter contribution is much larger than the contribution from magnetic field variations, and the electromagnetic radiation caused by the interplay between magnetic and electric fields does not play an important role for the workings of the brain. When studying brain processes, we therefore apply the so-called electro-quasi-static approximation of Maxwell's equations, which means that the temporal derivative of the magnetic field is set to zero.This means that eq. \ref{eq:Basics:Max3} simplifies to $\nabla \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. eq. \ref{eq:Basics:EV}). This assumption was also implicit when we expressed {\bf E} as a function of charges in eq. \ref{eq:Basics:currentconservation}. 
 
 
 \subsection{\orange{GH: Quasi-magnetostatic approximation of Maxwell's equations}}
 \label{sec:Basics:Quasimagnetostatic} \index{Quasi-magnetostatic approximation}
-The right hand side of eq. \ref{eq:Basics:Max4} is composed of a current of free charges (first term) plus a displacement current (last term).  For an idealized conductor, the displacement current is zero, while for an idealized capacitor, the current of free charges is zero. 
+The right hand side of eq. \ref{eq:Basics:Max4} contains a total current,
+\begin{equation}
+{\bf i}^{tot} = {\bf i}^{free} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
+\label{eq:Basics:totcurrent}
+\end{equation}
+composed of a current of free charges (first term) plus a displacement current (last term). For an idealized conductor, the displacement current is zero, while for an idealized capacitor, the current of free charges is zero. 
 
-Making the quasi-magnetostatic approximation means assuming that the displacement current (i.e., the last term in eq. \ref{eq:Basics:quasimag}) is zero, so that $\nabla \times {\bf B}  =  \mu{\bf i}^{free}$. This approximation can not be applied to transmembrane currents, where the capacitive current is an important contributor. However, we shall throughout this book assume that it holds for extracellular currents. 
-
-It is worth examining the conditions for the quasi-magnetostatic approximation to be valid. To do this, we follow the example from Appendix B1 in \citeasnoun**{Nunez2006} and consider a purely Ohmic current of free charges (${\bf i}^{free} = \sigma {\bf E}$), and an electric field that oscillates with some frequency $f$, 
+Making the quasi-magnetostatic approximation means assuming that the displacement current is zero, so that eq. \ref{eq:Basics:Max4} simplifies to $\nabla \times {\bf B}  =  \mu{\bf i}^{free}$. This will be a good approximation provided that the magnitude ${\bf i}^{free}$ is much smaller than that of the displacement current. In the following, we will investigate the conditions for this to be a valid approximation. To simplify the analysis, we assume that the current of free charges is purely Ohmic, so that eq. \ref{eq:Basics:totcurrent} becomes:
+\begin{equation}
+{\bf i}^{tot} = \sigma \nabla \cdot {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
+\label{eq:Basics:totcurrent2}
+\end{equation}
+Let us now consider an electric field that oscillates with some frequency $f$, 
 \begin{equation}
 {\bf E} = {\bf E}_{max} \exp{j2\pi f \epsilon t}, 
 \label{eq:Basics:Ecomponent}
 \end{equation}
-where $j$ here is the imaginary unit. The total current (right hand side of eq. \ref{eq:Basics:Max4}) can then be written as:
+where $j$ here is the imaginary unit. If we insert this into eq. \ref{eq:Basics:totcurrent2}, we get:
 \begin{equation}
-\sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
-\label{eq:Basics:Max4dot2}
+{\bf i}^{tot} = \sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
+\label{eq:Basics:totcurrent3}
 \end{equation}
-
-From this it is clear that the capacitive effects (last term) are negligible compared to the conductive effects (first term) when the ratio
+From this it is clear that the capacitive contribution (last term) is negligible compared to the conductive contribution (first term) when the ratio
 \begin{equation}
 \frac{2 \pi f \epsilon}{\sigma} << 1. 
 \label{eq:Basics:ratiocondition}
 \end{equation}
-Here, both $\sigma$ and $\epsilon$ can generally be functions of the frequency $f$. Typical frequencies of interest for neural signals are on the order of 100 Hz. Assuming that $f = 100 Hz$, and inserting values $\sigma = 0.25 S/m$ and $\epsilon = 8.84 \times 10^{-6}$ s$\cdot$S/m (used for muscle tissue at 100 Hz in  \citeasnoun**{Nunez2006}), we obtain a ratio of 
+Here, both $\sigma$ and $\epsilon$ can generally be functions of the frequency $f$. 
+
+To gain some insight into the ratio $\epsilon/\sigma$, it helps to look at the current concervation (eq. \ref{eq:Basics:currentconservation}) law, which in the case when the current of free charges is Ohmic, becomes:
 \begin{equation}
-\frac{2 \pi f \epsilon}{\sigma} \simeq 0.02. 
-\label{eq:Basics:ratiovalue}
+\frac{\partial \rho}{\partial t} + \sigma \nabla \cdot {\bf E} = 0
+\label{eq:Basics:OhmicConcervation}
 \end{equation}
-Hence, at frequencies on the order of 100 Hz and below, it seems safe to neglect the capacitive component of tissue currents. 
+If we insert eq. \ref{eq:Basics:Max1} for ${\bf E}$, we may rewrite this as:
+\begin{equation}
+\frac{\partial \rho}{\partial t} + \frac{\sigma}{\epsilon} \rho = 0, 
+\label{eq:Basics:OhmicConcervation2}
+\end{equation}
+which is a differential equation with the general solution
+\begin{equation}
+\rho({\bf r}, t) = \rho({\bf r}, 0)e^{-t/\tau}, 
+\label{eq:Basics:relax}
+\end{equation}
+where we now may identify the time constant, 
+\begin{equation}
+\tau = \frac{\epsilon}{\sigma}
+\label{eq:Basics:chargerelaxationtime}
+\end{equation}
+s the charge relaxation time, i.e. the time it takes for $d\rho/dt$ to decay to zero when responding to a change in the electric field \index{Charge relaxation time}. With this, the criterion \ref{eq:Basics:ratiocondition} simplifies to:
+\begin{equation}
+2 \pi f \tau << 1. 
+\label{eq:Basics:ratiocondition2}
+\end{equation}
 
-For the membrane, both the conductivity and capacitance can be expressed in terms of the permittivity through the relations $\epsilon = c_m \Delta r$ and $\sigma = \epsilon / \tau$. Neural membranes typically have a specific membrane capacitance of $c_m \sim 10^{-2} $F/m$^2$, a thickness $\Delta r \sim 10^{-8}$ m, and a time constant $\tau \sim 10^{-3}$ s. This amounts to a permittivity of $\epsilon \sim 10^{-10}$ s$\cdot$S/m, and conductivity of $\sigma \sim 10^{-7}$ S/m, although the latter van vary quite much depending on which ion channels that are present and activated. Both are lower than for the tissue medium, but the conductivity more so, meaning that the ratio (\ref{eq:Basics:ratiocondition}), which for the membrane becomes equal to $2\pi f \tau$ is much bigger for the membrane. For example, for $f = 100$ Hz, the ratio becomes $\sim 0.628$, showing that capacitive currents are non-neglibible in the membrane. 
+Typical frequencies of interest for neural signals are on the order of 100 Hz, which in an electromagnetic context can be considered a low frequency. Let us consider this ratio in three different mediums: 
 
-In conclusion, the quasi-magnetostatic approximation can be applied to tissue currents, but not to membrane currents.
+\begin{itemize}
+\item {\textit Extracellular saline solution:} In the low frequency limit, dilute salt water solutions, such as that filling up the extracellular space of the brain, have a relative permittivity $\epsilon_r \sim 80$ \cite**{hasted1948}, and the extracellular solution has a conductivity $\sigma_{saline} \sim 2$ S/m (see Section \ref{sec_Sigma}). This gives a value $\tau = \epsilon_r \epsilon_0/\sigma \sim 80\times 8.85\times10^{-12} \mathrm{F/m}/(2 \mathrm{S/m}) \sim 0.35 $ ns. A charge relaxation time in the order of 1 ns has also estimated in other works \cite**{Grodzinsky2011,Gratiy2017}), and implies that the displacement current (eq. \ref{VC:eq:idis}) will mainly be important under conditions when the electrical field varies with frequencies in the GHz range. The relevant fields with physiological origin vary with frequencies  ($f \sim 100 Hz$) that are orders of magnitude lower than this, which implies that the extracellular displacement current can safely be neglected. With $\tau = 0.35$ ns and $f = 100 Hz$, $2 \pi f \tau =  2.2 \times 10^{-7}$, and the criterion in eq. \ref{eq:Basics:ratiocondition2} is clearly met.
+
+\item{\textit Neural membrane:} Neural membranes typically have a time constant $\tau \sim 1$ ms associated with their capacitive charging. This is much lower than the corresponding charge relaxation time of the extracellular saline solution. With $\tau = 1$ ms and $f = 100 Hz$, $2 \pi f \tau =  0.63$, and the criterion in eq. \ref{eq:Basics:ratiocondition2} is not met. Hence, capacitive current is (not surprisingly) an important contributor to the total membrane current.
+
+We note that both the conductivity and capacitance of the membrane can be expressed in terms of the permittivity through the relations $\epsilon = c_m \Delta r$ and $\sigma = \epsilon / \tau$. Neural membranes typically have a specific membrane capacitance of $c_m \sim 10^{-2} $F/m$^2$, a thickness $\Delta r \sim 10^{-8}$ m, and a time constant $\tau \sim 10^{-3}$ s \cite**{Nunez2006}. This amounts to a permittivity of $\epsilon \sim 10^{-10}$ s$\cdot$S/m, and conductivity of $\sigma \sim 10^{-7}$ S/m, although the latter van vary quite much depending on which ion channels that are present and activated. Both are lower than for the tissue medium, but the conductivity more so, resulting in a $\tau$ that is much bigger for the membrane than for the extracellular solution. 
+
+\item{\textit Neural tissue:} As a third medium, we may consider neural tissue as a whole. Data from \citeasnoun**{gabriel1996compilation} suggests that grey matter has a relative permittivity $\epsilon_r \sim 10^6$ and conductivity $\sigma \sim 0.1$ S/m at $f = 100$ Hz. This gives a relaxation time constant $\tau = \epsilon_r \epsilon_0/\sigma \sim 10^6\times 8.85\times10^{-12} \mathrm{F/m} / (0.1 \mathrm{S/m}) \sim 0.1 $ ms. With this value, we get $2 \pi f \tau =  0.06$. Hence, the relative contribution of the displacement current is much larger in grey matter than in the extracellular saline solution, putatively because currents passing through tissue will interact with neural membranes. Nevertheless, the relative contribution of the displacement current is fairly low also in tissue, meaning that Ohmic currents will dominate.
+
+\end{itemize}
+
+In conclusion, the quasi-magnetostatic approximation seems justified for currents through tissue and in the extracellular saline solution, but not for transmembrane currents.
 
 
 \subsection{\blue{Extracellular currents are exclusively due to Ohmic drift}}
 \label{sec:VC:onlyohmic}
 When analyzing extracellular currents in the brain, it is common to assume that they are purely Ohmic, as we do when using the volume conductor theory that we present in Chapter \ref{sec:VC}. 
 
-In principle, a current could have additional contributions from ionic diffusion, advection currents, displacement currents, and magnetic induction, so that the total current density would be:
+In principle, a current could have additional contributions from ionic diffusion, advection currents, displacement currents, and electromagnetic induction, so that the total current density would be:
 
 \begin{equation}
 {\bf i} = {\bf i}^{ohm} + {\bf i}^{dif} + {\bf i}^{adv} + {\bf i}^{dis} + {\bf i}^{ind}, 
 \label{VC:eq:generalcurrent}
 \end{equation}
 As we have argued above, we will use the quasi-electro and quasi-magnetostatic approximations for extracellular currents, which means that we assume negligible contributions from the inductive and displacement components of the total currents. 
+
+
+
+
+Related to this, the actual charge accumulation that takes place during a relaxation time of 1 ns is very small. For most practical purposes it is a therefore good approximation to assume that the extracellular medium is electroneutral \cite**{Solbra2018}, which means that $\rho = 0$ so that the advective current becomes zero. Hence, for practical purposes, it is safe to assume that both the displacement current (eq. \ref{VC:eq:idis}) and the advective current (eq. \ref{VC:eq:iadv}) give negligible contributions to extracellular dynamics. A more physically rigorous argument for this was given in \citeasnoun**{Gratiy2017}. 
+
 
 The advective current, 
 \begin{equation}
