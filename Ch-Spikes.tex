@@ -2,7 +2,7 @@
 \label{sec:Spikes}
 
 If a neuroscientist is asked by a layman about what we have learned about brain networks from electrical recordings, there is a high chance she first highlights
-the studies of Hubel and Wiesel in the 1950s and 60s of neural representations in the primary visual cortex. In their pioneering studies, they measured spikes, the extracellular signatures of action potentials, of cortical cells by use of sharp recording electrodes. They found, for example, that many of the cells responded most vigorously, that is, with the highest number of spikes, to bar-like stimuli oriented in specific directions~\cite**{Hubel1959}. Later, the same approach has been used throughout the nervous system to map out how different neurons encode information on sensory stimuli, objects, spatial positions and more. Thus, the spike has arguably been the most important brain signal in systems neuroscience.
+the studies of Hubel and Wiesel in the 1950s and 60s of neural representations in the primary visual cortex. In their pioneering studies, they measured spikes, the extracellular signatures of action potentials, of cortical cells by use of sharp recording electrodes. They found, for example, that many of the cells responded most vigorously, that is, with the highest number of spikes, to bar-like stimuli oriented in specific directions~\cite**{Hubel1959}. Later, the same approach has been used throughout the nervous system to map out how different neurons encode information on sensory stimuli, objects, spatial positions and more. Spike measurements did not start with Hubel and Wiesel, however \cite**{Adrian1928}, and the spike has arguably been the most important brain signal in systems neuroscience.
 
 %%%%%%%%%%
 % Figure: Intracellular and extracellular action potentials
@@ -22,32 +22,32 @@ Adapted from \citeasnoun**{Henze2000}.
 
 While the amplitude of intracellular the action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. 
 Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (Fig.~\ref{fig:Spikes:Henze}).
-When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically \gex{XX}~$\mu$V. 
-\gen{Har vi et godt tall med medhoerende referanse her?} 
-\ehnote{Tja. Ambient noise er jo veldig avhengig av forskjellige faktorer, elektrode-type og impedans, in vivo vs. in vitro, vaaken vs. bedoevet tilstand osv, valg av filter, osv.}
-\tvnnote{Alessio sa de typisk ikke tar med spikes med amplitude under 30 uV, og det var dette vi brukte i Buccino et al., 2018, J Neurophysiol, men han hadde ikke noe god kilde ellers}
+When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically some tens of $\mu$V. 
+%\gen{Har vi et godt tall med medhoerende referanse her?} 
+%\ehnote{Tja. Ambient noise er jo veldig avhengig av forskjellige faktorer, elektrode-type og impedans, in vivo vs. in vitro, vaaken vs. bedoevet tilstand osv, valg av filter, osv.}
+%\tvnnote{Alessio sa de typisk ikke tar med spikes med amplitude under 30 uV, og det var dette vi brukte i Buccino et al., 2018, J Neurophysiol, men han hadde ikke noe god kilde ellers}
 For the detection of spikes, the detailed spike shape is of less importance. However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. And in this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. 
 Spikes shapes are also used to distinguish spikes from different neuron types. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes). But a more detailed separation into subgroups is also possible~\cite**{Buccino2018}.
 
 Detailed modeling of spikes are important for several reasons: for example, 
-(i) to understand what the single-neuron properties can tell us about spike shapes (and the other way around) \cite**{Holt1999,Gold2006,Pettersen2008a}
-(ii) to estimate biases regarding which types of neurons preferentially generate the spikes recorded by electrodes, 
-and 
-(iii) to provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}
+(i) to understand what the single-neuron properties can tell us about spike shapes (and the other way around) \cite**{Holt1999,Gold2006,Pettersen2008a,Anastassiou2013},
+(ii) to estimate biases regarding which types of neurons preferentially generate the spikes recorded by electrodes \cite**{Pettersen2008a},
+(iii) to provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}, and (iv) to fit model parameters in multicompartment neuron models \cite**{Gold2007}.
 
 %%%
-\section{\orange{Recording of spikes}}
+\section{\blue{Recording of spikes}}
 \label{Spikes:sec:recording}
-Spike recordings are typically done in living brains. Here the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at 500~Hz or so.
-The low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013}. 
+Spike recordings are typically done in living brains. Here the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz.
+In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013}. 
 
-A common misunderstanding is that a spike only consists of high-frequency components.
+A common misunderstanding is that a spike is built up only of high-frequency components.
 The reasoning is that as since it lasts only a couple of milliseconds and an oscillation with a period of, say, 
 2 milliseconds corresponds to a frequency of 500 hertz, lower frequencies will be absent or at least very weak.
 But this is not generally true~\cite**{Pettersen2008,Schomburg2012,Ray2011,Scheffer-Teixeira2013}. 
 Even a fast sodium spike contain frequency components with frequencies as low as 100 Hz \cite**{Pettersen2008a}.
 This is illustrated in Figure~\ref{fig:Spikes:freq_dep} showing that also very narrow spikes may contain low-frequency components.
-In fact, a so-called $\delta$-function pulse which essentially has zero width, is built up of equal amounts of frequency components for all frequencies.
+In fact, a so-called $\delta$-function pulse which essentially is infinitely sharp and 
+has zero width, is built up of equal amounts of frequency components for all frequencies.
 And slower phenomena such as calcium spikes~\cite**{Stuart2007} and spike afterhyperpolarization \cite**{Buzsaki1988} further contribute to low-frequency components~\cite**{Buzsaki2012}. 
 
 %%%%%%%%%
@@ -76,15 +76,14 @@ And slower phenomena such as calcium spikes~\cite**{Stuart2007} and spike afterh
 \end{figure}
 %%%
 
+The high-pass filtering of the extracellular signal typically used in extraction of spikes from extracellular recordings, 
+changes the shape and reduces the signal power of the extracellular spike signal.  The rationale for this high-pass filtering is 
+not to modify the spike shape and make it more amenable for detection or spike sorting. It is rather to remove the low-frequency (LFP) part which
+stems from other neural processes.  This LFP signal typically dominates in terms of overall power, but has very little power above a few hundred hertz~\cite**{Pettersen2008,Einevoll2013}.
 
+Overviews over the challenges when measuring spikes can be found in  \citeasnoun**{Anastassiou2013} and \citeasnoun**{Whittingstall2013}.
+\gen{Noen andre mulige referanser her?} 
 
-
-
-The high-pass filtering of the extracellular signal typically used in extraction of spikes from extracellular recordings, thus changes the shape and reduces the signal power of the extracellular spike signal. 
-The rationale for this high-pass filtering is rather to isolate the spikes from the the signal by removing the LFP part. The LFP
-signal typically dominates in terms of overall power, but has very little power above a few hundred hertz~\cite**{Pettersen2008,Einevoll2013}.
-
-\gen{Boer etter eller annet sted si noe om status for maalinger av spikes a.la. beskrivelse i bokkapittel av Anastassiou og co i "Principles of Neural Coding (2013)"}
 
 %%%
 \section{\orange{Spikes from multi-compartment neuron models}}
