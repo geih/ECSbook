@@ -150,8 +150,8 @@ def two_comp_dipole_decay():
     cell.z = np.array([[-10., 10.],
                       [790., 810.]])
 
-    # plot_two_monopole_versus_dipole(cell)
-    plot_two_monopole_decay_directions(cell)
+    plot_two_monopole_versus_dipole(cell)
+    # plot_two_monopole_decay_directions(cell)
     cell.__del__()
 
 
@@ -229,8 +229,9 @@ def plot_two_monopole_versus_dipole(cell):
 
     i = cell.imem[:, max_t_idx]
     ia = np.abs(i[0])
-
     l_d = cell.z.mean(axis=1)[1] - cell.z.mean(axis=1)[0]
+    print("Ia: ", ia)
+    print("l_d: ", l_d)
     cell.z -= l_d / 2
 
     x, y, z = cell.x.mean(axis=1), cell.y.mean(axis=1), cell.z.mean(axis=1)
