@@ -361,3 +361,24 @@ The simulation showed that the synaptic input lead to a peak response in $V$ tha
 \section{Quasistatic}
 
 
+\subsection{\orange{GH: Debye screening}}
+The Coulomb force (eq. \ref{eq:Basics:CoulombF}) causes positive charges to attract negative charges and repel other positive charges. An effect of this is that positive charges in a conductive medium will tend to surround themselves with negative charges, and vice versa. Consequently, the numbers of positive and negative charges in a finite volume of space tends to be in balance, and any finite reference volume of brain tissue will, on the coarse-grained scale, be practically electroneutral \cite**{Nunez2006,Grodzinsky2011}. If this were not the case, and a volume did contain a net charge density $\rho$, the very strong Coulomb-forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}, which in brain tissue is in the order of a nanosecond \cite**{Grodzinsky2011}. 
+
+Related to this, the Coulomb force also gives rise to a phenomenon called Debye screening, 
+
+The closely balanced negative and positive charges will tend to shield (cancel out) the electric fields from one another, so that neither of them give any contribution to the field measured at some distance away from the charges. 
+
+
+
+
+Of course, a non-zero electric field or potential does require some charge separation somewhere. In the brain, this predominantly happens at the capacitive neuronal membranes, and then on a very small spatial scale. As we described earlier, a patch of membrane has the capacity to separate a charge $q$ on the interior side from a charge $-q$ on the exterior side. However, since the membrane is just some nanometers thick, the two charges $-q$ and $q$ are very close in space, and will shield each others' contributions to extracellular fields measured at some distance from the membrane. 
+
+The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint that there should be no charge accumulation anywhere in the extracellular space. 
+
+
+
+
+
+
+
+
