@@ -1,8 +1,9 @@
 \chapter{Extracellular conductivity}
 \label{sec:Sigma}
 \index{Conductivity}
-A key parameter or, sometimes, variable in volume conductor (VC) theory is the extracellular conductivity, $\sigma_t$. In most applications of VC theory, $\sigma_t$ is assumed to be a constant, and its value is normally taken from some experimental measurement. Estimates can vary greatly between different recordings, but common values are between 0.2 and 0.5 S/m.
-Throughout the previous section, we assumed that $\sigma_t$ was homogeneous, isotropic and frequency independent. In this chapter we shall discuss these assumptions. In addition, we discuss some experimental and theoretical estimates of  $\sigma_t$. Before doing so, however, we shall introduce the continuous, porous medium approximation in some detail, to show what $\sigma_t$ actually represents.
+\tvnnote{Is the book about 'modelling extracellular potentials', or more broadly 'extracellular potentials'? If it is the latter, maybe we should say "key concept" instead of "key parameter/variable"?}
+A key parameter or, sometimes, variable in volume conductor (VC) theory is the extracellular conductivity, $\sigma_t$. In most applications of VC theory, $\sigma_t$ is assumed to be a constant, and its value is normally taken from some experimental measurement. Estimates can vary greatly between different recordings, but common values are between 0.2 and 0.5~S/m.
+Throughout the previous section, we assumed that $\sigma_t$ was homogeneous, isotropic and frequency independent. In this chapter we discuss these assumptions. In addition, we discuss some experimental and theoretical estimates of  $\sigma_t$. Before doing so, however, we introduce the continuous, porous medium approximation in some detail, to show what $\sigma_t$ actually represents.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,25 +13,26 @@ Throughout the previous section, we assumed that $\sigma_t$ was homogeneous, iso
 \index{Porous medium}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This is far from the truth. A cross-section of a piece of brain tissue shows that it is densely packed with neurons and glial cells (Fig.~\ref{Sigma:fig:ECS}), and that the extracellular space (colored light blue in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous \index{Tortuosity} geometry, with an average intercell-distance of about 40-60 nm \cite**{Sykova2008}. 
+When presenting the theory for modeling single neurons (Chapter \ref{sec:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors\tvnnote{Could mention that this mental image also stems from the early staining procedures (Cajal, Golgi, Nansen :-)), where only a small fraction of neurons were actually stained. If all had been stained, it would have been pure black}. This is far from the truth. A cross-section of a piece of brain tissue shows that it is densely packed with neurons and glial cells (Fig.~\ref{Sigma:fig:ECS}), and that the extracellular space (colored light blue in the figure) occupies only about 20 \% of the the total tissue volume. Moreover, it has a highly tortuous \index{Tortuosity} geometry, with an average intercell-distance \tvnnote{to me, intercell-distance sounds like soma-center-to-soma-center distance} of about 40-60 nm \cite**{Sykova2008}. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/ecs.png}
 \end{center}
 \caption[]{\textbf{Illustration of a piece of brain tissue.} Extracellular space (light blue) occupies only about a fraction $\alpha$ of the total tissue volume, and has a highly tortuous structure. The tortuosity, $\lambda$, is defined as the ratio between the shortest pathway between two points in space and the euclidian distance between these two points, and accounts for the fact that ions traveling through the medium do not travel in straight lines, but need to take detours around cellular obstacles.
-(A) $\alpha$ and $\lambda$ vary on the microscopic scale. For example, the shortest path (red dotted curve) between locations $r_0$ and $r_1$ is more tortuous than the path between locations $r_0$ and $r_2$. (B) On a larger spatial scale, local inhomogeneities average out, and the tissue can be treated as homogeneous. Typical tissue averages for $\alpha$ and $\lambda$ are 0.2 and 1.6, respectively \cite**{Nicholson1998,Sykova20008}. \ghnote{Omform figur i traad m/ figtekst}
+(A) $\alpha$ and $\lambda$ vary on the microscopic scale. For example, the shortest path (red dotted curve) between locations $r_0$ and $r_1$ is more tortuous than the path between locations $r_0$ and $r_2$. (B) On a larger spatial scale, local inhomogeneities average out, and the tissue can be treated as homogeneous. Typical tissue averages for $\alpha$ and $\lambda$ are 0.2 and 1.6, respectively \cite**{Nicholson1998,Sykova2008}. \ghnote{Omform figur i traad m/ figtekst}
 }
 \label{Sigma:fig:ECS}
 \end{figure}
 
-At the microscopic scale, the conductivity \index{Conductivity} $\sigma$ in the brain tissue is highly non-homogeneous and anisotropic. For example, the conductivity in a certain spatial direction will depend on whether there locally is a free extracellular passage in that direction (high conductivity), or whether this passage is blocked by a nearby membrane (low conductivity). Likewise, also the electric potential $\phi$ will vary greatly over tiny distances, depending on the proximity to neural membranes, and especially when approaching the nanometer thick Debye-layers building up the membrane charge \cite**{Pods2013}. 
+At the microscopic scale, the conductivity \index{Conductivity} $\sigma$ in the brain tissue is highly non-homogeneous and anisotropic. For example, the conductivity in a certain spatial direction will depend on whether there locally is a free extracellular passage in that direction (high conductivity), or whether this passage is blocked by a nearby membrane (low conductivity). Likewise, also the electric potential $\phi$ will vary greatly over tiny distances, depending on the proximity to neural membranes, especially when approaching the nanometer thick Debye-layers building up the membrane charge \cite**{Pods2013}. 
 
-When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. Electrodes used to record extracellular potentials typically have sizes ranging from 5 $\mu$m to 125 $\mu$m in diameter \cite**{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). In practice, the electrodes therefore perform such an averaging, and include contributions from several nearby neurons. 
+When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. Electrodes used to record extracellular potentials typically have sizes ranging from 5 $\mu$m to 125 $\mu$m in diameter \cite**{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). In practice, the electrodes therefore perform such an averaging, and include contributions from several nearby neurons \tvnnote{Remove last half of sentence? Seems like a different issue to me}. 
 
-At the coarse grained spatial scale of electrode measurements, it is reasonable to assume that microscale inhomogeneities average out, and that the brain tissue can be treated as a continuous, porous medium \cite**{Nicholson1981,Gratiy2017}. The VC theory presented in the previous chapter was based on the continuous, porous medium approximation, and thus describes the extracellular dynamics on a coarse grained spatial scale, with a spatial resolution larger than at least a micrometer. 
+At the coarse grained spatial scale of electrode measurements, it is reasonable to assume that microscale inhomogeneities average out, and that the brain tissue can be treated as a continuous, porous medium \cite**{Nicholson1981,Gratiy2017} \tvnnote{Mention also that there is no real alternative, since we can not know the exact microstructure?}. The VC theory presented in the previous chapter was based on the continuous, porous medium approximation, and thus describes the extracellular dynamics on a coarse grained spatial scale, with a spatial resolution larger than at least a few micrometers. 
 
-A continuous, porous medium is defined by two key parameters \cite**{Nicholson1981}. The first parameter, $\alpha$, is the fraction of the tissue volume that is extracellular space. The second parameter is $\lambda$, the tortuousity of the extracellular medium \cite**{Nicholson1981}. It is defined as the ratio between the shortest pathway between two points in space and the euclidian distance between these two points, and accounts for the fact that ions traveling through the medium do not travel in straight lines, but need to take detours around cellular obstacles. The parameters $\alpha$ and $\lambda$ can be measured experimentally. Typical values are $\alpha = 0.2$ and $\lambda = 1.6$, although these values vary between brain regions and even locally due to cellular swelling or shrinkage \cite**{Nicholson1998,Sykova2008}.
+A continuous, porous medium is defined by two key parameters \cite**{Nicholson1981}. The first parameter, $\alpha$, is the fraction of the tissue volume that is extracellular space. The second parameter is $\lambda$, the tortuousity of the extracellular medium \cite**{Nicholson1981}. It is defined as the ratio between the shortest \tvntxt{extracellular} pathway between two points in space and the euclidian distance between these two points, and accounts for the fact that ions traveling through the medium do not travel in straight lines, but need to take detours around cellular obstacles. The parameters $\alpha$ and $\lambda$ can be measured experimentally. Typical values are $\alpha = 0.2$ and $\lambda = 1.6$, although these values vary between brain regions and even locally due to cellular swelling or shrinkage \cite**{Nicholson1998,Sykova2008}.
+\tvnnote{Mention that $\alpha$ also varies considerably with brain state, for example with sleep? If I remember correctly, Nagelhus et al (inlcuding Klas) tried to measure brain conductivity to assess brain-state or something like that?}
 
 The continuous, porous medium approximation has implications for how we interpret the various concepts and variables that we use to compute extracellular potentials. In particular, it is important for how we understand the conductivity of the tissue medium. In this chapter, we shall compare three different conductivity measures, and we list them here for clarity and later reference: 
 
@@ -54,30 +56,50 @@ $\sigma_t$ to be greater than $\sigma_e$ \cite**{Okada1994}.
 \index{Conductivity!Anisotropic}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In Chapter \ref{sec:VC}, we assumed that the tissue conductivity $\sigma_t$ was isotropic, i.e., the same in all spatial directions. It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma_t$. If we use the point source approximation (eq. \ref{eq:VC:pointsources}), and denote the conductivity in the different spatial directions $\sigma_{tx}$, $\sigma_{ty}$ and $\sigma_{tz}$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \cite**{nicholson1975,Pettersen2012}:
+In Chapter \ref{sec:VC}, we assumed that the tissue conductivity $\sigma_t$ was isotropic, i.e., the same in all spatial directions. 
+\tvnnote{Give example already here of where this is particularly relevant?: White matter, Cerebellum, and also mention 50\% increase in cortex, from Goto.}
+It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma_t$. If we use the point source approximation (eq. \ref{eq:VC:pointsources}), and denote the conductivity in the different spatial directions $\sigma_{tx}$, $\sigma_{ty}$ and $\sigma_{tz}$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \cite**{nicholson1975,Pettersen2012}:
 
 \begin{equation}
 \phi(x,y,z) = \sum_k \frac{I_k}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}}.
 \label{Sigma:eq:Panisos}
 \end{equation}
-If we use the CSD-description of the sources (eq. \ref{VC:eq:csds}, the corresponding expression is:
+If we use the CSD-description of the sources (eq. \ref{VC:eq:csds}), the corresponding expression is:
 
 \begin{equation}
 \phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}} \, dV, 
 \label{Sigma:eq:Canisos}
 \end{equation}
+\tvnnote{Comment briefly on the derivation of these formulas, and link back to earlier equations? Should be easy enough to derive I guess?}
 
-In general, the brain does not have an isotropic $\sigma_t$. For example, in cortex it has been found that the conductivity is about 50\% higher in the depth direction, i.e., for currents running in parallel to the axis of pyramidal cell dendrites \cite**{Goto2010}. However, the overall effect of the anisotropy on extracellular potentials often appears to be quite weak \cite**{Ness2015,Miceli2017}, and the approximation that $\sigma_t$ is isotropic often gives good predictions of the potential.
+In general, the brain does not have an isotropic $\sigma_t$. For example, in cortex it has been found that the conductivity is about 50\% higher in the depth direction, i.e., for currents running in parallel to the axis of pyramidal cell dendrites \cite**{Goto2010}. \tvnnote{Move this up to start of this section?}
+
+However, the overall effect of the anisotropy on extracellular potentials, at least in cortex, often appears to be quite weak \cite**{Ness2015,Miceli2017}, and the approximation that $\sigma_t$ is isotropic often gives good predictions of the potential. See Figure~\ref{Sigma:fig:anisotropy_effect} for an example where a 50\% increase in the conductivity along the axis of the apical dendrite, only causes a slighty more squeezed shape of the extracellular potential than the isotropic case.
+
 \ghnote{Trenger vi en presisering her? Hva betyr det at effekten er lav? Jeg tenker at 50 prosent stoerre sigma burde gi 50 prosent stoerre amplituder, og det er vel ikke en svak effekt? Mener vi at spenningen i en utvalgt retning er relativt upaavirket av anisotropi i andre retninger enn den utvalgte?}
+\tvnnote{La til figur. Vi ble overasket i Ness et al. (2015), over at det nesten ikke var noe synlig effect, hverken naar det var simulert med FEM eller med punktkilde-formlene. Forskjellen kan kanskje kvantifiseres bedre, men er det noe vits?}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{Figures/Sigma/fig_anisotropy_effect.pdf}
+\end{center}
+\caption[]{\textbf{Effect of modest anisotropy.} 
+Extracellular potential at a snapshot in time following a single excitatory synaptic input (location marked by cyan dot) to a rat cortical layer 5 pyramidal neuron \cite**{Hay2011}.
+The extracellular potential is shown for the time step corresponding to the maximum observed absolute value for the extracellular potential, and it is calculated from the same neural simulation, at the same time with either an isotropic extracellular medium ({\bf A}) or with an anisotropic extracellular medium, with a 50\% higher
+conductivity along the axis of the apical dendrite ({\bf B}).
+}
+\label{Sigma:fig:anisotropy_effect}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\red{TVN: Nonhomogeneous extracellular medium}}
 \label{sec:Sigma:nonhomo}
 \index{Conductivity!Nonhomogeneous}
-In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma_t$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \cite**{Nicholson1998}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \cite**{Logothetis2007}. 
+In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma_t$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \cite**{Nicholson1998}, see Figure~\ref{Sigma:fig:ECS}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \cite**{Logothetis2007}\tvnnote{Er dette riktig sitering? Tenkte den handlet mest om frekvensavhengighet?}. 
 
-The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma_t$ that varied on a macroscopic scale. For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma_t$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{VC:eq:csds}, \ref{Sigma:eq:Panisos} or \ref{Sigma:eq:Canisos} ) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
+The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma_t$ that varied on a macroscopic scale \tvnnote{Er det egentlig riktig aa snakke om "reisen" til et potensial? }.
+ For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma_t$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{VC:eq:csds}, \ref{Sigma:eq:Panisos} or \ref{Sigma:eq:Canisos} ) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
 
 \ghnote{Enter TVN:}
 \begin{itemize}
