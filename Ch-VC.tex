@@ -373,6 +373,9 @@ In certain cases, like in ECoG \index{ECoG} measurements from the cortical surfa
 Large multi-contact electrode probes can be expected to have a substantial effect on close-by extracellular potentials, since it represents a large non-conducting volume \cite**{Mechler2012,Buccino2019}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}.
 \tvnnote{Can also hurt the brain to push large objects into it.}
 %%%%%%
+
+
+
 \section{\blue{Approximations used in VC theory}}
 \label{sec:VC:approximations}
 
@@ -381,105 +384,15 @@ Large multi-contact electrode probes can be expected to have a substantial effec
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The VC theory presented in this chapter relies on several assumptions and approximations. Firstly, the theory is based on the quasi-static approximation of Maxwell's equations (see Section \ref{sec:VC:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:VC:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:VC:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:VC:ephaptic} for more on this). Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Chapter \ref{sec:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
 
-\subsection{\blue{Electro-quasistatic approximation of Maxwell's equations}}
-\label{sec:VC:quasistatic}
-\index{Quasi-static approximation to Maxwell's equations}
-For fields in the brain, the typical temporal frequencies are so low that the magnetic induction term, i.e., the time derivative of ${\bf B}$, has a negligible impact on the electric field ${\bf E}$ \cite**{plonsey1967,Gratiy2017}. Maxwell's (macroscopic) equation for the curl of the electric field (eq.  \ref{Basics:eq:Max3}) can then be simplified to:
-\begin{equation}
-\nabla \times {\bf E} = - \frac{\partial {\bf B}}{\partial t}  \approx 0, 
-\label{VC:eq:maxE}
-\end{equation}
-This is called the electro-quasistatic approximation, and it follows from eq. \ref{VC:eq:maxE} that the quasi-static electric field is conservative, which is a criterion for relating it to an extracellular potential through:
-\begin{equation}
-{\bf E} = \nabla \cdot \phi,
-\label{VC:eq:conservative}
-\end{equation}
-as we postulated earlier (eq. \ref{Basics:eq:EV}). 
 
-In contrast, the displacement current term $\partial E/\partial t$ in Maxwell's (macroscopic) equation for the curl of the magnetic field (eq. \ref{Basics:eq:Max4}) is responsible for the charging up of capacitive neural membranes. Therefore, we can not as a generality assume that brain tissue is magneto-quasistatic. However, in shall assume that the extracellular currents are (see Section \ref{sec:VC:onlyohmic}).
-
-
-\begin{equation}
-\nabla \times {\bf H} = {\bf i_t} + \frac{\partial {\bf D}}{\partial t} \approx {\bf i_t},
-\label{VC:eq:maxB}
-\end{equation}
-which is the quasi-\textit{magnetoelectrostatic} approximation. We have here inserted the tissue volume current density ${\bf i_t}$, and not a general current density ${\bf i}$, which might include neuronal curre
-
-since we have excluded the possible membrane current sources.
-
-We may recall the constitutive relations ${\bf D} = \epsilon{\bf E}$ and $\mu{\bf H} = {\bf B}$, with $\mu$ and $\epsilon$ being the permeability and permittivity of the medium, respectively. The assumption behind eq. \ref{VC:eq:maxB} it is that the time variations in the electric field are too slow to affect the magnetic field. If we take the gradient of both sides of this equation, we get that (since the gradient of a curl is zero): 
-\begin{equation}
-\nabla\cdot {\bf i} = 0, 
-\label{VC:eq:maxBstatic}
-\end{equation}
-which we have also postulated earlier (eq. \ref{Basics:eq:MaxElectroneutral}). 
-
- For linear materials with instantaneous response properties, 
-
-
-
-\begin{equation}
-\nabla \cdot {\bf i_t}({\bf r}, t) = - C({\bf r}, t),
-\label{VC:eq:CSD1_2}
-\end{equation}
 
 
 In the previous subsection, we said that eq. \ref{Basics:eq:continuity1} will be our fundamental equation for modeling extracellular potentials. It is therefore important to point out that it is not in disagreement with Maxwell's equations, although eq. \ref{Basics:eq:continuity1} and eq. \ref{Basics:eq:MaxElectroneutral} at a first glimpse may look a bit different. Comparing the two, we we see that in \ref{Basics:eq:continuity1}, ${\bf i}$ has been replaced with ${\bf i_t}$, and a source term $C$ has been added on the right hand side. Essentially, eq. \ref{Basics:eq:continuity1} thus follows from decomposing the total current ${\bf i}$ in eq. \ref{Basics:eq:MaxElectroneutral} into the part of it ($\bf{i_t}$) that runs extracellularly through the tissue and the part of it ($C$) that enters the extracellular space through neural membranes. The reason for making this decomposition is practical. As we shall see in Chapter \ref{sec:VC}, it makes computations easier.
 \ehnote{Er vi ikke allerede i kapittel 4? ;-)}
 
 
-The quasi-static approximation appears to be well-justified for the relatively low frequencies relevant for brain signals, below about 10 kHz \cite**{Nunez2006,Grodzinsky2011}.
 
 
-
-\subsection{\blue{Linear extracellular medium} }
-\label{sec:VC:LinEx}
-\index{Extracellular medium! Linear}
-
-In a linear extracellular medium, the relationship between the current density and the electric field is given by:
-\begin{equation}
-{\bf i} = \sigma {\bf E}.
-\label{VC:eq:bertil}
-\end{equation}
-This relation is constitutive, meaning that it is observed in nature rather than derived from any physical principle \cite**{Nunez2006,Pettersen2012}. It is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions), inhomogeneous (position dependent), and complex (accounting for capacitive effects). We note that eq. \ref{VC:eq:bertil} is generally only valid in the frequency domain, while in the time domain, ${\bf i}$ must be given as a temporal convolution of $\sigma$ and ${\bf E}$ \cite**{Bedard2009}. However, if $\sigma$ is frequency independent (this assumption is discussed further below), eq. \ref{VC:eq:bertil} will also be valid in the time domain.
-
-Eq. \ref{VC:eq:bertil} is essentially Ohm's law for a volume conductor. If we combine it with the quasi-static approximation (i.e., with eq. \ref{VC:eq:conservative}), we get a current density given by ${\bf i} = \sigma \nabla \phi$, which is what we assumed for extracellular tissue currents in the beginning of this chapter (eq. \ref{VC:eq:ohmici}).
-
-
-\subsection{\blue{Extracellular currents are exclusively due to Ohmic drift}}
-\label{sec:VC:onlyohmic}
-When basing the VC theory on eq. \ref{VC:eq:ohmici}, we assumed that extracellular currents are mediated exclusively by Ohmic drift. In principle, a current density could have additional contributions from diffusion of ions, advection currents and displacement currents:
-
-\begin{equation}
-{\bf i} = {\bf i^{ohm}} + {\bf i^{dif}} + {\bf i^{adv}} + {\bf i^{dis}}, 
-\label{VC:eq:generalcurrent}
-\end{equation}
-\gen{Synes ikke "superscripts" eller "subscripts" skal vaere bold}
-
-The advective current, 
-\begin{equation}
-{\bf i^{adv}} = F \rho {\bf u}, 
-\label{VC:eq:iadv}
-\end{equation}
-is the current that arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$, while the displacement current,
-\begin{equation}
-{\bf i^{dis}} = \frac{\partial \rho}{\partial t},
-\label{VC:eq:idis}
-\end{equation}
-represents the capacitive effect of a medium that allows local charge accumulation, so that $\rho$ can vary with time.  
-
-For the physiological conditions of the extracellular solution, the charge relaxation time, i.e., the time it takes for $d\rho/dt$ to decay to zero when responding to a change in the electric field, is in the order of 1 ns \cite**{Grodzinsky2011,Gratiy2017}. This means that the displacement current (eq. \ref{VC:eq:idis}) will mainly be important under conditions when the electrical field varies with frequencies in the GHz range. As the relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this, the displacement current can safely be neglected. Related to this, the actual charge accumulation that takes place during a relaxation time of 1 ns is very small. For most practical purposes it is a therefore good approximation to assume that the extracellular medium is electroneutral \cite**{Solbra2018}, which means that $\rho = 0$ so that the advective current becomes zero. Hence, for practical purposes, it is safe to assume that both the displacement current (eq. \ref{VC:eq:idis}) and the advective current (eq. \ref{VC:eq:iadv}) give negligible contributions to extracellular dynamics. A more physically rigorous argument for this was given in \citeasnoun**{Gratiy2017}. 
-
-The diffusive current \index{Diffusive current},
-\begin{equation}
-{\bf i^{dif}} = -F \sum_k z_k D_k \nabla c_k,
-\label{VC:eq:idif}
-\end{equation}
-represents the current that arrises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along extracellular concentration gradients ($\nabla c_k$), and carry along with them a net charge. Diffusive currents are neglected in standard VC theory under the assumption that they are much smaller than Ohmic drift currents at the coarse grained scale of brain tissue. By estimates, the effect of diffusion on $\phi$ is most likely small under normal conditions, so that one might generally make quite good predictions with a VC theory that neglects them \cite**{Halnes2016,Gratiy2017}. 
-
-However, diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite**{Halnes2016,Gratiy2017}. Diffusive effects on $\phi$ may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite**{Somjen2001,Frohlich2008,Wei2014,Ayata2015}). 
-
-To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented here, but can be done using Finite Element Methods \cite**{Solbra2018}. We go through the theory for modelling electrodiffusive systems in Chapter \ref{sec:Eldiff}.
 
 
 \subsection{\orange{No ephaptic effects} }
