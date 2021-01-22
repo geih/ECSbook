@@ -406,7 +406,7 @@ Making the quasi-magnetostatic approximation means assuming that the displacemen
 \end{equation}
 Let us now consider an electric field that oscillates with some frequency $f$, 
 \begin{equation}
-{\bf E} = {\bf E}_{max} \exp{j2\pi f \epsilon t}, 
+{\bf E} = {\bf E}_{max} e^{j2\pi f \epsilon t}, 
 \label{eq:Basics:Ecomponent}
 \end{equation}
 where $j$ here is the imaginary unit. If we insert this into \fref{eq:Basics:totcurrent2}, we get:
@@ -529,9 +529,9 @@ where we defined everything inside the parenthesis (free plus capacitive current
 
 The simplest way from eq. \ref{eq:Basics:Melpomene} to eq. \label{eq:Basics:Greta} may be to express the total current as being composed of a part ${\bf i}^{tot}_p$, which covers all intracellular and membrane currents, and a part ${\bf i}^{tot}_t$, which covers the currents that run extracellularly through tissue. Eq. \ref{eq:Basics:Melpomene} can then be written
 \begin{equation}
-{\bf \nabla} {\bf i}^{tot}_t = - {\bf \nabla} \cdot {\bf i}^{tot}_p
+{\bf \nabla} {\bf i}^{tot}_t = - {\bf \nabla} \cdot {\bf i}^{tot}_p.
 \label{eq:Basics:Melpomene2}
-\end{equation}.
+\end{equation}
 
-Cellular and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}^{tot}_p$ and ${\bf i}^{tot}_t$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}^{tot}_p = C$, i.e. the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This was shown by \citeasnoun**{Gratiy2017}, who performed a a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}^{tot}_p$ ) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation at the coarse grained scale.
+Cellular and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}^{tot}_p$ and ${\bf i}^{tot}_t$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}^{tot}_p = C$, i.e., the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This was shown by \citeasnoun**{Gratiy2017}, who performed a a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}^{tot}_p$ ) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation when considering tissue in a coarse grained scale.
 
