@@ -1,5 +1,4 @@
 \chapter{Volume conductor theory}
-\label{sec:VC}
 \label{chap:VC} % EH need this
 \index{Volume conductor theory}
 As we saw in the previous section, multicompartment (MC) models of morphologically complex neurons allow us to compute the transmembrane currents entering/leaving the neuron at various locations. This chapter is about how we, when we know the distribution of neuronal current sources, can use volume conductor (VC) theory to predict the extracellular potential at any given point in space. VC theory is the fundament for forward modeling of extracellular potentials at different spatial scales, from extracellular spikes, LFPs and MUAs, to ECoGs and EEGs.
@@ -397,31 +396,5 @@ Large multi-contact electrode probes can be expected to have a substantial effec
 \section{\blue{Approximations used in VC theory}}
 \label{sec:VC:approximations}
 
-\ehnote{For meg fremstaar det som litt rart aa ha disse kapitlene \emph{etter} aa ha introdusert kabellikning, punktkildepotensial, elektrodemodeller etc. Skulle ikke dette vaert i kapt 2?}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The VC theory presented in this chapter relies on several assumptions and approximations. Firstly, the theory is based on the quasi-static approximation of Maxwell's equations (see Section \ref{sec:VC:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:VC:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:VC:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:VC:ephaptic} for more on this). Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Chapter \ref{sec:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
-
-
-
-
-In the previous subsection, we said that eq. \ref{Basics:eq:continuity1} will be our fundamental equation for modeling extracellular potentials. It is therefore important to point out that it is not in disagreement with Maxwell's equations, although eq. \ref{Basics:eq:continuity1} and eq. \ref{Basics:eq:MaxElectroneutral} at a first glimpse may look a bit different. Comparing the two, we we see that in \ref{Basics:eq:continuity1}, ${\bf i}$ has been replaced with ${\bf i_t}$, and a source term $C$ has been added on the right hand side. Essentially, eq. \ref{Basics:eq:continuity1} thus follows from decomposing the total current ${\bf i}$ in eq. \ref{Basics:eq:MaxElectroneutral} into the part of it ($\bf{i_t}$) that runs extracellularly through the tissue and the part of it ($C$) that enters the extracellular space through neural membranes. The reason for making this decomposition is practical. As we shall see in Chapter \ref{sec:VC}, it makes computations easier.
-\ehnote{Er vi ikke allerede i kapittel 4? ;-)}
-
-
-
-
-
-
-\subsection{\orange{No ephaptic effects} }
-\label{sec:VC:ephaptic}
-\index{Ephaptic effects}
-The standard workflow when modeling the extracellular potential ($\phi$) involves two steps: In Step 1 one uses the multicompartment (MC) formalism (cf. Chapter \ref{sec:Neuron}) to compute the transmembrane currents in all neuronal compartments. In Step 2, one uses VC theory (eq. \ref{eq:VC:pointsources}) to estimate the resulting $\phi$. Since the fundamental equation in the MC formalism (eq. \ref{Neuron:eq:multimain}) was derived under the assumption that $\phi=0$, this two-step approach is evidently inconsistent. 
-\gen{Jeg forbinder "ephaptic" mest med at EP satt opp av en celle paavirker en annen. Dette er mer "self-ephaptic" ...}
-\ehnote{det boer nevnes et sted at antagelsen om $\phi=0$ er ekvivalent med antatt null-resistans utenfor cellen - ekstracellulaer konduktivitet er mye hoyere en konduktans over cellemembranen.
-Man kan ogsaa i kabelformalismen bygge inn ekstracellulaer konduktans (extracellular mechanism i NEURON), men dette faller sammen for 2/3D geometrier.}
-
-In reality, the activity of a neuron will affect the membrane potential of both neighboring neurons and itself through the extracellular potential that it creates. Such effects of the extracellular potential on the neurodynamics are called \textit{ephaptic}. As we discussed in Section \ref{sec:Neuron:HHCassumptions}, $\phi$ is typically much smaller than the membrane potential, and ephaptic effects are therefore commonly assumed to be negligibly small. Provided that this is true, the two-step approach works well. 
-\gen{Paa side 22 i "Principles of neural coding (2013)" sies det at Gold et al (2006) har proevd et iterative scheme, uten at det gav en stor forskjell. Kan vaere fint aa nevne.}
-
-Importantly, the negligence of ephaptic effects when using the two-step scheme is implicit in the way that the neurons are modeled (Step 1), and not in the physical fundament of the VC theory (Step 2). The VC theory does not in itself make any assumption regarding ephaptic effects being present or not. Hence, the the extracellular potential should satisfy eq. \ref{eq:VC:pointsources} or \ref{VC:eq:csds} regardless of whether or not ephaptic effects were accounted for when the neural current sources were computed. As our main focus is on the extracellular potential, we will therefore stick with the two-step scheme throughout most of this book.
