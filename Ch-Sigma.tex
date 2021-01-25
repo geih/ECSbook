@@ -96,10 +96,23 @@ conductivity along the axis of the apical dendrite ({\bf B}).
 \section{\red{TVN: Nonhomogeneous extracellular medium}}
 \label{sec:Sigma:nonhomo}
 \index{Conductivity!Nonhomogeneous}
-In Chapter \ref{sec:VC}, we assumed that the extracellular conductivity $\sigma_t$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \cite**{Nicholson1998}, see Figure~\ref{Sigma:fig:ECS}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \cite**{Okada1994,Logothetis2007,Goto2010,Ness2015}. 
+In Chapter \ref{chap:VC}, we assumed that the extracellular conductivity $\sigma_t$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \cite**{Nicholson1998}, see Figure~\ref{Sigma:fig:ECS}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \cite**{Okada1994,Logothetis2007,Goto2010,Ness2015}. 
 
-The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma_t$ that varied on a macroscopic scale \tvnnote{Er det egentlig riktig aa snakke om "reisen" til et potensial? }.
- For example, the signals recorded in the EEG have traveled through brain tissue, bone and skin, which are three different media with different conductivities. When $\sigma_t$ is non-homogeneos, there is no general analytical formula available (like eqs. \ref{VC:eq:csds}, \ref{Sigma:eq:Panisos} or \ref{Sigma:eq:Canisos} ) that link the extracellular potentials to the underlying current sources. However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
+There are however many scenarios where an infinite homogeneous medium is not a reasonable assumption,
+typically because of boundaries between neural tissue and other tissue types or materials.
+%For example, for electric potentials measured close to the surface of the brain, the transition from neural tissue  (like for ECoG measurements, see also \ref{chap:ECoG}), 
+%The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma_t$ that varied on a macroscopic scale \tvnnote{Er det egentlig riktig aa snakke om "reisen" til et potensial? }.
+%For example, electroencephalography (EEG) signals recorded outside of the head are strongly affected by the presence of the brain tissue, cerebrospinal fluid (CSF), skull and scalp, which are very different media with different electrical  conductivities.
+When the extracellular medium is non-homogeneous, there is no general analytical formula available (like eqs. \ref{VC:eq:csds}, \ref{Sigma:eq:Panisos} or \ref{Sigma:eq:Canisos}) that link the extracellular potentials to the underlying current sources. In principle, one can however always solve eq. \ref{VC:eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \cite**{Logg2012}.
+This approach has for example been used to model electroencephalography (EEG) signals recorded outside of the head, because these potentials are not only affected by the conductivity of brain tissue, but also by the presence of the cerebrospinal fluid (CSF), skull and scalp, which have widely different conductivities. This is covered in more detail in Chapter \ref{chap:EEG}).
+Substantial inhomogeneities can also be introduced into neural tissue through the presence of big electrode shanks, as breifly discussed in Sec.~\ref{subsec:VC:elec_shafts}.
+
+%For examples of neuroscience applications using this approach, see \cite**{Moffitt2005,Frey2009,Joucla2012,Haufe2015,Ness2015,Buccino2019b,Obien2019}. 
+
+However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
+
+
+\subsection{Planar boundaries: The cortical surface and {\it in vitro} slice recordings}
 
 \ghnote{Enter TVN:}
 \begin{itemize}
@@ -107,7 +120,7 @@ The situation is different when signals are recorded very far from their sources
 \item FEM \cite**{Ness2015}, ...
 \end{itemize}
 
-For more general cases, one can in principle always solve eq. \ref{VC:eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \cite**{Logg2012}. For examples of neuroscience applications using this approach, see \cite**{Moffitt2005,Frey2009,Joucla2012,Haufe2015,Ness2015,Buccino2019b,Obien2019}. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
