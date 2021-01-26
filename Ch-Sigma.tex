@@ -56,7 +56,7 @@ $\sigma_t$ to be greater than $\sigma_e$ \cite**{Okada1994}.
 \index{Conductivity!Anisotropic}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In Chapter \ref{sec:VC}, we assumed that the tissue conductivity $\sigma_t$ was isotropic, i.e., the same in all spatial directions. 
+In Chapter \ref{chap:VC}, we assumed that the tissue conductivity $\sigma_t$ was isotropic, i.e., the same in all spatial directions. 
 \tvnnote{Give example already here of where this is particularly relevant?: White matter, Cerebellum, and also mention 50\% increase in cortex, from Goto.}
 It is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma_t$. If we use the point source approximation (eq. \ref{eq:VC:pointsources}), and denote the conductivity in the different spatial directions $\sigma_{tx}$, $\sigma_{ty}$ and $\sigma_{tz}$, the extracellular potential surrounding a set of point current sources $I_k$ is given by \cite**{nicholson1975,Pettersen2012}:
 
@@ -78,7 +78,6 @@ However, the overall effect of the anisotropy on extracellular potentials, at le
 
 \ghnote{Trenger vi en presisering her? Hva betyr det at effekten er lav? Jeg tenker at 50 prosent stoerre sigma burde gi 50 prosent stoerre amplituder, og det er vel ikke en svak effekt? Mener vi at spenningen i en utvalgt retning er relativt upaavirket av anisotropi i andre retninger enn den utvalgte?}
 \tvnnote{La til figur. Vi ble overasket i Ness et al. (2015), over at det nesten ikke var noe synlig effect, hverken naar det var simulert med FEM eller med punktkilde-formlene. Forskjellen kan kanskje kvantifiseres bedre, men er det noe vits?}
-
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/fig_anisotropy_effect.pdf}
@@ -96,33 +95,76 @@ conductivity along the axis of the apical dendrite ({\bf B}).
 \section{\red{TVN: Nonhomogeneous extracellular medium}}
 \label{sec:Sigma:nonhomo}
 \index{Conductivity!Nonhomogeneous}
-In Chapter \ref{chap:VC}, we assumed that the extracellular conductivity $\sigma_t$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \cite**{Nicholson1998}, see Figure~\ref{Sigma:fig:ECS}. However, microscale inhomogeneities tend to average out on a larger spatial scale (cf. the continuous medium approximation), and a homogeneous conductivity appears to be a reasonable approximation, at least within a given brain region such as cortex \cite**{Okada1994,Logothetis2007,Goto2010,Ness2015}. 
+In Chapter \ref{chap:VC}, we assumed that the extracellular conductivity $\sigma_t$ was homogeneous, i.e., the same everywhere. Clearly, this assumption does not hold on the micrometer scale, where neural tissue is highly non-homogeneous \cite**{Nicholson1998}, see Figure~\ref{Sigma:fig:ECS}. 
+On a very large spatial scale, for example at the scale of whole brains, it is again clear that the tissue is non-homogeneous, since the brains, even for large primates, are not infinite in size.
+However, on a mesoscopic spatial scale the microscale inhomogeneities tend to average out (cf. the continuous medium approximation), while the boundaries to other tissue types or materials are often sufficiently distant to have a negligible effect on extracellular potentials. In such cases, for example within a given brain region such as cortex, a homogeneous conductivity appears to be a reasonable approximation \cite**{Okada1994,Logothetis2007,Goto2010,Ness2015}. 
 
-There are however many scenarios where an infinite homogeneous medium is not a reasonable assumption,
+There are however still many scenarios where an infinite homogeneous medium is not a reasonable assumption,
 typically because of boundaries between neural tissue and other tissue types or materials.
 %For example, for electric potentials measured close to the surface of the brain, the transition from neural tissue  (like for ECoG measurements, see also \ref{chap:ECoG}), 
 %The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma_t$ that varied on a macroscopic scale \tvnnote{Er det egentlig riktig aa snakke om "reisen" til et potensial? }.
 %For example, electroencephalography (EEG) signals recorded outside of the head are strongly affected by the presence of the brain tissue, cerebrospinal fluid (CSF), skull and scalp, which are very different media with different electrical  conductivities.
 When the extracellular medium is non-homogeneous, there is no general analytical formula available (like eqs. \ref{VC:eq:csds}, \ref{Sigma:eq:Panisos} or \ref{Sigma:eq:Canisos}) that link the extracellular potentials to the underlying current sources. In principle, one can however always solve eq. \ref{VC:eq:CSD2} for arbitrarily complex geometries with varying conductivities using numerical methods, like the Finite Element Method (FEM) \cite**{Logg2012}.
-This approach has for example been used to model electroencephalography (EEG) signals recorded outside of the head, because these potentials are not only affected by the conductivity of brain tissue, but also by the presence of the cerebrospinal fluid (CSF), skull and scalp, which have widely different conductivities. This is covered in more detail in Chapter \ref{chap:EEG}).
+This approach has for example been used to model electroencephalography (EEG) signals recorded outside of the head, because these potentials are not only affected by the conductivity of brain tissue, but also by the presence of the cerebrospinal fluid (CSF), skull and scalp, which have widely different conductivities. This is covered in more detail in Chapter~\ref{chap:EEG}.
 Substantial inhomogeneities can also be introduced into neural tissue through the presence of big electrode shanks, as breifly discussed in Sec.~\ref{subsec:VC:elec_shafts}.
-
 %For examples of neuroscience applications using this approach, see \cite**{Moffitt2005,Frey2009,Joucla2012,Haufe2015,Ness2015,Buccino2019b,Obien2019}. 
 
-However, analytical solutions can still be obtained for some simple and idealized non-homogeneous cases. 
-
-
 \subsection{Planar boundaries: The cortical surface and {\it in vitro} slice recordings}
-
-\ghnote{Enter TVN:}
-\begin{itemize}
-\item Method of Images \cite**{Ness2015}
-\item FEM \cite**{Ness2015}, ...
-\end{itemize}
-
-
-
+For some simple and highly symmetric cases of inhomogeneous volume conductors, analytical solutions can be found for calculating extracellular potentials from the underlying current sources. 
+An important example of this is (approximately) planar boundaries between different tissue-types or different materials. In such cases, we can use the Method of Images (MoI)\index{Method of Images} from electrostatics \cite**{Jackson1998} to account for the effect of a planar boundary on the extracellular potential from current sources \cite**{Gold2006,Pettersen2006,Nunez2006,Ness2015,Obien2019}. This is done by introducing virtual current sources on the opposite side of the boundary with the same distance to the boundary as the original point current sources, and with the amplitudes scaled by \cite**{Nunez2006,Ness2015},
+\begin{equation}
+W = \frac{\sigma_1 - \sigma_2}{\sigma_1 + \sigma_2}.
+\label{Sigma:eq:MoI_scaling}
+\end{equation} 
+Here, $\sigma_1$ is the conductivity of the region containing the real current sources, and $\sigma_2$ is the conductivity of the region at the other side of the boundary containing the virtual sources. 
+For example, before inserting recording electrodes into the brain the cortical surface will typically be exposed, and materials of widely different conductivity can be used to cover the cortical surface. 
+To account for the effect of the different conductivity of cortex and the cover material, the point source equation
+(\ref{eq:VC:pointsource2}) must be modified,
+\begin{equation}
+\phi({\bf r}) = \frac{I_k}{4\pi \sigma_t |{\bf r-r_k}|} + \frac{\sigma_t - \sigma_{\rm cover}}{\sigma_t + \sigma_{\rm cover}} \frac{I_k}{4\pi \sigma_t |{\bf r-r_k'}|},
+\label{Sigma:eq:MoI}
+\end{equation} 
+where ${\bf r}_k'$ is the location of the virtual current source, mirrored across the cortical surface.
+The material at the cortical surface can substantially affect potentials measured near the cortical surface, as illustrated in Figure~\ref{Sigma:fig:cortical_surface_effect}.
+Note that the equation on this form is 
+only valid within the region with the real source, while other formulas apply outside of this region \cite**{Nunez2006}.
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1\textwidth]{Figures/Sigma/fig_cortical_surface_effect_MoI.pdf}
+\end{center}
+\caption[]{\textbf{Effect of inhomogeneity of cortical surface} 
+{\bf A:} Simulation set-up. A rat cortical layer 5 pyramidal cell \cite**{Hay2011} receives a wave of excitatory synaptic input to the upper apical dendrite (top 200~$\mu$m). The conductivity of cortical tissue is $\sigma_t$=0.3~S/m, while different conductivities of the region above cortex is tested.
+{\bf B:} The cover is an insulator, $\sigma_{\rm cover}$ = 0.0~S/m, like a non-conducting mineral oil or air. 
+{\bf C:} The cover has the same conductivity as tissue, $\sigma_{\rm cover}$ = 0.3~S/m, corresponding 	to an infinite homogeneous volume conductor. 
+{\bf D:} The cover is highly conductive, $\sigma_{\rm cover}$ = $\infty$~S/m, like a metal plate. 
+See also \citeasnoun**{Pettersen2006}. 
+}
+\label{Sigma:fig:cortical_surface_effect}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The same framework with MoI can also be used to model {\it in vitro} slice recordings, where a small slice of neural tissue is extracted from a brain and placed on a micro-electrode array (MEA), immersed in a saline bath. In this case, there are two planar boundaries, namely the lower boundary between the slice and the non-conducting MEA (glass) electrode plate, and the upper boundary between the slice and the saline bath, see Fig.~\ref{Sigma:fig:MEA_illustration}. 
+The two boundaries instead of one gives rise to an infinite series of virtual current sources, 
+\begin{eqnarray}
+\label{Sigma:eq:moi_PS}
+\phi(x,y,0) & =  & \frac{2I}{4\pi \sigma_T} \bigg( \psi_{PS}(x,y,z')  \nonumber \\
+& + & \sum_{n=1}^{\infty} W_{TS}^n\bigg[ \psi_{PS}(x,y,-z' + 2nh) + \psi_{PS}(x,y,-z' - 2nh) \bigg ]\bigg).
+\end{eqnarray}
+
+
+
+For an example of this framework, for modelling spikes in {\it in vitro} slices, see Fig.~\ref{fig:Spikes:MEA-spikes}.
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Figures/Sigma/MEA_illustration.pdf}
+\end{center}
+\caption[]{\textbf{Illustration of MEA recording set-up.} 
+See also \citeasnoun**{Ness2015}. 
+}
+\label{Sigma:fig:MEA_illustration}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{\orange{TVN: Frequency dependence of the conductivity} }
 \label{sec:Sigma:f-independent}
