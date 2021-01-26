@@ -135,7 +135,7 @@ To give an example of an active neuron model, the full set of equations for the 
      \beta_m &=& 4 \mathrm{ms}^{-1} e^{-(V+65  \mathrm{mV})/18 \mathrm{mV}}  \\ %\hline
     \alpha_h &=& 0.07 \mathrm{ms}^{-1} e^{-(V+65 \mathrm{mV})/20 \mathrm{mV}}  \\ %\hline
     \beta_h &=& \frac{1 \mathrm{ms}^{-1}}{1+e^{-(V+35 \mathrm{mV}))/10 \mathrm{mV})}}   \\ %\hline
-    c_{\mathrm{m} &=& 1.0 \mathrm{\mu F/cm^2} \\ %\hline
+    c_\mathrm{m} &=& 1.0 \mathrm{\mu F/cm^2} \\ %\hline
     \bar{g}_{\mathrm{Na}} &=& 120 \mathrm{mS/cm^2}\\ %\hline
     \bar{g}_{\mathrm{K}} &=& 36 \mathrm{mS/cm^2} \\ %\hline
     \bar{g}_{\mathrm{L}} &=& 0.3 \mathrm{mS/cm^2} \\ %\hline
@@ -182,12 +182,9 @@ The value of $E_\text{syn}$ determines whether a synapse is \textit{excitatory},
 The synapse model described by \fref{eq:Neuron:chemicalsynapse} is called \textit{conductance based}, because the activation of the synapse is modeled as a transient change in the synaptic conductance. Unlike for ion channels, which are often voltage or calcium activated, the chemical synapse is activated by neurotransmitters received from a pre-synaptic cell. However, the synaptic response tends to be rather stereotypical, meaning that the post-synaptic conductance change is more or less the same every time the synapse is activated. It is therefore not common to model neurotransmitter activation explicitly, but instead model $g_\text{syn}(t)$ as a constant $\bar{g}_\text{syn}$ multiplied with a temporal kernel determining the opening and closing of a synapse set off at an activation time $t_s$. Typical choices for $g_\text{syn}(t)$ are \index{Synapse models}: 
 \begin{align}
 &\text{(i) exponential decay:} \;\; g_\text{syn}(t) = \bar{g}_\text{syn} e^{-(t-t_\text{s})/\tau}\, \Theta(t-t_\text{s}) \\
-\label{eq:Neuron:sf1}
 &\text{(ii) $\alpha$-function:} \;\; g_\text{syn}(t) = \bar{g}_\text{syn} \frac{t-t_\text{s}}{\tau} e^{-(t-t_\text{s})/\tau} \, \Theta(t-t_\text{s}) \\
-\label{eq:Neuron:sf2}
 &\text{(iii) $\beta$-function:} \;\; g_\text{syn}(t) = \bar{g}_\text{syn} \frac{\tau_1 \tau_2}{\tau_1-\tau_2} 
 \Big( e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2} \Big) \, \Theta(t-t_\text{s}) \\
-\label{eq:Neuron:sf3}
 & \text{(iv) NMDA-like:} \;\; g_\text{syn}(t) = \bar{g}_\text{syn} \frac{e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2}} {1+\mu [\text{Mg}^{2+}] e^{-\gamma V} } \, \Theta(t-t_\text{s}),
 \label{eq:Neuron:sf4}
 \end{align}

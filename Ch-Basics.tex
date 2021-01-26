@@ -20,7 +20,7 @@ Readers without prior schooling in physics will probably not be able to follow a
 Let us begin with the fundamental quantity for electricity, the electric charge. Nature's fundamental charges are those carried by the protons and electrons that build up the atoms that build up the material world. The proton carries the charge $e$, while the electron carries the charge $-e$, where $e = 1.602\times10^{-19}$ coulomb (\si{\coulomb}) is called the \textit{unit charge} \index{Unit charge}. 
 \gen{Endret Coulomb til coulomb, tror konvensjonen er  aa bruke stor forbokstav naar man skriver ut hele enheten. Eller?}
 
-Since atoms contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper cable, such as that powering a lamp in a in a normal house, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt-water \gex{(saline?}), the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
+Since atoms contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper cable, such as that powering a lamp in a in a normal house, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt-water (saline), the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
 
 At a fundamental, microscopic level, electricity is largely due to the interactions between individual charges. A pair of charges, $q_1$ and $q_2$, will act on each others with a force $F$ (with units newton (\si{\newton})) given by Coulomb's law:
 \begin{equation}
@@ -29,7 +29,7 @@ F = \frac{q_1q_2}{4\pi \epsilon_0} \frac{1}{r^2},
 \end{equation}
 where the constant $\epsilon_0$ is the permittivity of free space, and $r$ is the distance between the two charges. The direction of the force is along the line between the two charges, and the force is inversely proportional to the square of the distance between them. The force will be repelling if the charges have the same sign and attractive if they have the opposite sign.
 
-We can express the direction of the force mathematically by use of a vector notation. Letting a boldface notation indicate that an entity is a vector, we denote the positions of the charges $q_1$ and $q_2$ by ${\bf r}_1$ and ${\bf r}_2$, respectively. The position vector ${\bf r}_1$ can be visualized as an arrow from some reference point $r=0$ \gen{Burde referansepunktet vaere beskrevet som en vektor ogsaa?} to the position of the charge $q_1$. Likewise, the vector ${\bf r}_1-{\bf r}_2$ can be visualized as an arrow from the position of $q_2$ to the position of $q_1$, defining both the distance and direction of the (imagined) line connecting them. In vector notation, the force between the charge pair can be written:
+We can express the direction of the force mathematically by use of a vector notation. Letting a boldface notation indicate that an entity is a vector, we denote the positions of the charges $q_1$ and $q_2$ by ${\bf r}_1$ and ${\bf r}_2$, respectively. The position vector ${\bf r}_1$ can be visualized as an arrow from some reference point ${\bf r} =0$ to the position of the charge $q_1$. Likewise, the vector ${\bf r}_1-{\bf r}_2$ can be visualized as an arrow from the position of $q_2$ to the position of $q_1$, defining both the distance and direction of the (imagined) line connecting them. In vector notation, the force between the charge pair can be written:
 \begin{equation}
 {\bf F} = \frac{q_1q_2}{4\pi \epsilon_0 |{\bf r}_1-{\bf r}_2|^2} \hat{{\bf r}}_{1,2}.
 \label{eq:Basics:CoulombFvec}
@@ -88,7 +88,7 @@ Since the field contribution from each point charge is spherically symmetric aro
 \label{eq:Basics:CoulombPhiN}
 \end{equation}
 
-Unlike ${\bf E}$, which is a vector-field \gen{bindestrek her? :-)}, $\phi$ is a scalar function \gen{scalar field?}, and as such, it tends to be easier to deal with. We note that \fref{eq:Basics:EV} rests on something called the \textit{quasi-static approximation} of Maxwell's equations, which we explain further in \fref{sec:Basics:Maxwell}. 
+Unlike ${\bf E}$, which is a vector field, $\phi$ is a scalar function \gen{scalar field?}, and as such, it tends to be easier to deal with. We note that \fref{eq:Basics:EV} rests on something called the \textit{quasi-static approximation} of Maxwell's equations, which we explain further in \fref{sec:Basics:Maxwell}. 
 
 
 \subsection{\blue{Electric ground}}
@@ -130,13 +130,12 @@ kontinuumapproksimasjon for elektrisk stroemmer? Og den kan generelt ikke brukes
 \gen{"Surface" faar meg til kun aa tenke paa metallelektroder. Kanskje legge et ord eller to slik at liquid-elektroder ogsaa er dekket?} 
 When we speak of an electric field or electric potential in the brain, we therefore always mean the field or potential on a so-called \textit{coarse-grained} scale, averaged over an electrode surface of at least 1 \si{\square\micro\metre}. A non-technical argument is that it is this coarse-grained signal, and not the microscopic reality that is bubbling underneath it, that is of importance if we want to understand the key brain processes. 
 
-The Coulomb force (\fref{eq:Basics:CoulombF}) causes charges to attract charges of opposite valency and repel charges of the same valency. 
-\gen{Omfatter ikke valency baade "sign" og antall elementaerladninger? Kanskje "sign" er bedre aa bruke her?} In a conductive medium, positive charges therefore tend to surround themselves with negative charges, and vice versa. Consequently, the numbers of positive and negative charges within a finite and not too small volume of space tend to be in close balance. On a coarse-grained scale, brain tissue will therefore to a good approximation be practically electroneutral \cite**{Nunez2006,Grodzinsky2011} \index{Electroneutrality}. If this was not the case, and a reference volume of tissue did contain a net charge density $\rho$, the very strong Coulomb-forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}, which in brain tissue is on the order of a nanosecond (see \fref{sec:Basics:Quasimagnetostatic}).
+The Coulomb force (\fref{eq:Basics:CoulombF}) causes charges to attract charges of opposite sign and repel charges of the same sign. In a conductive medium, positive charges therefore tend to surround themselves with negative charges, and vice versa. Consequently, the numbers of positive and negative charges within a finite and not too small volume of space tend to be in close balance. On a coarse-grained scale, brain tissue will therefore to a good approximation be practically electroneutral \cite**{Nunez2006,Grodzinsky2011} \index{Electroneutrality}. If this was not the case, and a reference volume of tissue did contain a net charge density $\rho$, the very strong Coulomb-forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}, which in brain tissue is on the order of a nanosecond (see \fref{sec:Basics:Quasimagnetostatic}).
 
 The largest violation of electroneutrality occurs at neural membranes. \gen{Kanskje si eksplisitt at mens intracellular og ekstracellular "medium" kan sees paa som en "conductor", saa kan selve membranen sees paa som et isolerende dielektrikum (hvis en tenker paa vanlig elektrisk klassifisering av materialer)?}
 Due to its capacitive properties (see \fref{sec:Basics:CapacitiveCurrent}), a patch of membrane can separate a charge $q$ on the interior side from a charge $-q$ on the exterior side. However, since the membrane is just some nanometers thick, also this charge separation occurs on a rather tiny spatial scale. On the coarse grained scale that we are interested in, we essentially consider entities averaged over volumes of tissue that are large enough to contain both intra- and extracellular components. Then electroneutrality will still be approximately preserved. 
 
-The closely balanced negative and positive charges populating the tissue will tend to shield (cancel out) the electric fields from one another \gex{from the two types of charges?}, so that neither of them contribute to the field measured at some distance away from the charges. This phenomenon is known as Debye shielding \index{Debye shielding}. On a microscopic scale, we would expect a reference charge to evoke a potential given by the single charge version of \fref{eq:Basics:CoulombPhiN}, i.e., by:
+The closely balanced negative and positive charges populating the tissue will tend to shield (cancel out) each others' electric fields, so that neither of them contribute to the field measured at some distance away from the charges. This phenomenon is known as Debye shielding \index{Debye shielding}. On a microscopic scale, we would expect a reference charge to evoke a potential given by the single charge version of \fref{eq:Basics:CoulombPhiN}, i.e., by:
 \begin{equation}
 \phi(r) = \frac{q}{4\pi \epsilon_0 r}.
 \label{eq:Basics:Coulomb_phi1}
@@ -146,9 +145,7 @@ However, according to \textit{Debye-H{\"u}ckel theory}, which we do not present 
 \phi(r) = \frac{q}{4\pi \epsilon_0 \epsilon_r r} e^{-r/r_D}, 
 \label{eq:Basics:DebyeScreening}
 \end{equation}
-where $r_D$ is called the \textit{Debye shielding distance} and $\epsilon_r$ is the \textit{relative permittivity} of the medium. 
-\gen{Her kunne vi kanskje ogsaa oppgitt epsilon-r, som vel er 80 eller noe saant i vann?}
-In the saline solution in the brain, $r_D$ is typically on the order of 8-9 \si{\angstrom} \cite**{Hille2001}, which implies that any given reference charge will give a negligible contribution to the potential at all macroscopic distances. 
+where $r_D$ is called the \textit{Debye shielding distance} and $\epsilon_r$ is the \textit{relative permittivity} of the medium, which has a value of about 80 in water and dilute saline solutions \cite**{hasted1948}. In the saline solution in the brain, $r_D$ is typically on the order of 8-9 \si{\angstrom} \cite**{Hille2001}, which implies that any given reference charge will give a negligible contribution to the potential at all macroscopic distances. 
 
 The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint that there should be no charge accumulation anywhere in the extracellular space. As we shall see, it will then be the current sources at neural membranes that give rise to an extracellular potential $\phi$. From here on, we shall thus not think of $\phi$ as something that we compute based on knowledge of the microscopic charge distribution (cf. \fref{eq:Basics:CoulombPhiN}), but rather as a higher level entity, exerting an average force on all charges in a certain direction. \gen{Si noe om at dette tilsvarer aa jobbe med ionekonsentrasjoner, istedenfor enkeltioner (hvis dette er riktig)?}
 
@@ -209,8 +206,8 @@ In the theory of electric circuits, a common circuit element is the capacitor. C
 \end{equation}
 where $C$ (units Farad (\si{\farad} = \si{\coulomb\per\volt})) is the capacitance. 
 
-To understand how a capacitor works, consider the illustration in \fref{fig:Basics:Capacitor}, where a conductive current $I^{in}$ enters the capacitor from the left, and a conductive current $I^{out}$ leaves to the right. Kirchhoff's current law states the current flowing into any node in a circuit must equal the current flowing out from that node, which means that we must define
-a \textit{capacitive current} $I^{cap}$ over the capacitor, so that we get continuity: $I^{in} = I^{cap} = I^{out}$. 
+To understand how a capacitor works, consider the illustration in \fref{fig:Basics:Capacitor}, where a conductive current $I^\text{in}$ enters the capacitor from the left, and a conductive current $I^\text{out}$ leaves to the right. Kirchhoff's current law states the current flowing into any node in a circuit must equal the current flowing out from that node, which means that we must define
+a \textit{capacitive current} $I^\text{cap}$ over the capacitor, so that we get continuity: $I^\text{in} = I^\text{cap} = I^\text{out}$. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -221,13 +218,13 @@ a \textit{capacitive current} $I^{cap}$ over the capacitor, so that we get conti
 \label{fig:Basics:Capacitor}
 \end{figure}
 
-Whereas the conductive currents $I^{in}$ and $I^{out}$ are mediated by charges moving freely through cables, no charges actually move across the capacitor itself. Instead, $I^{in}$ leads to an accumulation of charge $dq/dt$ on the left metal plate of the capacitor. This, in turn, evokes an electric field across its dielectric core, which drives positive charges away from the rightmost metal plate, charging it negatively $-dq/dt$. The temporal rate of change of the electric field across the dielectric medium can be described in terms of a capacitive current defined by:
+Whereas the conductive currents $I^\text{in}$ and $I^\text{out}$ are mediated by charges moving freely through cables, no charges actually move across the capacitor itself. Instead, $I^{in}$ leads to an accumulation of charge $dq/dt$ on the left metal plate of the capacitor. This, in turn, evokes an electric field across its dielectric core, which drives positive charges away from the rightmost metal plate, charging it negatively $-dq/dt$. The temporal rate of change of the electric field across the dielectric medium can be described in terms of a capacitive current defined by:
 
 \begin{equation}
 I^\text{cap} = \frac{dq}{dt} = C\frac{d\phi}{dt}, 
 \label{eq:Basics:Icap}
 \end{equation}
-Although $I^{cap}$ differs from conductive currents in the sense that it does not involve free transfer of charge through a medium, it has the same units (A). 
+Although $I^\text{cap}$ differs from conductive currents in the sense that it does not involve free transfer of charge through a medium, it has the same units (A). 
 
 The capacitive current was introduced here because neural membranes have capacitive properties, which causes the neural membrane potential to change when currents pass through the membrane. It custom to express the capacitive membrane current in terms of a current density: 
 
@@ -358,7 +355,7 @@ Maxwell's equations come in two versions, referred to as the microscopic and mac
 {\bf \nabla}\cdot {\bf D} & = & \rho. \label{eq:Basics:Max11} \\
 {\bf \nabla} \cdot {\bf B} & = & 0.  \label{eq:Basics:Max22} \\
 {\bf \nabla} \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{eq:Basics:Max33} \\
-{\bf \nabla} \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{eq:Basics:Max44}.
+{\bf \nabla} \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{eq:Basics:Max44}
 \end{eqnarray}
 Here $\rho$ and $\bf{i^\text{free}}$ are the free (unbound) charge and current densities, as the influence of bound charge and current is incorporated in the the auxillary displacement and magnetizing fields, ${\bf D}$ and ${\bf H}$. For linear mediums, ${\bf D}$ and ${\bf H}$ can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ (units henries per metre \si{\henry\per\metre}) is the magnetic permeability of the medium and $\epsilon$ (units \si{\farad\per\metre}) the electric permittivity of the medium. These linear approximations work well for brain tissue \cite**{Nunez2006}, and Maxwell's equations then take the form:
 
@@ -366,7 +363,7 @@ Here $\rho$ and $\bf{i^\text{free}}$ are the free (unbound) charge and current d
 {\bf \nabla}\cdot {\bf E} & = & \frac{\rho}{\epsilon}. \label{eq:Basics:Max1} \\
 {\bf \nabla} \cdot {\bf B} & = & 0.  \label{eq:Basics:Max2} \\
 {\bf \nabla} \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{eq:Basics:Max3} \\
-{\bf \nabla} \times {\bf B} & = & \mu\bf{i}^\text{free} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{eq:Basics:Max4}
+{\bf \nabla} \times {\bf B} & = & \mu{\bf i}^\text{free} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{eq:Basics:Max4}
 \end{eqnarray}
 
 \Fref{eq:Basics:Max1} is Gauss's law (for electricity). The free charge density, $\rho$, can generally be non-zero, although we argued earlier that brain tissue for practical purposes can be assumed to be electroneutral at the coarse-grained scale. 
@@ -386,7 +383,7 @@ Another fundamental physical principle that follows from Maxwell´s equations is
 \end{equation}
 This states that the sum of all currents (of free charges plus displacement) into any volume of space must be zero. To see the charge conservation explicitly, we can insert \fref{eq:Basics:Max1} for ${\bf E}$ to obtain:
 \begin{equation}
-- {\bf \nabla} \cdot {\bf i}\text^{free} =  \frac{\partial \rho}{\partial t},
+- {\bf \nabla} \cdot {\bf i}^\text{free} =  \frac{\partial \rho}{\partial t},
 \label{eq:Basics:currentconservation}
 \end{equation}
 Hence, if the left hand side in nonzero, there is a net influx of free charges into a volume, and if that is the case, there must be an accumulation of charge there, as described by the right hand side of the equation. This equation thus reveals that the displacement current can be expressed in terms of a local accumulation of free charge.
