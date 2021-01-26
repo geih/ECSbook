@@ -460,13 +460,13 @@ where we we have defined,
 Typical frequencies of interest for neural signals are on the order of 100 \si{\hertz}, which in an electromagnetic context can be considered a low frequency. Let us explore whether the criterion in \fref{eq:Basics:ratiocondition2} is met in three different mediums: 
 
 \begin{itemize}
-\item \textit{Extracellular saline solution:} The relative permittivity ($\epsilon_\text{r} = \epsilon/\epsilon_0$) of dilute salt water solutions, such as that filling up the extracellular space of the brain, is close to that of water, which at low frequencies is $\epsilon_\text{r} \sim 80$ \cite**{hasted1948}. The the extracellular solution has a conductivity $\sigma_\text{saline} \sim 2 \, \si{\siemens\per\metre}$ (see \fref{sec:Sigma}). This gives a value $\tau = \epsilon_r \epsilon_0/\sigma \sim 80\times 8.85\times10^{-12}/2 \simeq 0.35 \, \si{\nano\second}$. A charge relaxation time in the order of 1 \si{\nano\second} has also estimated in other works \cite**{Grodzinsky2011,Gratiy2017}), and implies that the displacement current will mainly be important under conditions when the electrical field varies with frequencies in the gigahertz range. The relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this ($f \sim 100 \, \si{\hertz} $), which implies that capacitive effects can safely be neglected. With $\tau = 0.35 \, \si{\nano\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  2.2 \times 10^{-7}$, and the criterion in \fref{eq:Basics:ratiocondition2} is clearly met.
+\item \textit{Extracellular saline solution:} The relative permittivity ($\epsilon_\text{r} = \epsilon/\epsilon_0$) of dilute salt water solutions, such as that filling up the extracellular space of the brain, is close to that of water, which at low frequencies is $\epsilon_\text{r} \sim 80$ \cite**{hasted1948}. The the extracellular solution has a conductivity $\sigma_\text{saline} \sim 2 \, \si{\siemens\per\metre}$ (see \fref{sec:Sigma}). This gives a value $\tau = \epsilon_\text{r} \epsilon_0/\sigma \sim 80\times 8.85\times10^{-12}/2 \simeq 0.35 \, \si{\nano\second}$. A charge relaxation time in the order of 1 \si{\nano\second} has also estimated in other works \cite**{Grodzinsky2011,Gratiy2017}), and implies that the displacement current will mainly be important under conditions when the electrical field varies with frequencies in the gigahertz range. The relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this ($f \sim 100 \, \si{\hertz} $), which implies that capacitive effects can safely be neglected. With $\tau = 0.35 \, \si{\nano\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  2.2 \times 10^{-7}$, and the criterion in \fref{eq:Basics:ratiocondition2} is clearly met.
 
 \item \textit{Neural membrane:} Neural membranes typically have a time constant $\tau \sim 1 \, \si{\milli\second}$ associated with their capacitive charging. This is much lower than the corresponding charge relaxation time of the extracellular saline solution. With $\tau = 1 \, \si{\milli\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  0.63$, and the criterion in \fref{eq:Basics:ratiocondition2} is not met. Hence, capacitive current is an important contributor to the total membrane current.
 
-We note that both the conductivity and capacitance of the membrane can be expressed in terms of the permittivity through the relations $\epsilon = c_m \Delta r$ and $\sigma = \epsilon / \tau$. Neural membranes typically have a specific membrane capacitance of $c_m \sim 10^{-2} \, \si{\farad\per\square\metre}$, a thickness $\Delta r \sim 10^{-8}\, \si{\metre}$, and a time constant $\tau \sim 10^{-3} \, \si{\second}$ \cite**{Nunez2006}. This amounts to a permittivity of $\epsilon \sim 10^{-10} \,\si{\farad\per\metre}$, and conductivity of $\sigma \sim 10^{-7} \, \si{\siemens\per\metre}$, although the latter can vary quite much depending on which ion channels that are present and activated. Both are lower than for the tissue medium, but the conductivity more so, resulting in a $\tau$ that is much bigger for the membrane than for the extracellular solution. 
+We note that both the conductivity and capacitance of the membrane can be expressed in terms of the permittivity through the relations $\epsilon = c_\text{m} \Delta r$ and $\sigma = \epsilon / \tau$. Neural membranes typically have a specific membrane capacitance of $c_\text{m} \sim 10^{-2} \, \si{\farad\per\square\metre}$, a thickness $\Delta r \sim 10^{-8}\, \si{\metre}$, and a time constant $\tau \sim 10^{-3} \, \si{\second}$ \cite**{Nunez2006}. This amounts to a permittivity of $\epsilon \sim 10^{-10} \,\si{\farad\per\metre}$, and conductivity of $\sigma \sim 10^{-7} \, \si{\siemens\per\metre}$, although the latter can vary quite much depending on which ion channels that are present and activated. Both are lower than for the tissue medium, but the conductivity more so, resulting in a $\tau$ that is much bigger for the membrane than for the extracellular solution. 
 
-\item \textit{Neural tissue:} As a third medium, we consider the neural tissue as a whole. Data from \citeasnoun**{gabriel1996compilation} suggests that grey matter has a relative permittivity $\epsilon_r \sim 10^6$ and conductivity $\sigma \sim 0.1 \, \si{\siemens\per\metre}$ at $f = 100 \, \si{\hertz}$. This gives a relaxation time constant $\tau = \epsilon_r \epsilon_0/\sigma \sim 10^6\times 8.85\times10^{-12}/0.1 \simeq 0.1 \, \si{\milli\second}$. With this value, we get $2 \pi f \tau =  0.06$. This is much larger than for the extracellular saline solution, and reflects the fact that currents passing through tissue will not solely be in contact with the saline solution, but may also interact with neural membranes. Nevertheless, the relative contribution of the capacitive current is fairly low also in tissue, meaning that Ohmic currents will dominate. We note that there is quite some variation in experimental estimates of  $\epsilon_r$ and $\sigma$ for the tissue medium, but they are normally of the same order of magnitude as the values used in the calculation above.
+\item \textit{Neural tissue:} As a third medium, we consider the neural tissue as a whole. Data from \citeasnoun**{gabriel1996compilation} suggests that grey matter has a relative permittivity $\epsilon_\text{r} \sim 10^6$ and conductivity $\sigma \sim 0.1 \, \si{\siemens\per\metre}$ at $f = 100 \, \si{\hertz}$. This gives a relaxation time constant $\tau = \epsilon_\text{r} \epsilon_0/\sigma \sim 10^6\times 8.85\times10^{-12}/0.1 \simeq 0.1 \, \si{\milli\second}$. With this value, we get $2 \pi f \tau =  0.06$. This is much larger than for the extracellular saline solution, and reflects the fact that currents passing through tissue will not solely be in contact with the saline solution, but may also interact with neural membranes. Nevertheless, the relative contribution of the capacitive current is fairly low also in tissue, meaning that Ohmic currents will dominate. We note that there is quite some variation in experimental estimates of  $\epsilon_\text{r}$ and $\sigma$ for the tissue medium, but they are normally of the same order of magnitude as the values used in the calculation above.
 \end{itemize}
 
 In conclusion, the quasi-magnetostatic approximation seems justified for currents through tissue and in the extracellular saline solution, but not for transmembrane currents.
@@ -476,7 +476,7 @@ In conclusion, the quasi-magnetostatic approximation seems justified for current
 \label{sec:Basics:onlyohmic}
 When analyzing extracellular currents in the brain, it is common to assume that they are purely due to electric drift, as we do when using the volume conductor (VC) theory that we present in \Fref{chap:VC}. In principle, a current could have additional contributions from ionic diffusion, advection currents, displacement currents, and electromagnetic induction, so that the total current density would be:
 \begin{equation}
-{\bf i} = {\bf i}^{ohm} + {\bf i}^{diff} + {\bf i}^{adv} + {\bf i}^{dis} + {\bf i}^{ind}, 
+{\bf i} = {\bf i}^\text{ohm} + {\bf i}^\text{diff} + {\bf i}^\text{adv} + {\bf i}^\text{dis} + {\bf i}^\text{ind}, 
 \label{VC:eq:generalcurrent}
 \end{equation}
 
@@ -484,14 +484,14 @@ As the displacement current is proportional to $\partial {\bf E}/\partial t$, an
 
 An advective current \index{Advective current}, 
 \begin{equation}
-{\bf i}^{adv} = F \rho {\bf u}, 
+{\bf i}^\text{adv} = F \rho {\bf u}, 
 \label{VC:eq:iadv}
 \end{equation}
 arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. As we argued in \fref{sec:Basics:Debye}, the extracellular medium is practically electroneutral ($\rho \simeq 0$), and the advective current therefore becomes negligible. A more thorough argument for this was given in \citeasnoun**{Gratiy2017}. 
 
 The diffusive current \index{Diffusive current},
 \begin{equation}
-{\bf i}^{diff} = -F \sum_k z_k D_k {\bf \nabla} c_k,
+{\bf i}^\text{diff} = -F \sum_k z_k D_k {\bf \nabla} c_k,
 \label{VC:eq:idif}
 \end{equation}
 arises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along concentration gradients (${\bf \nabla} c_k$), and carry with them a net charge. It has been suggested that diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite**{Halnes2016}, especially if ion concentration gradients vary quite rapidly with time \cite**{Gratiy2017}. Diffusive effects on $\phi$ may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite**{Somjen2001,Frohlich2008,Wei2014,Ayata2015}). 
@@ -514,10 +514,10 @@ Linearity in the conductive sense implies that the current density is linearly r
 
 Ohm's law is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions) and inhomogeneous (position dependent). Furthermore, Ohms law does not exclude capacitive effects, because, for a medium that is linear in both the conductive and capacitive sense, capacitive effects can be incorporated into  \fref{eq:Basics:bertil} through defining a complex conductivity \cite**{Nunez2006}:
 \begin{equation}
-\sigma_c = \sigma(f)\left(1+j\frac{2\pi f \epsilon(f)}{\sigma(f)}  \right), 
+\sigma_\text{c} = \sigma(f)\left(1+j\frac{2\pi f \epsilon(f)}{\sigma(f)}  \right), 
 \label{eq:Basics:complexsigma}
 \end{equation}
-where $j$ is the imaginary unit and $f$ the oscillation frequency of the electric field (or a component of it). Both the real and imaginary parts of $\sigma_c$ can be frequency dependent, and the two terms correspond to the conductive and capacitive properties of the medium, respectively. 
+where $j$ is the imaginary unit and $f$ the oscillation frequency of the electric field (or a component of it). Both the real and imaginary parts of $\sigma_\text{c}$ can be frequency dependent, and the two terms correspond to the conductive and capacitive properties of the medium, respectively. 
 
 The current density in \fref{eq:Basics:complexsigma} comprises both the electric drift current and the displacement current. In this book, we will not use \fref{eq:Basics:complexsigma}, but keep the two current types separate, as we did in \fref{sec:Basics:onlyohmic}). Furthermore, for extracellular tissue currents we have argued that the capacitive effects are negligible, so that they are determined by \fref{eq:Basics:bertil} with a real $\sigma$. As we also make the quasi-electrostatic approximation of Maxwell's equations (\fref{sec:Basics:Quasielectrostatic}), ${\bf E}$ can be written as the gradient of an electric potential, so that the extracellular drift current density is given \fref{eq:Basics:Ohm_3D_phi}, and so that we can take \fref{eq:Basics:continuity2} as our starting point when deriving the VC theory in \Fref{chap:VC}.
 
@@ -527,21 +527,21 @@ We note that \fref{eq:Basics:bertil} is generally only valid in the frequency do
 \subsection{\blue{Neurons as current sources} }
 As we will use \fref{eq:Basics:continuity1}:
 \begin{equation}
-{\bf \nabla} \cdot {\bf i_t} = -C.
+{\bf \nabla} \cdot {\bf i_\text{t}} = -C.
 \label{eq:Basics:Greta}
 \end{equation}
 as our fundamental equation for modeling extracellular potentials, it worth making the effort of showing how it relates to general current conservation. To do this, we state the current conservation equation (\fref{eq:Basics:Max4dot}) on the form:
 \begin{equation}
-{\bf \nabla} \cdot \left( {\bf i}^{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = {\bf \nabla} \cdot {\bf i}^{tot}  = 0, 
+{\bf \nabla} \cdot \left( {\bf i}^\text{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = {\bf \nabla} \cdot {\bf i}^\text{tot}  = 0, 
 \label{eq:Basics:Melpomene}
 \end{equation}
-where we defined everything inside the parenthesis (free plus capacitive current) as the total current to keep notation short. 
+where we in the last step defined everything inside the parenthesis (free plus capacitive current) as the total current to keep notation short. 
 
-The simplest way from eq. \ref{eq:Basics:Melpomene} to eq. \label{eq:Basics:Greta} may be to express the total current as being composed of a part ${\bf i}^{tot}_p$, which covers all intracellular and membrane currents, and a part ${\bf i}^{tot}_t$, which covers the currents that run extracellularly through tissue. Eq. \ref{eq:Basics:Melpomene} can then be written
+The simplest way from eq. \ref{eq:Basics:Melpomene} to eq. \label{eq:Basics:Greta} may be to express the total current as being composed of a part ${\bf i}^\text{tot}_\text{p}$, which covers all intracellular and membrane currents, and a part ${\bf i}^\text{tot}_\text{t}$, which covers the currents that run extracellularly through tissue. Eq. \ref{eq:Basics:Melpomene} can then be written
 \begin{equation}
-{\bf \nabla} {\bf i}^{tot}_t = - {\bf \nabla} \cdot {\bf i}^{tot}_p.
+{\bf \nabla} {\bf i}^\text{tot}_\text{t} = - {\bf \nabla} \cdot {\bf i}^\text{tot}_\text{p}.
 \label{eq:Basics:Melpomene2}
 \end{equation}
 
-Cellular and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}^{tot}_p$ and ${\bf i}^{tot}_t$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}^{tot}_p = C$, i.e., the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This was shown by \citeasnoun**{Gratiy2017}, who performed a a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}^{tot}_p$ ) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation when considering tissue in a coarse grained scale.
+Cellular and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}^\text{tot}_\text{p}$ and ${\bf i}^\text{tot}_\text{t}$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}^\text{tot}_\text{p} = C$, i.e., the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This was shown by \citeasnoun**{Gratiy2017}, who performed a a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}^\text{tot}_\text{p}$ ) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation when considering tissue in a coarse grained scale.
 
