@@ -273,6 +273,14 @@ your eyes only
 	\end{itemize}
 \gen{Subscripts og superscripts skal ikke vaere i bold.}
 \ehnote{jeg vil foreslaa en komplett tabell et sted for symboler brukt gjennom hele denne boken. Ogsaa boer vi vaere obs paa forskjellen mellom skalarfelt og vektorfelt, $J(\mathbf{r})$ vs. $\mathbf{J}(\mathbf{r})$.}
+\item Sub or superfix? Suggestion: 
+	\begin{itemize}
+	\item Superfix to specify types of currents: ${\bf }i^\text{drift}$, ${\bf }i^\text{diff}$, ${\bf }i^\text{cap}$, ${\bf }i^\text{tot}$, ${\bf }i^\text{free}$, ${\bf }i^\text{adv}$.
+	\item	Subfix to specify where they are: ${\bf }i_\text{m}$ (membrane), ${\bf }i_\text{t}$ (tissue), ${\bf }i_{n-1,n}$ (between intracellular compartments).
+	\item	Subfix to specify ion type: ${\bf }i_\text{Na}$, $i_\text{K}$, $i_{k}$ (general, ion specific), $i_\text{x}$ (general, not ion specific), $i_\text{L}$ (leak).
+	\end{itemize}
+Disadvantage: HH becomes $i_\text{m} = i^\text{cap} + i_\text{Na} + i_\text{K} + i_\text{L}$ with cap as superfix but the rest as subfix. But maybe that's okay?
+\item Potential: $\phi$ or $V$? My favorite is $\phi$. This is greek to Gaute, who seems to prefer $V$. 
 \item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template. 
 	\ehnote{Jeg la til en import av fancyref over. Den definerer kommandoen {\textbackslash}Fref\{\} og skal kunne skjoenne forskjellen paa chapter og section utfra innhold i label (chap:*, sec:*, eq:*, etc.), og faa ting internt konsistent. Test:} 
 	\ehtxt{{\textbackslash}label\{sec:Intro\}: \Fref{sec:Intro}; {\textbackslash}label\{chap:Intro\}: \Fref{chap:Intro}}

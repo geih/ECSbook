@@ -24,12 +24,11 @@ Below, we start by presenting a framework for modeling the transmembrane current
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_{\mathrm{c}}$), (ii) a the leakage current density ($i_{\mathrm{L}}$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). 
-\ehnote{Notasjon boer ryddes opp i. Kursiv subfix boer representere index, mens subfix som er en forkortelse (c-capacitance, m-membrane etc.) skal ikke vaere kursiv men normal font: $i_\mathrm{m}$.}
-In addition, a neuron may receive  (iv) external stimuli ($i_{\mathrm{stim}}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i^{\mathrm{cap}}$), (ii) a the leakage current density ($i_{\mathrm{L}}$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). 
+In addition, a neuron may receive (iv) external stimuli ($i^{\mathrm{stim}}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
 
 \begin{equation}
-i_{\mathrm{c}} + i_{\mathrm{L}} + \sum_x{i_x} +  i_{\mathrm{stim}} = 0.
+i^{\mathrm{c}} + i_{\mathrm{L}} + \sum_x{i_x} +  i^{\mathrm{stim}} = 0.
 \label{eq:Neuron:singlecomp_zerosum}
 \end{equation}
 Below, we define the various currents that go into this equation.
