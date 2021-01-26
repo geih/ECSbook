@@ -224,7 +224,7 @@ a \textit{capacitive current} $I^{cap}$ over the capacitor, so that we get conti
 Whereas the conductive currents $I^{in}$ and $I^{out}$ are mediated by charges moving freely through cables, no charges actually move across the capacitor itself. Instead, $I^{in}$ leads to an accumulation of charge $dq/dt$ on the left metal plate of the capacitor. This, in turn, evokes an electric field across its dielectric core, which drives positive charges away from the rightmost metal plate, charging it negatively $-dq/dt$. The temporal rate of change of the electric field across the dielectric medium can be described in terms of a capacitive current defined by:
 
 \begin{equation}
-I^{cap} = \frac{dq}{dt} = C\frac{d\phi}{dt}, 
+I^\text{cap} = \frac{dq}{dt} = C\frac{d\phi}{dt}, 
 \label{eq:Basics:Icap}
 \end{equation}
 Although $I^{cap}$ differs from conductive currents in the sense that it does not involve free transfer of charge through a medium, it has the same units (A). 
@@ -232,10 +232,10 @@ Although $I^{cap}$ differs from conductive currents in the sense that it does no
 The capacitive current was introduced here because neural membranes have capacitive properties, which causes the neural membrane potential to change when currents pass through the membrane. It custom to express the capacitive membrane current in terms of a current density: 
 
 \begin{equation}
-i^{cap} = c_m\frac{d\phi_m}{dt}, 
+i^\text{cap} = c_m\frac{d\phi_m}{dt}, 
 \label{eq:Basics:Icap_mem}
 \end{equation}
-where $c_m$ (units \si{\farad\per\square\metre}) is the capacitance per unit membrane area. In this case, the current density is one-dimensional and in the direction normal to the membrane.
+where $c_\text{m}$ (units \si{\farad\per\square\metre}) is the capacitance per unit membrane area. In this case, the current density is one-dimensional and in the direction normal to the membrane.
 
 
 \subsection{\blue{Diffusive currents}}
@@ -257,7 +257,7 @@ Faraday's constant is defined as the charge per mole ($1.602\times10^{-19}$) of 
 \end{equation}
 The last term on the right hand side is the drift current density, 
 \begin{equation}
-{\bf i}^{drift} = - F\sum_{k} \frac{{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi} = - \sigma {\bf \nabla}{\phi}.
+{\bf i}^\text{drift} = - F\sum_{k} \frac{{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi} = - \sigma {\bf \nabla}{\phi}.
 \label{eq:Basics:idrift}
 \end{equation}
 As we indicated with the last equality, the drift current density is the same as the Ohmic current that we defined in eq. \ref{eq:Basics:Ohm_3D_phi}, which means that we can identify the conductivity $\sigma$ of a salt water solution as:
@@ -268,7 +268,7 @@ As we indicated with the last equality, the drift current density is the same as
 
 The first term on the right hand side of \fref{eq:Basics:iNP} is the diffusive current density, 
 \begin{equation}
-{\bf i}^{diff}  = -\sum_k{F z_k {D_k}{\bf \nabla} c_{k}}.
+{\bf i}^\text{diff}  = -\sum_k{F z_k {D_k}{\bf \nabla} c_{k}}.
 \label{eq:Basics:idiff}
 \end{equation}
 Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. In many cases, the total current will be dominated by the drift component, and it is common to assume that the diffusive component is negligible. The diffusive current does, however, play an important role over neuronal membranes. 
@@ -316,28 +316,28 @@ For intracellular currents it is common to make the further simplification that 
 It is custom to express current continuity in brain tissue in terms of a set of boundary conditions, where the boundaries are represented by the neuronal membranes. A common starting point for computing extracellular potential is the requirement that 
 all currents entering or leaving through neuronal membranes must somehow be conserved and distributed in the extracellular space. This can be expressed mathematically through the continuity equation:
 \begin{equation}
-{\bf \nabla} \cdot {\bf i_t} = -C, 
+{\bf \nabla} \cdot {\bf i}_\text{t} = -C, 
 \label{eq:Basics:continuity1}
 \end{equation}
-where the source term, $C$ (with units \si{\ampere\per\cubic\metre}), is called the current source density (CSD). The CSD represents the transmembrane output currents from neurons per tissue volume and includes both the capacitive and conductive membrane currents. We have let ${\bf i_t}$ denote the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents. 
+where the source term, $C$ (with units \si{\ampere\per\cubic\metre}), is called the current source density (CSD). The CSD represents the transmembrane output currents from neurons per tissue volume and includes both the capacitive and conductive membrane currents. We have let ${\bf i}_\text{t}$ denote the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents. 
 
-In a volume of space where there is no neuronal membrane ($C = 0$), \fref{eq:Basics:continuity1} reduces to ${\bf \nabla} \cdot {\bf i_t} = 0$, which means that there will be no net tissue current entering or leaving such a volume. Importantly, this does not mean that the tissue current must be zero. Currents can still run \textit{through} the volume, as long as the amount of current entering it and leaving it are in balance. In a volume that \textit{does} receive a neuronal output, \fref{eq:Basics:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume in terms of an extracellular tissue current. As we shall show in \Fref{chap:VC}, this conservation law shall be the fundament for modeling extracellular potentials surrounding active neurons.
+In a volume of space where there is no neuronal membrane ($C = 0$), \fref{eq:Basics:continuity1} reduces to ${\bf \nabla} \cdot {\bf i}_\text{t} = 0$, which means that there will be no net tissue current entering or leaving such a volume. Importantly, this does not mean that the tissue current must be zero. Currents can still run \textit{through} the volume, as long as the amount of current entering it and leaving it are in balance. In a volume that \textit{does} receive a neuronal output, \fref{eq:Basics:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume in terms of an extracellular tissue current. As we shall show in \Fref{chap:VC}, this conservation law shall be the fundament for modeling extracellular potentials surrounding active neurons.
 
 For most parts of this book, we shall approximate brain tissue as a \textit{linear} Ohmic conductor, an approximation that we will discuss in further detail below. This means that the tissue current densities are given by \fref{eq:Basics:Ohm_3D_phi}. When this is inserted into \fref{eq:Basics:continuity1}, we obtain a relationship between the neuronal current sources and the extracellular potential: 
 \begin{equation}
-{\bf \nabla} \cdot \left(\sigma_t {\bf \nabla} {\phi} \right) = -C, 
+{\bf \nabla} \cdot \left(\sigma_\text{t} {\bf \nabla} {\phi} \right) = -C, 
 \label{eq:Basics:continuity2}
 \end{equation}
-with $\sigma_t$ being the tissue conductivity. If $\sigma_t$ does not vary across space, this simplifies to the often used form:
+with $\sigma_\text{t}$ being the tissue conductivity. If $\sigma_\text{t}$ does not vary across space, this simplifies to the often used form:
 \begin{equation}
-\sigma_t \nabla^2{\phi} = -C.
+\sigma_\text{t} \nabla^2{\phi} = -C.
 \label{eq:Basics:continuity3}
 \end{equation}
 
 
 \subsection{\blue{Two-step approach for modeling extracellular potentials}}
 \label{sec:Basics:twostep}
-In order to compute extracellular potentials based on \fref{eq:Basics:continuity2}, we need to know the neuronal output $C$. Generally, the transmembrane currents in neurons depend on the membrane potential $\phi_m$, defined as the difference between the intracellular ($\phi_i$) and the extracellular ($\phi_e$) potentials immediately inside and outside the membrane. To compute intra- and extracellular potentials on a unified and spatially resolved framework is extremely computationally demanding, and unattainable for large systems. Standard modeling approaches are therefore based on the simplifying assumption that the neurodynamics is independent of whatever goes on in the extracellular space. One may then take a two-step approach to model the cellular and extracellular dynamics: 
+In order to compute extracellular potentials based on \fref{eq:Basics:continuity2}, we need to know the neuronal output $C$. Generally, the transmembrane currents in neurons depend on the membrane potential $\phi_\text{m}$, defined as the difference between the intracellular ($\phi_\text{i}$) and the extracellular ($\phi_\text{e}$) potentials immediately inside and outside the membrane. To compute intra- and extracellular potentials on a unified and spatially resolved framework is extremely computationally demanding, and unattainable for large systems. Standard modeling approaches are therefore based on the simplifying assumption that the neurodynamics is independent of whatever goes on in the extracellular space. One may then take a two-step approach to model the cellular and extracellular dynamics: 
 
 \begin{itemize}
 \item {\bf Step 1:} Compute the cellular dynamics (intracellular currents, membrane currents, and membrane potential) on a separate framework based on the assumption that this is independent on what goes on in the extracellular space (Fig. \ref{fig:Basics:Twostep}B). 
@@ -360,13 +360,13 @@ Maxwell's equations come in two versions, referred to as the microscopic and mac
 {\bf \nabla} \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{eq:Basics:Max33} \\
 {\bf \nabla} \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{eq:Basics:Max44}.
 \end{eqnarray}
-Here $\rho$ and $\bf{i^{free}}$ are the free (unbound) charge and current densities, as the influence of bound charge and current is incorporated in the the auxillary displacement and magnetizing fields, ${\bf D}$ and ${\bf H}$. For linear mediums, ${\bf D}$ and ${\bf H}$ can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ (units henries per metre \si{\henry\per\metre}) is the magnetic permeability of the medium and $\epsilon$ (units \si{\farad\per\metre}) the electric permittivity of the medium. These linear approximations work well for brain tissue \cite**{Nunez2006}, and Maxwell's equations then take the form:
+Here $\rho$ and $\bf{i^\text{free}}$ are the free (unbound) charge and current densities, as the influence of bound charge and current is incorporated in the the auxillary displacement and magnetizing fields, ${\bf D}$ and ${\bf H}$. For linear mediums, ${\bf D}$ and ${\bf H}$ can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ (units henries per metre \si{\henry\per\metre}) is the magnetic permeability of the medium and $\epsilon$ (units \si{\farad\per\metre}) the electric permittivity of the medium. These linear approximations work well for brain tissue \cite**{Nunez2006}, and Maxwell's equations then take the form:
 
 \begin{eqnarray}
 {\bf \nabla}\cdot {\bf E} & = & \frac{\rho}{\epsilon}. \label{eq:Basics:Max1} \\
 {\bf \nabla} \cdot {\bf B} & = & 0.  \label{eq:Basics:Max2} \\
 {\bf \nabla} \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{eq:Basics:Max3} \\
-{\bf \nabla} \times {\bf B} & = & \mu\bf{i}^{free} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{eq:Basics:Max4}
+{\bf \nabla} \times {\bf B} & = & \mu\bf{i}^\text{free} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{eq:Basics:Max4}
 \end{eqnarray}
 
 \Fref{eq:Basics:Max1} is Gauss's law (for electricity). The free charge density, $\rho$, can generally be non-zero, although we argued earlier that brain tissue for practical purposes can be assumed to be electroneutral at the coarse-grained scale. 
@@ -381,12 +381,12 @@ Together, Maxwell's equations give a unified theory for electricity and magnetis
 
 Another fundamental physical principle that follows from Maxwell´s equations is that of charge conservation. To see this, we may start with taking the gradient (${\bf \nabla} \cdot$) of both sides of eq. \ref{eq:Basics:Max4}. Since the gradient of a cross product is always zero, \fref{eq:Basics:Max4} then reduces to:
 \begin{equation}
-{\bf \nabla} \cdot \left( {\bf i}^{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = 0.
+{\bf \nabla} \cdot \left( {\bf i}^\text{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = 0.
 \label{eq:Basics:Max4dot}
 \end{equation}
 This states that the sum of all currents (of free charges plus displacement) into any volume of space must be zero. To see the charge conservation explicitly, we can insert \fref{eq:Basics:Max1} for ${\bf E}$ to obtain:
 \begin{equation}
-- {\bf \nabla} \cdot {\bf i}^{free} =  \frac{\partial \rho}{\partial t},
+- {\bf \nabla} \cdot {\bf i}\text^{free} =  \frac{\partial \rho}{\partial t},
 \label{eq:Basics:currentconservation}
 \end{equation}
 Hence, if the left hand side in nonzero, there is a net influx of free charges into a volume, and if that is the case, there must be an accumulation of charge there, as described by the right hand side of the equation. This equation thus reveals that the displacement current can be expressed in terms of a local accumulation of free charge.
@@ -404,14 +404,14 @@ As we have seen, electric fields can arise from both magnetic induction and from
 \label{sec:Basics:Quasimagnetostatic} \index{Quasi-magnetostatic approximation}
 The right hand side of eq. \ref{eq:Basics:Max4} contains a total current,
 \begin{equation}
-{\bf i}^{tot} = {\bf i}^{free} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
+{\bf i}^\text{tot} = {\bf i}^\text{free} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
 \label{eq:Basics:totcurrent}
 \end{equation}
 composed of a current of free charges (first term) plus a displacement current (last term). For an idealized conductor, the displacement current is zero, while for an idealized capacitor, the current of free charges is zero. 
 
-Making the quasi-magnetostatic approximation means assuming that the displacement current, or equivalently, capacitive effects, are absent, so that \fref{eq:Basics:Max4} simplifies to ${\bf \nabla} \times {\bf B}  =  \mu{\bf i}^{free}$. This will be a good approximation provided that the magnitude ${\bf i}^{free}$ is much smaller than that of the displacement current. In the following, we will investigate the conditions for this to be a valid approximation. To simplify the analysis, we assume that the current of free charges is purely Ohmic, so that \fref{eq:Basics:totcurrent} becomes:
+Making the quasi-magnetostatic approximation means assuming that the displacement current, or equivalently, capacitive effects, are absent, so that \fref{eq:Basics:Max4} simplifies to ${\bf \nabla} \times {\bf B}  =  \mu{\bf i}^\text{free}$. This will be a good approximation provided that the magnitude ${\bf i}^\text{free}$ is much smaller than that of the displacement current. In the following, we will investigate the conditions for this to be a valid approximation. To simplify the analysis, we assume that the current of free charges is purely Ohmic, so that \fref{eq:Basics:totcurrent} becomes:
 \begin{equation}
-{\bf i}^{tot} = \sigma {\bf \nabla} \cdot {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
+{\bf i}^\text{tot} = \sigma {\bf \nabla} \cdot {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
 \label{eq:Basics:totcurrent2}
 \end{equation}
 Let us now consider an electric field that oscillates with some frequency $f$, 
@@ -421,7 +421,7 @@ Let us now consider an electric field that oscillates with some frequency $f$,
 \end{equation}
 where $j$ here is the imaginary unit. If we insert this into \fref{eq:Basics:totcurrent2}, we get:
 \begin{equation}
-{\bf i}^{tot} = \sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
+{\bf i}^\text{tot} = \sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
 \label{eq:Basics:totcurrent3}
 \end{equation}
 From this it is clear that the capacitive contribution (last term) is negligible compared to the conductive contribution (first term) when the ratio
@@ -460,7 +460,7 @@ where we we have defined,
 Typical frequencies of interest for neural signals are on the order of 100 \si{\hertz}, which in an electromagnetic context can be considered a low frequency. Let us explore whether the criterion in \fref{eq:Basics:ratiocondition2} is met in three different mediums: 
 
 \begin{itemize}
-\item \textit{Extracellular saline solution:} The relative permittivity ($\epsilon_r = \epsilon/\epsilon_0$) of dilute salt water solutions, such as that filling up the extracellular space of the brain, is close to that of water, which at low frequencies is $\epsilon_r \sim 80$ \cite**{hasted1948}. The the extracellular solution has a conductivity $\sigma_{saline} \sim 2 \, \si{\siemens\per\metre}$ (see \fref{sec:Sigma}). This gives a value $\tau = \epsilon_r \epsilon_0/\sigma \sim 80\times 8.85\times10^{-12}/2 \simeq 0.35 \, \si{\nano\second}$. A charge relaxation time in the order of 1 \si{\nano\second} has also estimated in other works \cite**{Grodzinsky2011,Gratiy2017}), and implies that the displacement current will mainly be important under conditions when the electrical field varies with frequencies in the gigahertz range. The relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this ($f \sim 100 \, \si{\hertz} $), which implies that capacitive effects can safely be neglected. With $\tau = 0.35 \, \si{\nano\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  2.2 \times 10^{-7}$, and the criterion in \fref{eq:Basics:ratiocondition2} is clearly met.
+\item \textit{Extracellular saline solution:} The relative permittivity ($\epsilon_\text{r} = \epsilon/\epsilon_0$) of dilute salt water solutions, such as that filling up the extracellular space of the brain, is close to that of water, which at low frequencies is $\epsilon_\text{r} \sim 80$ \cite**{hasted1948}. The the extracellular solution has a conductivity $\sigma_\text{saline} \sim 2 \, \si{\siemens\per\metre}$ (see \fref{sec:Sigma}). This gives a value $\tau = \epsilon_r \epsilon_0/\sigma \sim 80\times 8.85\times10^{-12}/2 \simeq 0.35 \, \si{\nano\second}$. A charge relaxation time in the order of 1 \si{\nano\second} has also estimated in other works \cite**{Grodzinsky2011,Gratiy2017}), and implies that the displacement current will mainly be important under conditions when the electrical field varies with frequencies in the gigahertz range. The relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this ($f \sim 100 \, \si{\hertz} $), which implies that capacitive effects can safely be neglected. With $\tau = 0.35 \, \si{\nano\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  2.2 \times 10^{-7}$, and the criterion in \fref{eq:Basics:ratiocondition2} is clearly met.
 
 \item \textit{Neural membrane:} Neural membranes typically have a time constant $\tau \sim 1 \, \si{\milli\second}$ associated with their capacitive charging. This is much lower than the corresponding charge relaxation time of the extracellular saline solution. With $\tau = 1 \, \si{\milli\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  0.63$, and the criterion in \fref{eq:Basics:ratiocondition2} is not met. Hence, capacitive current is an important contributor to the total membrane current.
 
