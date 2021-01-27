@@ -68,6 +68,8 @@ If we assume that this force is exclusively due to the Coulomb force, the electr
 \end{equation}
 
 Tightly related to the electric field ${\bf E}$ is the electric potential $\phi$ (with units volts (\si{\volt})), which is what we normally measure experimentally when we stick an electrode into the brain\index{Electric potential}. \gen{Senere har vi vel brukt andre symboler for potensial, i alle fall jeg.} \ghnote{Vi maa bestemme oss der, ja. Jeg og Torbjorn har brukt $\phi$, Gaute har brukt $V$, men jeg har brukt $V$ for membranpotensialet. }
+\gen{I Sterratt bruker vi $V_e/V_i$ for ekstracellulaert/intracellulaert potentsial, og $V$ for membranpotensial. Generelt fint hvis vi kan bruke mest mulig samme notasjon her, synes jeg}
+
 While ${\bf E}$ is a fundamental physical entity, $\phi$ may be regarded as an auxiliary variable. It is a way to represent the electric field that often makes computations simpler and measurements easier. 
 
 The electric field can be expressed as the spatial derivative, or gradient, of the potential:
@@ -153,14 +155,15 @@ The practical implication of electroneutrality and shielding effects is that, wh
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\blue{Electric currents}}
 \label{sec:Basics:Current} \index{Electric current}
-As we have stated several times by now, we do not want to study a macroscopic system by keeping track of individual charges. We are instead interested in the electric currents, $I$ (units Ampere: \si{\ampere} = \si{\coulomb\per\second}), which represent the net movement of charge at a coarse-grained (space averaged) scale. There exist various kinds of electric currents, differing in terms of what drive them. Here, we will briefly introduce the three kinds that are most important for the topic of this book, the conductive current, the capacitive current and the diffusive current.
+As we have stated several times by now, we do not want to study a macroscopic system by keeping track of individual charges. We are instead interested in the electric currents, $I$ (units Ampere: \si{\ampere} = \si{\coulomb\per\second}), which represent the net movement of charge at a coarse-grained (space averaged) scale. 
+\gen{Vi er jo ogsaa interessert i particle fluxes noen steder, men det er kanskje ikke noedvendig aa bringe opp her?} There exist various kinds of electric currents, differing in terms of what drive them. Here, we will briefly introduce the three kinds that are most important for the topic of this book, the conductive current, the capacitive current and the diffusive current.
 
 \subsection{\blue{Conductive currents}}
 \label{sec:Basics:ConductiveCurrent} 
 \index{Conductive current}
-A conductive material  \index{Conductive medium} is one that charges can move through freely when they are exposed to an electric field. The conductive current is defined as the amount of charge that moves through some reference cross-section area per second. 
+A conductive material  \index{Conductive medium} is one that \gex{(where?)} charges can move through freely when they are exposed to an electric field. The conductive current is defined as the amount of charge that moves through some reference cross-section area per second. 
 
-In electric circuits composed of wires and various circuit elements, currents are essentially one dimensional, running in the directions defined by the electric cables. The reference cross-section area is then typically taken to be that of "a whole cable", so that the current simply represents the total current through the cable. A simple example is shown in \fref{fig:Basics:Currents}A, where a current passes through a cable with a resistor. The current is then given by Ohm's law:
+In electric circuits composed of \gex{metallic} wires and various circuit elements, currents are essentially one dimensional, running in the directions defined by the electric cables. The reference cross-section area is then typically taken to be that of "a whole cable", so that the current simply represents the total current through the cable. A simple example is shown in \fref{fig:Basics:Currents}A, where a current passes through a cable with a resistor. The current is then given by Ohm's law:
 \begin{equation}
 I = - \frac{\Delta \phi}{R}, 
 \label{eq:Basics:Ohm_R}
@@ -175,31 +178,33 @@ where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference across the resisto
 \label{fig:Basics:Currents}
 \end{figure}
 
-In reality, the resistance of the cable is not strictly zero, but for most standard electrical circuits it an excellent approximation. However, in some applications, for example for very long and thin cables, or for cables of less conducting materials, it may be necessary to treat cables as continuous resistors. If we define the specific axial resistance per unit length $r_{a}$ (units \si{\ohm\per\metre}, Ohm's law becomes: 
+In reality, the resistance of the cable is not strictly zero, but for most standard electrical circuits it is an excellent approximation. However, in some applications, for example for very long and thin cables, or for cables of less conducting \gex{(conductive?)} materials, it may be necessary to treat cables as continuous resistors. If we define the specific axial resistance per unit length $r_{a}$ (units \si{\ohm\per\metre}), Ohm's law becomes: 
 \begin{equation}
 I = - \frac{1}{r_a}\frac{d\phi}{dx}, 
 \label{eq:Basics:Ohm_r}
 \end{equation}
 where $r_a=r_a(x)$ may in principle vary along the cable (\fref{fig:Basics:Currents}B). With \fref{eq:Basics:Ohm_r}, the potential $\phi(x)$ will vary gradually along the cable. If $r_a$ is constant along the cable, and the cable has length $L$, it is related to the resistance of the total cable through $r_a=R/L$. Conductive currents running axially through neural dendrites and axons are typically modeled in this manner. 
 
-The examples above were both one-dimensional in the sense that the current was restricted to run exclusively in the direction defined by the cable. In a three dimensional volume, such as for example brain tissue, currents may run in all spatial directions (\fref{fig:Basics:Currents}C). It is then convenient to describe them in terms of a current density, ${\bf i}$ (units \si{\ampere\per\square\metre}), a vector that defines the current per unit cross section area and its spatial direction. The current density can be defined in all points in 3D space, and is not dependent on any particular and predefined cross-section area. The conductive properties of a material can be specified either through its resistivity $r$ (units \si{\ohm\metre}), or its inverse, the conductivity $\sigma$ (units \si{\siemens\per\metre}), both being material properties. We shall here use the latter convention, and with that, Ohms law takes the form:
+The examples above were both one-dimensional in the sense that the current was restricted to run exclusively in the direction defined by the cable. In a three dimensional volume, such as for example brain tissue, currents may run in all spatial directions (\fref{fig:Basics:Currents}C). It is then convenient to describe them in terms of a current density, ${\bf i}$ (units \si{\ampere\per\square\metre}), a vector that defines the current per unit cross section area and its spatial direction. The current density can be defined in all points in 3D space, and is not dependent on any particular and predefined cross-section area. The conductive properties of a material can be specified either through its resistivity $r$ (units \si{\ohm\metre}), or its inverse, the conductivity $\sigma$ (units \si{\siemens\per\metre}), both being material properties. We shall here use the latter convention, and with that, Ohms law \gex{(Ohm's law?)} takes the form:
 \begin{equation}
 {\bf i} = - \sigma {\bf \nabla} \phi
 \label{eq:Basics:Ohm_3D_phi}
 \end{equation}
-
+%
 On a more general form, Ohms law states that:
 \begin{equation}
 {\bf i} = \sigma {\bf E}.
 \label{eq:Basics:Ohm_general}
 \end{equation}
-In comparison, \fref{eq:Basics:Ohm_R}-\fref{eq:Basics:Ohm_3D_phi} hold only in the cases when the electric field ${\bf E}$ is conservative (cf. eq. \ref{eq:Basics:EV}), which we shall assume throughout this book. A discussion of this assumption is given in \fref{sec:VC:quasistatic}. We emphasize, however, that Ohms law applies specifically to \textit{conductive} currents, and that there exist other forms of electric currents not described by it.
+In comparison, \fref{eq:Basics:Ohm_R}-\fref{eq:Basics:Ohm_3D_phi} hold only in the cases when the electric field ${\bf E}$ is conservative (cf. eq. \ref{eq:Basics:EV}), \gen{Kanskje legge til en kjapp forklaring paa hva som menes med "conservative"?} which we shall assume throughout this book. A discussion of this assumption is given in \fref{sec:VC:quasistatic}. We emphasize, however, that Ohms law applies specifically to \textit{conductive} currents, and that there exist other forms of electric currents not described by it.
 
 
 \subsection{\blue{Capacitive currents}}
 \label{sec:Basics:CapacitiveCurrent} 
 \index{Capacitive current}
-In the theory of electric circuits, a common circuit element is the capacitor. Capacitors are devices that can store electrical energy in terms of an electric field. The simplest form of a capacitor, a parallel plate capacitor, consists of two electrical metallic plates or surfaces separated by an insulating (dielectric) medium \index{Dielectric medium}.  By definition, a dielectric medium is one where charges are bound to stay in confined regions of space. An electric field only will slightly shift their average equilibrium positions, causing a polarization of the material. A parallel plate capacitor can separate a charge $q$ on one plate from a charge $-q$ on the other plate, to obtain a voltage difference:
+In the theory of electric circuits, a common circuit element is the capacitor. Capacitors are devices that can store electrical energy in terms of an electric field.
+\gen{Hva menes med "in terms of an electric field?} 
+The simplest form of a capacitor, a parallel plate capacitor, consists of two electrical metallic plates or surfaces separated by an insulating (dielectric) medium. \index{Dielectric medium} By definition, a dielectric medium is one where charges are bound to stay in confined regions of space. An electric field will only slightly shift their average equilibrium positions, causing a polarization of the material. A parallel plate capacitor can separate a charge $q$ on one plate from a charge $-q$ on the other plate, to obtain a voltage difference:
 \begin{equation}
 \phi = \frac{q}{C}, 
 \label{eq:Basics:Vcap}
@@ -226,7 +231,7 @@ I_\text{cap} = \frac{dq}{dt} = C\frac{d\phi}{dt},
 \end{equation}
 Although $I_\text{cap}$ differs from conductive currents in the sense that it does not involve free transfer of charge through a medium, it has the same units (A). 
 
-The capacitive current was introduced here because neural membranes have capacitive properties, which causes the neural membrane potential to change when currents pass through the membrane. It custom to express the capacitive membrane current in terms of a current density: 
+The capacitive current was introduced here because neural membranes have capacitive properties, which causes the neural membrane potential to change when currents pass through the membrane. It \gex{is customary} to express the capacitive membrane current in terms of a current density: 
 
 \begin{equation}
 i_\text{cap} = c_m\frac{d\phi_m}{dt}, 
@@ -238,14 +243,15 @@ where $c_\text{m}$ (units \si{\farad\per\square\metre}) is the capacitance per u
 \subsection{\blue{Diffusive currents}}
 \label{sec:Basics:DiffusiveCurrent} 
 \index{Diffusion} \index{Diffusive current}
-The charge carriers in the brain are ions floating around in the saline solutions that fill up the intra- and extracellular spaces. Ions in salt water will, like electrons in a metal conductor, be accelerated by the presence of an electric field, and will thus carry conductive currents. However, unlike electrons in the metal conductor, ions in water may also move due to diffusion. 
+The charge carriers in the brain are ions floating around in the saline solutions that fill up the intra- and extracellular spaces. Ions in salt water will, like electrons in a metal conductor, be accelerated by the presence of an electric field, and will thus carry conductive currents. However, unlike electrons in the metal conductor, ions in water may also move due to diffusion. \gen{Elektroner kan ogsaa diffundere, som f.eks, i en p-n overgang. Poenget ditt er vel at i et metall saa er det (typisk?) ingen konsentrasjonsgradient av elektroner, og derfor ingen diffusjonsstroem. Kanskje omformuler for aa vaere mer presis?}
 
 The electrodiffusive \index{Electrodiffusion} nature of ionic motion is described by the Nernst-Planck equation,
 \begin{equation}
 {\bf j_k} = - D_k {\bf \nabla} c_{k} - \frac{D_k z_k c_k}{\psi} {\bf \nabla} \phi,
 \label{eq:Basics:JNP}
 \end{equation}
-which determines the flux density, ${\bf j_k}$ (units \si{\mole\per\square\metre\per\second}), of an ion species $k$. The first term on the right hand side of \fref{eq:Basics:JNP} is Fick's law for diffusion. It states that the diffusive flux of ion species $k$ is proportional to the diffusion constant ${D}_k$ (units \si{\square\metre\per\second}) times the concentration gradient ${\bf \nabla} c_{k}$. ${D}_k$ is generally a property of the medium that the ion diffuses through, and determines how "easy" it is for the ion $k$ to move through the medium. The second term on the right hand side of eq. \ref{eq:Basics:JNP} accounts for ionic drift due to the electric field. The factor $D_k/\psi$ is the electrical mobility of the ions, which is linearly related to their diffusion constant. This linear relationship is called the Einstein relation\index{Einstein relation}. It does not apply generally, but is valid for dilute solutions, such as the saline solutions in the brain \cite**{Grodzinsky2011}. The valency, $z_{k}$, is a unit-less number that denotes the number of unit charges associated with a single ion of species $k$. The factor $\psi=RT/F$ (units \si{\volt}) is defined by the gas constant ($R = 8.314 \, \si{\joule\per\mole\per\kelvin}$), Faraday's constant ($F = 96458.3\, \si{coulomb\per\mole}$), and the temperature ($T$ with units \si{\kelvin}). 
+which determines the flux density, ${\bf j_k}$ (units \si{\mole\per\square\metre\per\second}), 
+\gen{"k" skal ikke vaere bold i subscripten til j, ser at det ogsaa er feil noen andre steder} of an ion species $k$. The first term on the right hand side of \fref{eq:Basics:JNP} is Fick's law for diffusion. It states that the diffusive flux of ion species $k$ is proportional to the diffusion constant ${D}_k$ (units \si{\square\metre\per\second}) times the concentration gradient ${\bf \nabla} c_{k}$. ${D}_k$ is generally a property of the medium that the ion diffuses through, and determines how "easy" it is for the ion $k$ to move through the medium. The second term on the right hand side of eq. \ref{eq:Basics:JNP} accounts for ionic drift due to the electric field. The factor $D_k/\psi$ is the electrical mobility of the ions, which is linearly related to their diffusion constant. This linear relationship is called the Einstein relation\index{Einstein relation}. It does not apply generally, but is valid for dilute solutions, such as the saline solutions in the brain \cite**{Grodzinsky2011}. The valency, $z_{k}$, is a unit-less number that denotes the number of unit charges associated with a single ion of species $k$. The factor $\psi=RT/F$ (units \si{\volt}) is defined by the gas constant ($R = 8.314 \, \si{\joule\per\mole\per\kelvin}$), Faraday's constant ($F = 96458.3\, \si{coulomb\per\mole}$), and the temperature ($T$ with units \si{\kelvin}). 
 
 Faraday's constant is defined as the charge per mole ($1.602\times10^{-19}$) of unit charges. A flux density ${\bf j_k}$ can thus be converted to a current density by multiplying it with $Fz_k$. A salt water solution is composed of several ions, and to obtain the net electric current, we can sum over the contributions from all of them to obtain the total current density: 
 \begin{equation}
@@ -268,12 +274,15 @@ The first term on the right hand side of \fref{eq:Basics:iNP} is the diffusive c
 {\bf i}_\text{diff}  = -\sum_k{F z_k {D_k}{\bf \nabla} c_{k}}.
 \label{eq:Basics:idiff}
 \end{equation}
-Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. In many cases, the total current will be dominated by the drift component, and it is common to assume that the diffusive component is negligible. The diffusive current does, however, play an important role over neuronal membranes. 
+Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. In many cases, the total current will be dominated by the drift component, and it is common to assume that the diffusive component is negligible \gex{when modeling neuronal dynamics (?)}. The diffusive current does, however, play an important role over neuronal membranes, \gex{and sometimes also when modeling extracellular currents (?).}
 
 
 \subsection{\blue{A note on Ohms law}}
 \label{sec:Basics:Note} 
-It is important to remember that Ohm's law (\fref{eq:Basics:Ohm_general}) represents the average movement of charge on a coarse-grained level, and does not apply on a microscopic scale. If we compare it with the microscopic fundament for this movement, it is easy to get confused, so let us dive into that confusion and try to clear it up. According to \fref{eq:Basics:E}, an electric field acts on a reference charge $q$ by a constant force, and should according to Newton's law (${\bf F} = m{\bf a}$) give it a constant acceleration in the field-direction. Conversely, \fref{eq:Basics:Ohm_general} states that ${\bf E}$ gives rise not to a constant acceleration of charges, but rather a constant current, i.e., a constant average \textit{velocity} of charges. 
+It is important to remember that Ohm's law (\fref{eq:Basics:Ohm_general}) represents the average movement of charge on a coarse-grained level, and does not apply \gex{for movement of an individual charge on a microscopic scale}.
+\gen{"Microscopic scale" kan vel mistorstaaes her. Vi mener jo ikke "micrometer"-skala.
+Er det bedre aa bruke "nanoscale" eller noe saant?}.
+ If we compare it with the microscopic fundament for this movement, it is easy to get confused, so let us dive into that confusion and try to clear it up. According to \fref{eq:Basics:E}, an electric field acts on a reference charge $q$ by a constant force, and should according to Newton's law (${\bf F} = m{\bf a}$) give it a constant acceleration in the field-direction. Conversely, \fref{eq:Basics:Ohm_general} states that ${\bf E}$ gives rise not to a constant acceleration of charges, but rather a constant current, i.e., a constant average \textit{velocity} of charges. 
 
 The reason for the discrepancy between the microscopic (constant acceleration) and macroscopic (constant velocity) scales is that the constant acceleration (eq. \ref{eq:Basics:E}) at the microscopic level will go on for only a tiny time period (called the charge relaxation-time) \index{Charge-relaxation} before our protagonist charge $q$ will bump into some other particle and be scattered out in some random direction. After the scattering event, the acceleration will start "from scratch", and go on until the next collision takes place, and so forth. Whereas the scattering events will tend to make the motion of $q$ a random walk (which should give it a zero average velocity in any preferred direction), the small periods of acceleration between collisions will at average give $q$ a net drift velocity in the field direction. As the same will happen for all other charges present, there will be a net drift of charge in the field direction. The current density given by \fref{eq:Basics:Ohm_general} is therefore often referred to as the drift current density. Admittedly, the explanation that we proposed here was somewhat hand-waving, and the fact that we get the linear (constant velocity) relationship in \fref{eq:Basics:Ohm_general} is constitutive, meaning that it is observed experimentally rather than derived from first physical principles. It is found to be a good approximation for many mediums under many conditions, and it is an excellent approximation for brain tissue \cite**{Nunez2006,Pettersen2012}. 
 
