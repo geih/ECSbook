@@ -222,8 +222,10 @@ The formalism introduced so far has been for modeling a neuron as a single compa
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/Neuron/multikompis.png}
 \end{center}
-\caption{\textbf{Multi-compartment model.} {\bf (A)} Representations of a neuronal morphology as a number of interconnected compartments. {\bf (B)} Subset of interconnected compartments. The currents involved in MC modelling include the sum of transmembrane currents ($I_{\mathrm{m},n$}) in a compartment $n$, and the intracellular currents running between 
-compartments, $I_{n-1,n}$ (current from compartment $n-1$ to $n$), and $I_{n,n+1}$ (current from compartment $n$ to $n+1$).}
+\caption{\textbf{Multi-compartment model.} {\bf (A)} Representations of a neuronal morphology as a number of interconnected compartments. {\bf (B)} Subset of interconnected compartments. The currents involved in MC modeling include the sum of transmembrane currents ($I_{\mathrm{m},n}$) in a compartment $n$, and the intracellular currents running between 
+compartments, $I_{n-1,n}$ (current from compartment $n-1$ to $n$), and $I_{n,n+1}$ (current from compartment $n$ to $n+1$).
+}
+
 \label{fig:Neuron:multikompisen}
 \end{figure}
 
@@ -404,7 +406,7 @@ In Fig. \ref{fig:Neuron:Semiinf}A we simulated numerically the response of a cyl
 V(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + C_2(x) e^{-t/\tau_2} + \ldots, 
 \label{eq:Neuron:cabletemporal}
 \end{equation}
-where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_\text{m} = R_\text{m} c_\text{m}$ is the \emph{membrane time constant} (eq. \ref{eq:Neuron:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). We will not here present these analytical results in any further detail, but note that the final decay phase, i.e., when $V$ at all locations have coincided, takes place at the slower time scale of the membrane time constant, $\tau_\text{m}$ which in the simulation in Fig. \ref{fig:Neuron:Semiinf}A  was 10 \si{\milli\seconds} ($R_\text{m}=10\,\si{\kilo\ohm\square\centi\metre}$, and $c_\text{m}=1\, \si{\micro\farad\per\square\centi\metre}$). 
+where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_\text{m} = R_\text{m} c_\text{m}$ is the \emph{membrane time constant} (eq. \ref{eq:Neuron:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). We will not here present these analytical results in any further detail, but note that the final decay phase, i.e., when $V$ at all locations have coincided, takes place at the slower time scale of the membrane time constant, $\tau_\text{m}$ which in the simulation in Fig. \ref{fig:Neuron:Semiinf}A  was 10 \si{\milli\second} ($R_\text{m}=10\,\si{\kilo\ohm\square\centi\metre}$, and $c_\text{m}=1\, \si{\micro\farad\per\square\centi\metre}$). 
 
 
 
@@ -471,7 +473,7 @@ E_k & =  \frac{RT}{Fz_k}  ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}}
 \end{align}
 where the last equality follows from the definition of $E_k$ as the membrane potential $V_{\text{in}}-V_{\text{out}}$ for which the the net flux (in \fref{eq:Neuron:NP1D}) is zero. \Fref{eq:Neuron:revpots} was used to compute the reversal potentials listed in \Fref{tab:Neuron:ion-concentrations}. 
 
-Let us illustrate how to interpret the reversal potential using a K$^+$ channel as an example. For simplicity, let us assume that we open it while the neuron is resting ($V = V_{\text{in}}-V_{\text{out}}$ \sim -70 \si{\milli\volt}), and that the K$^+$ is the only ion channel that is open. Since the intracellular space is more K$^+$-rich than the extracellular space, diffusion drive K$^+$ out from the neuron, and since $V$ is negative, electric drift will drive K$^+$ into the neuron. Initially, the diffusive process will dominate, and there will be a net effflux of K$^+$, causing a gradual decrease (hyperpolarization) of $V$ towards the K$^+$ reversal potential, which for the concentrations in \Fref{tab:Neuron:ion-concentrations} has the value $ $E_K = -100 \, \si{\milli\volt}$. As $V$ decreases, the drift component will become stronger, and when $V$ reaches $E_K$, it becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero. $E_K$ is called the reversal potential, because if the potential were to drop below this value, the current would reverse, i.e., the drift component would become dominant over diffusion, and K$^+$ would start to go into the neuron. 
+Let us illustrate how to interpret the reversal potential using a K$^+$ channel as an example. For simplicity, let us assume that we open it while the neuron is resting ($V = V_{\text{in}}-V_{\text{out}} \sim -70 \si{\milli\volt}$), and that the K$^+$ is the only ion channel that is open. Since the intracellular space is more K$^+$-rich than the extracellular space, diffusion drive K$^+$ out from the neuron, and since $V$ is negative, electric drift will drive K$^+$ into the neuron. Initially, the diffusive process will dominate, and there will be a net effflux of K$^+$, causing a gradual decrease (hyperpolarization) of $V$ towards the K$^+$ reversal potential, which for the concentrations in \Fref{tab:Neuron:ion-concentrations} has the value $E_K = -100 \, \si{\milli\volt}$. As $V$ decreases, the drift component will become stronger, and when $V$ reaches $E_K$, it becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero. $E_K$ is called the reversal potential, because if the potential were to drop below this value, the current would reverse, i.e., the drift component would become dominant over diffusion, and K$^+$ would start to go into the neuron. 
 
 As ion concentrations are generally assumed to remain constant in HH-type models, the reversal potentials are also assumed to be constant. As a consequence, one typically do not think that much about ionic concentrations when constructing such models, but simply use values for $E_k$ based or empirical measurements of the potential at which a certain membrane current reverses.
 
