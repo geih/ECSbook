@@ -206,8 +206,8 @@ In the theory of electric circuits, a common circuit element is the capacitor. C
 \end{equation}
 where $C$ (units Farad (\si{\farad} = \si{\coulomb\per\volt})) is the capacitance. 
 
-To understand how a capacitor works, consider the illustration in \fref{fig:Basics:Capacitor}, where a conductive current $I^\text{in}$ enters the capacitor from the left, and a conductive current $I^\text{out}$ leaves to the right. Kirchhoff's current law states the current flowing into any node in a circuit must equal the current flowing out from that node, which means that we must define
-a \textit{capacitive current} $I^\text{cap}$ over the capacitor, so that we get continuity: $I^\text{in} = I^\text{cap} = I^\text{out}$. 
+To understand how a capacitor works, consider the illustration in \fref{fig:Basics:Capacitor}, where a conductive current $I_\text{in}$ enters the capacitor from the left, and a conductive current $I_\text{out}$ leaves to the right. Kirchhoff's current law states the current flowing into any node in a circuit must equal the current flowing out from that node, which means that we must define
+a \textit{capacitive current} $I_\text{cap}$ over the capacitor, so that we get continuity: $I_\text{in} = I_\text{cap} = I_\text{out}$. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -218,18 +218,18 @@ a \textit{capacitive current} $I^\text{cap}$ over the capacitor, so that we get 
 \label{fig:Basics:Capacitor}
 \end{figure}
 
-Whereas the conductive currents $I^\text{in}$ and $I^\text{out}$ are mediated by charges moving freely through cables, no charges actually move across the capacitor itself. Instead, $I^{in}$ leads to an accumulation of charge $dq/dt$ on the left metal plate of the capacitor. This, in turn, evokes an electric field across its dielectric core, which drives positive charges away from the rightmost metal plate, charging it negatively $-dq/dt$. The temporal rate of change of the electric field across the dielectric medium can be described in terms of a capacitive current defined by:
+Whereas the conductive currents $I_\text{in}$ and $I_\text{out}$ are mediated by charges moving freely through cables, no charges actually move across the capacitor itself. Instead, $I_\text{in}$ leads to an accumulation of charge $dq/dt$ on the left metal plate of the capacitor. This, in turn, evokes an electric field across its dielectric core, which drives positive charges away from the rightmost metal plate, charging it negatively $-dq/dt$. The temporal rate of change of the electric field across the dielectric medium can be described in terms of a capacitive current defined by:
 
 \begin{equation}
-I^\text{cap} = \frac{dq}{dt} = C\frac{d\phi}{dt}, 
+I_\text{cap} = \frac{dq}{dt} = C\frac{d\phi}{dt}, 
 \label{eq:Basics:Icap}
 \end{equation}
-Although $I^\text{cap}$ differs from conductive currents in the sense that it does not involve free transfer of charge through a medium, it has the same units (A). 
+Although $I_\text{cap}$ differs from conductive currents in the sense that it does not involve free transfer of charge through a medium, it has the same units (A). 
 
 The capacitive current was introduced here because neural membranes have capacitive properties, which causes the neural membrane potential to change when currents pass through the membrane. It custom to express the capacitive membrane current in terms of a current density: 
 
 \begin{equation}
-i^\text{cap} = c_m\frac{d\phi_m}{dt}, 
+i_\text{cap} = c_m\frac{d\phi_m}{dt}, 
 \label{eq:Basics:Icap_mem}
 \end{equation}
 where $c_\text{m}$ (units \si{\farad\per\square\metre}) is the capacitance per unit membrane area. In this case, the current density is one-dimensional and in the direction normal to the membrane.
@@ -254,7 +254,7 @@ Faraday's constant is defined as the charge per mole ($1.602\times10^{-19}$) of 
 \end{equation}
 The last term on the right hand side is the drift current density, 
 \begin{equation}
-{\bf i}^\text{drift} = - F\sum_{k} \frac{{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi} = - \sigma {\bf \nabla}{\phi}.
+{\bf i}_\text{drift} = - F\sum_{k} \frac{{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi} = - \sigma {\bf \nabla}{\phi}.
 \label{eq:Basics:idrift}
 \end{equation}
 As we indicated with the last equality, the drift current density is the same as the Ohmic current that we defined in eq. \ref{eq:Basics:Ohm_3D_phi}, which means that we can identify the conductivity $\sigma$ of a salt water solution as:
@@ -265,7 +265,7 @@ As we indicated with the last equality, the drift current density is the same as
 
 The first term on the right hand side of \fref{eq:Basics:iNP} is the diffusive current density, 
 \begin{equation}
-{\bf i}^\text{diff}  = -\sum_k{F z_k {D_k}{\bf \nabla} c_{k}}.
+{\bf i}_\text{diff}  = -\sum_k{F z_k {D_k}{\bf \nabla} c_{k}}.
 \label{eq:Basics:idiff}
 \end{equation}
 Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. In many cases, the total current will be dominated by the drift component, and it is common to assume that the diffusive component is negligible. The diffusive current does, however, play an important role over neuronal membranes. 
@@ -355,15 +355,15 @@ Maxwell's equations come in two versions, referred to as the microscopic and mac
 {\bf \nabla}\cdot {\bf D} & = & \rho. \label{eq:Basics:Max11} \\
 {\bf \nabla} \cdot {\bf B} & = & 0.  \label{eq:Basics:Max22} \\
 {\bf \nabla} \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{eq:Basics:Max33} \\
-{\bf \nabla} \times {\bf H} & = & \bf{i^{free}} + \frac{\partial {\bf D}}{\partial t}.  \label{eq:Basics:Max44}
+{\bf \nabla} \times {\bf H} & = & {\bf i}_{free} + \frac{\partial {\bf D}}{\partial t}.  \label{eq:Basics:Max44}
 \end{eqnarray}
-Here $\rho$ and $\bf{i^\text{free}}$ are the free (unbound) charge and current densities, as the influence of bound charge and current is incorporated in the the auxillary displacement and magnetizing fields, ${\bf D}$ and ${\bf H}$. For linear mediums, ${\bf D}$ and ${\bf H}$ can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ (units henries per metre \si{\henry\per\metre}) is the magnetic permeability of the medium and $\epsilon$ (units \si{\farad\per\metre}) the electric permittivity of the medium. These linear approximations work well for brain tissue \cite**{Nunez2006}, and Maxwell's equations then take the form:
+Here $\rho$ and ${\bf i}_\text{free}$ are the free (unbound) charge and current densities, as the influence of bound charge and current is incorporated in the the auxillary displacement and magnetizing fields, ${\bf D}$ and ${\bf H}$. For linear mediums, ${\bf D}$ and ${\bf H}$ can be expressed in terms of the fundamental magnetic (${\bf B}$) and electric (${\bf E}$) fields through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$, where $\mu$ (units henries per metre \si{\henry\per\metre}) is the magnetic permeability of the medium and $\epsilon$ (units \si{\farad\per\metre}) the electric permittivity of the medium. These linear approximations work well for brain tissue \cite**{Nunez2006}, and Maxwell's equations then take the form:
 
 \begin{eqnarray}
 {\bf \nabla}\cdot {\bf E} & = & \frac{\rho}{\epsilon}. \label{eq:Basics:Max1} \\
 {\bf \nabla} \cdot {\bf B} & = & 0.  \label{eq:Basics:Max2} \\
 {\bf \nabla} \times {\bf E} & = & - \frac{\partial {\bf B}}{\partial t}.  \label{eq:Basics:Max3} \\
-{\bf \nabla} \times {\bf B} & = & \mu{\bf i}^\text{free} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{eq:Basics:Max4}
+{\bf \nabla} \times {\bf B} & = & \mu{\bf i}_\text{free} + \mu\epsilon\frac{\partial {\bf E}}{\partial t}.  \label{eq:Basics:Max4}
 \end{eqnarray}
 
 \Fref{eq:Basics:Max1} is Gauss's law (for electricity). The free charge density, $\rho$, can generally be non-zero, although we argued earlier that brain tissue for practical purposes can be assumed to be electroneutral at the coarse-grained scale. 
@@ -378,12 +378,12 @@ Together, Maxwell's equations give a unified theory for electricity and magnetis
 
 Another fundamental physical principle that follows from Maxwell´s equations is that of charge conservation. To see this, we may start with taking the gradient (${\bf \nabla} \cdot$) of both sides of eq. \ref{eq:Basics:Max4}. Since the gradient of a cross product is always zero, \fref{eq:Basics:Max4} then reduces to:
 \begin{equation}
-{\bf \nabla} \cdot \left( {\bf i}^\text{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = 0.
+{\bf \nabla} \cdot \left( {\bf i}_\text{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = 0.
 \label{eq:Basics:Max4dot}
 \end{equation}
 This states that the sum of all currents (of free charges plus displacement) into any volume of space must be zero. To see the charge conservation explicitly, we can insert \fref{eq:Basics:Max1} for ${\bf E}$ to obtain:
 \begin{equation}
-- {\bf \nabla} \cdot {\bf i}^\text{free} =  \frac{\partial \rho}{\partial t},
+- {\bf \nabla} \cdot {\bf i}_\text{free} =  \frac{\partial \rho}{\partial t},
 \label{eq:Basics:currentconservation}
 \end{equation}
 Hence, if the left hand side in nonzero, there is a net influx of free charges into a volume, and if that is the case, there must be an accumulation of charge there, as described by the right hand side of the equation. This equation thus reveals that the displacement current can be expressed in terms of a local accumulation of free charge.
@@ -397,18 +397,19 @@ Throughout most of this book, we shall base our theory for computing extracellul
 \label{sec:Basics:Quasielectrostatic} \index{Quasi-electrostatic approximation}
 As we have seen, electric fields can arise from both magnetic induction and from the presence of electric charges (cf. \fref{eq:Basics:Max1}). In the brain, this latter contribution is much larger than the contribution from magnetic field variations, and the electromagnetic radiation caused by the interplay between magnetic and electric fields does not play an important role for the workings of the brain. When studying brain processes, we therefore apply the so-called electro-quasi-static approximation of Maxwell's equations, which means that the temporal derivative of the magnetic field is set to zero.This means that eq. \ref{eq:Basics:Max3} simplifies to ${\bf \nabla} \times {\bf E} = 0$, which is a prerequisite for expressing ${\bf E}$ as a gradient of a potential (cf. \fref{eq:Basics:EV}). This assumption was also implicit when we expressed {\bf E} as a function of charges in \fref{eq:Basics:CoulombEN}.
 
+
 \subsection{\blue{Quasi-magnetostatic approximation of Maxwell's equations}}
 \label{sec:Basics:Quasimagnetostatic} \index{Quasi-magnetostatic approximation}
 The right hand side of eq. \ref{eq:Basics:Max4} contains a total current,
 \begin{equation}
-{\bf i}^\text{tot} = {\bf i}^\text{free} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
+{\bf i}_\text{tot} = {\bf i}_\text{free} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
 \label{eq:Basics:totcurrent}
 \end{equation}
 composed of a current of free charges (first term) plus a displacement current (last term). For an idealized conductor, the displacement current is zero, while for an idealized capacitor, the current of free charges is zero. 
 
-Making the quasi-magnetostatic approximation means assuming that the displacement current, or equivalently, capacitive effects, are absent, so that \fref{eq:Basics:Max4} simplifies to ${\bf \nabla} \times {\bf B}  =  \mu{\bf i}^\text{free}$. This will be a good approximation provided that the magnitude ${\bf i}^\text{free}$ is much smaller than that of the displacement current. In the following, we will investigate the conditions for this to be a valid approximation. To simplify the analysis, we assume that the current of free charges is purely Ohmic, so that \fref{eq:Basics:totcurrent} becomes:
+Making the quasi-magnetostatic approximation means assuming that the displacement current, or equivalently, capacitive effects, are absent, so that \fref{eq:Basics:Max4} simplifies to ${\bf \nabla} \times {\bf B}  =  \mu{\bf i}_\text{free}$. This will be a good approximation provided that the magnitude ${\bf i}_\text{free}$ is much smaller than that of the displacement current. In the following, we will investigate the conditions for this to be a valid approximation. To simplify the analysis, we assume that the current of free charges is purely Ohmic, so that \fref{eq:Basics:totcurrent} becomes:
 \begin{equation}
-{\bf i}^\text{tot} = \sigma {\bf \nabla} \cdot {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
+{\bf i}_\text{tot} = \sigma {\bf \nabla} \cdot {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t}, 
 \label{eq:Basics:totcurrent2}
 \end{equation}
 Let us now consider an electric field that oscillates with some frequency $f$, 
@@ -418,7 +419,7 @@ Let us now consider an electric field that oscillates with some frequency $f$,
 \end{equation}
 where $j$ here is the imaginary unit. If we insert this into \fref{eq:Basics:totcurrent2}, we get:
 \begin{equation}
-{\bf i}^\text{tot} = \sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
+{\bf i}_\text{tot} = \sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
 \label{eq:Basics:totcurrent3}
 \end{equation}
 From this it is clear that the capacitive contribution (last term) is negligible compared to the conductive contribution (first term) when the ratio
@@ -471,24 +472,24 @@ In conclusion, the quasi-magnetostatic approximation seems justified for current
 
 \subsection{\blue{Extracellular currents are exclusively due to electric drift}}
 \label{sec:Basics:onlyohmic}
-When analyzing extracellular currents in the brain, it is common to assume that they are purely due to electric drift, as we do when using the volume conductor (VC) theory that we present in \Fref{chap:VC}. In principle, a current could have additional contributions from ionic diffusion, advection currents, displacement currents, and electromagnetic induction, so that the total current density would be:
+When analyzing extracellular currents in the brain, it is common to assume that they are purely due to electric drift, as we do when using the volume conductor (VC) theory that we present in \Fref{chap:VC}. In principle, a current could have additional contributions from ionic diffusion, advection currents, capacitive (displacement) currents, and electromagnetic induction, so that the total current density would be:
 \begin{equation}
-{\bf i} = {\bf i}^\text{ohm} + {\bf i}^\text{diff} + {\bf i}^\text{adv} + {\bf i}^\text{dis} + {\bf i}^\text{ind}, 
+{\bf i} = {\bf i}_\text{ohm} + {\bf i}_\text{diff} + {\bf i}_\text{adv} + {\bf i}_\text{cap} + {\bf i}_\text{ind}, 
 \label{VC:eq:generalcurrent}
 \end{equation}
 
-As the displacement current is proportional to $\partial {\bf E}/\partial t$, and the inductive currents is proportional to $\partial {\bf B}/\partial t$, it follows from the quasi-magnetoostatic and quasi-electroostatic approximations, respectively, that they are zero. 
+As the capacitive current is proportional to $\partial {\bf E}/\partial t$, and the inductive currents is proportional to $\partial {\bf B}/\partial t$, it follows from the quasi-magnetoostatic and quasi-electroostatic approximations, respectively, that they are zero in the extracellular medium. 
 
 An advective current \index{Advective current}, 
 \begin{equation}
-{\bf i}^\text{adv} = F \rho {\bf u}, 
+{\bf i}_\text{adv} = F \rho {\bf u}, 
 \label{VC:eq:iadv}
 \end{equation}
 arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. As we argued in \fref{sec:Basics:Debye}, the extracellular medium is practically electroneutral ($\rho \simeq 0$), and the advective current therefore becomes negligible. A more thorough argument for this was given in \citeasnoun**{Gratiy2017}. 
 
 The diffusive current \index{Diffusive current},
 \begin{equation}
-{\bf i}^\text{diff} = -F \sum_k z_k D_k {\bf \nabla} c_k,
+{\bf i}_\text{diff} = -F \sum_k z_k D_k {\bf \nabla} c_k,
 \label{VC:eq:idif}
 \end{equation}
 arises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along concentration gradients (${\bf \nabla} c_k$), and carry with them a net charge. It has been suggested that diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite**{Halnes2016}, especially if ion concentration gradients vary quite rapidly with time \cite**{Gratiy2017}. Diffusive effects on $\phi$ may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite**{Somjen2001,Frohlich2008,Wei2014,Ayata2015}). 
@@ -529,16 +530,16 @@ As we will use \fref{eq:Basics:continuity1}:
 \end{equation}
 as our fundamental equation for modeling extracellular potentials, it worth making the effort of showing how it relates to general current conservation. To do this, we state the current conservation equation (\fref{eq:Basics:Max4dot}) on the form:
 \begin{equation}
-{\bf \nabla} \cdot \left( {\bf i}^\text{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = {\bf \nabla} \cdot {\bf i}^\text{tot}  = 0, 
+{\bf \nabla} \cdot \left( {\bf i}_ \text{free} +  \epsilon \frac{\partial {\bf E}}{\partial t} \right) = {\bf \nabla} \cdot {\bf i}_\text{tot}  = 0, 
 \label{eq:Basics:Melpomene}
 \end{equation}
-where we in the last step defined everything inside the parenthesis (free plus capacitive current) as the total current to keep notation short. 
+where we in the last step grouped the current of free charges and the capacitive current into a total current to keep notation short. 
 
-The simplest way from eq. \ref{eq:Basics:Melpomene} to eq. \label{eq:Basics:Greta} may be to express the total current as being composed of a part ${\bf i}^\text{tot}_\text{p}$, which covers all intracellular and membrane currents, and a part ${\bf i}^\text{tot}_\text{t}$, which covers the currents that run extracellularly through tissue. Eq. \ref{eq:Basics:Melpomene} can then be written
+The simplest way from eq. \ref{eq:Basics:Melpomene} to eq. \label{eq:Basics:Greta} may be to express the total current as being composed of a part ${\bf i}_\text{tot,p}$, which covers all primary (intracellular and membrane) currents, and a part ${\bf i}_\text{tot,t}$, which covers the currents that run extracellularly through tissue. Eq. \ref{eq:Basics:Melpomene} can then be written
 \begin{equation}
-{\bf \nabla} {\bf i}^\text{tot}_\text{t} = - {\bf \nabla} \cdot {\bf i}^\text{tot}_\text{p}.
+{\bf \nabla} {\bf i}_\text{tot,t} = - {\bf \nabla} \cdot {\bf i}_\text{tot,p}.
 \label{eq:Basics:Melpomene2}
 \end{equation}
 
-Cellular and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}^\text{tot}_\text{p}$ and ${\bf i}^\text{tot}_\text{t}$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}^\text{tot}_\text{p} = C$, i.e., the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This was shown by \citeasnoun**{Gratiy2017}, who performed a a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}^\text{tot}_\text{p}$ ) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation when considering tissue in a coarse grained scale.
+Cellular and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}_\text{tot,p}$ and ${\bf i}_\text{tot,t}$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}_\text{tot,p} = C$, i.e., the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This was shown by \citeasnoun**{Gratiy2017}, who performed a a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}_\text{tot,p}) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation when considering tissue in a coarse grained scale.
 

@@ -24,11 +24,11 @@ Below, we start by presenting a framework for modeling the transmembrane current
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i^{\mathrm{cap}}$), (ii) a the leakage current density ($i_{\mathrm{L}}$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). 
-In addition, a neuron may receive (iv) external stimuli ($i^{\mathrm{stim}}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (unit mA/cm$^2$). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a the leakage current density ($i_{\mathrm{L}}$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). 
+In addition, a neuron may receive (iv) external stimuli ($i_{\mathrm{stim}}$) either through synaptic currents or experimental current injections. In the case where the neuron is modeled as a single compartment, the net transmembrane current must be zero, so that:
 
 \begin{equation}
-i^{\mathrm{c}} + i_{\mathrm{L}} + \sum_x{i_x} +  i^{\mathrm{stim}} = 0.
+i_{\mathrm{cap}}+ i_{\mathrm{L}} + \sum_x{i_x} +  i_{\mathrm{stim}} = 0.
 \label{eq:Neuron:singlecomp_zerosum}
 \end{equation}
 Below, we define the various currents that go into this equation.
@@ -40,7 +40,7 @@ Below, we define the various currents that go into this equation.
 
 The capacitive current density,
 \begin{equation}
-i_{\mathrm{c}} = c_{\mathrm{m}} \frac{dV}{dt},
+i_{\mathrm{cap}}= c_{\mathrm{m}} \frac{dV}{dt},
 \label{eq:Neuron:HHcap}
 \end{equation}
 represents the charging up of the membrane potential $V$ due to a charge density accumulating on the outside of inside of the capacitive membrane. Here, $c_{\mathrm{m}}$ is the specific membrane capacitance. In the original HH-model, $c_{\mathrm{c}}$ had the value 1 $\mu$F/cm$^2$, and this value seems to be representative for most neurons.  An illustration of how to interpret the capacitive current is given in \fref{fig:Neuron:capacitive_currents}. 
@@ -88,7 +88,7 @@ Together, the capacitive current and the leakage current determine the passive p
 \subsection{\blue{Active ion channels}}
 \label{sec:Neuron:active}
 \index{Active ion channels}
-In addition to $i_{\mathrm{c}}$ and $i_{\mathrm{L}}$, biophysical neuronal models typically include a number of active ion channels. These account for the "fancy" aspect of neurodynamics, and the main legacy of Hodgkin and Huxley was that they derived a mathematical model for describing the kinetics of these \cite**{Hodgkin1952}.
+In addition to $i_{\mathrm{cap}}$ and $i_{\mathrm{L}}$, biophysical neuronal models typically include a number of active ion channels. These account for the "fancy" aspect of neurodynamics, and the main legacy of Hodgkin and Huxley was that they derived a mathematical model for describing the kinetics of these \cite**{Hodgkin1952}.
 
 In the HH-type formalism, the current through an active ion channel type $x$ is modeled as:
 \begin{equation}
@@ -97,7 +97,7 @@ i_x = \bar{g}_x m_x^{\alpha} h_x^{\beta}(V-E_x).
 \end{equation}
 We note that the current density $i_x$ does not represent the current through a single ion channel, but a large number of channels of the same type $x$. Thus, $\bar{g}_x$ (mS/cm$^2$) denotes the conductance when all channels of type $x$ are fully open (the bar indicates that it's a constant), while $E_x$ (mV) is the reversal potential for the ion species that travels through the channel type. In analogy with the leak reversal potential, we may think of $E_x$ as the target potential that the current through ion channel $x$ will strive to drive the membrane potential towards. The intrinsic membrane potential dynamics is thus due to the competition between various currents that try to drive it towards their respective reversal potentials. 
 
-If one prefers to think of neurons in terms of circuit diagrams, the active ion channels are simply added in parallel to the passive $i_{\mathrm{c}}$ and $i_{\mathrm{L}}$ currents. As an example, the electric circuit representation of the HH model is depicted in \Fref{fig:Neuron:HH}.
+If one prefers to think of neurons in terms of circuit diagrams, the active ion channels are simply added in parallel to the passive $i_{\mathrm{cap}}$ and $i_{\mathrm{L}}$ currents. As an example, the electric circuit representation of the HH model is depicted in \Fref{fig:Neuron:HH}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -116,7 +116,7 @@ For voltage-gated ion channels, the the dynamics of the gating variables can be 
 \end{equation}
 Here, the steady state activation $x_{\infty}(V)$, represents the fraction of gates that will end up in the open state if the cell is clamped at a given potential $V$ for sufficiently long time. However, the process of opening the gates takes some time, as accounted for by the activation time constant $\tau_x(V)$ (ms). Both $x_{\infty}(V)$ and $\tau_x(V)$ are functions of the membrane potential, and these must be determined experimentally for each individual ion channel type. We do not go into the experimental challenges here, but will think of them as known functions. 
 
-There are also many ion channels whose activation or inactivation do not depend on $V$, but on some other variable, such as the concentration of some ion species or ligand \cite**{Hille2001,Sterratt2011}. A common example are Ca$^{2+}$ gated ion channels, i.e., channels with gate opening controlled by the intracellular Ca$^{2+}$ concentration ($[Ca^{2+}]_{\mathrm{i}}$). There are also ion channels whose activation depend on more than one variable, such as e.g., ion channels whose activation depend on both $V$ and $[Ca^{2+}]_{\mathrm{i}}$. A HH type formalism can in most cases be applied also to these kind of ion channels, provided that $x_{\infty}(V)$ and $\tau_x(V)$ in \fref{eq:Neuron:HHgate} can be replaced with experimentally determined functions of the relevant variables \cite**{Sterratt2011}. 
+There are also many ion channels whose activation or inactivation do not depend on $V$, but on some other variable, such as the concentration of some ion species or ligand \cite**{Hille2001,Sterratt2011}. A common example are Ca$^{2+}$ gated ion channels, i.e., channels with gate opening controlled by the intracellular Ca$^{2+}$ concentration ($\mathrm{[Ca^{2+}]_i}$). There are also ion channels whose activation depend on more than one variable, such as e.g., ion channels whose activation depend on both $V$ and $\mathrm{[Ca^{2+}]_i}$. A HH type formalism can in most cases be applied also to these kind of ion channels, provided that $x_{\infty}(V)$ and $\tau_x(V)$ in \fref{eq:Neuron:HHgate} can be replaced with experimentally determined functions of the relevant variables \cite**{Sterratt2011}. 
 
 To give an example of an active neuron model, the full set of equations for the HH model is summarized in Box \ref{box:Neuron:HH}. Compared to modern biophysically detailed neuron models, the original Hodgkin-Huxley model is relatively simple in that it only contains two (voltage-gated) active ion channels, a Na$^+$ with three activation gates ($m^3$) and one inactivation gate ($h$), as well as a K$^+$ channel with four inactivation gates $n^4$. The two active ion channels are together responsible for action potential generation.  
 
@@ -128,31 +128,29 @@ To give an example of an active neuron model, the full set of equations for the 
     \frac{dx(V,t)}{dt} & = & \frac{x_{\infty}(V) - x}{\tau_x(V)},  \, \text{for } x = \{m,h,n\} \\ 
     x_{\infty}(V) &= & \frac{\alpha_x(V)}{\alpha_x(V) + \beta_x(V)}, \, \text{for } x = m,n,h \\ %\hline
     \tau_x(V) & = & \frac{1}{\alpha_x(V) + \beta_x(V)}, \, \text{for } x = m,n,h \\ %\hline
-    \alpha_n &=& \frac{0.01 \mathrm{ms}^{-1} V+55 \mathrm{mV}}{1-e^{-(V+55 \mathrm{mV})/10 \mathrm{mV}}}  \\ %\hline
-     \beta_n &=& 0.125 \mathrm{ms}^-1 e^{-(V+65 \mathrm{mV})/80 \mathrm{mV}}   \\ %\hline
-     \alpha_m &=& \frac{0.1 \mathrm{ms}^{-1} V+ 40 \mathrm{mV}} {1-e^{-(V+40 \mathrm{mV})/10 \mathrm{mV}}}  \\   
-     \beta_m &=& 4 \mathrm{ms}^{-1} e^{-(V+65  \mathrm{mV})/18 \mathrm{mV}}  \\ %\hline
-    \alpha_h &=& 0.07 \mathrm{ms}^{-1} e^{-(V+65 \mathrm{mV})/20 \mathrm{mV}}  \\ %\hline
-    \beta_h &=& \frac{1 \mathrm{ms}^{-1}}{1+e^{-(V+35 \mathrm{mV}))/10 \mathrm{mV})}}   \\ %\hline
-    c_\mathrm{m} &=& 1.0 \mathrm{\mu F/cm^2} \\ %\hline
-    \bar{g}_{\mathrm{Na}} &=& 120 \mathrm{mS/cm^2}\\ %\hline
-    \bar{g}_{\mathrm{K}} &=& 36 \mathrm{mS/cm^2} \\ %\hline
-    \bar{g}_{\mathrm{L}} &=& 0.3 \mathrm{mS/cm^2} \\ %\hline
-    E_{\mathrm{Na}} &=& 50 \mathrm{mV} \\ %\hline
-    E_{\mathrm{K}} &=& -77  \mathrm{mV} \\ %\hline
-    E_{\mathrm{L}} &=& -54.4 \mathrm{mV} \\ %\hline
+    \alpha_n &=& \frac{0.01 \mathrm{ms}^{-1} V+55 \si{\milli\volt}}{1-e^{-(V+55 \si{\milli\volt})/10 \si{\milli\volt}}}  \\ %\hline
+     \beta_n &=& 0.125 \mathrm{ms}^-1 e^{-(V+65 \si{\milli\volt})/80 \si{\milli\volt}}   \\ %\hline
+     \alpha_m &=& \frac{0.1 \mathrm{ms}^{-1} V+ 40 \si{\milli\volt}} {1-e^{-(V+40 \si{\milli\volt})/10 \si{\milli\volt}}}  \\   
+     \beta_m &=& 4 \mathrm{ms}^{-1} e^{-(V+65  \si{\milli\volt})/18 \si{\milli\volt}}  \\ %\hline
+    \alpha_h &=& 0.07 \mathrm{ms}^{-1} e^{-(V+65 \si{\milli\volt})/20 \si{\milli\volt}}  \\ %\hline
+    \beta_h &=& \frac{1 \mathrm{ms}^{-1}}{1+e^{-(V+35 \si{\milli\volt}))/10 \si{\milli\volt})}}   \\ %\hline
+    c_\mathrm{m} &=& 1.0 \si{\micro\farad\per\square\centi\metre} \\ %\hline
+    \bar{g}_{\mathrm{Na}} &=& 120 \si{\milli\siemens\per\square\centi\metre}\\ %\hline
+    \bar{g}_{\mathrm{K}} &=& 36 \si{\milli\siemens\per\square\centi\metre} \\ %\hline
+    \bar{g}_{\mathrm{L}} &=& 0.3 \si{\milli\siemens\per\square\centi\metre} \\ %\hline
+    E_{\mathrm{Na}} &=& 50 \si{\milli\volt} \\ %\hline
+    E_{\mathrm{K}} &=& -77  \si{\milli\volt} \\ %\hline
+    E_{\mathrm{L}} &=& -54.4 \si{\milli\volt} \\ %\hline
 \end{eqnarray*}
 \label{box:Neuron:HH}
 \end{floatingbox}
 
 
 
-
 \subsection{\blue{Stimulus currents and synapses}}
 \label{sec:Neuron:stim}
 \index{Stimulus currents}
-Finally, the stimulus current in \fref{eq:Neuron:singlecomp_zerosum} can represent any external stimulus that a neuron receives. Typically, it is either taken to represent an experimental electrode injection or a synaptic input. 
-
+Finally, the stimulus current in \fref{eq:Neuron:singlecomp_zerosum} can represent any external stimulus that a neuron receives. Typically, it is either taken to represent an experimental electrode injection or a synaptic input. Below we include some typical examples of stimuli used in neuron simulations. 
 
 \subsubsection{Current injections}
 An electrode injection such as a step-current injection is modeled as:
@@ -169,14 +167,14 @@ Of course, one may chose the stimulus to be any function of time.
 
 \subsubsection{Conductance-based synapses}
 \index{Synapse}
-A chemical synapse can be modeled  more or less like an ion channel:
+A chemical synapse can be modeled more or less like an ion channel:
 \begin{equation}
 i_\text{syn}(t) = g_\text{syn}(t) \big(V(t)-E_\text{syn} \big), 
 \label{eq:Neuron:chemicalsynapse}
 \end{equation}
 where $E_\text{syn}$ is the reversal potential of the synapse, and $g_\text{syn}(t)$ the conductance. 
 
-The value of $E_\text{syn}$ determines whether a synapse is \textit{excitatory}, which means that it will tend to drive the  membrane potential of neuron toward the threshold for generating action potentials, or \textit{inhibitory}, which means that it will tend to drive the neuron away from the threshold for generating action potentials. Examples of excitatory synapses are AMPA and NMDA synapses, in which $E_\text{syn}$ ($\sim$ 0 - 10 mV) is high above the neuronal resting potential. The most common inhibitory synapse, is the GABA synapse, in which $E_\text{syn}$ ($\sim$ - 70 mV) is close to the resting membrane potential of the neuron.
+The value of $E_\text{syn}$ determines whether the synapse is \textit{excitatory}, which means that it will tend to drive the  membrane potential of neuron toward the threshold for generating action potentials, or \textit{inhibitory}, which means that it will tend to drive the neuron away from the threshold for generating action potentials. Examples of excitatory synapses are AMPA and NMDA synapses, in which $E_\text{syn}$ ($\sim$ 0 - 10 mV) is high above the neuronal resting potential. The most common inhibitory synapse, is the GABA synapse, in which $E_\text{syn}$ ($\sim$ - 70 mV) is close to the resting membrane potential of the neuron.
 
 The synapse model described by \fref{eq:Neuron:chemicalsynapse} is called \textit{conductance based}, because the activation of the synapse is modeled as a transient change in the synaptic conductance. Unlike for ion channels, which are often voltage or calcium activated, the chemical synapse is activated by neurotransmitters received from a pre-synaptic cell. However, the synaptic response tends to be rather stereotypical, meaning that the post-synaptic conductance change is more or less the same every time the synapse is activated. It is therefore not common to model neurotransmitter activation explicitly, but instead model $g_\text{syn}(t)$ as a constant $\bar{g}_\text{syn}$ multiplied with a temporal kernel determining the opening and closing of a synapse set off at an activation time $t_s$. Typical choices for $g_\text{syn}(t)$ are \index{Synapse models}: 
 \begin{align}
@@ -224,24 +222,24 @@ The formalism introduced so far has been for modeling a neuron as a single compa
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/Neuron/multikompis.png}
 \end{center}
-\caption{\textbf{Multi-compartment model.} {\bf (A)} Representations of a neuronal morphology as a number of interconnected compartments. {\bf (B)} Subset of interconnected compartments. The currents involved in MC modelling include the sum of transmembrane currents ($I^M_n$) in a compartment $n$, and the intracellular currents running between 
+\caption{\textbf{Multi-compartment model.} {\bf (A)} Representations of a neuronal morphology as a number of interconnected compartments. {\bf (B)} Subset of interconnected compartments. The currents involved in MC modelling include the sum of transmembrane currents ($I_{\mathrm{m},n$}) in a compartment $n$, and the intracellular currents running between 
 compartments, $I_{n-1,n}$ (current from compartment $n-1$ to $n$), and $I_{n,n+1}$ (current from compartment $n$ to $n+1$).}
 \label{fig:Neuron:multikompisen}
 \end{figure}
 
-As a simple introduction to the formalism used in MC models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (\Fref{fig:Neuron:multikompisen}B). For simplicity, we assume that the three cylinders have the same length ($L$) and diameter ($d$). The two categories of currents that run in this system are (i) the transmembrane currents that we introduced in the previous subsection, all of which we for now can group together into a total transmembrane current $I^M_n$, and (ii) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$). The dynamics of this system is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) should be zero:
+As a simple introduction to the formalism used in MC models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (\Fref{fig:Neuron:multikompisen}B). For simplicity, we assume that the three cylinders have the same length ($L$) and diameter ($d$). The two categories of currents that run in this system are (i) the transmembrane currents that we introduced in the previous subsection, all of which we for now can group together into a total transmembrane current $I_{\mathrm{m},n}$, and (ii) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$). The dynamics of this system is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) should be zero:
 
 \begin{equation}
-I_{n-1,n} - I_{n,j+1} - I^M_n = 0
+I_{n-1,n} - I_{n,n+1} - I_{\mathrm{m},n} = 0
 \label{eq:Neuron:Kirch}
 \end{equation}
-We note that we calculate with total currents here (unit A), not current densities, so that $I^M_n$ is the sum of all current densities in the left hand side of \fref{eq:Neuron:singlecomp_zerosum} multiplied with the membrane area of compartment $n$. The axial currents between two compartments are proportional to the voltage difference between the compartments, as determined by Ohms law:
+We note that we calculate with total currents here (unit A), not current densities, so that $I_{\mathrm{m},n}$ is the sum of all current densities in the left hand side of \fref{eq:Neuron:singlecomp_zerosum} multiplied with the membrane area of compartment $n$. The axial currents between two compartments are proportional to the voltage difference between the compartments, as determined by Ohms law:
 \begin{eqnarray}
-I_{n-1,n} = \frac{V_{n-1}-V_n}{4 R_a L/(\pi d^2)}, \nonumber \\ 
-I_{n,n+1} = \frac{V_{n}-V_{n+1}}{4 R_a L/(\pi d^2)}.
+I_{n-1,n} = \frac{V_{n-1}-V_n}{4 R_\text{a} L/(\pi d^2)}, \nonumber \\ 
+I_{n,n+1} = \frac{V_{n}-V_{n+1}}{4 R_\text{a} L/(\pi d^2)}.
 \label{eq:Neuron:axialcurrents}
 \end{eqnarray}
-Here, the denominators represent the axial resistance between two compartments, defined in terms of the axial resistivity $R_a$ (\si{\ohm\centi\metre}, a material property of the cytosol solution, the cross-section area, $\pi d^2/4$, and the segment length or travel distance, $L$ (\si{\metre}). 
+Here, the denominators represent the axial resistance between two compartments, defined in terms of the axial resistivity $R_\text{a}$ (\si{\ohm\centi\metre}, a material property of the cytosol solution, the cross-section area, $\pi d^2/4$, and the segment length or travel distance, $L$ (\si{\metre}). 
 
 The calculations become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} automatizes the compartmentalization for the user once the neural morphology is specified. For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of morphology modeling. 
 
@@ -253,16 +251,16 @@ We note that in \fref{eq:Neuron:axialcurrents}, $V_n$ is the \emph{intracellular
 \label{sec:Neuron:Active_multicomp}
 To specify our MC neuron model further, we write out the total membrane current as:
 \begin{equation}
-I^M_n = I_n^{cap} + I_n^{ion} + I_n^{stim} = -\pi d L c_m \frac{dV_n}{dt} + \pi d L i_n^{ion} + I_n^{stim}, 
+I_{\mathrm{m},n} = I_{\mathrm{cap},n} + I_{\mathrm{ion},n} + I_{\mathrm{stim},n} = -\pi d L c_\text{m} \frac{dV_n}{dt} + \pi d L i_{\mathrm{ion},n} + I_{\mathrm{stim},n}
 \label{eq:Neuron:Imemb}
 \end{equation}
-where $I_n^{ion}$ represent the total transmembrane ionic currents through leakage and active ion channels. On the right hand side, we have expressed the capacitive and ionic currents (mA) as current densities (mA/cm$^2$) multiplied with the membrane area ($\pi d L$ (cm$^2$)) represented by the sides of the cylinder, and we have inserted eq. \ref{eq:Neuron:HHcap} for the capacitive current density. If we insert this into Eq. \ref{eq:Neuron:Kirch}, we get:
+where $I_{\mathrm{ion},n}$ represent the total transmembrane ionic currents through leakage and active ion channels. In the last step, we expressed the capacitive and ionic currents (\si{\milli\ampere}) as current densities (\si{\milli\ampere\per\square\centi\metre}) multiplied with the membrane area ($\pi d L$ (\si{\square\centi\metre})) represented by the sides of the cylinder, and we have inserted eq. \ref{eq:Neuron:HHcap} for the capacitive current density. If we insert this into Eq. \ref{eq:Neuron:Kirch}, we get:
 
 \begin{equation}
-c_m \frac{dV_n}{dt} = i_n^{ion} + \frac{d}{4R_a}\left(\frac{V_{n+1}-V_n}{L^2} - \frac{V_n-V_{n-1}}{L^2} \right) + \frac{I^{stim}}{\pi d L}.
+c_\text{m} \frac{dV_n}{dt} = i_{\mathrm{ion},n} + \frac{d}{4R_\text{a}}\left(\frac{V_{n+1}-V_n}{L^2} - \frac{V_n-V_{n-1}}{L^2} \right) + \frac{i_{\mathrm{stim},n}}{\pi d L}.
 \label{eq:Neuron:multimain}
 \end{equation}
-For whatever choice of membrane mechanisms that contribute to $i_n^{ion}$, Eq. \ref{eq:Neuron:multimain} can be solved numerically for appropriately chosen boundary conditions. The most common choice for boundary conditions are those of a sealed end ($\frac{\partial V_n}{\partial x} = 0$), or a killed end ($V_n=0$). The NEURON simulator by default uses the sealed-end condition, which means that no axial current leaves at the endpoints of the simulated structure. Eq. \ref{eq:Neuron:multimain} is the fundamental equation for multicompartmental models.
+For whatever choice of membrane mechanisms that contribute to $i_{\mathrm{ion},n}$, Eq. \ref{eq:Neuron:multimain} can be solved numerically for appropriately chosen boundary conditions. The most common choice for boundary conditions are those of a sealed end ($\frac{\partial V_n}{\partial x} = 0$), or a killed end ($V_n=0$). The NEURON simulator by default uses the sealed-end condition, which means that no axial current leaves at the endpoints of the simulated structure. Eq. \ref{eq:Neuron:multimain} is the fundamental equation for multicompartmental models.
 
 
 
@@ -270,24 +268,24 @@ For whatever choice of membrane mechanisms that contribute to $i_n^{ion}$, Eq. \
 \subsection{\blue{Passive multicompartment models}}
 \label{sec:Neuron:Passive_multicomp}
 \index{Multicompartmental neuron model}
-If the neuron contains no active ion channels, $i_n^{ion} = g_L(V_n - E_L)$ is simply the leakage current density. In purely passive models, the leakage reversal potential is identical to the membrane resting potential, and it is common to denote it by $E_m$. It is then also custom to replace the leak conductance $g_L$ with the membrane resistivity $R_m = 1/g_L$ ($\Omega$ cm$^2$). Eq. \ref{eq:Neuron:multimain} then simplifies to:
+If the neuron contains no active ion channels, $i_{\mathrm{ion},n} = g_\text{L}(V_n - E_L)$ is simply the leakage current density. In purely passive models, the leakage reversal potential is identical to the membrane resting potential, and it is common to denote it by $E_\text{m}$. It is then also custom to replace the leak conductance $g_\text{L}$ with the membrane resistivity $R_\text{m} = 1/g_\text{L}$ (\si{\ohm\square\centi\metre}). Eq. \ref{eq:Neuron:multimain} then simplifies to:
 
 \begin{equation}
-c_m \frac{dV_n}{dt} = \frac{E_m-V_n}{R_m} + \frac{d}{4R_a}\left(\frac{V_{n+1}-V_n}{L^2} - \frac{V_n-V_{n-1}}{L^2} \right) + \frac{I^{stim}}{\pi d L}
+c_\text{m} \frac{dV_n}{dt} = \frac{E_\text{m}-V_n}{R_\text{m}} + \frac{d}{4R_\text{a}}\left(\frac{V_{n+1}-V_n}{L^2} - \frac{V_n-V_{n-1}}{L^2} \right) + \frac{I_\text{stim}}{\pi d L}
 \label{eq:Neuron:multipassive}
 \end{equation}
 
 Although all neurons contain some active membrane mechanisms, the passive model (Eq. \ref{eq:Neuron:multipassive}) is still often used as an approximation for signaling in neural dendrites, which tend to have a lower density of active mechanisms compared to the soma and axon. 
 
-An illustration of passive signal propagation shown in Fig. \ref{fig:Neuron:Semiinf}A, which shows the membrane potentials at selected positions along a $1000 \, \mu$m long stick-neuron responding to a stimulus resembling a synaptic input in one end. We see that the peak response comes faster in proximal than in distal locations, and that the peak response decays with distance from the synapse. However, the potential at all points along the cable coincide a few milliseconds after the stimulus was delivered, after which $V$  decays gradually towards the resting potential.
+An illustration of passive signal propagation shown in \Fref{fig:Neuron:Semiinf}A, which shows the membrane potentials at selected positions along a $1000 \, \si{\micro\metre}$ long stick-neuron responding to a stimulus resembling a synaptic input in one end. We see that the peak response comes faster in proximal than in distal locations, and that the peak response decays with distance from the synapse. However, the potential at all points along the cable coincide a few milliseconds after the stimulus was delivered, after which $V$  decays gradually towards the resting potential.
 
-Although the dynamics of course will be system specific, depending on the passive membrane parameters and generally on the presence of active mechanisms, the simulation in Fig. \ref{fig:Neuron:Semiinf}A gives a general, qualitative idea on how signals spread in dendrites. As we shall see below, the passive model is also useful in that it allows us to derive some analytical results for signal propagation in neural branches.
+Although the dynamics of course will be system specific, depending on the passive membrane parameters and generally on the presence of active mechanisms, the simulation in \Fref{fig:Neuron:Semiinf}A gives a general, qualitative idea on how signals spread in dendrites. As we shall see below, the passive model is also useful in that it allows us to derive some analytical results for signal propagation in neural branches.
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/Neuron/Cablesims.png}
-\caption{\textbf{Stick-neuron responding to transient and constant inputs received in one end.} (A) Finite cable of length $L = 1 \, \text{mm}$ simulated numerically as 100 compartments, and stimulated with an alpha-synapse in the first compartment ($0<x<10 \, \mu\text{m}$). Transient responses shown at different distances from the synapse. The peak response decreases with distance from the synapse, and the time to reach the peak increases with distance from the synapse.
-(A) Analytical steady-state solution for semi-infinite cable receiving a constant input $I^{stim} = 0.1 \, \text{nA}$ in a sealed end at $x=0$. The membrane potential decays exponentially with distance from the stimulus site.  (A-B) Parameters choices: $c_m=1\,\mu\text{F}/\text{cm}^2$, $d = 1\, \mathrm{\mu}\text{m}$, $R_a=35.4\, \mathrm{\Omega cm}$, $R_m = 10 \, \mathrm{k\Omega cm^2}$, which gives a length constant $\lambda = 840\, \mathrm{\mu m}$. }
+\caption{\textbf{Stick-neuron responding to transient and constant inputs received in one end.} (A) Finite cable of length $L = 1 \, \si{\milli\metre}$ simulated numerically as 100 compartments, and stimulated with an alpha-synapse in the first compartment ($0<x<10 \, \si{\micro\metre}$). Transient responses shown at different distances from the synapse. The peak response decreases with distance from the synapse, and the time to reach the peak increases with distance from the synapse.
+(A) Analytical steady-state solution for semi-infinite cable receiving a constant input $I_\text{stim} = 0.1 \, \si{\nano\ampere}$ in a sealed end at $x=0$. The membrane potential decays exponentially with distance from the stimulus site.  (A-B) Parameters choices: $c_\text{m}=1\, \si{\micro\farad\per\square\centi\metre}$, $d = 1\, \si{\micro\metre}$, $R_\text{a}=35.4\, \si{\ohm\centi\metre}$, $R_\text{m} = 10 \, \si{\kilo\ohm\square\centi\metre}$, which gives a length constant $\lambda = 840\, \si{\micro\metre}$. }
 \end{center}
 \label{fig:Neuron:Semiinf}
 \end{figure}
@@ -300,28 +298,28 @@ Although the dynamics of course will be system specific, depending on the passiv
 If we in Eq. \ref{eq:Neuron:multipassive} let $L \rightarrow \delta x$, and take the limit $\delta x \rightarrow 0$, we obtain the cable equation (see e.g., \cite**{Sterratt2011}): 
 
 \begin{equation}
-c_m \frac{\partial V}{\partial t} = \frac{E_m-V}{R_m} +  \frac{d}{4 R_a}  \frac{\partial^2 V}{\partial x^2}  + \frac{\mathcal{I}^{stim}}{\pi d},
+c_\text{m} \frac{\partial V}{\partial t} = \frac{E_\text{m}-V}{R_\text{m}} +  \frac{d}{4 R_\text{a}}  \frac{\partial^2 V}{\partial x^2}  + \frac{\mathcal{I}_{\mathrm{stim}}}{\pi d},
 \label{eq:Neuron:cable}
 \end{equation}
-where we have  introduced the stimulus current per unit length, $\mathcal{I}^{stim}(x,t) = I^{stim}(x,t)/\delta x$ (mA/cm). To improve our analytical understanding of dendritic signaling, it is useful to reformulate the cable equation to:
+where we have  introduced the stimulus current per unit length, $\mathcal{I}_{\mathrm{stim}}(x,t) = I_{\mathrm{stim}}(x,t)/\delta x$ \si{\milli\ampere\per\centi\metre}. To improve our analytical understanding of dendritic signaling, it is useful to reformulate the cable equation to:
 \begin{equation}
-\tau_m \frac{\partial V}{\partial t} = E_m-V +   \lambda^2  \frac{\partial^2 V}{\partial x^2}  + \frac{R_m \mathcal{I}^{stim} }{\pi d},
+\tau_\text{m} \frac{\partial V}{\partial t} = E_\text{m}-V +   \lambda^2  \frac{\partial^2 V}{\partial x^2}  + \frac{R_\text{m} \mathcal{I}_{\mathrm{stim}} }{\pi d},
 \label{eq:Neuron:cable2}
 \end{equation}
-where we have multiplied all terms with $R_m$ and introduced the length constant,
+where we have multiplied all terms with $R_\text{m}$ and introduced the length constant \index{Length constant},
 \begin{equation}
-\lambda = \sqrt{\frac{d R_m}{4 R_a}} \,\; \text{(cm)}, 
+\lambda = \sqrt{\frac{d R_\text{m}}{4 R_\text{a}}} \,\; \text{(cm)}, 
 \label{eq:Neuron:lengthconst}
 \end{equation}
-and the time constant, 
+and the time constant \index{Membrane time constant}, 
 \begin{equation}
-\tau_m \equiv R_m c_m  \,\; \text{(ms)}.
+\tau_\text{m} \equiv R_\text{m} c_\text{m}  \,\; \text{(ms)}.
 \label{eq:Neuron:timeconst}
 \end{equation}
 
-The cable equation serves as a continuous version of a passive neural branch (with infinitely many infinitely small compartments), where $\tau_m$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless length: $x/\lambda$) for signals in the cable. If a certain point along the cable is perturbed, so that the potential is shifted from rest to a given value $V$, $\tau_m$ will determine how fast the local potential will dissipate back towards rest, while $\lambda$ will tell us how far the local perturbation will spread along the cable. 
+The cable equation serves as a continuous version of a passive neural branch (with infinitely many infinitely small compartments), where $\tau_\text{m}$ is typical time scale (dimensionless time: $t/\tau$), while $\lambda$  is typical length scale  (dimensionless length: $x/\lambda$) for signals in the cable. If a certain point along the cable is perturbed, so that the potential is shifted from rest to a given value $V$, $\tau_\text{m}$ will determine how fast the local potential will dissipate back towards rest, while $\lambda$ will tell us how far the local perturbation will spread along the cable. 
 
-Whereas MC models (Eq. \ref{eq:Neuron:multimain} and \ref{eq:Neuron:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved analytically for some idealized scenarios. Below, we consider a couple of scenarios that will  make the interpretation of $\tau_m$ and $\lambda$ clearer. 
+Whereas MC models (Eq. \ref{eq:Neuron:multimain} and \ref{eq:Neuron:multipassive}) generally must be solved numerically, the cable equation allows the spatiotemporal evolution of the membrane potential to be solved analytically for some idealized scenarios. Below, we consider a couple of scenarios that will  make the interpretation of $\tau_\text{m}$ and $\lambda$ clearer. 
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -331,10 +329,10 @@ Let find the steady state solution for a semi-infinite cable, receiving a consta
 
 At steady-state, $\partial V/\partial t = 0$, and Eq. \ref{eq:Neuron:cable2} becomes:
 \begin{equation}
-0 = E_m-V +  \lambda^2 \frac{\partial^2 V}{\partial x^2}, 
+0 = E_\text{m}-V +  \lambda^2 \frac{\partial^2 V}{\partial x^2}, 
 \label{eq:Neuron:semiinf}
 \end{equation}
-at all points along the cable, except $x=0$. If we introduce the new variable $\Delta{V}=V-E_m$, Eq. \ref{eq:Neuron:semiinf} simplifies to:
+at all points along the cable, except $x=0$. If we introduce the new variable $\Delta{V}=V-E_\text{m}$, Eq. \ref{eq:Neuron:semiinf} simplifies to:
 \begin{equation}
 \frac{d^2 \Delta{V}}{d x^2} -  \frac{1}{\lambda^2} \Delta{V}=0, 
 \label{eq:Neuron:semiinf2}
@@ -342,28 +340,28 @@ at all points along the cable, except $x=0$. If we introduce the new variable $\
 which has the solution:
 \begin{align}
 \Delta{V}(x) &= \Delta{V}(0) e^{-x/\lambda} \\
-V(x) &= E_m + \big( V(0)-E_m \big) e^{-x/\lambda}.
+V(x) &= E_\text{m} + \big( V(0)-E_\text{m} \big) e^{-x/\lambda}.
 \label{eq:Neuron:semiinf3}
 \end{align}
 The general-solution to the equation also has a term containing $e^{+x/\lambda}$, but this was excluded on the count of being unphysical, since it diverges when $x \rightarrow \infty$. 
 
-To get the final solution of the problem, we need to specify the boundary value $V(0)$. This will depend on the stimulus current, and since it only exists in a singular point, we go back to expressing in terms of a total current, $I^{stim}$ (and not as a current per unit length $\mathcal{I}^{stim}$). We introduce it through a boundary condition demanding that the injected current (at $x=0$) must be identical to the axial current in the cable at $x=0$:
+To get the final solution of the problem, we need to specify the boundary value $V(0)$. This will depend on the stimulus current, and since it only exists in a singular point, we go back to expressing in terms of a total current, $I_\text{stim}$ (and not as a current per unit length $\mathcal{I}_\text{stim}$). We introduce it through a boundary condition demanding that the injected current (at $x=0$) must be identical to the axial current in the cable at $x=0$:
 \begin{equation}
-I^{stim} = - \frac{\pi d^2}{4}\frac{1}{R_a} \frac{\partial V}{\partial x}   \Big|_{x=0}.
+I_\text{stim} = - \frac{\pi d^2}{4}\frac{1}{R_\text{a}} \frac{\partial V}{\partial x}   \Big|_{x=0}.
 \end{equation}
 The left hand side is the axial cable current as given by Ohm's law. The multiplication with the cable cross section area (first factor on the left) is used to convert a current density to a total current in the cable. If we insert for $\partial V/\partial x$ (calculated from eq. \ref{eq:Neuron:semiinf3}), and insert eq. \ref{eq:Neuron:lengthconst} for $\lambda$, we can derive the following expression for $V(0)$:
 \begin{equation}
-V(0) = E_m + R_{\infty}I^{stim}, 
+V(0) = E_\text{m} + R_{\infty}I_\text{stim}, 
 \label{eq:Neuron:firstRinf}
 \end{equation}
 where we have defined:
 \begin{equation}
-R_{\infty} = \sqrt{\frac{R_m R_a}{\pi^2 d^3}}.
+R_{\infty} = \sqrt{\frac{R_\text{m} R_\text{a}}{\pi^2 d^3}}.
 \label{eq:Neuron:Rinf}
 \end{equation}
 If we insert eq. \ref{eq:Neuron:firstRinf} into eq. \ref{eq:Neuron:semiinf3}, we obtain our final solution:
 \begin{equation}
-V(x) = E_m +R_{\infty}I^{stim}  e^{-x/\lambda}.
+V(x) = E_\text{m} +R_{\infty}I_\text{stim}  e^{-x/\lambda}.
 \label{eq:Neuron:semiinf4}
 \end{equation}
 
@@ -371,15 +369,16 @@ The steady state solution to the semi-infinite cable (lotted in Fig. \ref{fig:Ne
 
 \begin{itemize}
 
-\item It follows from eq. \ref{eq:Neuron:firstRinf} that $R_{\infty} = (E_m-V(0))/I^{stim}$, and thus interprets as the steady-state input resistance of the semi-infinite cable. Eq. \ref{eq:Neuron:Rinf} thus shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
+\item It follows from eq. \ref{eq:Neuron:firstRinf} that $R_{\infty} = (E_\text{m}-V(0))/I_\text{stim}$, and thus interprets as the steady-state input resistance of the semi-infinite cable. Eq. \ref{eq:Neuron:Rinf} thus shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
 
-\item Eq. \ref{eq:Neuron:semiinf4} shows that in steady-state, the amplitude will decay exponentially from the injection site and outwards, and will be reduced by a factor $1/e$ over the length $\lambda$. If we put in some typical values in eq. \ref{eq:Neuron:lengthconst}, like a dendritic diameter $d=1$~$\mu$m, a membrane resistance of $R_m=10\;\text{k}\Omega\text{cm}^2$, and an axial resistivity $R_a=35.4\;\Omega\text{cm}$, we get a length constant of $\lambda = 840\; \mu$m. Very long dendrites will thus only to a small degree be affected by the membrane potential in the soma.
+\item Eq. \ref{eq:Neuron:semiinf4} shows that in steady-state, the amplitude will decay exponentially from the injection site and outwards, and will be reduced by a factor $1/e$ over the length $\lambda$. If we put in some typical values in eq. \ref{eq:Neuron:lengthconst}, like a dendritic diameter of $d=1 \, \si{\micro\metre}$, a membrane resistance of $R_\text{m}=10 \,
+\si{\kilo\ohm\square\centi\metre}$, and an axial resistivity $R_\text{a}=35.4\, \si{\ohm\centi\metre}$, we get a length constant of $\lambda = 840\, \si{\micro\metre}$. Very long dendrites will thus only to a small degree be affected by the membrane potential in the soma.
 
 \item According to eq. \ref{eq:Neuron:lengthconst}, $\lambda \propto \sqrt{d}$, meaning that signals will spread further the thicker the dendrite.
 
-\item According to eq. \ref{eq:Neuron:lengthconst}, $\lambda \propto \sqrt{R_m/R_a}$ meaning that the signal is facilitated by having a large membrane resistance compared to the axial resistance. 
-
+\item According to eq. \ref{eq:Neuron:lengthconst}, $\lambda \propto \sqrt{R_\text{m}/R_\text{a}}$ meaning that the signal is facilitated by having a large membrane resistance compared to axial resistance. 
 \end{itemize}
+
 
 \subsection{\blue{Frequency dependence of the cable length constant}}
 \label{sec:Neuron:cablefreq}
@@ -392,7 +391,7 @@ It is possible to derive a corresponding length constant for AC input to a semi-
 \end{equation}
 Here $\tau$ still is the membrane time constant (eq. \ref{eq:Neuron:timeconst}), $\lambda$ is still the DC length constant (eq. \ref{eq:Neuron:lengthconst}), and $\omega = 2\pi f$ is the angular frequency of the the boundary potential.
 
-For a constant boundary condition ($I^{stim} = \text{constant}$ in eq. \ref{eq:Neuron:semiinf4}) or, equivalently, $V(0) = \text{constant}$ in eq. \ref{eq:Neuron:semiinf3}), $\omega$ is zero, and we may verify that $\lambda_{AC}$ becomes identical to the DC length constant $\lambda$. For an AC input, we see that $\lambda_{AC}$ decreases with $\omega$, and for high frequencies $\lambda_{AC} \propto (\omega \tau^{-1/2})$. Thus, low frequency input will tend to travel further in dendritic structures, while high frequency input will affect dendritic structures more locally. 
+For a constant boundary condition ($I_\text{stim} = \text{constant}$ in eq. \ref{eq:Neuron:semiinf4}) or, equivalently, $V(0) = \text{constant}$ in eq. \ref{eq:Neuron:semiinf3}), $\omega$ is zero, and we may verify that $\lambda_{AC}$ becomes identical to the DC length constant $\lambda$. For an AC input, we see that $\lambda_{AC}$ decreases with $\omega$, and for high frequencies $\lambda_{AC} \propto (\omega \tau^{-1/2})$. Thus, low frequency input will tend to travel further in dendritic structures, while high frequency input will affect dendritic structures more locally. 
 
 As we shall see later, an important factor determining the size and shape of extracellular potentials is the distance between inward (sinks) and outward (sources) transmembrane currents. This spatial separation is proportional to the neuronal length constant, and from eq. \ref{eq:Neuron:AClambda} we thus know that the source/sink separation will be larger for low frequency components of the neuronal activity.
 
@@ -405,7 +404,7 @@ In Fig. \ref{fig:Neuron:Semiinf}A we simulated numerically the response of a cyl
 V(x,t) = C_0(x) e^{-t/\tau_0} + C_1(x) e^{-t/\tau_1} + C_2(x) e^{-t/\tau_2} + \ldots, 
 \label{eq:Neuron:cabletemporal}
 \end{equation}
-where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_m = R_m c_m$ is the \emph{membrane time constant} (eq. \ref{eq:Neuron:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). We will not here present these analytical results in any further detail, but note that the final decay phase, i.e., when $V$ at all locations have coincided, takes place at the slower time scale of the membrane time constant, $\tau_m$ which in the simulation in Fig. \ref{fig:Neuron:Semiinf}A  was 10~ms ($R_m=10\,\text{k}\Omega \text{cm}^2$, and $c_m=1\,\mu\text{F}/\text{cm}^2$). 
+where the coefficients $C_n(x)$ depend on the distance along the cable, while $\tau_0 = \tau_\text{m} = R_\text{m} c_\text{m}$ is the \emph{membrane time constant} (eq. \ref{eq:Neuron:timeconst}), and the other time constants have successively smaller values ($\tau_0 > \tau_1 > \tau_2 > \ldots$). We will not here present these analytical results in any further detail, but note that the final decay phase, i.e., when $V$ at all locations have coincided, takes place at the slower time scale of the membrane time constant, $\tau_\text{m}$ which in the simulation in Fig. \ref{fig:Neuron:Semiinf}A  was 10 \si{\milli\seconds} ($R_\text{m}=10\,\si{\kilo\ohm\square\centi\metre}$, and $c_\text{m}=1\, \si{\micro\farad\per\square\centi\metre}$). 
 
 
 
@@ -423,21 +422,21 @@ In the neuron models presented in this chapter, it is implicitly assumed that, d
 
 \begin{table}[h]
 %\centering
-\caption[]{Major charge carrier concentrations inside/outside a typical mammalian neuron. Concentration values were taken from Table 2-1 in \citeasnoun**{Somjenboka} for neurons in the central nervous system (intracellular) and human cerebrospinal fluid (extracellular). Values vary with species and brain regions. Nernst potentials were computed from Eq. \ref{eq:Neuron:revpots} assuming a body temperature of 309.15 K.
+\caption[]{Major charge carrier concentrations inside/outside a typical mammalian neuron. Concentration values were taken from Table 2-1 in \citeasnoun**{Somjenboka} for neurons in the central nervous system (intracellular) and human cerebrospinal fluid (extracellular). Values vary with species and brain regions. Nernst potentials were computed from Eq. \ref{eq:Neuron:revpots} assuming a body temperature of 309.15 \si{\kelvin}.
 }
 \label{Neuron:tab:ion-concentrations}
 \begin{tabular}{@{}lcccccc@{}}
 \hline
 					& 	K$^+$	&	Na$^+$	&	Mg$^{2+}$	  &	Cl$^-$	&	Ca$^{2+}$	 	& HCO3$^-$ 	\\ 
 \hline
-Intracellular (mM)				    & 125		&		10	&		0.5	&	6.6		&  	6$\times$10$^{-5}$	  & 	18 \\
-Extracellular (mM)			           & 2.9			&		147	&		0.7	&	119 		&		1	&	23.3	  	\\
-Nernst potential (mV)		    &	-100		&	    	+72	&		+4.5	&	-77		&		+129 	& 	-6.9  	\\
+Intracellular (\si{\milli\molar})	 	   & 125		&		10	&		0.5	&	6.6		&  	6$\times$10$^{-5}$	  & 	18 \\
+Extracellular (\si{\milli\molar})			           & 2.9			&		147	&		0.7	&	119 		&		1	&	23.3	  	\\
+Nernst potential (\si{\milli\volt})		    &	-100		&	    	+72	&		+4.5	&	-77		&		+129 	& 	-6.9  	\\
 \hline
 \end{tabular}
 \end{table}
 
-In HH-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_L$ (eq. \ref{eq:Neuron:HHleak}), which largely determines the cell's resting potential (see see \cite**{offner1991} for a critical study of this approximation). Below, we shall explain how the ionic concentrations are implicitly present in the HH-formalism as they determine the ionic reversal potentials ($E_x$ in eq. \ref{eq:Neuron:HHform}). We shall also comment on the cases where the assumptions of constant ion concentrations are not applicable. 
+In HH-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_\text{L}$ (eq. \ref{eq:Neuron:HHleak}), which largely determines the cell's resting potential (see see \cite**{offner1991} for a critical study of this approximation). Below, we shall explain how the ionic concentrations are implicitly present in the HH-formalism as they determine the ionic reversal potentials ($E_x$ in eq. \ref{eq:Neuron:HHform}). We shall also comment on the cases where the assumptions of constant ion concentrations are not applicable. 
 
 
 \subsection{\blue{Ionic reversal potentials}}
@@ -445,7 +444,7 @@ In HH-type models, the ensemble of processes that work to maintain baseline cond
 \index{Reversal potential}
 Ion channels are pores in the membrane, some of which are selectively permeable only to specific ions. The ion flux through an open ion channel will be mediated by a combination of (i) diffusion and (ii) electric drift. 
 
-For example, when an K$^+$ channel opens, (i) diffusion will strive to drive K$^+$ out from the neuron, since the intracellular space is more K$^+$-rich than the extracellular space, while electric drift will strive to drive K$^+$ into the neuron, since the membrane potential $V$ (defined as intracellular minus the extracellular potential) tends to be negative ($V \sim - 70$  mV during rest). Initially, the diffusive process will dominate, so that the net flux of K$^+$ is outward. This leads to a gradual decrease (hyperpolarization) of the membrane potential,  and a corresponding gradual increase of the drift component. If the K$^+$ channel stays open, the hyperpolarization will go on until the drift component becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero.
+For example, when an K$^+$ channel opens, (i) diffusion will strive to drive K$^+$ out from the neuron, since the intracellular space is more K$^+$-rich than the extracellular space, while (ii) electric drift will strive to drive K$^+$ into the neuron, since the membrane potential $V$ (defined as intracellular minus the extracellular potential) tends to be negative ($V \sim - 70$  mV during rest). Initially, the diffusive process will dominate, so that the net flux of K$^+$ is outward. This leads to a gradual decrease (hyperpolarization) of the membrane potential,  and a corresponding gradual increase of the drift component. If the K$^+$ channel stays open, the hyperpolarization will go on until the drift component becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero.
 
 The ionic reversal potential is defined as the membrane potential at which the electrical drift current and diffusive current of a given ion species are in an equilibrium, i.e., they are equal in magnitude but oppositely directed. It can be calculated from the Nernst-Planck equation for electrodiffusion \index{Electrodiffusion}. If we approximate the problem as one-dimensional (in the $z$-direction, perpendicular to the membrane), the Nernst-Planck equation for an ion species $k$ is:
 
