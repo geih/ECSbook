@@ -495,7 +495,7 @@ We note that both the conductivity and capacitance of the membrane can be expres
 
 In conclusion, the quasi-magnetostatic approximation seems justified for currents through tissue and in the extracellular saline solution, but not for transmembrane currents.
 
-\gen{Jeg ble lit usikker her. Hva er konsekvensen av at quasi-magnetstatic approximation eventuelt ikke er oppfylt? Kun at beregningen av magnetfeltet blir mer komplisert, cf. linging 1.36?}
+\gen{Jeg ble lit usikker her. Hva er konsekvensen av at quasi-magnetstatic approximation eventuelt ikke er oppfylt? Kun at beregningen av magnetfeltet blir mer komplisert, cf. ligning 1.36?}
 
 
 \subsection{\blue{Extracellular currents are exclusively due to electric drift}}
@@ -506,7 +506,7 @@ When analyzing extracellular currents in the brain, it is common to assume that 
 \label{VC:eq:generalcurrent}
 \end{equation}
 
-As the capacitive current is proportional to $\partial {\bf E}/\partial t$, and the inductive currents is proportional to $\partial {\bf B}/\partial t$, it follows from the quasi-magnetoostatic and quasi-electroostatic approximations, respectively, that they are zero in the extracellular medium. 
+As the capacitive current is proportional to $\partial {\bf E}/\partial t$, and the inductive currents is proportional to $\partial {\bf B}/\partial t$, it follows from the quasi-magnetoostatic and quasi-electrostatic approximations, respectively, that they are zero in the extracellular medium. 
 
 An advective current \index{Advective current}, 
 \begin{equation}
@@ -522,7 +522,7 @@ The diffusive current \index{Diffusive current},
 \end{equation}
 arises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along concentration gradients (${\bf \nabla} c_k$), and carry with them a net charge. It has been suggested that diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite**{Halnes2016}, especially if ion concentration gradients vary quite rapidly with time \cite**{Gratiy2017}. Diffusive effects on $\phi$ may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite**{Somjen2001,Frohlich2008,Wei2014,Ayata2015}). 
 
-To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not be done using VC theory in the standard form presented in \Fref{chap:VC}, but can be done using Finite Element Methods (see e.g., \cite**{Solbra2018}). We go through the theory for modeling electrodiffusive systems in \fref{sec:Eldiff}.
+To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not \gen{Da jeg var liten mener jeg at vi maatte skrive "cannot" paa skolen, men det var kanskje et fenomen lokalt baade i tid og rom?} be done using VC theory in the standard form presented in \Fref{chap:VC}, but can be done using Finite Element Methods (see e.g., \cite**{Solbra2018}). We go through the theory for modeling electrodiffusive systems in \fref{sec:Eldiff}.
 
 Under normal conditions, drift currents are likely to have a much bigger impact on the time course of $\phi$ than diffusive currents. Standard VC theory, which neglects diffusive effects, will likely make quite good predictions of $\phi$ under most experimental conditions \cite**{Halnes2016,Gratiy2017}. 
 
@@ -530,7 +530,7 @@ Under normal conditions, drift currents are likely to have a much bigger impact 
 \subsection{\blue{Linear extracellular medium} }
 \label{sec:Basics:LinEx}
 \index{Extracellular medium! Linear}
-In practice, most medias can have capacitive, magnetic and conductive properties, and can be linear or nonlinear in all these three senses. Starting out with Maxwell's equations on the form given by \fref{eq:Basics:Max1}-\fref{eq:Basics:Max1}, we assumed linearity in the capacitive and magnetic sense, through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$. 
+In practice, most medias can \gex{(will?)} have capacitive, magnetic and conductive properties, and can be linear or nonlinear in all these three senses \gen{senses?}. Starting out with Maxwell's equations on the form given by \fref{eq:Basics:Max1}-\fref{eq:Basics:Max1} \gen{Feil ligningsnummer}, we assumed linearity in the capacitive and magnetic sense, through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$. 
 
 Linearity in the conductive sense implies that the current density is linearly related to the electric field through Ohm's law:
 \begin{equation}
@@ -538,14 +538,14 @@ Linearity in the conductive sense implies that the current density is linearly r
 \label{eq:Basics:bertil}
 \end{equation}
 
-Ohm's law is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions) and inhomogeneous (position dependent). Furthermore, Ohms law does not exclude capacitive effects, because, for a medium that is linear in both the conductive and capacitive sense, capacitive effects can be incorporated into  \fref{eq:Basics:bertil} through defining a complex conductivity \cite**{Nunez2006}:
+Ohm's law is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions) and inhomogeneous (position-dependent). Furthermore, Ohms law \gex{in this context (?)} \gen{Noen har kanskje en smalere definisjon av denne loven?} does not exclude capacitive effects, because, for a medium that is linear in both the conductive and capacitive sense, capacitive effects can be incorporated into  \fref{eq:Basics:bertil} through defining a complex conductivity \cite**{Nunez2006}:
 \begin{equation}
 \sigma_\text{c} = \sigma(f)\left(1+j\frac{2\pi f \epsilon(f)}{\sigma(f)}  \right), 
 \label{eq:Basics:complexsigma}
 \end{equation}
 where $j$ is the imaginary unit and $f$ the oscillation frequency of the electric field (or a component of it). Both the real and imaginary parts of $\sigma_\text{c}$ can be frequency dependent, and the two terms correspond to the conductive and capacitive properties of the medium, respectively. 
 
-The current density in \fref{eq:Basics:complexsigma} comprises both the electric drift current and the displacement current. In this book, we will not use \fref{eq:Basics:complexsigma}, but keep the two current types separate, as we did in \fref{sec:Basics:onlyohmic}). Furthermore, for extracellular tissue currents we have argued that the capacitive effects are negligible, so that they are determined by \fref{eq:Basics:bertil} with a real $\sigma$. As we also make the quasi-electrostatic approximation of Maxwell's equations (\fref{sec:Basics:Quasielectrostatic}), ${\bf E}$ can be written as the gradient of an electric potential, so that the extracellular drift current density is given \fref{eq:Basics:Ohm_3D_phi}, and so that we can take \fref{eq:Basics:continuity2} as our starting point when deriving the VC theory in \Fref{chap:VC}.
+The current density in \fref{eq:Basics:complexsigma} comprises both the electric drift current and the displacement current. In this book, we will not use \fref{eq:Basics:complexsigma}, but keep the two current types separate, as we did in \fref{sec:Basics:onlyohmic}. Furthermore, for extracellular tissue currents we have argued that the capacitive effects are negligible, so that they are determined by \fref{eq:Basics:bertil} with a real $\sigma$. As we also make the quasi-electrostatic approximation of Maxwell's equations (\fref{sec:Basics:Quasielectrostatic}), ${\bf E}$ can be written as the gradient of an electric potential, so that the extracellular drift current density is given \fref{eq:Basics:Ohm_3D_phi}, and so that we can take \fref{eq:Basics:continuity2} as our starting point when deriving the VC theory in \Fref{chap:VC}.
 
 We note that \fref{eq:Basics:bertil} is generally only valid in the frequency domain, while in the time domain, ${\bf i}$ must be given as a temporal convolution of $\sigma$ and ${\bf E}$ \cite**{Bedard2009}. However, if $\sigma$ is frequency independent (this assumption is discussed further in \fref{sec:Sigma}), \fref{eq:Basics:bertil} will also be valid in the time domain.
 
@@ -563,11 +563,13 @@ as our fundamental equation for modeling extracellular potentials, it worth maki
 \end{equation}
 where we in the last step grouped the current of free charges and the capacitive current into a total current to keep notation short. 
 
-The simplest way from eq. \ref{eq:Basics:Melpomene} to eq. \label{eq:Basics:Greta} may be to express the total current as being composed of a part ${\bf i}_\text{tot,p}$, which covers all primary (intracellular and membrane) currents, and a part ${\bf i}_\text{tot,t}$, which covers the currents that run extracellularly through tissue. Eq. \ref{eq:Basics:Melpomene} can then be written
+The simplest way from eq. \ref{eq:Basics:Melpomene} to eq. \ref{eq:Basics:Greta} may be to express the total current as being composed of a part ${\bf i}_\text{tot,p}$, which covers all primary (intracellular and membrane) 
+\gen{Men er ikke membranstroemmen divergensen til intracellular strommen paa membranen? Er det riktig aa si at primaerstroemmen utgjoeres av begge?}
+currents, and a part ${\bf i}_\text{tot,t}$, which covers the currents that run extracellularly through tissue. Eq. \ref{eq:Basics:Melpomene} can then be written
 \begin{equation}
 {\bf \nabla} {\bf i}_\text{tot,t} = - {\bf \nabla} \cdot {\bf i}_\text{tot,p}.
 \label{eq:Basics:Melpomene2}
 \end{equation}
 
-Cellular and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}_\text{tot,p}$ and ${\bf i}_\text{tot,t}$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}_\text{tot,p} = C$, i.e., the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This was shown by \citeasnoun**{Gratiy2017}, who performed a a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}_\text{tot,p}$) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation when considering tissue in a coarse grained scale.
+Cellular \gex{Intracellular (?)} and extracellular currents do not exist at the same points in space, and on a microscopic scale,  only one of them will be nonzero at a given position. Hence, eq. \ref{eq:Basics:Melpomene2} only makes sense on a coarse-grained scale, where ${\bf i}_\text{tot,p}$ and ${\bf i}_\text{tot,t}$ represent the currents averaged over a finite piece of tissue, large enough to contain both types. On such a coarse-grained scale, the right hand side of eq. \label{eq:Basics:Melpomene2} can be expressed as a current source density ${\bf \nabla} \cdot {\bf i}_\text{tot,p} = C$, i.e., the cellular current output per unit volume of tissue, which brings us back to eq. \ref{eq:Basics:Greta}. This \gex{bridging of scales (?) was described in a systematic fashion} by \citeasnoun**{Gratiy2017}, who performed a spatial averaging over all the intracellular and membrane currents (i.e., over ${\bf i}_\text{tot,p}$) within a finite piece of tissue. The derivation (not shown here), reveals that eq. \ref{eq:Basics:Greta} only has a meaningful interpretation when considering tissue in a coarse grained scale.
 
