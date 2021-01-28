@@ -320,6 +320,7 @@ Note that metallic recording electrodes are typically unable to measure static (
 \gen{Hvor har vi dette tallet fra?} 
 \ehnote{jeg er ogsaa overrasket over at metallelektroder ikke kan maale konstante potensialforskjeller i en loesning (i all den tid det finnes frie ioner i loesningen)?}
 \tvnnote{Jeg vet ikke om noen laerebok referanse, men det var det som ble oppgitt som nedre grense baade av Dirk og Anna (altsaa alle tilfeller jeg har vaert borti eksperimentell data), se Miceli-artikkelen, Uhlivora-artikkelen, og ogsaa Einevoll et al., 2007. Fra en av Anna's nyere artikler fant jeg frem til dokumentasjonen paa amplifieren de har brukt, og der staar det "Lower cutoff frequency configurable from 0.1 Hz to 500 Hz", men jeg vet ikke helt om forklaringen jeg har gitt over er helt riktig.}
+\ehnote{Det er vel da mer en begrensning med sampling apparat enn selve elektrodemaalingen. Si du sampler mange kanaler med int16 presisjon - det blir da et problem hvis DC-verdiene fluktuerer mye mer enn selve signalet (e.g., LFP).}
 Such DC potentials can be present in neural tissue, and can often arise in simulated extracellular potentials from cell models with active conductances, for example because of the $I_{\rm h}$-current \cite**{Ness2016}. In such cases, the simulated baseline (or mean) extracellular potential is typically subtracted from the extracellular potentials to effectively remove the unobservable DC-potential.
 
 

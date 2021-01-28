@@ -206,10 +206,14 @@ i_\mathrm{syn}(t) = \overline{i}_\mathrm{syn} f(t),
 \label{eq:Neuron:CurrentBasedSynapse}
 \end{equation}
 where $f(t)$ can have the same exponential waveforms (i)-(iv) as the conductance based synapses. 
+\ehnote{Hvorfor ikke definere} $f(t)$ 
+\ehnote{over, og} 
+$\overline{i}_\mathrm{syn}:=\overline{g}_\mathrm{syn}(\langle V(t) \rangle -E_\mathrm{syn})$ \ehnote{her?}
 
-Unlike conductance-based synapses, current-based synapses are independent of the state ($V(t)$) of the neuron, and synaptic events thus become independent of previous synaptic events, something that facilitates the derivation of analytical closed-form solutions \cite**{Richardson2004,Cavallari2014,Hagen2016}. Their relative simplicity have made current-based synapses popular in large network simulations because they reduce the computational load.
+Unlike conductance-based synapses, current-based synapses are independent of the state ($V(t)$) of the neuron, and synaptic events thus become independent of previous synaptic events, something that facilitates the derivation of analytical closed-form solutions \cite**{Richardson2004,Cavallari2014}. Their relative simplicity have made current-based synapses popular in large network simulations because they reduce the computational load.
 
 \ghnote{Man kunne jo skrevet flere sider om denne approksimasjonen, men jeg vet ikke hvor dypt vi vil gaa inn i dette.Jeg har ikke DeSchutter-boka, men har en hunch om at vi kan referere til den her. Er lite erfaren med bruk av slike synapser, og vet ikke hva de relevante referanser er. Espen - har du noe du vil legge til?}
+\ehnote{Tok bort referansen til Hagen2016. Vi utleda ingen "closed-form solutions" der for dette. Vaart valg av synapsemodell var hentet direkte fra synapsemodellen i Potjans\&Diesmann2014. LIF punkt-nevroner med stroembaserte synapser kan loeses eksakt uten numerisk integrasjon og er populaert i kontekst av NEST for eksempel. Naa har vel andre studier som Roessert2016 (https://arxiv.org/abs/1604.00087) for eksempel vist at man kan approksimere effekten av dendrittisk kabel og synapsetroem med et ekvivalent filter, som implisitt resulter i en stroembasert "synapse" saa vidt jeg husker.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
