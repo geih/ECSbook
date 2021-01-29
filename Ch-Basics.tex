@@ -9,7 +9,7 @@ Before we talk more about the electric signaling in the brain, we will in this c
 
 Most of the physics that we will go through is summarized in, and follows from, Maxwell's equations, and we might have kick-started this chapter by listing up those. However, since Maxwell's equations may appear a bit challenging for "the untrained eye", we will be taking a "softer" path, which we deem sufficient for establishing the main concepts that we will be working with. For good taste and later reference, we nevertheless go through Maxwell's equations in the final part of the chapter (Section \ref{sec:Basics:Maxwell}). Towards the end of the chapter we will also go through some of the most important assumptions that we use when applying the electromagnetic theory to predict electric potentials in complex medium like brain tissue.
 
-Readers without prior schooling in physics \tvntxt{might} not be able to follow all parts of this introduction, but it will hopefully still give them a basic understanding of the concepts of \textit{electric charge}, \textit{electric currents}, \textit{electric fields}, and \textit{electric potentials}, and some insight into how they are related to one another. Readers that do have a physics background might see the first part of this introduction as a useful repetition, and may appreciate the later parts, which deal deals with less trivial issues regarding the use of electromagnetic theory in a complex medium such as brain tissue. 
+Readers without prior schooling in physics \tvntxt{might} not be able to follow all parts of this introduction, but it will hopefully still give them a basic understanding of the concepts of \textit{electric charge}, \textit{electric currents}, \textit{electric fields}, and \textit{electric potentials}, and some insight into how they are related to one another. Readers that do have a physics background might see the first part of this introduction as a useful repetition, and may appreciate the later parts, which deal with less trivial issues regarding the use of electromagnetic theory in a complex medium such as brain tissue. 
 
 \gen{Kanskje spesielt nevne noe om at folk med bakgrunn i fysikk ofte tenker paa hjernen som et dielektrikum (som ofte er tema i vanlige fysikkurs) og ikke som en conductor. En grunn til dette kan vaere at den matematiske formelen for potensialet rundt en stromkilde i en leder, er den samme som for potensialet rundt en ladning i et dielektrikum.}
 
@@ -34,12 +34,12 @@ We can express the direction of the force mathematically by use of a vector nota
 {\bf F} = \frac{q_1q_2}{4\pi \epsilon_0 |{\bf r}_1-{\bf r}_2|^2} \hat{{\bf r}}_{1,2}.
 \label{eq:Basics:CoulombFvec}
 \end{equation}
-We have here introduced the \textit{unit vector}, defined as: 
+We have here introduced the \textit{unit vector},
 \begin{equation}
 \hat{{\bf r}}_{1,2} = \frac{{\bf r}_1 - {\bf r}_2}{|{\bf r}_1-{\bf r}_2|}, 
 \label{eq:Basics:UnitVector}
 \end{equation}
-i.e., a vector ${\bf r}_1-{\bf r}_2$ divided by its own length $|{\bf r}_1-{\bf r}_2|$, so that its length is one (unity). We chose this notation because the unit vector then defines the direction of the force, but says nothing about its magnitude, while the fraction in front of the unit vector is a scalar (a number with no direction) that defines the magnitude of the force, but  says nothing about its direction. It is then easy to verify that the magnitude is the same as in \fref{eq:Basics:CoulombF}.
+defined as vector ${\bf r}_1-{\bf r}_2$ divided by its own length $|{\bf r}_1-{\bf r}_2|$, so that its length is one (unity). We chose this notation because the unit vector defines the direction of the force, but says nothing about its magnitude, while the fraction in front of it is a scalar (a number with no direction) that defines the magnitude of the force, but  says nothing about its direction. It is then easy to verify that the magnitude is the same as in \fref{eq:Basics:CoulombF}.
 
 If there are several ($N$) point charges present, the contribution from each of them sum up linearly. If we have a charge $q_1$ in a position ${\bf r}_1$, the force acting on it by the $N-1$ other charges $q_2, q_3, q_4 ... q_{N}$ in positions ${\bf r}_2, {\bf r}_3, {\bf r}_4 ... {\bf r}_{N}$ will be:
 \begin{equation}
@@ -79,18 +79,18 @@ The electric field can be expressed as the spatial derivative, or gradient, of t
 \end{equation}
 The operator ${\bf \nabla}$ computes a property's spatial rate of change (also called the gradient) in the various spatial directions, and ${\bf e}_x$, ${\bf e}_y$ and  ${\bf e}_z$ are the unit vectors in the three spatial directions $x$, $y$ and $z$, respectively. 
 
-For a spherical symmetric potential, 
+For a spherical symmetric potential,
 \begin{equation}
 {\bf \nabla} \phi(r) = \frac{d\phi(r)}{dr} {\bf \hat{r}}.
 \label{eq:Basics:SphericalNablaPhi}
 \end{equation}
-Since the field contribution from each point charge is spherically symmetric around its position ($r_n$), the field in \fref{eq:Basics:CoulombEN} can thus be written as the gradient of the potential: 
+Since the field contribution from each point charge is spherically symmetric around its position (${\bf r}_n$), the field in \fref{eq:Basics:CoulombEN} can thus be written as the gradient of the potential: 
 \begin{equation}
 {\phi}({\bf r}) = \sum_{n=1}^{N}  \frac{q_n}{4\pi \epsilon_0} \frac{\hat{{\bf r}}_{1,n}}{|{\bf r}-{\bf r_n}|}.
 \label{eq:Basics:CoulombPhiN}
 \end{equation}
 
-Unlike ${\bf E}$, which is a vector field, $\phi$ is a scalar function \gen{scalar field?}, and as such, it tends to be easier to deal with \tvntxt{because measuring the value of a vector field requires measurement in all three spatial dimensions}. We note that \fref{eq:Basics:EV} rests on something called the \textit{quasi-static approximation} of Maxwell's equations, which we explain further in \fref{sec:Basics:Maxwell}. 
+Unlike ${\bf E}$, which is a vector field, $\phi$ is a scalar field, and as such, tends to be easier to deal with because measuring the value of a vector field requires measurement in all three spatial dimensions. We note that \fref{eq:Basics:EV} rests on something called the \textit{quasi-static approximation} of Maxwell's equations, which we explain further in \fref{sec:Basics:Maxwell}. 
 
 
 \subsection{\blue{Electric ground}}
@@ -100,7 +100,7 @@ To get an intuitive understanding of the relationship between ${\bf E}$ and $\ph
 E = -\frac{d\phi(x)}{dx} = -\frac{\Delta \phi}{\Delta x} = -\frac{\phi(x_b)-\phi(x_a)}{x_b-x_a},
 \label{eq:Basics:EV1D}
 \end{equation}
-where the first equality follows from the 1D-assumption, the second from the assumption that $E$ is constant, and the third is simply a definition of the second, where $x_b$ and $x_a$ may represent any two arbitrary points in space. For example, if $E = 1$~\si{\volt\per\metre}, and if the distance between our points $x_b-x_a$ is 1~\si{\metre}, \fref{eq:Basics:EV1D} tells us that $\phi$ will be 1~\si{\volt} lower in $x_b$ compared to $x_a$ (\fref{fig:Basics:Ground}).
+where the first equality follows from the 1D-assumption, the second from the assumption that $E$ is constant, and the third is simply a definition of the second, where $x_b$ and $x_a$ may represent any two arbitrary points in space. For example, if $E = 1$~\si{\volt\per\metre}, and the distance between our points $x_b-x_a$ is 1~\si{\metre}, \fref{eq:Basics:EV1D} tells us that $\phi$ will be 1~\si{\volt} lower in $x_b$ compared to $x_a$ (\fref{fig:Basics:Ground}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -111,9 +111,9 @@ where the first equality follows from the 1D-assumption, the second from the ass
 \label{fig:Basics:Ground}
 \end{figure}
 
-We may use the example in \fref{fig:Basics:Ground} to define the important concept of \textit{ground}\index{Ground}. The field ${\bf E}$ generally determines the potential only up to a constant. In the example, the field $E = 1$ V/m would be consistent with any pair of potentials $\phi_a$ and $\phi_b$ as long as $\phi_b - \phi_a =  1 \,\si{\volt}$. Since it is the field, and not the potential, that is the fundamental physical entity, we can therefore not speak of the potential in a certain point as an absolute entity, but only the potential \textit{difference} between two points. When we measure the potential in a given location, it is always measured relative to some reference point, which we \tvntxt{often} call \textit{ground}, and where we define $\phi = 0$ (cf. example in \fref{fig:Basics:Ground}). 
+We may use the example in \fref{fig:Basics:Ground} to define the important concept of \textit{ground}\index{Ground}. The field ${\bf E}$ generally determines the potential only up to a constant. In the example, the field $E = 1$ V/m would be consistent with any pair of potentials $\phi_a$ and $\phi_b$ as long as $\phi_b - \phi_a =  1 \,\si{\volt}$. Since it is the field, and not the potential, that is the fundamental physical entity, we can therefore not speak of the potential in a certain point as an absolute entity, but only the potential \textit{difference} between two points. When we measure the potential in a given location, it is always measured relative to some reference point, which we \tvntxt{often} call \textit{ground}, and where we define $\phi = 0$ (cf. example in \Fref{fig:Basics:Ground}). 
 
-When we record extracellular potentials, we can choose to place the reference electrode either outside or inside brain tissue \cite**{Sharott2015}, but we typically want to keep it at some distance from the recording electrode, so that reference electrode is not affected by the processes that we investigate with the recording electrode. \gen{Kanskje si enda klarere at man oensker at potensialet paa referanseelektroden skal vaere saa konstant som mulig under eksperimentet (eller blir dette sirkulaert?), husker at Anna plasserte referanseelektroden i nakken paa rottene hun gjorde maalinger fra. Kanskje vi kan hoere med eksperimentalistene paa CINPLA hva de gjoer?}
+When we record extracellular potentials, we can choose to place the reference electrode either outside or inside brain tissue \cite**{Sharott2015}, but we typically want to keep it at some distance from the recording electrode, so that reference electrode is not affected by the processes that we investigate with the recording electrode. \gen{Kanskje si enda klarere at man oensker at potensialet paa referanseelektroden skal vaere saa konstant som mulig under eksperimentet (eller blir dette sirkulaert?), husker at Anna plasserte referanseelektroden i nakken paa rottene hun gjorde maalinger fra. Kanskje vi kan hoere med eksperimentalistene paa CINPLA hva de gjoer?} \ghnote{Sikkert lurt aa spoerre noen, ja. Men man oensker vel egentlig ikke at referansen skal vaere saa konstant som mulig? Jeg kan tenke meg at hvis hele musekroppen eller laboratoriet den befinner seg i rir omkring paa en sinus (som kommer sivende opp fra dalstroekene nedenfor), saa vil man at referanseelektroden skal gjoere det samme? Man putter den jo ikke ned i den bokstavelige jorda. }
 
 By definition, the electric potential is the energy needed to move a unit of electric charge $q$ from the reference point (ground) to a specific location in the electric field. The unit (V) of the electric potential is equivalent to energy per charge, or Joule per Coulomb (1 \si{\volt} = 1 \si{\joule\per\coulomb}). As such, the concept of an electric potential is closely related to the concept of a potential energy. The potential energy ($U_E$) of a charge $q$ in an electric field is:
 \begin{equation}
@@ -162,6 +162,9 @@ where $r_D$ is called the \textit{Debye shielding distance} and $\epsilon_r$ is 
 
 The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint that there should be no charge accumulation anywhere in the extracellular space. As we shall see, it will then be the current sources at neural membranes that give rise to an extracellular potential $\phi$. From here on, we shall thus not think of $\phi$ as something that we compute based on knowledge of the microscopic charge distribution (cf. \fref{eq:Basics:CoulombPhiN}), but rather as a higher level entity, exerting an average force on all charges in a certain direction. \gen{Si noe om at dette tilsvarer aa jobbe med ionekonsentrasjoner, istedenfor enkeltioner (hvis dette er riktig)?}
 
+
+\section{\red{Scales of measurements?}}
+\ghnote{Burde vi ha et delkapittel her som klargjoer dette med ulike maaleskalaer. Nano: Enkeltladning. Mikro: Konsentrasjoner, ladningstettheter, deterministiske flukser/stroemmer. Coarse-grained: Hjernestrukturen tatt hensyn til.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\blue{Electric currents}}
