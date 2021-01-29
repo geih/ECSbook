@@ -170,11 +170,11 @@ The line-source approximation can be expected to give a better prediction of $\p
 \caption[]{\textbf{Point- versus line-source approximation.} 
 Extracellular potential at a snapshot in time following a single excitatory synaptic input (location marked by cyan dot) to a rat cortical layer 5 pyramidal neuron \cite**{Hay2011}.
 The extracellular potential is shown for the time step corresponding to the maximum observed absolute value for the extracellular potential, and it is calculated from the same neural simulation, at the same time with either the point-source approximation ({\bf A}) or the line-source approximation ({\bf B}). Very close to neural current sources, the two approaches
-give substantially different results, but at slightly larger differences, the results from the two approaches converge ({\bf C} versus {\bf D}). This is also illustrated in panel {\bf E}, which shows the relative difference between the results from the two approaches with increasing distance from the location of the synaptic input (red dashed line in panel {\bf A}). The relative difference was less than 10\% for distances greater than $\sim$13~µm, and less than 1\% for distances greater than $\sim$35~µm. 
+give substantially different results, but at slightly larger differences, the results from the two approaches converge ({\bf C} versus {\bf D}). This is also illustrated in panel {\bf E}, which shows the relative difference between the results from the two approaches with increasing distance from the location of the synaptic input (red dashed line in panel {\bf A}). The relative difference was less than 10\% for distances greater than $\sim$13~\si{\micro\metre}, and less than 1\% for distances greater than $\sim$35~\si{\micro\metre}. 
 }
 \label{VC:fig:point_vs_linesource}
 \end{figure}
-
+\si{\micro\metre}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Current-source-density description}}
 \label{sec:VC:CSD}
@@ -373,7 +373,7 @@ The effect of the presence of highly conductive electrodes can be investigated u
 \includegraphics[width=1\textwidth]{Figures/VC/fig_FEM_elec.pdf}
 \end{center}
 \caption[]{\textbf{Finite Element Method versus the point and disc electrode approximations.}
-{\bf A:} The lead-field from an electrode surface at $x$,$y$=0, simulated with the Finite Element Method (FEM). The highly conductive material of the electrode was included in the simulation, as a cylinder protruding out of the bottom of an otherwise homogeneous and isotropic volume conductor. The $x$- and $y$-axes are shown in units of the electrode radius, which in this specific example was 10~µm.
+{\bf A:} The lead-field from an electrode surface at $x$,$y$=0, simulated with the Finite Element Method (FEM). The highly conductive material of the electrode was included in the simulation, as a cylinder protruding out of the bottom of an otherwise homogeneous and isotropic volume conductor. The $x$- and $y$-axes are shown in units of the electrode radius, which in this specific example was 10~\si{\micro\metre}.
 {\bf B:} The lead-field from a point current source at the bottom of an homogeneous and isotropic volume conductor, $x$,$y$=0. 
 {\bf C:} The lead-field from 500 point current source randomly distributed across the electrode surface, centered at $x$,$y$=0. Each current source was scaled by 1/500.
 The Method of Images (Sec.~\ref{sec:Sigma:nonhomo}) was used to account for the bottom of the volume for the point- and disc-electrode approximation.

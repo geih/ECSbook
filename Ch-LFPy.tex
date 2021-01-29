@@ -38,7 +38,7 @@ Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4
 \index{Multicompartment models}
 
 
-Most models aiming to mimic the dynamics of a particular neuron or neural system except the simplest ball and stick like models are too complex to be solved analytically (cf. \Fref{sec:Neuron}). 
+Most models aiming to mimic the dynamics of a particular neuron or neural system except the simplest ball and stick like models are too complex to be solved analytically (cf. \Fref{chap:Neuron}). 
 Thus the set of partial differential equations (PDEs) and initial conditions representing voltage- and concentration-dependent ion channels, synapses, plasticity, neuronal geometry etc. of the full model will have to be solved numerically on computers. 
 The numerical solution of geometrically detailed cable models entails a discretization of the geometry into multiple compartments (hence MC) wherein the states of variables and their derivatives are estimated on a temporal grid which may be fixed or irregular.
 While one could utilize general-purpose numerical solvers in order to compute resulting voltage fluctuations, transmembrane currents or axial currents, 
@@ -154,7 +154,7 @@ i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\ma
 
 
 This machinery may appear as a bit of a hurdle to implement for the purpose of computing extracellular potentials or magnetic signals, 
-but thankfully MC neuron modeling software such as NEURON provides native support for computing the transmembrane current (\si{\ampere}) and/or transmembrane current density per surface membrane area (\si{\ampere/\metre^2}) for each compartment. 
+but thankfully MC neuron modeling software such as NEURON and Arbor provides native support for computing the transmembrane current (\si{\ampere}) and/or transmembrane current density per surface membrane area (\si{\ampere/\metre^2}) for each compartment. 
 Dependent on the implementation in the neural simulation software, 
 a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}). 
 % 
@@ -227,7 +227,7 @@ V_\mathrm{m}(\mathbf{r}_2, t) ~,
 %
 that is, similar to \Fref{eq:LFPy_linear_combination}. 
 We encourage the interested reader of this book to show that the same approach hold for other model configurations, such 
-as 3-compartment models without and with branching points.  
+as 3-compartment models without and with branching points as illustrated in \Fref{fig:LFPy_circuits}B and C.  
 
 So far the axial currents is represented as a scalar field. 
 For some applications, such as computing the magnetic field $\mathbf{H}(\mathbf{r}, t)$, 
