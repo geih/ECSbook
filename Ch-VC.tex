@@ -9,13 +9,13 @@ Before we present the VC theory, we again want to emphasize that our scale of in
 \label{VC:eq:ohmici}
 \end{equation}
 
-Further discussion of the assumptions underlying VC theory are found at the end of this chapter (Section \ref{sec:VC:approximations}), and in Chapter \ref{sec:Sigma}, "Extracellular conductivity", where we discuss the continuous medium approximation in greater detail.
+Further discussion of the assumptions underlying VC theory are found at the end of this chapter (Section \ref{sec:VC:approximations}), and in Chapter \ref{chap:Sigma}, "Extracellular conductivity", where we discuss the continuous medium approximation in greater detail.
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Figures/VC/ecs_scales_three_levels.png}
 \end{center}
-\caption{\textbf{Extracellular medium at different scales} 
+\caption{\textbf{Extracellular medium at different scales}
 Panel C is the level where we apply VC theory
 }
 \label{VC:fig:ECS_scales_3levels}
@@ -25,7 +25,7 @@ Panel C is the level where we apply VC theory
 \section{\blue{From neuronal current sources to extracellular potentials}}
 \label{sec:VC:main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Throughout this chapter we shall assume that we know the neuronal transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution \tvnnote{Virker litt rart for meg aa beskrive delta-funksjoner som contineous density distribution?} of current sources (Fig. \ref{VC:fig:CSD}B), which we call the \textit{current source density}\index{Current source density} (CSD), with units A/m$^3$ \tvnnote{Litt rart aa introdusere CSD her, ogsaa ikke bruke det i de foerste tilfellene. Hva med aa utsette dette til etter "line-source"?}. For example, the CSD representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions. 
+Throughout this chapter we shall assume that we know the neuronal transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution \tvnnote{Virker litt rart for meg aa beskrive delta-funksjoner som contineous density distribution?} of current sources (Fig. \ref{VC:fig:CSD}B), which we call the \textit{current source density}\index{Current source density} (CSD), with units A/m$^3$ \tvnnote{Litt rart aa introdusere CSD her, ogsaa ikke bruke det i de foerste tilfellene. Hva med aa utsette dette til etter "line-source"?}. For example, the CSD representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -55,11 +55,11 @@ which simplifies to the more commonly used relation:
 \sigma \nabla^2\phi({\bf r}, t) = - C({\bf r}, t),
 \label{VC:eq:CSD3}
 \end{equation}
-in the less general case where the conductivity $\sigma_t$ is constant. Hence, if we know the distribution of neuronal current sources, we can integrate eq. \ref{VC:eq:CSD2} or eq. \ref{VC:eq:CSD3} to predict the electrical potential in the extracellular space surrounding the sources. 
+in the less general case where the conductivity $\sigma_t$ is constant. Hence, if we know the distribution of neuronal current sources, we can integrate eq. \ref{VC:eq:CSD2} or eq. \ref{VC:eq:CSD3} to predict the electrical potential in the extracellular space surrounding the sources.
 
-As indicated above, the variables ${\bf i_t}$, $\sigma_t$ and $\phi$ can in general be functions of both position and time. However, for the remainder of this chapter, we shall for simplicity assume that $\sigma_t$ is constant. Furthermore, it is implicit in eq. \ref{VC:eq:CSD2} that the relationship between current sources and extracellular potentials is instantaneous (i.e., we can solve eq.  \ref{VC:eq:CSD2} at each time point independently), and in the remainder of the chapter we therefore only use the positional argument for ${\bf i_t}$ and $\phi$. 
+As indicated above, the variables ${\bf i_t}$, $\sigma_t$ and $\phi$ can in general be functions of both position and time. However, for the remainder of this chapter, we shall for simplicity assume that $\sigma_t$ is constant. Furthermore, it is implicit in eq. \ref{VC:eq:CSD2} that the relationship between current sources and extracellular potentials is instantaneous (i.e., we can solve eq.  \ref{VC:eq:CSD2} at each time point independently), and in the remainder of the chapter we therefore only use the positional argument for ${\bf i_t}$ and $\phi$.
 
-In the following subsections, we show how VC-theory is used to compute $\phi$ in some idealized cases with a homogeneous extracellular medium, and then discuss how this theory can be expanded to more complex cases accounting for inhomogeneities. 
+In the following subsections, we show how VC-theory is used to compute $\phi$ in some idealized cases with a homogeneous extracellular medium, and then discuss how this theory can be expanded to more complex cases accounting for inhomogeneities.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -77,13 +77,13 @@ We shall now derive an expression for the extracellular potential $\phi$ in the 
 \index{Point source approximation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We start by deriving the contribution to $\phi$ from a single neuronal point source $I_k$ at the point ${\bf r_k}=0$ (Fig. \ref{VC:fig:pointsource}A). 
+We start by deriving the contribution to $\phi$ from a single neuronal point source $I_k$ at the point ${\bf r_k}=0$ (Fig. \ref{VC:fig:pointsource}A).
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Figures/VC/EP_from_pointsource_illustration.png}
 \end{center}
-\caption{\textbf{Extracellular potential from single neuronal point source current.} 
+\caption{\textbf{Extracellular potential from single neuronal point source current.}
 \tvnnote{Har laget utkast til figur. Noe slikt? } \ghnote{Praktfull, men trenger index $t$ paa $\sigma_t$, og $i_t$ erstatter J.}
 }
 \label{VC:fig:pointsource}
@@ -131,7 +131,7 @@ If we have several point-current sources, $I_{1}, I_2, I_3, ... $, in locations 
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Eq.~\ref{eq:VC:pointsources} is referred to as the point-source approximation \cite**{Holt1999}, since it approximates the neuron as a set of point current sources, i.e., the neuron delivers to the extracellular space a singular current source per neuronal segment, located in the segment midpoint. 
+Eq.~\ref{eq:VC:pointsources} is referred to as the point-source approximation \cite**{Holt1999}, since it approximates the neuron as a set of point current sources, i.e., the neuron delivers to the extracellular space a singular current source per neuronal segment, located in the segment midpoint.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Line source approximation}}
@@ -141,7 +141,7 @@ Eq.~\ref{eq:VC:pointsources} is referred to as the point-source approximation \c
 A more sophisticated choice may be to assume that the transmembrane current is evenly distributed over the segment axis, a choice which is referred to as the line-source approximation \cite**{Holt1999,Linden2014}. The contribution to the extracellular potential from a current $I_k$ in a segment $k$ can be found analytically by integrating eq. \ref{eq:VC:pointsource} over the center-line axis of the compartment (see Appendix \ref{app:linesource} or \citeasnoun**{Holt1998}). For a segment with length $\Delta s_k$, the contribution to the extracellular potential will be:
 
 \begin{equation}
-\phi({\bf r},t)_k = \frac{I_k}{4\pi \sigma_t} \int \frac{dr_k}{|{\bf r-r_k}|} = 
+\phi({\bf r},t)_k = \frac{I_k}{4\pi \sigma_t} \int \frac{dr_k}{|{\bf r-r_k}|} =
 \frac{I_k}{4\pi \sigma_t \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
 \label{eq:VC:linesource}
 \end{equation}
@@ -167,10 +167,10 @@ The line-source approximation can be expected to give a better prediction of $\p
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/VC/fig_point_versus_linesource.png}
 \end{center}
-\caption[]{\textbf{Point- versus line-source approximation.} 
+\caption[]{\textbf{Point- versus line-source approximation.}
 Extracellular potential at a snapshot in time following a single excitatory synaptic input (location marked by cyan dot) to a rat cortical layer 5 pyramidal neuron \cite**{Hay2011}.
 The extracellular potential is shown for the time step corresponding to the maximum observed absolute value for the extracellular potential, and it is calculated from the same neural simulation, at the same time with either the point-source approximation ({\bf A}) or the line-source approximation ({\bf B}). Very close to neural current sources, the two approaches
-give substantially different results, but at slightly larger differences, the results from the two approaches converge ({\bf C} versus {\bf D}). This is also illustrated in panel {\bf E}, which shows the relative difference between the results from the two approaches with increasing distance from the location of the synaptic input (red dashed line in panel {\bf A}). The relative difference was less than 10\% for distances greater than $\sim$13~\si{\micro\metre}, and less than 1\% for distances greater than $\sim$35~\si{\micro\metre}. 
+give substantially different results, but at slightly larger differences, the results from the two approaches converge ({\bf C} versus {\bf D}). This is also illustrated in panel {\bf E}, which shows the relative difference between the results from the two approaches with increasing distance from the location of the synaptic input (red dashed line in panel {\bf A}). The relative difference was less than 10\% for distances greater than $\sim$13~\si{\micro\metre}, and less than 1\% for distances greater than $\sim$35~\si{\micro\metre}.
 }
 \label{VC:fig:point_vs_linesource}
 \end{figure}
@@ -180,16 +180,16 @@ give substantially different results, but at slightly larger differences, the re
 \label{sec:VC:CSD}
 \index{Current source density}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The forward modelling formulas in Eq. \ref{eq:VC:pointsources} and \ref{eq:VC:linesources} can be expressed more generally in terms of the CSD. The starting point is then eq. \ref{VC:eq:CSD3}, which for a homogeneous and isotopic medium can be written: 
+The forward modelling formulas in Eq. \ref{eq:VC:pointsources} and \ref{eq:VC:linesources} can be expressed more generally in terms of the CSD. The starting point is then eq. \ref{VC:eq:CSD3}, which for a homogeneous and isotopic medium can be written:
 
 \begin{equation}
 \nabla^2 \phi({\bf r}) = - \frac{C({\bf r})}{\sigma_t}
 \label{VC:eq:CSD4}
 \end{equation}
 
-Since this is a linear differential equation, we may solve it by first finding its Green's function, i.e., the solution to an impulse response $C({\bf r}) = I' \delta^3({\bf r-r'})$, 
+Since this is a linear differential equation, we may solve it by first finding its Green's function, i.e., the solution to an impulse response $C({\bf r}) = I' \delta^3({\bf r-r'})$,
 \ehnote{lite fan av notasjon med $'$, siden dette oftest brukes om den deriverte.}
-where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, and $I'$ is the current source at this location. The general solution can then be expressed as a convolution over such Green's functions. Thus, we first seek the solution to: 
+where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, and $I'$ is the current source at this location. The general solution can then be expressed as a convolution over such Green's functions. Thus, we first seek the solution to:
 
 \begin{equation}
 \nabla^2 \phi({\bf r}) = - \frac{I' \delta^3({\bf r-r'})}{\sigma_t}.
@@ -234,7 +234,7 @@ We may now insert back for $\phi(R)= \phi({\bf r})$ and $R = |{\bf r-r'}|$ to ob
 As earlier stated, the solution for a general CSD can be expressed as a convolution over the Green's function, so that:
 
 \begin{equation}
-\phi({\bf r}) = \frac{1}{4\pi \sigma_t}\iiint_V \frac{C({\bf r'})}{|{\bf r}-{\bf r'}|} \,dV, 
+\phi({\bf r}) = \frac{1}{4\pi \sigma_t}\iiint_V \frac{C({\bf r'})}{|{\bf r}-{\bf r'}|} \,dV,
 \label{VC:eq:csds}
 \end{equation}
 where the volume integral runs over all sources. Here, $C$ represents whatever approximation one used for the current sources, and eq. \ref{VC:eq:csds} is the continuous counterpart to eq. \ref{eq:VC:pointsources}. If we describe the CSD as a sum of point sources, i.e.,  $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$, eq. \ref{VC:eq:csds} reduces to eq.\ref{eq:VC:pointsources}.
@@ -244,7 +244,7 @@ where the volume integral runs over all sources. Here, $C$ represents whatever a
 \section{\orange{SN: Dipole approximation}}
 \label{sec:VC:dipole}
 \ghnote{GH: Jeg skrev en skisse til dette kapittelet, men fint om SN kan gaa gjennom.}
-\ehnote{Jeg ville skrevet dette ut fullt likt som under "Spherical form" paa Wikipedia https://en.wikipedia.org/wiki/Multipole\_expansion. 
+\ehnote{Jeg ville skrevet dette ut fullt likt som under "Spherical form" paa Wikipedia https://en.wikipedia.org/wiki/Multipole\_expansion.
 En annen ting er at dipol/multipolapproksimasjon ikke er en "volum-konduktor-modell" som dette kapitlet dreier seg om - kanskje det boer flyttes et anna sted}
 \ghnote{GH: Det som staar paa Wiki-siden er multipolekspansjon basert paa ladninger. Vaar er basert paa stroemkilder. Premisset for vaar multipolekspansj er da VC-teori, saa jeg synes stoffet hoerer hjemme her. Vi har en mer substansiell utledning i appendix, og vi bruker stort sett metoden kun i tilfeller da vi gjoer dipol-forenklingen. Derfor synes }
 
@@ -258,21 +258,21 @@ To be more precise, if the distance from the center of the volume containing the
 \phi(R) = \frac{C_{monopole}}{R} + \frac{C_{dipole}}{R^2} + \frac{C_{quadrupole}}{R^3} + \frac{C_{octupole}}{R^4} + ...
 \label{VC:eq:multipole}
 \end{equation}
-where $R$ is the distance from the center of the source distribution, $C_{monopole}$ is the monopolar contribution of the CSD to $\phi$, $C_{dipole}$ is the dipolar contribution from the CSD to $\phi$, and so on. The derivation of this expression can be found in Appendix \ref{app:dipoleappendix}. 
+where $R$ is the distance from the center of the source distribution, $C_{monopole}$ is the monopolar contribution of the CSD to $\phi$, $C_{dipole}$ is the dipolar contribution from the CSD to $\phi$, and so on. The derivation of this expression can be found in Appendix \ref{app:dipoleappendix}.
 
 As we explained in Section \ref{sec:Neuron:membranecurrents}, the net sum of currents over a neuronal membrane is always zero, meaning that the monopolar contribution, i.e., first term in eq. \ref{VC:eq:multipole}, vanishes. Furthermore, the quadrupole, octopole and higher-order contributions to $\phi$ decay rapidly with distance $R$. Provided that we are sufficiently far away from the source distribution, $\phi$ can therefore be well approximated by dipole contribution alone:
 
 \begin{equation}\label{VC:eq:CDA}
 \Phi(\mathbf{R}) \approx \frac{1}{4 \pi \sigma_t} \frac{|\mathbf{p}| \cos \theta}{R^2},
 \end{equation}
-where we have expressed $C_{dipole}$ in terms of the current dipole moment ($\mathbf{p}$), the angle ($\theta$) between the current dipole moment and the distance vector ($\mathbf{R}$), as explained in Appendix \ref{app:dipoleappendix}. 
+where we have expressed $C_{dipole}$ in terms of the current dipole moment ($\mathbf{p}$), the angle ($\theta$) between the current dipole moment and the distance vector ($\mathbf{R}$), as explained in Appendix \ref{app:dipoleappendix}.
 
-The current dipole moment is a function of the sum of all the transmembrane currents in a neuron \cite**{Pettersen2008,Pettersen2014,Nunez2006}: 
+The current dipole moment is a function of the sum of all the transmembrane currents in a neuron \cite**{Pettersen2008,Pettersen2014,Nunez2006}:
 \begin{equation}
 \mathbf{p} = \sum_{k=1}^N I_k \mathbf{r}_k.
 \label{eq:VC:dipole}
 \end{equation}
-For example, if we have a simple two-compartmental (and purely dipolar) neuron with a current sink $-I$ at location $\mathbf{r}_1$ and a current source $I$ at location $\mathbf{r}_2$, the current dipole moment can be formulated as $\mathbf{p} = -I\mathbf{r}_1 + I\mathbf{r}_2 = I(\mathbf{r}_2 - \mathbf{r}_1) = I\mathbf{d}$. Here $\mathbf{d}$ is the distance vector between the current sink and the current source, giving the length $d$ and direction of the current dipole. 
+For example, if we have a simple two-compartmental (and purely dipolar) neuron with a current sink $-I$ at location $\mathbf{r}_1$ and a current source $I$ at location $\mathbf{r}_2$, the current dipole moment can be formulated as $\mathbf{p} = -I\mathbf{r}_1 + I\mathbf{r}_2 = I(\mathbf{r}_2 - \mathbf{r}_1) = I\mathbf{d}$. Here $\mathbf{d}$ is the distance vector between the current sink and the current source, giving the length $d$ and direction of the current dipole.
 
 As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is though to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \cite**{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \cite**{Naess2020}.
 
@@ -282,15 +282,15 @@ As we mentioned above, the current dipole approximation is only applicable when 
 \index{Electrode model}
 \tvnnote{Paa sikt vil jeg gjerne spoerre noen elektrode-folk vi kjenner om aa kontroll-lese denne seksjonen, for eksempel Martinsen, Nelson, Frey eller Obien.}
 %\gen{Kanskje det kunne vaere en ide aa ogsaa beskrive methods-of-imaging og modellering i MEAs her?
-%Hadde foerst tenkt aa ta det med i Spikes-kapitlet. Men den gjelder jo like mye for LFP og har blitt brukt av oss i denne 
+%Hadde foerst tenkt aa ta det med i Spikes-kapitlet. Men den gjelder jo like mye for LFP og har blitt brukt av oss i denne
 %sammenheng i flere prosjekter med Ness eller Pettersen som foersteforfatter.}
 %\tvnnote{Jeg tenker dette passer best i naavaerende 5.3, "Non-homogeneous extracellular medium"?}
 
 We have demonstrated how we can use VC theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. Here we present a short review of different approaches to model such effects.
 
 Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, connected with a wire to an amplifier that measures the potential relative to a reference electrode \cite**{Martinsen2008}, see Fig.~\ref{VC:fig:elec_circuit}{\bf A}.
-To accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very low resistance so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside of the electrode surface is in practice homogeneous. The amplifier must however have a very high impedance, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Martinsen2008,Moulin2008,Ishai2013}. The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Nelson2008,Nelson2010,Ness2015,Vermaas2020b}. 
-An "ideal" electrode\index{ideal electrode} is the hypothetical case where the measured potential reported by the amplifier is identical to the "true" extracellular potential at the tip of the recording electrode (with the extracellular potential unaffected by the electrode itself). In reality there are however several different complicating factors which can cause the measured potential to differ from the "true" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}. 
+To accurately measure the potential at the electrode surface, the measurement electrodes themselves must have a very low resistance so that no potential drop occurs from the measurement site to the amplifier. The electrodes are therefore typically made of a highly conductive metal like silver or platinum, and the potential directly on the inside of the electrode surface is in practice homogeneous. The amplifier must however have a very high impedance, so that a negligible amount of current will cross the tissue-electrode interface, as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Martinsen2008,Moulin2008,Ishai2013}. The homogeneous potential inside the recording electrode ideally corresponds to a spatial average of the potential across the outer surface of the electrode \cite**{Nelson2008,Nelson2010,Ness2015,Vermaas2020b}.
+An "ideal" electrode\index{ideal electrode} is the hypothetical case where the measured potential reported by the amplifier is identical to the "true" extracellular potential at the tip of the recording electrode (with the extracellular potential unaffected by the electrode itself). In reality there are however several different complicating factors which can cause the measured potential to differ from the "true" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -298,26 +298,26 @@ An "ideal" electrode\index{ideal electrode} is the hypothetical case where the m
 \end{center}
 \caption[]{\textbf{Illustration of recording setup and equivalent circuit}
 {\bf A}: The extracellular potential is measured between a recording electrode and reference electrode.
-{\bf B}: An simple example of an equivalent circuit describing the recording setup, see main text and 
-\citeasnoun**{Robinson1968}, \citeasnoun**{Nelson2008}, \citeasnoun**{Obien2015}, and \citeasnoun**{Viswam2019}. 
+{\bf B}: An simple example of an equivalent circuit describing the recording setup, see main text and
+\citeasnoun**{Robinson1968}, \citeasnoun**{Nelson2008}, \citeasnoun**{Obien2015}, and \citeasnoun**{Viswam2019}.
 }
 \label{VC:fig:elec_circuit}
 \end{figure}
 
-To understand and/or model such effects it is convenient to represent the recording set-up as an equivalent circuit diagram \cite**{Geddes1997}, see Fig.~\ref{VC:fig:elec_circuit}{\bf B} for an example inspired by \citeasnoun**{Robinson1968}, \citeasnoun**{Nelson2008}, \citeasnoun**{Obien2015}, and \citeasnoun**{Viswam2019}. 
-Here $\phi_{\rm True}$ is the "true" extracellular potential at some location in the brain, caused by some neural activity, and $\phi_{\rm Rec}$ is the potential reported by the amplifier. 
-$R_s$ is the resistance of the extracellular medium from the measurement point to the reference electrode. 
+To understand and/or model such effects it is convenient to represent the recording set-up as an equivalent circuit diagram \cite**{Geddes1997}, see Fig.~\ref{VC:fig:elec_circuit}{\bf B} for an example inspired by \citeasnoun**{Robinson1968}, \citeasnoun**{Nelson2008}, \citeasnoun**{Obien2015}, and \citeasnoun**{Viswam2019}.
+Here $\phi_{\rm True}$ is the "true" extracellular potential at some location in the brain, caused by some neural activity, and $\phi_{\rm Rec}$ is the potential reported by the amplifier.
+$R_s$ is the resistance of the extracellular medium from the measurement point to the reference electrode.
 The surface of the electrode, that is, the electrode-electrolyte interface, is often modelled as a resistance, $R_e$, and a capacitance, $C_e$, in parallel (gray shaded area in Fig.~\ref{VC:fig:elec_circuit}{\bf B}) \cite**{Martinsen2008,Nelson2008,CamunasMesa2013,Viswam2019}. Importantly, the values of both $R_e$ and $C_e$ are typically expected to be highly frequency dependent \cite**{Martinsen2008,Nelson2008,Viswam2019}, and are often considered to be approximately proportional to $1/\sqrt{f}$ \cite{Robinson1968}, where $f$ is the frequency (implications of this frequency dependence is discussed below).
 The wire from the electrode-electrolyte interface to the amplifier has resistance $R_m$, typically assumed to be negligible.
 $C_{sh}$ and $R_{sh}$ represents all the shunt capacitance and resistance to ground that occurs between the electrode surface and the amplifier, through wires, connections etc., where often $R_{sh}$ is assumed to be negligible.
 Finally, $Z_a$ is the amplifier input impedance.
 
 Two important concepts here are the effective electrode impedance, $Z_e'$, and the effective amplifier input impedance, $Z_a'$. Here, $Z_e'$ is the combined impedance of the extracellular medium ($R_s$), the electrode-electrolyte interface ($R_e$, $C_e$) and the metal wire ($R_m$), while $Z_a'$ is the total impedance to ground from after the metal wire, which includes the shunt current and the amplifier itself (Fig.~\ref{VC:fig:elec_circuit}{\bf B}).
-For the recorded potential, $\phi_{\rm Rec}$ to be as similar as possible to the true potential, $\phi_{\rm True}$,  it is vital that $Z_a' \gg Z_e'$. If this is not fulfilled, 
-the recorded potential will have frequency-dependent phase- and amplitude distortions \cite**{Nelson2008,Nelson2010,Obien2015,Viswam2019}. 
+For the recorded potential, $\phi_{\rm Rec}$ to be as similar as possible to the true potential, $\phi_{\rm True}$,  it is vital that $Z_a' \gg Z_e'$. If this is not fulfilled,
+the recorded potential will have frequency-dependent phase- and amplitude distortions \cite**{Nelson2008,Nelson2010,Obien2015,Viswam2019}.
 Importantly, the effective electrode impedance, $Z_e'$, increases strongly for low frequencies and is typically much more frequency dependent than the effective amplifier input impedance, $Z_a'$ \cite**{Nelson2008}. This means that some given recording equipment might be able to measure extracellular spikes with negligible distortion, while at the same time substantial phase and amplitude distortions might be present in LFP signals measured by the same equipment \cite**{Nelson2008,Nelson2010,Viswam2019}.
 Note that metallic recording electrodes are typically unable to measure static (DC) potentials, or capture changes slower than $\sim$ 0.1 Hz.
-\gen{Hvor har vi dette tallet fra?} 
+\gen{Hvor har vi dette tallet fra?}
 \ehnote{jeg er ogsaa overrasket over at metallelektroder ikke kan maale konstante potensialforskjeller i en loesning (i all den tid det finnes frie ioner i loesningen)?}
 \tvnnote{Jeg vet ikke om noen laerebok referanse, men det var det som ble oppgitt som nedre grense baade av Dirk og Anna (altsaa alle tilfeller jeg har vaert borti eksperimentell data), se Miceli-artikkelen, Uhlivora-artikkelen, og ogsaa Einevoll et al., 2007. Fra en av Anna's nyere artikler fant jeg frem til dokumentasjonen paa amplifieren de har brukt, og der staar det "Lower cutoff frequency configurable from 0.1 Hz to 500 Hz", men jeg vet ikke helt om forklaringen jeg har gitt over er helt riktig.}
 \ehnote{Det er vel da mer en begrensning med sampling apparat enn selve elektrodemaalingen. Si du sampler mange kanaler med int16 presisjon - det blir da et problem hvis DC-verdiene fluktuerer mye mer enn selve signalet (e.g., LFP).}
@@ -335,14 +335,14 @@ Such DC potentials can be present in neural tissue, and can often arise in simul
 %\label{VC:fig:elec_circuit}
 %\end{figure}
 
-Apart from the issues discussed above, it has been convincingly argued that, provided that the proper recording equipment is used (so that $Z_a' \gg Z_e'$), electrode impedance or other electrode properties should not substantially distort recorded potentials \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}. 
+Apart from the issues discussed above, it has been convincingly argued that, provided that the proper recording equipment is used (so that $Z_a' \gg Z_e'$), electrode impedance or other electrode properties should not substantially distort recorded potentials \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}.
   Note that this only applies to recording electrodes, and that substantially more complex electrode models might be needed to accurately represent current stimulation electrodes because of electrode polarization, see Section~\ref{Sec:EPI}.
 
-Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential. 
-For example, since the (homogeneous) potential directly on the inside of the electrode surface corresponds to a spatial average of the potential on the outside, the area of the electrode surface will affect over how large a region the extracellular potential is averaged over. 
+Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, electrode properties can still affect the recorded potential.
+For example, since the (homogeneous) potential directly on the inside of the electrode surface corresponds to a spatial average of the potential on the outside, the area of the electrode surface will affect over how large a region the extracellular potential is averaged over.
 In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008,Viswam2019}, see Section~\ref{sec:Spikes:electrode_size}.
 
-%if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials. 
+%if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials.
 %\gen{Her maa vi vaere presise. Potensialet paa selve elektroden vil vaere det samme, det som vil variere er hva potensialet ville vaert paa denne "virtuelle" flaten hvis det ikke hadde vaert en metallisk elektrode der.}
 %In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008,Viswam2019}, see Section~\ref{Spikes:sec:elec_size}.
 
@@ -350,8 +350,8 @@ In practice, this means for example that extracellular action potentials (which 
 \subsection{\blue{Point-electrode approximation}}
 \label{VC:sec:point-electrode}
 \index{Point-electrode}
-The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to  
-ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential at single points. For relatively small micro-electrodes 
+The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to
+ignoring any potential effect from recording electrodes or electrode shanks, and calculating the extracellular potential at single points. For relatively small micro-electrodes
 this has been found to be a reasonable approximation \cite**{Moffitt2005,Moulin2008,Ness2015,Buccino2019}.
 \ghnote{Tror vi maa forklare at punktet vaart er et punkt i en coarse-grained beskrivelse av tissue. "Punktet" i vaar utregning tilsvarer en midling over et mikrometerstort omraade rundt punktet s.a. utslaget ikke er avhengiv av hvorvidt det er 1, 2, 3 eller 40 nm til naermeste membran. Den samme midlingen gjoeres av smaa elektroder. Saa "point" betyr i denne sammenhengen at vi allokerer elektrodemaalingen til punktet i sentrum av elektroden, og at elektrodens tilstedevaerelse ikke paavirker hva midlingen over dette omraadet vil vaere?}
 \gen{Kan vi ikke ogsaa tenke paa maalingen som maaling av potensialet i et lite punkt i ECS (selv om vi bruker coarse-grained beskrivelse)?}
@@ -365,8 +365,8 @@ In some cases recording electrodes are large enough that the extracellular poten
 In such cases, we can use the point-electrode approximation to calculate the potential at many points across the electrode surface and compute the average potential, an approach referred to as the disc-electrode approximation \cite**{CamunasMesa2013,Linden2014,Hagen2015,Ness2015,Viswam2019}.
 This approach takes into account the physical extent of the electrodes, and the disc-electrode approximation can therefore account for the spatial filtering effects introduced by electrodes that are large compared to the spatial variations of the extracellular potential. See Section~\ref{sec:Spikes:electrode_size} for an example of this approach applied to calculating extracellular spikes recorded with electrodes of different sizes.
 
-However, very close to electrodes the electrodes can themselves affect the close-by extracellular potential, since they represent a region of a highly conductive material in contact with the tissue being measured from. 
-The effect of the presence of highly conductive electrodes can be investigated using the Finite Element Method (FEM) \index{Finite Element Method}. \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode. The point-electrode approximation was also found to be fairly accurate for distanced greater than $\sim$4 times the electrode radius away from the electrode, see Fig.~\ref{VC:fig:FEM_elec}.  
+However, very close to electrodes the electrodes can themselves affect the close-by extracellular potential, since they represent a region of a highly conductive material in contact with the tissue being measured from.
+The effect of the presence of highly conductive electrodes can be investigated using the Finite Element Method (FEM) \index{Finite Element Method}. \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode. The point-electrode approximation was also found to be fairly accurate for distanced greater than $\sim$4 times the electrode radius away from the electrode, see Fig.~\ref{VC:fig:FEM_elec}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -374,10 +374,10 @@ The effect of the presence of highly conductive electrodes can be investigated u
 \end{center}
 \caption[]{\textbf{Finite Element Method versus the point and disc electrode approximations.}
 {\bf A:} The lead-field from an electrode surface at $x$,$y$=0, simulated with the Finite Element Method (FEM). The highly conductive material of the electrode was included in the simulation, as a cylinder protruding out of the bottom of an otherwise homogeneous and isotropic volume conductor. The $x$- and $y$-axes are shown in units of the electrode radius, which in this specific example was 10~\si{\micro\metre}.
-{\bf B:} The lead-field from a point current source at the bottom of an homogeneous and isotropic volume conductor, $x$,$y$=0. 
+{\bf B:} The lead-field from a point current source at the bottom of an homogeneous and isotropic volume conductor, $x$,$y$=0.
 {\bf C:} The lead-field from 500 point current source randomly distributed across the electrode surface, centered at $x$,$y$=0. Each current source was scaled by 1/500.
 The Method of Images (Sec.~\ref{sec:Sigma:nonhomo}) was used to account for the bottom of the volume for the point- and disc-electrode approximation.
-See \citeasnoun**{Ness2015} for full simulation details. 
+See \citeasnoun**{Ness2015} for full simulation details.
 }
 \label{VC:fig:FEM_elec}
 \end{figure}
@@ -398,4 +398,4 @@ Large multi-contact electrode shanks can be expected to have a substantial effec
 \label{sec:VC:approximations}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The VC theory presented in this chapter relies on several assumptions and approximations. Firstly, the theory is based on the quasi-static approximation of Maxwell's equations (see Section \ref{sec:VC:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:VC:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:VC:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:VC:ephaptic} for more on this). Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Chapter \ref{sec:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
+The VC theory presented in this chapter relies on several assumptions and approximations. Firstly, the theory is based on the quasi-static approximation of Maxwell's equations (see Section \ref{sec:VC:quasistatic} for more on this). Secondly, the the extracellular medium is assumed to be linear, so that the current density is proportional to the electrical field (see Section \ref{sec:VC:LinEx} for more on this). Thirdly, extracellular currents are assumed to be exclusively due to Ohmic drift, although other currents could in principle be present (see Section \ref{sec:VC:onlyohmic} for more on this). Fourthly, when applying VC theory, one typically assumes that there is no (ephaptic) feedback from extracellular potentials on the neural activity (see Section \ref{sec:VC:ephaptic} for more on this). Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (Chapter \ref{chap:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
