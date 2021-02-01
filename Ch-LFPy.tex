@@ -303,6 +303,7 @@ w(\mathbf{r}_N, t)
 \end{eqnarray}
 %
 where $\mathbf{F}$ is a matrix with dimensions $(M, N)$ wherein each element $f_{ij}$ is the chosen forward solution mapping the contribution from each source to the corresponding measurement.
+For the sake of compactness, $w(\mathbf{r}_j, t)$ is here either represents the axial or transmembrane current of compartment $j$. 
 A simple linear forward model mapping transmembrane currents of an $N$-compartment model to extracellular potentials in $M$ locations would be the point-source formalism,
 which models neuronal sources \textit{and} measurement sites as infinitesimally small points a conductive medium.
 The point-source formula (\Fref{eq:VC:pointsource}) results in
@@ -391,7 +392,7 @@ Alternatively,
 one can build up a forward model matrix $\mathbf{F}$ element by element as
 %
 \begin{equation}
-f_{ij} = \frac{1}{4\pi} \frac{-I_3 \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
+f_{ij} = - \frac{1}{4\pi} \frac{I_3 \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
 \label{eq:LFPy_biotsavart2}
 \end{equation}
 %
@@ -415,6 +416,34 @@ current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stor
 
 
 \ehnote{add some on combining current dipole moment to distal measures of activity (EEG, MEG)}
+For forward-model predictions of distal electric and magnetic measures of neural activity such as EEG and MEG recordings, 
+some simplifying steps can be made. 
+As these signals are measured at distances much greater than the typical extent of the neuronal sources, 
+the discrete spatial distribution of transmembrane currents $\mathbf{I}_\mathrm{m}(t)$ may be 
+treated as an equivalent current dipole moment (\Fref{sec:VC:dipole}) defined as the product
+\begin{equation}
+\mathbf{P}(t) = 
+\begin{bmatrix}
+\mathbf{r}_1 \\
+\mathbf{r}_2 \\
+\vdots \\
+\mathbf{r}_N
+\end{bmatrix}
+\begin{bmatrix}
+I_\mathrm{m}(\mathbf{r}_1, t) \\
+I_\mathrm{m}(\mathbf{r}_2, t) \\
+\vdots \\
+I_\mathrm{m}(\mathbf{r}_N, t)
+\end{bmatrix} ~, 
+\end{equation}
+which is equivalent to \Fref{eq:VC:dipole}. 
+As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$ the shape of the current dipole moment array will be $(3, n_t)$. 
+
+In the relatively simple case of an infinite homogeneous volume conductor the extracellular potential resulting from the current dipole moment is
+\begin{equation}
+\phi(\mathbf{R}, t) = \frac{\mathbf{P}(t) \cdot (\mathbf{R-r})}{4 \pi \sigma \Vert \mathbf{R-r} \Vert^3} ~,
+\end{equation}
+where $\mathbf{R}$ denotes the measurement site and $\mathbf{r}$ the assumed dipole location. 
 
 
 \ehnote{show code examples from LFPykit?}
@@ -457,7 +486,7 @@ We here only describe very briefly the essence of the EMI framework. It is based
 \end{equation}
 where $r$ takes the indexes $i$ (intracellular space) or $e$ (extracellular space). The intra- and extracellular dynamics are coupled through suitable boundary condictions at the membrane, making sure that a current \textit{entering} the membrane (normal component) at one side of the membrane, is constrained to be identical to the current \textit{leaving} the membrane (negative normal component) on the opposite side \cite**{Krassowska1994}. These entering and leaving currents are in turn determined by a set of mechanisms that jointly determine the transmembrane current $I_m$. In previous numerical implementations of the EMI framework, the membrane currents were modeled with Hodgkin-Huxley like kinetics \cite**{Agudelo-Toro2013,Tveito2017}.
 
-Compared to the two-step MC+VC framework, EMI has the disadvantage that it is computationally expensive. In the MC + VC scheme, which uses volume conduction modeling only for the extracellular space, $\phi_e$ can be computed as an analytical function of the transmembrane neural currents (cf. Chapter \ref{sec:VC}). Using EMI, analytical examples of solutions can only be obtained for idealized scenarios \cite**{Krassowska1994}, while general EMI applications require that both the intra- and extracellular spaces are spatially resolved and their dynamics computed on a numerical framework \cite**{Agudelo-Toro2013,Tveito2017}.
+Compared to the two-step MC+VC framework, EMI has the disadvantage that it is computationally expensive. In the MC + VC scheme, which uses volume conduction modeling only for the extracellular space, $\phi_e$ can be computed as an analytical function of the transmembrane neural currents (cf. Chapter \ref{chap:VC}). Using EMI, analytical examples of solutions can only be obtained for idealized scenarios \cite**{Krassowska1994}, while general EMI applications require that both the intra- and extracellular spaces are spatially resolved and their dynamics computed on a numerical framework \cite**{Agudelo-Toro2013,Tveito2017}.
 
 Using EMI to simulate larger systems with realistic morphologies would probably exceed the capacity of today's computers. However, EMI has been used to perform a systematic exploration of the inaccuracies induced when ignoring ephaptic effects in a small system of neurons represented with stylized geometries  \cite**{Tveito2017}.
 
