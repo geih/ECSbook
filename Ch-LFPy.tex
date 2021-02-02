@@ -444,6 +444,21 @@ In the relatively simple case of an infinite homogeneous volume conductor the ex
 \phi(\mathbf{R}, t) = \frac{\mathbf{P}(t) \cdot (\mathbf{R-r})}{4 \pi \sigma \Vert \mathbf{R-r} \Vert^3} ~,
 \end{equation}
 where $\mathbf{R}$ denotes the measurement site and $\mathbf{r}$ the assumed dipole location. 
+For the sake of computing EEG surface potentials however, 
+an infinite homogeneous volume conductor model is arguably a quite poor approximation to the different tissues of the head.  
+As discussed in more detail throughout \Fref{chap:EEG} different forward models for EEG-like potentials has been developed in the past, 
+either relying on representing different tissues as a series of concentric shells with different conductivities for each main tissue (gray matter, cerebral spinal fluid, skull etc.) \cite{Nunez2006,Naess2017,Naess2020}, 
+or even more detailed head models based on anatomical reconstruction such as the New York Head model \cite{Huang2016}. 
+Without going into any mathematical detail here (more on that in \Fref{chap:EEG}), 
+these models generally takes the form of a linear combination
+\begin{equation}
+\phi(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
+\end{equation}
+where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is model dependent. 
+
+As the extracellular potential remains linearly dependent on the current dipole moment $\mathbf{P}$ 
+which in turn is linearly dependent on the transmembrane currents, 
+one can with relative ease estimate a linear predictor from transmembrane currents by applying a similar trick as above: 
 
 
 \ehnote{show code examples from LFPykit?}
