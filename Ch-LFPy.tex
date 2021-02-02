@@ -442,6 +442,7 @@ As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$ the shape of the current dipole mo
 In the relatively simple case of an infinite homogeneous volume conductor the extracellular potential resulting from the current dipole moment is
 \begin{equation}
 \phi(\mathbf{R}, t) = \frac{\mathbf{P}(t) \cdot (\mathbf{R-r})}{4 \pi \sigma \Vert \mathbf{R-r} \Vert^3} ~,
+\label{eq:LFPy:dipolepotential}
 \end{equation}
 where $\mathbf{R}$ denotes the measurement site and $\mathbf{r}$ the assumed dipole location. 
 For the sake of computing EEG surface potentials however, 
@@ -450,16 +451,25 @@ As discussed in more detail throughout \Fref{chap:EEG} different forward models 
 either relying on representing different tissues as a series of concentric shells with different conductivities for each main tissue (gray matter, cerebral spinal fluid, skull etc.) \cite{Nunez2006,Naess2017,Naess2020}, 
 or even more detailed head models based on anatomical reconstruction such as the New York Head model \cite{Huang2016}. 
 Without going into any mathematical detail here (more on that in \Fref{chap:EEG}), 
-these models generally takes the form of a linear combination
+these models generally can be written on the form of a linear combination
 \begin{equation}
 \phi(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
 \end{equation}
 where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is model dependent. 
+From the current dipole moment potential (\Fref{eq:LFPy:dipolepotential}), 
+the corresponding rows of $\mathbf{M}$ for each electrode site $\mathbf{R}_i$ can be computed as 
+\begin{equation}
+m_{i} = \frac{I_3 \cdot (\mathbf{R_i-r})}{4 \pi \sigma \Vert \mathbf{R_i-r} \Vert^3}~,
+\end{equation}
+where $I_3$ is the shape $3 \times 3$ identity matrix as above.
+The resulting shape of $\mathbf{M}$ is $M \times 3$. 
 
 As the extracellular potential remains linearly dependent on the current dipole moment $\mathbf{P}$ 
 which in turn is linearly dependent on the transmembrane currents, 
-one can with relative ease estimate a linear predictor from transmembrane currents by applying a similar trick as above: 
-
+one can with relative ease estimate a linear predictor of extracellular potentials from transmembrane currents via the current dipole moment by computing the matrices $\mathbf{M}$ and $\mathbf{F}$ and then estimate the final signal as 
+\begin{equation}
+\phi(\mathbf{R}, t) = \mathbf{M}\mathbf{F}\mathbf{I}_\mathrm{m}(t)~. 
+\end{equation}
 
 \ehnote{show code examples from LFPykit?}
 
