@@ -49,21 +49,21 @@ the spatial variation in membrane voltage across the entire morphology can be co
 transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).
 
 
-The NEURON simulation environment\footnote{\href{https://neuron.yale.edu}{https://neuron.yale.edu}} \cite{Hines1997} presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-,
+The NEURON simulation environment\footnote{\href{https://neuron.yale.edu}{https://neuron.yale.edu}} \cite**{Hines1997} presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-,
 linux- and unix-based operating systems including MacOS,
 and can be used with a GUI or in a programmatic fashion on laptops, desktop computers and in parallel on large-scale high-performance computing (HPC) facilities.
 NEURON is also utilized as a simulator backend for other higher-level software such as
-PyNN\footnote{\href{https://neuralensemble.org/PyNN/}{https://neuralensemble.org/PyNN/}} \cite{Davison2008},
-NetPyne\footnote{\href{http://www.netpyne.org}{http://www.netpyne.org}} \cite{Dura_Bernal_2019},
-BMTK\footnote{\href{https://alleninstitute.github.io/bmtk/}{https://alleninstitute.github.io/bmtk/}} \cite{Dai2020},
-LFPy\footnote{\href{https://lfpy.readthedocs.io}{https://lfpy.readthedocs.io}} \cite{Linden2014,Hagen2018} etc.
+PyNN\footnote{\href{https://neuralensemble.org/PyNN/}{https://neuralensemble.org/PyNN/}} \cite**{Davison2008},
+NetPyne\footnote{\href{http://www.netpyne.org}{http://www.netpyne.org}} \cite**{Dura_Bernal_2019},
+BMTK\footnote{\href{https://alleninstitute.github.io/bmtk/}{https://alleninstitute.github.io/bmtk/}} \cite**{Dai2020},
+LFPy\footnote{\href{https://lfpy.readthedocs.io}{https://lfpy.readthedocs.io}} \cite**{Linden2014,Hagen2018} etc.
 Alternatives to NEURON with partially overlapping feature sets have been developed in the past in form of
-MOOSE\footnote{\href{https://moose.ncbs.res.in}{https://moose.ncbs.res.in}} \cite{Bhalla2008} and
-GENESIS\footnote{\href{http://genesis-sim.org}{http://genesis-sim.org}} \cite{Bower1998},
+MOOSE\footnote{\href{https://moose.ncbs.res.in}{https://moose.ncbs.res.in}} \cite**{Bhalla2008} and
+GENESIS\footnote{\href{http://genesis-sim.org}{http://genesis-sim.org}} \cite**{Bower1998},
 while software tailored for point-like neuron models such as
-Brian\footnote{\href{https://briansimulator.org/}{https://briansimulator.org/}} \cite{Stimberg2019} recently received support for biophysically detailed MC neuron models.
+Brian\footnote{\href{https://briansimulator.org/}{https://briansimulator.org/}} \cite**{Stimberg2019} recently received support for biophysically detailed MC neuron models.
 Another effort receiving funding from the EU Human Brain Project,
-named Arbor\footnote{\href{https://arbor.readthedocs.io}{https://arbor.readthedocs.io}} \cite{Akar2019},
+named Arbor\footnote{\href{https://arbor.readthedocs.io}{https://arbor.readthedocs.io}} \cite**{Akar2019},
 aims to develop MC neuron simulation software from the ground up in order to fully exploit modern high-performance libraries and next generation hardware in the form of graphical processing units (GPUs) and massively parallel HPC facilities.
 
 
@@ -101,7 +101,7 @@ Its diameter is typically assumed to be constant,
 and the cylindrical compartment is a straight along its length axis.
 \ehnote{True for NEURON, but not for Arbor which adapts a FDM type scheme in 1D corresponding to electric compartments made up by series of conical frusta.}
 Note that it is possible to swap the central difference approximation
-by the forward and  backward difference approximation estimating axial currents for each half-compartment respectively as in \cite{Hagen2018},
+by the forward and  backward difference approximation estimating axial currents for each half-compartment respectively as in \cite**{Hagen2018},
 but we will not go into further detail here.
 
 We next outline how the membrane potential can be estimated at the end points of each compartment $x \in \{x_j-L_j/2, x_j+L_j/2\}$,
@@ -118,7 +118,7 @@ depending on which end(s) has no electric connections.
 (This step effectively utilize the forward/backward difference approximation to first derivatives but only to terminating compartments.
 If both ends terminate, the axial current will be zero as the voltage is implicitly assumed to be iso-potential along the compartment axis.)
 
-For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite{Hagen2018}
+For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite**{Hagen2018}
 
 \begin{equation}
 V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^N V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^N 1 / R_{j+n}}~,
@@ -158,7 +158,7 @@ but thankfully MC neuron modeling software such as NEURON and Arbor provides nat
 Dependent on the implementation in the neural simulation software,
 a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
 %
-The current state is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite{Hagen2018}).
+The current state is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite**{Hagen2018}).
 For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
 
 \begin{figure}[!ht]
@@ -305,7 +305,7 @@ w(\mathbf{r}_N, t)
 where $\mathbf{F}$ is a matrix with dimensions $(M, N)$ wherein each element $f_{ij}$ is the chosen forward solution mapping the contribution from each source to the corresponding measurement.
 For the sake of compactness, $w(\mathbf{r}_j, t)$ is here either represents the axial or transmembrane current of compartment $j$. 
 A simple linear forward model mapping transmembrane currents of an $N$-compartment model to extracellular potentials in $M$ locations would be the point-source formalism,
-which models neuronal sources \textit{and} measurement sites as infinitesimally small points a conductive medium.
+which models neuronal sources \textit{and} measurement sites as infinitesimally small points an infinite homogeneous isotropic and linear volume conductor.
 The point-source formula (\Fref{eq:VC:pointsource}) results in
 %
 \begin{equation}
@@ -362,7 +362,7 @@ z_j
 \end{bmatrix} ~.
 \end{equation}
 %
-Another example is computing the \textit{ground truth} current source density (CSD) \cite{Pettersen2008,Hagen2016,Hagen2017},
+Another example is computing the \textit{ground truth} current source density (CSD) \cite**{Pettersen2008,Hagen2016,Hagen2017},
 that is, assigning the contribution of different compartments' transmembrane current to $M$ different spatial domains $\Omega_i$ as
 %
 \begin{equation}
@@ -374,13 +374,13 @@ where $(\Delta s_{ij\in \Omega_i} / \Delta s_{ij}) \in [0, 1]$ denotes the fract
 $V_{\Omega_i}$ the volume of the spatial domain.
 The geometry of each volume is in principle arbitrary,
 however they are typically assumed to be cylindrical or cubic.
-Cylindrical volumes can be useful for computing the ground truth CSD alongside a laminar probe \cite{Pettersen2008,Hagen2016,Hagen2017},
+Cylindrical volumes can be useful for computing the ground truth CSD alongside a laminar probe \cite**{Pettersen2008,Hagen2016,Hagen2017},
 while the latter could be used to compute the ground truth CSD across evenly distributed voxels distributed in the full 3D space occupied by the neuronal sources.
 
 The formalism may also be adapted for higher-dimensional source elements, that is,
 the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context can be represented by a 3D tensor arrays with shape $(M, 3, N_t)$.
 To compute the magnetic field outside the neuron arising from axial currents one can
-either sum up the individual contributions using the relevant Biot-Savart law \cite{Blagoev2007,Hagen2018} as
+either sum up the individual contributions using the relevant Biot-Savart law \cite**{Blagoev2007,Hagen2018} as
 %
 \begin{equation}
 \mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^M \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
@@ -437,7 +437,7 @@ I_\mathrm{m}(\mathbf{r}_N, t)
 \end{bmatrix} ~, 
 \end{equation}
 which is equivalent to \Fref{eq:VC:dipole}. 
-As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$ the shape of the current dipole moment array will be $(3, n_t)$. 
+As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$ (the shape of the current dipole moment array will be $(3, n_t)$. 
 
 In the relatively simple case of an infinite homogeneous volume conductor the extracellular potential resulting from the current dipole moment is
 \begin{equation}
@@ -448,8 +448,8 @@ where $\mathbf{R}$ denotes the measurement site and $\mathbf{r}$ the assumed dip
 For the sake of computing EEG surface potentials however, 
 an infinite homogeneous volume conductor model is arguably a quite poor approximation to the different tissues of the head.  
 As discussed in more detail throughout \Fref{chap:EEG} different forward models for EEG-like potentials has been developed in the past, 
-either relying on representing different tissues as a series of concentric shells with different conductivities for each main tissue (gray matter, cerebral spinal fluid, skull etc.) \cite{Nunez2006,Naess2017,Naess2020}, 
-or even more detailed head models based on anatomical reconstruction such as the New York Head model \cite{Huang2016}. 
+either relying on representing different tissues as a series of concentric shells with different conductivities for each main tissue (gray matter, cerebral spinal fluid, skull etc.) \cite**{Nunez2006,Naess2017,Naess2020}, 
+or even more detailed head models based on anatomical reconstruction such as the New York Head model \cite**{Huang2016}. 
 Without going into any mathematical detail here (more on that in \Fref{chap:EEG}), 
 these models generally can be written on the form of a linear combination
 \begin{equation}
@@ -459,7 +459,7 @@ where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})
 From the current dipole moment potential (\Fref{eq:LFPy:dipolepotential}), 
 the corresponding rows of $\mathbf{M}$ for each electrode site $\mathbf{R}_i$ can be computed as 
 \begin{equation}
-m_{i} = \frac{I_3 \cdot (\mathbf{R_i-r})}{4 \pi \sigma \Vert \mathbf{R_i-r} \Vert^3}~,
+m_{i} = \frac{I_3 \cdot (\mathbf{R}_i-\mathbf{r})}{4 \pi \sigma \Vert \mathbf{R}_i-\mathbf{r} \Vert^3}~,
 \end{equation}
 where $I_3$ is the shape $3 \times 3$ identity matrix as above.
 The resulting shape of $\mathbf{M}$ is $M \times 3$. 
@@ -468,7 +468,7 @@ As the extracellular potential remains linearly dependent on the current dipole 
 which in turn is linearly dependent on the transmembrane currents, 
 one can with relative ease estimate a linear predictor of extracellular potentials from transmembrane currents via the current dipole moment by computing the matrices $\mathbf{M}$ and $\mathbf{F}$ and then estimate the final signal as 
 \begin{equation}
-\phi(\mathbf{R}, t) = \mathbf{M}\mathbf{F}\mathbf{I}_\mathrm{m}(t)~. 
+\phi(\mathbf{R}, t) = \mathbf{M}\mathbf{F}\mathbf{I}_\mathrm{m}(t)~.
 \end{equation}
 
 \ehnote{show code examples from LFPykit?}
@@ -484,6 +484,25 @@ one can with relative ease estimate a linear predictor of extracellular potentia
 Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)
 
 \ehnote{nytt:}
+Many biophysically detailed and phenomenological models of individual neurons and neuronal networks that have been developed in the past have incorporated spatial geometry of the neurons at various level of detail. 
+To represent and simulate the dynamics of such neuron models using computers the multicompartment cable formalism (\Fref{chap:Neuron}) remains a common choice. 
+For the purpose of predicting extracellular electric or magnetic measures of neural activity, 
+the multicompartment formalism (or variants thereof) is \emph{a priori} required in order to predict the spatial distribution of transmembrane or axial currents required for the different forward models derived using volume conductor theory (\Fref{chap:VC}). 
+
+Biophysically detailed multicompartment neuron models (and recurrently connected networks thereof) are however computationally costly due to the large number of associated state variables that must be predicted, 
+resulting in long simulation times on typical hardware. 
+For recurrent neuronal network simulations with more than a few hundred neurons, distributed high-performance computing (HPC) facilities are generally required, 
+unless the neuronal simulation software may utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.  
+
+As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes') and/or voltage traces, 
+many (if not most) studies aiming to explain neuronal population dynamics at the level of spikes and somatic voltages have deliberately chosen much-simpler mathematical abstractions of the individual neurons. 
+As an umbrella term such simple neuron models are often referred to as `point' neuron models if they can be considered as a singular compartment,
+that is, 
+the neuron model has no description of how the membrane potential vary throughout the dendrites and axon which may be present in actual neurons. 
+Point neuron models as a consequence also then carries no spatial information about neuronal geometry.
+
+
+
 
 \section{\red{EH: Neurodynamics using firing-rate models}}
 \label{sec:Schemes:KernelLFPy}
@@ -504,7 +523,7 @@ Ephaptic effects refers to the phenomenon where the extracellular potential affe
 
 Most of these studies have been based on some simplified approximations as to how evoked fields from one neuron affects other neurons, and less focus has been put on how the presence of ephaptic effects will affect the extracellular potential itself. Rigorous modeling of this, requires that the intra- and extracellular dynamics are modeled simultaneously on a unified framework based on VC theory. Such a framework exists \cite**{Krassowska1994,Agudelo-Toro2013,Tveito 2017}, and was in a recent publication referred to as the extracellular-membrane-intracellular (EMI) framework \cite**{Tveito2017}.
 
-We here only describe very briefly the essence of the EMI framework. It is based on (Ohmic) current conservation in the intra- and extracelluar spaces, so that:
+We here only describe very briefly the essence of the EMI framework. It is based on (Ohmic) current conservation in the intra- and extracellular spaces, so that:
 \begin{equation}
 \nabla \cdot \sigma_r \nabla \phi_r = 0,
 \label{eq:VC:EMI}
