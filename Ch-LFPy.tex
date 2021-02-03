@@ -494,12 +494,17 @@ resulting in long simulation times on typical hardware.
 For recurrent neuronal network simulations with more than a few hundred neurons, distributed high-performance computing (HPC) facilities are generally required, 
 unless the neuronal simulation software may utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.  
 
-As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes') and/or voltage traces, 
+As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes' - see \Fref{chap:Spikes}) and/or voltage traces, 
 many (if not most) studies aiming to explain neuronal population dynamics at the level of spikes and somatic voltages have deliberately chosen much-simpler mathematical abstractions of the individual neurons. 
 As an umbrella term such simple neuron models are often referred to as `point' neuron models if they can be considered as a singular compartment,
 that is, 
 the neuron model has no description of how the membrane potential vary throughout the dendrites and axon which may be present in actual neurons. 
 Point neuron models as a consequence also then carries no spatial information about neuronal geometry.
+The individual point neurons may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar, 
+which may facilitate connection routines that depend on location and distance between the neurons. 
+
+Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model \cite**{Lapicque1907,Brunel_2007}.
+We will here point out that describing the somatic voltage is not a strict requirement for point neurons in the present context - they may very well be some statistical model for spike time generation as function of presynaptic activity or some other stimuli. 
 
 
 
