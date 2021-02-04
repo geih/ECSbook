@@ -480,8 +480,8 @@ one can with relative ease estimate a linear predictor of extracellular potentia
 \label{sec:Schemes:HybridLFPy}
 \index{Point neuron model}
 
-\ehnote{gammalt:}
-Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)
+%\ehnote{gammalt:}
+%%\sout{Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)}
 
 \ehnote{nytt:}
 Many biophysically detailed and phenomenological models of individual neurons and neuronal networks that have been developed in the past have incorporated spatial geometry of the neurons at various level of detail. 
@@ -491,7 +491,7 @@ the multicompartment formalism (or variants thereof) is \emph{a priori} required
 
 Biophysically detailed multicompartment neuron models (and recurrently connected networks thereof) are however computationally costly due to the large number of associated state variables that must be predicted, 
 resulting in long simulation times on typical hardware. 
-For recurrent neuronal network simulations with more than a few hundred neurons, distributed high-performance computing (HPC) facilities are generally required, 
+For recurrent neuronal network simulations with more than a few hundred biophysically detailed neurons, distributed high-performance computing (HPC) facilities are generally required, 
 unless the neuronal simulation software may utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.  
 
 As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes' - see \Fref{chap:Spikes}) and/or voltage traces, 
@@ -500,7 +500,7 @@ As an umbrella term such simple neuron models are often referred to as `point' n
 that is, 
 the neuron model has no description of how the membrane potential vary throughout the dendrites and axon which may be present in actual neurons. 
 Point neuron models as a consequence also then carries no spatial information about neuronal geometry.
-The individual point neurons may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar, 
+The individual point neurons (or \emph{point processes}) may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar, 
 which may facilitate connection routines that depend on location and distance between the neurons. 
 
 Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model \cite**{Lapicque1907,Brunel_2007}.
@@ -520,7 +520,25 @@ Physics-based computational schemes for predicting signals such as the local fie
 \subsection{The hybrid scheme}
 \label{chap:LFPy:hybrid}
 
+As constraining activity in large scale multicompartment neuron network models are inherently difficult due to the large number of parameters and huge computational demands, 
+point neurons (or other simplified neuron representations) are more-often used in simulation studies of network activity. 
+But for forward-model predictions, 
+at least a two-compartment neuron model is \textit{a priori} required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields. 
 
+One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was introduced by 
+\cite**{Hagen2016}, 
+referred to as a hybrid scheme. 
+The scheme is hybrid in the sense that the common-place scheme of using multi-compartment neuron models in conjunction with electrostatic forward models is used for signal prediction, 
+while it assumes that simulations of the actual network activity can be done independently using neuron models with arbitrary levels of detail, including point processes (LIF neurons etc.). 
+We will next go through the number of assumptions underlying this scheme. 
+
+One main assumption is that point-neuron network models can accurately capture observations present in experimental data gathered \textit{in vivo}, 
+including irregular firing patterns
+\ehnote{(Softky and Koch 1993; van Vreeswijk and Sompolinsky 1996; Amit and Brunel 1997; Shadlen and Newsome 1998), membrane-potential fluctuations (Destexhe and Pare 1999), asynchronous firing (Ecker et al. 2010; Renart et al. 2010; Ostojic 2014), correlations in neural activity (Gentet et al. 2010; Okun and Lampl 2008; Helias et al. 2013), self-sustained activity (Ohbayashi et al. 2003; Kriener et al. 2014), and realistic firing rates across laminar cortical populations (Potjans and Diesmann 2014).}
+Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the original model (see e.g., \cite**{Roessert2016,Billeh_2020}). 
+
+
+Another main assumption underlying the hybrid scheme is 
 
 
 \section{\red{EH: Neurodynamics using firing-rate models}}
