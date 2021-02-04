@@ -537,12 +537,31 @@ We will next go through the number of assumptions and methodology underlying thi
 One main assumption is that point-neuron network models can accurately capture observations present in experimental data gathered \textit{in vivo}, 
 including irregular firing patterns
 \ehnote{(Softky and Koch 1993; van Vreeswijk and Sompolinsky 1996; Amit and Brunel 1997; Shadlen and Newsome 1998), membrane-potential fluctuations (Destexhe and Pare 1999), asynchronous firing (Ecker et al. 2010; Renart et al. 2010; Ostojic 2014), correlations in neural activity (Gentet et al. 2010; Okun and Lampl 2008; Helias et al. 2013), self-sustained activity (Ohbayashi et al. 2003; Kriener et al. 2014), and realistic firing rates across laminar cortical populations (Potjans and Diesmann 2014).}
-Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the original model (see e.g., \cite**{Roessert2016, Billeh_2020}). 
+Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the original model (see e.g., \cite**{Roessert2016,Billeh_2020}). 
 In the case of \cite**{Roessert2016} the effect of dendritic filtering on synaptic input currents is captured by computing an equivalent filter for each possible synapse location and type using a Green's function formalism \cite**{Wybo_2013}. 
 The point neurons are modeled using a generalized integrate-and-fire (GIF) formalism, 
 and the linear filters applied to the synaptic currents result in  well-preserved post-synaptic potentials in the point neuron. \ehnote{perhaps I'll leave this last point out.}  
 
-Another main assumption underlying the hybrid scheme is 
+Another main assumption underlying the hybrid scheme is that spatial information, that is, neuronal geometry and locations of synapses can be `restored' \ehnote{noen bedre ord?} for the purpose of computing extracellular signals, 
+based on available anatomical knowledge. 
+This assumption entails that a point-neuron network population representing for instance a set of layer 5 pyramidal cells, 
+will be represented by a corresponding population of geometrically detailed multicompartment neuron models, 
+placed at a cortical depth and density in accordance with the overall network size and available anatomical constraints. 
+Similarly, incoming synaptic connections onto the same point-neuron population from each presynaptic population, 
+for instance layer 4 inhibitory interneurons, 
+should be positioned onto the layer 5 pyramidal cell geometries according to rules derived from available data on such connections, 
+while also preserving the typical number of incoming synapses (aka synaptic in-degree). 
+
+In the original application of the hybrid scheme \cite**{Hagen2016} to a point-neuron network model representing a generic cortical microcircuit \cite**{Potjans2014}, 
+a number of parameters of the network model were inherited by the  forward-modeling step. 
+In order to preserve synaptic currents, 
+the same current-based synapse type with an exponentially decaying temporal kernel were used \ehnote{kryssref likning}, 
+with the same maximum current amplitude, 
+and with activation delays drawn from the same delay distribution as was used in the network. 
+
+The reconstructed morphologies utilized purely passive compartments throughout, 
+while active ion channel mechanisms may optionally be present.  
+
 
 
 \section{\red{EH: Neurodynamics using firing-rate models}}
