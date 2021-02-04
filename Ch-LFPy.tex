@@ -506,6 +506,20 @@ which may facilitate connection routines that depend on location and distance be
 Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model \cite**{Lapicque1907,Brunel_2007}.
 We will here point out that describing the somatic voltage is not a strict requirement for point neurons in the present context - they may very well be some statistical model for spike time generation as function of presynaptic activity or some other stimuli. 
 
+Their mathematical simplicity lends point neurons to be implemented and solved very efficiently in comparison to biophysically detailed multicompartment neuron models. 
+As a consequence, dynamics of recurrently connected networks of spiking point neurons can be studied at a much grander scale and pace than similarly sized networks of multicompartment neuron models. 
+As typical point neurons also have very few intrinsic parameters compared to any multicompartment neuron model, 
+this has also allowed for separating effects of network connectivity from the cellular dynamics 
+explaining observed phenomena such as asynchronous or synchronous, regular and irregular spiking activity also using rigorous mathematical analysis, see e.g., \cite**{Brunel2000}). 
+
+Linking activity of point neurons and point neuron network models to electric or magnetic extracellular measures of activity however poses a problem. 
+One could attempt to extract equivalent transmembrane currents (synaptic, ionic, capacitive etc.) and quickly come to the conclusion that all currents \emph{must} sum to zero in the point(s) due to charge conservation. 
+As such there can be no electric or magnetic signals arising from point neurons or networks thereof. 
+Physics-based computational schemes for predicting signals such as the local field potential (LFP) is therefore required. 
+
+\subsection{The hybrid scheme}
+\label{chap:LFPy:hybrid}
+
 
 
 
