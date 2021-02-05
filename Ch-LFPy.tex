@@ -602,7 +602,7 @@ Let us first define some properties of the biophysically detailed model:
 \item Let $X \in \{ \ldots \}$ and $Y \subseteq X$ denote pre- and postsynaptic population, respectively. Each population corresponds to separate classes of neurons (derived from anatomy, electrical properties, gene expression etc.).
 \item Let $N_X$ and $N_Y$ denote the sizes of population $X$ and $Ys$.
 \item Let $i \in \{ 1, \ldots , N_X \}$ and $j \in \{ 1, \ldots , N_Y \}$ denote pre- and postsynaptic neuron index, respectively.
-\item Let $\mathbf{r}_i \in \Omega_X$ denote the discrete somatic location of neuron $i$ in a spatial domain $\Omega_X$
+\item Let $\mathbf{r}_i \in \Omega_X$ denote the discrete somatic location of neuron $i$ in a volumetric domain $\Omega_X$
 \item Let $K_{YX}$ denote the total number of synapses between presynaptic population $X$ and postsynaptic population $Y$. 
 Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}. 
 \item Let layer or region (e.g., cortical layer) be denoted by $L$.
@@ -611,9 +611,21 @@ Assuming a random connectivity with binomial in- and out-degree distributions th
 where $\overline{g}_{\mathrm{syn}YX}$ is the maximum synaptic conductance and $f(t) \in [0, 1]$ is one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}. 
 $V(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}Y}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory). 
 For simplicity we will assume that conductance magnitude is independent of $L$. 
-\item The conduction delay from presynaptic action potential generation time  to activation time of the synapse $d_{YX}$ be constant (i.e., independent of cell location and geometry). 
+\item The conduction delay from presynaptic action potential generation time  to activation time of the synapse $d_{YX}$ be constant (i.e., independent of cell location and geometry for simplicity). 
+\item Each postsynaptic neuron $j \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle j \rangle}(t)$ or axial currents $\mathcal{I}_\mathrm{a}^{\langle j \rangle}(t)$ can be computed. 
+Here $X$ and $Y$ may be used interchangeable, however, 
+presynaptic populations may represent point processes, external stimuli and similar, which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
+\item Extracellular signal contributions in different spatial locations may be computed and summed up as 
+$\sum_Y \sum_{j=1}^{N_Y} \mathbf{F}^{\langle j \rangle} \mathbf{I}_\mathrm{m}^{\langle j \rangle}$ and similar for axial currents. 
+$\mathbf{F}^{\langle j \rangle}$ here denotes a linear mapping of transmembrane currents of cell $j$ to a linearly dependent signal.  
+\item The set of spike times $\{ t_\mathrm{s}^{\langle i \rangle} \}$ of each of each neuron $i \in X$ is recorded throughout the entire simulation interval $[0, T_\mathrm{sim} \rangle$. 
+We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with `flat' spiking statistics (e.g., Poisson point process) into the recurrently connected network. 
+\item We may store the directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic population. 
+This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full graph from the model specification (at least statistically). 
 \end{enumerate}
-  
+
+
+
 
 
 \section{\red{EH: Neurodynamics using firing-rate models}}
