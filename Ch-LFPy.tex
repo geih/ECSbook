@@ -476,12 +476,12 @@ one can with relative ease estimate a linear predictor of extracellular potentia
 
 
 
-\section{\red{TVN/EH: Neurodynamics from point-neuron models}}
+\section{\red{EH: Forward-model predictions from point-neuron models}}
 \label{sec:Schemes:HybridLFPy}
 \index{Point neuron model}
 
-\ehnote{gammalt:}
-Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)
+%\ehnote{gammalt:}
+%%\sout{Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)}
 
 \ehnote{nytt:}
 Many biophysically detailed and phenomenological models of individual neurons and neuronal networks that have been developed in the past have incorporated spatial geometry of the neurons at various level of detail. 
@@ -491,7 +491,7 @@ the multicompartment formalism (or variants thereof) is \emph{a priori} required
 
 Biophysically detailed multicompartment neuron models (and recurrently connected networks thereof) are however computationally costly due to the large number of associated state variables that must be predicted, 
 resulting in long simulation times on typical hardware. 
-For recurrent neuronal network simulations with more than a few hundred neurons, distributed high-performance computing (HPC) facilities are generally required, 
+For recurrent neuronal network simulations with more than a few hundred biophysically detailed neurons, distributed high-performance computing (HPC) facilities are generally required, 
 unless the neuronal simulation software may utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.  
 
 As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes' - see \Fref{chap:Spikes}) and/or voltage traces, 
@@ -500,7 +500,7 @@ As an umbrella term such simple neuron models are often referred to as `point' n
 that is, 
 the neuron model has no description of how the membrane potential vary throughout the dendrites and axon which may be present in actual neurons. 
 Point neuron models as a consequence also then carries no spatial information about neuronal geometry.
-The individual point neurons may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar, 
+The individual point neurons (or \emph{point processes}) may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar, 
 which may facilitate connection routines that depend on location and distance between the neurons. 
 
 Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model \cite**{Lapicque1907,Brunel_2007}.
@@ -519,6 +519,111 @@ Physics-based computational schemes for predicting signals such as the local fie
 
 \subsection{The hybrid scheme}
 \label{chap:LFPy:hybrid}
+
+As constraining activity in large scale multicompartment neuron network models are inherently difficult due to the large number of parameters and huge computational demands, 
+point neurons (or other simplified neuron representations) are more-often used in simulation studies of network activity. 
+But for forward-model predictions, 
+at least a two-compartment neuron model is \textit{a priori} required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields. 
+
+One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was introduced by 
+\cite**{Hagen2016}, 
+referred to as a hybrid scheme. 
+The scheme is hybrid in the sense that the common-place scheme of using multi-compartment neuron models in conjunction with electrostatic forward models is used for signal prediction, 
+while it assumes that simulations of the actual network activity can be done independently using neuron models with arbitrary levels of detail, including point processes (LIF neurons etc.). 
+In a latter step, 
+generated spike times are used for activation times of synapses distributed onto multicompartment neuron models which allows using the standard computational scheme for predicting extracellular signals. 
+We will next go through the number of assumptions and methodology underlying this scheme in detail. 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\columnwidth]{Figures/Ch-LFPy/hybridmodel}
+\caption{\ehnote{Hagen 2016 caption:} 
+Overview of the hybrid LFP modeling scheme for a cortical microcircuit model. 
+(A) Sketch of the point-neuron network representing a 
+\SI{1}{\milli\metre} patch of early sensory cortex (adapted from Potjans2014). 
+The network consists of 8 populations of LIF neurons, representing excitatory (E) and inhibitory neurons (I) in cortical layers 2/3, 4, 5, and 6. 
+External input is provided by a population of TC neurons and cortico-cortical afferents. 
+The color coding of neuron populations is used consistently throughout this paper. 
+Red arrows: excitatory connections. Blue arrows: inhibitory connections. 
+See Tables 1-2, 5-6 for details on the network model. 
+(B) Spontaneous (t < \SI{900}{\milli\second}) and stimulus-evoked spiking activity (synchronous firing of TC neurons at time $t = $\SI{900}{\milli\second}, denoted by thin vertical line) generated by the point-neuron network model shown in panel A, sampled from all neurons in each population. Each dot represents the spike time of a particular neuron. 
+(C) Populations of LFP-generating multicompartment model neurons with reconstructed, layer- and cell-type specific morphologies. 
+Cells are distributed within a cylinder spanning the cortex. Layer boundaries are marked by horizontal black lines (at depths $z$ relative to cortex surface $z = 0$). Only one representative neuron for each population is shown 
+(see Fig. 4 for a detailed overview of cell types and morphologies). 
+Sketch of a laminar recording electrode (gray) with 16 contacts separated by \SI{100}{\micro\metre} (black dots). 
+(D) Depth-resolved LFP traces predicted by the model (cf. Tables 3 and 4). 
+Note that channel 1 is at the pial surface, so that channel 2 corresponds to a cortical depth of \SI{100}{\micro\metre} and so forth.
+}
+\label{fig:LFPy:hybridmodel}
+\end{center}
+\end{figure}
+
+
+
+One main assumption is that point-neuron network models can accurately capture observations present in experimental data gathered \textit{in vivo}, 
+including irregular firing patterns
+\ehnote{(Softky and Koch 1993; van Vreeswijk and Sompolinsky 1996; Amit and Brunel 1997; Shadlen and Newsome 1998), membrane-potential fluctuations (Destexhe and Pare 1999), asynchronous firing (Ecker et al. 2010; Renart et al. 2010; Ostojic 2014), correlations in neural activity (Gentet et al. 2010; Okun and Lampl 2008; Helias et al. 2013), self-sustained activity (Ohbayashi et al. 2003; Kriener et al. 2014), and realistic firing rates across laminar cortical populations (Potjans and Diesmann 2014).}
+Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the original model (see e.g., \cite**{Roessert2016,Billeh_2020}). 
+In the case of \cite**{Roessert2016} the effect of dendritic filtering on synaptic input currents is captured by computing an equivalent filter for each possible synapse location and type using a Green's function formalism \cite**{Wybo_2013}. 
+The point neurons are modeled using a generalized integrate-and-fire (GIF) formalism, 
+and the linear filters applied to the synaptic currents result in  well-preserved post-synaptic potentials in the point neuron. \ehnote{perhaps I'll leave this last point out.}  
+
+Another main assumption underlying the hybrid scheme is that spatial information, that is, neuronal geometry and locations of synapses can be `restored' \ehnote{noen bedre ord?} for the purpose of computing extracellular signals, 
+based on available anatomical knowledge. 
+This assumption entails that a point-neuron network population representing for instance a set of layer 5 pyramidal cells, 
+will be represented by a corresponding population of geometrically detailed multicompartment neuron models, 
+placed at a cortical depth and density in accordance with the overall network size and available anatomical constraints. 
+Similarly, incoming synaptic connections onto the same point-neuron population from each presynaptic population, 
+for instance layer 4 inhibitory interneurons, 
+should be positioned onto the layer 5 pyramidal cell geometries according to rules derived from available data on such connections, 
+while also preserving the typical number of incoming synapses (aka synaptic in-degree). 
+
+In the original application of the hybrid scheme \cite**{Hagen2016} to a point-neuron network model representing a generic cortical microcircuit \cite**{Potjans2014}, 
+a number of parameters of the network model were inherited by the  forward-modeling step. 
+In order to preserve synaptic currents, 
+the same current-based synapse type (see \Fref{sec:Ch-Neuron:current-based-syn}) with an exponentially decaying temporal kernel were used, 
+with the same average maximum current amplitude, 
+and with activation delays drawn from the same conduction delay distribution as was used in the network. 
+Synapse sites on the postsynaptic morphologies were derived from a connectivity dataset resolving numbers of synapses per layer between 16 different excitatory and inhibitory neuron types spanning layers 2/3, 4, 5 and 6.
+The total numbers of synapses per connection (from each presynaptic to postsynaptic population) were preserved. 
+Furthermore, membrane time constants of the reconstructed morphologies which utilized purely passive compartments throughout were set similar to those of the point neurons. 
+\ehnote{kunne lagt til noe om ekspandering av enkelte punktnevronpopulasjoner til forskjellige celletyper som vi gjorde den gang.} 
+
+One key feature of the this hybrid scheme application as devised by \cite**{Hagen2016} was an assumed-to-be \emph{linear} spike-LFP relationship, 
+that is, 
+one spike generated by a network subpopulation would result in a fixed contribution to the extracellular signal resulting from synaptic and transmembrane currents on postsynaptic multicompartment neurons.  
+So how can we make an argument about the validity of said scheme, 
+e.g., in the presence of \emph{non-linear} synaptic and ion-specific channels?
+Conceptually, it is perhaps best to first consider a recurrently connected network of biophysically detailed neurons, 
+and that the aforementioned point-neuron network model represents something of an idealized scenario obtained by reducing biophysical detail in a systematic manner.
+
+Let us first define some properties of the biophysically detailed model:
+\begin{enumerate}
+\item Let $X \in \{ \ldots \}$ and $Y \subseteq X$ denote pre- and postsynaptic population, respectively. Each population corresponds to separate classes of neurons (derived from anatomy, electrical properties, gene expression etc.).
+\item Let $N_X$ and $N_Y$ denote the sizes of population $X$ and $Ys$.
+\item Let $i \in \{ 1, \ldots , N_X \}$ and $j \in \{ 1, \ldots , N_Y \}$ denote pre- and postsynaptic neuron index, respectively.
+\item Let $\mathbf{r}_i \in \Omega_X$ denote the discrete somatic location of neuron $i$ in a volumetric domain $\Omega_X$
+\item Let $K_{YX}$ denote the total number of synapses between presynaptic population $X$ and postsynaptic population $Y$. 
+Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}. 
+\item Let layer or region (e.g., cortical layer) be denoted by $L$.
+\item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} := 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
+\item Synaptic currents for each connection are given as $i_{\mathrm{syn}YX}(t)=\overline{g}_{\mathrm{syn}YX} f(t)(V(t)-E_{\mathrm{syn}Y}$
+where $\overline{g}_{\mathrm{syn}YX}$ is the maximum synaptic conductance and $f(t) \in [0, 1]$ is one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}. 
+$V(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}Y}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory). 
+For simplicity we will assume that conductance magnitude is independent of $L$. 
+\item The conduction delay from presynaptic action potential generation time  to activation time of the synapse $d_{YX}$ be constant (i.e., independent of cell location and geometry for simplicity). 
+\item Each postsynaptic neuron $j \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle j \rangle}(t)$ or axial currents $\mathcal{I}_\mathrm{a}^{\langle j \rangle}(t)$ can be computed. 
+Here $X$ and $Y$ may be used interchangeable, however, 
+presynaptic populations may represent point processes, external stimuli and similar, which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
+\item Extracellular signal contributions in different spatial locations may be computed and summed up as 
+$\sum_Y \sum_{j=1}^{N_Y} \mathbf{F}^{\langle j \rangle} \mathbf{I}_\mathrm{m}^{\langle j \rangle}$ and similar for axial currents. 
+$\mathbf{F}^{\langle j \rangle}$ here denotes a linear mapping of transmembrane currents of cell $j$ to a linearly dependent signal.  
+\item The set of spike times $\{ t_\mathrm{s}^{\langle i \rangle} \}$ of each of each neuron $i \in X$ is recorded throughout the entire simulation interval $[0, T_\mathrm{sim} \rangle$. 
+We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with `flat' spiking statistics (e.g., Poisson point process) into the recurrently connected network. 
+\item We may store the directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic population. 
+This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full graph from the model specification (at least statistically). 
+\end{enumerate}
+
 
 
 
