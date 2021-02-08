@@ -600,18 +600,19 @@ and that the aforementioned point-neuron network model represents something of a
 Let us first define some properties of the biophysically detailed model:
 \begin{enumerate}
 \item Let $X \in \{ \ldots \}$ and $Y \subseteq X$ denote pre- and postsynaptic population, respectively. Each population corresponds to separate classes of neurons (derived from anatomy, electrical properties, gene expression etc.).
-\item Let $N_X$ and $N_Y$ denote the sizes of population $X$ and $Ys$.
+\item Let $N_X$ and $N_Y$ denote the sizes of population $X$ and $Y$.
 \item Let $i \in \{ 1, \ldots , N_X \}$ and $j \in \{ 1, \ldots , N_Y \}$ denote pre- and postsynaptic neuron index, respectively.
 \item Let $\mathbf{r}_i \in \Omega_X$ denote the discrete somatic location of neuron $i$ in a volumetric domain $\Omega_X$
 \item Let $K_{YX}$ denote the total number of synapses between presynaptic population $X$ and postsynaptic population $Y$. 
 Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}. 
 \item Let layer or region (e.g., cortical layer) be denoted by $L$.
 \item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} := 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
-\item Synaptic currents for each connection are given as $i_{\mathrm{syn}YX}(t)=\overline{g}_{\mathrm{syn}YX} f(t)(V(t)-E_{\mathrm{syn}Y}$
+\item Synaptic currents for each connection are given as $i_{\mathrm{syn}YX}(t)=\overline{g}_{\mathrm{syn}YX} f(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}Y}$
 where $\overline{g}_{\mathrm{syn}YX}$ is the maximum synaptic conductance and $f(t) \in [0, 1]$ is one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}. 
-$V(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}Y}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory). 
+$V_\mathrm{m}(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}Y}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory). 
 For simplicity we will assume that conductance magnitude is independent of $L$. 
-\item The conduction delay from presynaptic action potential generation time  to activation time of the synapse $d_{YX}$ be constant (i.e., independent of cell location and geometry for simplicity). 
+We will also assume that connection weights $\overline{g}_{YX}$ are static, i.e., there are no synaptic plasticity rules in place. 
+\item The conduction delay from presynaptic action potential generation time  to activation time of the synapse $d_{YX}$ is constant (i.e., independent of cell location and geometry for simplicity) and positive. 
 \item Each postsynaptic neuron $j \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle j \rangle}(t)$ or axial currents $\mathcal{I}_\mathrm{a}^{\langle j \rangle}(t)$ can be computed. 
 Here $X$ and $Y$ may be used interchangeable, however, 
 presynaptic populations may represent point processes, external stimuli and similar, which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
@@ -620,8 +621,9 @@ $\sum_Y \sum_{j=1}^{N_Y} \mathbf{F}^{\langle j \rangle} \mathbf{I}_\mathrm{m}^{\
 $\mathbf{F}^{\langle j \rangle}$ here denotes a linear mapping of transmembrane currents of cell $j$ to a linearly dependent signal.  
 \item The set of spike times $\{ t_\mathrm{s}^{\langle i \rangle} \}$ of each of each neuron $i \in X$ is recorded throughout the entire simulation interval $[0, T_\mathrm{sim} \rangle$. 
 We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with `flat' spiking statistics (e.g., Poisson point process) into the recurrently connected network. 
-\item We may store the directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic populations. 
+\item We may store the weighted, directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic populations. 
 This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full connectivity graph procedurally (at least statistically). 
+Graph weights represent maximum synaptic conductances. 
 \end{enumerate}
 
 At this point one could destroy every connection of the recurrently connected network, 
@@ -631,7 +633,78 @@ and otherwise keep neuron and synaptic type, parameterization and locations the 
 This would result in exactly the same changes in membrane voltages and consequently the same spatiotemporal distributions of transmembrane currents as in the recurrently connected case. 
 However, what did we gain through these steps?
 
+\begin{enumerate}
+\item HPC resources may have been required for simulating neural dynamics in the recurrently connected network in parallel in the first place, 
+but one may now utilize a trivial parallelization scheme in order to compute extracellular signals as contributions of each cell is independent of the others. 
+One could also do single-cell simulations serially. 
+\item Full disassociation of simulations of neuronal network dynamics and simulations of extracellular signals. 
+\item Little was gained in terms of overall computational cost -- the total number of state variables (for active ion channels etc.) is approximately the same. 
+The computational cost of transmitting times of spike events across the parallel network can be assumed to be minuscular compared to the rest.
+\end{enumerate}
 
+For the purpose of predicting extracellular signals, 
+let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents. 
+We may also relax the requirement that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials):
+\begin{enumerate}
+\item Approximate conductance-based synapses by equivalent current-based synapses:
+\begin{eqnarray}
+i_\mathrm{syn}(t) 
+	&=& \overline{g}_\mathrm{syn}f(t)\left(V_\mathrm{m}(t) - E_\mathrm{syn}\right) \\
+	&\approx& \overline{g}_\mathrm{syn}f(t)\left(\langle V_\mathrm{m}(t) \rangle - E_\mathrm{syn}\right) \\
+	&=& \overline{i}_\mathrm{syn}f(t)~, 
+\end{eqnarray}
+where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged postsynaptic potential.
+\item Remove active ion channels if their net contributions to the total transmembrane currents are small.
+\item Active ion channel currents on the form 
+\begin{equation}
+I_\mathrm{w}(t) = \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~, \label{eq:Ch-LFPy:active}
+\end{equation}
+may be approximated by a linearly dependent current \cite**{Remme_2010,Ness2016}. 
+Here, 
+$\overline{g}_\mathrm{w}$ is the maximum conductance,
+$E_\mathrm{w}$ its reversal potential and 
+$\omega(t)$ the gating variable which dynamics are given in terms of an activation time function $\tau_\mathrm{w}(V)$ and activation function $\omega_\infty(V)$ as
+\begin{equation}
+\tau_\mathrm{w}(V_\mathrm{m}(t)) \frac{d\omega(t)}{dt} = \omega_\infty(V_\mathrm{m}(t)) - \omega(t)~.
+\label{eq:Ch-LFPy:domega_dt}
+\end{equation}
+One can obtain the so-called \emph{quasi-active approximation} by linearizing each voltage dependent term around the steady state value 
+$\langle V_\mathrm{m}(t) \rangle$. 
+\Fref{eq:Ch-LFPy:active} may then be rewritten as the linear function 
+\begin{eqnarray}
+I_\mathrm{w}(t) \approx \overline{g}_\mathrm{w} \hat{\omega}(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~\text{, where} \\
+\tau_\mathrm{w}(\langle V_\mathrm{m}(t) \rangle)  \frac{d\hat{\omega}(t)}{dt} = \omega_\infty( \langle V_\mathrm{m}(t) \rangle ) - \hat{\omega}(t)
+\end{eqnarray}
+This effectively turns the equivalent circuit of each compartment into an RLC type circuit. 
+\ehnote{For `compactness' kan vi beholde versjonen over - ikke fruktelig interressant aa differensiere mellom regenerative eller restorative stroemmer i denne konteksten? Har jeg forstaatt ting rett, vil ogsaa forskjellige bidrag summere lineaert - hvordan ser dette ut?}
+
+Alternatively, one may introduce the equivalent gating variable
+\begin{equation}
+m(t) := \left( \omega(t) - \omega_\infty ( \langle V_\mathrm{m}(t) \rangle ) \right) / \frac{d\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{dV_\mathrm{m}}
+\end{equation}
+and rewrite the dynamics of the compartment as
+\begin{eqnarray}
+c_\mathrm{m}\frac{dV_\mathrm{m}(t)}{dt} &=& 
+	- g_\mathrm{L} \left( \gamma_\mathrm{R}  
+						  \left( V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle \right)
+						  + \mu m(t)  \right)
+	+ I_\mathrm{axial} + \cdots ~\text{, where} \\
+\gamma_\mathrm{R} &:=& 1 + \overline{g}_\mathrm{w} \omega_\infty(\langle V_\mathrm{m}(t) \rangle) / g_\mathrm{L} ~\text{, and} \\
+\mu &:=& \frac{\overline{g}_\mathrm{w} ( \langle V_\mathrm{m}(t) \rangle - E_\mathrm{w} )}{g_\mathrm{L}} \frac{d\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{dV_\mathrm{m}}~.
+\end{eqnarray}
+Here, $\gamma_\mathrm{R}$ denotes the ratio between the total and leak conductance 
+while $\mu$ characterize whether the quasi-active current approximation act as positive $(\mu < 0)$ or negative $(\mu > 0)$ feedback.  
+The linear dynamics of the equivalent gating variable is governed by
+\begin{equation}
+\tau_\mathrm{w} (\langle V_\mathrm{m}(t) \rangle) \frac{dm(t)}{dt} = V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle - m(t)~. 
+\end{equation}
+
+\item Further reduction of number of state variables can be achieved by reducing the number of compartments per postsynaptic cell. 
+This may reduce the accuracy of membrane voltage predictions, but more so at higher frequencies. 
+Extracellular signals like the LFP, EEG and MEG however carry more power at lower frequencies and may be less affected. 
+\item Further reduction of number of state variables describing synapses can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment. 
+It's activation times are defined as the concatenation of $\{ t_\mathrm{s}^{\langle i \rangle} + d_{YX} \}$ for the subset $i \subset X$ being presynaptic to neuron $j \subset Y$ at the original synapse site(s) located on the compartment.  
+\end{enumerate}
 
 
 \section{\red{EH: Neurodynamics using firing-rate models}}
