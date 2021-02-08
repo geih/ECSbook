@@ -657,7 +657,7 @@ where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged po
 \item Remove active ion channels if their net contributions to the total transmembrane currents are small.
 \item Active ion channel currents on the form 
 \begin{equation}
-I_\mathrm{w}(t) = \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~, \label{eq:Ch-LFPy:active}
+I_\mathrm{w}(t) = - \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~, \label{eq:Ch-LFPy:active}
 \end{equation}
 may be approximated by a linearly dependent current \cite**{Remme_2010,Ness2016}. 
 Here, 
@@ -672,7 +672,7 @@ One can obtain the so-called \emph{quasi-active approximation} by linearizing ea
 $\langle V_\mathrm{m}(t) \rangle$. 
 \Fref{eq:Ch-LFPy:active} may then be rewritten as the linear function 
 \begin{eqnarray}
-I_\mathrm{w}(t) \approx \overline{g}_\mathrm{w} \hat{\omega}(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~\text{, where} \\
+I_\mathrm{w}(t) \approx - \overline{g}_\mathrm{w} \hat{\omega}(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~\text{, where} \\
 \tau_\mathrm{w}(\langle V_\mathrm{m}(t) \rangle)  \frac{d\hat{\omega}(t)}{dt} = \omega_\infty( \langle V_\mathrm{m}(t) \rangle ) - \hat{\omega}(t)
 \end{eqnarray}
 This effectively turns the equivalent circuit of each compartment into an RLC type circuit. 
@@ -698,6 +698,12 @@ The linear dynamics of the equivalent gating variable is governed by
 \begin{equation}
 \tau_\mathrm{w} (\langle V_\mathrm{m}(t) \rangle) \frac{dm(t)}{dt} = V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle - m(t)~. 
 \end{equation}
+
+\item For the special case $\mu=0$ the quasi-active current is `frozen', acting as a static, passive current \cite**{Ness2016}. 
+\ehnote{@TBN; hva mente du egentlig naar du skrev dette? Den kvasi-aktive stroembidraget er lineaert avhengig av $V_\mathrm{m}(t)$ hvis $\mu=0$ og foelgelig ikke statisk.}
+
+Note that the above sets of equations corresponds to channels usually modelled with a single state variable (e.g., Na- and h-type currents), 
+but generalize also to current types with more than one gating variable (e.g., K-currents), see \cite**{Remme_2010} for details.
 
 \item Further reduction of number of state variables can be achieved by reducing the number of compartments per postsynaptic cell. 
 This may reduce the accuracy of membrane voltage predictions, but more so at higher frequencies. 
