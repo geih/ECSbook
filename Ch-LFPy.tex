@@ -654,10 +654,12 @@ i_\mathrm{syn}(t)
 	&=& \overline{i}_\mathrm{syn}f(t)~, 
 \end{eqnarray}
 where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged postsynaptic potential.
-\item Remove active ion channels if their net contributions to the total transmembrane currents are small.
+
+\item Remove active ion channels if their net contributions to the total transmembrane currents can be assumed to be small.
+
 \item Active ion channel currents on the form 
 \begin{equation}
-I_\mathrm{w}(t) = - \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~, \label{eq:Ch-LFPy:active}
+I_\mathrm{w}(t) = - \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~ \label{eq:Ch-LFPy:active}
 \end{equation}
 may be approximated by a linearly dependent current \cite**{Remme_2010,Ness2016}. 
 Here, 
@@ -665,52 +667,53 @@ $\overline{g}_\mathrm{w}$ is the maximum conductance,
 $E_\mathrm{w}$ its reversal potential and 
 $\omega(t)$ the gating variable which dynamics are given in terms of an activation time function $\tau_\mathrm{w}(V)$ and activation function $\omega_\infty(V)$ as
 \begin{equation}
-\tau_\mathrm{w}(V_\mathrm{m}(t)) \frac{d\omega(t)}{dt} = \omega_\infty(V_\mathrm{m}(t)) - \omega(t)~.
+\tau_\mathrm{w}(V_\mathrm{m}(t)) \frac{\partial\omega(t)}{\partial t} = \omega_\infty(V_\mathrm{m}(t)) - \omega(t)~.
 \label{eq:Ch-LFPy:domega_dt}
 \end{equation}
-One can obtain the so-called \emph{quasi-active approximation} by linearizing each voltage dependent term around the steady state value 
-$\langle V_\mathrm{m}(t) \rangle$. 
-\Fref{eq:Ch-LFPy:active} may then be rewritten as the linear function 
-\begin{eqnarray}
-I_\mathrm{w}(t) \approx - \overline{g}_\mathrm{w} \hat{\omega}(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~\text{, where} \\
-\tau_\mathrm{w}(\langle V_\mathrm{m}(t) \rangle)  \frac{d\hat{\omega}(t)}{dt} = \omega_\infty( \langle V_\mathrm{m}(t) \rangle ) - \hat{\omega}(t)
-\end{eqnarray}
-This effectively turns the equivalent circuit of each compartment into an RLC type circuit. 
-\ehnote{For `compactness' kan vi beholde versjonen over - ikke fruktelig interressant aa differensiere mellom regenerative eller restorative stroemmer i denne konteksten? Har jeg forstaatt ting rett, vil ogsaa forskjellige bidrag summere lineaert - hvordan ser dette ut?}
-
-Alternatively, one may introduce the equivalent gating variable
+If the voltage dynamics of the active compartment is defined by
 \begin{equation}
-m(t) := \left( \omega(t) - \omega_\infty ( \langle V_\mathrm{m}(t) \rangle ) \right) / \frac{d\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{dV_\mathrm{m}}
-\end{equation}
-and rewrite the dynamics of the compartment as
+c_\mathrm{m}\frac{\partial V_\mathrm{m}(t)}{\partial t} =
+	- \overline{g}_\mathrm{L}\left(V_\mathrm{m}(t) - E_\mathrm{L}\right) 
+	- \overline{g}_\mathrm{w}\omega(t)\left(V_\mathrm{m}(t) - E_\mathrm{w}\right) 
+	+ I_\mathrm{a}~,
+\end{equation} 
+one can obtain the so-called \emph{quasi-active approximation} \cite**{Koch1984,Remme_2010,Ness2016} by linearizing each voltage dependent term around the steady state value $\langle V_\mathrm{m}(t) \rangle$ resulting in
 \begin{eqnarray}
-c_\mathrm{m}\frac{dV_\mathrm{m}(t)}{dt} &=& 
+c_\mathrm{m}\frac{\partial V_\mathrm{m}(t)}{\partial t} &=& 
 	- g_\mathrm{L} \left( \gamma_\mathrm{R}  
 						  \left( V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle \right)
 						  + \mu m(t)  \right)
-	+ I_\mathrm{axial} + \cdots ~\text{, where} \\
+	+ I_\mathrm{a} ~\text{, where} \\
 \gamma_\mathrm{R} &:=& 1 + \overline{g}_\mathrm{w} \omega_\infty(\langle V_\mathrm{m}(t) \rangle) / g_\mathrm{L} ~\text{, and} \\
-\mu &:=& \frac{\overline{g}_\mathrm{w} ( \langle V_\mathrm{m}(t) \rangle - E_\mathrm{w} )}{g_\mathrm{L}} \frac{d\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{dV_\mathrm{m}}~.
+\mu &:=& \frac{\overline{g}_\mathrm{w} ( \langle V_\mathrm{m}(t) \rangle - E_\mathrm{w} )}{g_\mathrm{L}} \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~.
 \end{eqnarray}
-Here, $\gamma_\mathrm{R}$ denotes the ratio between the total and leak conductance 
-while $\mu$ characterize whether the quasi-active current approximation act as positive $(\mu < 0)$ or negative $(\mu > 0)$ feedback.  
-The linear dynamics of the equivalent gating variable is governed by
+Here, an equivalent gating variable was defined as
 \begin{equation}
-\tau_\mathrm{w} (\langle V_\mathrm{m}(t) \rangle) \frac{dm(t)}{dt} = V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle - m(t)~. 
+m(t) := \left( \omega(t) - \omega_\infty ( \langle V_\mathrm{m}(t) \rangle ) \right) / \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~,
 \end{equation}
+and its linear dynamics is governed by
+\begin{equation}
+\tau_\mathrm{w} (\langle V_\mathrm{m}(t) \rangle) \frac{\partial m(t)}{\partial t} = V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle - m(t)~. 
+\end{equation}
+%
+Above, $\gamma_\mathrm{R}$ denotes the ratio between the total and leak conductance 
+while $\mu$ characterize whether the quasi-active current approximation act as positive $(\mu < 0)$ or negative $(\mu > 0)$ feedback.  
 
-\item For the special case $\mu=0$ the quasi-active current is `frozen', acting as a static, passive current \cite**{Ness2016}. 
-\ehnote{@TBN; hva mente du egentlig naar du skrev dette? Den kvasi-aktive stroembidraget er lineaert avhengig av $V_\mathrm{m}(t)$ hvis $\mu=0$ og foelgelig ikke statisk.}
-
+For the special case $\mu=0$ the quasi-active current is `frozen', acting as a static, passive current \cite**{Ness2016}. 
+\ehnote{@TBN; hva mente du egentlig naar du skrev dette? Den kvasi-aktive stroembidraget er vel lineaert avhengig av $V_\mathrm{m}(t)$ hvis $\mu=0$ og foelgelig ikke statisk.}
+%
 Note that the above sets of equations corresponds to channels usually modelled with a single state variable (e.g., Na- and h-type currents), 
 but generalize also to current types with more than one gating variable (e.g., K-currents), see \cite**{Remme_2010} for details.
 
 \item Further reduction of number of state variables can be achieved by reducing the number of compartments per postsynaptic cell. 
 This may reduce the accuracy of membrane voltage predictions, but more so at higher frequencies. 
 Extracellular signals like the LFP, EEG and MEG however carry more power at lower frequencies and may be less affected. 
-\item Further reduction of number of state variables describing synapses can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment. 
-It's activation times are defined as the concatenation of $\{ t_\mathrm{s}^{\langle i \rangle} + d_{YX} \}$ for the subset $i \subset X$ being presynaptic to neuron $j \subset Y$ at the original synapse site(s) located on the compartment.  
+
+\item Further reduction of number of state variables describing linearly summing synaptic currents can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment. 
+It's activation times are defined as the concatenation of sets $\{ t_\mathrm{s}^{\langle i \rangle} + d_{YX} \}$ for the subset $i \subset X$ being presynaptic to neuron $j \subset Y$ at the original synapse site(s) located on the compartment.  
 \end{enumerate}
+
+\ehnote{Jeg er fristet til aa sette opp en rekke simuleringer som viser effekten av hvert steg som proof of principle, liknende det Steinn setter opp i sin master}
 
 
 \section{\red{EH: Neurodynamics using firing-rate models}}
