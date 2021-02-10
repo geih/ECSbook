@@ -768,7 +768,7 @@ the final signal approximation $\phi^\ast(\mathbf{r}, t) \approx \phi(\mathbf{r}
 \end{equation}
 
 
-\section{\red{Population firing rate models}}
+\subsubsection{\red{Population firing rate models}}
 \label{sec:Schemes:populationmodels}
 \index{Firing rate model}
 
@@ -788,7 +788,39 @@ where $\tau_\mathrm{m}$ is the time constant of the effective low pass filter ch
 \ehnote{mulig jeg kan gaa inn i bittelitt mer detalj her og bruke likning 15.18-19 fra seksjon 15.3.2 som eksempel her i stedet} 
 
 What we will primarily focus on here, 
-is how the hybrid forward modeling scheme and the above `kernel trick' may be adapted for use with population rate models. 
+is how the hybrid forward modeling scheme and the above `kernel trick' may be adapted for use with population rate models in a self-consistent manner. 
+Let us first make a series of assumptions:
+\begin{enumerate}
+\item The rate model accurately captures the fluctuations in spike rate of different populations of recurrently connected network of point neurons. 
+As before, the point-neuron network \textit{may} even have been derived by systematic reduction of detail in a biophysically detailed multicompartment neuron network. 
+We do not 
+
+\item The rate model allows for specifying key neuron and connectivity parameters such as 
+population sizes ($N_X, N_Y$) average synaptic in-degree ($\langle k_{YX} \rangle$) or connection probabilities $C_{YX}$, 
+synaptic coupling strength ($\overline{i}_{\mathrm{syn}YX}$), 
+synaptic temporal kernel ($f_{YX}(t)$) and
+conduction delay function $\Delta_{YX}(t)$ for each connection. 
+Let us for now assume that these parameters are used to derive parameters and variables actually entering the rate equations.
+
+\item We let the continuous variable $\nu_X(t)$ describe the population-averaged firing rate with unit \si{\per\second} for all $N_X$ neurons in each population $X$ as predicted by the rate model. 
+Conceptually this quantity is equivalent to the discrete population spike signal $s_X(t)$ convolved with some normalized temporal filter kernel $\mathcal{N}(t)$, that is:
+\begin{eqnarray}
+\nu_X(t) &\equiv& \frac{1}{N_X} \left(s_X \ast \mathcal{N}\right)(t)~\text{, where} \\
+\int_{-\infty}^\infty \mathcal{N}(\tau) d\tau &=& 1 ~.
+\end{eqnarray}
+Choices for filter be (but is not limited to) a boxcar, Gaussian or Hamming type windowing function symmetric around $\tau = 0$.   
+
+\end{enumerate}
+
+Granted that we already computed population-averaged spatiotemporal kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$ for the particular pre and postsynaptic network populations ($X, Y \subseteq X$) our rate model represents as above, 
+we could persevere and compute our signal as
+\begin{equation}
+\phi(\mathbf{r}, t) = \sum_X N_X \sum_Y \left( \nu_X \ast \hat{H}_{YX} \right)(\mathbf{r}, t) ~.
+\end{equation}
+However, such an approach implies that we must perform a series of very computationally demanding calculations in order to compute transfer functions averaged over many thousands of multicompartment neurons. 
+Can we deduce a methodology to compute the set of $\hat{H}_{YX}(\mathbf{r}, \tau)$ we need directly, 
+based on some expectation values for cell and synaptic placements? 
+Let's try!
 
 
 \section{\red{EH: Other approximations}}
