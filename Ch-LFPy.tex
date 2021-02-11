@@ -606,20 +606,21 @@ Let us first define some properties of the biophysically detailed model:
 \item Let $K_{YX}$ denote the total number of synapses between presynaptic population $X$ and postsynaptic population $Y$. 
 Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}. 
 \item Let layer or region (e.g., cortical layer) be denoted by $L$.
-\item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} := 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
-\item Synaptic currents for each connection are given as $i_{\mathrm{syn}YX}(t)=\overline{g}_{\mathrm{syn}YX} f(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}Y}$
-where $\overline{g}_{\mathrm{syn}YX}$ is the maximum synaptic conductance and $f(t) \in [0, 1]$ is one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}. 
+\item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
+\item Synaptic currents for each connection are given as $i_{\mathrm{syn}YX}(t)=\overline{g}_{\mathrm{syn}YX} f_{YX}(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}Y}$
+where $\overline{g}_{\mathrm{syn}YX}$ is the maximum synaptic conductance and $f_{YX}(t) \in [0, 1]$ is one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}. 
 $V_\mathrm{m}(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}Y}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory). 
 For simplicity we will assume that conductance magnitude is independent of $L$. 
 We will also assume that connection weights $\overline{g}_{YX}$ are static, i.e., there are no synaptic plasticity rules in place. 
 \item The conduction delay from presynaptic action potential generation time  to activation time of the synapse $d_{YX}$ is constant (i.e., independent of cell location and geometry for simplicity) and positive. 
+\ehnote{Tenker jeg redifinerer denne til en funksjon ala $\Delta_{YX}(t) = \delta(t - d_{YX})$}
 \item Each postsynaptic neuron $j \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle j \rangle}(t)$ or axial currents $\mathcal{I}_\mathrm{a}^{\langle j \rangle}(t)$ can be computed. 
 Here $X$ and $Y$ may be used interchangeable, however, 
 presynaptic populations may represent point processes, external stimuli and similar, which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
 \item Extracellular signal contributions in different spatial locations may be computed and summed up as 
 $\sum_Y \sum_{j=1}^{N_Y} \mathbf{F}^{\langle j \rangle} \mathbf{I}_\mathrm{m}^{\langle j \rangle}$ and similar for axial currents. 
 $\mathbf{F}^{\langle j \rangle}$ here denotes a linear mapping of transmembrane currents of cell $j$ to a linearly dependent signal.  
-\item The set of spike times $\{ t_\mathrm{s}^{\langle i \rangle} \}$ of each of each neuron $i \in X$ is recorded throughout the entire simulation interval $[0, T_\mathrm{sim} \rangle$. 
+\item The sequence of spike times $s_i(t) = \sum_k \delta (t - t_k)$ \ehnote{$\{ t_\mathrm{s}^{\langle i \rangle} \}$} of each of each neuron $i \in X$ is recorded throughout the entire simulation interval $[0, T_\mathrm{sim} \rangle$. 
 We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with `flat' spiking statistics (e.g., Poisson point process) into the recurrently connected network. 
 \item We may store the weighted, directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic populations. 
 This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full connectivity graph procedurally (at least statistically). 
@@ -627,9 +628,10 @@ Graph weights represent maximum synaptic conductances.
 \end{enumerate}
 
 At this point one could destroy every connection of the recurrently connected network, 
-load sets of spike events $\{ t_\mathrm{s}^{\langle i \rangle} \}$ of presynaptic neurons $i \in X$ recorded to some intermediate data storage, 
-reinstate every synapse on each postsynaptic neuron $j \in Y$ but this time activate them at times $\{ t_\mathrm{s}^{\langle i \rangle} + d_{YX} \}$ accounting for transmission delay, 
+load sets of spike events $s_i(t)$ of presynaptic neurons $i \in X$ recorded to some intermediate data storage, 
+reinstate every synapse on each postsynaptic neuron $j \in Y$ but this time activate them at times $\left(s_i \ast \delta(t - d_{YX})\right)(t)$ accounting for transmission delay, 
 and otherwise keep neuron and synaptic type, parameterization and locations the same. 
+The asterisk symbol denotes a convolution operation. 
 This would result in exactly the same changes in membrane voltages and consequently the same spatiotemporal distributions of transmembrane currents as in the recurrently connected case. 
 However, what did we gain through these steps?
 
@@ -642,18 +644,20 @@ One could also do single-cell simulations serially.
 The computational cost of transmitting times of spike events across the parallel network can be assumed to be minuscular compared to the rest.
 \end{enumerate}
 
-For the purpose of predicting extracellular signals, 
+For the purpose of predicting extracellular signals \emph{only}, 
 let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents. 
 We may also relax the requirement that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials):
 \begin{enumerate}
 \item Approximate conductance-based synapses by equivalent current-based synapses:
 \begin{eqnarray}
-i_\mathrm{syn}(t) 
-	&=& \overline{g}_\mathrm{syn}f(t)\left(V_\mathrm{m}(t) - E_\mathrm{syn}\right) \\
-	&\approx& \overline{g}_\mathrm{syn}f(t)\left(\langle V_\mathrm{m}(t) \rangle - E_\mathrm{syn}\right) \\
-	&=& \overline{i}_\mathrm{syn}f(t)~, 
+i_{\mathrm{syn}YX}(t) 
+	&=& \overline{g}_{\mathrm{syn}YX}f_{YX}(t)\left(V_\mathrm{m}(t) - E_{\mathrm{syn}X}\right) \\
+	&\approx& \overline{g}_{\mathrm{syn}YX}f_{YX}(t)\left(\langle V_\mathrm{m}(t) \rangle - E_{\mathrm{syn}X}\right) \\
+	&=& \overline{i}_{\mathrm{syn}YX}f_{YX}(t)~, 
 \end{eqnarray}
-where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged postsynaptic potential.
+where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged postsynaptic potential (or its expectation value). 
+We here use the sub-fix $Y|X$ notation to emphasize that some of these parameters may be connection specific.
+We would also note that some rescaling of current amplitudes may be required for certain synapse instances if the postsynaptic targets are characterized by very high input impedances (e.g., oblique dendrites).  
 
 \item Remove active ion channels if their net contributions to the total transmembrane currents can be assumed to be small.
 
@@ -684,12 +688,12 @@ c_\mathrm{m}\frac{\partial V_\mathrm{m}(t)}{\partial t} &=&
 						  \left( V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle \right)
 						  + \mu m(t)  \right)
 	+ I_\mathrm{a} ~\text{, where} \\
-\gamma_\mathrm{R} &:=& 1 + \overline{g}_\mathrm{w} \omega_\infty(\langle V_\mathrm{m}(t) \rangle) / g_\mathrm{L} ~\text{, and} \\
-\mu &:=& \frac{\overline{g}_\mathrm{w} ( \langle V_\mathrm{m}(t) \rangle - E_\mathrm{w} )}{g_\mathrm{L}} \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~.
+\gamma_\mathrm{R} &\coloneq& 1 + \overline{g}_\mathrm{w} \omega_\infty(\langle V_\mathrm{m}(t) \rangle) / g_\mathrm{L} ~\text{, and} \\
+\mu &\coloneq& \frac{\overline{g}_\mathrm{w} ( \langle V_\mathrm{m}(t) \rangle - E_\mathrm{w} )}{g_\mathrm{L}} \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~.
 \end{eqnarray}
 Here, an equivalent gating variable was defined as
 \begin{equation}
-m(t) := \left( \omega(t) - \omega_\infty ( \langle V_\mathrm{m}(t) \rangle ) \right) / \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~,
+m(t) \coloneq \left( \omega(t) - \omega_\infty ( \langle V_\mathrm{m}(t) \rangle ) \right) / \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~,
 \end{equation}
 and its linear dynamics is governed by
 \begin{equation}
@@ -710,20 +714,119 @@ This may reduce the accuracy of membrane voltage predictions, but more so at hig
 Extracellular signals like the LFP, EEG and MEG however carry more power at lower frequencies and may be less affected. 
 
 \item Further reduction of number of state variables describing linearly summing synaptic currents can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment. 
-It's activation times are defined as the concatenation of sets $\{ t_\mathrm{s}^{\langle i \rangle} + d_{YX} \}$ for the subset $i \subset X$ being presynaptic to neuron $j \subset Y$ at the original synapse site(s) located on the compartment.  
+It's activation times are defined as the concatenation of sequences $\left(s_i \ast \delta(t - d_{YX})\right)(t)$ for the subset $i \subset X$ being presynaptic to neuron $j \subset Y$ at the original synapse site(s) located on the compartment.  
 \end{enumerate}
 
 \ehnote{Jeg er fristet til aa sette opp en rekke simuleringer som viser effekten av hvert steg som proof of principle, liknende det Steinn setter opp i sin master}
 
 
-\section{\red{EH: Neurodynamics using firing-rate models}}
-\label{sec:Schemes:KernelLFPy}
+\subsubsection{Kernel tricks}
+\label{sec:LFPy:kerneltricks}
+
+The cable equation describing the membrane voltage dynamics across different neuron sections is already a linear partial differential equation.
+Points 1--4 above allows for computing a \emph{linear} relation between spikes of each presynaptic neurons and resulting contribution to the extracellular signal(s), 
+as every component including synaptic conductances and voltage-gated ion channels of this hybridized simulation scheme is linearized and linearly separable. 
+The different effects of transmission delays (or transmission delay distributions), 
+evoked synaptic currents, 
+filtering of inputs by dendrites plus quasi-active approximation of active ion channels and
+linear forward model 
+may then be combined into a spatiotemporal filter kernel $H_{ji}(\mathbf{r},\tau)$ where $\tau$ denote time lag relative to presynaptic spike times in $s_i(t)$ \cite**{Hagen2016}. 
+One may compute this filter as 
+\begin{equation}
+H_{ji}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{i}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX} \ast G_{ji} \right)(\mathbf{r}, \tau) \right]~, 
+\end{equation}
+where $\Delta_{YX}(t) \coloneq \delta(t - d_{YX})$ and
+the Green's like functions $G_{ji}(\mathbf{r}, \tau)$ encompass all dendritic filtering effects on the synaptic input currents into each corresponding distribution of transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle ij \rangle}(\mathbf{r}, \tau)$.
+If each kernel function which is specific to each pair of pre- and postsynaptic neuron can be computed, 
+one could compute the signal as the sum over convolutions between presynaptic spike times and corresponding kernels
+\begin{equation}
+\phi(\mathbf{r}, t) = \sum_{i \in X} \sum_{j \subset Y} \left(s_i \ast H_{ji} \right)(\mathbf{r}, t)~.
+\end{equation}
+In large networks however, 
+computing the full set $H_{ji}(\mathbf{r},\tau)$ can become intractable as the number of connections (and consequently number of kernels) grow proportionally to the product $N_X N_Y$ if the connection probabilities are kept fixed. 
+\cite**{Hagen2016} showed however that a good approximation to the signal $\phi(\mathbf{r}, t)$ could be obtained by estimating kernels averaged over all pre- and postsynaptic neurons in each population $X$ and $Y$ defined as
+\begin{equation}
+\hat{H}_{YX}(\mathbf{r}, \tau) = \frac{1}{N_X} \sum_{i \in X} \sum_{j \subset Y} H_{ji}(\mathbf{r}, \tau)~. 
+\end{equation}
+In order to compute these kernels directly, 
+actual network spiking activity may first be replaced by simultaneous and deterministic events 
+$s_i(t) = \delta(t - t_X)$ where $t_X > 0$ is a chosen time for each population $X$, 
+compute via the disassociated network model the signal contributions of each postsynaptic population $\phi_{YX}(\mathbf{r}, t)$ around $t_X$
+and average the response as 
+\begin{equation}
+\hat{H}_{YX}(\mathbf{r}, \tau) = \frac{1}{N_X} \phi_{YX} (\mathbf{r}, \tau)
+\end{equation}
+where $\tau$ denote time relative to $t_X$. 
+It is worth mentioning that these kernels are causal, that is, 
+by construction $H_{YX}(\mathbf{r}, \tau) \coloneq 0$ for $\tau < 0$ as any contribution to the signal $\phi(\mathbf{r}, t)$ is solely due to postsynaptic contributions which can not occur before the presynaptic spike event. 
+The time lags spanned by the kernels are also symmetric around $\tau=0$ and of finite duration -- 
+the postsynaptic responses typically decay to approximately zero after a few tens of milliseconds. 
+Finally, if we define the presynaptic population spiking activity as the sequence of Dirac delta distributions $s_X(t) \coloneq \sum_{i \in X} s_i(t)$, 
+the final signal approximation $\phi^\ast(\mathbf{r}, t) \approx \phi(\mathbf{r}, t)$ may then be computed as the sum over convolutions
+\begin{equation}
+\phi^\ast(\mathbf{r}, t) = \sum_X \sum_Y \left(s_X \ast \hat{H}_{YX} \right)(\mathbf{r}, t)~. 
+\end{equation}
+
+
+\subsubsection{\red{Population firing rate models}}
+\label{sec:Schemes:populationmodels}
 \index{Firing rate model}
 
-\ehnote{gammalt:}
-Would make things even faster. Population firing-rate models  \cite**{Hagen2016}. Kernel trick (Ness et al, on-going project)
+Similar to how dynamics of large-scale multicompartment neuron networks as reflected by spikes of the individual neurons can some times be preserved in equivalent networks of point neurons after a series of simplifying steps,
+further successive steps of simplification may be applied to the point-neuron networks in order to describe neuronal dynamics at the level of populations. 
+Such models are commonly referred to as \emph{rate models} as an umbrella term, 
+and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} \ehnote{Ha!} (whole brain) level such as oscillations. 
+Rate models may simply describe the mean activity of subsets of neurons (`populations') but may also explain activity both in space and time. 
+The latter is some times referred to as \emph{neural fields} and may readily produce observed phenomena such as traveling waves of activity. 
+Here, we will not delve into much mathematical detail as the body of literature on both rate models and neural fields and their derivation is vast, 
+see for example \cite**{Gerstner2014} and \cite**{Ermentrout2010}. 
+As an example, we will merely show that in their simplest form the activity $A(t)$ in a rate model may be described by (Equation 15.17 in \cite**{Gerstner2014})
+\begin{equation}
+\tau_\mathrm{m} \frac{dA(t)}{dt} = - A(t) + g_\sigma( I(t) ) ~,
+\end{equation}
+where $\tau_\mathrm{m}$ is the time constant of the effective low pass filter characterizing the system, $I(t)$ describes the input current (from external and recurrent sources) and $g_\sigma$ a stationary gain function (see \cite**{Gerstner2014} for details). 
+\ehnote{mulig jeg kan gaa inn i bittelitt mer detalj her og bruke likning 15.18-19 fra seksjon 15.3.2 som eksempel her i stedet} 
 
-\ehnote{nytt:}
+What we will primarily focus on here, 
+is how the hybrid forward modeling scheme and the above `kernel trick' may be adapted for use with population rate models in a self-consistent manner. 
+Let us first make a series of assumptions:
+\begin{enumerate}
+\item The rate model accurately captures the fluctuations in spike rate of different populations of recurrently connected network of point neurons. 
+As before, the point-neuron network \textit{may} even have been derived by systematic reduction of detail in a biophysically detailed multicompartment neuron network. 
+We do not 
+
+\item The rate model allows for specifying key neuron and connectivity parameters such as 
+population sizes ($N_X, N_Y$) average synaptic in-degree ($\langle k_{YX} \rangle$) or connection probabilities $C_{YX}$, 
+synaptic coupling strength ($\overline{i}_{\mathrm{syn}YX}$), 
+synaptic temporal kernel ($f_{YX}(t)$) and
+conduction delay function $\Delta_{YX}(t)$ for each connection. 
+Let us for now assume that these parameters are used to derive parameters and variables actually entering the rate equations.
+
+\item We let the continuous variable $\nu_X(t)$ describe the population-averaged firing rate with unit \si{\per\second} for all $N_X$ neurons in each population $X$ as predicted by the rate model. 
+Conceptually this quantity is equivalent to the discrete population spike signal $s_X(t)$ convolved with some normalized temporal filter kernel $\mathcal{N}(t)$, that is:
+\begin{eqnarray}
+\nu_X(t) &\equiv& \frac{1}{N_X} \left(s_X \ast \mathcal{N}\right)(t)~\text{, where} \\
+\int_{-\infty}^\infty \mathcal{N}(\tau) d\tau &=& 1 ~.
+\end{eqnarray}
+Choices for filter be (but is not limited to) a boxcar, Gaussian or Hamming type windowing function symmetric around $\tau = 0$.   
+
+\end{enumerate}
+
+Granted that we already computed population-averaged spatiotemporal kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$ for the particular pre and postsynaptic network populations ($X, Y \subseteq X$) our rate model represents as above, 
+we could persevere and compute our signal as
+\begin{equation}
+\phi(\mathbf{r}, t) = \sum_X N_X \sum_Y \left( \nu_X \ast \hat{H}_{YX} \right)(\mathbf{r}, t) ~.
+\end{equation}
+However, such an approach implies that we must perform a series of very computationally demanding calculations in order to compute transfer functions averaged over many thousands of multicompartment neurons. 
+Can we deduce a methodology to compute the set of $\hat{H}_{YX}(\mathbf{r}, \tau)$ we need directly, 
+based on some expectation values for cell and synaptic placements? 
+Let's try!
+
+
+\section{\red{EH: Other approximations}}
+
+\cite**{Mazzoni2015}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
