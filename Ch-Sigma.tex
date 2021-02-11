@@ -187,9 +187,14 @@ See also \citeasnoun**{Ness2015}.
 %\ghnote{GH: Skrev skisse til dette. Puttet figuren m/ sigma-maalinger inn her, da disse ser ut til aa primaert diskuteres opp mot eventuell frekvensavhengighet. Mulig vi burde ha med "eksperimentelle maalinger i kapittel-tittelen?}
 
 %Regardless of the level of isotropy and homogeneity of a medium, its response to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that accounts for capacitive and inductive effects that are frequency dependent.
-An important question for interpreting and modelling electric signals in neuroscience is whether the conductivity of neural tissue is frequency-dependent. 
+An important question for interpreting and modelling electric signals in neuroscience is whether the conductivity of neural tissue is frequency dependent. If a substantial frequency dependence is present, this would mean that the recorded signals are distorted as they propagate through the medium, and it would bias recordings towards certain parts of the frequency spectrum. In the latter case, this might for example imply that the low-frequency LFP signals are less attenuated than the high-frequency spikes. 
 
-This would not in itself be surprising: Tightly packed with neurons, and because of the capacitive properties of the membrane, the electrical properties of membranes are highly frequency dependent. Extracellular currents could make use of the capacitive properties of membranes to move through them, and if so, this would increase the conductivity for higher frequencies.
+A frequency dependence in the extracellular conductivity would not in itself be surprising: As we have seen, the extracellular space is tightly packed with neurons, and because of the capacitive properties of their membranes, their membrane conductivity is highly frequency dependent (\fref{sec:Neuron:Cap}). Therefore, one could easily imagine that low-frequency extracellular currents are confined to move resistively through the extracellular space, while
+high-frequency extracellular currents could move both resistively through the extracellular space and capacitively through the cells. This would effectively introduce a higher conductivity for higher frequencies, thereby reducing the amplitude of extracellularly recorded potentials (see \fref{eq:Sigma:pointsource_freq_dep}}).
+
+It has been suggested that "stability" of LFP and sensitivity of spikes to position is caused by this, and EEG has "only" low frequencies \cite**{Logothetis2007,}
+
+Earlier investigations into any potential frequency dependence (impedance spectrum) of the extracellular conductivity reported little or no frequency dependence \cite**{Nicholson1975}
 
 
 By far the most common approach is to assume that it is not. 
@@ -209,6 +214,12 @@ Most studies seem to indicate a very weak frequency dependence of the extracellu
 }
 \label{Sigma:fig:freq_dep}
 \end{figure}
+
+For a frequency-dependent conductivity, the point-source equation becomes \cite{Bossetti2008,Miceli2017}
+\begin{equation}
+\phi({\bf r}, \omega) = \frac{I}{4\pi (\sigma_t(\omega) + \vec j \omega \epsilon(\omega)) r},
+\label{eq:sigma:pointsource_freq_dep}
+\end{equation}
 
 %\tvnnote{Utledning tilsvarende Appendix B i Nunez?}
 %\ghnote{Vet ikke helt.... Appendixet gir et greit bevis paa at kapasitive effekter i ECS er smaa. De foelger opp med et tilsvarende studium av membranen, men i det studiet er det membranen alene som er mediumet. Saa vidt jeg kan se faar vi ingen pekepinn paa hva membranens tilstedevaerelse gjoer for tissue-stroemmer....}
