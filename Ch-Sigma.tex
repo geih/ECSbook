@@ -171,7 +171,7 @@ with
 For an example of this framework, for modelling spikes in {\it in vitro} slices, see \fref{fig:Spikes:MEA-spikes}, and for further details see \citeasnoun**{Ness2015}.
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{Figures/Sigma/MEA_illustration.pdf}
+\includegraphics[width=0.4\textwidth]{Figures/Sigma/MEA_illustration.pdf}
 \end{center}
 \caption[]{\textbf{Illustration of MEA recording set-up.}
 See also \citeasnoun**{Ness2015}.
@@ -187,18 +187,17 @@ See also \citeasnoun**{Ness2015}.
 %\ghnote{GH: Skrev skisse til dette. Puttet figuren m/ sigma-maalinger inn her, da disse ser ut til aa primaert diskuteres opp mot eventuell frekvensavhengighet. Mulig vi burde ha med "eksperimentelle maalinger i kapittel-tittelen?}
 
 %Regardless of the level of isotropy and homogeneity of a medium, its response to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that accounts for capacitive and inductive effects that are frequency dependent.
-An important question for interpreting and modelling electric signals in neuroscience is whether the conductivity of neural tissue is frequency-dependent. 
+An important question for interpreting and modelling electric signals in neuroscience is whether the conductivity of neural tissue is frequency dependent. If a substantial frequency dependence is present, this would mean that the recorded signals are distorted as they propagate through the medium, and it would bias recordings towards certain parts of the frequency spectrum. In this subsection we will briefly cover the experimental measurements investigating this issue, as well as the theory needed to model such effects, should it be deemed necessary.
 
-This would not in itself be surprising: Tightly packed with neurons, and because of the capacitive properties of the membrane, the electrical properties of membranes are highly frequency dependent. Extracellular currents could make use of the capacitive properties of membranes to move through them, and if so, this would increase the conductivity for higher frequencies.
+We have earlier stated that extracellular currents are typically assumed to move mostly through the extracellular saline solution, where the cells can basically be treated as non-conducting objects (\fref{sec:Sigma:continuous}). If this is true, we would expect the extracellular conductivity to be frequency-independent, since saline is known to be an ohmic medium \cite**{Martinsen2008}. 
+A frequency dependence in the extracellular conductivity would not however in itself be surprising: As we have seen, the extracellular space is tightly packed with neurons, and because of the capacitive properties of their membranes, their membrane conductivity is highly frequency dependent (\fref{sec:Neuron:Cap}). Therefore, one could easily imagine that low-frequency extracellular currents are more confined to move resistively through the extracellular space, while
+high-frequency extracellular currents could move both resistively through the extracellular space and capacitively through the cells. This would effectively introduce a higher conductivity for higher frequencies, thereby reducing the amplitude of high-frequency extracellular potentials (see \fref{eq:Sigma:pointsource_freq_dep}). This would for example imply that the low-frequency LFP signals are less attenuated than the high-frequency spikes. 
+It has been suggested that "stability" of LFP and sensitivity of spikes to position is caused by this, and EEG has "only" low frequencies \cite**{Logothetis2007}, and 1/f power-laws in LFP.
 
-
-By far the most common approach is to assume that it is not. 
-However some indications: Gabriel, Bedard, Destexhe
-(and somewhat controversial) 
-
-In Section \ref{chap:VC:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself (and thus $\sigma_e$) does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium ($\sigma_t$) includes capacitive effects, as currents traveling through it could interact with nearby capacitive neural membranes.
-
-However, for the relevant frequencies in extracellular recordings (Fig.~\ref{Sigma:fig:freq_dep}), the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite**{Logothetis2007,Miceli2017,Ranta2017}. In most applications of VC theory, one therefore applies the assumption that the medium is Ohmic or resistive, meaning that the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite**{Bedard2004,Tracey2011,Miceli2017}.
+Earlier investigations the frequency dependence of the extracellular conductivity (also called the impedance spectrum) reported little or no frequency dependence \cite**{Ranck1963,nicholson1975,Pfurtscheller1975}. However, a later study by \citeasnoun**{Gabriel1996} reported a substantial frequency dependence,
+in particular below 100~\si{\hertz} (\fref{fig:Sigma:freq_dep}). 
+More recent studies again seem to measure little or no frequency dependence of the extracellular conductivity \cite**{Logothetis2007,Elbohouty2013,Wagner2014,Dowrick2015,Miceli2017,Ranta2017,Avery2017}. 
+It should be noted that these more recent studies typically consistently measure an increase of the conductivity of about 20-50\% from a few hertz to a hundreds or thousands of hertz, however, at least in some cases, a similar frequency dependence was also measured in saline, indicating that this frequency dependence at least partially originated in the recording equipment \cite**{Logothetis2007,Miceli2017}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -207,8 +206,27 @@ However, for the relevant frequencies in extracellular recordings (Fig.~\ref{Sig
 \caption[]{\textbf{Literature review of reported conductivities in various species and experimental setups.}
 Most studies seem to indicate a very weak frequency dependence of the extracellular conductivity\index{Conductivity}, which would have a negligible effect on measured extracellular potentials \cite**{Miceli2017}. The very low and strongly frequency dependent values measured by \cite**{Gabriel1996} represents an outlier, and although it has received substantial attention, it has to the best of our knowledge not been reproduced by any other study. For details about the data, see \cite**{Miceli2017}, and references therein \cite**{Ranck1963,Gabriel1996,Logothetis2007,Elbohouty2013,Wagner2014}.
 }
-\label{Sigma:fig:freq_dep}
+\label{fig:Sigma:freq_dep}
 \end{figure}
+
+The study by \citeasnoun**{Gabriel1996} clearly stands out, as it is the only study to our knowledge to experimentally measure a strong frequency dependence below 100~\si{\hertz}. This study also reported a conductivity of only about 0.03~\si{\siemens/ \metre} at 10~\si{\hertz}, about an order of magnitude lower than the commonly reported values. This value seems surprisingly low, given that neural tissue contains a substantial fraction of highly conducting saline.
+ The authors were however careful to note that the reported low-frequency values might be distorted by inadequate correction for electrode polarization (see also \fref{sec:VC:electrodes}). Further, a later study using the same recording equipment did not observe a similarly strong frequency-dependence, or similarly low conductivity values (\citeasnoun**{Wagner2014}; \fref{fig:Sigma:freq_dep}). Finally, their recording were done in bovine brains obtained from a slaughterhouse up to a couple of hours post-mortem \cite**{Gabriel1996}, which can potentially have resulted in suboptimal tissue preservation and cell swelling \cite**{Seoane2004}. 
+
+Consequently, the extracellular
+ it has been widely is to assume that it is not. 
+However some indications: Gabriel, Bedard, Destexhe
+(and somewhat controversial) 
+
+In Section \ref{chap:VC:onlyohmic}) we argued that the extracellular displacement current is negligible, which means that the extracellular medium in itself (and thus $\sigma_e$) does not exhibit any capacitive effects. This alone does not rule out the possibility that the effective conductivity of the tissue medium ($\sigma_t$) includes capacitive effects, as currents traveling through it could interact with nearby capacitive neural membranes.
+
+However, for the relevant frequencies in extracellular recordings (\fref{fig:Sigma:freq_dep}), the capacitive and inductive effects appear to be negligible compared to the resistive effects \cite**{Logothetis2007,Miceli2017,Ranta2017}. In most applications of VC theory, one therefore applies the assumption that the medium is Ohmic or resistive, meaning that the imaginary and frequency dependent part of the conductivity is zero. We note, however, that it is possible to expand the formalism to include a frequency dependent conductivity \cite**{Bedard2004,Tracey2011,Miceli2017}.
+
+
+For a frequency-dependent conductivity, the point-source equation becomes \cite{Bossetti2008,Miceli2017}
+\begin{equation}
+\phi({\bf r}, \omega) = \frac{I}{4\pi (\sigma_t(\omega) + \vec j \omega \epsilon(\omega)) r},
+\label{eq:Sigma:pointsource_freq_dep}
+\end{equation}
 
 %\tvnnote{Utledning tilsvarende Appendix B i Nunez?}
 %\ghnote{Vet ikke helt.... Appendixet gir et greit bevis paa at kapasitive effekter i ECS er smaa. De foelger opp med et tilsvarende studium av membranen, men i det studiet er det membranen alene som er mediumet. Saa vidt jeg kan se faar vi ingen pekepinn paa hva membranens tilstedevaerelse gjoer for tissue-stroemmer....}
