@@ -378,6 +378,34 @@ The practical implication of electroneutrality and shielding effects is that, wh
 
 
 
+\subsection{\blue{Extracellular currents are exclusively due to electric drift}}
+\label{sec:Basics:onlyohmic}
+When analyzing extracellular currents in the brain, it is common to assume that they are purely due to electric drift, as we do when using the volume conductor (VC) theory that we present in \Fref{chap:VC}. In principle, a current could have additional contributions from ionic diffusion, advection currents, capacitive (displacement) currents, and electromagnetic induction, so that the total current density would be:
+\begin{equation}
+{\bf i} = {\bf i}_\text{ohm} + {\bf i}_\text{diff} + {\bf i}_\text{adv} + {\bf i}_\text{cap} + {\bf i}_\text{ind},
+\label{VC:eq:generalcurrent}
+\end{equation}
+
+As the capacitive current is proportional to $\partial {\bf E}/\partial t$, and the inductive currents is proportional to $\partial {\bf B}/\partial t$, it follows from the quasi-magnetostatic and quasi-electrostatic approximations, respectively, that they are zero in the extracellular medium.
+
+An advective current\index{Advective current},
+\begin{equation}
+{\bf i}_\text{adv} = F \rho {\bf u},
+\label{VC:eq:iadv}
+\end{equation}
+arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. As we argued in \fref{sec:Basics:Debye}, the extracellular medium is practically electroneutral ($\rho \simeq 0$), and the advective current therefore becomes negligible. A more thorough argument for this was given in \citeasnoun**{Gratiy2017}.
+
+The diffusive current\index{Diffusive current},
+\begin{equation}
+{\bf i}_\text{diff} = -F \sum_k z_k D_k {\bf \nabla} c_k,
+\label{VC:eq:idif}
+\end{equation}
+arises when ions (with valence $z_k$ and diffusion constants $D_k$) diffuse along concentration gradients (${\bf \nabla} c_k$), and carry with them a net charge. It has been suggested that diffusive currents can have a notable impact on $\phi$ in physiological conditions with large concentration gradients \cite**{Halnes2016}, especially if ion concentration gradients vary quite rapidly with time \cite**{Gratiy2017}. Diffusive effects on $\phi$ may therefore be particularly relevant under pathological conditions such as epilepsy, stroke and spreading depression, which are associated with dramatic shifts in local extracellular concentrations (see e.g.,  \cite**{Somjen2001,Frohlich2008,Wei2014,Ayata2015}).
+
+To account for diffusive effects, one needs to compute not only the electrical potential, but also the ion concentration dynamics of all involved ions at all points in space. This can not \gen{Da jeg var liten mener jeg at vi maatte skrive "cannot" paa skolen, men det var kanskje et fenomen lokalt baade i tid og rom?} be done using VC theory in the standard form presented in \Fref{chap:VC}, but can be done using Finite Element Methods (see e.g., \cite**{Solbra2018}). We go through the theory for modeling electrodiffusive systems in \fref{sec:Eldiff}.
+
+Under normal conditions, drift currents are likely to have a much bigger impact on the time course of $\phi$ than diffusive currents. Standard VC theory, which neglects diffusive effects, will likely make quite good predictions of $\phi$ under most experimental conditions \cite**{Halnes2016,Gratiy2017}.
+
 
 
 

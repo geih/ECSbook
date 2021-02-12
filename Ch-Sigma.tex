@@ -240,6 +240,121 @@ Note that while both $\sigma_t(\omega)$ and $\epsilon(\omega)$ can be frequency 
 %\label{Sigma:fig:maxwell_resistivity}
 %\end{figure}
 
+\subsection{\red{Quasi-magnetostatic approximation of Maxwell's equations}}
+\label{sec:Basics:Quasimagnetostatic} \index{Quasi-magnetostatic approximation}
+\ghnote{DETTE OG NESTE DELKAPITTEL FLYTTET HIT FRA BASICS. Foreslaar at de smeises sammen til ett, og integrerers med den teorietiske utforskningen av frekvensavhengig sigma. Har ikke tatt tak i dette ennaa, men ser for meg at jeg og Tobjorn forhandler oss fram til et godt sluttresultat. Kanskje denne meffin og co skal vaere en del av historien - vet ikke ennaa. }
+
+The right hand side of eq. \ref{eq:Basics:Max4} contains a total current,
+\tvnnote{Jeg er forvirret igjen: Elektrisk felt i vakuum gir jo ogsaa magnetisk felt, helt uten stroem?}
+\begin{equation}
+{\bf i}_\text{tot} = {\bf i}_\text{free} + \epsilon\frac{\partial {\bf E}}{\partial t},
+\label{eq:Basics:totcurrent}
+\end{equation}
+composed of a current of free charges (first term) plus a displacement current (last term). For an idealized conductor, the displacement current is zero, while for an idealized capacitor, the current of free charges is zero.
+
+Making the quasi-magnetostatic approximation means assuming that the displacement current, or equivalently, capacitive effects\tvnnote{Naa har jeg glemt dette igjen: Hva med om man har et tidsvarierende elektrisk felt i et Ohmsk medium?}, are absent \gex{when computing the magnetic field (?)}, so that \fref{eq:Basics:Max4} simplifies to ${\bf \nabla} \times {\bf B}  =  \mu{\bf i}_\text{free}$. This will be a good approximation provided that the magnitude ${\bf i}_\text{free}$ is much smaller \tvnnote{?} than that of the displacement current. In the following, we will investigate the conditions for this to be a valid approximation. To simplify the analysis, we assume that the current of free charges is purely Ohmic, so that \fref{eq:Basics:totcurrent} becomes:
+\begin{equation}
+{\bf i}_\text{tot} = \sigma {\bf \nabla} \cdot {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t},
+\label{eq:Basics:totcurrent2}
+\end{equation}
+Let us now consider an electric field that oscillates with some frequency $f$,
+\begin{equation}
+{\bf E} = {\bf E}_\text{max} e^{j2\pi f \epsilon t},
+\label{eq:Basics:Ecomponent}
+\end{equation}
+where $j$ here is the imaginary unit. \gen{Kanskje si noe om hva som ligger i den komplekse notasjonen?}
+If we insert this into \fref{eq:Basics:totcurrent2}, we get:
+\begin{equation}
+{\bf i}_\text{tot} = \sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
+\label{eq:Basics:totcurrent3}
+\end{equation}
+From this it is clear that the capacitive contribution (last term) is negligible compared to the conductive contribution (first term) when the ratio
+\begin{equation}
+\frac{2 \pi f \epsilon}{\sigma} \ll 1.
+\label{eq:Basics:ratiocondition}
+\end{equation}
+\gen{Det finnes et egen latex-kommando for "mye mindre".}
+Here, both $\sigma$ and $\epsilon$ can generally be functions of the frequency $f$.
+
+To gain some insight into the ratio $\epsilon/\sigma$, consider at the current conservation law (\fref{eq:Basics:currentconservation}), which when the current of free charges is purely Ohmic becomes:
+\begin{equation}
+\frac{\partial \rho}{\partial t} + \sigma {\bf \nabla} \cdot {\bf E} = 0
+\label{eq:Basics:OhmicConcervation}
+\end{equation}
+If we insert \fref{eq:Basics:Max1} for ${\bf E}$, we may rewrite this as:
+\begin{equation}
+\frac{\partial \rho}{\partial t} + \frac{\sigma}{\epsilon} \rho = 0,
+\label{eq:Basics:OhmicConcervation2}
+\end{equation}
+which is a differential equation with the general solution
+\begin{equation}
+\rho({\bf r}, t) = \rho({\bf r}, 0)e^{-t/\tau},
+\label{eq:Basics:relax}
+\end{equation}
+where we we have defined,
+\begin{equation}
+\tau = \frac{\epsilon}{\sigma}.
+\label{eq:Basics:chargerelaxationtime}
+\end{equation}
+\Fref{eq:Basics:relax} shows that there is no steady-state free charge in the system considered. If any nonzero free charge occurs, for example due to sudden change in the electric field, it will decay towards zero with the time constant $\tau$, which is known as the charge-relaxation time \index{Charge relaxation}. If we insert for $\tau$, the criterion in \fref{eq:Basics:ratiocondition} simplifies to:
+\begin{equation}
+2 \pi f \tau \ll 1.
+\label{eq:Basics:ratiocondition2}
+\end{equation}
+
+Typical frequencies of interest for neural signals are on the order of 100 \si{\hertz},
+\gen{Kanskje vi kan se paa tilfellet med noen kilohertz ogsaa? Da skulle ogsaa frekvensinnhold i spikes vaere godt dekket.} which in an electromagnetic context can be considered a low frequency. Let us explore whether the criterion in \fref{eq:Basics:ratiocondition2} is met in three different mediums:
+
+\begin{itemize}
+\item \textit{Extracellular saline solution:} The relative permittivity ($\epsilon_\text{r} = \epsilon/\epsilon_0$) of dilute salt water solutions, such as that filling up the extracellular space of the brain, is close to that of water, which at low frequencies is $\epsilon_\text{r} \sim 80$ \cite**{hasted1948}. The the extracellular solution has a conductivity $\sigma_\text{saline} \sim 2 \, \si{\siemens\per\metre}$ (see \fref{chap:Sigma}). This gives a value $\tau = \epsilon_\text{r} \epsilon_0/\sigma \sim 80\times 8.85\times10^{-12}/2 \simeq 0.35 \, \si{\nano\second}$. A charge relaxation time \gex{on} the order of 1 \si{\nano\second} has also been estimated in other works \cite**{Grodzinsky2011,Gratiy2017}), and implies that the displacement current will mainly be important under conditions when the electrical field varies with frequencies in the gigahertz range. The relevant fields with physiological origin vary with frequencies that are orders of magnitude lower than this ($f \sim 100 \, \si{\hertz} $), which implies that capacitive effects can safely be neglected. With $\tau = 0.35 \, \si{\nano\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  2.2 \times 10^{-7}$, and the criterion in \fref{eq:Basics:ratiocondition2} is clearly met.
+
+\item \textit{Neural membrane:} Neural membranes typically have a time constant $\tau \sim 1 \, \si{\milli\second}$ associated with their capacitive charging.
+\gen{Hvor kommer dette fra? Typisk membran-tidskonstanten RC? Kanskje forklare litt mer?}
+This is much lower than the corresponding charge relaxation time of the extracellular saline solution. With $\tau = 1 \, \si{\milli\second}$ and $f = 100 \, \si{\hertz}$, $2 \pi f \tau =  0.63$, and the criterion in \fref{eq:Basics:ratiocondition2} is not met. Hence, capacitive current is an important contributor to the total membrane current.
+\gen{Det folger vel ikke av dette at det er en "important contributor", kun at den ikke kan neglisjeres i utgangspunktet.}
+
+We note that both the conductivity and capacitance of the membrane can be expressed in terms of the permittivity through the relations $\epsilon = c_\text{m} \Delta r$ and $\sigma = \epsilon / \tau$. Neural membranes typically have a specific membrane capacitance of $c_\text{m} \sim 10^{-2} \, \si{\farad\per\square\metre}$, a thickness $\Delta r \sim 10^{-8}\, \si{\metre}$, and a time constant $\tau \sim 10^{-3} \, \si{\second}$ \cite**{Nunez2006}. This amounts to a permittivity of $\epsilon \sim 10^{-10} \,\si{\farad\per\metre}$, and conductivity of $\sigma \sim 10^{-7} \, \si{\siemens\per\metre}$, although the latter can vary quite much depending on which ion channels that are present and activated. Both are lower than for the tissue medium, but the conductivity more so, resulting in a $\tau$ that is much bigger for the membrane than for the extracellular solution.
+
+\item \textit{Neural tissue:} As a third medium, we consider the neural tissue as a whole. Data from \citeasnoun**{gabriel1996compilation} suggests that grey matter has a relative permittivity $\epsilon_\text{r} \sim 10^6$ and conductivity $\sigma \sim 0.1 \, \si{\siemens\per\metre}$ at $f = 100 \, \si{\hertz}$. This gives a relaxation time constant $\tau = \epsilon_\text{r} \epsilon_0/\sigma \sim 10^6\times 8.85\times10^{-12}/0.1 \simeq 0.1 \, \si{\milli\second}$. With this value, we get $2 \pi f \tau =  0.06$. This is much larger than for the extracellular saline solution, and reflects the fact that currents passing through tissue will not solely be in contact with the saline solution, but may also interact with neural membranes. Nevertheless, the relative contribution of the capacitive current is fairly low also in tissue, meaning that Ohmic currents will dominate. We note that there is quite some variation in experimental estimates of  $\epsilon_\text{r}$ and $\sigma$ for the tissue medium, but they are normally of the same order of magnitude as the values used in the calculation above.
+\end{itemize}
+
+In conclusion, the quasi-magnetostatic approximation seems justified for currents through tissue and in the extracellular saline solution, but not for transmembrane currents.
+
+\gen{Jeg ble lit usikker her. Hva er konsekvensen av at quasi-magnetstatic approximation eventuelt ikke er oppfylt? Kun at beregningen av magnetfeltet blir mer komplisert, cf. ligning 1.36?}
+
+\subsection{\blue{Linear extracellular medium} }
+\label{sec:Basics:LinEx}
+\index{Extracellular medium! Linear}
+In practice, most medias can \gex{(will?)} have capacitive, magnetic and conductive properties, and can be linear or nonlinear in all these three senses \gen{senses?}. Starting out with Maxwell's equations on the form given by \fref{eq:Basics:Max1}-\fref{eq:Basics:Max1} \gen{Feil ligningsnummer}, we assumed linearity in the capacitive and magnetic sense, through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$.
+
+Linearity in the conductive sense implies that the current density is linearly related to the electric field through Ohm's law:
+\begin{equation}
+{\bf i} = \sigma {\bf E}.
+\label{eq:Basics:bertil}
+\end{equation}
+
+Ohm's law is quite general, and $\sigma$ can here in principle be anisotropic (i.e., a tensor, accounting for different conductivities in different directions) and inhomogeneous (position-dependent). Furthermore, Ohms law \gex{in this context (?)} \gen{Noen har kanskje en smalere definisjon av denne loven?} does not exclude capacitive effects, because, for a medium that is linear in both the conductive and capacitive sense, capacitive effects can be incorporated into  \fref{eq:Basics:bertil} through defining a complex conductivity \cite**{Nunez2006}:
+\begin{equation}
+\sigma_\text{c} = \sigma(f)\left(1+j\frac{2\pi f \epsilon(f)}{\sigma(f)}  \right),
+\label{eq:Basics:complexsigma}
+\end{equation}
+where $j$ is the imaginary unit and $f$ the oscillation frequency of the electric field (or a component of it). Both the real and imaginary parts of $\sigma_\text{c}$ can be frequency dependent, and the two terms correspond to the conductive and capacitive properties of the medium, respectively.
+
+The current density in \fref{eq:Basics:complexsigma}\tvnnote{?} comprises both the electric drift current and the displacement current. In this book, we will not use \fref{eq:Basics:complexsigma}, but keep the two current types separate, as we did in \fref{sec:Basics:onlyohmic}. Furthermore, for extracellular tissue currents we have argued that the capacitive effects are negligible, so that they are determined by \fref{eq:Basics:bertil} with a real $\sigma$. As we also make the quasi-electrostatic approximation of Maxwell's equations (\fref{sec:Basics:Quasielectrostatic}), ${\bf E}$ can be written as the gradient of an electric potential, so that the extracellular drift current density is given \fref{eq:Basics:Ohm_3D_phi}, and so that we can take \fref{eq:Basics:continuity2} as our starting point when deriving the VC theory in \Fref{chap:VC}.
+
+We note that \fref{eq:Basics:bertil} is generally only valid in the frequency domain, while in the time domain, ${\bf i}$ must be given as a temporal convolution of $\sigma$ and ${\bf E}$ \cite**{Bedard2009}. However, if $\sigma$ is frequency independent (this assumption is discussed further in \fref{chap:Sigma}), \fref{eq:Basics:bertil} will also be valid in the time domain.
+
+
+
+
+
+
+
+
+
+
+
+
 \section{\red{TVN: Theoretical explorations....} }
 \index{Conductivity!Theoretical estimates}
 
