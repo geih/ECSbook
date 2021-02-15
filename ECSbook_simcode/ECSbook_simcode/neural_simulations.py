@@ -347,6 +347,24 @@ def return_freq_and_amplitude(tvec, sig):
     amplitude = np.abs(Y)
     return freqs, amplitude
 
+
+def return_freq_and_psd_welch(sig, welch_dict):
+    from matplotlib import mlab as ml
+    sig = np.array(sig)
+    if len(sig.shape) == 1:
+        sig = np.array([sig])
+    elif len(sig.shape) == 2:
+        pass
+    else:
+        raise RuntimeError("Not compatible with given array shape!")
+    psd = []
+    freqs = None
+    for idx in range(sig.shape[0]):
+        yvec_w, freqs = ml.psd(sig[idx, :], **welch_dict)
+        psd.append(yvec_w)
+    return freqs, np.array(psd)
+
+
 def make_WN_input(cell, max_freq):
     """ White Noise input ala Linden 2010 is made """
     tot_ntsteps = round((cell.tstop - cell.tstart) / cell.dt + 1)
