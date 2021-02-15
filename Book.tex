@@ -281,6 +281,7 @@ your eyes only
 	\item	Subfix to specify ion type: ${\bf }i_\text{Na}$, $i_\text{K}$, $i_{k}$ (general, ion specific), $i_\text{x}$ (general, not ion specific), $i_\text{L}$ (leak).
 	\end{itemize}
 Disadvantage: HH becomes $i_\text{m} = i^\text{cap} + i_\text{Na} + i_\text{K} + i_\text{L}$ with cap as superfix but the rest as subfix. But maybe that's okay?
+\ehnote{Jeg bruker lowercase consistent, i.e., $i_\mathrm{cap}$ -- en kan indeksere som $i_\mathrm{cap}^{\langle i \rangle} \equiv i_\mathrm{cap}[i]$}
 \item Potential: $\phi$ or $V$? My favorite is $\phi$. This is greek to Gaute, who seems to prefer $V$. 
 \item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template. 
 	\ehnote{Jeg la til en import av fancyref over. Den definerer kommandoen {\textbackslash}Fref\{\} og skal kunne skjoenne forskjellen paa chapter og section utfra innhold i label (chap:*, sec:*, eq:*, etc.), og faa ting internt konsistent. Test:} 
@@ -298,6 +299,7 @@ Disadvantage: HH becomes $i_\text{m} = i^\text{cap} + i_\text{Na} + i_\text{K} +
 	\item Urls: I don't know why, but for some reason the harvard-bibtexing did not handle the urls
 	in our ".bib"-file, so I removed them all. Now it works fine. I suggest that new bibtex-entries are
 	copypasted in from google-scholar. My mendelay-generated entries contained some fields that 	the Harvard-style tried to to things with that it wasnt't able to.
+	\ehnote{Hvis du bruker JabRef i nyere versjon og DOI/ISBN er spesifisert, kan du enkelt synke bibtex info -- hoeyreklikk entry saa ligger det litt ned i lista bare}
 	\end{itemize}
 \item When to include functional arguments and not?
 \item Color coding:
@@ -342,6 +344,55 @@ Based on this quote, we judge ourselves to be experts in the narrow field of mod
 \acrodef{FEM}{...}
 
 
+
+
+\chapter*{Symbols}
+
+\begin{table}[!htb]
+\caption{Reserved physical symbols and quantities}
+\label{tab:symbols}
+\begin{tabular}{|l|l|l|}
+\hline
+Symbol 				& Unit 					& Description \\
+\hline
+$t$ 				& \si{\second}  		& time \\
+$q$					& \si{\coulomb} 		& electric charge \\
+$i$ 				& \si{\ampere} 			& electric current (scalar) \\
+$\mathbf{i}$		& \si{\ampere}			& electric current (directed) \\
+$E,\mathbf{E}$		& \si{\volt\per\metre} 	& electric field (scalar, directed) \\
+$V$ 				& \si{\volt} 			& electric potential \\
+$u \in \{ x,y,z \}$	& \si{\metre} 			& location on $u$-axis \\
+$\mathbf{r}$		& \si{\metre} 			& position vector \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+
+
+\chapter*{Mathematical notation}
+
+
+\begin{table}[!htb]
+\caption{Mathematical notation and operators}
+\label{tab:math}
+\begin{tabular}{|l|l|}
+\hline
+Notation/operator & Description \\
+\hline
+$\coloneq$											& definition operator \\
+$\nabla$											& gradient operator \\
+$\langle u(t) \rangle $ 							& mean/expectation value of $u(t)$  \\
+$\vert u \vert$										& absolute value of u \\
+$\Vert \mathbf{r} \Vert$							& norm of $\mathbf{r}$ \\
+$\{ \mathbf{r}_1, \mathbf{r}_2, \ldots \mathbf{r}_n \}$	& set \\
+$\mathbf{u} \coloneq [u_1, u_2, \ldots u_n]$ 		& vector (1-dimensional matrix) \\
+$\mathbf{U} \coloneq [\mathbf{u}_1^T, \mathbf{u}_2^T, \ldots \mathbf{u}_n^T]$ 		& 2-dimensional matrix \\
+ & \\
+\hline
+\end{tabular}
+\end{table}
 
 % \editedlistofcontributors
 \include{notation}
