@@ -315,7 +315,7 @@ c_\text{m} \frac{\partial V}{\partial t} = \frac{E_\text{m}-V}{R_\text{m}} +  \f
 \end{equation}
 where we have introduced the stimulus current per unit length, 
 \begin{equation}
-\mathcal{I}_{\mathrm{stim}}(x,t) = \lim_{\delta x\to\0} I_{\mathrm{stim}}(x,t)/\delta x \,\; (\si{\milli\ampere\per\centi\metre}). 
+\mathcal{I}_{\mathrm{stim}}(x,t) = \lim_{\delta x \to 0} I_{\mathrm{stim}}(x,t)/\delta x \,\; (\si{\milli\ampere\per\centi\metre}). 
 \label{eq:Neuron:CurrentPerUnitLength}
 \end{equation}
 To improve our analytical understanding of dendritic signaling, it is useful to reformulate the cable equation to:
@@ -360,7 +360,7 @@ which has the solution:
 \end{equation}
 or, 
 \begin{equation}
-V(x) &= E_\text{m} + \big( V(0)-E_\text{m} \big) e^{-x/\lambda}.
+V(x) = E_\text{m} + \big( V(0)-E_\text{m} \big) e^{-x/\lambda}.
 \label{eq:Neuron:semiinf4}
 \end{equation}
 We note that the general-solution to \fref{eq:Neuron:semiinf2} also has a term containing $e^{+x/\lambda}$, but this was excluded on the count of being unphysical, since it diverges when $x \rightarrow \infty$. 
@@ -439,14 +439,14 @@ Up til this point, we have focused on electrical currents in neurons, but talked
 
 In the MC models it is normally assumed that, despite all these various ionic fluxes, the ion concentrations remain constant. This may seem like a peculiar assumption, but it is often quite good. The reason is that the number of ions crossing the membrane during a brief signal such as an action potential only leads to tiny changes in the ion concentrations. 
 
-To see why, let us consider an example with a spherical single compartment neuron with radius $r$. This neuron will contain a number $N_0 = 4/3 \,\pi r^3 N_\text{A} c_\text{Na}$ of Na$^{+}$ ions, where $N_\text{A}$ is Avogadro's number and $c_\text{Na}$ the intracellular Na$^{+}$ concentration. Let us next assume that Na$^+$ ions enter the neuron and increases the membrane potential by $\Delta V$. The total charge needed for this will be $\Delta Q = 4 \pi \r^2 c_m \Delta V$, which corresponds to a number of $N_\text{new} = \Delta Q/e$ of ions, where $e$ is the unit charge. From this, we may compute the ratio between the number of ions that entered the neuron and the number of ions that were already there:
+To see why, let us consider an example with a spherical single compartment neuron with radius $r$. This neuron will contain a number $N_0 = 4/3 \,\pi r^3 N_\text{A} c_\text{Na}$ of Na$^{+}$ ions, where $N_\text{A}$ is Avogadro's number and $c_\text{Na}$ the intracellular Na$^{+}$ concentration. Let us next assume that Na$^+$ ions enter the neuron and increases the membrane potential by $\Delta V$. The total charge needed for this will be $\Delta Q = 4 \pi r^2 c_m \Delta V$, which corresponds to a number of $N_\text{new} = \Delta Q/e$ of ions, where $e$ is the unit charge. From this, we may compute the ratio between the number of ions that entered the neuron and the number of ions that were already there:
 \begin{equation}
-\frac{N_\text{new}{N_0} = \frac{3 c_m \Delta V}{F r c_\text{Na}}, 
+\frac{N_\text{new}}{N_0} = \frac{3 c_m \Delta V}{F r c_\text{Na}}, 
 \label{eq:Neuron:NaNaNa}
 \end{equation}
-where we have used that Faraday's constant $F = eN_\text{A} = 96458.3 \, \si{\colomb\per\mol}$. If we insert values for a typical action potential $\Delta V = 100 \,\si{\milli\volt} = 0.1 \si{Volt}, an intracellular Na$^+$ concentration $c_\text{Na} = 10 \, \si{\milli\molar}$, and $c_\text{m} = 1 \, \si{\micro\farad\per\square\centi\metre} = 10^{-2}\, \si{\farad\per\square\metre}$, the ratio becomes:
+where we have used that Faraday's constant $F = eN_\text{A} = 96458.3 \, \si{\coulomb\per\mol}$. If we insert values for a typical action potential $\Delta V = 100 \,\si{\milli\volt} = 0.1 \si{Volt}$, an intracellular Na$^+$ concentration $c_\text{Na} = 10 \, \si{\milli\molar}$, and $c_\text{m} = 1 \, \si{\micro\farad\per\square\centi\metre} = 10^{-2}\, \si{\farad\per\square\metre}$, the ratio becomes:
 \begin{equation}
-\frac{N_\text{new}{N_0} = \frac{3.1 \times 10^{-9} \si{\metre}}{r}, 
+\frac{N_\text{new}}{N_0} = \frac{3.1 \times 10^{-9} \si{\metre}}{r}, 
 \label{eq:Neuron:NaNaNaNa}
 \end{equation}
 Hence, even in a small compartment with $r=1\,\si{\micro\metre} = 10^{-6}\,\si{\metre}$, the number of ions that enters during an action potential will only change the concentration by fraction $3.1 \times 10^{-3} \approx 0.3 \%$. This suggests that concentrations changes on a short time scale are small enough to be neglected. 
