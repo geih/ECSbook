@@ -7,7 +7,7 @@ evoke the extracellular electric potentials that are the main topic of this book
 
 Before we talk more about the electric signaling in the brain, we will in this chapter give a general introduction to electromagnetic theory, focusing mostly on the electric part of it, and less on the magnetic. The aim of this rather incomplete introduction is to establish an elementary understanding of the main concepts that we will use in the remainder of this book.
 
-Electromagnetic theory is summarized by Maxwell's equations, and we might have kick-started this chapter by listing up those. However, since Maxwell's equations may appear a bit challenging for "the untrained eye", we will be taking a "softer" path, which we deem sufficient for establishing the main concepts that we will be working with. For good taste and later reference, we nevertheless go through Maxwell's equations in the final part of the chapter (Section \ref{sec:Basics:Maxwell}). Towards the end of the chapter we will also go through some of the most important assumptions that we use when applying the electromagnetic theory to predict electric potentials in complex medium like brain tissue.
+Electromagnetic theory is summarized by Maxwell's equations, and we might have kick-started this chapter by listing up those. However, since Maxwell's equations may appear a bit challenging for "the untrained eye", we will be taking a "softer" path, which we deem sufficient for establishing the main concepts that we will be working with. For good taste and later reference, we nevertheless go through Maxwell's equations in the final part of the chapter (Section \ref{sec:Basics:Maxwell}). Towards the end of the chapter we will also go through some of the most important assumptions that we use when applying the electromagnetic theory to predict electric potentials in a complex medium like brain tissue.
 
 Readers without prior schooling in physics might not be able to follow all parts of this introduction, but it will hopefully still give them a basic understanding of the concepts of \textit{electric charge}, \textit{electric currents}, \textit{electric fields}, and \textit{electric potentials}, and some insight into how they are related to one another. Readers that do have a physics background might see the first part of this introduction as a useful repetition, and may appreciate the later parts, which deal with less trivial issues regarding the use of electromagnetic theory in a complex medium such as brain tissue.
 
@@ -15,11 +15,11 @@ Readers without prior schooling in physics might not be able to follow all parts
 
 \section{\blue{Electric charge}}
 \label{sec:Basics:Charge} \index{Charge}
-Let us begin with the fundamental quantity for electricity, the electric charge. Nature's fundamental charges are those carried by the protons and electrons that build up the atoms that build up the material world. The proton carries the charge $e$, while the electron carries the charge $-e$, where $e = 1.602\times10^{-19}$ coulomb (\si{\coulomb}) is called the \textit{unit charge} \index{Unit charge}.
+Let us begin with the fundamental quantity for electricity, the electric charge. Nature's fundamental charges are those carried by the protons and electrons that build up the atoms that build up the material world. The proton carries the charge $e$, while the electron carries the charge $-e$, where $e = 1.602\times10^{-19}$ coulomb (\si{\coulomb}) is called the \textit{unit charge}. \index{Unit charge}
 
-Since atoms in their natural state contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper wire, such as that carrying current to normal desktop lamp, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt-water (saline), the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
+Since atoms in their natural state contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper wire, such as that carrying current to a normal desktop lamp, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt water \gen{Tok bort bindestrek :-)} (saline), the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
 
-At a fundamental, microscopic level, electricity is due to the movement of charges. Such a movement can be caused both by electric and magnetic forces, but for now, we consider only the electric force, which is the most important for the phenomena that we will study in this book. A pair of charges, $q_1$ and $q_2$, will act on each others with a force $F$ (with units newton (\si{\newton})) given by Coulomb's law:
+At a fundamental, microscopic level, electricity is due to the movement of charges. Such a movement can be caused both by electric and magnetic forces, but for now, we consider only the electric force, which is the most important for the phenomena that we will study in this book. A pair of charges, $q_1$ and $q_2$, will act on each other with a force $F$ (with units newton (\si{\newton})) given by Coulomb's law:
 \begin{equation}
 F = \frac{q_1q_2}{4\pi \epsilon_0} \frac{1}{r^2},
 \label{eq:Basics:CoulombF}
@@ -40,16 +40,16 @@ defined as vector ${\bf r}_1-{\bf r}_2$ divided by its own length $|{\bf r}_1-{\
 
 If there are several ($N$) point charges present, the contribution from each of them sum up linearly. If we have a charge $q_1$ in a position ${\bf r}_1$, the force acting on it by the $N-1$ other charges $q_2, q_3, q_4 ... q_{N}$ in positions ${\bf r}_2, {\bf r}_3, {\bf r}_4 ... {\bf r}_{N}$ will be:
 \begin{equation}
-{\bf F}({\bf r_1}) = \sum_{n=2}^{N} \frac{q_1 q_n}{4\pi \epsilon_0} \frac{\hat{{\bf r}}_{1,n}}{|{\bf r}_1-{\bf r}_n|^2}.
+{\bf F}({\bf r}_1) = \sum_{n=2}^{N} \frac{q_1 q_n}{4\pi \epsilon_0} \frac{\hat{{\bf r}}_{1,n}}{|{\bf r}_1-{\bf r}_n|^2}.
 \label{eq:Basics:CoulombFN}
 \end{equation}
 
 If our system of study consisted of a small number $N$ of charges, we could use $N$ instances of \fref{eq:Basics:CoulombFN} to compute the force acting on all the $N$ individual charges. Together with Newton's law ${\bf F} = m {\bf a}$, which tells us how the charges will be accelerated in the force direction, \fref{eq:Basics:CoulombFN} would then allow us to compute the movements of all our charges over time.
 
-Although \fref{eq:Basics:CoulombFN} establishes the fundamental origin for electric interactions, there is a fairly long way to go from this equation to the understanding of electric phenomena in a macroscopic system such as for example the brain. When describing a macroscopic system, we are usually not interested in the microscopic interactions between a small number of charges, but rather the joint interactions of a very, very large number of charges. It is then not feasible to keep record of the position of each individual charge, but rather to work with continuous variables defined on a larger spatial scale, such as charge densities, $\rho$ (with units \si{\coulomb\per\cubic\metre}), or ion concentrations, $c_k$ (with units millimolar ($1\, \si{\milli\molar} = 1 \,\si{\mole\per\cubic\metre} = 6.02\times10^{23}$ particles per \si{\cubic\metre}). The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units Ampere (\si{\ampere} = \si{\coulomb\per\second}).
+Although \fref{eq:Basics:CoulombFN} establishes the fundamental origin for electric interactions, there is a fairly long way to go from this equation to the understanding of electric phenomena in a macroscopic system such as for example the brain. When describing a macroscopic system, we are usually not interested in the microscopic interactions between a small number of charges, but rather the joint interactions of a very, very large number of charges. It is then not feasible to keep record of the position of each individual charge, but rather to work with continuous variables defined on a larger spatial scale, such as charge densities, $\rho$ (with units \si{\coulomb\per\cubic\metre}), or ion concentrations, $c_k$ (with units millimolar ($1\, \si{\milli\molar} = 1 \,\si{\mole\per\cubic\metre} = 6.02\times10^{23}$ particles per \si{\cubic\metre})). The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}).
 
-\gen{I tillegg kan det jo ogsaa vaere magnetiske krefter paa ladninger, kanskje bare nevne det for "completeness"?}
-\ghnote{La til kort kommentar i begynnelsen.}
+%\gen{I tillegg kan det jo ogsaa vaere magnetiske krefter paa ladninger, kanskje bare nevne det for "completeness"?}
+%\ghnote{La til kort kommentar i begynnelsen.}
 
 
 \section{\blue{Electric fields and potentials}}
@@ -65,14 +65,17 @@ Since the electric force is due to the Coulomb force, the electric field generat
 \label{eq:Basics:CoulombEN}
 \end{equation}
 
-Tightly related to the electric field ${\bf E}$ is the electric potential $\phi$ (with units volts (\si{\volt})), which is what we normally measure experimentally with electrodes \index{Electric potential}. While ${\bf E}$ is a fundamental physical entity, $\phi$ may be regarded as an auxiliary variable. It is a way to represent the electric field that often makes computations simpler and measurements easier.
+Tightly related to the electric field ${\bf E}$ is the electric potential $\phi$ (with units volts (\si{\volt})), which is what we normally measure experimentally with electrodes.\index{Electric potential} While ${\bf E}$ is a fundamental physical entity, $\phi$ may be regarded as an auxiliary variable. 
+\gen{Er ikke {\bf E} ogsaa en auxiliary variabel?}
+It is a way to represent the electric field that often makes computations simpler and measurements easier.
 
 The electric field can be expressed as the spatial derivative, or gradient, of the potential:
 \begin{equation}
-{\bf E}(x,y,z) = - {\bf \nabla} \phi(x,y,z) = - \left(\frac{d\phi}{dx} {\bf e}_x  + \frac{d\phi}{dy} {\bf e}_y + \frac{d\phi}{dz} {\bf e}_z \right) \phi.
+{\bf E}(x,y,z) = - {\bf \nabla} \phi(x,y,z) = - \left(\frac{d\phi}{dx} {\bf e}_x  + \frac{d\phi}{dy} {\bf e}_y + \frac{d\phi}{dz} {\bf e}_z \right).
 \label{eq:Basics:EV}
 \end{equation}
 The operator ${\bf \nabla}$ computes a property's spatial rate of change (also called the gradient) in the various spatial directions, and ${\bf e}_x$, ${\bf e}_y$ and  ${\bf e}_z$ are the unit vectors in the three spatial directions $x$, $y$ and $z$, respectively.
+\gen{Egentlig hadde det vel vaert mer presist aa si "a scalar field's rate of change" enn "a property's rate of change", men det blir kanskje forvirrende her?}
 
 For a spherical symmetric potential,
 \begin{equation}
@@ -81,7 +84,7 @@ For a spherical symmetric potential,
 \end{equation}
 Since the field contribution from each point charge is spherically symmetric around its position (${\bf r}_n$), the field in \fref{eq:Basics:CoulombEN} can thus be written as the gradient of the potential:
 \begin{equation}
-{\phi}({\bf r}) = \sum_{n=1}^{N}  \frac{q_n}{4\pi \epsilon_0} \frac{\hat{{\bf r}}_{1,n}}{|{\bf r}-{\bf r_n}|}.
+{\phi}({\bf r}) = \sum_{n=1}^{N}  \frac{q_n}{4\pi \epsilon_0} \frac{\hat{{\bf r}}_{1,n}}{|{\bf r}-{\bf r}_n|}.
 \label{eq:Basics:CoulombPhiN}
 \end{equation}
 
@@ -97,7 +100,7 @@ To get an intuitive understanding of the relationship between ${\bf E}$ and $\ph
 E = -\frac{d\phi(x)}{dx} = -\frac{\Delta \phi}{\Delta x} = -\frac{\phi(x_b)-\phi(x_a)}{x_b-x_a},
 \label{eq:Basics:EV1D}
 \end{equation}
-where the first equality follows from the 1D-assumption, the second from the assumption that $E$ is constant, and the third is simply a definition of the second, where $x_b$ and $x_a$ may represent any two arbitrary points in space. For example, if $E = 1$~\si{\volt\per\metre}, and the distance between our points $x_b-x_a$ is 1~\si{\metre}, \fref{eq:Basics:EV1D} tells us that $\phi$ will be 1~\si{\volt} lower in $x_b$ compared to $x_a$ (\fref{fig:Basics:Ground}).
+where the first equality follows from the 1D-assumption \gen{det skal vel ikke vaere bindestrek her?}, the second from the assumption that $E$ is constant, and the third is simply a definition of the second, where $x_b$ and $x_a$ may represent any two arbitrary points in space. For example, if $E = 1$~\si{\volt\per\metre}, and the distance between our points $x_b-x_a$ is 1~\si{\metre}, \fref{eq:Basics:EV1D} tells us that $\phi$ will be 1~\si{\volt} lower in $x_b$ compared to $x_a$ (\fref{fig:Basics:Ground}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -108,13 +111,17 @@ where the first equality follows from the 1D-assumption, the second from the ass
 \label{fig:Basics:Ground}
 \end{figure}
 
-We may use the example in \fref{fig:Basics:Ground} to define the important concept of \textit{ground}\index{Ground}. The field ${\bf E}$ generally determines the potential only up to a constant. In the example, the field $E = 1$ V/m would be consistent with any pair of potentials $\phi_a$ and $\phi_b$ as long as $\phi_b - \phi_a =  1 \,\si{\volt}$. Since it is the field, and not the potential, that is the fundamental physical entity, we can therefore not speak of the potential in a certain point as an absolute entity, but only the potential \textit{difference} between two points. When we measure the potential in a given location, it is always measured relative to some reference electrode (\fref{fig:Basics:elec_circuit}), which we often call \textit{ground}, and where we define $\phi = 0$ (cf. example in \Fref{fig:Basics:Ground}). When we record extracellular potentials in the brain, we can choose to place the reference electrode close or far away from the recording electrode, depending on the kind of signal one wishes to measure \cite**{Sharott2015}. 
+We may use the example in \fref{fig:Basics:Ground} to define the important concept of \textit{ground}\index{Ground}. The field ${\bf E}$ generally determines the potential only up to a constant. In the example, the field $E = 1$ V/m would be consistent with any pair of potentials $\phi_a$ and $\phi_b$ as long as $\phi_b - \phi_a =  1 \,\si{\volt}$. Since it is the field, and not the potential, that is the fundamental physical entity \gen{egentlig er det vel "force" som er det 
+fundamental physical entity?}, we can therefore not speak of the potential in a certain point as an absolute entity, but only the potential \textit{difference} between two points. When we measure the potential in a given location, it is always measured relative to some reference electrode (\fref{fig:Basics:elec_circuit}), which we often call \textit{ground}, and where we define $\phi = 0$ (cf. example in \Fref{fig:Basics:Ground}). When we record extracellular potentials in the brain, we can choose to place the reference electrode close or far away from the recording electrode, depending on the kind of signal one wishes to measure \cite**{Sharott2015}. 
 \tvnnote{Alternative:
  When recording extracellular potentials in the brain, we are in principle free to arbitrarily choose the location of the reference electrode. The ideal location for the reference electrode depends on several different factors, but it is commonly placed "far away" from the neural activity that is being measured from so that the measured potential is not dependent on the exact location of the reference electrode. When modelling extracellular potentials, the reference electrode is typically (and often implicitly) placed at "infinity".
 }
+\gen{Synes Torbjorns forlslag er bra, men har et endringsforslag i en av setningene: 
+"so that the measured potential is not dependent on an unknown varying electrical activity around the reference electrode."}
+
 
 \subsection{\tvnnote{The physical interpretation of the potential}}
-By definition, the electric potential is the energy needed to move a unit of electric charge $q$ from the reference point (ground) to a specific location in the electric field (\fref{fig:Basics:elec_circuit}). The unit (V) of the electric potential is equivalent to energy per charge, or Joule per Coulomb (1 \si{\volt} = 1 \si{\joule\per\coulomb}). As such, the concept of an electric potential is closely related to the concept of a potential energy. The potential energy ($U_E$) of a charge $q$ in an electric field is:
+By definition, the electric potential is the energy needed to move a unit of electric charge $q$ from the reference point (ground) to a specific location in the electric field (\fref{fig:Basics:elec_circuit}). The unit (V) of the electric potential is equivalent to energy per charge, or joule per coulomb (1 \si{\volt} = 1 \si{\joule\per\coulomb}). As such, the concept of an electric potential is closely related to the concept of a potential energy. The potential energy ($U_E$) of a charge $q$ in an electric field is:
 \begin{equation}
 U_E = q\phi.
 \label{eq:Basics:UE}
@@ -125,6 +132,7 @@ U_E = q\phi.
 
 Many people (hvertfall Torbj\o rn) might have the intuition that if the extracellular conductivity is very low, the extracellular potential should also also be very low (after all "the signal can hardly propagate through the medium"). However, the extracellular potential is the energy needed to move a unit charge from a reference electrode to a measurement electrode, and therefore, if the extracellular conductivity is very low, more energy is needed.
 \tvnnote{For uformelt/haandveivende/meningsloest? Husker jeg slet lenge med denne intuisjonen om hva potensialet representerer fysisk.}
+\gen{Dette maa vi diskutere. Jeg synes det er lettere aa tenke/snakke om str{\o}mmer enn ladninger. Naar en str{\o}mkilde  presser en str{\o}m gjennom et Ohmsk medium saa blir det et spenningfall (hopp) i mediet som er proporsjonalt med motstanden. Men ladningene som flytter paa seg faar ikke mer energi, alle frigjort energi blir vel til varme i det ohmske mediet?} 
 }
 
 \begin{figure}[!ht]
@@ -132,7 +140,8 @@ Many people (hvertfall Torbj\o rn) might have the intuition that if the extracel
 \includegraphics[width=0.4\textwidth]{Figures/Basics/rec_elec_circuit.png}
 \end{center}
 \caption[]{\textbf{Measurement of extracellular potential.}
-Electric potential is measured between recording electrode and reference electrode, and represents the energy required to move a positive test charge from the reference electrode to the measurement electrode. If, say, positive ions are leaving the extracellular medium (and entering a cell) in the vicinity of the recording electrode, then the energy needed to move a positive charge to the measurement electrode is negative, that is, one can gain energy by moving the charge there.}
+Electric potential is measured between recording electrode and reference electrode, and represents the energy required to move a positive test charge from the reference electrode to the measurement electrode. If, say, positive ions are leaving the extracellular medium (and entering a cell) in the vicinity of the recording electrode, then the energy needed to move a positive charge to the measurement electrode is negative, that is, \gex{the positive charge will gain energy when moved to this electrode}.}
+\gen{Men kanskje det er bedre aa snakke om str{\o}mmer enn ladninger?}
 \label{fig:Basics:elec_circuit}
 \end{figure}
 
@@ -156,11 +165,12 @@ which is the single charge version of \fref{eq:Basics:CoulombPhiN}, but instead 
 \phi(r) = \frac{q}{4\pi \epsilon_0 \epsilon_r r} e^{-r/r_D}.
 \label{eq:Basics:DebyeScreening}
 \end{equation}
+\gen{Vi burde ha en passende referanse til Debye-Huckel teori her.}
 Here, $r_D$ is called the \textit{Debye shielding distance} and $\epsilon_r$ is the \textit{relative permittivity} of the medium, which has a value of about 80 in water and dilute saline solutions \cite**{hasted1948}. In the saline solution in the brain, $r_D$ is typically just below 1 \si{\nano\metre} \cite**{Hille2001}, which implies that any given reference charge will give a negligible contribution to the potential at distances larger than the nanometre scale.
 
-Closely related to the discussion above is the concept of electroneutrality\index{Electroneutrality}. When arranged by Coulomb interactions, the numbers of positive and negative charges within a finite and not too small volume of space tend to be kept in close balance. If this were not the case, and a reference volume of tissue did contain a net charge density $\rho$, the very strong Coulomb forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}, which in brain tissue is on the order of a nanosecond (see \fref{sec:Basics:Quasimagnetostatic}). On spatial scales larger than nanometres and temporal scales larger than nanoseconds, brain tissue will therefore to a good approximation be practically electroneutral \cite**{Nunez2006,Grodzinsky2011}.
+Closely related to the discussion above is the concept of electroneutrality\index{Electroneutrality}. When arranged by Coulomb interactions, the numbers of positive and negative charges within a finite and not too small volume of space tend, to be kept in close balance. If this were not the case, and a reference volume of tissue did contain a net charge density $\rho$, the very strong Coulomb forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}, which in brain tissue is on the order of a nanosecond (see \fref{sec:Basics:Quasimagnetostatic}). On spatial scales larger than nanometres and temporal scales larger than nanoseconds, brain tissue will therefore to a good approximation be practically electroneutral \cite**{Nunez2006,Grodzinsky2011}.
 
-Since charges are free to move around both inside and outside cells, both the intracellular domain and the extracellular domain are practically electroneutral. However, whereas the intra- and extracellular mediums are conducting, the cellular membrane is largely dielectric (inslulating), and violations of electroneutrality can therefore occur locally at neural membranes.
+Since charges are free to move around both inside and outside cells, both the intracellular domain and the extracellular domain are practically electroneutral. However, whereas the intra- and extracellular mediums are conducting, the cellular membrane is largely dielectric (insulating), and violations of electroneutrality can therefore occur locally at neural membranes.
 Due to the capacitive properties of neural membranes (see \fref{sec:Basics:CapacitiveCurrent}), a patch of membrane can separate a charge $-q$ on the interior side from a charge $q$ on the exterior side, and this breach of electroneutrality is what gives rise to the membrane potential. However, since the membrane is just some nanometres thick, the separation of $-q$ from $q$ occurs on a small spatial scale, and the two charges will still shield each others' contributions to the electric potential some nanometres away from the membrane. 
 
 The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint or current continuity, or equivalently, the constraint that  there should be no charge accumulation anywhere in the extracellular space. As we shall see, it will then be the current sources at neural membranes that give rise to an extracellular potential $\phi$. For example, consider positive ions flowing through the neural membrane into a cell, thereby leaving a certain region of the extracellular medium. This will cause a rearrangement of the extracellular ions, so that positive ions move into this region and negative ions move out from this region. The potential can then be thought of, not as a the result of a particular charge-distribution, but rather as a higher level entity, reflecting the energy landscape needed for these ionic movements to take place in a manner that preserves electroneutrality. 
@@ -213,7 +223,7 @@ As we noted earlier, the charge-relaxation time in the extracellular saline solu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\blue{Electric currents}}
 \label{sec:Basics:Current} \index{Electric current}
-As we have stated several times by now, we do not want to study a macroscopic system by keeping track of individual particles or charges, but rather in the average movement of particles or charge on a larger spatial scale. The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units Ampere (\si{\ampere} = \si{\coulomb\per\second}). 
+As we have stated several times by now, we do not want to study a macroscopic system by keeping track of individual particles or charges, but rather in the average movement of particles or charge on a larger spatial scale. The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}). 
 
 There exist various kinds of electric currents, differing in terms of what drives them. Below we will introduce the three kinds that are most important for the topic of this book, which are conductive currents (\fref{sec:Basics:ConductiveCurrent}),  capacitive currents (\fref{sec:Basics:CapacitiveCurrent}) and diffusive currents (\fref{sec:Basics:DiffusiveCurrent}). We also briefly comment on inductive and advective currents (\fref{sec:Basics:OtherCurrents}), although we consider them to be of less importance for the brain dynamics that we study in this book. 
 
@@ -223,7 +233,7 @@ There exist various kinds of electric currents, differing in terms of what drive
 \index{Conductive current}
 A conductive material \index{Conductive medium} is one through which charges can move freely when they are exposed to an electric field. The field-driven motion of charges can be quantified in terms of a conductive current, defined as the amount of charge that moves through some reference cross-section area per second.
 
-In electric circuits composed of metallic wires and various circuit elements, currents are essentially one dimensional, running in the directions defined by the circuitry. The reference cross-section area is then typically taken to be that of "the whole wire" or "the whole circuit element". We then do not have to think about the reference-cross section area, but can simply define the total current at each part of the circuit. A simple example is shown in \fref{fig:Basics:Currents}A, where a current passes through a wire with a resistor. The current is then given by Ohm's law:
+In electric circuits composed of metallic wires and various circuit elements, currents are essentially one dimensional, running in the directions defined by the circuitry. The reference cross-section area is then typically taken to be that of "the whole wire" or "the whole circuit element". We then do not have to think about the reference cross-section area, but can simply define the total current at each part of the circuit. A simple example is shown in \fref{fig:Basics:Currents}A, where a current passes through a wire with a resistor. The current is then given by Ohm's law:
 \begin{equation}
 I = - \frac{\Delta \phi}{R},
 \label{eq:Basics:Ohm_R}
@@ -258,15 +268,17 @@ On a more general form, Ohm's law states that:
 {\bf i} = \sigma {\bf E}.
 \label{eq:Basics:Ohm_general}
 \end{equation}
-In comparison, \fref{eq:Basics:Ohm_R}-\fref{eq:Basics:Ohm_3D_phi} hold only in the cases when the electric field ${\bf E}$ can be expressed as a gradient of the potential (cf. \fref{eq:Basics:EV}), which we shall assume throughout this book. A discussion of this assumption is given in \fref{sec:VC:quasistatic}.
+In comparison, \fref{eq:Basics:Ohm_R}-\fref{eq:Basics:Ohm_3D_phi} hold only in the cases when the electric field ${\bf E}$ can be expressed as a gradient of the potential (cf. \fref{eq:Basics:EV}), which we shall assume throughout this book. 
+\gen{Hmm... Er vi sikre paa at Ohms lov ogsaa kan brukes i tilfeller der potensialet ikke kan skrives som en gradient av potensialet? Ja, vi er kanskje det?}
+A discussion of this assumption is given in \fref{sec:VC:quasistatic}.
 
 
 \subsubsection{\blue{A note on Ohms law}}
 \label{sec:Basics:Note}
-It is important to remember that Ohm's law (\fref{eq:Basics:Ohm_general}) represents the average movement of charge on larger spatial scale, and does not apply for movement of individual charges on the nanometre scale. If we compare it with the fundament for electric interactions it is easy to get confused, so let us dive into that confusion and try to clear it up. According to \fref{eq:Basics:E}, an electric field acts on a reference charge $q$ by a constant force, and should according to Newton's law (${\bf F} = m{\bf a}$) give it a constant acceleration in the field-direction. Conversely, \fref{eq:Basics:Ohm_general} states that ${\bf E}$ gives rise, not to a constant acceleration of charges, but rather a constant current, i.e., a constant average \textit{velocity} of charges.
+It is important to remember that Ohm's law (\fref{eq:Basics:Ohm_general}) represents the average movement of charge on larger spatial scale, and does not apply for movement of individual charges on the nanometre scale. If we compare it with the fundament \gen{physical foundations?} for electric interactions it is easy to get confused, so let us dive into that confusion and try to clear it up. According to \fref{eq:Basics:E}, an electric field acts on a reference charge $q$ by a constant force, and should according to Newton's law (${\bf F} = m{\bf a}$) give it a constant acceleration in the field-direction. Conversely, \fref{eq:Basics:Ohm_general} states that ${\bf E}$ gives rise, not to a constant acceleration of charges, but rather a constant current, i.e., a constant average \textit{velocity} of charges.
 
 The reason for the discrepancy between the single charge (constant acceleration) and many-charge (constant velocity) scales is that the constant acceleration (eq. \ref{eq:Basics:E}) of our single protagonist charge $q$ will go on for only a tiny time period (the charge relaxation-time) \index{Charge-relaxation} before it will bump into some other particle and be scattered out in some random direction. After the scattering event, the acceleration will start "from scratch", and go on until the next collision takes place, and so forth. Whereas the scattering events will tend to make the motion of $q$ a random walk (which should give it a zero average velocity in any preferred direction), the small periods of acceleration between collisions will at average give $q$ a net drift velocity in the field direction. As the same will happen for all other charges present, there will be a net drift of charge in the field direction. The current density given by \fref{eq:Basics:Ohm_general} is therefore often referred to as the \textit{drift current density}\index{Drift current}. Admittedly, the explanation that we proposed here was somewhat hand-waving, and the fact that we get the linear (constant velocity) relationship in \fref{eq:Basics:Ohm_general} is constitutive, meaning that it is observed experimentally rather than derived from first physical principles. It is found to be a good approximation for many mediums under many conditions, and an excellent approximation for brain tissue \cite**{Nunez2006,Pettersen2012}.
-\tvnnote{En ting vi ofte gjoer i artikler er aa referere til laereboeker og review-artikler, som kommer med paastander aa henviser videre til tidligere boeker og artikler. Til en viss grad har jeg lyst til aa proeve aa ungaa dette her, siden det blir litt babushka.}
+\tvnnote{En ting vi ofte gjoer i artikler er aa referere til laereboeker og review-artikler, som kommer med paastander aa henviser videre til tidligere boeker og artikler. Til en viss grad har jeg lyst til aa proeve aa ungaa dette her, siden det blir litt babushka.} 
 
 \subsection{\blue{Capacitive currents}}
 \label{sec:Basics:CapacitiveCurrent}
@@ -278,7 +290,7 @@ A parallel plate capacitor can separate a charge $q$ on one plate from a charge 
 \phi = \frac{q}{C},
 \label{eq:Basics:Vcap}
 \end{equation}
-where $C$ (units Farad (\si{\farad} = \si{\coulomb\per\volt})) is the capacitance.
+where $C$ (units farad (\si{\farad} = \si{\coulomb\per\volt})) is the capacitance.
 
 To understand how a capacitor works, consider the illustration in \fref{fig:Basics:Capacitor}, where a conductive current $I_\text{in}$ enters the capacitor from the left, and a conductive current $I_\text{out}$ leaves to the right. Kirchhoff's current law states the current flowing into any node in a circuit must equal the current flowing out from that node, which means that we must define
 a \textit{capacitive current} $I_\text{cap}$ over the capacitor, so that we get continuity: $I_\text{in} = I_\text{cap} = I_\text{out}$. \tvnnote{Syntes forklaringen her blir litt baklengs, som om Kirchoff's lov er det grunnleggende sanne, heller enn en observasjon. Ta forklaringen under foerst?}
@@ -321,9 +333,14 @@ The electrodiffusive \index{Electrodiffusion} nature of ionic motion is describe
 {\bf j}_k = - D_k {\bf \nabla} c_{k} - \frac{D_k z_k c_k}{\psi} {\bf \nabla} \phi,
 \label{eq:Basics:JNP}
 \end{equation}
-which determines the flux density, ${\bf j}_k$ (units \si{\mole\per\square\metre\per\second}) of an ion species $k$. The first term on the right hand side of \fref{eq:Basics:JNP} is Fick's law for diffusion, and states that the diffusive flux of ion species $k$ is proportional to the diffusion constant ${D}_k$ (units \si{\square\metre\per\second}) times the concentration gradient ${\bf \nabla} c_{k}$. ${D}_k$ is a property of the medium that the ion diffuses through, and determines how "easy" it is for the ion $k$ to move through the medium. The second term on the right hand side of eq. \ref{eq:Basics:JNP} accounts for ionic drift due to the electric field. The factor $D_k/\psi$ is the electrical mobility of the ions, which is linearly related to their diffusion constant. This linear relationship is called the Einstein relation\index{Einstein relation}. It does not apply generally, but is valid for dilute solutions, such as the saline solutions in the brain \cite**{Grodzinsky2011}. The valency, $z_{k}$, is a unit-less number that denotes the number of unit charges associated with a single ion of species $k$. The factor $\psi=RT/F$ (units \si{\volt}) is defined by the gas constant ($R = 8.314 \, \si{\joule\per\mole\per\kelvin}$), Faraday's constant ($F = 96458.3\, \si{coulomb\per\mole}$), and the temperature ($T$ with units \si{\kelvin}).
+which determines the flux density, ${\bf j}_k$ (units \si{\mole\per\square\metre\per\second}) of an ion species $k$. The first term on the right hand side of \fref{eq:Basics:JNP} is Fick's law for diffusion, and states that the diffusive flux of ion species $k$ is proportional to the diffusion constant ${D}_k$ (units \si{\square\metre\per\second}) times the concentration gradient ${\bf \nabla} c_{k}$. ${D}_k$ is a property of the medium that the ion diffuses through, and determines how "easy" it is for the ion $k$ to move through the medium. The second term on the right hand side of eq. \ref{eq:Basics:JNP} accounts for ionic drift due to the electric field. 
 
-Faraday's constant is defined as the charge per mole ($6.02\times10^{23}$) of unit charges. A flux density ${\bf j_k}$ can thus be converted to a current density by multiplying it with $Fz_k$. A salt water solution is composed of several ions, and to obtain the net electric current, we can sum over the contributions from all of them to obtain the total current density:
+The factor $D_k/\psi$ is the electrical mobility of the ions, which is linearly related to their diffusion constant. 
+\gen{Kunne kanskje vaere en ide aa bruke litt mer tekst paa aa definer og snakke om "mobility" siden dette er en stoerrelse som brukes litt rundt omkring, 
+ogsaa for aa beskrive bevegelse at kuler i vaesker under paavirkning at gravitasjonskraft? Saa er det riktig aa snakke om "electrical mobility"?}
+This linear relationship is called the Einstein relation\index{Einstein relation}. It does not apply generally, but is valid for dilute solutions, such as the saline solutions in the brain \cite**{Grodzinsky2011}. The valency, $z_{k}$, is a unit-less number that denotes the number of unit charges associated with a single ion of species $k$. The factor $\psi=RT/F$ (units \si{\volt}) is defined by the gas constant ($R = 8.314 \, \si{\joule\per\mole\per\kelvin}$), Faraday's constant ($F = 96458.3\, \si{coulomb\per\mole}$), and the temperature ($T$ with units \si{\kelvin}).
+
+Faraday's constant is defined as the charge per mole ($6.02\times10^{23}$) of unit charges. A flux density ${\bf j_k}$ can thus be converted to a current density by multiplying it with $Fz_k$. A salt-water solution is composed of several ions, and to obtain the net electric current, we can sum over the contributions from all of them to obtain the total current density:
 \begin{equation}
 {\bf i} = \sum_k z_k F {\bf j}_k = -\sum_k{F z_k {D_k}{\bf \nabla} c_{k}} - F\sum_{k} \frac{{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi}.
 \label{eq:Basics:iNP}
@@ -333,7 +350,7 @@ The last term on the right hand side is the drift current density,
 {\bf i}_\text{drift} = - F\sum_{k} \frac{{D_k} z_{k}^2}{\psi}c_{k} {\bf \nabla}{\phi} = - \sigma {\bf \nabla}{\phi}.
 \label{eq:Basics:idrift}
 \end{equation}
-As we indicated with the last equality, the drift current density is the same as the Ohmic current that we defined in eq. \ref{eq:Basics:Ohm_3D_phi}, which means that we can identify the conductivity $\sigma$ of a salt water solution as:
+As we indicated with the last equality, the drift current density is the same as the Ohmic current that we defined in eq. \ref{eq:Basics:Ohm_3D_phi}, which means that we can identify the conductivity $\sigma$ of a salt-water solution as:
 \begin{equation}
 \sigma = \frac{F}{\psi}\sum_{k} {D}_k z_{k}^2 c_{k},
 \label{eq:Basics:sigma_conc}
@@ -346,7 +363,7 @@ The first term on the right hand side of \fref{eq:Basics:iNP} is the diffusive c
 \end{equation}
 Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. 
 
-In many cases, the total current will be dominated by the drift component, and although it is possible that it sometimes plays a role, it is common to assume that the diffusive component is negligible when modeling extracellular currents in the brain. The diffusive current does, however, play an important role over neuronal membranes.
+In many cases, the total current will be dominated by the drift component, and although it is possible that it sometimes plays a role, it is common to assume that the diffusive component is negligible when modeling extracellular currents in the brain. The diffusive current does, however, play an important role for currents across neuronal membranes.
 
 
 \subsection{\blue{Other currents}}
@@ -356,7 +373,7 @@ Generally, currents additional to those defined above may arise due to advection
 {\bf i}_\text{adv} = F \rho {\bf u},
 \label{VC:eq:iadv}
 \end{equation}
-arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. However, as we argued in \fref{sec:Basics:Debye}, the saline solution in the brain is practically electroneutral ($\rho \simeq 0$), and the advective current therefore becomes negligible. A more thorough argument for this was given in \citeasnoun**{Gratiy2017}.
+arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. However, as we argued in \fref{sec:Basics:Debye}, the saline solution in the brain is practically electroneutral ($\rho \simeq 0$), and the advective current therefore becomes \gen{is expectedly?} negligible. A more thorough argument for this was given in \citeasnoun**{Gratiy2017}.
 
 As we briefly touched upon earlier, charges may also be accelerated by changes a magnetic field ${\bf B}$, which gives rise to so-called inductive current proportional to $\partial {\bf B}/\partial t$. However, in the brain, inductive currents are assumed to be of negligible importance \tvntxt{\cite**{Ranck1963,plonsey1967,Bossetti2008}} (more about this in \fref{sec:Basics:Maxwell}).
 
@@ -371,18 +388,19 @@ Let us therefore start this endeavor by defining the types of currents that are 
 
 \subsection{\blue{Electric currents in the brain}}
 \label{sec:Basics:braincurrents}
-Having introduced different kinds of currents in \fref{sec:Basics:Current}, we can now summarize the role that they play within a brain-specific context. It is useful to make a distinction between currents existing in one of three different mediums, running through either:
+Having introduced different kinds of currents in \fref{sec:Basics:Current}, we can now summarize the role they play within a brain-specific context. It is useful to make a distinction between currents existing in one of three different mediums, running through either:
 \begin{itemize}
 \item The intracellular saline solution (cytosol)
 \item The extracellular saline solution
 \item The cellular (neuronal or glial) membrane
 \end{itemize}
 
-Among these three, the membrane currents are the odd ones out. A bit cartoonishly, we may think of the cellular membrane as an insulator (dielectric medium) with small holes. Due to its dielectric properties, it can store charges in so-called Debye-layers on its in- and outside, in a way equivalent to how charges are stored on the metal plates in a parallel plate capacitor (cf. \fref{fig:Basics:Capacitor}). This charge-storage process can be described in terms of a capacitive current like that defined in by \fref{eq:Basics:Icap_mem}, which causes the membrane potential to vary with time. The holes represent various kinds of ion channels, which are conductive pores in the membrane that allow ions to pass through them. Ionic currents through ion channels come in addition to the capacitive current. The capacitive and conductive membrane currents are both essentially one-dimensional and perpendicular to the membrane. They depend both on voltage- and ion concentration differences between the inside and outside of the membrane, and are thus electrodiffusive in their nature, cf. \fref{eq:Basics:iNP}, but in one dimension, so that ${\bf \nabla} \rightarrow d/dx$.
+Among these three, the membrane currents are the odd ones out. A bit cartoonishly, we may think of the cellular membrane as an insulator (dielectric medium) with small holes.
+\gen{Kanskje si noe om at membranen har bundne ladninger som kan flytte litt paa seg, noe som gir opphav til de dielektriske egenskapene?} Due to its dielectric properties, it can store charges in so-called Debye-layers on its in- and outside, in a way equivalent to how charges are stored on the metal plates in a parallel plate capacitor (cf. \fref{fig:Basics:Capacitor}). \gen{Er det riktig aa si at det er de dielektriske egenskapene som gjor dette mulig? Det ville vel ogsaa vaert mulig med to metalplater med vakum mellom?} This charge-storage process can be described in terms of a capacitive current like that defined in by \fref{eq:Basics:Icap_mem}, which causes the membrane potential to vary with time. The holes represent various kinds of ion channels, which are conductive pores in the membrane that allow ions to pass through them. Ionic currents through ion channels come in addition to the capacitive current. The capacitive and conductive membrane currents are both essentially one-dimensional and perpendicular to the membrane. They depend both on voltage- and ion concentration differences between the inside and outside of the membrane, and are thus electrodiffusive in their nature, cf. \fref{eq:Basics:iNP}, but in one dimension, so that ${\bf \nabla} \rightarrow d/dx$.
 
 The intra- and extracellular currents are generally three-dimensional electrodiffusive volume currents (cf. \fref{eq:Basics:iNP}) through the conductive saline solutions that fill up the intra- and extracellular spaces. However, as concentration gradients within the intracellular and extracellular spaces typically are much smaller than those across membranes, it is common to neglect the diffusive component, and approximate the intra- and extracellular currents as being purely conductive (cf. \fref{eq:Basics:Ohm_3D_phi}). An illustration of the involved currents in a small piece of tissue is given in \fref{fig:Basics:Twostep}A. As indicated there, currents travel in loops, so that the intracellular and extracellular currents are coupled through the transmembrane currents at the cellular boundary. 
 
-For intracellular currents it is common to make the further simplification that they are well approximated as one-dimensional (cf. eq. \ref{eq:Basics:Ohm_r}). This is motivated by the morphological structure of neurons, which to a fair degree of accuracy can be represented as one-dimensional branching cables of varying diameter (\fref{fig:Basics:Twostep}B).
+For intracellular currents it is common to make the further simplification that they are well approximated as one-dimensional (cf. \fref{eq:Basics:Ohm_r}). This is motivated by the morphological structure of neurons, which to a fair degree of accuracy can be represented as one-dimensional branching cables of varying diameter (\fref{fig:Basics:Twostep}B).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -400,7 +418,7 @@ The recording of an electric potential requires an electrode, and the spatial ex
 
 We started this chapter on the spatial scale of a single atom (\fref{sec:Basics:Charge}). Single charge interactions, taking place on the spatial scale of the Debye-length ($\sim 1 \, \si{\nano\metre}$) and temporal scale of the charge-relaxation time ($\sim 1 \, \si{\nano\second}$), may be important for understanding detailed properties in cellular membranes. However, in this book we are interested in processes on the larger spatial scale where it is meaningful to work with continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents (\fref{sec:Basics:Charge}). 
 
-The Na$^{+}$ concentration in the extracellular space of the brain is $\sim 150 \, \si{\milli\molar}$, which means that a volume of $1 \, \si{\cubic\nano\metre}$ of extracellular space then contains (on average) only $150\times 6.02\times10^{23}\times10^{-27} \approx 0.1$ Na$^{+}$ ions. A concentration is therefore not a very meaningful concept on a spatial scale as small as this. Continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents, therefore imply a spatial resolution $\gg 1 \, \si{\nano\metre}$. When working on this scale, we do not need to be concerned with details of single charge interactions taking place on the nanometre and nanosecond timescale \cite**{Grodzinsky2011}.
+The Na$^{+}$ concentration in the extracellular space of the brain is $\sim 150 \, \si{\milli\molar}$, which means that a volume of $1 \, \si{\cubic\nano\metre}$ of extracellular space then contains (on average) only $150\times 6.02\times10^{23}\times10^{-27} \approx 0.1$ Na$^{+}$ ions. A concentration is therefore not a very meaningful concept on a spatial scale as small as this. Continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents, therefore imply a spatial resolution $\gg 1 \, \si{\nano\metre}$. When working on this scale, we do not need to be concerned with details of single charge interactions taking place on the nanometre \gen{nanometer?} and nanosecond timescale \cite**{Grodzinsky2011}.
 
 When we study processes on the level of brain tissue, we often wish to work on an even coarser spatial scale, using an averaging volume $\gg 1 \, \si{\cubic\micro\metre}$. The diameter of a neural dendrites is typically $\sim 1 \,\si{\micro\metre}$, which means that the averaging volume encloses components of multiple neurites, and includes both intra- and extracellular spaces. The advantage with such a \textit{coarse-grained}\index{Coarse-grained} resolution, is that both cellular and extracellular currents will be defined over the whole tissue-space, rather than within their respective sub-spaces \cite**{Gratiy2017}. At this spatial scale, the intracellular current, for example, does not interpret as belonging to a specific neuron, but rather as the average intracellular current within the whole volume, containing contributions from several different neurons. Likewise, also the transmembrane currents and extracellular currents are volume averages. 
 
