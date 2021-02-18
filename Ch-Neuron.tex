@@ -71,7 +71,9 @@ The leakage current density is given by
 i_{\mathrm{L}} = \bar{g}_{\mathrm{L}} (V - E_{\mathrm{L}}),
 \label{eq:Neuron:HHleak}
 \end{equation}
-where $\bar{g}_{\mathrm{L}}$ (mS/cm$^2$) is the leak conductance (the bar indicates that it's a constant). The factor $(V - E_{\mathrm{L}})$ (mV) is often called the driving force, and $E_{\mathrm{L}}$ the leak reversal potential. The biophysical origin of the reversal potential is explained later (see \Fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. In reality, the leakage current is not a single current, but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
+where $\bar{g}_{\mathrm{L}}$ (mS/cm$^2$) is the leak conductance (the bar indicates that it's a constant). 
+\ehnote{Trengs virkelig den notasjonen? Lite konsekvent med andre parametre som ogsaa kun er skalarverdier.}
+The factor $(V - E_{\mathrm{L}})$ (mV) is often called the driving force, and $E_{\mathrm{L}}$ the leak reversal potential. The biophysical origin of the reversal potential is explained later (see \Fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. In reality, the leakage current is not a single current, but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
 
 Together, the capacitive current and the leakage current determine the passive properties of the membrane. If the neuron were to include only these two currents, it could be well modeled as an RC-circuit, and RC-neuron models are often used to simulate the subthreshold dynamics of neurons (\Fref{fig:Neuron:RC}). 
 
