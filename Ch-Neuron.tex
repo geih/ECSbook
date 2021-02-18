@@ -229,8 +229,11 @@ where (cf. \fref{eq:Neuron:chemicalsynapse}):
 \end{equation}
 and where $\langle V(t) \rangle_t$ denotes the temporal average of the membrane potential. The temporal kernel
 $f(t)$ can have the same exponential waveforms (i)-(iv) as the conductance based synapses. 
+\ehnote{Jeg tenker subfix $t$ kan droppes siden $V(t)$ er 1D}
 
-Unlike conductance-based synapses, current-based synapses are independent of the state ($V(t)$) of the neuron, and synaptic events thus become independent of previous synaptic events, something that facilitates the derivation of analytical solutions \cite**{Richardson2004,Cavallari2014}. Their relative simplicity have made current-based synapses popular in large network simulations because they reduce the computational load. \tvnnote{Should mention that they are linear}
+Unlike conductance-based synapses, current-based synapses are independent of the state ($V(t)$) of the neuron, and synaptic events thus become independent of previous synaptic events, something that facilitates the derivation of analytical solutions \cite**{Richardson2004,Cavallari2014}. Their relative simplicity have made current-based synapses popular in large network simulations because they reduce the computational load. 
+\tvnnote{Should mention that they are linear}
+\ehnote{Jeg tenker det er mer til det enn dette - NEURON er det lite aa hente paa lineariserte synapser siden MC formalismen krever numerisk integrasjon uansett - for punktnevroner med linear subthreshold dynamics (LIF etc.) kan man bruke eksakt integrasjon som er kjapt (i NEST for eksempel).}
 
 \ghnote{Jeg skrev ikke mer enn det som staar over. Er det tilstrekkelig? Jeg ser at Espen har lagt inn noen kommentarer under, men trenger vi aa gaa inn paa disse tingene her? Espen, kan du se paa det, skrive inn noe ekstra om du mener det skal inn dit, og fjerne kommentarene hvis ikke?}
 
@@ -239,10 +242,11 @@ Unlike conductance-based synapses, current-based synapses are independent of the
 
 \subsubsection{Gap-junctions}
 \tvnnote{Brukes dette senere i boka? Hvis ikke kan vi kanskje ta det bort for enkelhets-skyld?}
+\ehnote{Jeg ville beholdt dette - gap junctions er "vanlige". Om vi bruker de er en annen ting ;)}
 In addition to the chemical synapses, some neurons also form electrical synapses called \underline{gap junctions}. A gap junction is basically an electric coupling between a branch of one neuron (with membrane potential $V_1$) and a branch of another neuron (with membrane potential $V_2$). The current through the gap junction is then simply the synaptic conductance multiplied with the voltage difference between the coupled branches:
 
 \begin{equation}
-i_\text{gap}=g_\text{gap} (V_{m2}-V_{m1}).
+i_\text{gap}=g_\text{gap} (V_{\mathrm{m}2}-V_{\mathrm{m}1}).
 \label{eq:Neuron:gapjunction}
 \end{equation}
 
