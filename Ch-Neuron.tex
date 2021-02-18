@@ -191,6 +191,7 @@ i_\text{syn}(t) = {g}_\text{syn}(t) \big(V(t)-E_\text{syn} \big),
 \label{eq:Neuron:chemicalsynapse}
 \end{equation}
 where $g_\text{syn}(t)$ is the synaptic conductance and $E_\text{syn}$ is the reversal potential of the synapse. 
+\ehnote{jeg er litt forvirra, er synaptic conductance per areal eller ikke? Enhet S vs. S~m$^{-2}$? Jeg tenker synapser er punktprosesser uten romlig utstrekning saa enhet S og derfor notasjon $I_\mathrm{syn}, G_\mathrm{syn}$ Schuetter bruker liten bokstav av en eller annen grunn.}
 
 The value of $E_\text{syn}$ determines whether the synapse is \textit{excitatory}, which means that it will tend to drive the  membrane potential of neuron toward the threshold for generating action potentials, or \textit{inhibitory}, which means that it will tend to drive the neuron away from the threshold for generating action potentials. Examples of excitatory synapses are AMPA and NMDA synapses, in which $E_\text{syn}$ ($\sim$ 0 - 10 mV) is high above the neuronal resting potential. The most common inhibitory synapse is the GABA synapse, in which $E_\text{syn}$ ($\sim$ - 70 mV) is close to the resting membrane potential of the neuron.
 
@@ -233,7 +234,7 @@ $f(t)$ can have the same exponential waveforms (i)-(iv) as the conductance based
 
 Unlike conductance-based synapses, current-based synapses are independent of the state ($V(t)$) of the neuron, and synaptic events thus become independent of previous synaptic events, something that facilitates the derivation of analytical solutions \cite**{Richardson2004,Cavallari2014}. Their relative simplicity have made current-based synapses popular in large network simulations because they reduce the computational load. 
 \tvnnote{Should mention that they are linear}
-\ehnote{Jeg tenker det er mer til det enn dette - NEURON er det lite aa hente paa lineariserte synapser siden MC formalismen krever numerisk integrasjon uansett - for punktnevroner med linear subthreshold dynamics (LIF etc.) kan man bruke eksakt integrasjon som er kjapt (i NEST for eksempel).}
+\ehnote{Jeg tenker det er mer til det enn dette - for NEURON sin del er det lite aa hente paa lineariserte synapser siden MC formalismen krever numerisk integrasjon uansett - for punktnevroner med linear subthreshold dynamics (LIF etc.) kan man bruke eksakt integrasjon som er kjapt (i NEST for eksempel).}
 
 \ghnote{Jeg skrev ikke mer enn det som staar over. Er det tilstrekkelig? Jeg ser at Espen har lagt inn noen kommentarer under, men trenger vi aa gaa inn paa disse tingene her? Espen, kan du se paa det, skrive inn noe ekstra om du mener det skal inn dit, og fjerne kommentarene hvis ikke?}
 
@@ -256,7 +257,9 @@ i_\text{gap}=g_\text{gap} (V_{\mathrm{m}2}-V_{\mathrm{m}1}).
 \section{\blue{Morphology}}
 \label{sec:Neuron:morphology}
 \index{Multicompartmental neuron model}
-When we above introduced the various membrane currents, we mostly pictured the neuron as being a single compartment. In doing that, we implicitly assumed that the whole neuron was isopotential (same $V$ everywhere). However, in neurons with long and branchy dendrites, $V$ in the soma can be completely different from $V$ in the tip of a distal dendrite. If we want to account for the spatial aspect of neuronal signaling, we need to use multicompartmental (MC) models, where the neural morphology is represented as cylindrical compartments connected with resistors, and $V$ can be computed in each individual compartment (\Fref{fig:Neuron:multikompisen}A). 
+When we above introduced the various membrane currents, we mostly pictured the neuron as being a single compartment. In doing that, we implicitly assumed that the whole neuron was isopotential (same $V$ everywhere). 
+\ehnote{Ikke aner jeg hvorfor det refereres til at antagelsen er 'isopotential compartments' - spesielt siden dette ville resultert i null aksialstroem og null transmembran stroem. For vaart formaal er vel en antagelse om tilnaermet konstant transmembran stroemtetthet langsmed hvert compartment langt bedre! Se foeroevrig kap 4.1.2 og kap 5.2.4.1 i NEURON-boka, potensialet til et kompartment er kun gyldig midt paa.}
+However, in neurons with long and branchy dendrites, $V$ in the soma can be completely different from $V$ in the tip of a distal dendrite. If we want to account for the spatial aspect of neuronal signaling, we need to use multicompartmental (MC) models, where the neural morphology is represented as cylindrical compartments connected with resistors, and $V$ can be computed in each individual compartment (\Fref{fig:Neuron:multikompisen}A). 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -316,6 +319,7 @@ c_\text{m} \frac{dV_n}{dt} = \frac{E_\text{m}-V_n}{R_\text{m}} + \frac{d}{4R_\te
 \label{eq:Neuron:multipassive}
 \end{equation}
 \tvnnote{Stor I?}
+\ehnote{ser riktig ut her, men ikke over i likning 3.20}.
 Although all neurons contain some active membrane mechanisms, the passive model (\fref{eq:Neuron:multipassive}) is often used as an approximation for signaling in neural dendrites, which tend to have a lower density of active mechanisms compared to the soma and axon. 
 \tvnnote{paapeke at nevroner ofte er nesten passive litt unna threshold? (eksempel i Figure 9.5))}
 
@@ -341,7 +345,8 @@ If we in \fref{eq:Neuron:multipassive} let $L \rightarrow \delta x$, and take th
 c_\text{m} \frac{\partial V}{\partial t} = \frac{E_\text{m}-V}{R_\text{m}} +  \frac{d}{4 R_\text{a}}  \frac{\partial^2 V}{\partial x^2}  + \frac{\mathcal{I}_{\mathrm{stim}}}{\pi d},
 \label{eq:Neuron:cable}
 \end{equation}
-where we have introduced the stimulus current per unit length, 
+where we have introduced the stimulus current per unit length,
+\ehnote{synes det er mindre kloenete aa definere denne som $I_\mathrm{stim}(x, t)$ i enhet A direkte. $\mathcal{I}_\mathrm{stim}(x,t)$ dukker jo bare opp en gang nedenfor for saa aa bli omdefinert til $I_\mathrm{stim}(x,t)$ igjen.} 
 \begin{equation}
 \mathcal{I}_{\mathrm{stim}}(x,t) = \lim_{\delta x \to 0} I_{\mathrm{stim}}(x,t)/\delta x \,\; (\si{\milli\ampere\per\centi\metre}). 
 \label{eq:Neuron:CurrentPerUnitLength}
@@ -421,7 +426,7 @@ The steady state solution to the semi-infinite cable (plotted in \Fref{fig:Neuro
 \item It follows from \fref{eq:Neuron:firstRinf} that $R_{\infty} = (E_\text{m}-V(0))/I_\text{stim}$, and thus interprets as the steady-state input resistance of the semi-infinite cable. \Fref{eq:Neuron:Rinf} thus shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
 
 \item \Fref{eq:Neuron:semiinf4} shows that in steady-state, the amplitude will decay exponentially from the injection site and outwards, and will be reduced by a factor $1/e$ over the length $\lambda$. If we insert some typical values into \fref{eq:Neuron:lengthconst}, like a dendritic diameter of $d=1 \, \si{\micro\metre}$, a membrane resistance of $R_\text{m}=10 \,
-\si{\kilo\ohm\square\centi\metre}$, and an axial resistivity $R_\text{a}=35.4\, \si{\ohm\centi\metre}$\tvnnote{litt lavt?}`, we get a length constant of $\lambda = 840\, \si{\micro\metre}$. Dendrites with lengths in this order will thus only be moderately affected by the membrane potential in the soma.
+\si{\kilo\ohm\square\centi\metre}$, and an axial resistivity $R_\text{a}=35.4\, \si{\ohm\centi\metre}$\tvnnote{litt lavt?}\ehnote{ikke for giant squid}, we get a length constant of $\lambda = 840\, \si{\micro\metre}$. Dendrites with lengths in this order will thus only be moderately affected by the membrane potential in the soma.
 
 \item According to \fref{eq:Neuron:lengthconst}, $\lambda \propto \sqrt{d}$, meaning that signals will spread further the thicker the dendrite.
 
@@ -450,12 +455,13 @@ It is possible to derive a corresponding length constant for AC input to a semi-
 \lambda_{AC} = \lambda \sqrt{ \frac{2}{1+\sqrt{(\omega \tau)^2 + 1}} }.
 \label{eq:Neuron:AClambda}
 \end{equation}
-Here $\tau$ still is the membrane time constant (\fref{eq:Neuron:timeconst}), $\lambda$ is still the DC length constant (\fref{eq:Neuron:lengthconst}), and $\omega = 2\pi f$ is the angular frequency of the the boundary potential.
+Here $\tau$ \ehnote{$\tau_\mathrm{m}$?} still is the membrane time constant (\fref{eq:Neuron:timeconst}), $\lambda$ is still the DC length constant (\fref{eq:Neuron:lengthconst}), and $\omega = 2\pi f$ is the angular frequency of the the boundary potential.
 
 For a constant boundary condition ($I_\text{stim} = \text{constant}$ in \fref{eq:Neuron:semiinf4}) or, equivalently, $V(0) = \text{constant}$ in \fref{eq:Neuron:semiinf3}), $\omega$ is zero, and we may verify that $\lambda_{AC}$ becomes identical to the DC length constant $\lambda$. For an AC input, we see that $\lambda_{AC}$ decreases with $\omega$, and for high frequencies $\lambda_{AC} \propto (\omega \tau^{-1/2})$. Thus, low frequency input will tend to travel further in dendritic structures, while high frequency input will only affect dendritic structures more locally. 
 
 When a neuron receives an input current (synaptic or injected) in a particular point, the same amount of current will have to leave the neuron from other points along the neural extension. The spatial separation between the input current (sink) and return currents (sources) will be proportional to the neuronal length constant, and from \fref{eq:Neuron:AClambda} we thus know that the source/sink separation will be larger for low frequency components of the neuronal activity. As we shall see later, the spatial separation between inward (sinks) and outward (sources) transmembrane currents is an important factor determining the size and shape of extracellular potentials. 
 \tvnnote{Har skrevet om dette i LFP-kapittelet ogsaa, kanskje slaa sammen?}
+\ehnote{Jeg tenker vi ikke trenger aa spekulere om effekten paa EPs her.}
 
 
 
@@ -467,7 +473,9 @@ When a neuron receives an input current (synaptic or injected) in a particular p
 \index{Ion concentration dynamics}
 MC models as defined in \fref{sec:Neuron:Active_multicomp} with membrane mechanisms as specified in \fref{sec:Neuron:membranecurrents} give a complete and operational framework for modeling the electrical activity of neurons, and works well for most purposes. The reader may chose to skip the remainder of this chapter, which delves more into the biophysical origin of neural activity. 
 
-Up til this point, we have focused on electrical currents in neurons, but talked little of their biophysical origin, i.e., the ions that carry these electrical currents. For example, action potentials are generated by a transmembrane influx of Na\textsuperscript{+}, which charges up (depolarizes) the neuron, followed by an efflux of K\textsuperscript{+}, which discharges (repolarizes) it. These fluxes are primarily driven by diffusion, and thus depend on the intra- and extracellular solutions having different ionic compositions. 
+Up til this point, we have focused on electrical currents in neurons, but talked little of their biophysical origin, i.e., the ions that carry these electrical currents. For example, action potentials are generated by a transmembrane influx of Na\textsuperscript{+}, 
+which charges up \ehnote{dropp "up" -- antonymet til "discharge" er vel bare "charge"?}
+(depolarizes) the neuron, followed by an efflux of K\textsuperscript{+}, which discharges (repolarizes) it. These fluxes are primarily driven by diffusion, and thus depend on the intra- and extracellular solutions having different ionic compositions. 
 
 In the MC models it is normally assumed that, despite all these various ionic fluxes, the ion concentrations remain constant. This may seem like a peculiar assumption, but it is often quite good. The reason is that the number of ions crossing the membrane during a brief signal such as an action potential only leads to tiny changes in the ion concentrations. 
 
@@ -482,7 +490,7 @@ where we have used that Faraday's constant $F = eN_\text{A} = 96458.3 \, \si{\co
 \label{eq:Neuron:NaNaNaNa}
 \end{equation}
 Hence, even in a small compartment with $r=1\,\si{\micro\metre} = 10^{-6}\,\si{\metre}$, the number of ions that enters during an action potential will only change the concentration by fraction $3.1 \times 10^{-3} \approx 0.3 \%$. This suggests that concentrations changes on a short time scale are small enough to be neglected. 
-\tvntxt{It also serves to demonstrate how relatively tiny the deviations from electroneutrality across the membrane are, while still giving rise to substantial membrane potentials.}\tvnnote{Vet ikke helt om dette er riktig?`}
+\tvntxt{It also serves to demonstrate how relatively tiny the deviations from electroneutrality across the membrane are, while still giving rise to substantial membrane potentials.}\tvnnote{Vet ikke helt om dette er riktig?}
 
 Since neurons possess a team of homeostatic mechanisms that strive to maintain the trans-membrane ion concentration gradients, the assumption of constant ion concentrations also tends to hold on a longer time scale. The perhaps most important of these mechanisms is the ATPase pump, which uses \tvntxt{the} energy \tvntxt{of 1 ATP molecule} to pump \tvntxt{2} K$^+$ ions into the neuron and \tvntxt{3} Na$^+$ ions out, thus reversing the ionic exchange that occurs during action potential generation. As a result of this pump, the intracellular space tends to remain comparatively rich in K$^+$, while the extracellular space is tends to remain comparatively rich on Na$^+$. Typical values of ion concentrations of the main charge carriers inside and outside neurons are given in \Fref{tab:Neuron:ion-concentrations}. 
 
@@ -519,7 +527,9 @@ j_k = j_{k,\text{diff}} + j_{k,\text{drift}}
 \label{eq:Neuron:NP1D}
 \end{equation}
 %%%%
-where the first term \tvntxt{inside the parenthesis} is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. Since we consider membrane fluxes, we have replaced the diffusion constant ($D_k$) which appears in the more common form of the Nernst-Planck equation (\fref{eq:Basics:JNP}) with the membrane's permeability ($P_k$) to ion $k$. The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
+where the first term \tvntxt{inside the parenthesis} is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. 
+\ehtxt{[k] denotes the concentration of ion $k$ (\si{\molar\per\metre^3}).}
+Since we consider membrane fluxes, we have replaced the diffusion constant ($D_k$) which appears in the more common form of the Nernst-Planck equation (\fref{eq:Basics:JNP}) with the membrane's permeability ($P_k$) to ion $k$. The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
 
 \begin{equation}
 \frac{1}{[k]} \frac{d[k]}{dz} = - \frac{Fz_k}{RT}  \frac{dV}{dz}.
@@ -567,7 +577,9 @@ Looking at \fref{eq:Neuron:GHK}, we see that the transmembrane currents are nonl
 \subsection{\blue{Intracellular Calcium dynamics}}
 \label{sec:Neuron:Calcium}
 \index{Calcium dynamics}
-While most ion concentrations are assumed to be constant in HH-based models, it is common to make an exception for Ca$^{2+}$. The main reason for this is that the intracellular Ca$^{2+}$ concentration ($\mathrm{[Ca]_i}$) is very low compared to that of the other ion species (\Fref{tab:Neuron:ion-concentrations}). Unlike for the other ion species,  $\mathrm{[Ca]_i}$, can therefore change quite dramatically on a short time scale, for example during the opening of Ca$^{2+}$ channel. 
+While most ion concentrations are assumed to be constant in HH-based models,
+\ehnote{mer riktig aa si "... constant in models utilizing the HH formalism,"}  
+it is common to make an exception for Ca$^{2+}$. The main reason for this is that the intracellular Ca$^{2+}$ concentration ($\mathrm{[Ca]_i}$) is very low compared to that of the other ion species (\Fref{tab:Neuron:ion-concentrations}). Unlike for the other ion species,  $\mathrm{[Ca]_i}$, can therefore change quite dramatically on a short time scale, for example during the opening of Ca$^{2+}$ channel. 
 
 The motivation for explicitly keeping track of changes in $\mathrm{[Ca]_i}$ are several. Firstly, to accurately model currents through Ca$^{2+}$ channels, the concentration-dependent GHK formalism (\fref{eq:Neuron:GHK}) is often used (see e.g., \cite**{Destexhe1994,Zhu1999,Halnes2011}), and one then needs to simulate $\mathrm{[Ca]_i}$. Secondly, modeling $\mathrm{[Ca]_i}$ could be motivated by the aim to reproduce data from Ca$^{2+}$ imaging experiments. Thirdly, Ca$^{2+}$ does not only act as a charge carrier in neurons, but is also a second messenger, which means that it can trigger a number of intracellular chemical processes, including the gating of Ca$^{2+}$ activated ion channels. 
 
@@ -598,9 +610,13 @@ Like any model, MC type models are simplified representations of the real system
 
 \item \textit{Ion concentrations}: As we explained in \fref{sec:Neuron:Ions_and_reversals}, the concentrations of the main charge carriers are in standard MC models assumed to be constant. As the main ion concentrations change little during normal neuronal activity, this assumption is often warranted. However, there exist scenarios when this is not true, and dramatic changes in ion concentrations is a trademark of several pathological conditions, such as epilepsy, stroke and spreading depression \cite**{Somjen2001,Zandt2015,Ayata2015}. Effects of changes in ion concentrations on the dynamical properties of neurons has been the topic of many modeling studies (see e.g., \cite**{Qian1989,Kager2000,Ullah2009,Zandt2011,Wei2014,WeiUllahSchiff2014,Hubel2014,Saetra2020}), but are not accounted for by standard MC models.
 
-\item \textit {Ephaptic effects}\index{Ephaptic effects}: While direct neural communication is mediated through chemical and electrical synapses, a neuron can also affect neighboring neurons indirectly by altering the extracellular environment, either through its exchange of ions with the surroundings, or through the electric fields that it generates \cite**{Jefferys1995}. These indirect effects are often referred to as \textit{ephaptic copupling}. In principle, a neuron can also affect itself (\textit{self-ephaptically}) by changing its own extracellular environment \cite**{Roth1994}.\tvnnote{Jeg visste ikke at endringer i konsentrasjon kunne kalles 'ephaptic', jeg trodde dette kun gjalt ekstracellulaere felt?}
+\item \textit {Ephaptic effects}\index{Ephaptic effects}: While direct neural communication is mediated through chemical and electrical synapses, a neuron can also affect neighboring neurons indirectly by altering the extracellular environment, either through its exchange of ions with the surroundings, or through the electric fields that it generates \cite**{Jefferys1995}. These indirect effects are often referred to as \textit{ephaptic coupling}. 
+In principle, a neuron can also affect itself (\textit{self-ephaptically}) by changing its own extracellular environment \cite**{Roth1994}.\tvnnote{Jeg visste ikke at endringer i konsentrasjon kunne kalles 'ephaptic', jeg trodde dette kun gjalt ekstracellulaere felt?}
 
-Being based on the assumption that ion concentrations do not vary and the extracellular space being grounded ($V_e = 0$ in \fref{eq:Neuron:multimain}), MC models do not account for ephaptic effects. The main argument for neglecting ephaptic concentration effects is, as we have explained earlier, that concentrations tend to remain relatively constant under most circumstances. The main argument for neglecting electric ephaptic effects is that $V_e$ generally is much smaller than the membrane potential $V$, and therefore not likely to affect it notably. Self-ephaptic effects have been accounted for in simulations by using the two-step scheme (\Fref{sec:Basics:twostep}) interatively \cite**{Gold2006}, i.e., first (i) used MC models to compute $V$ assuming $V_e = 0$, next (ii) use volume conductor (VC) theory to compute $V_e$, and then (iii) refine the estimates in (i) by accounting for the effects of $V_e$ on $V$. According to \citeasnoun**{Gold2006} this did not significantly affect the numerical results. However, electric ephaptic coupling between different neurons have been suggested to play a possible role, for example in brain regions with low extracellular conductivity, or in bundles of axons \cite**{Holt1999,Bokil2001,anastassiou2015,Goldwyn2016,Tveito2017,Shifman2019}. Such effects are not accounted for in the standard MC models.
+Being based on the assumption that ion concentrations do not vary and the extracellular space being grounded ($V_e = 0$ \ehnote{$V_\mathrm{e}$?} in \fref{eq:Neuron:multimain}), 
+MC models do not account for ephaptic effects. The main argument for neglecting ephaptic concentration effects is, as we have explained earlier, that concentrations tend to remain relatively constant under most circumstances. The main argument for neglecting electric ephaptic effects is that $V_e$ generally is much smaller than the membrane potential $V$, and therefore not likely to affect it notably. Self-ephaptic effects have been accounted for in simulations by using the two-step scheme (\Fref{sec:Basics:twostep}) interatively \cite**{Gold2006}, i.e., first (i) used MC models to compute $V$ assuming $V_e = 0$, next (ii) use volume conductor (VC) theory to compute $V_e$, and then (iii) refine the estimates in (i) by accounting for the effects of $V_e$ on $V$. According to \citeasnoun**{Gold2006} this did not significantly affect the numerical results. However, electric ephaptic coupling between different neurons have been suggested to play a possible role, for example in brain regions with low extracellular conductivity, or in bundles of axons \cite**{Holt1999,Bokil2001,anastassiou2015,Goldwyn2016,Tveito2017,Shifman2019}. Such effects are not accounted for in the standard MC models.
 
-Importantly, the negligence of ephaptic effects when using the two-step scheme is implicit in the way that the neurons are modeled (Step 1), but not part of the physical fundament of the VC theory (Step 2) used to compute extracellular potentials. VC theory does not in itself make any assumption regarding ephaptic effects being present or not. Hence, the the extracellular potential should satisfy \fref{eq:Basics:continuity2} regardless of whether or not ephaptic effects were accounted for when the neural current sources $C$ were computed. As our main focus is on the extracellular potential, we will therefore stick with the two-step scheme throughout most of this book.
+Importantly, the negligence of ephaptic effects when using the two-step scheme is implicit in the way that the neurons are modeled (Step 1), but not part of the physical fundament of the VC theory (Step 2) used to compute extracellular potentials. VC theory does not in itself make any assumption regarding ephaptic effects being present or not. Hence, the the extracellular potential should satisfy \fref{eq:Basics:continuity2} regardless of whether or not ephaptic effects were accounted for when the neural current sources $C$ were computed. 
+\ehnote{Variabelen $C$ kan vel kanskje utelates her.}
+As our main focus is on the extracellular potential, we will therefore stick with the two-step scheme throughout most of this book.
 \end{itemize}
