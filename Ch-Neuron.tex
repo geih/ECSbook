@@ -29,8 +29,9 @@ Below, we first present a framework for modeling the transmembrane currents in a
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (units \si{\milli\ampere\per\square\centi\metre}). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a the leakage current density ($i_{\mathrm{L}}$), and (iii) a the current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive (iv) external stimuli ($i_{\mathrm{stim}}$) either through synaptic currents or experimental current injections. 
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (units \si{\milli\ampere\per\square\centi\metre}). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a leakage current density ($i_{\mathrm{L}}$), and (iii) a current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive (iv) external stimuli ($i_{\mathrm{stim}}$) either through synaptic currents or experimental current injections. 
 \ehnote{Bedre symbol er $i_{\mathrm{ext}}$ for stroembidrag fra baade elektroder, synapser etc.}
+\gen{Kanskje ikke optimalt aa kalle synaptisk input for et eksternt sitmulus her i boka?}
 
 In the case where the neuron is modeled as a single compartment, the transmembrane currents into that compartment must sum to zero, so that:
 \begin{equation}
@@ -47,15 +48,16 @@ The capacitive current density,
 i_{\mathrm{cap}}= c_{\mathrm{m}} \frac{dV}{dt},
 \label{eq:Neuron:HHcap}
 \end{equation}
-represents the charging up of the membrane potential $V$ due to a charge density accumulating on the outside and inside of the capacitive membrane. 
-\ehnote{I mine oerer skjaerer "charging up" noe. Kan vi ikke skrive "... represents the accumulation of charge in- and outside of the capacitive membrane as function of change in membrane potential $V$ over time."?}
+represents the charging up of \gex{the membrane to a} potential $V$ due to a charge density accumulating on the outside and inside of the capacitive membrane. 
+\ehnote{I mine oerer skjaerer "charging up" noe. Kan vi ikke skrive "... represents the accumulation of charge in- and outside of the capacitive membrane as function of change in membrane potential $V$ over time."?} \gen{Dette gaar vel delvis paa valg av skrivestil? Jeg synes vi skal bruke saa enkle ord og skrive saa enkelt som mulig, og "charging up" er vel ikke galt? Og det h{\o}res enkelt, ujaalete og bra ut i mine {\o}rer.} 
 Here, $c_{\mathrm{m}}$ is the \textit{specific membrane capacitance} defined as capacitance per membrane area. In the original HH model, $c_{\mathrm{m}}$ had the value 1 \si{\micro \farad / \cm}$^2$, and this value seems to be representative for most neurons.  An illustration of how to interpret the capacitive current is given in \fref{fig:Neuron:capacitive_currents}. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{Figures/Neuron/capacitive_currents.pdf}
 \end{center}
-\caption{\textbf{Capacitive currents are important for current \ehnote{"charge conservation" er et mer fundamentalt begrep} conservation.}  (\textbf{(A)}) The extracellular and intracellular bulk solutions are essentially electroneutral, and the only region where there is a nonzero charge density is in thin Debye layers around the capacitive membrane. Unlike the other currents involved, the capacitive current is not due to ions crossing the membrane, but due to ions piling up on either side of it, separating a membrane charge density $\eta$ and a charge membrane charge density $-\eta$, giving rise to a membrane potential of $V = \eta/c_{\mathrm{m}}$. An outward capacitive current could correspond to an anion leaving the membrane on the inside (\textbf{(B)}), which will coincide with a cation leaving the membrane on the outside (\textbf{(C)}). Thus, capacitive membrane currents do give rise to electrical ionic volume currents both in the intra- and extracellular space.
+\caption{\textbf{Capacitive currents are important for current \ehnote{"charge conservation" er et mer fundamentalt begrep} conservation.}  \gen{Ja, "charge conservarion" gjelder vel alltid, men her er vel poenget at dette leder til "current conservation" i vaart spesialtilfelle?} (\textbf{(A)}) The extracellular and intracellular bulk solutions are essentially electroneutral, and the only region where there is a nonzero charge density, is in thin Debye layers around the capacitive membrane. Unlike the other currents involved, the capacitive current is not due to ions crossing the membrane, but due to ions piling up on either side of it, separating a membrane charge density $\eta$ and a charge membrane charge density $-\eta$, giving rise to a membrane potential of $V = \eta/c_{\mathrm{m}}$. \gen{Det er vel ogsaa et lite str{\o}mbidrag 
+fra "gating currents" i membranen, dvs. fra bundne ladninger som flytter paa seg, ikke at vi trenger aa komme inn paa det her.} An outward capacitive current could correspond to an anion leaving the membrane on the inside (\textbf{(B)}), which will coincide with a cation leaving the membrane on the outside (\textbf{(C)}). Thus, capacitive membrane currents do give rise to electrical ionic volume currents both in the intra- and extracellular space.
 }
 \label{fig:Neuron:capacitive_currents}
 \end{figure}
@@ -78,7 +80,8 @@ i_{\mathrm{L}} = \bar{g}_{\mathrm{L}} (V - E_{\mathrm{L}}),
 \end{equation}
 where $\bar{g}_{\mathrm{L}}$ (mS/cm$^2$) is the leak conductance (the bar indicates that it's a constant). 
 \ehnote{Trengs virkelig den overline notasjonen? Lite konsekvent med andre parametre som ogsaa kun er skalarverdier. Veit det er brukt i HH-52-artikkelen, men virker litt utypisk i matte/fysikk ellers\ldots}
-The factor $(V - E_{\mathrm{L}})$ (\si{\milli\volt}) is often called the driving force, and $E_{\mathrm{L}}$ the leak reversal potential\index{Reversal potential}. The biophysical origin of the reversal potential is explained later (see \fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. In reality, the leakage current is not a single current, but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
+\gen{Tror det er ganske standard for aa betegne max-verdien til konduktanser, f.eks., brukt i Sterratt}
+The factor $(V - E_{\mathrm{L}})$ (\si{\milli\volt}) is often called the driving force, \gen{driving force i italic?} and $E_{\mathrm{L}}$ the leak reversal potential\index{Reversal potential}. The biophysical origin of the reversal potential is explained later (see \fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. In reality, the leakage current is not a single current, but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
 
 Together, the capacitive current and the leakage current determine the passive properties of the membrane. If the neuron were to include only these two currents, it could be well modeled as an RC-circuit, and RC-neuron\index{RC-neuron} models are often used to simulate the subthreshold dynamics of neurons (\Fref{fig:Neuron:RC}). 
 
@@ -97,6 +100,7 @@ Together, the capacitive current and the leakage current determine the passive p
 \index{Ion channels! Voltage gated}
 In addition to $i_{\mathrm{cap}}$ and $i_{\mathrm{L}}$, biophysical neuronal models include a number of active ion channels. These account for the fancy aspects of neurodynamics, 
 \ehnote{"fancy" er vel kanskje litt upresist\ldots}
+\gen{synes det er baade presist og l{\o}dig :-)}
 and the main legacy of Hodgkin and Huxley was that they derived a mathematical model for describing the kinetics of these \cite**{Hodgkin1952}.
 
 In the HH-type formalism, the current through an active ion channel type $x$ is modeled as:
@@ -157,7 +161,8 @@ To give an example of an active neuron model, the full set of equations for the 
 \end{eqnarray*}
 \label{box:Neuron:HH}
 \end{floatingbox}
-
+\gen{Trenger en referanse inne i HH-boksen}
+\gen{Vanskelig aa lese ligningene for $\alpha$ og $\beta$ - HH-boksen}
 
 \ehnote{Burde ikke andre formalismer som termodynamiske og stokastiske (Markov?) modeller nevnes? HH formalismen er vel kun en empirisk approksimasjon som ikke ivaretar fundamentale fysiske prinsipp (energibevaring for eksempel).}
 
@@ -193,7 +198,7 @@ i_\text{syn}(t) = {g}_\text{syn}(t) \big(V(t)-E_\text{syn} \big),
 where $g_\text{syn}(t)$ is the synaptic conductance and $E_\text{syn}$ is the reversal potential of the synapse. 
 \ehnote{jeg er litt forvirra, er synaptic conductance per areal eller ikke? Enhet S vs. S~m$^{-2}$? Jeg tenker synapser er punktprosesser uten romlig utstrekning saa enhet S og derfor notasjon $I_\mathrm{syn}, G_\mathrm{syn}$ Schuetter bruker liten bokstav av en eller annen grunn.}
 
-The value of $E_\text{syn}$ determines whether the synapse is \textit{excitatory}, which means that it will tend to drive the  membrane potential of neuron toward the threshold for generating action potentials, or \textit{inhibitory}, which means that it will tend to drive the neuron away from the threshold for generating action potentials. Examples of excitatory synapses are AMPA and NMDA synapses, in which $E_\text{syn}$ ($\sim$ 0 - 10 mV) is high above the neuronal resting potential. The most common inhibitory synapse is the GABA synapse, in which $E_\text{syn}$ ($\sim$ - 70 mV) is close to the resting membrane potential of the neuron.
+The value of $E_\text{syn}$ determines whether the synapse is \textit{excitatory}, which means that it will tend to drive the  membrane potential of neuron toward the threshold for generating action potentials, or \textit{inhibitory}, which means that it will tend to drive the neuron away from the threshold for generating action potentials. Examples of excitatory synapses are AMPA and NMDA synapses, in which $E_\text{syn}$ ($\sim$ 0 \gex{--} 10 mV) is high above the neuronal resting potential. The most common inhibitory synapse is the GABA synapse, in which $E_\text{syn}$ ($\sim$ -70 mV) is close to the resting membrane potential of the neuron.
 
 The synapse model described by \fref{eq:Neuron:chemicalsynapse} is called \textit{conductance based}, because the activation of the synapse is modeled as a transient change in the synaptic conductance. Unlike for ion channels, which are often voltage or calcium activated, the chemical synapse is activated by neurotransmitters received from a pre-synaptic cell. However, the synaptic response tends to be rather stereotypical, meaning that the post-synaptic conductance change is more or less the same every time the synapse is activated \tvnnote{Har vi kilde paa dette? Er dette egentlig sant? Har jo STD, STP osv. Swadlow 2002 for eksempel finner jo ganske andre resultater}. 
 It is therefore not common to model neurotransmitter activation explicitly, but instead just
