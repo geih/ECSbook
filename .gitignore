@@ -13,3 +13,8 @@
 *.sav
 *.glo
 .DS_Store
+Figures/vector_graphics/*/*.pdf
+Figures/vector_graphics/*/*.png
+ECSbook_simcode/*/*.png
+ECSbook_simcode/*/*.pdf
+ECSbook_simcode/*/*.npy
