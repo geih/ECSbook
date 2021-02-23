@@ -408,5 +408,74 @@ Under normal conditions, drift currents are likely to have a much bigger impact 
 
 
 
+Conductivity is related to conductance $g$ through $\sigma = gd$, where $d$ is the condu
+
+and will depend on what ion channels that are present and activated. The ratio \fref{eq:Sigma:ratiocondition} will be greatest when the conductance is at its minimal, and as an estimate of the minimal conductance, we use the leakage conductance in In the HH model (see \fref{box:Neuron:HH}): $\bar{g}_{\mathrm{L}} &=& 0.3 \,\si{\milli\siemens\per\square\centi\metre} = 30 \,\si{\siemens\per\square\metre}$. This corresponds to a conductivity $\sigma_\text{leak} = 30 \times 10^{-8} = 3\times10^{-7} \si{\siemens\per\metre}$, and gives a charge relaxation time $\tau = \epsilon/\sigma_\text{leak} \approx 0.3 \si{\milli\seconds}$ for the membrane medium. For $f = 1000 \, \si{\hertz}$, $2 \pi f \tau \approx  2$. Hence, the criterion in \fref{eq:Basics:ratiocondition2} is clearly not met. We note that a membrane time constant of $\tau \approx 0.3 \si{\milli\second}$ is very low. In the HH model,  the active sodium and potassium conductances are partially open even at the resting potential, so that the conductivity is never as low as $$\bar{g}_{\mathrm{L}}$, and the passive membrane time constant for this model is about $0.85\,\si{\milli\second}$ (see chapter 6.2.3 in \citeasnoun**{Koch1999}). Also, the HH model has a faster time constant than what is estimated for most mammalian central neurons, for which the typical values range from 20 to 100 \si{\milli\second} \cite**{koch1996}. With $\tau = 30 \,\si{\milli\second}$, and  $f = 1000 \, \si{\hertz}$, \fref{eq:Basics:ratiocondition2} gives the ratio $2 \pi f \tau \approx  0.02$
+
+
+
+ and capacitive effects can not be neglected. We note that a membrane time constant of $\tau \approx 0.3 \si{\milli\second}$ is lower than 
+
+
+\cite**{koch1996}
+
+
+\gen{Det folger vel ikke av dette at det er en "important contributor", kun at den ikke kan neglisjeres i utgangspunktet.}
+
+
+Neural membranes typically have a time constant $\tau \sim 1 \, \si{\milli\second}$ associated with their capacitive charging.
+\gen{Hvor kommer dette fra? Typisk membran-tidskonstanten RC? Kanskje forklare litt mer?}
+
+We note that both the conductivity and capacitance of the membrane can be expressed in terms of the permittivity through the relations $\epsilon = c_\text{m} \Delta r$ and $\sigma = \epsilon / \tau$. Neural membranes typically have a specific membrane capacitance of $c_\text{m} \sim 10^{-2} \, \si{\farad\per\square\metre}$, a thickness $\Delta r \sim 10^{-8}\, \si{\metre}$, and a time constant $\tau \sim 10^{-3} \, \si{\second}$ \cite**{Nunez2006}. This amounts to a permittivity of $\epsilon \sim 10^{-10} \,\si{\farad\per\metre}$, and conductivity of $\sigma \sim 10^{-7} \, \si{\siemens\per\metre}$, although the latter can vary quite much depending on which ion channels that are present and activated. Both are lower than for the tissue medium, but the conductivity more so, resulting in a $\tau$ that is much bigger for the membrane than for the extracellular solution.
+
+
+
+\gen{Kanskje vi kan se paa tilfellet med noen kilohertz ogsaa? Da skulle ogsaa frekvensinnhold i spikes vaere godt dekket.} which in an electromagnetic context can be considered a low frequency. 
+
+
+
+\subsection{\red{Quasi-magnetostatic approximation of Maxwell's equations}}
+\label{sec:Basics:Quasimagnetostatic} \index{Quasi-magnetostatic approximation}
+
+The right hand side of eq. \ref{eq:Basics:Max4} contains a total current,
+\tvnnote{Jeg er forvirret igjen: Elektrisk felt i vakuum gir jo ogsaa magnetisk felt, helt uten stroem?}
+\begin{equation}
+{\bf i}_\text{tot} = {\bf i}_\text{free} + \epsilon\frac{\partial {\bf E}}{\partial t},
+\label{eq:Basics:totcurrent}
+\end{equation}
+composed of a current of free charges (first term) plus a displacement current (last term). For an idealized conductor, the displacement current is zero, while for an idealized capacitor, the current of free charges is zero.
+
+Making the quasi-magnetostatic approximation means assuming that the displacement current, or equivalently, capacitive effects\tvnnote{Naa har jeg glemt dette igjen: Hva med om man har et tidsvarierende elektrisk felt i et Ohmsk medium?}, are absent \gex{when computing the magnetic field (?)}, so that \fref{eq:Basics:Max4} simplifies to ${\bf \nabla} \times {\bf B}  =  \mu{\bf i}_\text{free}$. This will be a good approximation provided that the magnitude ${\bf i}_\text{free}$ is much smaller \tvnnote{?} than that of the displacement current. In the following, we will investigate the conditions for this to be a valid approximation. To simplify the analysis, we assume that the current of free charges is purely Ohmic, so that \fref{eq:Basics:totcurrent} becomes:
+\begin{equation}
+{\bf i}_\text{tot} = \sigma {\bf \nabla} \cdot {\bf E} + \epsilon\frac{\partial {\bf E}}{\partial t},
+\label{eq:Basics:totcurrent2}
+\end{equation}
+Let us now consider an electric field that oscillates with some frequency $f$,
+\begin{equation}
+{\bf E} = {\bf E}_\text{max} e^{j2\pi f \epsilon t},
+\label{eq:Basics:Ecomponent}
+\end{equation}
+where $j$ here is the imaginary unit. \gen{Kanskje si noe om hva som ligger i den komplekse notasjonen?}
+If we insert this into \fref{eq:Basics:totcurrent2}, we get:
+\begin{equation}
+{\bf i}_\text{tot} = \sigma{\bf E} +  j 2 \pi f \epsilon {\bf E} = \left( \sigma + j 2 \pi f \epsilon \right){\bf E}
+\label{eq:Basics:totcurrent3}
+\end{equation}
+
+\subsection{\blue{Linear extracellular medium} }
+\label{sec:Basics:LinEx}
+\index{Extracellular medium! Linear}
+In practice, most medias can \gex{(will?)} have capacitive, magnetic and conductive properties, and can be linear or nonlinear in all these three senses \gen{senses?}. Starting out with Maxwell's equations on the form given by \fref{eq:Basics:Max1}-\fref{eq:Basics:Max1} \gen{Feil ligningsnummer}, we assumed linearity in the capacitive and magnetic sense, through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$.
+
+
+
+
+
+
+
+
+
+
+
 
 
