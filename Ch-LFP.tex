@@ -1,5 +1,5 @@
 \chapter{TVN/GTE: Local Field Potentials}
-\label{sec:LFP}
+\label{chap:LFP}
 \ghnote{Torbjorn will take the main responsibility for this chapter}
 \tvnnote{Add brief historical perspective?}
 
@@ -13,7 +13,7 @@ Extracellular potentials measured in neural tissue reflects extracellular spikes
 \caption{\textbf{Illustration the origin of the LFP.}
 Synaptic input to a population of 10 000 pyramidal cells.
 }
-\label{LFP:fig:LFP_pop_origin}
+\label{fig:LFP:LFP_pop_origin}
 \end{figure}
 
 \section{Single-neuron LFPs}
@@ -26,11 +26,11 @@ The LFP is thought to reflect synaptic inputs to thousands of pyramidal neurons,
 \caption{\textbf{LFPs from synaptic inputs to pyramidal cell}
 Snapshot of the LFP around a neuron model from synaptic input (cyan dots). LFPs stemming from different synaptic input locations can be highly variable ({\bf A-C}), but many synaptic inputs to specific cell regions give more standardized LFP responses ({\bf D-E}). Uniformly distributed synaptic inputs will tent to lead to more or less random source/sink distributions, and much weaker LFPs.
 }
-\label{LFP:fig:LFP_dipoles}
+\label{fig:LFP:LFP_dipoles}
 \end{figure}
 
 
-One of the defining features of the LFP is its dipolar nature. This stems from current conservation, implying that current going into the cell at one location is exactly balanced by current going out of the cell at other locations, so that synaptic input always gives rise to a balanced set of current sources and sinks (see Chap XX). The simulated LFP in the vicinity of a neuron stemming from a single synaptic input can be highly irregular in shape due to the morphological details of the cell. For example, different locations of a single excitatory synaptic inputs to the basal dendrite of a pyramidal cell can not be expected to result in similar LFPs, and will not necessarily be dipolar in shape (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf A-C}). However, for many simultaneous excitatory synaptic inputs to the basal dendrite of a pyramidal cell, we can expect that the irregularities largely cancel, and that the resulting LFP will be dominated by a basal sink (excitatory input gives negative transmembrane currents), and an apical source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf D}). Similarly, many excitatory synaptic inputs to the apical dendrite of a pyramidal cell can be expected to result in an apical sink and a basal source (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf E}). Finally, synaptic input that is uniformly spread out over an entire neuronal morphology will tend to cause a more or less random distribution of current sources and sinks, leading to strong cancellations in the LFP and not in a dipolar shape of the LFP (Fig.~\ref{LFP:fig:LFP_dipoles}{\bf F}) (but see also sec. XX (Ih)). 
+One of the defining features of the LFP is its dipolar nature. This stems from current conservation, implying that current going into the cell at one location is exactly balanced by current going out of the cell at other locations, so that synaptic input always gives rise to a balanced set of current sources and sinks (see \fref{chap:Neuron}). The simulated LFP in the vicinity of a neuron stemming from a single synaptic input can be highly irregular in shape due to the morphological details of the cell. For example, different locations of a single excitatory synaptic inputs to the basal dendrite of a pyramidal cell can not be expected to result in similar LFPs, and will not necessarily be dipolar in shape (\fref{fig:LFP:LFP_dipoles}{\bf A-C}). However, for many simultaneous excitatory synaptic inputs to the basal dendrite of a pyramidal cell, we can expect that the irregularities largely cancel, and that the resulting LFP will be dominated by a basal sink (excitatory input gives negative transmembrane currents), and an apical source (\fref{fig:LFP:LFP_dipoles}{\bf D}). Similarly, many excitatory synaptic inputs to the apical dendrite of a pyramidal cell can be expected to result in an apical sink and a basal source (\fref{fig:LFP:LFP_dipoles}{\bf E}). Finally, synaptic input that is uniformly spread out over an entire neuronal morphology will tend to cause a more or less random distribution of current sources and sinks, leading to strong cancellations in the LFP and not in a dipolar shape of the LFP (\fref{fig:LFP:LFP_dipoles}{\bf F}) (but see also sec. XX (Ih)). 
 
 
 
@@ -39,9 +39,9 @@ From the analysis in the previous paragraph, we can draw important conclusions a
 Firstly, synaptic inputs to a population of neurons will cause much stronger LFP signals if the synaptic input is asymetrically distributed on the neurons. 
 This can happen if a given pre-synaptic neural population has a preferential synaptic target region on a given post-synaptic population. It is for example known that the inhibitory cortical Martinotti cells tend to make synaptic contacts on the distal apical dendrites of pyramidal neurons. 
 Note that this can only happen if the post-synaptic population has a certain geometrical alignment of its neurons with distinct cell regions, like basal and apical dendrites. In cortex, the inhibitory interneurons and excitatory layer 4 stellate cells tend to be more symmetrical than pyramidal cells, and their morphologies are not as clearly separated into different cell regions. This prevents the asymmetric distribution of synapses that is needed for generating strong LFP signals \cite**{Linden2011,Hagen2016,Naess2020}.
-\tvnnote{Make illustration figure, similar to but simpler than Fig 4 in N\ae ss et al 2021 }
+\tvnnote{Make illustration figure, similar to but simpler than Fig 4 in N\ae ss et al 2021?}
 
-Since there is reason to believe that the LFP is dominated by asymmetric synaptic input to geometrically aligned populations of pyramidal cells, we can identify four main LFP contributors: excitatory or inhibitory synaptic input to the apical or basal dendrites, see Fig.~\ref{LFP:fig:LFP_lego}.
+Since there is reason to believe that the LFP is dominated by asymmetric synaptic input to geometrically aligned populations of pyramidal cells, we can identify four main LFP contributors: excitatory or inhibitory synaptic input to the apical or basal dendrites, see \fref{fig:LFP:LFP_lego}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -53,25 +53,26 @@ cell in response to different types of synaptic input. The LFP signature depends
 or inhibitory), and the location (apical, basal, uniform), but also, to a lesser degree, to many other parameters of the cells
 and synapses.
 }
-\label{LFP:fig:LFP_lego}
+\label{fig:LFP:LFP_lego}
 \end{figure}
 
-\section{Frequency-content of LFP signals}
-LFPs are often analyzed in terms of the frequency content.
+
+
+
 \subsection{Intrinsic dendritic filtering}
 
 An important concept in understanding the origin of LFPs is intrinsic
 dendritic filtering \cite**{Linden2010}. This effect causes a low-pass filtering of the LFP with increasing distance from the neuronal sources.
-It is caused by the frequency dependence of transmembrane capacitive currents, and it can be illustrated through considering sinusoidal current injection to a simple stick model (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}).
-From Kirchoff's circuit laws (Ch.~\ref{sec:Neuron}), we know
-that the current injected into a neuronal compartment must equal the current leaving the same compartment, partly through the membrane as a transmembrane current, and partly into other compartments, as axial currents $I_{inj} = I_m + I_a$ (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf A}). We also know that the sum of all transmembrane currents must in this case equal $I_{inj}$, but how much these return currents will be spread out over the membrane of the neuron is dependent on how easy it is for the current to move intracellularly, and how easy it is for the currents to cross the membrane.
+It is caused by the frequency dependence of transmembrane capacitive currents, and it can be illustrated through considering sinusoidal current injection to a simple stick model (\fref{fig:LFP:intrinsic_dendritic_filt}).
+From Kirchoff's circuit laws (\fref{chap:Neuron}), we know
+that the current injected into a neuronal compartment must equal the current leaving the same compartment, partly through the membrane as a transmembrane current, and partly into other compartments, as axial currents $I_{inj} = I_m + I_a$ (\fref{fig:LFP:intrinsic_dendritic_filt}{\bf A}). We also know that the sum of all transmembrane currents must in this case equal $I_{inj}$, but how much these return currents will be spread out over the membrane of the neuron is dependent on how easy it is for the current to move intracellularly, and how easy it is for the currents to cross the membrane.
 The transmembrane current can be expressed as $I_m = c_m\frac{dV}{dt} + I_{ion}$. Note that the transmembrane current is dependent on the time derivative of the membrane potential (through the capacitive current), implying that the membrane is more "leaky" for fast changes in the membrane potential. For a sinusoidal injected current, %$I_{inj} = A \sin (2\pi f t)$,
 this means that for increasing frequencies, a larger fraction of the injected current will be balanced by local transmembrane currents instead of axial currents, shifting the transmembrane currents closer to the input site. 
-Therefore, rapid changes in the membrane potential are associated with predominately local transmembrane currents, while slow changes in the membrane potential are associated with more distributed transmembrane currents. This can be demonstrated by simulating the extracellular potential around a simple stick model, with a sinusoidal current synapse. A stimulation frequency of 1~Hz gives rise to a large dipolar LFP around the cell, reflecting the distributed nature of the transmembrane currents (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf B}). For the same current amplitude, but with a frequency of 1000~Hz, the resulting LFP is much more spatially confined (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf C}).
+Therefore, rapid changes in the membrane potential are associated with predominately local transmembrane currents, while slow changes in the membrane potential are associated with more distributed transmembrane currents. This can be demonstrated by simulating the extracellular potential around a simple stick model, with a sinusoidal current synapse. A stimulation frequency of 1~Hz gives rise to a large dipolar LFP around the cell, reflecting the distributed nature of the transmembrane currents (\fref{fig:LFP:intrinsic_dendritic_filt}{\bf B}). For the same current amplitude, but with a frequency of 1000~Hz, the resulting LFP is much more spatially confined (\fref{fig:LFP:intrinsic_dendritic_filt}{\bf C}).
 
-This has implications for how the amplitude of different frequency-components will decay with distance from the cell \cite**{Linden2010}. This is because the amplitude of the LFP from a dipole will decay faster in the far-field limit, and the far-field limit is reached at a smaller distance for more spatially confined dipoles \cite**{Linden2010}. In the present example, the amplitude of the LFP very close the the input site was almost identical for the two different frequencies, but the amplitude of the LFP from the high-frequency input decayed more steeply with distance (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf D}). 
+This has implications for how the amplitude of different frequency-components will decay with distance from the cell \cite**{Linden2010}. This is because the amplitude of the LFP from a dipole will decay faster in the far-field limit, and the far-field limit is reached at a smaller distance for more spatially confined dipoles \cite**{Linden2010}. In the present example, the amplitude of the LFP very close the the input site was almost identical for the two different frequencies, but the amplitude of the LFP from the high-frequency input decayed more steeply with distance (\fref{fig:LFP:intrinsic_dendritic_filt}{\bf D}). 
 For synaptic inputs consisting of both high and low frequency 
-components, this means that with increasing distance, the low frequency components will become increasingly dominant in the LFP, causing a low-pass filtering effect in the LFP (Fig.~\ref{LFP:fig:intrinsic_dendritic_filt}{\bf E}).
+components, this means that with increasing distance, the low frequency components will become increasingly dominant in the LFP, causing a low-pass filtering effect in the LFP (\fref{fig:LFP:intrinsic_dendritic_filt}{\bf E}).
 Note that this is a quite general result, since we from Fourier analysis know that all signals can be written as a weighted sum of sinusoids with different frequencies.
 
 \begin{figure}[!ht]
@@ -84,9 +85,21 @@ Illustration of the LFP at a snapshot in time in response
 to a sinusoidal synapse with different frequencies to a 
 dendritic stick.
 }
-\label{LFP:fig:intrinsic_dendritic_filt}
+\label{fig:LFP:intrinsic_dendritic_filt}
 \end{figure}
 
+\section{Frequency-content of LFP signals}
+LFPs are often analyzed in terms of the frequency content. Many things affect how much power the LFP has at different frequencies, and different parameters can often affect different frequency regions. The dynamics of the synaptic input mostly affect low-frequency (\fref{fig:LFP:psd_input}).
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.7\textwidth]{Figures/LFP/fig_LFP_powerlaws_input_dynamics.png}
+\end{center}
+\caption{\textbf{Frequency-content of LFP signals}
+The LFP will have different "power-laws" depending on the parameters. The total number of synaptic inputs is the same in both cases, and all other parameters are identical
+\tvnnote{placeholder. Vet ikke om vi skal ha dette.}
+}
+\label{fig:LFP:psd_input}
+\end{figure}
 
 \subsection{\red{TVN:Effect of spikes on the LFP}}
 \tvnnote{Hadde vaert fint aa gaa litt ordentlig igjennom dette, men vi faar se.}
@@ -98,7 +111,7 @@ Can definitely be expected to contribute somewhat to LFP PSDs.
 
 
 \subsection{\red{TVN: Effect of subthreshold active conductances}}
-Since the LFP is thought to mainly originate from large numbers of synaptic inputs and the resulting return currents, it is reasonable to expect that any ion channel on the cellular membrane that might affect the transmembrane currents, would also affect the LFP. Note that most ion channels are closed at the cells resting potential, and only becomes active during spiking. This is illustrated for a rat layer 5 pyramidal cell model from  \citeasnoun**{Hay2011} in Fig.~\ref{LFP:fig:subtheshold_linear},
+Since the LFP is thought to mainly originate from large numbers of synaptic inputs and the resulting return currents, it is reasonable to expect that any ion channel on the cellular membrane that might affect the transmembrane currents, would also affect the LFP. Note that most ion channels are closed at the cells resting potential, and only becomes active during spiking. This is illustrated for a rat layer 5 pyramidal cell model from  \citeasnoun**{Hay2011} in \fref{fig:LFP:subtheshold_linear},
 where we see that the simulated somatic membrane potential response to an injected current was almost perfectly linear for a wide range of different subthreshold current amplitudes, and only deviates from this for suprathreshold current input. 
 
 \begin{figure}[!ht]
@@ -107,7 +120,7 @@ where we see that the simulated somatic membrane potential response to an inject
 \end{center}
 \caption{\textbf{Subthreshold response to somatic current injection is close to linear.}
 The somatic membrane potential of the rat pyramidal layer 5 neuron model from cite Hay2011 from exhibits an almost perfectly linear I-V response for somatic subthreshold current injections. Red dashed line is linear.}
-\label{LFP:fig:subtheshold_linear}
+\label{fig:LFP:subtheshold_linear}
 \end{figure}
 
 There are however certain active conductances that can be expected to affect the LFP, in particular the hyperpolarization-activated cation current $I_{\rm h}$ \index{$I_{\rm h}$}.
@@ -119,14 +132,14 @@ In cortical pyramidal cells, the $I_{\rm h}$-conductance is concentrated in the 
 \end{center}
 \caption{\textbf{Affect of Ih on LFP.}
 The $I_{\rm h}$-current can affect the LFP.}
-\label{LFP:fig:Ih_effect}
+\label{fig:LFP:Ih_effect}
 \end{figure}
 
 \section{\red{TVN: Other approaches}}
 
 \begin{itemize}
 \item "Magic" simple formula \cite**{Mazzoni2015}
-\item Kernel trick \cite**{Hagen2015,Skaar2020}
+\item Kernel trick \cite**{Hagen2016,Skaar2020}
 \end{itemize}
 
 \subsection{\red{TBV:Population LFPs}}
@@ -145,7 +158,7 @@ The $I_{\rm h}$-current can affect the LFP.}
 \caption{\textbf{Illustration of why correlation in synaptic input boosts LFP.}
 Basically, it is just because PSD is squared, and variability increase sum of squares: $(1+3) = (2 +2)$, but $(1^2 + 3^2) > (2^2 + 2^2)$
 }
-\label{LFP:fig:correlation_boost}
+\label{fig:LFP:correlation_boost}
 \end{figure}
 
 

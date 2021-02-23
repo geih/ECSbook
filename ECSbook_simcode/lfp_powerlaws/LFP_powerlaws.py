@@ -92,7 +92,7 @@ def return_wave_spiketimes(tvec, num_spikes):
 def make_input_dynamics_figure():
 
     num_syns = 4000
-    tstop = 4000
+    tstop = 5000
     dt = 2**-4
     num_tsteps = int(tstop / dt + 1)
     tvec = np.arange(num_tsteps) * dt
@@ -105,7 +105,7 @@ def make_input_dynamics_figure():
                   'scale_by_freq': True,
                   }
 
-    cell = return_hay_cell(tstop=tstop, dt=dt, make_passive=True)
+    cell = return_hay_cell(tstop=tstop, dt=dt, make_passive=True)   
     syn_idxs = cell.get_rand_idx_area_norm(section="allsec", nidx=num_syns,
                                        z_min=-100, z_max=100)
     cell.__del__()
@@ -187,7 +187,7 @@ def make_input_dynamics_figure():
     simplify_axes(fig.axes)
     ax_psd.set_xticks([1, 10, 100, 1000])
 
-    fig.savefig("fig_LFP_powerlaws_input_dynamics.png", dpi=300)
+    fig.savefig("fig_LFP_powerlaws_input_dynamics_.png", dpi=300)
     # plt.show()
 
 
@@ -409,6 +409,6 @@ def make_syn_tau_figure():
 
 
 if __name__ == '__main__':
-    # make_input_dynamics_figure()
+    make_input_dynamics_figure()
     # make_cm_figure()
-    make_syn_tau_figure()
+    # make_syn_tau_figure()
