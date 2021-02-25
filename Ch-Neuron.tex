@@ -462,6 +462,7 @@ where the coefficients $C_n(x)$ depend on the distance along the cable, while $\
 As we just saw, the length constant $\lambda$ (\fref{eq:Neuron:lengthconst}) is the length over which the potential falls to a fraction $1/e$ of its boundary value when the finite end of a semi-infinite cable is fixed at a constant potential, or, equivalently, if the end of a semi-infinite cable receives a constant direct-current (DC) input. Therefore, $\lambda$ is often referred to as the DC length constant. 
 
 It is possible to derive a corresponding length constant for AC input to a semi-infinite cable \cite**{Pettersen2008a}: 
+\gen{Ikke sikker paa at dette er riktig referanse her.}
 \begin{equation}
 \lambda_{AC} = \lambda \sqrt{ \frac{2}{1+\sqrt{(\omega \tau)^2 + 1}} }.
 \label{eq:Neuron:AClambda}
@@ -490,12 +491,12 @@ which charges up \ehnote{dropp "up" -- antonymet til "discharge" er vel bare "ch
 
 In the MC models it is normally assumed that, despite all these various ionic fluxes, the ion concentrations remain constant. This may seem like a peculiar assumption, but it is often quite good. The reason is that the number of ions crossing the membrane during a brief signal such as an action potential only leads to tiny changes in the ion concentrations. 
 
-To see why, let us consider an example with a spherical single compartment neuron with radius $r$. This neuron will contain a number $N_0 = 4/3 \,\pi r^3 N_\text{A} c_\text{Na}$ of Na$^{+}$ ions, where $N_\text{A}$ is Avogadro's number and $c_\text{Na}$ the intracellular Na$^{+}$ concentration. Let us next assume that Na$^+$ ions enter the neuron and increases the membrane potential by $\Delta V$. The total charge needed for this will be $\Delta Q = 4 \pi r^2 c_m \Delta V$, which corresponds to a number of $N_\text{new} = \Delta Q/e$ of ions, where $e$ is the unit charge. From this, we may compute the ratio between the number of ions that entered the neuron and the number of ions that were already there:
+To see why, let us consider an example with a spherical single compartment neuron with radius $r$. This neuron \gex{contains} a number $N_0 = 4/3 \,\pi r^3 N_\text{A} c_\text{Na}$ of Na$^{+}$ ions, where $N_\text{A}$ is Avogadro's number and $c_\text{Na}$ the intracellular Na$^{+}$ concentration. Let us next assume that Na$^+$ ions enter the neuron and increases the membrane potential by $\Delta V$. The total charge needed for this will be $\Delta Q = 4 \pi r^2 c_m \Delta V$, which corresponds to a number of $N_\text{new} = \Delta Q/e$ of ions, where $e$ is the unit charge. From this, we may compute the ratio between the number of ions that entered the neuron and the number of ions that were already there:
 \begin{equation}
 \frac{N_\text{new}}{N_0} = \frac{3 c_m \Delta V}{F r c_\text{Na}}, 
 \label{eq:Neuron:NaNaNa}
 \end{equation}
-where we have used that Faraday's constant $F = eN_\text{A} = 96458.3 \, \si{\coulomb\per\mol}$. If we insert values for a typical action potential $\Delta V = 100 \,\si{\milli\volt} = 0.1 \si{Volt}$, an intracellular Na$^+$ concentration $c_\text{Na} = 10 \, \si{\milli\molar}$, and $c_\text{m} = 1 \, \si{\micro\farad\per\square\centi\metre} = 10^{-2}\, \si{\farad\per\square\metre}$, the ratio becomes:
+where we have used that Faraday's constant $F = eN_\text{A} = 96458.3 \, \si{\coulomb\per\mol}$. If we insert values for a typical action potential $\Delta V = 100 \,\si{\milli\volt} = 0.1 \si{\volt}$, an intracellular Na$^+$ concentration $c_\text{Na} = 10 \, \si{\milli\molar}$, and $c_\text{m} = 1 \, \si{\micro\farad\per\square\centi\metre} = 10^{-2}\, \si{\farad\per\square\metre}$, the ratio becomes:
 \begin{equation}
 \frac{N_\text{new}}{N_0} = \frac{3.1 \times 10^{-9} \si{\metre}}{r}, 
 \label{eq:Neuron:NaNaNaNa}
@@ -503,7 +504,8 @@ where we have used that Faraday's constant $F = eN_\text{A} = 96458.3 \, \si{\co
 Hence, even in a small compartment with $r=1\,\si{\micro\metre} = 10^{-6}\,\si{\metre}$, the number of ions that enters during an action potential will only change the concentration by fraction $3.1 \times 10^{-3} \approx 0.3 \%$. This suggests that concentrations changes on a short time scale are small enough to be neglected. 
 \tvntxt{It also serves to demonstrate how relatively tiny the deviations from electroneutrality across the membrane are, while still giving rise to substantial membrane potentials.}\tvnnote{Vet ikke helt om dette er riktig?}
 
-Since neurons possess a team of homeostatic mechanisms that strive to maintain the trans-membrane ion concentration gradients, the assumption of constant ion concentrations also tends to hold on a longer time scale. The perhaps most important of these mechanisms is the ATPase pump, which uses \tvntxt{the} energy \tvntxt{of 1 ATP molecule} to pump \tvntxt{2} K$^+$ ions into the neuron and \tvntxt{3} Na$^+$ ions out, thus reversing the ionic exchange that occurs during action potential generation. As a result of this pump, the intracellular space tends to remain comparatively rich in K$^+$, while the extracellular space is tends to remain comparatively rich on Na$^+$. Typical values of ion concentrations of the main charge carriers inside and outside neurons are given in \Fref{tab:Neuron:ion-concentrations}. 
+Since neurons possess a team of homeostatic mechanisms that strive to maintain the trans-membrane 
+\gen{bindestrek?} ion concentration gradients, the assumption of constant ion concentrations also tends to hold on a longer time scale. The perhaps most important of these mechanisms is the ATPase pump, which uses \tvntxt{the} energy \tvntxt{of 1 ATP molecule} to pump \tvntxt{2} K$^+$ ions into the neuron and \tvntxt{3} Na$^+$ ions out, thus reversing the ionic exchange that occurs during action potential generation. As a result of this pump, the intracellular space tends to remain comparatively rich in K$^+$, while the extracellular space tends to remain comparatively rich on Na$^+$. Typical values of ion concentrations of the main charge carriers inside and outside neurons are given in \Fref{tab:Neuron:ion-concentrations}. 
 
 \begin{table}[h]
 %\centering
@@ -521,7 +523,7 @@ Nernst potential (\si{\milli\volt})		    &	-100		&	    	+72	&		+4.5	&	-77		&		+1
 \end{tabular}
 \end{table}
 
-In HH-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_\text{L}$ (\fref{eq:Neuron:HHleak}), which largely determines the cell's resting potential (see see \cite**{offner1991} for a critical study of this approximation). \tvnnote{Kan virke litt som vi antyder at ione-pumpene er inkludert i leak current syntes jeg. Flytte dette til begynnelsen av neste subsection?} Below, we shall explain how the ionic concentrations are implicitly present in the HH-formalism as they determine the ionic reversal potentials ($E_x$ in \fref{eq:Neuron:HHform}). We shall also comment briefly on the cases where the assumptions of constant ion concentrations are not applicable. 
+In HH-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $I_\text{L}$ (\fref{eq:Neuron:HHleak}), which largely determines the cell's resting potential (see \cite**{offner1991} for a critical study of this approximation). \tvnnote{Kan virke litt som vi antyder at ione-pumpene er inkludert i leak current syntes jeg. Flytte dette til begynnelsen av neste subsection?} Below, we shall explain how the ionic concentrations are implicitly present in the HH-formalism as they determine the ionic reversal potentials ($E_x$ in \fref{eq:Neuron:HHform}). We shall also comment briefly on the cases where the assumptions of constant ion concentrations are not applicable. 
 
 
 \subsection{\blue{Ionic reversal potentials}}
@@ -539,7 +541,7 @@ j_k = j_{k,\text{diff}} + j_{k,\text{drift}}
 \end{equation}
 %%%%
 where the first term \tvntxt{inside the parenthesis} is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. 
-\ehtxt{[k] denotes the concentration of ion $k$ (\si{\molar\per\metre^3}).}
+\ehtxt{[k] denotes the concentration of ion $k$ (\si{\molar\per\metre^3}).} \gen{Det skal vel bare vaere molar (M)?}
 Since we consider membrane fluxes, we have replaced the diffusion constant ($D_k$) which appears in the more common form of the Nernst-Planck equation (\fref{eq:Basics:JNP}) with the membrane's permeability ($P_k$) to ion $k$. The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
 
 \begin{equation}
@@ -585,7 +587,7 @@ E_\text{L} = \frac{R T}{F}
 Looking at \fref{eq:Neuron:GHK}, we see that the transmembrane currents are nonlinear functions of both the ionic concentrations $[k]$ in the intra and extracellular space, and the membrane potential $V$. In comparison, the transmembrane currents used in the HH-type formalism (\fref{eq:Neuron:HHform}), assumed to be proportional to the driving force $(V-E_k)$, are linearized (sometimes called quasi-Ohmic) versions of the Goldman-Hodkgkin-Katz equation. The HH-form (\fref{eq:Neuron:HHform}) is generally deemed as sufficient for modeling most ion channels, because it gives good predictions of the membrane currents. Ion concentrations and ionic reversal potentials are then assumed to be constant.
 
 
-\subsection{\blue{Intracellular Calcium dynamics}}
+\subsection{\blue{Intracellular calcium dynamics}}
 \label{sec:Neuron:Calcium}
 \index{Calcium dynamics}
 While most ion concentrations are assumed to be constant in HH-based models,
@@ -602,7 +604,7 @@ When Ca$^{2+}$ dynamics is included in HH-based models, it is usually to account
 \end{equation}
 and the $\mathrm{[Ca]_i}$ in a neuronal compartment is typically modeled using a simplified framework on the form:
 \begin{equation}
-\frac{d\mathrm{[Ca]_i}}{dt} = \gamma i_{\text{Ca}} - \frac{\mathrm{[Ca]_i}-\mathrm{[Ca]_{i,0}}}{\tau_{Ca}}, 
+\frac{d\mathrm{[Ca]_i}}{dt} = \gamma i_{\text{Ca}} - \frac{\mathrm{[Ca]_i}-\mathrm{[Ca]_{i,0}}}{\tau_\text{Ca}}, 
 \label{eq:Neuron:Cadynamics}
 \end{equation}
 where a transmembrane Ca$^{2+}$ current ($i_\text{Ca}$ is converted to a change in $\mathrm{[Ca]_i}$ by the conversion factor $\gamma$, which is proportional to the surface to volume ratio of the neuronal compartment where $\mathrm{[Ca]_i}$ is defined. In addition, the last term in \fref{eq:Neuron:Cadynamics} represents the summed activity of a number of extrusion mechanisms that will make $\mathrm{[Ca]_i}$ decay towards some baseline value $\mathrm{[Ca]_{i,0}}$ with a time constant $\tau_\text{Ca}$ (see e.g. \cite**{Sterratt2011}).
@@ -612,12 +614,19 @@ To use a simple model as in \fref{eq:Neuron:Cadynamics} might not be meaningful 
 
 \section{\blue{Underlying assumptions in multicompartment models}}
 \label{sec:Neuron:HHCassumptions}
+
+\gen{Litt usikker paa om overskriften er godt dekkende for innholdet i seksjonen}
+
+\gen{Boer ogsaa nevne et sted at gliaceller kan modelleres paa samme maate som nevroner, og
+at de ogsaa bidrar til extracellulaere potensialer.}
+
 Like any model, MC type models are simplified representations of the real system, and rest on a series of simplifying assumptions. Since MC type models with HH-type ion channels have become quite a pillar in modern neuroscience, their weaknesses and general applicability have been the subject of numerous publications within the field (see e.g., \cite**{Rinzel1990,Meunier2002,Catterall2012,Almog2016,Drukarch2018}). We will not give any detailed discussion on this topic here, but we will briefly just list up the main assumption that MC models rest upon. 
 
 \begin{itemize}
-\item \textit{Cable equation}: MC models rest on the assumption that neuronal morphology is well represented by a one-dimensional, branching cable. As such, MC type models neglect the radial components of intracellular currents (see e.g.,\citeasnoun**{lindsay2004maxwell} for a critical study of this approximation).
+\item \textit{Cable equation}: MC models rest on the assumption that neuronal morphology is well represented by a one-dimensional, branching cable. As such, MC type models neglect the radial components of intracellular currents (see e.g., \citeasnoun**{lindsay2004maxwell} for a critical study of this approximation).
 
 \item \textit {Ion channels}: HH-type ion channels are simplified approximations of the electrophysiological dynamics of ion channel gating. Since the HH-type formalism is based on deterministic equations, it cannot account for ion channel noise, which can stem from the stochastic gating at the single channel level \cite**{Meunier2002, Goldwyn2011}. Furthermore, the relatively simple gating kinetics described by HH-type channels is not accurate for all ion channels, and more detailed ion channel models have been developed, based on a formalism more compatible with statistical physics and thermodynamics \cite**{Destexhe2010}, or even more detailed, Markov-type formalism based on single-channel recordings \cite**{sakmann2013}.
+
 
 \item \textit{Ion concentrations}: As we explained in \fref{sec:Neuron:Ions_and_reversals}, the concentrations of the main charge carriers are in standard MC models assumed to be constant. As the main ion concentrations change little during normal neuronal activity, this assumption is often warranted. However, there exist scenarios when this is not true, and dramatic changes in ion concentrations is a trademark of several pathological conditions, such as epilepsy, stroke and spreading depression \cite**{Somjen2001,Zandt2015,Ayata2015}. Effects of changes in ion concentrations on the dynamical properties of neurons has been the topic of many modeling studies (see e.g., \cite**{Qian1989,Kager2000,Ullah2009,Zandt2011,Wei2014,WeiUllahSchiff2014,Hubel2014,Saetra2020}), but are not accounted for by standard MC models.
 
