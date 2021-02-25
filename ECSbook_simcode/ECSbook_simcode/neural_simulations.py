@@ -153,7 +153,7 @@ def return_stick_cell(tstop, dt):
                 'tstop': tstop,
             }
     cell = LFPy.Cell(**cell_params)
-    cell.set_pos(x=-cell.xstart[0])
+    cell.set_pos(x=-cell.x[0, 0])
     return cell
 
 
@@ -378,7 +378,7 @@ def make_WN_input(cell, max_freq):
 def make_white_noise_stimuli(cell, input_idx, weight=None):
 
     input_scaling = 0.005
-    max_freq = 1000
+    max_freq = 1100
     np.random.seed(1234)
     input_array = input_scaling * (make_WN_input(cell, max_freq))
 
