@@ -119,14 +119,7 @@ By definition, the electric potential is the energy needed to move
 U_E = q\phi.
 \label{eq:Basics:UE}
 \end{equation}
-\tvnnote{Hmm, kanskje det under egentlig ikke hoerer hjemme her allikevel, men heller under 2.4 "Extracellular potentials in the brain?}
-\tvntxt{This means that the extracellular potential is really a measure of the energy needed to move a positive unit of charge from the reference electrode and to the measurement electrode. If a positive current is leaving the extracellular region containing a measurement electrode (for example a sodium current flowing into a cell), then a positive current is drawn into the region, and the energy needed to move a positive charge here is negative (you can in theory gain energy) (\fref{fig:Basics:elec_circuit}). This is why the sodium peak of extracellular spikes is negative (\fref{chap:Spikes}). Slightly later, during the after-hyperpolarization phase of the spike, a potassium current is flowing out of the cell. Moving additional positive charges there now requires more energy, making the measured extracellular potential positive.
 
-Many people (hvertfall Torbj\o rn) might have the intuition that if the extracellular conductivity is very low, the amplitude of the extracellular potential should also also be very low (after all "the signal can hardly propagate through the medium"). However, when a current source is pushing a current through a resistive medium, the drop in the potential will be proportional to the inverse of the conductivity (see Ohm's law), and therefore a lower conductivity gives a larger amplitude of the extracellular potential. 
-%the extracellular potential is the energy needed to move a unit charge from a reference electrode to a measurement electrode, and therefore, if the extracellular conductivity is very low, more energy is needed.
-\gen{Jeg synes det er lettere aa tenke/snakke om str{\o}mmer enn ladninger. Naar en str{\o}mkilde  presser en str{\o}m gjennom et Ohmsk medium saa blir det et spenningfall (hopp) i mediet som er proporsjonalt med motstanden. Men ladningene som flytter paa seg faar ikke mer energi, alle frigjort energi blir vel til varme i det ohmske mediet?} 
-}
-\ghnote{Torbjorn omformulerer til stroembetraktninger. Gi gjerne en kortfattet definisjon av stroem og referer til delkapitlene under.} 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -363,9 +356,7 @@ Generally, currents additional to those defined above may arise due to advection
 \end{equation}
 arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. However, as we argued in \fref{sec:Basics:Debye}, the saline solution in the brain is practically electroneutral ($\rho \simeq 0$), and the advective current is expectedly negligible. A more thorough argument for this was given in \citeasnoun**{Gratiy2017}.
 
-As we briefly touched upon earlier, charges may also be accelerated by changes a magnetic field ${\bf B}$, which gives rise to so-called inductive current proportional to $\partial {\bf B}/\partial t$. However, in the brain, inductive currents are assumed to be of negligible importance \cite**{Ranck1963,plonsey1967,Bossetti2008} (more about this in \fref{sec:Basics:Maxwell}).
-\tvnnote{Bor kanskje paapeke at vi tenker paa ekstracellulaere strommer her. Ione-kanaler (som Ih) kan jo beskrives som induktive.}
-
+As we briefly touched upon earlier, charges may also be accelerated by changes a magnetic field ${\bf B}$, which gives rise to so-called inductive current proportional to $\partial {\bf B}/\partial t$. However, in the brain, such inductive currents caused by the magnetic field are assumed to be of negligible importance \cite**{Ranck1963,plonsey1967,Bossetti2008} (more about this in \fref{sec:Basics:Maxwell}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -399,7 +390,7 @@ For intracellular currents it is common to make the further simplification that 
 \end{figure}
 
 
-\subsection{\blue{Spatial scales}}
+\subsection{\red{TVN: Jumping up in spatial scale 2: From chaotic entangled neurites to smooth tissue}}
 \label{sec:Basics:ECSpot}
 The recording of an electric potential requires an electrode, and the spatial extension of the electrode determines the spatial resolution of the recording. For example, an electrode placed in the extracellular space of the brain will record the average potential taken over the interface (typically a metal surface or liquid junction) between the electrode and the extracellular fluid, which normally is at least 1~\si{\square\micro\metre}. When we speak of an electric field or potential, we generally mean the average of these quantities taken over a certain volume of interest. 
 
@@ -467,6 +458,17 @@ In Appendix A of \citeasnoun**{Gratiy2017}) it was shown that the divergence of 
 
 The derivation of \fref{eq:Basics:continuity1} thus reveals that it only has a meaningful interpretation when considering tissue in a coarse-grained scale, i.e., a spatial scale large enough to contain both intra- and extracellular domains.\tvnnote{Er dette noedvendigvis sant? Ligningen i seg selv er vel ganske generell og blir jo brukt i EMI (Tveito) osv, og boer vel kunne loeses nummerisk paa micrometer nivaa?}
 Importantly, ${\bf i}_\text{t}$ thus interprets as the average current running extracellularly through tissue, defined as extracellular current per unit \textit{tissue} cross section area and not per \textit{extracellular} cross section area (although it only runs through the extracellular parts of this cross section area). Similarly, $\sigma_\text{t}$ in \fref{eq:Basics:continuity2} interprets as average conductivity experienced by the current ${\bf i}_\text{t}$. As this current will face cellular obstacles, and is restricted to run only through the extracellular parts of the tissue, $\sigma_\text{t}$ is generally lower than the conductivity of the extracellular saline solution (see \fref{chap:Sigma} for further discussion). 
+
+\subsection{\tvntxt{The physical interpretation of extracellular potentials in the brain}}
+\tvnnote{Flyttet dette, siden vi ikke hadde introdusert stroemmer engang der det foerst stod.}
+\tvntxt{This means that the extracellular potential is really a measure of the energy needed to move a positive unit of charge from the reference electrode and to the measurement electrode. If a positive current is leaving the extracellular region containing a measurement electrode (for example a sodium current flowing into a cell), then a positive current is drawn into the region, and the energy needed to move a positive charge here is negative (you can in theory gain energy) (\fref{fig:Basics:elec_circuit}). This is why the sodium peak of extracellular spikes is negative (\fref{chap:Spikes}). Slightly later, during the after-hyperpolarization phase of the spike, a potassium current is flowing out of the cell. Moving additional positive charges there now requires more energy, making the measured extracellular potential positive.
+
+Many people (hvertfall Torbj\o rn) might have the intuition that if the extracellular conductivity is very low, the amplitude of the extracellular potential should also also be very low (after all "the signal can hardly propagate through the medium"). However, when a current source is pushing a current through a resistive medium, the drop in the potential will be proportional to the inverse of the conductivity (see Ohm's law), and therefore a lower conductivity gives a larger amplitude of the extracellular potential. 
+%the extracellular potential is the energy needed to move a unit charge from a reference electrode to a measurement electrode, and therefore, if the extracellular conductivity is very low, more energy is needed.
+\gen{Jeg synes det er lettere aa tenke/snakke om str{\o}mmer enn ladninger. Naar en str{\o}mkilde  presser en str{\o}m gjennom et Ohmsk medium saa blir det et spenningfall (hopp) i mediet som er proporsjonalt med motstanden. Men ladningene som flytter paa seg faar ikke mer energi, alle frigjort energi blir vel til varme i det ohmske mediet?} 
+}
+\ghnote{Torbjorn omformulerer til stroembetraktninger. Gi gjerne en kortfattet definisjon av stroem og referer til delkapitlene under.} 
+
 
 
 \subsection{\blue{Two-step approach for modeling extracellular potentials}}
