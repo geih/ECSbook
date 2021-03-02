@@ -19,7 +19,7 @@ Let us begin with the fundamental quantity for electricity, the electric charge.
 
 Since atoms in their natural state contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper wire, such as that carrying current to a normal desktop lamp, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt water (saline), the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
 
-At a fundamental, microscopic level, electricity is due to the movement of charges. Such a movement can be caused both by electric and magnetic forces, but for now, we consider only the electric force, which is the most important for the phenomena that we will study in this book. A pair of charges, $q_1$ and $q_2$, will act on each other with a force $F$ (with units newton (\si{\newton})) given by Coulomb's law:
+At a fundamental, microscopic level, electricity is due to the movement of charges. Such a movement can be caused both by electric and magnetic forces \tvnnote{Burde vi egentlig ha nevnt diffusjon ogsaa her, eller reformulere littegrann?}, but for now, we consider only the electric force, which is the most important for the phenomena that we will study in this book. A pair of charges, $q_1$ and $q_2$, will act on each other with a force $F$ (with units newton (\si{\newton})) given by Coulomb's law:
 \begin{equation}
 F = \frac{q_1q_2}{4\pi \epsilon_0} \frac{1}{r^2},
 \label{eq:Basics:CoulombF}
@@ -47,7 +47,7 @@ If there are several ($N$) point charges present, the contribution from each of 
 If our system of study consisted of a small number $N$ of charges, we could use $N$ instances of \fref{eq:Basics:CoulombFN} to compute the force acting on all the $N$ individual charges. Together with Newton's law ${\bf F} = m {\bf a}$, which tells us how the charges will be accelerated in the force direction, \fref{eq:Basics:CoulombFN} would then allow us to compute the movements of all our charges over time.
 
 Although \fref{eq:Basics:CoulombFN} establishes the fundamental origin for electric interactions, there is a fairly long way to go from this equation to the understanding of electric phenomena in a macroscopic system such as for example the brain. When describing a macroscopic system, we are usually not interested in the microscopic interactions between a small number of charges, but rather the joint interactions of a very, very large number of charges. It is then not feasible to keep record of the position of each individual charge, but rather to work with continuous variables defined on a larger spatial scale, such as charge densities, $\rho$ (with units \si{\coulomb\per\cubic\metre}), or ion concentrations, $c_k$ (with units millimolar ($1\, \si{\milli\molar} = 1 \,\si{\mole\per\cubic\metre} = 6.02\times10^{23}$ particles per \si{\cubic\metre})). The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}).
-
+\tvnnote{Kanskje ryddigere aa flytte dette avsnittet til litt senere, naar vi gaar over til stroemmer? Foelses litt uryddig aa saavidt nevne det her, men saa fortsette med enkelt-ladninger. Kan eventuelt begynne kapittelet med aa fortelle at vi skal til stroemmer og potensialer, men beggynner paa bunn og jobber oss oppover i skala}
 %\gen{I tillegg kan det jo ogsaa vaere magnetiske krefter paa ladninger, kanskje bare nevne det for "completeness"?}
 %\ghnote{La til kort kommentar i begynnelsen.}
 
@@ -78,6 +78,7 @@ For a spherical symmetric potential,
 {\bf \nabla} \phi(r) = \frac{d\phi(r)}{dr} {\bf \hat{r}}.
 \label{eq:Basics:SphericalNablaPhi}
 \end{equation}
+\tvnnote{Hva med {\bf e$_r$}, for aa vaere mer likt {\bf e$_x$}?}
 Since the field contribution from each point charge is spherically symmetric around its position (${\bf r}_n$), the field in \fref{eq:Basics:CoulombEN} can thus be written as the gradient of the potential:
 \begin{equation}
 {\phi}({\bf r}) = \sum_{n=1}^{N}  \frac{q_n}{4\pi \epsilon_0} \frac{\hat{{\bf r}}_{1,n}}{|{\bf r}-{\bf r}_n|}.
@@ -203,7 +204,7 @@ As we noted earlier, the charge-relaxation time in the extracellular saline solu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\blue{Electric currents}}
 \label{sec:Basics:Current} \index{Electric current}
-As we have stated several times by now, we do not want to study a macroscopic system by keeping track of individual particles or charges, but rather in the average movement of particles or charge on a larger spatial scale. The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}). 
+As we have stated several times by now, we do not want to study a macroscopic system by keeping track of individual particles or charges, but rather in the average movement of particles or charge on a larger spatial scale.\tvnnote{Bytte til: As was argued in the previous subsection, we do not want ...? Og kanskje flytte deler av siste avsnitt i "2.1 Electric charge" hit?} The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}). 
 
 There exist various kinds of electric currents, differing in terms of what drives them. Below we will introduce the three kinds that are most important for the topic of this book, which are conductive currents (\fref{sec:Basics:ConductiveCurrent}),  capacitive currents (\fref{sec:Basics:CapacitiveCurrent}) and diffusive currents (\fref{sec:Basics:DiffusiveCurrent}). We also briefly comment on inductive and advective currents (\fref{sec:Basics:OtherCurrents}), although we consider them to be of less importance for the brain dynamics that we study in this book. 
 
@@ -218,6 +219,7 @@ In electric circuits composed of metallic wires and various circuit elements, cu
 I = - \frac{\Delta \phi}{R},
 \label{eq:Basics:Ohm_R}
 \end{equation}
+\tvnnote{Her syntes jeg vi boer bruke V istedet for phi.}
 where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference across the resistor, and $R$ (units Ohm (\si{\ohm})) its resistance. Here, the wire itself was assumed to have a zero resistance, so that the entire resistance in the system, and the entire voltage drop, was that over the resistor. To describe this system, we only needed to consider the potential at two locations, A and B, representing the two sides of the resistor.
 
 \begin{figure}[!ht]
@@ -235,7 +237,7 @@ I = - \frac{1}{r_a}\frac{d\phi}{dx},
 \end{equation}
 where $r_a=r_a(x)$ may in principle vary along the wire (\fref{fig:Basics:Currents}B). With \fref{eq:Basics:Ohm_r}, the potential $\phi(x)$ will vary gradually along the wire. If $r_a$ is constant along the wire, and the wire has length $L$, it is related to the resistance of the total wire through $r_a=R/L$. As we shall see in \fref{sec:Neuron:morphology}, conductive currents running axially through neural dendrites and axons are typically modeled in this manner. 
 
-The examples above were both 1D in the sense that the current was restricted to run exclusively in the direction defined by the wire. In a 3D volume, such as for example brain tissue, currents may run in all spatial directions (\fref{fig:Basics:Currents}C). It is then convenient to describe them in terms of a current density, ${\bf i}$ (units \si{\ampere\per\square\metre}), a vector that defines the current per unit cross section area and its spatial direction. The current density\index{Current density} can be defined in all points in 3D space, and is not dependent on any particular and predefined cross-section area. The conductive properties of a material can be specified either through its resistivity $r$ (units \si{\ohm\metre}), or its inverse, the conductivity $\sigma$ (units \si{\siemens\per\metre}), both being material properties. We shall here use the latter convention, and with that, Ohm's law takes the form:
+The examples above were both 1D in the sense that the current was restricted to run exclusively in the direction defined by the wire. In a 3D volume, such as for example brain tissue, currents may run in all spatial directions (\fref{fig:Basics:Currents}C). It is then convenient to describe them in terms of a current density, ${\bf i}$ (units \si{\ampere\per\square\metre}), a vector that defines the current per unit cross section area and its spatial direction. The current density\index{Current density} can be defined in all points in 3D space, and is not dependent on any particular and predefined cross-section area\tvnnote{Men teknisk sett rettning?}. The conductive properties of a material can be specified either through its resistivity $r$ (units \si{\ohm\metre}), or its inverse, the conductivity $\sigma$ (units \si{\siemens\per\metre}), both being material properties. We shall here use the latter convention, and with that, Ohm's law takes the form:
 \begin{equation}
 {\bf i} = - \sigma {\bf \nabla} \phi,
 \label{eq:Basics:Ohm_3D_phi}
@@ -298,7 +300,6 @@ where $c_\text{m}$ (units \si{\farad\per\square\metre}) is the capacitance per u
 \label{sec:Basics:DiffusiveCurrent}
 \index{Diffusion} \index{Diffusive current}
 The charge carriers in the brain are ions floating around in the saline solutions that fill up the intra- and extracellular spaces. Ions in salt water will, like electrons in a metal conductor, be accelerated by the presence of an electric field, and will thus carry conductive currents in accordance to Ohm's law (\fref{eq:Basics:Ohm_general}).
-
 In addition to movement propelled by the electric field, ions in water may also move due to diffusion. If the concentration ($c_k$) of an ion species $k$ varies with position, diffusion will tend to drive ions towards regions with low concentration, and since ions carry electric charge, this movement amounts to an electric current that comes in addition to the conductive current. 
 
 The electrodiffusive \index{Electrodiffusion} nature of ionic motion is described by the Nernst-Planck equation\index{Nernst-Planck equation},
@@ -335,8 +336,7 @@ The first term on the right hand side of \fref{eq:Basics:iNP} is the diffusive c
 \end{equation}
 Hence, in a conductive medium that contains concentration gradients, the total current is not purely Ohmic, but can contain an additional contribution from ionic diffusion. 
 
-In many cases, the total current will be dominated by the drift component, and although it is possible that it sometimes plays a role, it is common to assume that the diffusive component is negligible when modeling extracellular currents in the brain. The diffusive current does, however, play an important role for currents across neuronal membranes.
-
+In many cases, the total current will be dominated by the drift component, and although it is possible that ionic diffusion sometimes plays a role (see \fref{chap:Schemes}), it is common to assume that the diffusive component is negligible when modeling extracellular currents in the brain. The diffusive current does, however, play an important role for currents across neuronal membranes.
 
 \subsection{\blue{Other currents}}
 \label{sec:Basics:OtherCurrents}
@@ -348,7 +348,7 @@ Generally, currents additional to those defined above may arise due to advection
 arises in a bulk solution if the solution has a charge density $\rho$ that it drags along with it due to a bulk flow with velocity ${\bf u}$. However, as we argued in \fref{sec:Basics:Debye}, the saline solution in the brain is practically electroneutral ($\rho \simeq 0$), and the advective current is expectedly negligible. A more thorough argument for this was given in \citeasnoun**{Gratiy2017}.
 
 As we briefly touched upon earlier, charges may also be accelerated by changes a magnetic field ${\bf B}$, which gives rise to so-called inductive current proportional to $\partial {\bf B}/\partial t$. However, in the brain, inductive currents are assumed to be of negligible importance \cite**{Ranck1963,plonsey1967,Bossetti2008} (more about this in \fref{sec:Basics:Maxwell}).
-
+\tvnnote{Bor kanskje paapeke at vi tenker paa ekstracellulaere strommer her. Ione-kanaler (som Ih) kan jo beskrives som induktive.}
 
 
 
