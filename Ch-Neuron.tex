@@ -21,6 +21,7 @@ The most common MC modeling framework combines a so-called \textit{Hodgkin-Huxle
 An MC model is characterized by (i) its morphology, and (ii) its membrane mechanisms, and the key dynamical variable is the membrane potential ($V$). The morphology (i) of the real neuron (\fref{fig:Neuron:multicomp}A) is represented as a discretized set of compartments connected by resistors (\fref{fig:Neuron:multicomp}B). This structure houses two kinds of currents \fref{fig:Neuron:multicomp}C): (i) currents that run intracellularly between compartments (yellow arrows), and (ii) the transmembrane currents in each compartment (green arrows). Both currents depend (among other things) on the membrane potential in the various compartments, and together they determine how the membrane potential develops over time. 
 
 \ghnote{Hva med denne versjonen?}
+\gen{Den var vel fin?}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -37,7 +38,9 @@ Below, we first present a framework for modeling the transmembrane currents in a
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (units \si{\ampere\per\square\metre}). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a leakage current density ($i_{\mathrm{L}}$), and (iii) a current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive stimuli, normally represented as total currents (units \si{\milli\ampere}). These can be either (iv) external current injections delivered by an experimentalist ($I_{\mathrm{ext}}$), or (v) synaptic input ($I_{\mathrm{syn}}$). In computer-modeling terminology, the membrane currents (i-iii) are often called distributed mechanisms, as they are membrane properties, and scale with the membrane area, while the stimuli (iv-v) are often called point-processes, as they are delivered on a singular point on the membrane. 
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (units \si{\ampere\per\square\metre}). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a leakage current density ($i_{\mathrm{L}}$), and (iii) a current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive stimuli, normally represented as total currents (units \si{\milli\ampere}).
+\gen{Kanskje droppe enhet her? Typiske stroemmer for enkeltsynapser er vel uansett typisk en pA eller mindre.} 
+These can be either (iv) external current injections delivered by an experimentalist ($I_{\mathrm{ext}}$), or (v) synaptic input ($I_{\mathrm{syn}}$). In computer-modeling terminology, the membrane currents (i-iii) are often called distributed mechanisms, as they are membrane properties, and scale with the membrane area, while the stimuli (iv-v) are often called point-processes, as they are delivered on a singular point on the membrane. 
 
 In the case where the neuron is modeled as a single compartment, the transmembrane currents into that compartment must sum to zero, so that:
 \begin{equation}
@@ -60,14 +63,17 @@ represents the charging up of the membrane to a potential $V$ due to a charge de
 \begin{center}
 \includegraphics[width=1.0\textwidth]{Figures/Neuron/capacitive_currents.pdf}
 \end{center}
-\caption{\textbf{Capacitive currents ensure current conservation.} (\textbf{(A)}) The extracellular and intracellular bulk solutions are essentially electroneutral, and the only region where there is a nonzero charge density, is in thin Debye layers on either side of the capacitive membrane. The membrane separates a membrane charge density $\eta$ on one side from a membrane charge density $-\eta$ on the opposite side, giving rise to a membrane potential of $V = \eta/c_{\mathrm{m}}$. This charge separation process can be described in terms of a capacitive current: a transmembrane current that is not due to ions crossing the membrane, but due to ions piling up on either side of it.  An outward capacitive current could correspond to an anion leaving the membrane on the inside (\textbf{(B)}), which will coincide with a cation leaving the membrane on the outside (\textbf{(C)}). Thus, the capacitive current ensures current conservation. and gives rise to electrical ionic volume currents both in the intra- and extracellular space. \ghnote{Ny versjon av figurtekst. Ok?}
+\caption{\textbf{Capacitive currents ensure current conservation.} (\textbf{(A)}) The extracellular and intracellular bulk solutions are essentially electroneutral, and the only region where there is a nonzero charge density, is in thin Debye layers on either side of the capacitive membrane. The membrane separates a membrane charge density $\eta$ on one side from a membrane charge density $-\eta$ on the opposite side, giving rise to a membrane potential of $V = \eta/c_{\mathrm{m}}$. 
+\gen{Dette er vel da ladning per areal?} This charge separation process can be described in terms of a capacitive current: a transmembrane current that is not due to ions crossing the membrane, but due to ions piling up on either side of it.  An outward capacitive current could correspond to an anion leaving the membrane on the inside (\textbf{(B)}), which will coincide with a cation leaving the membrane on the outside (\textbf{(C)}). Thus, the capacitive current ensures current conservation. and gives rise to electrical ionic volume currents both in the intra- and extracellular space. \ghnote{Ny versjon av figurtekst. Ok?}
+\gen{Synes den var fin.}
 }
 \label{fig:Neuron:capacitive_currents}
 \end{figure}
 
 If we insert \fref{eq:Neuron:HHcap} into \fref{eq:Neuron:singlecomp_zerosum}, we get:
+\gen{Hvor store parenteser boer vi ha i ligninger som under?}
 \begin{equation}
-c_{\mathrm{m}} \frac{dV}{dt} = - (i_{\mathrm{L}} + \sum_x{i_x} +  \frac{I_{\mathrm{ext}} + I_{\mathrm{syn}}}{a_\text{c}},
+c_{\mathrm{m}} \frac{dV}{dt} = -  ( i_{\mathrm{L}} + \sum_x{i_x} +  \frac{I_{\mathrm{ext}} + I_{\mathrm{syn}}}{a_\text{c}} ) ,
 \label{eq:Neuron:singlecomp_capinserted}
 \end{equation}
 which gives us an intuitive understanding of neurodynamics: If the sum of ionic currents over the membrane (right hand side) is nonzero, it will lead to a charging up (left hand side) of the membrane.
@@ -133,7 +139,6 @@ To give an example of an active neuron model, the full set of equations for the 
 
 \begin{floatingbox}[h]
 \caption{Hodgkin-Huxley equations}
-
 \begin{eqnarray*}
     c_{\mathrm{m}} \frac{dV}{dt} & =  & -\bar{g}_{\mathrm{L}}(V-E_{\mathrm{L}}) - \bar{g}_{\mathrm{Na}} m^3 h (V - E_{\mathrm{Na}}) - \bar{g}_{\mathrm{K}} n^4 (V - E_{\mathrm{K}}) \\
     \frac{dx(V,t)}{dt} & = & \frac{x_{\infty}(V) - x}{\tau_x(V)},  \, \text{for } x \in \{m,h,n\} \\ 
@@ -154,11 +159,15 @@ To give an example of an active neuron model, the full set of equations for the 
     E_{\mathrm{L}} &=& -54.4 \,\si{\milli\volt} \\ %\hline
 \end{eqnarray*}
 \\
-Equations were taken from \citeasnoun**{Sterratt2011}. $V$ must be inserted with units \si{\milli\volt}
+Equations were taken from \citeasnoun**{Sterratt2011}. 
+$V$ must be inserted with units \si{\milli\volt}. 
 \label{box:Neuron:HH}
 \end{floatingbox}
 
-We note that the HH-type formalism for ion channels is a simplified approximation of the electrophysiological dynamics of ion channel currents and ion channel gating. Firstly, the currents described by \fref{eq:Neuron:HHform}, are sometimes called \textit{quasi-Ohmic}, as they are assumed to be proportional to the driving force $(V-E_k)$, when they in reality are nonlinear functions of both the ionic concentrations in the intra and extracellular space, and the membrane potential $V$ (for more on this, see \fref{sec:Neuron:GHK}). Secondly, since the HH-type formalism is based on deterministic equations, it cannot account for ion channel noise, which can stem from the stochastic gating at the single channel level. Thirdly, when channels open and close, movement of charges in channel proteins give rise to a tiny current called the \textit{gating current}, which is not included in the HH formalism. Fourthly, the relatively simple gating kinetics described by HH-type channels is not accurate for all ion channels, and more detailed ion channel models have been developed, based on a formalism more compatible with statistical physics and thermodynamics, or even more detailed, Markov-type formalism based on single-channel recordings. More comprehensive overviews of alternative ion channel models can be found in other textbooks (e.g., \cite**{Koch1999,Hille2001,Sterratt2011}).
+\gen{Kommentar til HH-box: Kanskje si noe om hvilket system det tilsvarer? Squid axon ved en eller annen temperatur?}
+\gen{Kommentar til HH-box: Maa si noe om hvilke enheter de resulterende ratekontantene har.}
+
+We note that the HH-type formalism for ion channels is a simplified approximation of the electrophysiological dynamics of ion channel currents and ion channel gating. Firstly, the currents described by \fref{eq:Neuron:HHform} are sometimes called \textit{quasi-Ohmic}, as they are assumed to be proportional to the driving force $(V-E_k)$, when they in reality are nonlinear functions of both the ionic concentrations in the intra\gex{--} and extracellular space, and the membrane potential $V$ (for more on this, see \fref{sec:Neuron:GHK}). Secondly, since the HH-type formalism is based on deterministic equations, it cannot account for ion channel noise, which can stem from the stochastic gating at the single channel level. Thirdly, when channels open and close, movement of charges in channel proteins give rise to a tiny current called the \textit{gating current}, which is not included in the HH formalism. Fourthly, the relatively simple gating kinetics described by HH-type channels is not accurate for all ion channels, and more detailed ion channel models have been developed, based on a formalism more compatible with statistical physics and thermodynamics \gen{Er alle disse alternativene "more detailed"?}, or even more detailed, Markov-type formalism based on single-channel recordings. More comprehensive overviews of alternative ion channel models can be found in other textbooks (e.g., \cite**{Koch1999,Hille2001,Sterratt2011}).
 
 Despite its limitations, the HH-form (\fref{eq:Neuron:HHform}) is generally deemed as sufficient for modeling neurodynamics on the cellular level, because it gives good predictions of the membrane currents. 
 
@@ -190,11 +199,12 @@ A chemical synapse can be modeled more or less like an ion channel:
 I_\text{syn}(t) = {G}_\text{syn}(t) \big(V(t)-E_\text{syn} \big), 
 \label{eq:Neuron:chemicalsynapse}
 \end{equation}
-where $G_\text{syn}(t)$ is the synaptic conductance and $E_\text{syn}$ is the reversal potential of the synapse. The SI-base unit of a conductance is siemens (\si{\siemens}), but in neuroscience applications it is common to use units millisiemens (\si{\milli\siemens}) for $G_\text{syn}(t)$. We have denoted the synaptic conductance with a capitol $G$ to distinguish it from the specific conductances per unit membrane area ($g$) of ion channels.
+where $G_\text{syn}(t)$ is the synaptic conductance, and $E_\text{syn}$ is the reversal potential of the synapse. The SI-base unit of a conductance is siemens (\si{\siemens}), but in neuroscience applications it is common to use units millisiemens (\si{\milli\siemens}) for $G_\text{syn}(t)$. We have denoted the synaptic conductance with a capital $G$ to distinguish it from the specific conductances per unit membrane area ($g$) of ion channels.
 
-The value of $E_\text{syn}$ determines whether the synapse is \textit{excitatory}, which means that it will tend to drive the  membrane potential of neuron toward the threshold for generating action potentials, or \textit{inhibitory}, which means that it will tend to drive the neuron away from the threshold for generating action potentials. Examples of excitatory synapses are AMPA and NMDA synapses, in which $E_\text{syn}$ ($\sim$ 0 \gex{--} 10 mV) is high above the neuronal resting potential. The most common inhibitory synapse is the GABA synapse, in which $E_\text{syn}$ ($\sim$ -70 mV) is close to the resting membrane potential of the neuron.
+The value of $E_\text{syn}$ determines whether the synapse is \textit{excitatory}, which means that it will tend to drive the  membrane potential of \gex{the postsynaptic} neuron toward the threshold for generating action potentials, or \textit{inhibitory}, which means that it will tend to drive the neuron away from the threshold for generating action potentials. Examples of excitatory synapses are AMPA and NMDA synapses, in which $E_\text{syn}$ ($\sim$ 0 \gex{--} 10 mV) is high above the neuronal resting potential. The most common inhibitory synapse is the GABA synapse, in which $E_\text{syn}$ ($\sim$ -70 mV) is close to the resting membrane potential of the neuron.
 
 The synapse model described by \fref{eq:Neuron:chemicalsynapse} is called \textit{conductance based}, because the activation of the synapse is modeled as a transient change in the synaptic conductance. Unlike for ion channels, which are often voltage or calcium activated, the chemical synapse is activated by neurotransmitters received from a pre-synaptic cell. However, in MC type models, the transmitter-activation processes occurring in the synaptic cleft are normally not explicitly described. Instead, one normally uses a phenomenological synapse model, where the synaptic conductance $G_\text{syn}(t)$ is represented as a constant $\bar{G}_\text{syn}$ multiplied with a temporal kernel determining the opening and closing of a synapse set off at an activation time $t_s$:
+\gen{Boer vi ha normaliserte utgaver av $f$ under slik at $\bar{G}_\text{syn}$  tilsvarer maximal conductance?}
 \begin{equation}
 I_\text{syn}(t) = \bar{G}_\text{syn} f(t) \big(V(t)-E_\text{syn} \big).
 \label{eq:Neuron:chemicalsynapse}
