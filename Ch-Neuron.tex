@@ -223,6 +223,7 @@ where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $
 The strength or efficacy of synaptic transmission may change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g.,  \citeasnoun**{DeSchutter2000}.
 
 \ghnote{Jeg sa ikke mer om saken enn dette. Kommentarer?}
+\gen{Synes det er OK.}
 
 
 \subsubsection{Current-based synapses}
@@ -266,7 +267,9 @@ compartments, $I_{n-1,n}$ (current from compartment $n-1$ to $n$), and $I_{n,n+1
 \label{fig:Neuron:multikompisen}
 \end{figure}
 
-MC models rest on the assumption that neuronal morphology is well represented by a one-dimensional, branching cable. As such, MC type models neglect the radial components of intracellular currents (see e.g., \citeasnoun**{lindsay2004maxwell} for a critical study of this approximation). As a simple introduction to the formalism used in MC models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (\Fref{fig:Neuron:multikompisen}B). For simplicity, we assume that the three cylinders have the same length ($L$) and diameter ($d$). The two categories of currents that run in this system are (i) the transmembrane currents that we introduced in the previous subsection, all of which we for now can group together into a total transmembrane current $I_{\mathrm{m},n}$, and (ii) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$). The dynamics of this system is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) should be zero:
+MC models rest on the assumption that neuronal morphology is well represented by a one-dimensional, branching cable. As such, MC type models neglect the radial components of intracellular currents (see e.g., \citeasnoun**{lindsay2004maxwell} for a critical study of this approximation). 
+
+As a simple introduction to the formalism used in MC models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (\Fref{fig:Neuron:multikompisen}B). For simplicity, we assume that the three cylinders have the same length ($L$) and diameter ($d$). The two categories of currents that run in this system are (i) the transmembrane currents that we introduced in the previous subsection, all of which we for now can group together into a total transmembrane current $I_{\mathrm{m},n}$, and (ii) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$). The dynamics of this system is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) should be zero:
 \begin{equation}
 I_{n-1,n} - I_{n,n+1} - I_{\mathrm{m},n} = 0.
 \label{eq:Neuron:Kirch}
@@ -285,6 +288,7 @@ The calculations become more complicated when the connected cylinders are of dif
 
 We note that in \fref{eq:Neuron:axialcurrents}, $V_n$ is the \emph{intracellular} potential in compartment $n$. However, in most MC models, the intracellular potential is assumed to be identical to the membrane potential. This means that we assume that the extracellular potential $V_e = 0$. In turn, this amounts to assuming that the extracellular resistivity is zero, so that the extracellular space is isopotential and grounded. This may seem like a peculiar assumption to make in a book where the extracellular potential is the main topic. We comment further on this assumption and its consequences towards the end of this chapter. For now, we simply note that although the extracellular potential in reality is not zero, it is generally so much smaller than the intracellular potential that we can assume that it is zero without going too wrong when computing the neurodynamics. 
 \ghnote{Er denne versjonen ok? Gikk ikke videre inn paa biologisk stoette for antakelsen $V_e = 0$.}
+\gen{Kanskje bedre naar vi beskriver vanlige approksimasjoner i boka aa si noe a.la. "it is commonly assumed that" istedenfor "we can assume"?}
 
 
 
@@ -296,7 +300,10 @@ To specify our MC neuron model further, we write out the total membrane current 
 I_{\mathrm{m},n} = I_{\mathrm{cap},n} + I_{\mathrm{ion},n} + I_{\mathrm{stim},n} = -\pi d L c_\text{m} \frac{dV_n}{dt} + \pi d L i_{\mathrm{ion},n} + I_{\mathrm{stim},n}
 \label{eq:Neuron:Imemb}
 \end{equation}
-where $I_{\mathrm{ion},n}$ represents the total transmembrane ionic currents through leakage and active ion channels, and $I_{\mathrm{syn},n}$ can represent an electrode stimulus, a synaptic stimulus, or a combination of the two. In the last step, we expressed the capacitive and ionic currents (\si{\milli\ampere}) as current densities multiplied with the membrane area of the compartment ($a_\text{c} = \pi d L$) represented by the lateral sides of the cylinder, and we have inserted \fref{eq:Neuron:HHcap} for the capacitive current density. If we insert this into \fref{eq:Neuron:Kirch}, we get the fundamental equation for multicompartmental models:
+where $I_{\mathrm{ion},n}$ represents the total transmembrane ionic currents 
+\gen{Her maa vi vaere forsiktige: en elektrode-stroem skal ikke regnes med i transmembran strom
+naar vi regner ut ekstracellulaert potensial, i motsetning til synapsestrom}
+through leakage and active ion channels, and $I_{\mathrm{syn},n}$ can represent an electrode stimulus, a synaptic stimulus, or a combination of the two. In the last step, we expressed the capacitive and ionic currents (\si{\milli\ampere}) as current densities multiplied with the membrane area of the compartment ($a_\text{c} = \pi d L$) represented by the lateral sides of the cylinder, and we have inserted \fref{eq:Neuron:HHcap} for the capacitive current density. If we insert this into \fref{eq:Neuron:Kirch}, we get the fundamental equation for multicompartmental models:
 
 \begin{equation}
 c_\text{m} \frac{dV_n}{dt} = i_{\mathrm{ion},n} + \frac{d}{4r_\text{a}}\left(\frac{V_{n+1}-V_n}{L^2} - \frac{V_n-V_{n-1}}{L^2} \right) + \frac{I_{\mathrm{stim},n}}{\pi d L}.
@@ -308,7 +315,9 @@ c_\text{m} \frac{dV_n}{dt} = i_{\mathrm{ion},n} + \frac{d}{4r_\text{a}}\left(\fr
 \subsection{\blue{Passive multicompartment models}}
 \label{sec:Neuron:Passive_multicomp}
 \index{Multicompartmental neuron model}
-The neural response to small perturbations from the resting potential often has a close to linear relationship between the membrane potential and membrane currents \cite**{mauro1970,koch1984,ness2016}.\ghnote{Ha med disse refs eller ikke? Disse arbeidene driver jo med en linearisering og bruker ikke den enkle formen vi drar til med nedenfor. Samtidig gir de jo et argument for lineariteten vi postulerer.} When modeling subthreshold neural dynamics, a common simplification is therefore to assume that ionic membrane current density has the linear form,
+The neural response to small perturbations from the resting potential often has a close to linear relationship between the membrane potential and membrane currents \cite**{mauro1970,koch1984,ness2016}.\ghnote{Ha med disse refs eller ikke? Disse arbeidene driver jo med en linearisering og bruker ikke den enkle formen vi drar til med nedenfor. Samtidig gir de jo et argument for lineariteten vi postulerer.} 
+\gen{Hmm... Vi faar diskutere saken}
+When modeling subthreshold neural dynamics, a common simplification is therefore to assume that ionic membrane current density has the linear form,
 \begin{equation}
 i_{\mathrm{ion},n} = g_\text{m}(V_n - E_m),
 \label{eq:Neuron:mleak}
@@ -332,6 +341,7 @@ An illustration of passive signal propagation is shown in \fref{fig:Neuron:Semii
 \end{center}
 \caption{\textbf{Stick-neuron responding to transient and constant inputs received in one end.} (A) Finite cable of length $L = 1 \, \si{\milli\metre}$ simulated numerically as 100 compartments, and stimulated with an alpha-synapse in the first compartment ($0<x<10 \, \si{\micro\metre}$). Transient responses shown at different distances from the synapse. The peak response decreases with distance from the synapse, and the time to reach the peak increases with distance from the synapse.
 (A) Analytical steady-state solution for semi-infinite cable receiving a constant input $I_\text{stim} = 0.1 \, \si{\nano\ampere}$ in a sealed end at $x=0$. The membrane potential decays exponentially with distance from the stimulus site.  (A-B) Parameter choices: $c_\text{m}=1\, \si{\micro\farad\per\square\centi\metre}$, $d = 1\, \si{\micro\metre}$, $r_\text{a}=35.4\, \si{\ohm\centi\metre}$, $r_\text{m} = 10 \, \si{\kilo\ohm\square\centi\metre}$, which gives a length constant $\lambda = 840\, \si{\micro\metre}$.}
+\gen{Panel A er kanskje ikke noedvendig naar vi ikke har med tekst om transient respons til kabler? Men kanskje greit aa ha den med?}
 \label{fig:Neuron:Semiinf}
 \end{figure}
 
@@ -461,6 +471,7 @@ We note that $\lambda_{AC}$, which is the length constant for how $V$ decays alo
 \tvnnote{Har skrevet om dette i LFP-kapittelet ogsaa, kanskje slaa sammen?}
 \ehnote{Jeg tenker vi ikke trenger aa spekulere om effekten paa EPs her.}
 \ghnote{Jeg kortet det ned, men ga et hint om hva vi har aa vente oss. Ok?}
+\gen{Synes det er OK.}
 
 
 %%%%%%%%%%
@@ -495,6 +506,7 @@ ion concentration gradients, the assumption of constant ion concentrations also 
 \caption[]{Major charge carrier concentrations inside/outside a typical mammalian neuron. Concentration values were taken from Table 2-1 in \citeasnoun**{Somjenboka} for neurons in the central nervous system (intracellular) and human cerebrospinal fluid (extracellular). Values vary with species and brain regions. Nernst potentials were computed from \fref{eq:Neuron:revpots} assuming a body temperature of 309.15 \si{\kelvin}.
 }
 \label{tab:Neuron:ion-concentrations}
+\begin{center}
 \begin{tabular}{@{}lcccccc@{}}
 \hline
 					& 	K$^+$	&	Na$^+$	&	Mg$^{2+}$	  &	Cl$^-$	&	Ca$^{2+}$	 	& HCO3$^-$ 	\\ 
@@ -504,6 +516,7 @@ Extracellular (\si{\milli\molar})			           & 2.9			&		147	&		0.7	&	119 		&		
 Nernst potential (\si{\milli\volt})		    &	-100		&	    	+72	&		+4.5	&	-77		&		+129 	& 	-6.9  	\\
 \hline
 \end{tabular}
+\end{center}
 \end{table}
 
 In HH-type models, the ensemble of processes that work to maintain baseline conditions are simply assumed to do their job, and not explicitly modeled. Instead, they are grouped together into the \textit{passive} leakage current $i_\text{L}$ (\fref{eq:Neuron:HHleak}), which largely determines the cell's resting potential (see \cite**{offner1991} for a critical study of this approximation). Below, we shall explain how the ionic concentrations are implicitly present in the HH-formalism as they determine the ionic reversal potentials ($E_x$ in \fref{eq:Neuron:HHform}). We shall also comment briefly on the cases where the assumptions of constant ion concentrations are not applicable. 
@@ -523,7 +536,9 @@ j_k = j_{k,\text{diff}} + j_{k,\text{drift}}
 \label{eq:Neuron:NP1D}
 \end{equation}
 %%%%
-where  [k] denotes the concentration of ion $k$ (\si{\milli\molar}). The first term  inside the parenthesis of \fref{eq:Neuron:NP1D} is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. Since we consider membrane fluxes, we have replaced the diffusion constant ($D_k$) which appears in the more common form of the Nernst-Planck equation (\fref{eq:Basics:JNP}) with the membrane's permeability ($P_k$) to ion $k$. The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
+where  $[k]$ denotes the concentration of ion $k$ (\si{\milli\molar}). 
+\gen{Kanskje bedre aa bruke $x$-retning, siden $z$ ogsaa brukes for valenstall?}
+The first term  inside the parenthesis of \fref{eq:Neuron:NP1D} is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. Since we consider membrane fluxes, we have replaced the diffusion constant ($D_k$) which appears in the more common form of the Nernst-Planck equation (\fref{eq:Basics:JNP}) with the membrane's permeability ($P_k$) to ion $k$. The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
 
 \begin{equation}
 \frac{1}{[k]} \frac{d[k]}{dz} = - \frac{Fz_k}{RT}  \frac{dV}{dz}.
@@ -541,7 +556,9 @@ E_k & =  \frac{RT}{Fz_k}  ln \frac{[k]_{\text{out}}} {[k]_{\text{in}}}
 \end{align}
 where the last equality follows from the definition of $E_k$ as the membrane potential $V_{\text{in}}-V_{\text{out}}$ for which the the net flux (in \fref{eq:Neuron:NP1D}) is zero. \Fref{eq:Neuron:revpots} was used to compute the reversal potentials listed in \Fref{tab:Neuron:ion-concentrations}. 
 
-To illustrate how to interpret the reversal potential, we can use a K$^+$ channel as an example. For simplicity, let us assume that it opens at a time when the neuron is resting ($V = V_{\text{in}}-V_{\text{out}} \sim -70 \, \si{\milli\volt}$), and that the K$^+$ is the only ion channel that opens. Since the intracellular space is more K$^+$-rich than the extracellular space, diffusion will drive K$^+$ out from the neuron, and since $V$ is negative, electric drift will drive K$^+$ into the neuron. Initially, the diffusive process will dominate, so that there will be a net efflux of K$^+$. This will cause a gradual decrease (hyperpolarization) of $V$ towards the K$^+$ reversal potential, which with concentrations as in \fref{tab:Neuron:ion-concentrations} has the value $E_K = -100 \, \si{\milli\volt}$. As $V$ decreases, the drift component will become stronger, and when $V$ reaches $E_K$, it becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero. $E_K$ is called the reversal potential, because if the potential were to drop below this value, the current would reverse, i.e., the drift component would become dominant over diffusion, and K$^+$ would start to go inward into the neuron. 
+To illustrate how to interpret the reversal potential, we can use a K$^+$ channel as an example. For simplicity, let us assume that it opens at a time when the neuron is resting ($V = V_{\text{in}}-V_{\text{out}} \sim -70 \, \si{\milli\volt}$), and that the K$^+$ is the only ion channel that opens. Since the intracellular space is more K$^+$-rich than the extracellular space, diffusion will drive K$^+$ out from the neuron, and since $V$ is negative, electric drift will drive K$^+$ into the neuron. Initially,
+\gen{Kan "intitially" vaere forvirrende? Det skjer jo ganske instantant, i alle fall i forhold til millesekundskalaen til ionekanal-dynamikk}
+ the diffusive process will dominate, so that there will be a net efflux of K$^+$. This will cause a gradual decrease (hyperpolarization) of $V$ towards the K$^+$ reversal potential, which with concentrations as in \fref{tab:Neuron:ion-concentrations} has the value $E_K = -100 \, \si{\milli\volt}$. As $V$ decreases, the drift component will become stronger, and when $V$ reaches $E_K$, it becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero. $E_K$ is called the reversal potential, because if the potential were to drop below this value, the current would reverse, i.e., the drift component would become dominant over diffusion, and K$^+$ would start to go inward into the neuron. 
 
 As ion concentrations are generally assumed to remain constant in HH-type models, the reversal potentials are also assumed to be constant. As a consequence, one typically does not worry about ionic concentrations when constructing such models, but simply uses values for $E_k$ based or empirical measurements of the potential at which a certain membrane current reverses.
 
