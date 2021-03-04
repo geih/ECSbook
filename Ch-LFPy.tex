@@ -718,7 +718,14 @@ This may reduce the accuracy of membrane voltage predictions, but more so at hig
 Extracellular signals like the LFP, EEG and MEG however carry more power at lower frequencies and may be less affected. 
 
 \item Further reduction of number of state variables describing linearly summing synaptic currents can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment. 
-It's activation times are defined as the concatenation of sequences $\left(s_u \ast \Delta_{YX} \right)(t)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on the compartment.  
+It's activation times are defined as the concatenation of sequences $\left(s_u \ast \Delta_{YX} \right)(t)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on the compartment.
+
+\item With the exception of spike measurements, most electric and magnetic signals of interest carry most power at comparably low frequencies ($\lesssim$\SI{1}{\kilo\hertz}). 
+Thus, the temporal step size ($\Delta t$) of the simulations can usually be multifold increased compared to $\Delta t$ in the actual network simulation without sacrificing much in terms of accuracy in the relevant low-frequency range. 
+The computational cost is inversely proportional to the temporal step size, 
+and a reasonable choice may be $\Delta t \lesssim \{ \tau_\mathrm{m}, \tau_\mathrm{syn}, \ldots \}$, 
+that is, shorter than the typical time constants for membranes, synapses etc.  
+ 
 \end{enumerate}
 
 \ehnote{Jeg setter opp en rekke simuleringer som viser effekten av hvert steg som proof of principle, liknende det Steinn setter opp i sin master, ogsaa for visualiseringer av hvert steg}

@@ -142,7 +142,7 @@ If one prefers to think of neurons in terms of circuit diagrams, the active ion 
 Active ion channels differ from the passive leakage channel in that their total conductance, $\bar{g}_{x} m^{\alpha} h^{\beta}$, vary with time due to the so-called gating variables, in \fref{eq:Neuron:HHform} denoted $m$ and $h$\index{Gating variables}. These determine how the ion channels activate or deactivate (open or close), and $m$ and $h$ represent two different types of gates differing in terms of their opening/closing dynamics. 
 \ehnote{Snodig setning, mente du kanskje "... the number of gates of each type within channel $x$"?} The exponents $\alpha$ and $\beta$ represent the number of copies that a channel $x$ has of each type of gate. 
 At the level of a single ion channel the values of $m$ and $h$ would interpret as the \textit{probability} that a given gate is in the open state. However, when we deal with summed currents through a large number of ion channels, the values of $m$ and $h$ interpret as the \textit{fraction} of the gates of the various types that are open. The values are thus numbers between 0 (all gates in the closed state) and 1 (all gates in the open state). 
-The product $m^{\alpha} h^{\beta}$ thus interprets as  \ehnote{"interprets as" -> "corresponds to"} the fractions of ion channels in which all gates are open so that currents can pass through. 
+The product $m^{\alpha} h^{\beta}$ thus interprets as  \ehnote{"interprets as" -> "corresponds to" (inanimate entities can't "interpret" anything - but can be interpreted as whatever)} the fractions of ion channels in which all gates are open so that currents can pass through. 
 Consequently, the ion channel conductance is given by the product $\bar{g}_x m_x^{\alpha} h_x^{\beta}$.
 
 For voltage-gated ion channels, the the dynamics of the gating variables can be described by kinetics equations on the form:
@@ -235,11 +235,18 @@ Typical choices for $f(t)$ are\index{Synapse models}:
 \begin{align}
 &\text{(i) exponential decay:} \;\; f(t) = e^{-(t-t_\text{s})/\tau}\, \Theta(t-t_\text{s}) \\
 &\text{(ii) $\alpha$-function:} \;\; f(t) =  \frac{t-t_\text{s}}{\tau} e^{-(t-t_\text{s})/\tau} \, \Theta(t-t_\text{s}) \\
-&\text{(iii) $\beta$-function:} \;\; f(t) = \frac{\tau_1 \tau_2}{\tau_1-\tau_2} 
+&\text{(iii) $\beta$-function:} \;\; f(t) = \frac{\tau_1 \tau_2}{\tau_1-\tau_2}
 \Big( e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2} \Big) \, \Theta(t-t_\text{s}) \\
 & \text{(iv) NMDA-like:} \;\; f(t) = \frac{e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2}} {1+\mu [\text{Mg}^{2+}] e^{-\gamma V} } \, \Theta(t-t_\text{s}),
 \label{eq:Neuron:sf4}
 \end{align}
+\ehnote{NMDA: temporal dynamikk er vel fritt valgt ut fra i--iii eller? Kanskje dynamisk vekt ($V$, [Mg], avhengighet) kan sammenstilles med synaptisk plastisitet nedenfor? 
+Ellers er normalisert $\beta$-kernel denne:}
+\ehtxt{\begin{align}
+t_\mathrm{peak} &= \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \\
+f(t) &= \frac{e^{-(t - t_\text{s}) / \tau_2} - e^{-(t - t_\text{s}) / \tau_1} }{e^{- t_\mathrm{peak} / \tau_2} - e^{- t_\mathrm{peak} / \tau_1}} \Theta(t-t_\text{s})
+\end{align}}
+
 where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $\Theta(t< 0)=0$, and where parameters like $\gamma$,  $\tau$, $\tau_1$ and $\tau_2$ must be tuned to experimental data from the particular synapse type that one wants to model. The simple waveforms (i)--(iii) are typically used for AMPA  and GABA synapses, while the waveform (iv), is used for NMDA-synapses, where the conductance is influenced by membrane voltage and concentration of extracellular magnesium. 
 
 The strength or efficacy of synaptic transmission may change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g.,  \citeasnoun**{DeSchutter2000}.
@@ -262,8 +269,21 @@ We can think of the current-based synapse as a conductance-based synapse where t
 \label{eq:Neuron:CurrentBasedAvg}
 \end{equation}
 where $\langle V(t) \rangle_t$ denotes the temporal average of the membrane potential. The temporal kernel
-$f(t)$ can have the same exponential waveforms (i)-(iv) as for the conductance based synapses. Their relative conceptual and computational simplicity have made current-based synapses popular in large \ehtxt{point-neuron} network simulations, and their linearity facilitates the derivation of analytical solutions \cite**{Richardson2004,Cavallari2014}. 
-\ehnote{solutions to what?}
+$f(t)$ can have the same exponential waveforms (i)-(iv) as for the conductance based synapses. 
+\sout{Their relative conceptual and computational simplicity have made} 
+current-based synapses \ehtxt{have been} popular in \sout{large} \ehtxt{point-neuron} network simulations \ehtxt{in particular}, 
+and their linearity facilitates the derivation of analytical solutions \cite**{Richardson2004,Cavallari2014}. 
+\ehnote{solutions to what? Mitt forslag:} 
+\ehtxt{\ldots simulations in particular, 
+as such networks can subjected to rigorous mathematical analysis (e.g., \cite**{Brunel2000,Deco2008,Tetzlaff2012,Helias2013,deKamps2013,Schuecker2015,Bos2016}) 
+and are also computationally efficient \cite**{Brette2007,Plesser2007,Helias2012,Kunkel2014}.}
+\ehnote{referanser tatt rett fra Hagen2016 -- kan legge til hvis du er ok med mitt forslag.}
+\ehtxt{For point-neuron networks, effects of conductance-based synapses vs. current-based synapses on network activity have been investigated, see for example \cite**{Richardson2004,Cavallari2014}}
+\ehnote{Mer en notat til oss selv: Denne lineariseringen tar ikke hoyde for en eventuell endring i effektiv membran-tidskonstant og shift i $E_L$ paa grunn av synapsekonduktanser med tilhoerende reverseringspotensial som til enhver tid er aapne. Se Cavallari2014 for detaljer.}
+
+
+
+
 
 \subsubsection{Gap-junctions}
 In addition to the chemical synapses, some neurons also form electrical synapses called \textit{gap junctions}. A gap junction is basically an electric coupling between a branch of one neuron (with membrane potential $V_1$) and a branch of another neuron (with membrane potential $V_2$). Essentially, we can think of this coupling as two neurons growing together into a continuous structure. The current through the gap junction is given by synaptic conductance multiplied with the voltage difference between the two coupled neural branches. 
@@ -307,13 +327,16 @@ I_{n,n+1} = \frac{V_{n}-V_{n+1}}{4 r_\text{a} L/(\pi d^2)}.
 \end{eqnarray}
 Here, the denominators represent the axial resistance between two compartments, defined in terms of the axial resistivity $r_\text{a}$ (\si{\ohm\centi\metre}), a material property of the cytosol solution, the cross-section area, $\pi d^2/4$, and the segment length or travel distance, $L$.
 
-The calculations become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} automatizes the compartmentalization for the user once the neural morphology is specified. 
-\ehnote{Stemmer ikke helt -- NEURON lar brukeren sette $nseg$ for hver seksjon sant nok, men $nseg$ her vel en variabel brukeren maa definere selv som regel utfra en gitt regel}
+The calculations become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} 
+\sout{automatizes the} \ehtxt{facilitates customization of} 
+compartmentalization for the user once the neural morphology is specified. 
+\ehnote{Stemmer ikke helt -- NEURON lar brukeren sette $nseg$ for hver seksjon sant nok, men $nseg$ her vel en variabel brukeren maa definere selv som regel utfra en gitt regel/algoritme}
+\ehtxt{Different strategies for determining a suitable spatial discretization of cable models such as the \emph{d\_lambda rule} are discussed in \cite**{Hines2001}.}
 For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of MC modeling. 
 
 We note that in \fref{eq:Neuron:axialcurrents}, $V_n$ is the \emph{intracellular} potential in compartment $n$. 
 However, in most MC models, the intracellular potential is assumed to be identical to the membrane potential. This means that we assume that the extracellular potential $V_e = 0$. 
-\ehnote{$V_\mathrm{e}$ -- ikke kursiv subfix}
+\ehnote{$V_\mathrm{e}$ o.l. ikke kursiv subfix}
 In turn, this amounts to assuming that the extracellular resistivity is zero, so that the extracellular space is isopotential and grounded. This may seem like a peculiar assumption to make in a book where the extracellular potential is the main topic. We comment further on this assumption and its consequences towards the end of this chapter. For now, we simply note that although the extracellular potential in reality is not zero, it is generally so much smaller than the intracellular potential that we can assume that it is zero without going too wrong when computing the neurodynamics. 
 \ghnote{Er denne versjonen ok? Gikk ikke videre inn paa biologisk stoette for antakelsen $V_e = 0$.}
 \gen{Kanskje bedre naar vi beskriver vanlige approksimasjoner i boka aa si noe a.la. "it is commonly assumed that" istedenfor "we can assume"?}
@@ -331,7 +354,6 @@ I_{\mathrm{m},n} = I_{\mathrm{cap},n} + I_{\mathrm{ion},n} + I_{\mathrm{stim},n}
 where $I_{\mathrm{ion},n}$ represents the total transmembrane ionic currents 
 \gen{Her maa vi vaere forsiktige: en elektrode-stroem skal ikke regnes med i transmembran strom
 naar vi regner ut ekstracellulaert potensial, i motsetning til synapsestrom}
-\ehnote{Det kan man vel? Man kan jo fint regne ut EP selv om det er en elektrode i cella. Man faar et monopolbidrag som i prinsippet er ok.}
 through leakage and active ion channels, and $I_{\mathrm{syn},n}$ can represent an electrode stimulus, a synaptic stimulus, or a combination of the two. In the last step, we expressed the capacitive and ionic currents (\si{\milli\ampere}) as current densities multiplied with the membrane area of the compartment ($a_\text{c} = \pi d L$) represented by the lateral sides of the cylinder, and we have inserted \fref{eq:Neuron:HHcap} for the capacitive current density. If we insert this into \fref{eq:Neuron:Kirch}, we get the fundamental equation for multicompartmental models:
 
 \begin{equation}
