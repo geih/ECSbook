@@ -113,6 +113,7 @@ When we record extracellular potentials in the brain, the optimal positioning of
 
 
 \subsection{\tvntxt{The physical interpretation of the potential}}
+\label{sec:Basics:interp_pot_charge}
 By definition, the electric potential is the energy needed to move
  a unit of electric charge $q$ from the reference point (ground) to a specific location in the electric field (\fref{fig:Basics:elec_circuit}). The unit (V) of the electric potential is equivalent to energy per charge, or joule per coulomb (1 \si{\volt} = 1 \si{\joule\per\coulomb}). As such, the concept of an electric potential is closely related to the concept of a potential energy. The potential energy ($U_E$) of a charge $q$ in an electric field is:
 \begin{equation}
@@ -403,7 +404,7 @@ At the level of one micrometer, neural tissue is a chaotic mess of entangles neu
 The extracellular separation between the cell membranes of different cells is typically only on the order of a few tens of nanometers (\fref{chap:VC}). 
 The extracellular potential will in principle depend on the exact microstructure of the extracellular space in vicinity of the transmembrane currents and recording electrodes (\fref{chap:Neuron}-\fref{chap:Sigma}). However,
 this microstructure is almost always unknown (although small volumes can be partially reconstructed {\it ex vivo} using techniques like scanning electron microscopy), and even if it was known, including it in modelling or analysis of extracellular potentials would require prohibitively (in some cases impossibly) large computational resources.
-Therefore, keeping track of the exact microstructure of neural tissue is in practice impossible. Luckily, it is also for most purposes unnecessary.%, and 
+Therefore, keeping track of the exact microstructure of neural tissue is in practice impossible. Luckily, it is also for most purposes unnecessary. %, and 
 %Analogous to how it is impossible and unnecessary to keep track of individual atoms and charges, it is therefore in practice impossible and 
 %The recording of an electric potential requires an electrode, and the spatial extension of the electrode determines the spatial resolution of the recording. For example, an electrode placed in the extracellular space of the brain will record the average potential taken over the interface (typically a metal surface or liquid junction) between the electrode and the extracellular fluid, which normally is at least 1~\si{\square\micro\metre}. When we speak of an electric field or potential, we generally mean the average of these quantities taken over a certain volume of interest. 
 %We started this chapter on the spatial scale of a single atom (\fref{sec:Basics:Charge}). Single charge interactions, taking place on the spatial scale of the Debye-length ($\sim 1 \, \si{\nano\metre}$) and temporal scale of the charge-relaxation time ($\sim 1 \, \si{\nano\second}$), may be important for understanding detailed properties in cellular membranes. However, in this book we are interested in processes on the larger spatial scale where it is meaningful to work with continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents (\fref{sec:Basics:Charge}). 
@@ -420,8 +421,9 @@ nanometer (10 i minus 9), micrometer (10 i minus 6) og millimeter (10 i minus 3)
 \index{Current source density}
 Although potentials fundamentally are due to the distribution of charges on a nanometre scale, the shielding effects that we discussed in \fref{sec:Basics:Debye} allow us to predict a macroscopic (coarse-grained) extracellular potential from the constraint that there should be no charge accumulation anywhere in the extracellular space, or equivalently, that there should be no net electric current entering or leaving any finite volume of tissue.
 \tvnnote{Siste del av setningen kan kanskje vaere litt forvirrende, mtp kilder og sluk osv? Kanskje ogsaa litt rart aa foerst anta makroskopisk volum, og saa si at det skal gjelde "any finite volume"?}
-
-On the coarse-grained tissue scale ($\gg 1 \,\si{\cubic\micro\metre}$) \gex{($\sim$ 1 mm or larger?)} , a common starting point for computing extracellular potential is the requirement that all currents entering or leaving through neuronal membranes must somehow\tvnnote{fjerne somehow?} be conserved and distributed in the extracellular space. This can be expressed mathematically through the continuity equation \cite**{nicholson1975}:
+\tvnnote{Alternativ: ... there should be no charge accumulation anywhere in the coarse-grained description of neural tissue. Charge accumulation on neural membranes still occurs, but this charge accumulation will always be in balance on the intra- and extracellular side,
+and the course-grained description by definition includes both these domains.}
+On the coarse-grained tissue scale ($\gg 1 \,\si{\cubic\micro\metre}$) \gex{($\sim$ 1 mm or larger?)} , a common starting point for computing extracellular potential is the requirement that all currents entering or leaving through neuronal membranes must be conserved and distributed in the extracellular space. This can be expressed mathematically through the continuity equation \cite**{nicholson1975}:
 \begin{equation}
 {\bf \nabla} \cdot {\bf i}_\text{t} = -C,
 \label{eq:Basics:continuity1}
@@ -470,15 +472,14 @@ The derivation of \fref{eq:Basics:continuity1} thus reveals that it only has a m
 Importantly, ${\bf i}_\text{t}$ thus interprets as the average current running extracellularly through tissue, defined as extracellular current per unit \textit{tissue} cross section area and not per \textit{extracellular} cross section area (although it only runs through the extracellular parts of this cross section area). Similarly, $\sigma_\text{t}$ in \fref{eq:Basics:continuity2} interprets as average conductivity experienced by the current ${\bf i}_\text{t}$. As this current will face cellular obstacles, and is restricted to run only through the extracellular parts of the tissue, $\sigma_\text{t}$ is generally lower than the conductivity of the extracellular saline solution (see \fref{chap:Sigma} for further discussion). 
 
 \subsection{\tvntxt{The physical interpretation of extracellular potentials in the brain}}
+\label{sec:Basics:interp_pot_brain}
 \tvnnote{Flyttet dette, siden vi ikke hadde introdusert stroemmer engang der det foerst stod.}
-\tvntxt{This means that the extracellular potential is really a measure of the energy needed to move a positive unit of charge from the reference electrode and to the measurement electrode. If a positive current is leaving the extracellular region containing a measurement electrode (for example a sodium current flowing into a cell), then a positive current is drawn into the region, and the energy needed to move a positive charge here is negative (you can in theory gain energy) (\fref{fig:Basics:elec_circuit}). This is why the sodium peak of extracellular spikes is negative (\fref{chap:Spikes}). Slightly later, during the after-hyperpolarization phase of the spike, a potassium current is flowing out of the cell. Moving additional positive charges there now requires more energy, making the measured extracellular potential positive.
+\tvntxt{The extracellular potential is really a measure of the energy needed to move a positive unit of charge from the reference electrode and to the measurement electrode (\fref{sec:Basics:interp_pot_charge}). If a positive current is leaving the extracellular region containing a measurement electrode (for example a sodium current flowing into a cell), then a positive current is drawn into the region, and the energy needed to move a positive charge here is negative (you can in theory gain energy) (\fref{fig:Basics:elec_circuit}). This is why the sodium peak of extracellular spikes is negative (\fref{chap:Spikes}). Slightly later, during the after-hyperpolarization phase of the spike, a potassium current is flowing out of the cell. Moving additional positive charges there now requires more energy, making the measured extracellular potential positive.
 
 Many people (hvertfall Torbj\o rn) might have the intuition that if the extracellular conductivity is very low, the amplitude of the extracellular potential should also also be very low (after all "the signal can hardly propagate through the medium"). However, when a current source is pushing a current through a resistive medium, the drop in the potential will be proportional to the inverse of the conductivity (see Ohm's law), and therefore a lower conductivity gives a larger amplitude of the extracellular potential. 
 %the extracellular potential is the energy needed to move a unit charge from a reference electrode to a measurement electrode, and therefore, if the extracellular conductivity is very low, more energy is needed.
 \gen{Jeg synes det er lettere aa tenke/snakke om str{\o}mmer enn ladninger. Naar en str{\o}mkilde  presser en str{\o}m gjennom et Ohmsk medium saa blir det et spenningfall (hopp) i mediet som er proporsjonalt med motstanden. Men ladningene som flytter paa seg faar ikke mer energi, alle frigjort energi blir vel til varme i det ohmske mediet?} 
 }
-\ghnote{Torbjorn omformulerer til stroembetraktninger. Gi gjerne en kortfattet definisjon av stroem og referer til delkapitlene under.} 
-
 
 
 \subsection{\blue{Two-step approach for modeling extracellular potentials}}
@@ -497,7 +498,10 @@ Throughout this book, we shall use this two-step approach to compute extracellul
 
 \section{\blue{Maxwell's equations}}
 \label{sec:Basics:Maxwell} \index{Maxwell's equations}
-The physics of electromagnetism is summarized by Maxwell's equations, so we end this chapter by going briefly through these. We will also discuss some of the approximations of Maxwell's equations that we use when applying them to studies of brain tissue.
+The physics of electromagnetism is summarized by Maxwell's equations,
+\tvntxt{and not including these equations in a book about electromagnetic signals would
+be considered directly offensive by the physics community (including the authors themselves).
+Therefore}, we end this chapter by going briefly through these. We will also discuss some of the approximations of Maxwell's equations that we use when applying them to studies of brain tissue.
 
 Maxwell's equations come in two versions, referred to as the microscopic and macroscopic versions. The microscopic version is the most fundamental, but using it requires knowledge of the positions of all individual charges. Since that is unfeasible when any medium at a macroscopic level, we therefore only list up the macroscopic set of equations:
 
