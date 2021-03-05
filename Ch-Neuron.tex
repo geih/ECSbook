@@ -360,7 +360,10 @@ through leakage and active ion channels, and $I_{\mathrm{syn},n}$ can represent 
 c_\text{m} \frac{dV_n}{dt} = i_{\mathrm{ion},n} + \frac{d}{4r_\text{a}}\left(\frac{V_{n+1}-V_n}{L^2} - \frac{V_n-V_{n-1}}{L^2} \right) + \frac{I_{\mathrm{stim},n}}{\pi d L}.
 \label{eq:Neuron:multimain}
 \end{equation}
-\Fref{eq:Neuron:multimain} assumes that a compartment $n$ has two neighbors ($n-1$ and $n+1$), which will not be true for the endpoint compartments of the simulated structure. To solve it, we must therefore select appropriate boundary conditions for these compartments. The most commonly used boundary condition is that of a sealed end, where $\frac{\partial V_n}{\partial x} = 0$ for $n$ at the endpoints, that no axial current leaves there.  This is for example the default boundary condition in the NEURON simulator. 
+\Fref{eq:Neuron:multimain} assumes that a compartment $n$ has two neighbors ($n-1$ and $n+1$), which will not be true for the endpoint compartments of the simulated structure. To solve it, we must therefore select appropriate boundary conditions for these compartments. The most commonly used boundary condition is that of a sealed end, where $\frac{\partial V_n}{\partial x} = 0$ for $n$ at the endpoints, that no axial current leaves there. 
+\ehnote{Kan det bli litt forvirrende med partial derivative her? En alternativ formulering er via `backward difference' approksimasjonen hvor $V_{n+1}$ termen faller ut:
+$dV_n/dt \propto (V_n - V_{n-1} / L)$.}	
+This is for example the default boundary condition in the NEURON simulator. 
 
 %%%%%%%%%%%%%%%%%
 \subsection{\blue{Passive multicompartment models}}
@@ -368,6 +371,7 @@ c_\text{m} \frac{dV_n}{dt} = i_{\mathrm{ion},n} + \frac{d}{4r_\text{a}}\left(\fr
 \index{Multicompartmental neuron model}
 The neural response to small perturbations from the resting potential often has a close to linear relationship between the membrane potential and membrane currents \cite**{mauro1970,koch1984,ness2016}.\ghnote{Ha med disse refs eller ikke? Disse arbeidene driver jo med en linearisering og bruker ikke den enkle formen vi drar til med nedenfor. Samtidig gir de jo et argument for lineariteten vi postulerer.} 
 \gen{Hmm... Vi faar diskutere saken}
+\ehnote{Ness2016 er vel mer om EPs...}
 When modeling subthreshold neural dynamics, a common simplification is therefore to assume that ionic membrane current density has the linear form,
 \begin{equation}
 i_{\mathrm{ion},n} = g_\text{m}(V_n - E_m),
@@ -459,7 +463,9 @@ V(x) = E_\text{m} + \big( V(0)-E_\text{m} \big) e^{-x/\lambda}.
 \end{equation}
 We note that the general-solution to \fref{eq:Neuron:semiinf2} also has a term containing $e^{+x/\lambda}$, but this term diverges when $x \rightarrow \infty$ and was excluded on the count of being unphysical.
 
-To obtain the final solution of the problem, we need to specify the boundary value $V(0)$, which will depend on the stimulus current. Since the stimulus is injected in a singular point ($x=0$), we go back to expressing in terms of a total current, $I_\text{stim}$ (and not as a current per unit length $\mathcal{I}_\text{stim}$). We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
+To obtain the final solution of the problem, we need to specify the boundary value $V(0)$, which will depend on the stimulus current. Since the stimulus is injected in a singular point ($x=0$), we go back to expressing in terms of a total current, $I_\text{stim}$ (and not as a current per unit length $\mathcal{I}_\text{stim}$). 
+\ehnote{igjen, var det noen grunn til \emph{ikke} aa bruke $i_\mathrm{stim}$ for stroem per lengdeenhet?}
+We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
 \begin{equation}
 I_\text{stim} = - \frac{\pi d^2}{4}\frac{1}{r_\text{a}} \frac{\partial V}{\partial x}   \Big|_{x=0}.
 \end{equation}
@@ -589,6 +595,7 @@ j_k = j_{k,\text{diff}} + j_{k,\text{drift}}
 %%%%
 where  $[k]$ denotes the concentration of ion $k$ (\si{\milli\molar}). 
 \gen{Kanskje bedre aa bruke $x$-retning, siden $z$ ogsaa brukes for valenstall?}
+\ehnote{hvorfor brukes $j$ som symbol for stroem her og ikke $i$ som ellers i kapitlet?}
 The first term  inside the parenthesis of \fref{eq:Neuron:NP1D} is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. Since we consider membrane fluxes, we have replaced the diffusion constant ($D_k$) which appears in the more common form of the Nernst-Planck equation (\fref{eq:Basics:JNP}) with the membrane's permeability ($P_k$) to ion $k$. The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
 
 \begin{equation}
@@ -609,6 +616,7 @@ where the last equality follows from the definition of $E_k$ as the membrane pot
 
 To illustrate how to interpret the reversal potential, we can use a K$^+$ channel as an example. For simplicity, let us assume that it opens at a time when the neuron is resting ($V = V_{\text{in}}-V_{\text{out}} \sim -70 \, \si{\milli\volt}$), and that the K$^+$ is the only ion channel that opens. Since the intracellular space is more K$^+$-rich than the extracellular space, diffusion will drive K$^+$ out from the neuron, and since $V$ is negative, electric drift will drive K$^+$ into the neuron. Initially,
 \gen{Kan "intitially" vaere forvirrende? Det skjer jo ganske instantant, i alle fall i forhold til millesekundskalaen til ionekanal-dynamikk}
+\ehnote{"intitially" er enda mer forvirrende.}
  the diffusive process will dominate, so that there will be a net efflux of K$^+$. This will cause a gradual decrease (hyperpolarization) of $V$ towards the K$^+$ reversal potential, which with concentrations as in \fref{tab:Neuron:ion-concentrations} has the value $E_K = -100 \, \si{\milli\volt}$. As $V$ decreases, the drift component will become stronger, and when $V$ reaches $E_K$, it becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero. $E_K$ is called the reversal potential, because if the potential were to drop below this value, the current would reverse, i.e., the drift component would become dominant over diffusion, and K$^+$ would start to go inward into the neuron. 
 
 As ion concentrations are generally assumed to remain constant in HH-type models, the reversal potentials are also assumed to be constant. As a consequence, one typically does not worry about ionic concentrations when constructing such models, but simply uses values for $E_k$ based or empirical measurements of the potential at which a certain membrane current reverses.
@@ -657,7 +665,7 @@ and the $\mathrm{[Ca]_i}$ in a neuronal compartment is typically modeled using a
 \end{equation}
 where a transmembrane Ca$^{2+}$ current ($i_\text{Ca}$ is converted to a change in $\mathrm{[Ca]_i}$ by the conversion factor $\gamma$, which is proportional to the surface to volume ratio of the neuronal compartment where $\mathrm{[Ca]_i}$ is defined. In addition, the last term in \fref{eq:Neuron:Cadynamics} represents the summed activity of a number of extrusion mechanisms that will make $\mathrm{[Ca]_i}$ decay towards some baseline value $\mathrm{[Ca]_{i,0}}$ with a time constant $\tau_\text{Ca}$ (see e.g. \cite**{Sterratt2011}).
 
-To use a simple model as in \fref{eq:Neuron:Cadynamics} might not be meaningful when it comes to model the more abundant ion species (K$^{+}$, Na$^{+}$ and Cl$^{-}$). One reason is that \fref{eq:Neuron:Cadynamics} only considers the intracellular concentration. This makes sense for Ca$^2+$, since the intracellular concentration is much smaller than the extracellular concentration, so that dramatic relative changes of $\mathrm{[Ca]_i}$ can occur without requiring correspondingly dramatic relative changes in the extracellular concentration. The same does not hold for the more abundant species, for which the concentrations are of the same order of magnitude on both sides of the membrane. Another reason is that \fref{eq:Neuron:Cadynamics} is local in the sense that the concentration is affected exclusively by transmembrane ionic currents. In reality, also the axial intracellular currents are carried by ions, especially by the more abundant ones \cite**{Qian1989}. A complete and consistent model of ion concentration dynamics would thus need to account for electrodiffusive ion concentration dynamics both in the intra- and extracellular space. Such models exist (see e.g., \cite**{Saetra2020,ellingsrud2020}), but they are generally computationally heavy, and not based on the MC framework that we have presented here. 
+To use a simple model as in \fref{eq:Neuron:Cadynamics} might not be meaningful when it comes to model the more abundant ion species (K$^{+}$, Na$^{+}$ and Cl$^{-}$). One reason is that \fref{eq:Neuron:Cadynamics} only considers the intracellular concentration. This makes sense for Ca$^{2+}$, since the intracellular concentration is much smaller than the extracellular concentration, so that dramatic relative changes of $\mathrm{[Ca]_i}$ can occur without requiring correspondingly dramatic relative changes in the extracellular concentration. The same does not hold for the more abundant species, for which the concentrations are of the same order of magnitude on both sides of the membrane. Another reason is that \fref{eq:Neuron:Cadynamics} is local in the sense that the concentration is affected exclusively by transmembrane ionic currents. In reality, also the axial intracellular currents are carried by ions, especially by the more abundant ones \cite**{Qian1989}. A complete and consistent model of ion concentration dynamics would thus need to account for electrodiffusive ion concentration dynamics both in the intra- and extracellular space. Such models exist (see e.g., \cite**{Saetra2020,ellingsrud2020}), but they are generally computationally heavy, and not based on the MC framework that we have presented here. 
 
 
 \section{\blue{Discussion: From neurodynamics to extracellular potentials}}
