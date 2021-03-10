@@ -25,37 +25,9 @@ Panel C is the level where we apply VC theory
 \section{\blue{From neuronal current sources to extracellular potentials}}
 \label{sec:VC:main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Throughout this chapter we shall assume that we know the neuronal transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A). As a mathematical generality, we may instead define a continuous density distribution \tvnnote{Virker litt rart for meg aa beskrive delta-funksjoner som contineous density distribution?} of current sources (Fig. \ref{VC:fig:CSD}B), which we call the \textit{current source density}\index{Current source density} (CSD), with units A/m$^3$ \tvnnote{Litt rart aa introdusere CSD her, ogsaa ikke bruke det i de foerste tilfellene. Hva med aa utsette dette til etter "line-source"?}. For example, the CSD representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions.
+Throughout this chapter we shall assume that we know the neuronal transmembrane currents at all points in space. If they stem from a simulation of a multicompartmental neuron model, they are typically represented as a set of discrete current sources, i.e., one source per neuronal segment (Fig. \ref{VC:fig:CSD}A).
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{Figures/VC/CSD.png}
-\end{center}
-\caption{\textbf{Neuronal current sources.}  {\bf (A)} When simulated on a numerical scheme, the transmembrane currents are known at a discrete set of neuronal segments, i.e., as a set of point sources.  {\bf (B)} As a mathematical generality, we can describe the transmembrane currents as a current source density (CSD) distribution, $C({\bf r},t)$. We note the sum of current entering/leaving a neuron is always zero, so that in {\bf (A)}, we must have that $I_1 + I_2 + I_3 + I_4 + I_5= 0$, and in {\bf (B)} we have that the spatial integral over $C({\bf r},t)$ must be zero at all times.
-}
-\label{VC:fig:CSD}
-\end{figure}
-Volume conductor theory is essentially based on current continuity in the extracellular medium, i.e., the requirement that no net current can enter/leave a given point\tvnnote{"Point" har jo i prinsippet ikke noen utstrekning. Kan vi bruke "volume"?}
-\tvnnote{Dette gjelder kun untenfor sinks/sources da. Nevne det?} in space. Mathematically, current continuity implies that:
-\begin{equation}
-\nabla \cdot {\bf i_t}({\bf r}, t) = - C({\bf r}, t),
-\label{VC:eq:CSD1}
-\end{equation}
-which is the same as we postulated previously in eq. \ref{Basics:eq:continuity1}. Here, ${\bf i_t}$ is the extracellular current density through the brain tissue, and $C$ is the current source density. What Eq. \ref{VC:eq:CSD1} essentially tells us, is that if a neuron outputs a current into a (infinitesimal) volume of space (the $C$ term), an equally large current leaves that volume as an extracellular current (the $\nabla \cdot {\bf i_t}$ term).
 
-In this chapter, we shall\tvnnote{personlig syntes jeg det er litt mye "shall" :-)} assume that the extracellular current density is described by Ohm's law (eq. \ref{VC:eq:ohmici}). If we combine Eq. \ref{VC:eq:ohmici} and Eq. \ref{VC:eq:CSD1}, we get:
-
-\begin{equation}
-\nabla \left( \sigma_t({\bf r}, t) \nabla \phi({\bf r}, t) \right) = - C({\bf r}, t),
-\label{VC:eq:CSD2}
-\end{equation}
-
-which simplifies to the more commonly used relation:
-\begin{equation}
-\sigma \nabla^2\phi({\bf r}, t) = - C({\bf r}, t),
-\label{VC:eq:CSD3}
-\end{equation}
-in the less general case where the conductivity $\sigma_t$ is constant. Hence, if we know the distribution of neuronal current sources, we can integrate eq. \ref{VC:eq:CSD2} or eq. \ref{VC:eq:CSD3} to predict the electrical potential in the extracellular space surrounding the sources.
 
 As indicated above, the variables ${\bf i_t}$, $\sigma_t$ and $\phi$ can in general be functions of both position and time. However, for the remainder of this chapter, we shall for simplicity assume that $\sigma_t$ is constant. Furthermore, it is implicit in eq. \ref{VC:eq:CSD2} that the relationship between current sources and extracellular potentials is instantaneous (i.e., we can solve eq.  \ref{VC:eq:CSD2} at each time point independently), and in the remainder of the chapter we therefore only use the positional argument for ${\bf i_t}$ and $\phi$.
 
@@ -174,12 +146,45 @@ give substantially different results, but at slightly larger differences, the re
 }
 \label{VC:fig:point_vs_linesource}
 \end{figure}
-\si{\micro\metre}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\blue{Current-source-density description}}
 \label{sec:VC:CSD}
 \index{Current source density}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ As a mathematical generality, we may instead define a continuous density distribution \tvnnote{Virker litt rart for meg aa beskrive delta-funksjoner som contineous density distribution?} of current sources (Fig. \ref{VC:fig:CSD}B), which we call the \textit{current source density}\index{Current source density} (CSD), with units A/m$^3$ \tvnnote{Litt rart aa introdusere CSD her, ogsaa ikke bruke det i de foerste tilfellene. Hva med aa utsette dette til etter "line-source"?}. For example, the CSD representing the four point sources in Fig. \ref{VC:fig:CSD}A would be formulated as a sum of four delta functions.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Figures/VC/CSD.png}
+\end{center}
+\caption{\textbf{Neuronal current sources.}  {\bf (A)} When simulated on a numerical scheme, the transmembrane currents are known at a discrete set of neuronal segments, i.e., as a set of point sources.  {\bf (B)} As a mathematical generality, we can describe the transmembrane currents as a current source density (CSD) distribution, $C({\bf r},t)$. We note the sum of current entering/leaving a neuron is always zero, so that in {\bf (A)}, we must have that $I_1 + I_2 + I_3 + I_4 + I_5= 0$, and in {\bf (B)} we have that the spatial integral over $C({\bf r},t)$ must be zero at all times.
+}
+\label{VC:fig:CSD}
+\end{figure}
+Volume conductor theory is essentially based on current continuity in the extracellular medium, i.e., the requirement that no net current can enter/leave a given point\tvnnote{"Point" har jo i prinsippet ikke noen utstrekning. Kan vi bruke "volume"?}
+\tvnnote{Dette gjelder kun untenfor sinks/sources da. Nevne det?} in space. Mathematically, current continuity implies that:
+\begin{equation}
+\nabla \cdot {\bf i_t}({\bf r}, t) = - C({\bf r}, t),
+\label{VC:eq:CSD1}
+\end{equation}
+which is the same as we postulated previously in eq. \ref{Basics:eq:continuity1}. Here, ${\bf i_t}$ is the extracellular current density through the brain tissue, and $C$ is the current source density. What Eq. \ref{VC:eq:CSD1} essentially tells us, is that if a neuron outputs a current into a (infinitesimal) volume of space (the $C$ term), an equally large current leaves that volume as an extracellular current (the $\nabla \cdot {\bf i_t}$ term).
+
+In this chapter, we shall assume that the extracellular current density is described by Ohm's law (eq. \ref{VC:eq:ohmici}). If we combine Eq. \ref{VC:eq:ohmici} and Eq. \ref{VC:eq:CSD1}, we get:
+
+\begin{equation}
+\nabla \left( \sigma_t({\bf r}, t) \nabla \phi({\bf r}, t) \right) = - C({\bf r}, t),
+\label{VC:eq:CSD2}
+\end{equation}
+
+which simplifies to the more commonly used relation:
+\begin{equation}
+\sigma \nabla^2\phi({\bf r}, t) = - C({\bf r}, t),
+\label{VC:eq:CSD3}
+\end{equation}
+in the less general case where the conductivity $\sigma_t$ is constant. Hence, if we know the distribution of neuronal current sources, we can integrate eq. \ref{VC:eq:CSD2} or eq. \ref{VC:eq:CSD3} to predict the electrical potential in the extracellular space surrounding the sources.
+
 The forward modelling formulas in Eq. \ref{eq:VC:pointsources} and \ref{eq:VC:linesources} can be expressed more generally in terms of the CSD. The starting point is then eq. \ref{VC:eq:CSD3}, which for a homogeneous and isotopic medium can be written:
 
 \begin{equation}
@@ -238,6 +243,33 @@ As earlier stated, the solution for a general CSD can be expressed as a convolut
 \label{VC:eq:csds}
 \end{equation}
 where the volume integral runs over all sources. Here, $C$ represents whatever approximation one used for the current sources, and eq. \ref{VC:eq:csds} is the continuous counterpart to eq. \ref{eq:VC:pointsources}. If we describe the CSD as a sum of point sources, i.e.,  $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$, eq. \ref{VC:eq:csds} reduces to eq.\ref{eq:VC:pointsources}.
+
+
+\subsubsection{\blue{Derivation of the CSD equation}}
+\label{sec:VC:C2}
+\index{Current source density}
+Although  \fref{eq:Basics:continuity1} may seem intuitively reasonable, we introduced it above more or less as a postulate. A thorough derivation of this equation was given by \citeasnoun**{Gratiy2017}, and for the interested reader, we will here go through the main steps of this derivation. 
+
+In general, current conservation implies that: 
+\begin{equation}
+{\bf \nabla} \cdot {\bf i}_\text{tot} = 0, 
+\label{eq:Basics:Sergey1}
+\end{equation}
+where we can think of ${\bf i}_\text{tot}$ as the total current density defined on the relatively fine spatial scale where it is meaningful to distinguish between it being either cellular or extracellular. Let us further define $\left<{\bf i}_\text{tot}\right>$ as being this total current when averaged over some coarse-grained volume that spans over both intra- and extracellular spaces. 
+As current conservation also applies at this scale \gen{Kanskje det kan forklares med en setning? MEMBRANSPALTING?}, we have that: 
+\begin{equation}
+{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle = 0.
+\label{eq:Basics:Sergey2}
+\end{equation}
+Since we may perform the averaging separately over the cellular (c) \gex{(Inkluderer "cellular" baade  "intracellular" og membranen?)} and extracellular (e) domains, we have that $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$. With this, we can may write \fref{eq:Basics:Sergey2} as:
+\begin{equation}
+{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  + {\bf \nabla}\cdot \langle{\bf i}_\text{tot}\rangle_\text{e} = 0
+\label{eq:Basics:Sergey3}
+\end{equation}
+In Appendix A of \citeasnoun**{Gratiy2017}) it was shown that the divergence of the coarse-grained current density over the cellular domain can be expressed as a sum of transmembrane currents (i.e., as the CSD term ($C$) that we introduced in \fref{eq:Basics:continuity1}. Further, if we rename the average current running extracellularly through tissue $\langle{\bf i}_\text{tot}\rangle_\text{e}$ to ${\bf i}_\text{t}$, we see that \fref{eq:Basics:Sergey3} becomes identical to  \fref{eq:Basics:continuity1}. 
+
+The derivation of \fref{eq:Basics:continuity1} thus reveals that it only has a meaningful interpretation when considering tissue in a coarse-grained scale, i.e., a spatial scale large enough to contain both intra- and extracellular domains.\tvnnote{Er dette noedvendigvis sant? Ligningen i seg selv er vel ganske generell og blir jo brukt i EMI (Tveito) osv, og boer vel kunne loeses nummerisk paa micrometer nivaa?}
+Importantly, ${\bf i}_\text{t}$ thus interprets as the average current running extracellularly through tissue, defined as extracellular current per unit \textit{tissue} cross section area and not per \textit{extracellular} cross section area (although it only runs through the extracellular parts of this cross section area). Similarly, $\sigma_\text{t}$ in \fref{eq:Basics:continuity2} interprets as average conductivity experienced by the current ${\bf i}_\text{t}$. As this current will face cellular obstacles, and is restricted to run only through the extracellular parts of the tissue, $\sigma_\text{t}$ is generally lower than the conductivity of the extracellular saline solution (see \fref{chap:Sigma} for further discussion). 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
