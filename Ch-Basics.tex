@@ -266,7 +266,7 @@ or, equivalently (cf. \fref{eq:Basics:EV}):
 {\bf i} = \sigma {\bf E}.
 \label{eq:Basics:Ohm_general}
 \end{equation}
-\tvntxt{Note that in general the conductivity can be inhomogeneous, that is, position-dependent: $\sigma(x,y,z)$.}
+\tvntxt{Note that in general the conductivity can be inhomogeneous, that is, position-dependent, so that $\sigma \rightarrow\sigma(x,y,z)$.}
 
 \subsubsection{\blue{A note on Ohm's law}}
 \label{sec:Basics:Note}
@@ -394,8 +394,8 @@ For intracellular currents it is common to make the further simplification that 
 \includegraphics[width=1.0\textwidth]{Figures/Basics/Twostep.png}
 \end{center}
 \caption{{\bf Currents in brain tissue}. {\bf(A)} Illustration of currents involved in the brain, with intracellular volume currents (yellow), extracellular volume currents (red), and transmembrane currents (orange). Currents travel in closed loops. The entire space will be filled with currents, and only a few paths was included in the illustration. {\bf(B)} A standard modeling strategy is to compute the intracellular and transmembrane currents on a framework independent of the extracellular dynamics. The neuron is approximated as a branching cable, and intracellular currents are one-dimensional along the cable, whereas transmembrane currents are perpendicular to the cable and distributed over the cable. {\bf(C)} The transmembrane currents computed in the framework {\bf(B)} can be used as output sources and sinks to the extracellular space, and can be used to compute the extracellular potential $\phi({\bf r})$. This will be the potential that is "needed" to complete all current loops, a few of which are illustrated with red, dashed arrows.
-\tvnnote{Kanskje holde oss til "to-kompartment" versjon av cella i B, for enkelt hets skyld? Altsaa én intracellulaer stroem, og to membran-stroemmer, samt symmetriske volum-stroemmer paa begge sider av cella. Kan ogsaa kanskje tegne inn noen
-stiplede firkanter som representerer "volum", faar aa gjoere et poeng av at volum uten kilder har stroem, men like mye ut som inn, mens membranstroemmer kan sees paa som kilder/sluk. Dette kunne vaert fint for diskusjon rundt ligning (2.27) i "Neurons as current sources".}
+\tvnnote{Kanskje holde oss til "to-kompartment" versjon av cella i B, for enkelthets skyld? Altsaa én intracellulaer stroem, og to membran-stroemmer, samt symmetriske volum-stroemmer paa begge sider av cella. Kan ogsaa kanskje tegne inn noen
+stiplede firkanter som representerer "volum", for aa gjoere et poeng av at volum uten kilder har stroem, men like mye ut som inn, mens membranstroemmer kan sees paa som kilder/sluk. Dette kunne vaert fint for diskusjon rundt ligning (2.27) i "Neurons as current sources".}
 }
 \label{fig:Basics:Twostep}
 \end{figure}
@@ -428,19 +428,11 @@ As a loose analogy, we can consider a person moving through a dense crowd of peo
 %We started this chapter on the spatial scale of a single atom (\fref{sec:Basics:Charge}). Single charge interactions, taking place on the spatial scale of the Debye-length ($\sim 1 \, \si{\nano\metre}$) and temporal scale of the charge-relaxation time ($\sim 1 \, \si{\nano\second}$), may be important for understanding detailed properties in cellular membranes. However, in this book we are interested in processes on the larger spatial scale where it is meaningful to work with continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents (\fref{sec:Basics:Charge}). 
 %The Na$^{+}$ concentration in the extracellular space of the brain is $\sim 150 \, \si{\milli\molar}$, which means that a volume of $1 \, \si{\cubic\nano\metre}$ of extracellular space then contains (on average) only $150\times 6.02\times10^{23}\times10^{-27} \approx 0.1$ Na$^{+}$ ions. A concentration is therefore not a very meaningful concept on a spatial scale as small as this. Continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents, therefore imply a spatial resolution $\gg 1 \, \si{\nano\metre}$. When working on this scale, we do not need to be concerned with details of single charge interactions taking place on the nanometer and nanosecond timescale \cite**{Grodzinsky2011}.
 
-\tvnnote{Flytter dette siste avsnittet til VC-kapittelet}
-When we study processes on the level of brain tissue, %we often wish to work on an even coarser spatial scale\tvnnote{Litt uklart hva "even coarser" henviser til. Tidligere er jo bare skrevet mye stoerre enn nm som jo kan vaere km.}
-we are typically interested in volumes $\gg 1 \, \si{\cubic\micro\metre}$. The diameter of a neural dendrites is typically $\sim 1 \,\si{\micro\metre}$, which means that the averaging volume encloses components of multiple neurites, and includes both intra- and extracellular spaces. The advantage with such a \textit{coarse-grained}\index{Coarse-grained} resolution, is that both cellular and extracellular currents will be defined over the whole tissue-space, rather than within their respective sub-spaces \cite**{Gratiy2017}. At this spatial scale, the intracellular current, for example, does not \tvntxt{necessarily} interpret as belonging to a specific neuron, but rather as the average intracellular current within the whole volume, containing contributions from several different neurons. Likewise, also the transmembrane currents and extracellular currents are volume averages. 
-\tvnnote{Litt usikker paa dette. For meg er alltid transmembrane stroemmer knyttet til ett nevron. Boer spesifiseres mer, eller taes bort?}
-\gen{Kanskje vi kunne hatt en liten figur som viser de tre skalaene vaare (atom, cell ("concentration"), tissue)? Egentlig er vel 
-nanometer (10 i minus 9), micrometer (10 i minus 6) og millimeter (10 i minus 3) ganske typiske lengder for disse tre skalaene selv om tissue jo kan vaere stoerre enn en millimeter.}
 
 
 \subsection{\blue{Neurons as current sources}}
 \label{sec:Basics:C}
 \index{Current source density}
-\tvnnote{Kanskje vi egentlig kan kutte litt ned her? Er jo paa en maate VC-kapittel-stoff, dette.
-Egentlig syntes jeg dette Gratiy2017 greiene er litt vanskeligere enn det som trengs. Kan vi ikke bare si at man behandler transmembrane stroemmer som en stoemkilder i et homogent medium?}
 %Although potentials fundamentally are due to the distribution of charges on a nanometre scale, the shielding effects that we discussed in \fref{sec:Basics:Debye} allow us to predict a macroscopic (coarse-grained) extracellular potential from the constraint that there should be no charge accumulation anywhere in the extracellular space.
 %, or equivalently, that there should be no net electric current entering or leaving any finite volume of tissue.
 %\tvnnote{Siste del av setningen kan kanskje vaere litt forvirrende, mtp kilder og sluk osv? Kanskje ogsaa litt rart aa foerst anta makroskopisk volum, og saa si at det skal gjelde "any finite volume"?}
@@ -449,17 +441,23 @@ Egentlig syntes jeg dette Gratiy2017 greiene er litt vanskeligere enn det som tr
 %On the coarse-grained tissue scale ($\gg 1 \,\si{\cubic\micro\metre}$) \gex{($\sim$ 1 mm or larger?)} , a common starting point for computing extracellular potential is the requirement that all currents entering or leaving through neuronal membranes must be conserved and distributed in the extracellular space. 
 \tvntxt{In the previous section, we outlined how neural transmembrane currents will cause extracellular currents,
 and how we can use Ohm's law for a smooth volume conductor to calculate the corresponding extracellular potential from these extracellular currents.
-In practice it is however much more convenient to link the extracellular potentials directly to the transmembrane currents. In the previous section we also argued that we can assume current conservation in the extracellular space.
+In practice it is however much more convenient to link the extracellular potentials directly to transmembrane currents. 
+We start by considering a single transmembrane current source, which we denote $C$ (with units \si{\ampere\per\cubic\metre}), often referred to as the current source density (CSD). Further, we denote the 
+density of current running through the extracellular space as {\bf i}$_{\rm t}$.
+In the previous section we argued that we can assume current conservation in the extracellular space.
 }
 This can be expressed mathematically through the continuity equation \cite**{nicholson1975}:
 \begin{equation}
 {\bf \nabla} \cdot {\bf i}_\text{t} = -C,
 \label{eq:Basics:continuity1}
 \end{equation}
-where the source term, $C$ (with units \si{\ampere\per\cubic\metre}), is called the current source density (CSD). The CSD represents the transmembrane output currents from neurons per tissue volume, and includes both the a capacitive component and a component due to ions crossing the membrane. We have let ${\bf i}_\text{t}$ denote the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents.
-\ghnote{Det er vel strengt tatt feil aa si at ${\bf i}_\text{t}$ trenger aa vaere ekstracellulaer. Kan vi si at ${\bf i}_\text{t}$ er all running through brain tissue that is not accounted for by the CSD?}
+%where the source term, $C$ (with units \si{\ampere\per\cubic\metre}), is called the current source density (CSD). 
+The CSD represents the transmembrane output current per tissue volume, and includes both the a capacitive component and a component due to ions crossing the membrane. 
+%We have let ${\bf i}_\text{t}$ denote the density of current running extracellularly through brain tissue. 
+%It does not include intracellular or transmembrane neural currents.
+%\ghnote{Det er vel strengt tatt feil aa si at ${\bf i}_\text{t}$ trenger aa vaere ekstracellulaer. Kan vi si at ${\bf i}_\text{t}$ er all running through brain tissue that is not accounted for by the CSD?}
 
-In a volume of space where there is no transmembrane currents ($C = 0$), \fref{eq:Basics:continuity1} reduces to ${\bf \nabla} \cdot {\bf i}_\text{t} = 0$. This tells us that the spatial rate of change of the current ${\bf i}_\text{t}$ is zero, which means that there will be no net tissue current entering or leaving such a volume. Importantly, this does not mean that the tissue current itself must be zero. Currents can still run \textit{through} the volume, as long as the amount of current entering equals the amount leaving it. In a volume that \textit{does} receive transmembrane currents, \fref{eq:Basics:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume as an extracellular tissue current. As we shall show in \Fref{chap:VC}, this conservation law shall be the foundation for modeling extracellular potentials arising from neural activity.
+In a volume of space where there is no transmembrane currents ($C = 0$), \fref{eq:Basics:continuity1} reduces to ${\bf \nabla} \cdot {\bf i}_\text{t} = 0$. This tells us that the spatial rate of change of the current ${\bf i}_\text{t}$ is zero, which means that there will be no net tissue current entering or leaving such a volume. Importantly, this does not mean that the tissue current itself must be zero. Currents can still run \textit{through} the volume, as long as the amount of current entering equals the amount leaving it. In a volume that \textit{does} receive transmembrane currents, \fref{eq:Basics:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume as an extracellular tissue current. As we will show in \Fref{chap:VC}, this conservation law will be the foundation for modeling extracellular potentials arising from neural activity.
 
 For most parts of this book, we shall approximate brain tissue as a \textit{linear} Ohmic conductor, an approximation that we will discuss in further detail below. This means that the tissue current densities are given by Ohm's law for volume conductors (\fref{eq:Basics:Ohm_3D_phi}). When this is inserted into \fref{eq:Basics:continuity1}, we obtain a relationship between the neuronal current sources and the extracellular potential:
 \begin{equation}

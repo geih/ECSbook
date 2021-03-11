@@ -248,6 +248,15 @@ where the volume integral runs over all sources. Here, $C$ represents whatever a
 \subsubsection{\blue{Derivation of the CSD equation}}
 \label{sec:VC:C2}
 \index{Current source density}
+
+\tvnnote{Flyttet avsnittetet under fra Basics-kapittelet}
+When we study processes on the level of brain tissue, %we often wish to work on an even coarser spatial scale\tvnnote{Litt uklart hva "even coarser" henviser til. Tidligere er jo bare skrevet mye stoerre enn nm som jo kan vaere km.}
+we are typically interested in volumes $\gg 1 \, \si{\cubic\micro\metre}$. The diameter of a neural dendrites is typically $\sim 1 \,\si{\micro\metre}$, which means that the averaging volume encloses components of multiple neurites, and includes both intra- and extracellular spaces. The advantage with such a \textit{coarse-grained}\index{Coarse-grained} resolution, is that both cellular and extracellular currents will be defined over the whole tissue-space, rather than within their respective sub-spaces \cite**{Gratiy2017}. At this spatial scale, the intracellular current, for example, does not \tvntxt{necessarily} interpret as belonging to a specific neuron, but rather as the average intracellular current within the whole volume, containing contributions from several different neurons. Likewise, also the transmembrane currents and extracellular currents are volume averages. 
+\tvnnote{Litt usikker paa dette. For meg er alltid transmembrane stroemmer knyttet til ett nevron. Boer spesifiseres mer, eller taes bort?}
+\gen{Kanskje vi kunne hatt en liten figur som viser de tre skalaene vaare (atom, cell ("concentration"), tissue)? Egentlig er vel 
+nanometer (10 i minus 9), micrometer (10 i minus 6) og millimeter (10 i minus 3) ganske typiske lengder for disse tre skalaene selv om tissue jo kan vaere stoerre enn en millimeter.}
+
+
 Although  \fref{eq:Basics:continuity1} may seem intuitively reasonable, we introduced it above more or less as a postulate. A thorough derivation of this equation was given by \citeasnoun**{Gratiy2017}, and for the interested reader, we will here go through the main steps of this derivation. 
 
 In general, current conservation implies that: 
