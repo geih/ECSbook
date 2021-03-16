@@ -609,8 +609,8 @@ Assuming a random connectivity with binomial in- and out-degree distributions th
 \item Let layer or region (e.g., cortical layer) be denoted by $L$.
 \item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$. 
 Connection probability may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{a}_Y$. 
-\item Synaptic currents for each connection are given as $i_{\mathrm{syn}YX}(t)=\overline{g}_{\mathrm{syn}YX} f_{YX}(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}Y}$
-where $\overline{g}_{\mathrm{syn}YX}$ is the maximum synaptic conductance and $f_{YX}(t) \in [0, 1]$ is one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}. 
+\item Synaptic currents for each connection are given as $I_{\mathrm{syn}YX}(t)=\overline{G}_{\mathrm{syn}YX} f_{YX}(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}Y})$
+where $\overline{G}_{\mathrm{syn}YX}$ is the maximum synaptic conductance and $f_{YX}(t) \in [0, 1]$ is one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}. 
 $V_\mathrm{m}(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}Y}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory). 
 For simplicity we will assume that conductance magnitude is independent of $L$. 
 We will also assume that connection weights $\overline{g}_{YX}$ are static, i.e., there are no synaptic plasticity rules in place. 
@@ -650,18 +650,37 @@ The computational cost of transmitting times of spike events across the parallel
 
 For the purpose of predicting extracellular signals \emph{only}, 
 let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents. 
-We may also relax the requirement that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials):
+We may also relax the requirement that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all):
 \begin{enumerate}
 \item Approximate conductance-based synapses by equivalent current-based synapses:
 \begin{eqnarray}
-i_{\mathrm{syn}YX}(t) 
-	&=& \overline{g}_{\mathrm{syn}YX}f_{YX}(t)\left(V_\mathrm{m}(t) - E_{\mathrm{syn}X}\right) \\
-	&\approx& \overline{g}_{\mathrm{syn}YX}f_{YX}(t)\left(\langle V_\mathrm{m}(t) \rangle - E_{\mathrm{syn}X}\right) \\
-	&=& \overline{i}_{\mathrm{syn}YX}f_{YX}(t)~, 
+I_{\mathrm{syn}YX}(t) 
+	&=& \overline{G}_{\mathrm{syn}YX}f_{YX}(t)\left(V_\mathrm{m}(t) - E_{\mathrm{syn}X}\right) \\
+	&\approx& \overline{G}_{\mathrm{syn}YX}f_{YX}(t)\left(\langle V_\mathrm{m}(t) \rangle - E_{\mathrm{syn}X}\right) \\
+	&=& \overline{I}_{\mathrm{syn}YX}f_{YX}(t)~, 
 \end{eqnarray}
 where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged postsynaptic potential (or its expectation value). 
 We here use the sub-fix $Y|X$ notation to emphasize that some of these parameters may be connection specific.
-We would also note that some rescaling of current amplitudes \emph{may} be required for certain synapse instances if the postsynaptic targets are characterized by very high input impedances (e.g., oblique dendrites).  
+We would also note that some rescaling of current amplitudes \emph{may} be required for certain synapse instances if the postsynaptic targets are characterized by very high input impedances (e.g., oblique dendrites). 
+
+\item In absence of conductance-based synapses, incorporate the \emph{effective membrane conductance} $G_\mathrm{eff}$. 
+Ignoring other conductances which may be present (active ion channels etc.), 
+the total membrane conductance per postsynaptic compartment $w$ is
+\begin{equation}
+G_{\mathrm{eff}}(t) = G_L + \sum_X \sum_{u \subset X} \overline{G}_{\mathrm{syn}YX} \left( f_{YX} \ast s_u \ast \Delta_{YX} \right)(t)
+\end{equation}
+where $G_L \coloneq g_L A_w$ is the total leak conductance from the specific conductivity $g_L$ and compartment area $A_w$, 
+$s_u(t)$ the sequence of presynaptic spikes 
+and $\Delta_{YX}(t)$ the conduction delay distribution. 
+The double sum over presynaptic populations $X$ and units $u \in X$ imply that each presynaptic unit targeting the compartment is accounted for. 
+Assuming a fixed average presynaptic spike rate $\langle \nu_u \rangle \coloneq \Delta t^{-1} \int_t^{t+\Delta t} s_u(t) dt$, 
+a normalized delay distribution ($\int_0^\infty \Delta_{YX}(t) dt \coloneq 1$),
+$\int_0^\infty f_{YX}(t) dt = F_{YX}$
+the time-averaged effective conductance is approximately
+\begin{equation}
+\overline{G}_\mathrm{eff} \approx G_L + \sum_X \sum_{u \subset X} \langle \nu_u \rangle \overline{G}_{\mathrm{syn}YX} F_{YX} ~.
+\end{equation}
+
 
 \item Remove active ion channels if their net contributions to the total transmembrane currents can be assumed to be small.
 
@@ -712,6 +731,7 @@ For the special case $\mu=0$ the quasi-active current is `frozen', acting as a s
 %
 Note that the above sets of equations corresponds to channels usually modelled with a single state variable (e.g., Na- and h-type currents), 
 but generalize also to current types with more than one gating variable (e.g., K-currents), see \cite**{Remme_2010} for details.
+\ehnote{legg til modifisert $E_L$!}
 
 \item Further reduction of number of state variables can be achieved by reducing the number of compartments per postsynaptic cell. 
 This may reduce the accuracy of membrane voltage predictions, but more so at higher frequencies. 
@@ -744,7 +764,7 @@ linear forward model
 may then be combined into a spatiotemporal filter kernel $H_{vu}(\mathbf{r},\tau)$ where $\tau$ denote time lag relative to presynaptic spike times in $s_u(t)$ \cite**{Hagen2016}. 
 One may compute this filter as 
 \begin{equation}
-H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{i}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~, 
+H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{I}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~, 
 \end{equation}
 where $\Delta_{YX}(t) \coloneq \delta(t - d_{YX})$ and
 the Green's like functions $G_{vu}(\mathbf{r}, \tau)$ encompass all dendritic filtering effects on the synaptic input currents into each corresponding distribution of transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle ij \rangle}(\mathbf{r}, \tau)$.
@@ -810,7 +830,7 @@ as many rate models are phenomenological or have had their parameters determined
 
 \item The rate model framework allows for specifying key neuron and connectivity parameters such as 
 population sizes ($N_X, N_Y$) average synaptic in-degree ($\langle k_{YX} \rangle$) or connection probabilities $C_{YX}$, 
-synaptic coupling strength ($\overline{i}_{\mathrm{syn}YX}$), 
+synaptic coupling strength ($\overline{I}_{\mathrm{syn}YX}$), 
 synaptic temporal kernel ($f_{YX}(t)$) and
 conduction delay function $\Delta_{YX}(t)$ for each connection. 
 Let us for now assume that these parameters are used to derive parameters and variables entering the actually rate equations. 
@@ -843,7 +863,7 @@ We also assume that each population can be represented by \emph{one} typical mor
 Further we assume that the statistics of synaptic placements and currents would be preserved, 
 which allows us to compute the synaptic current density $\rho_{\mathrm{syn}YX}(\mathbf{r}, \tau)$ for each recurrent connection over the whole postsynaptic `neuron' which fulfills 
 \begin{equation}
-\iiint_{\Omega_\mathrm{syn}} \rho_{\mathrm{syn}YX}(\mathbf{r}, \tau) d\Omega_\mathrm{syn} = k_{YX} \overline{i}_{\mathrm{syn}YX} f_{YX}(\tau) ~.
+\iiint_{\Omega_\mathrm{syn}} \rho_{\mathrm{syn}YX}(\mathbf{r}, \tau) d\Omega_\mathrm{syn} = k_{YX} \overline{I}_{\mathrm{syn}YX} f_{YX}(\tau) ~.
 \end{equation}
 Here, $\Omega_\mathrm{syn}$ denotes the synaptic input domain, that is, the neuron  membrane hence the unit of $\rho_{\mathrm{syn}YX}(\mathbf{r}, \tau)$ is proportional to \si{\ampere\per\metre^2}. 
 One \emph{could} in principle also define this quantity per unit length (but why would we). 
@@ -864,7 +884,7 @@ Hence the expectation value for synaptic in-degree per compartment indexed by $k
 where $\mathbf{r}_k$ denotes the center location of each compartment.  
 With this quantity one may define the transfer function  of firing rate of population $X$ to each per-compartment synaptic input current as
 \begin{equation}
-H_{\mathrm{syn}YX}(\tau)[k] = N_X \langle k_{\mathrm{syn}YX}[k] \rangle \overline{i}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX}\right)(\tau) ~.
+H_{\mathrm{syn}YX}(\tau)[k] = N_X \langle k_{\mathrm{syn}YX}[k] \rangle \overline{I}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX}\right)(\tau) ~.
 \end{equation}
 
 \item We will assume that the the linearization tricks applied to the membrane of neuron models representative of each population   is still valid for rate-based frameworks, 

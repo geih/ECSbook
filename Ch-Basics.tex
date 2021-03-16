@@ -16,6 +16,8 @@ Readers without prior schooling in physics might not be able to follow all parts
 \section{\blue{Electric charge}}
 \label{sec:Basics:Charge} \index{Charge}
 Let us begin with the fundamental quantity for electricity, the electric charge. Nature's fundamental charges are those carried by the protons and electrons that build up the atoms that build up the material world. The proton carries the charge $e$, while the electron carries the charge $-e$, where $e = 1.602\times10^{-19}$ coulomb (\si{\coulomb}) is called the \textit{unit charge}. \index{Unit charge}
+\tvntxt{A fundamental law of nature is {\it charge conservation}\index{charge conservation},
+meaning that it seems fundamentally impossible to create or destroy a net amount of positive or negative charge, and the universe as we know it is exactly electrically neutral.}
 
 Since atoms in their \tvntxt{neutral} state contain an equal number of electrons and protons, most matter is electrically neutral. Some mediums are nevertheless conductive, which means that they contain so-called "free charge carriers" that may move through the medium. In an electric copper wire, such as that carrying current to a normal desktop lamp, the free charge carriers are electrons that are not bound to specific locations (i.e., to specific copper atoms), but can move freely through the copper material. In an electrolyte solution, for example salt water (saline), the free charge carriers are instead ions, i.e., atoms or molecules that have gained or donated one or several electrons, and therefore have become electrically charged. The saline solutions that fill the intracellular and extracellular space of the brain are such electrolytic solutions. Important charge carriers in the brain are sodium and potassium ions (Na$^+$ and K$^+$ with charge $1e$), chloride ions (Cl$^-$ with charge $-1e$), and calcium ions (Ca$^{2+}$ with charge $2e$).
 
@@ -208,6 +210,16 @@ such as charge densities, $\rho$ (with units \si{\coulomb\per\cubic\metre}), or 
 
 The Na$^{+}$ concentration in the extracellular space of the brain is $\sim 150 \, \si{\milli\molar}$, which means that a volume of $1 \, \si{\cubic\nano\metre}$ of extracellular space then contains (on average) only $150\times 6.02\times10^{23}\times10^{-27} \approx 0.1$ Na$^{+}$ ions. A concentration is therefore not a very meaningful concept on a spatial scale as small as this. Continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents, therefore imply a spatial resolution $\gg 1 \, \si{\nano\metre}$. When working on this scale, we do not need to be concerned with details of single charge interactions taking place on the nanometer and nanosecond timescale \cite**{Grodzinsky2011}.
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{Figures/VC/ecs_scales_three_levels.png}
+\end{center}
+\caption{\textbf{Extracellular medium at different scales}
+Panel C is the level where we apply VC theory
+\tvnnote{Denne figuren er ogsaa i VC, men passer kanskje best her?}
+}
+\label{fig:Basics:ECS_scales_3levels}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\blue{Electric currents}}
@@ -216,7 +228,10 @@ The Na$^{+}$ concentration in the extracellular space of the brain is $\sim 150 
 %As was argued in the previous subsection, we do not (and can not) study a macroscopic system by keeping track of individual particles or charges, but rather in the average movement of particles or charge on a larger spatial scale.
 %Although \tvntxt{charges and forces, as we have discussed up until now,} establishes the fundamental origin for electric interactions, there is a fairly long way to go from these equations (e.g., \fref{eq:Basics:CoulombFN}) to the understanding of electric phenomena in a macroscopic system such as the brain. When describing a macroscopic system, we are usually not interested in the microscopic interactions between a small number of charges, but rather the joint interactions of a very, very large number of charges. It is then not feasible to keep record of the position of each individual charge, but rather to work with continuous variables defined on a larger spatial scale, such as charge densities, $\rho$ (with units \si{\coulomb\per\cubic\metre}), or ion concentrations, $c_k$ (with units millimolar ($1\, \si{\milli\molar} = 1 \,\si{\mole\per\cubic\metre} = 6.02\times10^{23}$ particles per \si{\cubic\metre})). The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}).
 %The movement of particles of a given species $k$ is then quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}). 
-\tvntxt{An electric current is a net movement of charge.}
+\tvntxt{An electric current is a net movement of charge.
+An important concept that we will return to many times in this book is {\it current conservation}\index{current conservation}, which is a slightly less fundamental version of the charge conservation discussed at the beginning of this chapter (\fref{sec:Basics:Charge}). When charge conservation is combined with electroneutrality (\fref{sec:Basics:Debye}), current conservation automatically follows, since the same amount of charge that enters a volume, must also leave the volume to ensure electroneutrality. In certain cases electroneutrality
+is not fulfilled (for example at one side of a capacitor), but since charge is conserved, this necessarily leads to charge accumulation, and this accumulated charge can be released as a current at a later time.
+}
 There exist various kinds of electric currents, differing in terms of what drives them. Below we will introduce the three kinds that are most important for the topic of this book, which are conductive currents (\fref{sec:Basics:ConductiveCurrent}),  capacitive currents (\fref{sec:Basics:CapacitiveCurrent}) and diffusive currents (\fref{sec:Basics:DiffusiveCurrent}). We also briefly comment on inductive and advective currents (\fref{sec:Basics:OtherCurrents}), although we consider them to be of less importance for the brain dynamics that we study in this book. 
 
 
@@ -237,7 +252,9 @@ where $\Delta \phi = \phi_B-\phi_A$ is the voltage difference across the resisto
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Basics/Currents.png}
 \end{center}
-\caption{{\bf Ohms law for currents and current densities.} {\bf (A)} Current through wire and resistor with resistance $R$ (\si{\ohm}): $I = (\phi_B-\phi_A)/R$. {\bf (B)} Current in wire with specific axial resistance per unit length $r_a$ (\si{\ohm\per\metre}).  $I=- (1/r_a) d\phi/dx$. {\bf (C)} Current density (\si{\ampere\per\square\metre}) for current passing through a volume conductor with conductivity $\sigma$ (\si{\siemens\metre}): ${\bf i} = \sigma {\bf E} = - \sigma {\bf \nabla} \phi$. Current paths will depend on $\sigma(x,y,z)$ which generally can vary with position.}
+\caption{{\bf Ohms law for currents and current densities.} {\bf (A)} Current through wire and resistor with resistance $R$ (\si{\ohm}): $I = (\phi_B-\phi_A)/R$. {\bf (B)} Current in wire with specific axial resistance per unit length $r_a$ (\si{\ohm\per\metre}).  $I=- (1/r_a) d\phi/dx$. {\bf (C)} Current density (\si{\ampere\per\square\metre}) for current passing through a volume conductor with conductivity $\sigma$ (\si{\siemens\metre}): ${\bf i} = \sigma {\bf E} = - \sigma {\bf \nabla} \phi$. Current paths will depend on $\sigma(x,y,z)$ which generally can vary with position.
+\tvntxt{Note that in all three cases we have current conservation, meaning that for an arbitrarily defined closed volume, the exact same amount of current will enter and exit the volume.}
+}
 \label{fig:Basics:Currents}
 \end{figure}
 In reality, the resistance of the wire is not strictly zero, but for most standard electrical circuits it is an excellent approximation. However, in some applications, for example if the wire is very long and thin, or if it is made of a less conductive material, it may be necessary to treat it as a continuous resistor. If we define the specific axial resistance per unit length $r_{a}$ (units \si{\ohm\per\metre}), Ohm's law becomes:
@@ -259,7 +276,7 @@ or, equivalently (cf. \fref{eq:Basics:EV}):
 {\bf i} = \sigma {\bf E}.
 \label{eq:Basics:Ohm_general}
 \end{equation}
-
+\tvntxt{Note that in general the conductivity can be inhomogeneous, that is, position-dependent, so that $\sigma \rightarrow\sigma(x,y,z)$.}
 
 \subsubsection{\blue{A note on Ohm's law}}
 \label{sec:Basics:Note}
@@ -387,6 +404,8 @@ For intracellular currents it is common to make the further simplification that 
 \includegraphics[width=1.0\textwidth]{Figures/Basics/Twostep.png}
 \end{center}
 \caption{{\bf Currents in brain tissue}. {\bf(A)} Illustration of currents involved in the brain, with intracellular volume currents (yellow), extracellular volume currents (red), and transmembrane currents (orange). Currents travel in closed loops. The entire space will be filled with currents, and only a few paths was included in the illustration. {\bf(B)} A standard modeling strategy is to compute the intracellular and transmembrane currents on a framework independent of the extracellular dynamics. The neuron is approximated as a branching cable, and intracellular currents are one-dimensional along the cable, whereas transmembrane currents are perpendicular to the cable and distributed over the cable. {\bf(C)} The transmembrane currents computed in the framework {\bf(B)} can be used as output sources and sinks to the extracellular space, and can be used to compute the extracellular potential $\phi({\bf r})$. This will be the potential that is "needed" to complete all current loops, a few of which are illustrated with red, dashed arrows.
+\tvnnote{Kanskje holde oss til "to-kompartment" versjon av cella i B, for enkelthets skyld? Altsaa én intracellulaer stroem, og to membran-stroemmer, samt symmetriske volum-stroemmer paa begge sider av cella. Kan ogsaa kanskje tegne inn noen
+stiplede firkanter som representerer "volum", for aa gjoere et poeng av at volum uten kilder har stroem, men like mye ut som inn, mens membranstroemmer kan sees paa som kilder/sluk. Dette kunne vaert fint for diskusjon rundt ligning (2.27) i "Neurons as current sources".}
 }
 \label{fig:Basics:Twostep}
 \end{figure}
@@ -401,39 +420,54 @@ be measured with electrodes with surface areas which are at least a few square m
 In this section we take this one step further and describe how we can go from the chaotic microstructure of neural tissue to a smooth continuous medium. This issue is discussed in more detail in \fref{chap:VC}-\fref{chap:Sigma}.
 
 At the level of one micrometer, neural tissue is a chaotic mess of entangles neurites, where about 80\% of the volume is made up of cells, and about 20\% is the highly tortuous extracellular space. 
-The extracellular separation between the cell membranes of different cells is typically only on the order of a few tens of nanometers (\fref{chap:VC}). 
-The extracellular potential will in principle depend on the exact microstructure of the extracellular space in vicinity of the transmembrane currents and recording electrodes (\fref{chap:Neuron}-\fref{chap:Sigma}). However,
-this microstructure is almost always unknown (although small volumes can be partially reconstructed {\it ex vivo} using techniques like scanning electron microscopy), and even if it was known, including it in modelling or analysis of extracellular potentials would require prohibitively (in some cases impossibly) large computational resources.
-Therefore, keeping track of the exact microstructure of neural tissue is in practice impossible. Luckily, it is also for most purposes unnecessary. %, and 
+%The extracellular separation between the cell membranes of different cells is typically only on the order of a few tens of nanometers (\fref{chap:VC}). 
+We have argued that the extracellular space (more than a nanometer or so away from the Debye-layers at neural membranes) can be considered electroneutral (\fref{sec:Basics:Debye}), 
+and because of current conservation (\fref{sec:Basics:Current}), the transmembrane currents 
+discussed in the previous section will give rise to extracellular currents. 
+For now, we will just assume that these extracellular currents are restricted to move only through the extracellular space. This amounts to the assumption that, from the perspective of an extracellular current, cellular membranes have a much higher resistance than the extracellular space (we get back to this in \fref{chap:Sigma}). 
+The extracellular space itself if filled with a conductive and resistive saline solution. We
+can therefore use Ohm's law for volume conductors (\fref{eq:Basics:Ohm_3D_phi}) to calculate an extracellular potential from these extracellular currents. However we would in principle have to take into account the highly inhomogeneous microstructure of the medium that the currents are moving through. 
+This microstructure is almost always unknown (although small volumes can be partially reconstructed {\it ex vivo} using techniques like scanning electron microscopy), and even if it was known, including it in modelling or analysis of extracellular potentials would require prohibitively (in some cases impossibly) large computational resources.
+Therefore, keeping track of the exact microstructure of neural tissue is in practice impossible. Luckily, it is also for most purposes unnecessary. 
+As a loose analogy, we can consider a person moving through a dense crowd of people. On the scale of one meter, the crowd will appear highly inhomogeneous as certain directions are blocked by other people. However, on the scale of say ten meters, all directions might be approximately as easy to move in, and the crowd can seem roughly homogeneous. Something similar can be expected to happen with neural tissue, which appears highly inhomogeneous at the micrometer scale, but will typically appear quite homogeneous at a scale larger than ten micrometers or so. Therefore, for the purpose of modelling and analysing extracellular potentials, it is common to approximate neural tissue as a smooth continuous conducting medium, with a constant conductivity, where we can calculate extracellular potentials by use of Ohm's law for volume conductors (\fref{eq:Basics:Ohm_3D_phi}).  
+}
+
+%, and 
 %Analogous to how it is impossible and unnecessary to keep track of individual atoms and charges, it is therefore in practice impossible and 
 %The recording of an electric potential requires an electrode, and the spatial extension of the electrode determines the spatial resolution of the recording. For example, an electrode placed in the extracellular space of the brain will record the average potential taken over the interface (typically a metal surface or liquid junction) between the electrode and the extracellular fluid, which normally is at least 1~\si{\square\micro\metre}. When we speak of an electric field or potential, we generally mean the average of these quantities taken over a certain volume of interest. 
 %We started this chapter on the spatial scale of a single atom (\fref{sec:Basics:Charge}). Single charge interactions, taking place on the spatial scale of the Debye-length ($\sim 1 \, \si{\nano\metre}$) and temporal scale of the charge-relaxation time ($\sim 1 \, \si{\nano\second}$), may be important for understanding detailed properties in cellular membranes. However, in this book we are interested in processes on the larger spatial scale where it is meaningful to work with continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents (\fref{sec:Basics:Charge}). 
 %The Na$^{+}$ concentration in the extracellular space of the brain is $\sim 150 \, \si{\milli\molar}$, which means that a volume of $1 \, \si{\cubic\nano\metre}$ of extracellular space then contains (on average) only $150\times 6.02\times10^{23}\times10^{-27} \approx 0.1$ Na$^{+}$ ions. A concentration is therefore not a very meaningful concept on a spatial scale as small as this. Continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents, therefore imply a spatial resolution $\gg 1 \, \si{\nano\metre}$. When working on this scale, we do not need to be concerned with details of single charge interactions taking place on the nanometer and nanosecond timescale \cite**{Grodzinsky2011}.
-When we study processes on the level of brain tissue, %we often wish to work on an even coarser spatial scale\tvnnote{Litt uklart hva "even coarser" henviser til. Tidligere er jo bare skrevet mye stoerre enn nm som jo kan vaere km.}
-we are typically interested in volumes} $\gg 1 \, \si{\cubic\micro\metre}$. The diameter of a neural dendrites is typically $\sim 1 \,\si{\micro\metre}$, which means that the averaging volume encloses components of multiple neurites, and includes both intra- and extracellular spaces. The advantage with such a \textit{coarse-grained}\index{Coarse-grained} resolution, is that both cellular and extracellular currents will be defined over the whole tissue-space, rather than within their respective sub-spaces \cite**{Gratiy2017}. At this spatial scale, the intracellular current, for example, does not \tvntxt{necessarily} interpret as belonging to a specific neuron, but rather as the average intracellular current within the whole volume, containing contributions from several different neurons. Likewise, also the transmembrane currents and extracellular currents are volume averages. 
-\tvnnote{Litt usikker paa dette. For meg er alltid transmembrane stroemmer knyttet til ett nevron. Boer spesifiseres mer, eller taes bort?}
-\gen{Kanskje vi kunne hatt en liten figur som viser de tre skalaene vaare (atom, cell ("concentration"), tissue)? Egentlig er vel 
-nanometer (10 i minus 9), micrometer (10 i minus 6) og millimeter (10 i minus 3) ganske typiske lengder for disse tre skalaene selv om tissue jo kan vaere stoerre enn en millimeter.}
+
 
 
 \subsection{\blue{Neurons as current sources}}
 \label{sec:Basics:C}
 \index{Current source density}
-\tvnnote{Kanskje vi egentlig kan kutte litt ned her? Er jo paa en maate VC-kapittel-stoff, dette.
-Egentlig syntes jeg dette Gratiy2017 greiene er litt vanskeligere enn det som trengs. Kan vi ikke bare si at man behandler transmembrane stroemmer som en stoemkilder i et homogent medium?}
-Although potentials fundamentally are due to the distribution of charges on a nanometre scale, the shielding effects that we discussed in \fref{sec:Basics:Debye} allow us to predict a macroscopic (coarse-grained) extracellular potential from the constraint that there should be no charge accumulation anywhere in the extracellular space, or equivalently, that there should be no net electric current entering or leaving any finite volume of tissue.
-\tvnnote{Siste del av setningen kan kanskje vaere litt forvirrende, mtp kilder og sluk osv? Kanskje ogsaa litt rart aa foerst anta makroskopisk volum, og saa si at det skal gjelde "any finite volume"?}
-\tvnnote{Alternativ: ... there should be no charge accumulation anywhere in the coarse-grained description of neural tissue. Charge accumulation on neural membranes still occurs, but this charge accumulation will always be in balance on the intra- and extracellular side,
-and the course-grained description by definition includes both these domains.}
-On the coarse-grained tissue scale ($\gg 1 \,\si{\cubic\micro\metre}$) \gex{($\sim$ 1 mm or larger?)} , a common starting point for computing extracellular potential is the requirement that all currents entering or leaving through neuronal membranes must be conserved and distributed in the extracellular space. This can be expressed mathematically through the continuity equation \cite**{nicholson1975}:
+%Although potentials fundamentally are due to the distribution of charges on a nanometre scale, the shielding effects that we discussed in \fref{sec:Basics:Debye} allow us to predict a macroscopic (coarse-grained) extracellular potential from the constraint that there should be no charge accumulation anywhere in the extracellular space.
+%, or equivalently, that there should be no net electric current entering or leaving any finite volume of tissue.
+%\tvnnote{Siste del av setningen kan kanskje vaere litt forvirrende, mtp kilder og sluk osv? Kanskje ogsaa litt rart aa foerst anta makroskopisk volum, og saa si at det skal gjelde "any finite volume"?}
+%\tvnnote{Alternativ: ... there should be no charge accumulation anywhere in the coarse-grained description of neural tissue. Charge accumulation on neural membranes still occurs, but this charge accumulation will always be in balance on the intra- and extracellular side,
+%and the course-grained description by definition includes both these domains.}
+%On the coarse-grained tissue scale ($\gg 1 \,\si{\cubic\micro\metre}$) \gex{($\sim$ 1 mm or larger?)} , a common starting point for computing extracellular potential is the requirement that all currents entering or leaving through neuronal membranes must be conserved and distributed in the extracellular space. 
+\tvntxt{In the previous section, we outlined how neural transmembrane currents will cause extracellular currents,
+and how we can use Ohm's law for a smooth volume conductor to calculate the corresponding extracellular potential from these extracellular currents.
+In practice it is however much more convenient to link the extracellular potentials directly to transmembrane currents. 
+We start by considering a single transmembrane current source, which we denote $C$ (with units \si{\ampere\per\cubic\metre}), often referred to as the current source density (CSD). Further, we denote the 
+density of current running through the extracellular space as {\bf i}$_{\rm t}$.
+In the previous section we argued that we can assume current conservation in the extracellular space.
+}
+This can be expressed mathematically through the continuity equation \cite**{nicholson1975}:
 \begin{equation}
 {\bf \nabla} \cdot {\bf i}_\text{t} = -C,
 \label{eq:Basics:continuity1}
 \end{equation}
-where the source term, $C$ (with units \si{\ampere\per\cubic\metre}), is called the current source density (CSD). The CSD represents the transmembrane output currents from neurons per tissue volume, and includes both the a capacitive component and a component due to ions crossing the membrane. We have let ${\bf i}_\text{t}$ denote the density of current running extracellularly through brain tissue. It does not include intracellular or transmembrane neural currents.
-\ghnote{Det er vel strengt tatt feil aa si at ${\bf i}_\text{t}$ trenger aa vaere ekstracellulaer. Kan vi si at ${\bf i}_\text{t}$ er all running through brain tissue that is not accounted for by the CSD?}
+%where the source term, $C$ (with units \si{\ampere\per\cubic\metre}), is called the current source density (CSD). 
+The CSD represents the transmembrane output current per tissue volume, and includes both the a capacitive component and a component due to ions crossing the membrane. 
+%We have let ${\bf i}_\text{t}$ denote the density of current running extracellularly through brain tissue. 
+%It does not include intracellular or transmembrane neural currents.
+%\ghnote{Det er vel strengt tatt feil aa si at ${\bf i}_\text{t}$ trenger aa vaere ekstracellulaer. Kan vi si at ${\bf i}_\text{t}$ er all running through brain tissue that is not accounted for by the CSD?}
 
-In a volume of space where there is no transmembrane currents ($C = 0$), \fref{eq:Basics:continuity1} reduces to ${\bf \nabla} \cdot {\bf i}_\text{t} = 0$. This tells us that the spatial rate of change of the current ${\bf i}_\text{t}$ is zero, which means that there will be no net tissue current entering or leaving such a volume. Importantly, this does not mean that the tissue current itself must be zero. Currents can still run \textit{through} the volume, as long as the amount of current entering equals the amount leaving it. In a volume that \textit{does} receive transmembrane currents, \fref{eq:Basics:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume as an extracellular tissue current. As we shall show in \Fref{chap:VC}, this conservation law shall be the foundation for modeling extracellular potentials arising from neural activity.
+In a volume of space where there is no transmembrane currents ($C = 0$), \fref{eq:Basics:continuity1} reduces to ${\bf \nabla} \cdot {\bf i}_\text{t} = 0$. This tells us that the spatial rate of change of the current ${\bf i}_\text{t}$ is zero, which means that there will be no net tissue current entering or leaving such a volume. Importantly, this does not mean that the tissue current itself must be zero. Currents can still run \textit{through} the volume, as long as the amount of current entering equals the amount leaving it. In a volume that \textit{does} receive transmembrane currents, \fref{eq:Basics:continuity1} tells us that the current outputted from the neuron into that volume ($C$) must be carried away from that volume as an extracellular tissue current. As we will show in \Fref{chap:VC}, this conservation law will be the foundation for modeling extracellular potentials arising from neural activity.
 
 For most parts of this book, we shall approximate brain tissue as a \textit{linear} Ohmic conductor, an approximation that we will discuss in further detail below. This means that the tissue current densities are given by Ohm's law for volume conductors (\fref{eq:Basics:Ohm_3D_phi}). When this is inserted into \fref{eq:Basics:continuity1}, we obtain a relationship between the neuronal current sources and the extracellular potential:
 \begin{equation}
@@ -446,32 +480,7 @@ where we have used the index $t$ to denote that $\sigma_\text{t}$ is the \textit
 \label{eq:Basics:continuity3}
 \end{equation}
 
-
-\subsubsection{\blue{Derivation of the CSD equation}}
-\label{sec:Basics:C2}
-\index{Current source density}
-Although  \fref{eq:Basics:continuity1} may seem intuitively reasonable, we introduced it above more or less as a postulate. A thorough derivation of this equation was given by \citeasnoun**{Gratiy2017}, and for the interested reader, we will here go through the main steps of this derivation. 
-
-In general, current conservation implies that: 
-\begin{equation}
-{\bf \nabla} \cdot {\bf i}_\text{tot} = 0, 
-\label{eq:Basics:Sergey1}
-\end{equation}
-where we can think of ${\bf i}_\text{tot}$ as the total current density defined on the relatively fine spatial scale where it is meaningful to distinguish between it being either cellular or extracellular. Let us further define $\left<{\bf i}_\text{tot}\right>$ as being this total current when averaged over some coarse-grained volume that spans over both intra- and extracellular spaces. 
-As current conservation also applies at this scale \gen{Kanskje det kan forklares med en setning? MEMBRANSPALTING?}, we have that: 
-\begin{equation}
-{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle = 0.
-\label{eq:Basics:Sergey2}
-\end{equation}
-Since we may perform the averaging separately over the cellular (c) \gex{(Inkluderer "cellular" baade  "intracellular" og membranen?)} and extracellular (e) domains, we have that $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$. With this, we can may write \fref{eq:Basics:Sergey2} as:
-\begin{equation}
-{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  + {\bf \nabla}\cdot \langle{\bf i}_\text{tot}\rangle_\text{e} = 0
-\label{eq:Basics:Sergey3}
-\end{equation}
-In Appendix A of \citeasnoun**{Gratiy2017}) it was shown that the divergence of the coarse-grained current density over the cellular domain can be expressed as a sum of transmembrane currents (i.e., as the CSD term ($C$) that we introduced in \fref{eq:Basics:continuity1}. Further, if we rename the average current running extracellularly through tissue $\langle{\bf i}_\text{tot}\rangle_\text{e}$ to ${\bf i}_\text{t}$, we see that \fref{eq:Basics:Sergey3} becomes identical to  \fref{eq:Basics:continuity1}. 
-
-The derivation of \fref{eq:Basics:continuity1} thus reveals that it only has a meaningful interpretation when considering tissue in a coarse-grained scale, i.e., a spatial scale large enough to contain both intra- and extracellular domains.\tvnnote{Er dette noedvendigvis sant? Ligningen i seg selv er vel ganske generell og blir jo brukt i EMI (Tveito) osv, og boer vel kunne loeses nummerisk paa micrometer nivaa?}
-Importantly, ${\bf i}_\text{t}$ thus interprets as the average current running extracellularly through tissue, defined as extracellular current per unit \textit{tissue} cross section area and not per \textit{extracellular} cross section area (although it only runs through the extracellular parts of this cross section area). Similarly, $\sigma_\text{t}$ in \fref{eq:Basics:continuity2} interprets as average conductivity experienced by the current ${\bf i}_\text{t}$. As this current will face cellular obstacles, and is restricted to run only through the extracellular parts of the tissue, $\sigma_\text{t}$ is generally lower than the conductivity of the extracellular saline solution (see \fref{chap:Sigma} for further discussion). 
+\tvnnote{Jeg har proevd aa flytte en del CSD greier ala Graity til VC-kapittelet}
 
 \subsection{\tvntxt{The physical interpretation of extracellular potentials in the brain}}
 \label{sec:Basics:interp_pot_brain}
@@ -505,7 +514,7 @@ The physics of electromagnetism is summarized by Maxwell's equations,
 be considered directly offensive by the physics community (including the authors themselves).
 Therefore}, we end this chapter by going briefly through these. We will also discuss some of the approximations of Maxwell's equations that we use when applying them to studies of brain tissue.
 
-Maxwell's equations come in two versions, referred to as the microscopic and macroscopic versions. The microscopic version is the most fundamental, but using it requires knowledge of the positions of all individual charges. Since that is unfeasible when any medium at a macroscopic level, we therefore only list up the macroscopic set of equations:
+Maxwell's equations come in two versions, referred to as the microscopic and macroscopic versions. The microscopic version is the most fundamental, but using it requires knowledge of the positions of all individual charges. Since that is unfeasible for any medium at a macroscopic level, we therefore only list up the macroscopic set of equations:
 
 \begin{eqnarray}
 {\bf \nabla}\cdot {\bf D} & = & \rho, \label{eq:Basics:Max11} \\
@@ -547,6 +556,7 @@ Hence, if the left hand side in nonzero, there is a net influx of free charges i
 \label{sec:Basics:Quasistatic} \index{Quasi-static approximation}
 Together, Maxwell's equations give a unified theory for electricity and magnetism, and laid the theoretical fundament for understanding electromagnetic radiation such as light. We can "see the light" by looking at \fref{eq:Basics:Max3} and \fref{eq:Basics:Max4}. \Fref{eq:Basics:Max3} shows that a temporal change in the magnetic field induces an electric field perpendicular to the change (perpendicular, because that is what the curl-operation ${\bf \nabla} \times$ does), while \fref{eq:Basics:Max4} shows that a temporal change in the electric field (last term on the right hand side) induces a magnetic field perpendicular to the change. Electromagnetic radiation is due to such an interplay where electric and magnetic fields act on each other through a periodic series of inductions and cancellations that propagate as a wave through a medium. 
 
+\tvntxt{In principle, when neural activity generates an electric field, this electric field will again generate a magnetic field, which will again generate an electric field and so on.}
 The generation of such electromagnetic waves are, however, not a characteristic feature of brain activity. Brain activity at the scale of tissue is therefore often studied using the quasistatic-approximations of Maxwell's equations \cite**{Hamalainen1993}. This means that in the calculation of ${\bf E}$ and ${\bf B}$, the source terms associated with temporal changes in the fields $\partial{\bf B}/\partial t$ and $\partial{\bf E}/\partial t$ are assumed to give a negligible contribution. When making these approximations, the electric and magnetic fields decouple. It is worth mentioning that the \textit{quasi-electrostatic} assumption that $\partial{\bf B}/\partial t \approx 0$ in \fref{eq:Basics:Max3} does not by necessity imply that the \textit{quasi-magnetostatic} assumption that $\partial{\bf E}/\partial t \approx 0$ in \fref{eq:Basics:Max4} must hold, or vice versa.
 
 The CSD equation (\fref{eq:Basics:continuity2}) that we will use to describe electric fields in the brain rests heavily on the quasi-electrostatic approximation Maxwell's equations, which means that \fref{eq:Basics:Max3} simplifies to:

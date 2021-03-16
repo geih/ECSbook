@@ -467,10 +467,19 @@ If we insert this into \fref{eq:Basics:totcurrent2}, we get:
 \index{Extracellular medium! Linear}
 In practice, most medias can \gex{(will?)} have capacitive, magnetic and conductive properties, and can be linear or nonlinear in all these three senses \gen{senses?}. Starting out with Maxwell's equations on the form given by \fref{eq:Basics:Max1}-\fref{eq:Basics:Max1} \gen{Feil ligningsnummer}, we assumed linearity in the capacitive and magnetic sense, through the constitutive relations ${\bf B} = \mu{\bf H}$ and ${\bf D} = \epsilon {\bf E}$.
 
+\section{Kommentarer til current-based synapses}
+\tvnnote{Should mention that they are linear}
+\ehnote{Jeg tenker det er mer til det enn dette - for NEURON sin del er det lite aa hente paa lineariserte synapser siden MC formalismen krever numerisk integrasjon uansett - for punktnevroner med linear subthreshold dynamics (LIF etc.) kan man bruke eksakt integrasjon som er kjapt (i NEST for eksempel).}
+
+\ghnote{Jeg skrev ikke mer enn det som staar over. Er det tilstrekkelig? Jeg ser at Espen har lagt inn noen kommentarer under, men trenger vi aa gaa inn paa disse tingene her? Espen, kan du se paa det, skrive inn noe ekstra om du mener det skal inn dit, og fjerne kommentarene hvis ikke?}
+
+\ghnote{Man kunne jo skrevet flere sider om denne approksimasjonen, men jeg vet ikke hvor dypt vi vil gaa inn i dette.Jeg har ikke DeSchutter-boka, men har en hunch om at vi kan referere til den her. Er lite erfaren med bruk av slike synapser, og vet ikke hva de relevante referanser er. Espen - har du noe du vil legge til?}
+\ehnote{Tok bort referansen til Hagen2016. Vi utleda ingen "closed-form solutions" der for dette. Vaart valg av synapsemodell var hentet direkte fra synapsemodellen i Potjans\&Diesmann2014. LIF punkt-nevroner med stroembaserte synapser kan loeses eksakt uten numerisk integrasjon og er populaert i kontekst av NEST for eksempel. Naa har vel andre studier som Roessert2016 (https://arxiv.org/abs/1604.00087) for eksempel vist at man kan approksimere effekten av dendrittisk kabel og synapsetroem med et ekvivalent filter, som implisitt resulter i en stroembasert "synapse" saa vidt jeg husker.}
 
 
-
-
+\section{ion channel models}
+We note that the HH-type formalism for ion channels is a simplified approximation of the electrophysiological dynamics of ion channel gating and ion channel currents. Since the HH-type formalism is based on deterministic equations, it cannot account for ion channel noise, which can stem from the stochastic gating at the single channel level \cite**{Meunier2002, Goldwyn2011}. Also, when channels open and close, movement of charges in channel proteins give rise to a tiny current called
+the \textit{gating current}, which is not included in the HH formalism \cite**{Hille2001}. Furthermore, the relatively simple gating kinetics described by HH-type channels is not accurate for all ion channels, and more detailed ion channel models have been developed, based on a formalism more compatible with statistical physics and thermodynamics \cite**{Destexhe2010}, or even more detailed, Markov-type formalism based on single-channel recordings \cite**{sakmann2013}.
 
 
 
