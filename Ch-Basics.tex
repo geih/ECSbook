@@ -404,7 +404,7 @@ stiplede firkanter som representerer "volum", for aa gjoere et poeng av at volum
 
 \subsection{\red{TVN: Jumping up in spatial scale 2: From a mess of entangled neurites to smooth neural tissue}}
 \label{sec:Basics:ECSpot}
-Brain tissue is a dense mishmash of neurites and other cellular structures, where about 80\% of the volume is occupied by cells, and about 20\% is the highly tortuous\index{Tortuosity} extracellular space. The diameter of a typical neurite is on the order of a micrometer, and the extracellular space between cellular membranes is typically as narrow as 40-60 \si{\nano\metres} \cite**{Sykova2008}. 
+Brain tissue is a dense mishmash of neurites and other cellular structures, where about 80\% of the volume is occupied by cells, and about 20\% is the highly tortuous\index{Tortuosity} extracellular space. The diameter of a typical neurite is on the order of a micrometer, and the extracellular space between cellular membranes is typically as narrow as 40-60 \si{\nano\metre} \cite**{Sykova2008}. 
 
 Electric currents in the narrow confines of extracellular space may locally have a "clear coast" in some directions, whereas other directions are blocked by cellular membranes, which have a much higher resistance than the extracellular space. Hence, a micrometer-precice insight into the pathways taken by extracellular currents requires knowledge of the highly inhomogeneous microstructure of the tissue. Although small volumes can be partially reconstructed {\it ex vivo} using techniques like scanning electron microscopy, the overall microstructure is almost always unknown, and even if it were known, including it in modeling or analysis of extracellular potentials would require prohibitively (in some cases impossibly) large computational resources. Keeping track of the exact microstructure of neural tissue is therefore practically impossible. Luckily, it is also for most purposes unnecessary. 
 
@@ -414,7 +414,7 @@ When we want to consider extracellular currents through brain tissue, we need to
 
 We note that the electrodes used for measuring extracellular potentials typical have surface areas which are at least a few square micrometers. Hence, also these electrodes perform such a spatial averaging. 
 
-Therefore we can safely ignore charges and single atoms at this level and focus on currents and concentrations. In this section we take this one step further and describe how we can go from the chaotic microstructure of neural tissue to a smooth continuous medium. This issue is discussed in more detail in \fref{chap:VC}-\fref{chap:Sigma.
+Therefore we can safely ignore charges and single atoms at this level and focus on currents and concentrations. In this section we take this one step further and describe how we can go from the chaotic microstructure of neural tissue to a smooth continuous medium. This issue is discussed in more detail in \fref{chap:VC}-\fref{chap:Sigma}.
 
 %The extracellular separation between the cell membranes of different cells is typically only on the order of a few tens of nanometers (\fref{chap:VC}).
 \sntxt{\snnote{Litt lang setning? Forslag til oppdeling:}} 
@@ -430,7 +430,6 @@ can therefore use Ohm's law for volume conductors (\fref{eq:Basics:Ohm_3D_phi}) 
 This microstructure is\sntxt{, however,} almost always unknown (although small volumes can be partially reconstructed {\it ex vivo} using techniques like scanning electron microscopy), and even if it was known, including it in modeling or analysis of extracellular potentials would require prohibitively (in some cases impossibly) large computational resources.
 Therefore, keeping track of the exact microstructure of neural tissue is in practice impossible. Luckily, it is also for most purposes unnecessary. 
 As a loose analogy, we can consider a person moving through a dense crowd of people. On the scale of one meter, the crowd will appear highly inhomogeneous as certain directions are blocked by other people. However, on the scale of say ten meters, all directions might be approximately as easy to move in, and the crowd can seem roughly homogeneous. Something similar can be expected to happen with neural tissue, which appears highly inhomogeneous at the micrometer scale, but will typically appear quite homogeneous at a scale larger than ten micrometers or so. Therefore, for the purpose of modeling and analysing extracellular potentials, it is common to approximate neural tissue as a smooth continuous conducting medium, with a constant conductivity, where we can calculate extracellular potentials by use of Ohm's law for volume conductors (\fref{eq:Basics:Ohm_3D_phi}).  
-}
 
 %, and 
 %Analogous to how it is impossible and unnecessary to keep track of individual atoms and charges, it is therefore in practice impossible and 
