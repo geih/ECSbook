@@ -369,7 +369,7 @@ This is for example the default boundary condition in the NEURON simulator.
 \subsection{\blue{Passive multicompartment models}}
 \label{sec:Neuron:Passive_multicomp}
 \index{Multicompartmental neuron model}
-The neural response to small perturbations from the resting potential often has a close to linear relationship between the membrane potential and membrane currents \cite**{mauro1970,koch1984,ness2016}.\ghnote{Ha med disse refs eller ikke? Disse arbeidene driver jo med en linearisering og bruker ikke den enkle formen vi drar til med nedenfor. Samtidig gir de jo et argument for lineariteten vi postulerer.} 
+The neural response to small perturbations from the resting potential often has a close to linear relationship between the membrane potential and membrane currents \cite**{mauro1970,Koch1984,Ness2016}.\ghnote{Ha med disse refs eller ikke? Disse arbeidene driver jo med en linearisering og bruker ikke den enkle formen vi drar til med nedenfor. Samtidig gir de jo et argument for lineariteten vi postulerer.} 
 \gen{Hmm... Vi faar diskutere saken}
 \ehnote{Ness2016 er vel mer om EPs...}
 When modeling subthreshold neural dynamics, a common simplification is therefore to assume that ionic membrane current density has the linear form,
@@ -595,7 +595,6 @@ j_k = j_{k,\text{diff}} + j_{k,\text{drift}}
 %%%%
 where  $[k]$ denotes the concentration of ion $k$ (\si{\milli\molar}). 
 \gen{Kanskje bedre aa bruke $x$-retning, siden $z$ ogsaa brukes for valenstall?}
-\ehnote{hvorfor brukes $j$ som symbol for stroem her og ikke $i$ som ellers i kapitlet?}
 The first term  inside the parenthesis of \fref{eq:Neuron:NP1D} is Fick's law for the diffusive flux density along the concentration gradient, and the second term is the electrical drift along the voltage gradient. Since we consider membrane fluxes, we have replaced the diffusion constant ($D_k$) which appears in the more common form of the Nernst-Planck equation (\fref{eq:Basics:JNP}) with the membrane's permeability ($P_k$) to ion $k$. The reversal potential (also called the Nernst-potential) is found by solving for when there is no net flux, i.e., when  $j_{k,\text{diff}} = - j_{k,\text{drift}}$:
 
 \begin{equation}
