@@ -635,6 +635,26 @@ This requirement may also be relaxed if the total number of connections $K = \su
 Graph weights represent maximum synaptic conductances. 
 \end{enumerate}
 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_A.pdf}
+\includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_B.pdf}
+\end{center}
+\caption{\textbf{Disassociation between simulations of network activity and extracellular potentials.}
+({\bf A}) Illustration of self-consistent neuronal network simulation where network activity where the primary output are spikes, 
+which is in turn stored in a database or file (bottom). 
+Extracellular potentials can optionally be computed. 
+({\bf B}) `Hybrid` simulation where recurrent network connections (dashed lines) have been removed, 
+but synaptic locations have been preserved.
+Here, synaptic activation times are set from pre-recorded spike times recorded to a database. 
+As the 
+}
+\label{fig:LFPy_hybrid}
+\end{figure}
+
+
+
 At this point one could destroy every connection of the recurrently connected network, 
 load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage, 
 reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times 
