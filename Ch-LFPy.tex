@@ -664,8 +664,9 @@ The synaptic currents and associated transmembrane currents on the postsynaptic 
 ({\bf A}) Cell and electrode geometry. The network is constructed of one excitatory (`E') and one inhibitory (`I') population. 
 Only a subset of cells are shown from each population. 
 ({\bf B}) Synapse counts per connection along the vertical $z$-axis in bins of \SI{20}{\micro\metre}.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-({\bf C}) Network spike raster and mean firing rates.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-({\bf D}) Extracellular potentials.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+({\bf C}) Network spike raster and mean population-averaged firing rates. 
+({\bf D}) Per-population spike-count histograms with bin size \SI{5}{\milli\second}.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+({\bf E}) Extracellular potentials.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 }
 \label{fig:LFPy_network}
 \end{figure}
@@ -798,6 +799,60 @@ that is, shorter than the typical time constants for membranes, synapses etc.
 \end{enumerate}
 
 \ehnote{Jeg setter opp en rekke simuleringer som viser effekten av hvert steg som proof of principle, liknende det Steinn setter opp i sin master, ogsaa for visualiseringer av hvert steg}
+
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-kernels.pdf}
+\end{center}
+\caption{\textbf{Spike-LFP impulse response functions (``kernels'').}
+Functions $\langle H_{YX}(\mathbf{r}, \tau) \rangle$ for each connection between every possible pre- and postsynaptic network population $X$ and $Y$, respectively. 
+The kernels are computed as the spike-averaged contribution by postsynaptic neurons to the extracellular potential in electrode contact locations shown in \Fref{fig:LFPy_network}{\bf A}. 
+The kernels are computed either using fully passive (`pas') or with quasi-linearized (`Ih\_lin') cable models. 
+\ehnote{placeholder - tenker fjerne current dipole moment}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+}
+\label{fig:LFPy_kernels}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-kernel_approx.pdf}
+\end{center}
+\caption{\textbf{Spike-LFP impulse response function predictions.}
+Similar to \Fref{fig:LFPy_kernels}, 
+but here computed using a computationally fast method accounting for the expectation values in terms of cell and synapse placement.
+\ehnote{placeholder}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+}
+\label{fig:LFPy_kernel_predictions}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
+\end{center}
+\caption{\textbf{Ground truth signals vs. approximations.}
+Here, extracellular potentials predicted from a multicompartment neuron network model (left) is compared to predictions made using the hybrid scheme 
+with either passive or quasi-linear predictors, 
+as well as kernel-based approximations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+}
+\label{fig:LFPy_predictions}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-correlations.pdf}
+\end{center}
+\caption{\textbf{Accuracy of signal predictions vs. ground truth.}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+For each approximation shown in \Fref{fig:LFPy_predictions}, 
+their accuracy is evaluated in terms of the Pearson correlation coefficient between approximation and ground truth ($CC(\hat{\phi}, \phi)$, top row) and 
+their covariance normalized by ground truth signal variance ($COV(\hat{\phi}, \phi)/VAR(\phi)$).
+}
+\label{fig:LFPy_correlations}
+\end{figure}
+
 
 
 \subsubsection{Kernel tricks}
