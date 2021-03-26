@@ -623,8 +623,9 @@ We will also assume that connection weights $\overline{G}_{\mathrm{syn}YX}$ are 
 For simplicity, we let conduction delays be independent of cell location and geometry. 
 (Other use cases may also pick delays from a statistical distribution or compute delays based on distance between pre- and post-synaptic units.)
 \item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathcal{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed. 
-Here $X$ and $Y$ may be used interchangeable, however, 
-presynaptic populations may represent point processes, external stimuli and similar, which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
+Here $X$ and $Y$ may be used interchangeably, however, 
+presynaptic populations may also represent point processes, external stimuli and similar, 
+which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
 \item Extracellular signal contributions in different spatial locations may be computed and summed up as 
 $\sum_Y \sum_{v=1}^{N_Y} \mathbf{F}^{\langle v \rangle} \mathbf{I}_\mathrm{m}^{\langle v \rangle}$ and similar for axial currents. 
 $\mathbf{F}^{\langle v \rangle}$ here denotes a linear mapping of transmembrane currents of cell $v$ to a linearly dependent signal.  
@@ -687,11 +688,11 @@ However, what did we gain through these steps?
 \begin{enumerate}
 \item HPC resources may have been required for simulating neural dynamics in the recurrently connected network in parallel in the first place, 
 but one may now utilize a trivial parallelization scheme in order to compute extracellular signals as contributions of each cell is independent of the others. 
-One could even do single-cell simulations serially. 
+One could even do each single-cell simulation serially. 
 \item Full disassociation of simulations of neuronal network dynamics and simulations of extracellular signals, 
 as illustrated in \Fref{fig:LFPy_hybrid}. 
 \item Little was gained in terms of overall computational cost -- the total number of state variables (for active ion channels etc.) remains approximately the same. 
-The computational cost of transmitting times of spike events across the parallel network can be assumed to be minuscular compared to the rest.
+The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials, etc.
 \end{enumerate}
 
 For the purpose of predicting extracellular signals \emph{only}, 
@@ -706,18 +707,18 @@ I_{\mathrm{syn}YX}(t)
 	&=& \overline{I}_{\mathrm{syn}YX}f_{YX}(t)~, 
 \end{eqnarray}
 where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged postsynaptic potential (or its expectation value). 
-We here use the sub-fix $Y|X$ notation to emphasize that some of these parameters may be connection specific.
+We here use the sub-fix $YX$ notation to emphasize that some of these parameters may be connection specific.
 We would also note that some rescaling of current amplitudes \emph{may} be required for certain synapse instances if the postsynaptic targets are characterized by very high input impedances (e.g., oblique dendrites). 
 
 \item In absence of conductance-based synapses, incorporate the \emph{effective membrane conductance} $G_\mathrm{eff}$. 
-Ignoring other conductances which may be present (active ion channels etc.), 
+Ignoring other conductances which may be present (active ion channels etc.) except the passive leak conductance, 
 the total membrane conductance per postsynaptic compartment $w$ is
 \begin{equation}
-G_{\mathrm{tot}}(t) = G_L + \sum_X \sum_{u \subset X} \overline{G}_{\mathrm{syn}YX} \left( f_{YX} \ast s_u \ast \Delta_{YX} \right)(t)
+G_{\mathrm{tot}}(t) = G_L + \sum_X \sum_{u \subset X} \overline{G}_{\mathrm{syn}YX} \left( f_{YX} \ast s_u \ast \delta(t-d_{YX}) \right)(t)
 \end{equation}
 where $G_L \coloneq g_L A_w$ is the total leak conductance from the specific conductivity $g_L$ and compartment area $A_w$, 
 $s_u(t)$ the sequence of presynaptic spikes 
-and $\Delta_{YX}(t)$ the conduction delay distribution. 
+and $d_{YX}(t)$ the conduction delay. 
 The double sum over presynaptic populations $X$ and units $u \in X$ imply that each presynaptic unit targeting the compartment is accounted for. 
 Assuming a fixed average presynaptic spike rate $\langle \nu_u \rangle \coloneq \Delta t^{-1} \int_t^{t+\Delta t} s_u(t) dt$, 
 a normalized delay distribution ($\int_0^\infty \Delta_{YX}(t) dt \coloneq 1$),
@@ -725,7 +726,7 @@ the time-averaged effective conductance is approximately
 \begin{equation}
 G_\mathrm{eff} \coloneq \langle G_\mathrm{tot} \rangle \approx G_L + \sum_X \sum_{u \subset X} \langle \nu_u \rangle \overline{G}_{\mathrm{syn}YX} \int_0^\infty f_{YX}(t) dt ~.
 \end{equation}
-
+\ehnote{fix notasjon}
 
 \item Remove active ion channels if their net contributions to the total transmembrane currents can be assumed to be small.
 
@@ -815,6 +816,26 @@ The kernels are computed either using fully passive (`pas') or with quasi-linear
 \label{fig:LFPy_kernels}
 \end{figure}
 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-ratepredictor.pdf}
+\end{center}
+\caption{\textbf{Components for predictor of spike-signal filter kernels $H_{YX}(\mathbf{r}, \tau)$.}
+{\bf A} Multicompartment neuron models representative of each population `E' and `I',
+with layout of extracellular laminar probe. 
+{\bf B} Densities of somas along $z$-axis. 
+{\bf C} Densities of synapses for each connection between the two populations.  
+{\bf D} Normalized continuous density functions of distributions of transmission delays $\Delta_{YX}(\tau)$ for each connection relative to presynaptic activation time. 
+{\bf E} Synaptic currents $I_{\mathrm{syn}YX}(\tau)$ relative to synaptic onset for each connection.
+\ehnote{placeholder}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+}
+\label{fig:LFPy_kernel_predictions}
+\end{figure}
+
+
+
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-kernel_approx.pdf}
@@ -833,9 +854,10 @@ but here computed using a computationally fast method accounting for the expecta
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
 \end{center}
 \caption{\textbf{Ground truth signals vs. approximations.}
-Here, extracellular potentials predicted from a multicompartment neuron network model (left) is compared to predictions made using the hybrid scheme 
-with either passive or quasi-linear predictors, 
-as well as kernel-based approximations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+Here, extracellular potentials predicted from a multicompartment neuron network model (left) is compared to predictions made using the hybrid scheme (columns 2-5)
+with either passive or quasi-linear multicompartment neurons,
+ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively), 
+as well as kernel-based approximations obtained by convolving presynaptic population firing rates ($\nu_X$) with respective kernels (H_{YX}) and summing the contributions (columns 6-9).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 }
 \label{fig:LFPy_predictions}
 \end{figure}
@@ -848,7 +870,7 @@ as well as kernel-based approximations.
 \caption{\textbf{Accuracy of signal predictions vs. ground truth.}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 For each approximation shown in \Fref{fig:LFPy_predictions}, 
 their accuracy is evaluated in terms of the Pearson correlation coefficient between approximation and ground truth ($CC(\hat{\phi}, \phi)$, top row) and 
-their covariance normalized by ground truth signal variance ($COV(\hat{\phi}, \phi)/VAR(\phi)$).
+their covariance normalized by ground truth signal variance ($COV(\hat{\phi}, \phi)/VAR(\phi)$, bottom row).
 }
 \label{fig:LFPy_correlations}
 \end{figure}
