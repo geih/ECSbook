@@ -31,6 +31,9 @@ We can express the direction of the force mathematically by use of a vector nota
 {\bf F} = \frac{q_1q_2}{4\pi \epsilon_0 |{\bf r}_1-{\bf r}_2|^2} {{\bf e}}_{1,2}.
 \label{eq:Basics:CoulombFvec}
 \end{equation}
+\gen{"The force between the charge pair" er litt upresist, kraften fra 1 til 2 er jo motsatt rettet av den fra 2 til 1.
+Hvis dette er kraften paa 1 (F(r1)), saa tror jeg fortegnet blir riktig hvis du bruker e21 istedenfor e12.} 
+\gen{Kanskje det er bedre aa kalle kraften paa 1 for F1 siden det ikke er en feltstoerrelse?}
 We have here introduced the \textit{unit vector},
 \begin{equation}
 {{\bf e}}_{1,2} = \frac{{\bf r}_1 - {\bf r}_2}{|{\bf r}_1-{\bf r}_2|},
@@ -45,6 +48,8 @@ If there are several ($N$) point charges present, the contribution from each of 
 \end{equation}
 \ghtxt{
 Whereas a pairwise particle interaction was well described by the scalar expression in \fref{eq:Basics:CoulombFvec}, the summation of several force contributions acting in different directions could not be done without using a vector notation, as in \fref{eq:Basics:CoulombFN}.}
+\gen{Eq. 1.2 er vel ogsaa en vektorligning?}
+\gen{Tror fortegnet blir feil i Eq. 1.4, ser ut som kraften paa 1 fra n blir tiltrekkende naar ladningene 1 og n er de samme.} 
 
 If our system of study consisted of a small number $N$ of charges, we could use $N$ instances of \fref{eq:Basics:CoulombFN} to compute the force acting on all the $N$ individual charges. Together with Newton's law ${\bf F} = m {\bf a}$, which tells us how the charges will be accelerated in the force direction, \fref{eq:Basics:CoulombFN} would then allow us to compute the movements of all our charges over time. \ghtxt{For a macroscopic system, the number of charges involved is anything but small, and it not practically attainable to keep track of individual charges. As we will see later, the electrodynamics of macroscopic systems are instead studied using equations valid at a larger spatial scale. }
 
@@ -75,10 +80,10 @@ Tightly related to the electric field ${\bf E}$ is the electric potential $V$ (w
 {\bf E}(x,y,z) = - {\bf \nabla} V(x,y,z) = - \left(\frac{dV}{dx} {\bf e}_x  + \frac{dV}{dy} {\bf e}_y + \frac{dV}{dz} {\bf e}_z \right).
 \label{eq:Basics:EV}
 \end{equation}
-The operator ${\bf \nabla}$ computes scalar field's spatial rate of change in the various spatial directions, and ${\bf e}_x$, ${\bf e}_y$ and  ${\bf e}_z$ are the unit vectors in the three spatial directions $x$, $y$ and $z$, respectively. We note that \fref{eq:Basics:EV} only holds when magnetic field variations are assumed to to have negligible impacts on ${\bf E}$. As we shall see, this is an excellent approximation for the processes that we will study in brain tissue (see 
+The operator ${\bf \nabla}$ computes scalar field's spatial rate of change in the various spatial directions, and ${\bf e}_x$, ${\bf e}_y$ and  ${\bf e}_z$ are the unit vectors in the three spatial directions $x$, $y$ and $z$, respectively. We note that \fref{eq:Basics:EV} only holds when magnetic field variations are assumed to have negligible impacts on ${\bf E}$. As we shall see, this is an excellent approximation for the processes that we will study in brain tissue (see 
 \fref{sec:Basics:Maxwell}).
 
-For a spherical symmetric potential,
+For a spherically symmetric potential,
 \begin{equation}
 {\bf \nabla} V(r) = \frac{dV(r)}{dr} {\bf {e}}_r, 
 \label{eq:Basics:SphericalNablaPhi}
@@ -88,7 +93,8 @@ where ${\bf {e}}_r$ is the unit vector in the radial direction. Since the field 
 {V}({\bf r}) = \sum_{n=1}^{N}  \frac{q_n}{4\pi \epsilon_0} \frac{{{\bf e}}_{1,n}}{|{\bf r}-{\bf r}_n|}.
 \label{eq:Basics:CoulombPhiN}
 \end{equation}
-\ghtxt{In practical physics problems one rarely knows the positions of all present charges $q_n$, and the computation of the electric field from \fref{eq:Basics:CoulombEN} or the potential from \fref{eq:Basics:CoulombPhiN} can therefore only be done in idealized physics examples. Fields and potentials are nevertheless useful quantities at a systems level. They can be measured experimentally, and as we will come back to later, they can be computed from other physical principles than single charge interactions.}
+\ghtxt{In practical physics problems one rarely knows the positions of all present charges $q_n$, and the computation of the electric field from \fref{eq:Basics:CoulombEN} or the potential from \fref{eq:Basics:CoulombPhiN} can therefore only be done in idealized physics examples. Fields and potentials are nevertheless useful quantities at a systems level. They can be measured experimentally, and as we will come back to later, they can be computed from other physical principles than} 
+\gex{interactions between individual charges.}
 
 
 \subsection{\blue{Reference point for potentials}}
@@ -115,7 +121,7 @@ When we record extracellular potentials in the brain, the optimal positioning of
 \ghnote{Eventuell videre diskusjon om elektrodeplasseringer tas i VC-kapittelet, modeling the electrode.}
 
 
-\subsection{\blue{The physical interpretation of the potential}}
+\subsection{\blue{Physical interpretation of the potential}}
 \label{sec:Basics:interp_pot_charge}
 By definition, the electric potential is the energy needed to move a unit of electric charge $q$ from the reference point (ground) to a specific location in the electric field (see \fref{sec:Basics:interp_pot_brain} for a illustrative example). The unit (\si{\volt}) of the electric potential is equivalent to energy per charge, or joule per coulomb (1 \si{\volt} = 1 \si{\joule\per\coulomb}). As such, the concept of an electric potential is closely related to the concept of a potential energy. The potential energy ($U_\text{E}$) of a charge $q$ in an electric field is:
 \begin{equation}
@@ -142,10 +148,11 @@ Here, $r_D$ is called the \textit{Debye shielding distance} and $\epsilon_r$ is 
 
 Closely related to the shielding effects is the concept of electroneutrality\index{Electroneutrality}. When arranged by Coulomb interactions, the numbers of positive and negative charges within a finite and not too small volume of space tend to be kept in close balance. If this were not the case, and a reference volume of tissue did contain a net charge density $\rho$, the very strong Coulomb forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}\index{Charge-relaxation}, which in brain tissue is on the order of a nanosecond (see \fref{sec:Sigma:Estimates}). On spatial scales larger than nanometres and temporal scales larger than nanoseconds, brain tissue is therefore to a good approximation electroneutral \cite**{Nunez2006,Grodzinsky2011}.
 
-Since charges are free to move around both inside and outside cells, both the intracellular domain and the extracellular domain are practically electroneutral. However, whereas the intra- and extracellular mediums are conducting, the cellular membrane is largely dielectric (insulating), and violations of electroneutrality can therefore occur locally at neural membranes.
+Since charges are free to move around both inside and outside cells, both the intracellular domain and the extracellular domain are practically \gen{practically speaking?} electroneutral. However, whereas the intra- and extracellular mediums are conducting, the cellular membrane is largely dielectric (insulating), and violations of electroneutrality can therefore occur locally at neural membranes.
 Due to the capacitive properties of neural membranes (see \fref{sec:Basics:CapacitiveCurrent}), a patch of membrane can separate a charge $-q$ on the interior side from a charge $q$ on the exterior side, and this breach of electroneutrality is what gives rise to the membrane potential. However, since the membrane is just some nanometres thick, the separation of $-q$ from $q$ occurs on a small spatial scale, and the two charges will still shield each others' contributions to the electric potential some nanometres away from the membrane. 
 
-The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint of current conservation, or equivalently, the constraint that  there should be no charge accumulation anywhere in the extracellular space. As we show later, it will then be the current sources at neural membranes that give rise to an extracellular potential $V$. For example, consider positive ions flowing through the neural membrane into a cell, thereby leaving a certain region of the extracellular medium. This will cause a rearrangement of the extracellular ions, so that positive ions move into this region and negative ions move out from this region. The potential can then be thought of, not as a the result of a particular charge-distribution, but rather as a higher level entity, reflecting the energy landscape needed for these ionic movements to take place in a manner that preserves electroneutrality. 
+The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint of current conservation, or equivalently, the constraint that  there should be no charge accumulation anywhere in the extracellular space. As we show later, it will then be the current sources at neural membranes that give rise to an extracellular potential $V$. For example, consider positive ions flowing through the neural membrane into a cell, thereby leaving a certain region of the extracellular medium. This will cause a rearrangement of the extracellular ions, so that positive ions move into this region and negative ions move out from this region. The potential can then be thought of, not as a the result of a particular charge distribution, but rather as a higher level entity, reflecting the energy landscape needed for these ionic movements to take place in a manner that preserves electroneutrality. 
+\gen{Den siste setningen var litt vanskelig aa forstaa.}
 
 As we noted earlier, the charge-relaxation time in the extracellular saline solution is on the order of a nanosecond. In comparison, the timescale of neural transmembrane currents tends to be milliseconds (\fref{chap:Neuron}). This gives the charge-relaxation processes a good margin for keeping up with the neural activity. For practical purposes, we can therefore assume that the relationship between transmembrane neural currents and the extracellular potential is instantaneous.
 
@@ -189,7 +196,10 @@ We started this chapter on the spatial scale of a single atom (\fref{sec:Basics:
 
 We are in this book mostly interested in describing brain dynamics on the larger spatial scale where it is meaningful to work with continuous variables, such as charge densities, $\rho$ (with units \si{\coulomb\per\cubic\metre}), or ion concentrations, $c_k$ (with units millimolar ($1\, \si{\milli\molar} = 1 \,\si{\mole\per\cubic\metre} = 6.02\times10^{23}$ particles per \si{\cubic\metre})). On this larger spatial scale, the movement of particles of a given species $k$ is quantified in terms of a particle flux, $J_k$, with units \si{\mole\per\second}, and the movement of charge is quantified in terms of an electric current, $I$, with units ampere (\si{\ampere} = \si{\coulomb\per\second}).
 
-\ghtxt{The definitions of the continuous variables depend on a large number of particles and charges to be involved. How coarse the spatial resolution must be for the continuum description to be applicable depends on how densely packed the medium is with the particle species that we are interested in. We can get a feeling for the appropriate scale by asking how large a reference volume must be in order for the number of particles inside it not to be significantly subject to stochastic fluctuations. Let us use the extracellular K$^{+}$ concentration in the brain as an example. The extracellular K$^{+}$ concentration is about $3 \, \si{\milli\molar}$ \cite**{Somjenboka}, which means that a volume of $1 \, \si{\cubic\nano\metre}$ of extracellular space contains (on average) $3\times 6.02\times10^{23}\times10^{-27} \approx 0.002$ K$^{+}$ ions. Hence, if we tried to define a K$^{+}$ concentration in this tiny volume, it would fluctuate between between $1500 \, \si{\milli\molar}$ whenever there is a K$^{+}$ ion inside it, and $0 \, \si{\milli\molar}$ whenever there is not. Likewise, a volume of $10\times 10\times 10 \, \si{\cubic\nano\metre}$ would contain an average of $\approx 2$ K$^{+}$ ions, which is also a small number that would be subject to stochastic fluctuations. The concept of a concentration is therefore not very meaningful on the nanometer scale. However, with a resolution of, say, $1 \, \si{\cubic\micro\metre}$ ($\approx 2\times 10^6$ K$^{+}$ ions), the use of continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents should be accurate. When considering processes taking place on this scale, we do not need to be concerned with details of single charge interactions taking place on the nanometer and nanosecond timescale \cite**{Grodzinsky2011}.}
+\gex{The use of continuous variables assumes that large numbers of particles and charges are involved.} 
+\ghtxt{How coarse the spatial resolution must be for the continuum description to be applicable depends on how densely packed the medium is with the particle species that we are interested in. We can get a feeling for the appropriate scale by asking how large a reference volume must be}
+\gex{to be sure that the number of particles contained by it, is not significantly affected by} 
+\ghtxt{stochastic fluctuations. Let us use the extracellular K$^{+}$ concentration in the brain as an example. The extracellular K$^{+}$ concentration is about $3 \, \si{\milli\molar}$ \cite**{Somjenboka}, which means that a volume of $1 \, \si{\cubic\nano\metre}$ of extracellular space contains (on average) $3\times 6.02\times10^{23}\times10^{-27} \approx 0.002$ K$^{+}$ ions. Hence, if we tried to define a K$^{+}$ concentration in this tiny volume, it would fluctuate between between $1500 \, \si{\milli\molar}$ whenever there is a K$^{+}$ ion inside it, and $0 \, \si{\milli\molar}$ whenever there is not. Likewise, a volume of $10\times 10\times 10 \, \si{\cubic\nano\metre}$ would contain an average of $\approx 2$ K$^{+}$ ions, which is also a small number that would be subject to stochastic fluctuations. The concept of a concentration is therefore not very meaningful on the nanometer scale. However, with a resolution of, say, $1 \, \si{\cubic\micro\metre}$ ($\approx 2\times 10^6$ K$^{+}$ ions), the use of continuous variables such as ion concentrations, charge densities, particle fluxes and electric currents should be accurate. When considering processes taking place on this scale, we do not need to be concerned with details of single charge interactions taking place on the nanometer and nanosecond} \gex{scales \cite**{Grodzinsky2011}.}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -391,7 +401,7 @@ stiplede firkanter som representerer "volum", for aa gjoere et poeng av at volum
 \end{figure}
 
 
-\section{\blue{TVN: Jumping up in spatial scale 2: From a mishmash of entangled neurites to smooth neural tissue}}
+\section{\blue{Jumping up in spatial scale 2: From a mishmash of entangled neurites to smooth neural tissue}}
 \label{sec:Basics:ECSpot}
 Brain tissue is a dense mishmash of neurites and other cellular structures, where about 80\% of the volume is occupied by cells, and about 20\% is the highly tortuous\index{Tortuosity} extracellular space. The diameter of a typical neurite is on the order of 1 \si{\micro\metre}, and the extracellular space between cellular membranes is typically as narrow as 40-60 \si{\nano\metre} \cite**{Sykova2008}. Due to the principle of current conservation, a transmembrane current (defined in the previous section) at some location must "continue" as an extracellular current and somehow make its way through the tissue mishmash. Current conservation in tissue is the fundamental principle that we use for modeling extracellular potentials.
 
