@@ -26,30 +26,25 @@ F = \frac{q_1q_2}{4\pi \epsilon_0} \frac{1}{r^2},
 \end{equation}
 where the constant $\epsilon_0$ is the permittivity of free space, and $r$ is the distance between the two charges. The direction of the Coulomb force is along the line between the two charges, and the force is inversely proportional to the square of the distance between them. The force will be repelling if the charges have the same sign and attractive if they have the opposite sign. 
 
-We can express the direction of the force mathematically by use of a vector notation. Letting a boldface notation indicate that an entity is a vector, we denote the positions of the charges $q_1$ and $q_2$ by ${\bf r}_1$ and ${\bf r}_2$, respectively. The position vector ${\bf r}_1$ can be visualized as an arrow from some reference point ${\bf r} =0$ to the position of the charge $q_1$. Likewise, the vector ${\bf r}_1-{\bf r}_2$ can be visualized as an arrow from the position of $q_2$ to the position of $q_1$, defining both the distance and direction of the (imagined) line connecting them. In vector notation, the force between the charge pair can be written:
+We can express the direction of the force mathematically by use of a vector notation. Letting a boldface notation indicate that an entity is a vector, we denote the positions of the charges $q_1$ and $q_2$ by ${\bf r}_1$ and ${\bf r}_2$, respectively. The position vector ${\bf r}_1$ can be visualized as an arrow from some reference point ${\bf r} =0$ to the position of the charge $q_1$. Likewise, the vector ${\bf r}_1-{\bf r}_2$ can be visualized as an arrow from the position of $q_2$ to the position of $q_1$, defining both the distance and direction of the (imagined) line connecting them. In vector notation, the force acting on the charge ($q_1$) by the charge ($q_2$) can be written:
 \begin{equation}
-{\bf F} = \frac{q_1q_2}{4\pi \epsilon_0 |{\bf r}_1-{\bf r}_2|^2} {{\bf e}}_{1,2}.
+{\bf F}_{1} = \frac{q_1q_2}{4\pi \epsilon_0 |{\bf r}_1-{\bf r}_2|^2} {{\bf e}}_{2,1}.
 \label{eq:Basics:CoulombFvec}
 \end{equation}
-\gen{"The force between the charge pair" er litt upresist, kraften fra 1 til 2 er jo motsatt rettet av den fra 2 til 1.
-Hvis dette er kraften paa 1 (F(r1)), saa tror jeg fortegnet blir riktig hvis du bruker e21 istedenfor e12.} 
-\gen{Kanskje det er bedre aa kalle kraften paa 1 for F1 siden det ikke er en feltstoerrelse?}
 We have here introduced the \textit{unit vector},
 \begin{equation}
-{{\bf e}}_{1,2} = \frac{{\bf r}_1 - {\bf r}_2}{|{\bf r}_1-{\bf r}_2|},
+{{\bf e}}_{2,1} = \frac{{\bf r}_1 - {\bf r}_2}{|{\bf r}_1-{\bf r}_2|},
 \label{eq:Basics:UnitVector}
 \end{equation}
 defined as vector ${\bf r}_1-{\bf r}_2$ divided by its own length $|{\bf r}_1-{\bf r}_2|$, so that its length is one (unity). We chose this notation because the unit vector then defines the direction of the force in \fref{eq:Basics:CoulombFvec}, but says nothing about its magnitude, while the fraction in front of it is a scalar (a number with no direction) that defines the magnitude of the force, but  says nothing about its direction. It is then easy to verify that the magnitude is the same as in \fref{eq:Basics:CoulombF}.
 
 If there are several ($N$) point charges present, the contribution from each of them to the total force sum up linearly. If we have a charge $q_1$ in a position ${\bf r}_1$, the force acting on it by the $N-1$ other charges $q_2, q_3, q_4 ... q_{N}$ in positions ${\bf r}_2, {\bf r}_3, {\bf r}_4 ... {\bf r}_{N}$ will be:
 \begin{equation}
-{\bf F}({\bf r}_1) = \sum_{n=2}^{N} \frac{q_1 q_n}{4\pi \epsilon_0} \frac{{{\bf e}}_{1,n}}{|{\bf r}_1-{\bf r}_n|^2}.
+{\bf F}_1 = \sum_{n=2}^{N} \frac{q_1 q_n}{4\pi \epsilon_0} \frac{{{\bf e}}_{n,1}}{|{\bf r}_1-{\bf r}_n|^2}.
 \label{eq:Basics:CoulombFN}
 \end{equation}
-\ghtxt{
-Whereas a pairwise particle interaction was well described by the scalar expression in \fref{eq:Basics:CoulombFvec}, the summation of several force contributions acting in different directions could not be done without using a vector notation, as in \fref{eq:Basics:CoulombFN}.}
-\gen{Eq. 1.2 er vel ogsaa en vektorligning?}
-\gen{Tror fortegnet blir feil i Eq. 1.4, ser ut som kraften paa 1 fra n blir tiltrekkende naar ladningene 1 og n er de samme.} 
+Whereas a pairwise particle interaction was well described by the scalar expression in \fref{eq:Basics:CoulombF}, the summation of several force contributions acting in different directions could not be done without using a vector notation, as in \fref{eq:Basics:CoulombFN}.
+\ghnote{Gaute spotta fortegnskluss her. Burde vaere i orden naa. Konvensjon paa hva ${\bf e}_{1,2}$ betyr - fra 1 til 2 eller motsatt, ser ut til aa variere. Hos oss betyr det naa FRA 1 TIL 2, og det samme er brukt for stroemmer i utledning av kavellingning i NEURON-kapittelet.}
 
 If our system of study consisted of a small number $N$ of charges, we could use $N$ instances of \fref{eq:Basics:CoulombFN} to compute the force acting on all the $N$ individual charges. Together with Newton's law ${\bf F} = m {\bf a}$, which tells us how the charges will be accelerated in the force direction, \fref{eq:Basics:CoulombFN} would then allow us to compute the movements of all our charges over time. \ghtxt{For a macroscopic system, the number of charges involved is anything but small, and it not practically attainable to keep track of individual charges. As we will see later, the electrodynamics of macroscopic systems are instead studied using equations valid at a larger spatial scale. }
 
@@ -93,8 +88,8 @@ where ${\bf {e}}_r$ is the unit vector in the radial direction. Since the field 
 {V}({\bf r}) = \sum_{n=1}^{N}  \frac{q_n}{4\pi \epsilon_0} \frac{{{\bf e}}_{1,n}}{|{\bf r}-{\bf r}_n|}.
 \label{eq:Basics:CoulombPhiN}
 \end{equation}
-\ghtxt{In practical physics problems one rarely knows the positions of all present charges $q_n$, and the computation of the electric field from \fref{eq:Basics:CoulombEN} or the potential from \fref{eq:Basics:CoulombPhiN} can therefore only be done in idealized physics examples. Fields and potentials are nevertheless useful quantities at a systems level. They can be measured experimentally, and as we will come back to later, they can be computed from other physical principles than} 
-\gex{interactions between individual charges.}
+In practical physics problems one rarely knows the positions of all present charges $q_n$, and the computation of the electric field from \fref{eq:Basics:CoulombEN} or the potential from \fref{eq:Basics:CoulombPhiN} can therefore only be done in idealized physics examples. Fields and potentials are nevertheless useful quantities at a systems level. They can be measured experimentally, and as we will come back to later, they can be computed from other physical principles than
+interactions between individual charges.
 
 
 \subsection{\blue{Reference point for potentials}}
@@ -148,11 +143,14 @@ Here, $r_D$ is called the \textit{Debye shielding distance} and $\epsilon_r$ is 
 
 Closely related to the shielding effects is the concept of electroneutrality\index{Electroneutrality}. When arranged by Coulomb interactions, the numbers of positive and negative charges within a finite and not too small volume of space tend to be kept in close balance. If this were not the case, and a reference volume of tissue did contain a net charge density $\rho$, the very strong Coulomb forces associated with it would cause $\rho$ to decay to zero at a rate proportional to the so-called \textit{charge-relaxation time}\index{Charge-relaxation}, which in brain tissue is on the order of a nanosecond (see \fref{sec:Sigma:Estimates}). On spatial scales larger than nanometres and temporal scales larger than nanoseconds, brain tissue is therefore to a good approximation electroneutral \cite**{Nunez2006,Grodzinsky2011}.
 
-Since charges are free to move around both inside and outside cells, both the intracellular domain and the extracellular domain are practically \gen{practically speaking?} electroneutral. However, whereas the intra- and extracellular mediums are conducting, the cellular membrane is largely dielectric (insulating), and violations of electroneutrality can therefore occur locally at neural membranes.
+Since charges are free to move around both inside and outside cells, both the intracellular domain and the extracellular domain are practically speaking electroneutral. However, whereas the intra- and extracellular mediums are conducting, the cellular membrane is largely dielectric (insulating), and violations of electroneutrality can therefore occur locally at neural membranes.
 Due to the capacitive properties of neural membranes (see \fref{sec:Basics:CapacitiveCurrent}), a patch of membrane can separate a charge $-q$ on the interior side from a charge $q$ on the exterior side, and this breach of electroneutrality is what gives rise to the membrane potential. However, since the membrane is just some nanometres thick, the separation of $-q$ from $q$ occurs on a small spatial scale, and the two charges will still shield each others' contributions to the electric potential some nanometres away from the membrane. 
 
-The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint of current conservation, or equivalently, the constraint that  there should be no charge accumulation anywhere in the extracellular space. As we show later, it will then be the current sources at neural membranes that give rise to an extracellular potential $V$. For example, consider positive ions flowing through the neural membrane into a cell, thereby leaving a certain region of the extracellular medium. This will cause a rearrangement of the extracellular ions, so that positive ions move into this region and negative ions move out from this region. The potential can then be thought of, not as a the result of a particular charge distribution, but rather as a higher level entity, reflecting the energy landscape needed for these ionic movements to take place in a manner that preserves electroneutrality. 
+The practical implication of electroneutrality and shielding effects is that, when we study extracellular potentials (or fields), we can neglect contributions from any particular distribution of charges, and instead compute extracellular potentials from the constraint of current conservation, or equivalently, the constraint that  there should be no charge accumulation anywhere in the extracellular space. As we show later, it will then be the current sources at neural membranes that give rise to an extracellular potential $V$. 
+
+\ghtxt{\sout{For example, consider positive ions flowing through the neural membrane into a cell, thereby leaving a certain region of the extracellular medium. This will cause a rearrangement of the extracellular ions, so that positive ions move into this region and negative ions move out from this region. The potential can then be thought of, not as a the result of a particular charge distribution, but rather as a higher level entity, reflecting the energy landscape needed for these ionic movements to take place in a manner that preserves electroneutrality. }}
 \gen{Den siste setningen var litt vanskelig aa forstaa.}
+\ghnote{Enig, men er det setningen eller fenomenet som er vanskelig? Kanskje vi kan la vaere aa si noe om det her. Foreslaar at vi stryker ut som foreslaatt.}
 
 As we noted earlier, the charge-relaxation time in the extracellular saline solution is on the order of a nanosecond. In comparison, the timescale of neural transmembrane currents tends to be milliseconds (\fref{chap:Neuron}). This gives the charge-relaxation processes a good margin for keeping up with the neural activity. For practical purposes, we can therefore assume that the relationship between transmembrane neural currents and the extracellular potential is instantaneous.
 
