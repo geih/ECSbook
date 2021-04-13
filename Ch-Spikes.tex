@@ -19,9 +19,7 @@ Adapted from \citeasnoun**{Henze2000}.
 \end{figure}
 %%%%%%%%%%%
 
-While the amplitude of the membrane-potential deflection during an action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. 
-Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}).
-The initial sharp negative peak is often referred to as the `sodium peak' as it mainly stems from sodium ions flowing into the soma (and axon hillock) during the initial phase of the action potential. The \ghtxt{\sout{latter},later} blunter positive peak is likewise sometimes referred to as the `potassium peak'\ghtxt{,} as it is dominated by potassium ions flowing out of the soma. \gen{Dette maa vel vaere riktig aa si?} \ghnote{Hoeres riktig ut, ja.} \ghnote{Jeg har tidligere brukt kursivering for aa introduse begreper, mens du bruker fnutter. Maa bli enige om en fast konvensjon.}
+While the amplitude of the membrane-potential deflection during an action potential is about 100~mV, the amplitudes of spikes are typically less than 1~mV. Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}). The initial sharp negative peak is often referred to as the `sodium peak' as it mainly stems from sodium ions flowing into the soma (and axon hillock) during the initial phase of the action potential. The \ghtxt{\sout{latter},later} blunter positive peak is likewise sometimes referred to as the `potassium peak'\ghtxt{,} as it is dominated by potassium ions flowing out of the soma. \gen{Dette maa vel vaere riktig aa si?} \ghnote{Hoeres riktig ut, ja.} \ghnote{Jeg har tidligere brukt kursivering for aa introduse begreper, mens du bruker fnutter. Maa bli enige om en fast konvensjon.}
 
 When detecting spikes, the main issue is that the spike amplitude is larger than the ambient noise level, typically some tens of $\mu$V. 
 %\gen{Har vi et godt tall med medhoerende referanse her?} 
@@ -37,20 +35,12 @@ Detailed modeling of spikes are important for several reasons: for example,
 %%%
 \section{\blue{Recording of spikes}}
 \label{sec:Spikes:recording}
-Spike recordings are typically done in living brains. Here the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz.
+Spike recordings are typically done in living brains\ghtxt{\sout{. Here}, and} the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz.
 In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013},
 see \Fref{chap:LFP}.
 
-A common misunderstanding is that a spike is built up only of high-frequency components.
-The reasoning is that a spike typically lasts only a couple of milliseconds and an oscillation with a period of, say, 
-2 milliseconds corresponds to a frequency of 500 hertz, lower frequencies will be absent or at least very weak.
-But this is not generally true~\cite**{Pettersen2008,Schomburg2012,Ray2011,Scheffer-Teixeira2013}. 
-Even a fast sodium spike contain frequency components with frequencies as low as 100 Hz \cite**{Pettersen2008a}.
-This is illustrated in Figure~\Fref{fig:Spikes:freq_dep} showing that also very narrow spikes may contain low-frequency components.
-In fact, a so-called $\delta$-function pulse which essentially is infinitely sharp and 
-has zero width, is built up of equal amounts of frequency components for all frequencies.
-And slower phenomena such as calcium spikes~\cite**{Stuart2007}, spike afterhyperpolarization \cite**{Buzsaki1988}, and strongly correlated action-potential firing \cite**{Schomburg2012}
-may further contribute to increased low-frequency components~\cite**{Buzsaki2012}. 
+A common misunderstanding is that a spike is built up only of high-frequency components. The reasoning is that\ghtxt{, since} a spike typically lasts only a couple of milliseconds and an oscillation with a period of, say, 2 milliseconds corresponds to a frequency of 500 hertz, lower frequencies will be absent or at least very weak. \ghtxt{\sout{But}However,} this is not generally true~\cite**{Pettersen2008,Schomburg2012,Ray2011,Scheffer-Teixeira2013}. Even a fast sodium spike contains frequency components with frequencies as low as 100 Hz \cite**{Pettersen2008a}. This is illustrated in Figure~\Fref{fig:Spikes:freq_dep} showing that also very narrow spikes may contain low-frequency components. In fact, a so-called $\delta$-function pulse which essentially is infinitely sharp and has zero width, is built up of equal amounts of frequency components for all frequencies.
+\ghtxt{\sout{And}In addition, the sodium spike in a single neuron may coincide with} slower phenomena such as calcium spikes~\cite**{Stuart2007}, spike afterhyperpolarization \cite**{Buzsaki1988}, and \ghtxt{\sout{strongly correlated action-potential firing} spikes elicited by other neurons} \cite**{Schomburg2012} may further contribute to increased low-frequency components~\cite**{Buzsaki2012}. \ghnote{Uklar sistesetning. Du snakket om en spike, men listet saa opp en masse andre greier. Hvordan relaterer spiken til disse sakene i sistesetningen? Jeg gjorde et forsoek paa aa antyde det.}
 
 %%%%%%%%%
 % Figure
