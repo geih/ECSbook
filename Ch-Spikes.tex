@@ -619,7 +619,9 @@ all active conductances are included explicitly.
 
 Using this scheme, Gold and coworkers \cite**{Gold2006,Gold2007} performed thorough investigations of the extracellular signatures of spikes from pyramidal neurons in hippocampus CA1 where active dendritic conductances were included in the model. Their results were in qualitative agreement with many of the observations seen above 
 for neurons with passive dendrites: (i) the spike width was seen to increase with distance from the soma (cf.~Fig.~5A in Ref.~\citeasnoun**{Gold2006}), (ii) the spike amplitude was seen to decay with distance from the soma with a power between 1 and 2 for distances less than 50 $\mu$m (cf.~Fig.~14 in 
-Ref.~\citeasnoun**{Gold2006}), and (iii) the spike amplitude was also seen to change significantly with varying intracellular resistivity $R_i$ and capacitance $C_m$, \ghnote{Har brukt smaa bokstaver, $r_\text{a}$ og $c_\text{m} for disse tidligere.} but not so much with varying membrane resistivity \cite**{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models.
+Ref.~\citeasnoun**{Gold2006}), and (iii) the spike amplitude was also seen to change significantly with varying intracellular resistivity $R_i$ and capacitance $C_m$, 
+\ghnote{Har brukt smaa bokstaver, $r_\text{a}$ og $c_\text{m}$ for disse tidligere.}
+but not so much with varying membrane resistivity \cite**{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models.
 
 \section{\orange{Axonal spikes}}
 
@@ -795,11 +797,17 @@ in \Fref{fig:Spikes:MUA-rectifify}.
 %%%
 \begin{figure}[!ht]
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{Figures/Spikes/MUA-2}
+\includegraphics[width=1.\textwidth]{Figures/Spikes/fig_hay_MUA.pdf}
 \end{center}
-\caption[]{
+\caption[]{{\bf Illustration of MUA rectification}
+{\bf A:} Spike-time histogram of the spikes to be inserted.
+{\bf B:} The raw signal, containing artificially generated noise, with spikes superimposed on the signal 
+according to the spike-times from {\bf A}. For each spike time the spike shape is randomly chosen from the grid in \fref{fig:Spikes:MultiCompartment}{\bf A}.
+{\bf C:} High-pass filtered (>300~\si{\hertz}) version of the raw-signal in {\bf B}.
+{\bf D:} Rectified version (that is, the absolute value is taken) of high-pass filtered signal in {\bf C}.
+{\bf E:} Low-pass filtered (<50~\si{\hertz} version of signal in {\bf D}.
 \gen{Figure illustrating principle behind MUA from rectification method}
-\gen{Can you make such a figure, Torbj{\o}rn?}
+\gen{Can you make such a figure, Torbj{\o}rn?}\tvnnote{OK?}
 }
 \label{fig:Spikes:MUA-rectifify}
 \end{figure}
