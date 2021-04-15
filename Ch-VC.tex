@@ -8,7 +8,7 @@ Before we present the VC theory, we again want to emphasize that our scale of in
 the approximation of neural current sources in a smooth volume conductor.
 This will be our starting point here, but a more thorough mathematical analysis
 is given at the end of the chapter in \fref{sec:VC:CSD}.}
-At this spatial scale we will assume that the extracellular medium can be represented as a continuous medium \index{continuous medium} with an effective conductivity $\sigma_t$  \index{Conductivity}, representing the conductivity experienced by macroscopic extracellular currents through the tissue (\fref{fig:VC:ECS_scales_3levels}). Furthermore, we shall assume that an extracellular current density in this medium is linear and given by Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
+At this spatial scale we will assume that the extracellular \sntxt{\sout{medium} space} can be represented as a continuous medium \index{continuous medium} with an effective conductivity $\sigma_t$  \index{Conductivity}, representing the conductivity experienced by macroscopic extracellular currents through the tissue (\fref{fig:VC:ECS_scales_3levels}). Furthermore, we shall assume that an extracellular current density in this medium is linear and given by Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
 \begin{equation}
 {\bf i_t}({\bf r}, t) = - \sigma_t({\bf r}, t) \nabla \phi({\bf r}, t).
 \label{eq:VC:ohmici}
@@ -66,25 +66,36 @@ We start by deriving the contribution to $\phi$ from a single neuronal point sou
 }
 \label{fig:VC:pointsource}
 \end{figure}
+\snnote{Dere har kanskje diskutert dette allerede..men jeg tenker at det kanskje ikke er nodvendig aa henvise til Poisson her, siden den ikke er introdusert ennaa?}
+\sntxt{\sout{Here, we could compute $\phi$ by solving \fref{eq:VC:CSD3}. However, due to the spherical symmetry of this simple case, we can take a shorter path by realizing that the current density (\fref{eq:VC:ohmici}) must} In this simple case, we know that the current density is} radially directed, and that its magnitude must be solely a function of distance $r$ from the source:
 
-Here, we could compute $\phi$ by solving \fref{eq:VC:CSD3}. However, due to the spherical symmetry of this simple case, we can take a shorter path by realizing that the current density (\fref{eq:VC:ohmici}) must radially directed, and that its magnitude must be solely a function of distance $r$ from the source:
 
 \begin{equation}
 i_t({\bf r}) = i_t(r) = -\sigma_t \frac{d\phi(r)}{dr}.
 \end{equation}
 
-Knowing this, we may find $\phi$ by simply noting that, since there can be no charge accumulation anywhere inside the sphere, the net current $I_k$ injected into the center of the spherical volume with radius $r$ must equal the net current leaving through the surface of the volume, which in turn must equal the current density $i_t(r)$ at the surface multiplied with the surface area $4\pi r^2$. We then get the relationship:
+\snnote{Setningen under var ganske lang..hva med:}
+\sntxt{\sout{Knowing this, we may find $\phi$ by simply noting that, s} S}ince there can be no charge accumulation anywhere inside the sphere, the net current $I_k$ injected into the center of the spherical volume with radius $r$ must equal the net current leaving through the surface of the volume \sntxt{.\sout{, which} The net current escaping the surface can in turn be found by multiplying \sout{in turn must equal}} the current density $i_t(r)$ at the surface \sntxt{\sout{multiplied}} with the surface area $4\pi r^2$. We then get the relationship:
 
 \begin{equation}
 I_k = -4\pi \sigma_t r^2  \frac{d\phi(r)}{dr} \, \iff \, \frac{d\phi(r)}{dr} = -\frac{I_k}{4\pi \sigma_t r^2 }.
 \label{eq:VC:knut}
 \end{equation}
+\snnote{Hva tenker dere om aa enten sette en minus foran begge sider av 4.4 eller enda enklere bare integrere fra uendelig til r isteden? Da hadde leseren sluppet aa gange med -1 selv..}
+To obtain the final solution for $\phi$, we integrate eq. \ref{eq:VC:knut} from $r$ to $\infty$:
+\snnote{Forslag: (original kommentert ut)}
 
-To obtain the final solution for $\phi$, we integrate eq. \ref{VC:eq:knut} from $r$ to $\infty$:
+%\begin{equation}
+%\int_r^{\infty} \frac{d\phi(r')}{dr'} dr' = \int_r^{\infty} -\frac{I_k}{4\pi \sigma_t r'^2 } dr'.
+%\label{eq:VC:knut2}
+%\end{equation}
+
+\sntxt{
 \begin{equation}
-\int_r^{\infty} \frac{d\phi(r')}{dr'} dr' = \int_r^{\infty} -\frac{I_k}{4\pi \sigma_t r'^2 } dr'.
+\int_{\infty}^r \frac{d\phi(r')}{dr'} dr' = \int_{\infty}^r -\frac{I_k}{4\pi \sigma_t r'^2 } dr'.
 \label{eq:VC:knut2}
 \end{equation}
+}
 Since $\phi({\infty}) = 0$, this leads to the final expression:
 
 \begin{equation}
@@ -93,7 +104,7 @@ Since $\phi({\infty}) = 0$, this leads to the final expression:
 \end{equation}
 where $r$ is the distance from the source.
 
-In the above, we made things simple by assuming that the current source was placed in the origin ${\bf r} = 0$. For a point source located in an arbitrary point ${\bf r_k} $ (\fref{fig:VC:pointsource}{\bf B})), the corresponding expression for the extracellular potential is:
+In the \sntxt{example?} above, we made things simple by assuming that the current source was placed in the origin ${\bf r} = 0$. For a point source located in an arbitrary point ${\bf r_k} $ (\fref{fig:VC:pointsource}{\bf B})), the corresponding expression for the extracellular potential is:
 
 \begin{equation}
 \phi({\bf r}) = \frac{I_k}{4\pi \sigma_t |{\bf r-r_k}|},
@@ -117,8 +128,10 @@ If we have several point-current sources, $I_{1}, I_2, I_3, ... $, in locations 
 
 A more sophisticated choice may be to assume that the transmembrane current is evenly distributed over the segment axis, a choice which is referred to as the line-source approximation \cite**{Holt1999,Linden2014}. The contribution to the extracellular potential from a current $I_k$ in a segment $k$ can be found analytically by integrating \fref{eq:VC:pointsource} over the center-line axis of the compartment (see Appendix \ref{app:linesource} or \citeasnoun**{Holt1998}). For a segment with length $\Delta s_k$, the contribution to the extracellular potential will be:
 
+\snnote{Forslag: ta bort t..}
+
 \begin{equation}
-\phi({\bf r},t)_k = \frac{I_k}{4\pi \sigma_t} \int \frac{dr_k}{|{\bf r-r_k}|} =
+\phi({\bf r},\sntxt{\sout{t}})_k = \frac{I_k}{4\pi \sigma_t} \int \frac{dr_k}{|{\bf r-r_k}|} =
 \frac{I_k}{4\pi \sigma_t \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
 \label{eq:VC:linesource}
 \end{equation}
@@ -126,7 +139,7 @@ A more sophisticated choice may be to assume that the transmembrane current is e
 Here $\rho_k$ is the distance perpendicular to the line segment, $h_k$ is the longitudinal distance from the end of the segment, and $\ell_k = \delta s_k + h_k$ is the longitudinal distance from the start of the segment (\fref{fig:VC:line_source_illustration}). \Fref{eq:VC:linesource} and \fref{eq:VC:pointsource} are the equivalent expressions where the transmembrane currents in a single neuronal segment are treated as a line source and point source, respectively. As for the point-source approximation, the contributions from several line-sources add up linearly. That is, if we have multiple segments $k$, the extracellular potential can be computed as:
 
 \begin{equation}
-\phi({\bf r},{\bf t}) = \sum_k \frac{I_k}{4\pi \sigma_t \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
+\phi({\bf r},\sntxt{\sout{{\bf t}}}) = \sum_k \frac{I_k}{4\pi \sigma_t \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
 \label{eq:VC:linesources}
 \end{equation}
 
@@ -170,8 +183,9 @@ give substantially different results, but at slightly larger differences, the re
 \end{figure}
 Volume conductor theory is essentially based on current continuity in the extracellular medium, i.e., the requirement that no net current can enter/leave a given point\tvnnote{"Point" har jo i prinsippet ikke noen utstrekning. Kan vi bruke "volume"?}
 \tvnnote{Dette gjelder kun untenfor sinks/sources da. Nevne det?} in space. Mathematically, current continuity implies that:
+\snnote{Kanskje vi like gjerne kan glemme tid her?}
 \begin{equation}
-\nabla \cdot {\bf i_t}({\bf r}, t) = - C({\bf r}, t),
+\nabla \cdot {\bf i_t}({\bf r}\sntxt{\sout{, t}}) = - C({\bf r}, \sntxt{\sout{t}}),
 \label{eq:VC:CSD1}
 \end{equation}
 which is the same as we postulated previously in \fref{eq:Basics:continuity1}. Here, ${\bf i_t}$ is the extracellular current density through the brain tissue, and $C$ is the current source density. What  \fref{eq:VC:CSD1} essentially tells us, is that if a neuron outputs a current into a (infinitesimal) volume of space (the $C$ term), an equally large current leaves that volume as an extracellular current (the $\nabla \cdot {\bf i_t}$ term).
@@ -179,18 +193,18 @@ which is the same as we postulated previously in \fref{eq:Basics:continuity1}. H
 In this chapter, we shall assume that the extracellular current density is described by Ohm's law ( \fref{eq:VC:ohmici}). If we combine \fref{eq:VC:ohmici} and \fref{eq:VC:CSD1}, we get:
 
 \begin{equation}
-\nabla \left( \sigma_t({\bf r}, t) \nabla \phi({\bf r}, t) \right) = - C({\bf r}, t),
+\nabla \left( \sigma_t({\bf r}\sntxt{\sout{, t}}) \nabla \phi({\bf r}, t) \right) = - C({\bf r}\sntxt{\sout{, t}}),
 \label{eq:VC:CSD2}
 \end{equation}
 
 which simplifies to the more commonly used relation:
 \begin{equation}
-\sigma \nabla^2\phi({\bf r}, t) = - C({\bf r}, t),
+\sigma \nabla^2\phi({\bf r}\sntxt{\sout{, t}}) = - C({\bf r}\sntxt{\sout{, t}}),
 \label{eq:VC:CSD3}
 \end{equation}
 in the less general case where the conductivity $\sigma_t$ is constant. Hence, if we know the distribution of neuronal current sources, we can integrate \fref{eq:VC:CSD2} or \fref{eq:VC:CSD3} to predict the electrical potential in the extracellular space surrounding the sources.
 
-The forward modelling formulas in \fref{eq:VC:pointsources} and \fref{eq:VC:linesources} can be expressed more generally in terms of the CSD. The starting point is then eq. \fref{eq:VC:CSD3}, which for a homogeneous and isotopic medium can be written:
+The forward modeling formulas in \fref{eq:VC:pointsources} and \fref{eq:VC:linesources} can be expressed more generally in terms of the CSD. The starting point is then \fref{eq:VC:CSD3}, which for a homogeneous and isotopic medium can be written:
 
 \begin{equation}
 \nabla^2 \phi({\bf r}) = - \frac{C({\bf r})}{\sigma_t}
@@ -298,10 +312,10 @@ En annen ting er at dipol/multipolapproksimasjon ikke er en "volum-konduktor-mod
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The \textit{dipole approximation} \index{Dipole approximation} is an alternative to \fref{eq:VC:pointsources} for predicting the extracellular potential. The approximation is good provided that the "measuring point" for $\phi$ is far away from the source-sink distribution that it originates from, like in the case of EEG.
 
-To be more precise, if the distance from the center of the volume containing the current sources to the measurement point is larger than the maximal distance from volume center to any source [cite - find Jackson!], we can reformulate \fref{eq:VC:pointsources} by using the the multipole expansion \cite**{Nunez2006}:
+To be more precise, if the distance from the center of the volume containing the current sources to the measurement point is larger than the maximal distance from volume center to any source \cite**{Jackson1998}, we can reformulate \fref{eq:VC:pointsources} by using the the multipole expansion \cite**{Nunez2006}:
 
 \begin{equation}
-\phi(R) = \frac{C_{monopole}}{R} + \frac{C_{dipole}}{R^2} + \frac{C_{quadrupole}}{R^3} + \frac{C_{octupole}}{R^4} + ...
+\phi(R) = \frac{C_{monopole}}{R} + \frac{C_{dipole}}{R^2} + \frac{C_{quadrupole}}{R^3} + \frac{C_{octopole}}{R^4} + ...
 \label{eq:VC:multipole}
 \end{equation}
 where $R$ is the distance from the center of the source distribution, $C_{monopole}$ is the monopolar contribution of the CSD to $\phi$, $C_{dipole}$ is the dipolar contribution from the CSD to $\phi$, and so on. The derivation of this expression can be found in Appendix \ref{app:dipoleappendix}.
@@ -320,10 +334,10 @@ The current dipole moment is a function of the sum of all the transmembrane curr
 \end{equation}
 For example, if we have a simple two-compartmental (and purely dipolar) neuron with a current sink $-I$ at location $\mathbf{r}_1$ and a current source $I$ at location $\mathbf{r}_2$, the current dipole moment can be formulated as $\mathbf{p} = -I\mathbf{r}_1 + I\mathbf{r}_2 = I(\mathbf{r}_2 - \mathbf{r}_1) = I\mathbf{d}$. Here $\mathbf{d}$ is the distance vector between the current sink and the current source, giving the length $d$ and direction of the current dipole.
 
-As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is though to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \cite**{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \cite**{Naess2020}.
+As we mentioned above, the current dipole approximation is only applicable when we are at some distance away from the source distribution. As a rule of thumb, the approximation is thought to be good when $R$ is three to four times greater than the dipole length: $R > 3d$ or $R > 4d$ \cite**{Nunez2006}. It has been found to work well for predicting the extracranial EEG signal, but less well for intracranial electrocorticography (ECoG) \cite**{Naess2020}.
 
 
-\section{\blue{Modelling recording electrodes}}
+\section{\blue{Modeling recording electrodes}}
 \label{sec:VC:electrodes}
 \index{Electrode model}
 \tvnnote{Paa sikt vil jeg gjerne spoerre noen elektrode-folk vi kjenner om aa kontroll-lese denne seksjonen, for eksempel Martinsen, Nelson, Frey eller Obien.}
