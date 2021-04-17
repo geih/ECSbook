@@ -199,10 +199,12 @@ but the key qualitative feature remains: the spike gets blunter when moving away
 In particular, the width of the negative sodium peak is seen to increase with increased lateral distance.
 \gex{The spikes from the ball-and-stick neuron model is also in better accordance with predictions from the multi-compartment model than the two-compartment model in that large positive spikes above the soma is absent.}
 
-\section{\blue{Analysis of spikes}}
+\section{\blue{Analysis of spike shapes and sizes}}
 
-\gen{Si at multicomp er mer realistisk, men at ball-and-stick kan analyseres}
-Unlike anatomically detailed multi-compartment neuron models, the ball-and-stick neuron is amenable to analytical mathematical studies. 
+\gex{
+As discussed above, the ball-and-stick neuron reproduces several of the key qualitative features of spikes seen for the anatomically detailed 
+multi-compartmental example neuron, cf. \Fref{fig:Spikes:DifferentNeuronModels}.}
+Unlike anatomically detailed multi-compartment neuron models, it is is amenable to analytical mathematical studies. 
 \citeasnoun**{Pettersen2008a} took advantage of this and used this model to explore the link between the morphology and electrical properties of neurons and the shape and size of the spike they produce during an action potential. 
 \Fref{fig:Spikes:ball-and-stick-results} shows the distance dependence of the spike amplitude and spike width both for a detailed multi-compartmental pyramidal neuron model and ball-and-stick neurons. While the spike width and amplitude of the multi-compartmental neuron are larger than for the two example ball-and-stick neurons (with short and long dendrite sticks, respectively), the shapes of the curves are similar. \ghnote{Kan vi ikke velge parametere slik at amplituden og shapen ligner i de to tilfellene?}  \gen{Jo, det kan sikkert vaere mulig. Dette er klippet rett fra Pettersen2008a.} Note also that the results for a ball-and-stick neuron with an infinitely long dendritic stick is
 effectively identical to the long-stick results in the figure~\cite**{Pettersen2008}.
@@ -243,11 +245,17 @@ Spike widths (left) and (peak-to-peak) spike amplitudes (right) as a function of
 %%\figpermOurs
 %\end{figure}
 
+\gex{
+When modeling spikes with the ball-and-stick neuron, one option is to include spike-generating 
+active sodium and potassium conductances in the soma compartment. Another option is to impose 
+a waveform mimicking a somatic action potential as a boundary condition in the soma end of the dendritic stick.
+In both cases the spike shape and size will be determined by the pattern of membrane currents returning to the ECS
+through the dendritic stick, see \Fref{fig:Spikes:ball-and-stick-sketch}. For the present analysis we will use the second option.
 
+Since the dendritic stick is passive, it has linear response properties to imposed currents or voltages. It is then convenient to decompose
+the soma action potential into a Fourier sum of oscillatory components with different frequencies and consider each frequency component of the action potential separately. Each oscillatory component of the soma action potentials gives an oscillatory axial current entering the stick at the soma end. The spatial pattern of return current along the stick will depend on the frequency of the oscillation due to the capacitive properties of the membrane: For higher frequencies the capacitive membrane current will be larger, and the  membrane effectively more leaky. Thus the imposed soma potential will result in dendritic membrane currents returning closer to the soma for higher frequencies,  as seen in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}.  }
 
-\subsection{\blue{Frequency components of spikes}}
-\label{sec:Spikes:Fourier}
-To understand the physical origin of these results it is easier to consider each frequency component of the action potential separately. \ghnote{(1) Er "the physical origin" rett begrep? (2) Uklart hva "these results" refererer til. Ny aapningssetning trengs. To understand the physics behind the dependence of spike shape on position ... ? To analyze extracellular potentials, it is easier to ...?}  From Fourier theory it follows that any signal such as the time course of a spike $V_\mathrm{e}(t)$, can be written as a sum of waves with different frequencies. Such a Fourier sum can be constructed in various ways. The derivations presented below, building on \citeasnoun**{Pettersen2008a}, use the convention that a time signal $S(t)$ can be written as
+A Fourier sum of a signal such as the soma action potential can be constructed in various ways. The derivations presented below, building on \citeasnoun**{Pettersen2008a}, use the convention that a time signal $S(t)$ can be written as
 %%%
 \begin{equation}
 S(t) = Re \{ \sum_{f}  \hat{S}(f) \exp (j 2 \pi f t) \}
@@ -255,8 +263,6 @@ S(t) = Re \{ \sum_{f}  \hat{S}(f) \exp (j 2 \pi f t) \}
 \end{equation}
 %%%
 where $Re\{z\}$ represents the real part of the complex number $z$.  Here $j$ is the unit of imaginary numbers, $f$ is the frequency, and the weight $\hat{S}(f)$ is in general  complex. 
-
-\ghnote{Jeg tror dette asnittet trenger en mer utfoerlig aapning. (1) Er det rart aa infoere dette med frequency components som underkapittel i Ball-and-stick? Ville det kanskje vaert bedre aa hatt tre oppsummerende og korte delkapitler i 8.2: 8.2.1 "Spikes from multicomp", 8.2.2. "Spikes from two-comp", 8.2.3. "Spikes from ball and stick". Og saa 8.3. Analysis of frequency components of spikes, eller noe slik, der man begynner med å introdusere Fourier, og foelger opp med en analyse som for enkelthets skyld primaert er basert paa ball-and-stick? Synes det virker som en mer logisk struktur.}
 
 \Fref{fig:Spikes:ball-and-stick-frequency} illustrates the Fourier decomposition of the
 intracellular action potential (membrane potential) and extracellular spike, respectively.
@@ -307,13 +313,12 @@ Pettersen2008?} \ghnote{mV/Hz paa y-aksen.}
 \subsection{\blue{Approximate spike formulas}}
 \label{sec:Spikes:approximate}
 
-\ehtxt{Beyond some distance, this amplitude decay is approximately inversely proportional to the distance squared~\cite**{Hagen2015}.}
-
-\ehnote{som foerste approksimasjon til extracellulaere spikes ville jeg valgt den tidsderiverte av somatisk potensial ($V_e(t)\propto -dV/dt$) som ville antatt at eventuelle bidrag fra transmembrane returstroemmer kan ignoreres. Det signalet kan introduseres med en avstandsavhengighet $1/(^+const. + r^2)$. Da kunne man fortsatt med disse mer prinsippielle utledningene som kommer fra Klas sitt paper.} 
-
-To compute the extracellular spike generated by an imposed oscillatory current, \ghnote{Tung start. Hva er en imposed oscillatory current? Det er et AP dekomonert i ulike frekvenser og matet inn som en soma-stroem, regner jeg med. Boer forklare dette tydeligere.} the stick must be divided into small compartments  and the multi-compartmental formula in Equation \gex{XX} used. This in general requires detailed knowledge of the resulting membrane currents in all compartments. 
+To compute the extracellular potential generated by an imposed oscillatory voltage,  the stick must be divided into small compartments  and the multi-compartmental formula in Equation \gex{XX} used. This in general requires detailed knowledge of the resulting membrane currents in all compartments. 
 While these can be computed for the ball-and-stick neuron (see, for example, \citeasnoun**{Pettersen2014}), 
 the resulting formula for the spike becomes cumbersome and difficult to interpret.  However, some useful insights can be obtained in two limiting cases: the recording being very near to the soma or very far from the soma.
+
+%\subsection{\blue{Frequency components of spikes}}
+%\label{sec:Spikes:Fourier}
 
 %For recording positions very close to the soma, the contribution from the soma current will dominate 
 %in the sum in \gex(XX). In this case the distance from the electrode
@@ -326,10 +331,7 @@ the resulting formula for the spike becomes cumbersome and difficult to interpre
 
 \subsubsection{Spikes recorded near the soma}
 \label{sec:Spikes:near-spikes}
-\tvnnote{En del bruker den deriverte av membranpotensial til aa approksimere spikes. Boer det taes med?}
-\gen{Ja, det kommenteres naa lenger ned i "Spike shape dependence on distance".}
-To understand the dependence of spike shapes and amplitudes on model parameters for the ball-and-stick neuron, it is useful
-to consider the extracellular potentials set up by each of the frequency (Fourier) components of the action potentials separately. \ghnote{Noe ala setningen over burde kanskje staa skrevet ut litt mer utfoerlig i begynnelsen av "Frequency components of spikes"}
+
 For recording positions $\vec{r}$ very close to the soma, the contribution from the soma current will dominate over the contributions from the dendrite 
 in the sum giving the extracellular potential in Equation \gex{XX}. Then the amplitude of the
 predicted oscillating extracellular potential $|\hat{V}_\mathrm{e,near}(f,\vec{r})|$ is approximately given by 
@@ -345,7 +347,7 @@ For the relatively high frequencies of most relevance for the spike, this soma c
 $\hat{V}_\mathrm{s}(f)$ through~\cite**{Pettersen2008a}
 %
 \begin{equation}
-  |\hat{I}_\mathrm{s}(f)| =  \frac{\pi^{3/2} d^{3/2}}{\sqrt{2}} \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)|
+  |\hat{I}_\mathrm{s}(f)| =  \frac{\pi^{3/2} d^{3/2}}{\sqrt{2}} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)|
   \label{eq:Spikes:Isoma}
 \end{equation}
 %
@@ -355,8 +357,8 @@ and the contribution to the spike is thus found to be
   |\hat{V}_\mathrm{e,near}(f,\vec{r})| 
   = \frac{\sqrt{\pi}}{4 \sqrt{2} \sigma}
      \frac{d^{3/2}}{r} 
-     \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
-  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
+     \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
+  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
   \label{eq:Spikes:Ve_near_2}
 \end{equation}
 %
@@ -373,7 +375,7 @@ and the contribution to the spike is thus found to be
 %%
 %\begin{equation}
 %  |\hat{V}_\mathrm{e,near}(f,\vec{r})| 
-%  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
+%  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
 %  \label{eq:Spikes:Ve_near}
 %\end{equation}
 %%
@@ -381,13 +383,13 @@ The suffix `near' is added because this expression only applies in the `near-fie
 close to the soma.
 $|\hat{V}_\mathrm{s}(f)|$ is the amplitude of Fourier component of the soma membrane potential at the same
 frequency (see \Fref{fig:Spikes:ball-and-stick-frequency}). Further, $d$ is the diameter of the dendritic
-stick, $C_\mathrm{m}$ is the specific membrane capacitance, and $R_\mathrm{a}$ is the specific axial resistance.  
+stick, $c_\mathrm{m}$ is the specific membrane capacitance, and $r_\mathrm{a}$ is the specific axial resistance.  
 
 %One of the predictions from the formula in \Fref{eq:Spikes:Ve_near_2} is that the amplitude of each Fourier component decays
 %as $1/r$ when moving away from soma (yet staying within distances where the `near-field' approximation is still applicable).
 %Since this applies to all Fourier components which together constitute the action potential, this implies that the amplitude of the 
 %spike will decay as $1/r$ in this regime as well.
-%\gen{From David Sterratt: Intuition for the relationship witd $d, C_m, f, r_a$.}
+%\gen{From David Sterratt: Intuition for the relationship witd $d, c_m, f, r_a$.}
 
 %%%%%%%%%%
 % Figure: Frequency-dependent distribution of return currents
@@ -439,12 +441,12 @@ For an infinite dendrite stick this corresponds to
 %=  \frac{\sqrt{2}\lambda}{\sqrt{\sqrt{W^2+1}+1}}.
 \end{equation}
 %
-For high frequencies ($f \gg 1/2 \pi R_\mathrm{m} C_\mathrm{m}$) this is after some algebra 
+For high frequencies ($f \gg 1/2 \pi r_\mathrm{m} c_\mathrm{m}$) this is after some algebra 
 found to give (see \citeasnoun[Appendix C]{Pettersen2008a} for details)
 %
 \begin{equation}
  \lambda_\mathrm{AC}^\infty(f) =  \frac{\lambda}{\sqrt{\pi f \tau}} = 
-  \frac{1}{2\sqrt{\pi}} \sqrt{\frac{d}{f R_\mathrm{m} C_\mathrm{m}}}
+  \frac{1}{2\sqrt{\pi}} \sqrt{\frac{d}{f r_\mathrm{m} c_\mathrm{m}}}
 \label{eq:Spikes:approx_lambda_ac}
 \end{equation}
 %
@@ -463,14 +465,15 @@ dipolar expression in Equation~\gex{XX}, that is,
 Thus for spikes measured far away from the soma we find 
 %  
 \begin{equation}
-  |\hat{V}_\mathrm{e,far}(f,\vec{r})|  = \frac{1}{8 \sqrt{2} \sigma} d^{2} \frac{1}{r^2  R_\mathrm{a}} 
+  |\hat{V}_\mathrm{e,far}(f,\vec{r})|  = \frac{1}{8 \sqrt{2} \sigma} d^{2} \frac{1}{r^2  r_\mathrm{a}} 
       |\hat{V}_\mathrm{s}(f) \cos \theta | 
-  \propto d^{2} \frac{|\cos \theta|}{r^2  R_\mathrm{a}} |\hat{V}_\mathrm{s}(f)| 
+  \propto d^{2} \frac{|\cos \theta|}{r^2  r_\mathrm{a}} |\hat{V}_\mathrm{s}(f)| 
   \label{eq:Spikes:Ve_far_2}
 \end{equation}
 The suffix `far' is added because this expression only applies in the `far-field' limit, that is,
 far away from the soma. 
 \ehnote{`far-field' limit har vel en noe mer generell definisjon?}
+\gen{Etter aa tenkt litt mer tror jeg det er OK aa si far-field limit siden dette dipolleddet vil dominere i denne grensen.}
 %
 %Equations~(\Fref{eq:Spikes:Ve_near_2}) and (\Fref{Spikes:box:equation:Ve_far_2}) describe how each frequency component of 
 %the soma membrane potential  $\hat{V}_\mathrm{s}(f)$ is `translated' into frequency components of the 
@@ -486,7 +489,7 @@ far away from the soma.
 %\Fref{XX:equation:Ve-dipole-p}:
 %%%%
 %\begin{equation}
-%  |\hat{V}_\mathrm{e,far}(f,\vec{r})|  \propto d^{2} \frac{|\cos \theta| }{r^2  R_\mathrm{a}}  |\hat{V}_\mathrm{s}(f)| 
+%  |\hat{V}_\mathrm{e,far}(f,\vec{r})|  \propto d^{2} \frac{|\cos \theta| }{r^2  r_\mathrm{a}}  |\hat{V}_\mathrm{s}(f)| 
 %  \label{eq:Spikes:Ve_far}
 %\end{equation}
 %%%%
@@ -506,6 +509,10 @@ far away from the soma.
 %the spike-amplitude panel in \Fref{fig:Spikes:ball-and-stick-results}.
 
 \subsection{\blue{Spike amplitude dependence on distance}}
+
+\ehtxt{Beyond some distance, this amplitude decay is approximately inversely proportional to the distance squared~\cite**{Hagen2015}.}
+
+
 A prediction from the near-field formula in \Fref{eq:Spikes:Ve_near_2} is that the amplitude of each Fourier component decays as $1/r$ when moving away from the soma, 
 as long as the position remains within distances where the `near-field' approximation still applies.
 Since this applies to all frequency components which together constitute the action potential, this implies that the amplitude of the 
@@ -535,16 +542,16 @@ that in practice an electrode contact will only pick up spikes from neurons with
 The spike amplitude is proportional to $d^{2}$ far away from the soma and to $d^{3/2}$ close to the soma,
 where $d$ is the diameter of the dendritic stick diameter. This implies that far away from the soma the spike amplitude is proportional to  the cross-sectional area of the dendrite. Close to the soma, the spike amplitude also increases with dendrite diameter, but slightly less so.
 
-Another observation is that the spike amplitude is independent of the membrane resistance $R_\mathrm{m}$ of the dendrite.
-This reflects that the frequencies dominating the spike are so high that the ionic membrane current, governed by $R_\mathrm{m}$, is
-much smaller than the capacitive membrane current, governed by membrane capacitance $C_\mathrm{m}$.  
+Another observation is that the spike amplitude is independent of the membrane resistance $r_\mathrm{m}$ of the dendrite.
+This reflects that the frequencies dominating the spike are so high that the ionic membrane current, governed by $r_\mathrm{m}$, is
+much smaller than the capacitive membrane current, governed by membrane capacitance $c_\mathrm{m}$.  
 Thus the spatial distribution of the return current along the dendrite will depend only on the capacitive current. This dependence
-is seen through the presence of  $C_\mathrm{m}$ in the near-field formula in \Fref{eq:Spikes:Ve_far_2}. 
-Note that in the far-field formula \Fref{eq:Spikes:Ve_far_2},  $C_\mathrm{m}$ is absent due to cancellation with another factor containing $C_\mathrm{m}$ in the mathematical derivation, 
+is seen through the presence of  $c_\mathrm{m}$ in the near-field formula in \Fref{eq:Spikes:Ve_far_2}. 
+Note that in the far-field formula \Fref{eq:Spikes:Ve_far_2},  $c_\mathrm{m}$ is absent due to cancellation with another factor containing $c_\mathrm{m}$ in the mathematical derivation, 
 cf. \citeasnoun[Equation 23]{Pettersen2008}.)
 
 In Equations~\Fref{eq:Spikes:Ve_near_2} and \Fref{eq:Spikes:Ve_far_2}, the spike amplitude is reduced when the 
-axial resistance $R_\mathrm{a}$ in the dendrites is increased. This reflects that an increased axial resistance implies that the current entering
+axial resistance $r_\mathrm{a}$ in the dendrites is increased. This reflects that an increased axial resistance implies that the current entering
 the soma during the first phase of an action potential will return closer to the soma. This implies shorter distances on average between the sink (soma) and the sources, where the current return to the ECS, and thus a smaller current dipole and a smaller spike.
 
 
@@ -577,6 +584,7 @@ soma, the contributions to the spike amplitude roughly add up. A simple rule of 
 roughly proportional to the sum of the cross-sectional areas for all dendrite branches attached directly onto the soma. Neurons with many thick dendritic branches attached to the soma will thus generate the largest spikes. See~\citeasnoun**{Pettersen2008} for further discussion.
 \gen{Kunne eventuelt aa vise noen resultater fra Jorgens thesis her}
 \tvnnote{Foeler dette er litt lite testet enn saa lenge til aa ha med i bok? Maa i minste fall gjennskape resultatene, men kan godt gjoere det om du vil :-)}
+\gen{Vi kan tenke paa, men jeg synes en del av funnene hans var veldig interessante.}
 
 
 %\subsection{Insights from spike near- and far-field expressions}
@@ -597,10 +605,10 @@ roughly proportional to the sum of the cross-sectional areas for all dendrite br
 %where $d$ is the diameter of the dendritic stick diameter.
 %This implies that far-way from the soma the spike amplitude is proportional to the cross-sectional area of the dendrite.
 %Close to the soma, the spike amplitude also increases with dendrite diameter, but not so prominently as far away.
-%Another observation is that the spike amplitude is independent of the membrane resistance $R_\mathrm{m}$ of the dendrite; only the membrane 
-%capacitance $C_\mathrm{m}$ and the axial resistance $R_\mathrm{a}$ matter, 
+%Another observation is that the spike amplitude is independent of the membrane resistance $r_\mathrm{m}$ of the dendrite; only the membrane 
+%capacitance $c_\mathrm{m}$ and the axial resistance $r_\mathrm{a}$ matter, 
 %This reflects that the frequencies dominating the spike are so high that the capacitive membrane current 
-%(governed by $C_\mathrm{m}$) is much larger than the ionic membrane current  (governed by $R_\mathrm{m}$). 
+%(governed by $c_\mathrm{m}$) is much larger than the ionic membrane current  (governed by $r_\mathrm{m}$). 
 %%\todo{DCS: I'm wondering if we need more details on frequency-dependent cable theory, beyond Eq. 5.11.}
 %
 %An overall observation is that the spike is quite local, that is, the amplitude of the spike decays rapidly with distance from the neuron soma. For the pyramidal neuron considered in 
@@ -626,8 +634,9 @@ roughly proportional to the sum of the cross-sectional areas for all dendrite br
 
 In the investigations of the spike generated by the ball-and-stick neuron above, the assumption was that the action potential
 is generated by active conductances in the soma and that the spike is generated by a current dipole reflecting the distribution of return currents in the dendritic stick. 
-However, in some \ehnote{most?} neurons the action potential is initiated at the axon initial segment (AIS) some distance away from the soma~\cite**{Goethals2020}. \ghnote{Er dette en review-artikkel? Er ikke Mainen og Sejnowski 1995 ellers en kjerneref paa dette?} This will in turn ignite the full soma action potential. In this initial phase of the action potential there will thus be a current dipole where current enters the neuron at AIS and leave through the soma. 
-\ehnote{nevne axonal backpropagation?}
+However, in some neurons the action potential is initiated some distance away from the soma along the axon 
+initial segment (AIS)\cite**{Goethals2020}. 
+This will in turn ignite the full soma action potential. In this initial phase of the action potential there will thus be a current dipole where current enters the neuron at AIS and leave through the soma. 
 
 In this scenario there will expectedly be a short-lasting somatic source prior to the longer-lasting somatic sink setting up the characteristic strong negative sodium peak. Model simulations have indeed confirmed that this is feasible and that a small and narrow positive peak can be seen prior to the negative sodium peak for recording close to the soma~\cite**{Telenczuk2018}.
 Interestingly, detailed experimental studies of the shape and amplitude of extracellular spikes recorded simultaneously around the soma and along the axon has now become possible by means of 
@@ -651,9 +660,7 @@ all active conductances are included explicitly.
 
 Using this scheme, Gold and coworkers \cite**{Gold2006,Gold2007} performed thorough investigations of the extracellular signatures of spikes from pyramidal neurons in hippocampus CA1 where active dendritic conductances were included in the model. Their results were in qualitative agreement with many of the observations seen above 
 for neurons with passive dendrites: (i) the spike width was seen to increase with distance from the soma (cf.~Fig.~5A in Ref.~\citeasnoun**{Gold2006}), (ii) the spike amplitude was seen to decay with distance from the soma with a power between 1 and 2 for distances less than 50 $\mu$m (cf.~Fig.~14 in 
-Ref.~\citeasnoun**{Gold2006}), and (iii) the spike amplitude was also seen to change significantly with varying intracellular resistivity $R_i$ and capacitance $C_m$, 
-\ghnote{Har brukt smaa bokstaver, $r_\text{a}$ og $c_\text{m}$ for disse tidligere.}
-but not so much with varying membrane resistivity \cite**{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models.
+Ref.~\citeasnoun**{Gold2006}), and (iii) the spike amplitude was also seen to change significantly with varying axial resistance $r_\mathrm{a}$ and capacitance $c_\mathrm{m}$, but not so much with varying membrane resistance \cite**{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models.
 
 \section{\orange{Axonal spikes}}
 
@@ -1042,7 +1049,7 @@ apical dendrites as in \Fref{fig:Spikes:MUA-ApicalSynapses}.
 %%
 %\begin{equation}
 %  |\hat{V}_\mathrm{e,near}(f,\vec{r})| 
-%  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
+%  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
 %  \label{mm:equation:Ve_near}
 %\end{equation}
 %%
@@ -1051,12 +1058,12 @@ apical dendrites as in \Fref{fig:Spikes:MUA-ApicalSynapses}.
 %For recording positions far away from the soma, the following expression was instead found:
 %%%%
 %\begin{equation}
-%  |\hat{V}_\mathrm{e,far}(f,\vec{r})|  \propto d^{2} \frac{|\cos \theta| }{r^2  R_\mathrm{a}}  |\hat{V}_\mathrm{s}(f)| 
+%  |\hat{V}_\mathrm{e,far}(f,\vec{r})|  \propto d^{2} \frac{|\cos \theta| }{r^2  r_\mathrm{a}}  |\hat{V}_\mathrm{s}(f)| 
 %  \label{mm:equation:Ve_far}
 %\end{equation}
 %%%%
 %In these formulas, $d$ is the diameter of the dendritic
-%stick, $C_\mathrm{m}$ the specific membrane capacitance, and $R_\mathrm{a}$ the specific axial resistance.  
+%stick, $c_\mathrm{m}$ the specific membrane capacitance, and $r_\mathrm{a}$ the specific axial resistance.  
 %
 
 %%%%%%%%%%%
@@ -1195,7 +1202,7 @@ apical dendrites as in \Fref{fig:Spikes:MUA-ApicalSynapses}.
 %$\hat{V}_\mathrm{s}(f)$ through~\cite**{Pettersen2008}
 %%
 %\begin{equation}
-%  |\hat{I}_\mathrm{s}(f)| =  \frac{\pi^{3/2} d^{3/2}}{\sqrt{2}} \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)|
+%  |\hat{I}_\mathrm{s}(f)| =  \frac{\pi^{3/2} d^{3/2}}{\sqrt{2}} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)|
 %  \label{mm:box:equation:Isoma}
 %\end{equation}
 %%
@@ -1205,8 +1212,8 @@ apical dendrites as in \Fref{fig:Spikes:MUA-ApicalSynapses}.
 %  |\hat{V}_\mathrm{e,near}(f,\vec{r})| 
 %  = \frac{\sqrt{\pi}}{4 \sqrt{2} \sigma}
 %     \frac{d^{3/2}}{r} 
-%     \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
-%  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f C_\mathrm{m}}{R_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
+%     \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
+%  \propto \frac{d^{3/2}}{r} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)| 
 %  \label{mm:box:equation:Ve_near_2}
 %\end{equation}
 %%
@@ -1239,12 +1246,12 @@ apical dendrites as in \Fref{fig:Spikes:MUA-ApicalSynapses}.
 %\end{equation}
 %%
 %
-%For high frequencies ($f \gg 1/2 \pi R_\mathrm{m} C_\mathrm{m}$) this is after some algebra 
+%For high frequencies ($f \gg 1/2 \pi r_\mathrm{m} c_\mathrm{m}$) this is after some algebra 
 %found to give (see \citeasnoun[Appendix C]{Pettersen2008} for details)
 %%
 %\begin{equation}
 % \lambda_\mathrm{AC}^\infty(f) =  \frac{\lambda}{\sqrt{\pi f \tau}} = 
-%  \frac{1}{2\sqrt{\pi}} \sqrt{\frac{d}{f R_\mathrm{m} C_\mathrm{m}}}
+%  \frac{1}{2\sqrt{\pi}} \sqrt{\frac{d}{f r_\mathrm{m} c_\mathrm{m}}}
 %\label{mm:box:equation:approx_lambda_ac}
 %\end{equation}
 %%
