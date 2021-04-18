@@ -741,8 +741,8 @@ Figure is adapted from \citeasnoun**{Ness2015}.}
 
 In MEAs the electrode contacts are embedded in an insulating glass plate with very 
 low electrical conductivity, while the covering liquid typically has a higher electrical conductivity 
-than the brain slice it covers. \ghtxt{\sout{Thus} In this setup} the extracellular conductivity around the signal-generating neurons
-will not be constant as assumed \ghtxt{\sout{above} for the \textit{in vivo} recordings}, and this will affect the amplitude and shape of the recorded spikes. 
+than the brain slice it covers. In this setup the extracellular conductivity around the signal-generating neurons
+will not be constant as assumed above for the \textit{in vivo} recordings, and this will affect the amplitude and shape of the recorded spikes. 
 
 In general, FEM modeling will be required to solve the forward-modeling for situations such as this where
 the the conductivity $\sigma$ varies with position. However, if we assume that the MEA substrate, slice and saline
@@ -761,8 +761,9 @@ Figure is adapted from \citeasnoun**{Ness2015}.}
 \end{figure}
 %%%
 
-An example result is shown in \Fref{fig:Spikes:MEA-spikes}. The largest effect on the spike comes from the insulating glass substrate which roughly doubles the size \ghnote{amplitude?} of the recorded spikes \ghnote{Hvor ser jeg dette? Roed kurve har dobbel amplitude jmf svart. Roed er semi-infinite. Betyr det "glassplate tilstede"? Jeg er ikke med.}. However, also the highly-conductive saline cover employed in the example has an effect. More specifically, it reduces the size of the spike compared to the hypothetical situation where the saline had the same value of the electrical conductivity as the brain slice.
-\ghnote{Mer forklaring trengs. Semi-infinite - er det glassplate og infinite oppover? }
+An example result is shown in \Fref{fig:Spikes:MEA-spikes}. The largest effect on the spike from the measurement device comes from the insulating glass substrate which roughly doubles the amplitude of the recorded spikes, \gex{but this effect is not illustrated in the figure. Rather, the figure illustrates the effect of having a highly conductive saline layer covering the brain slice. Specifically, the saline reduces the size of the spike compared to the hypothetical situation where the saline had the same value of the electrical conductivity as the less conductive 
+brain slice (`semi-infinite slice').}
+\gen{Mulig vi boer bruke andre labels paa de to situasjonene i figuren.}
 
 \section{\blue{Multi-unit activity (MUA)}}
 In general, a recording contact will pick up spikes from several neurons positioned in its vicinity, that is, from `multiple units'.
@@ -793,7 +794,7 @@ With only a single recording contact, the most direct way to analyse the MUA is 
 Jeg synes ikke vi trenger aa gaa inn paa prisnipper for spike sorting siden dette vel er mer "dataanalyse" enn vi ellers har planlagt aa ha med i boka.
 }
 
-Today, spikes are typically recorded with multielectrodes, for example, tetrodes with four closely positioned recording contacts (\Fref{fig:Spikes:MUA-tetrode}), linear multielectrodes (polytrodes) with tens of contacts positioned along a straight line (\Fref{fig:Spikes:MUA-polytrode}), or grid-like multielectrodes with many hundred tiny contacts arranged in rectangular patterns on an electrode shaft \cite**{Jun2017}.  On these multielectrodes, the same spike will in general show up on several contacts, and a process known as \emph{spike sorting}~\cite**{Quiroga2007} is required to (i) properly count spikes and (ii) to sort recorded spikes into contributions from individual neurons as is often the goal. 
+Today, spikes are typically recorded with multielectrodes, for example, tetrodes with four closely positioned recording contacts (\Fref{fig:Spikes:MUA-tetrode}), linear multielectrodes (polytrodes) with tens of contacts positioned along a straight line, or spade-like multielectrodes with many hundred tiny contacts arranged in rectangular patterns on an electrode shaft \cite**{Jun2017}.  On these multielectrodes, the same spike will in general show up on several contacts, and a process known as \emph{spike sorting}~\cite**{Quiroga2007} is required to (i) properly count spikes and (ii) to sort recorded spikes into contributions from individual neurons as is often the goal. 
 
 To develop and validate methods for spike sorting, benchmarking data where the `ground truth' is known is highly desirable. Experimental benchmarking data is hard to come by as they require simultaneous recording of intracellular action potentials and corresponding extracellular spikes. However, model-based benchmarking data is an attractive alternative~\cite**{Einevoll2012} and the generation of such data has been pursued in several projects
 \cite**{CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}. 
