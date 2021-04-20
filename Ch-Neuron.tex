@@ -210,7 +210,7 @@ where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $
 
 The simple waveforms (i)--(iii) are typically used for AMPA and GABA synapses. NMDA-synapses have an additional dependency on membrane voltage and the concentration of extracellular Mg$^{2+}$ \cite**{Koch1999,Sterratt2011}, and are commonly modeled as  \cite**{Koch1999,Sterratt2011}:
 \begin{equation}
-I_\text{syn}(t) = \frac{\bar{G}_\text{syn}}{1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}} } f(t) \left(V_\mathrm{m}(t)-E_\text{syn} \right)
+I_\text{NMDA}(t) = \frac{\bar{G}_\text{NMDA}}{1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}} } f(t) \left(V_\mathrm{m}(t)-E_\text{syn} \right)
 \label{eq:Neuron:NMDAsynapse}
 \end{equation}
 where $f(t)$ in principle can be any of the three kernels (i)-(iii) defined above, but is commonly taken to be a $\beta$-function (iii) \cite**{Koch1999,Sterratt2011}. Due to the dependence on $V_\mathrm{m}$ and Mg$^{2+}$, the conductance of the fully open NMDA synapse is not $\bar{G}_\text{syn}$, but $\bar{G}_\text{syn}/(1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}})$.
@@ -275,7 +275,7 @@ Of course, one may chose the stimulus to be any function of time.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\blue{Morphology}}
+\section{\blue{Multicompartment models}}
 \label{sec:Neuron:morphology}
 \index{Multicompartmental neuron model}
 When we above introduced the various membrane currents, we mostly pictured the neuron as being represented as a single compartment. In doing that, we implicitly assumed that the whole neuron was isopotential (same $V_\mathrm{m}$ everywhere). However, in neurons with long and branchy dendrites, $V_\mathrm{m}$ in the soma can be completely different from $V_\mathrm{m}$ in the tip of a distal dendrite. If we want to account for the spatial aspect of neuronal signaling, we need to use multicompartmental (MC) models, where the neural morphology is represented as cylindrical compartments connected with resistors, and $V_\mathrm{m}$ can be computed in each individual compartment (\Fref{fig:Neuron:multikompisen}A). 
@@ -292,24 +292,20 @@ compartments, $I_{n-1,n}$ (current from compartment $n-1$ to $n$), and $I_{n,n+1
 
 MC models rest on the assumption that neuronal morphology is well represented by a one-dimensional, branching cable. As such, MC type models neglect the radial components of intracellular currents (see e.g., \citeasnoun**{lindsay2004maxwell} for a critical study of this approximation). 
 
-As a simple introduction to the formalism used in MC models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (\Fref{fig:Neuron:multikompisen}B). For simplicity, we assume that the three cylinders have the same length ($L$) and diameter ($d$). The three categories of currents that run in this system are (i) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$), (ii) the transmembrane currents ($I_{\mathrm{m},n}$) and (iii) the external stimulus ($I_\mathrm{ext}$) that we introduced in the previous subsection. 
 
-\ghtxt{The external-stimulus current ($I_\mathrm{ext}$) affects the neurodynamics as if it were just another transmembrane current, and for the purpose of computing the neurodynamics, we could therefore have baked it into the expression for the general transmembrane current ($I_{\mathrm{m},n}$). However, as we discussed earlier, $I_\mathrm{ext}$ differs from the other transmembrane currents in that it does not directly
-\gen{"in itself"?} affect the extracellular potentials} (\gex{it enters the inside the cells from an insulated glass electrode} 
-\ghtxt{and not from the extracellular space). For later convenience, we have therefore chosen to keep $I_{\mathrm{m},n}$ and $I_\mathrm{ext}$ as two separate types of currents. }
+\subsection{\blue{Multicompartment formalism}}
+\label{sec:Neuron:Active_multicomp}
+As a simple introduction to the formalism used in MC models, let us consider a subset of three connected cylindrical compartments which we number $n-1$, $n$ and $n+1$ (\Fref{fig:Neuron:multikompisen}B). For simplicity, we assume that the three cylinders have the same length ($L$) and diameter ($d$). The three categories of currents that might be present in this system are (i) the axial currents running between the cylindrical compartments ($I_{n-1,n}$ and $I_{n,n+1}$), (ii) the transmembrane currents ($I_{\mathrm{m},n}$) and (iii) the external stimulus ($I_{\mathrm{ext},n}$) that we introduced in the previous subsection. 
 
-The dynamics of the system in \Fref{fig:Neuron:multikompisen}B  is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) should be zero:
-\begin{equation}
-I_{n-1,n} - I_{n,n+1} - I_{\mathrm{m},n} + I_{\mathrm{ext},n} = 0.
-\label{eq:Neuron:Kirch}
-\end{equation}
-
-To keep notation short, we for now group the different transmembrane currents together into a total transmembrane current,
+The transmembrane currents we know from \fref{sec:Neuron:membranecurrents}, but to keep notation short, we have 
+here grouped them together into a total transmembrane current:
 \begin{equation}
 I_{\mathrm{m},n} = I_{\mathrm{cap},n} + I_{\mathrm{ion},n} + I_{\mathrm{syn},n} = \pi d L c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} + \pi d L i_{\mathrm{ion},n}  + I_{\mathrm{syn},n}, 
 \label{eq:Neuron:Imemb}
 \end{equation}
-where $I_{\mathrm{ion},n}$ represents the total transmembrane ionic currents. We recall that we use the convention that $I_{\mathrm{m},n}$ does not include the stimulus current ($I_{\mathrm{ext},n}$), which comes as an addition to $I_{\mathrm{m},n}$ (\Fref{fig:Neuron:multikompisen}B). In \fref{eq:Neuron:Imemb}, the the current densities in \fref{eq:Neuron:singlecomp_zerosum} were converted to total currents through multiplication with the membrane area $A=\pi d L$ (lateral side of sylinder) of compartment $n$.
+where $I_{\mathrm{ion},n}$ represents the total transmembrane ionic currents. In \fref{eq:Neuron:Imemb}, the the current densities in \fref{eq:Neuron:singlecomp_zerosum} were converted to total currents through multiplication with the membrane area $A=\pi d L$ (lateral side of sylinder) of compartment $n$.
+
+The external-stimulus current ($I_{\mathrm{ext},n}$) affects the neurodynamics as if it were just another transmembrane current, and for the purpose of computing the neurodynamics, we could therefore have baked it into the expression for the general transmembrane current ($I_{\mathrm{m},n}$). However, as we discussed earlier, $I_{\mathrm{ext},n}$ differs from the other transmembrane currents in that it does not in itself affect the extracellular potentials, since it enters the inside of the neuron from an insulated glass electrode and not from the extracellular space. For later convenience, we have therefore chosen to keep $I_{\mathrm{m},n}$ and $I_{\mathrm{ext},n}$ as two separate types of currents (\Fref{fig:Neuron:multikompisen}B). 
 
 The axial current between two compartments is proportional to the intracellular voltage difference between the compartments, as determined by Ohm's law:
 \begin{eqnarray}
@@ -319,11 +315,17 @@ I_{n,n+1} = \frac{V_{\mathrm{i},n}-V_{\mathrm{i},n+1}}{4 r_\text{a} L/(\pi d^2)}
 \end{eqnarray}
 Here, the denominators represent the axial resistance between two compartments, defined in terms of the axial resistivity $r_\text{a}$ (\si{\ohm\centi\metre}), a material property of the cytosol solution, the cross-section area, $\pi d^2/4$, and the segment length or travel distance, $L$. 
 
-The calculations of the axial currents (\fref{eq:Neuron:axialcurrents}) become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} \ghtxt{offers standardized solutions for compartmentalizing neurons once the morphology is specified by the user. } \sout{facilitates customization of compartmentalization by the user once the neural morphology is specified.} \ehnote{Stemmer ikke helt -- NEURON lar brukeren sette $nseg$ for hver seksjon sant nok, men $nseg$ her vel en variabel brukeren maa definere selv som regel utfra en gitt regel/algoritme} \ghnote{Hva med det nye forslaget mitt? Poenget var her aa si at NEURON gjoer ting lettere for oss. Facilitates customization of compartmentalization framsto som litt tungt og generelt - kunne vi ikke sagt det samme om C++ f.eks.?} Different strategies for determining a suitable spatial discretization of cable models such as the \emph{d\_lambda rule} are discussed in \citeasnoun**{Hines2001}. For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of MC modeling. 
+With all the current specified as above, the dynamics of the system in \Fref{fig:Neuron:multikompisen}B  is computed using Kirchhoff's current law, which demands that the sum of currents into a given compartment ($n$) is zero:
+\begin{equation}
+I_{n-1,n} - I_{n,n+1} - I_{\mathrm{m},n} + I_{\mathrm{ext},n} = 0.
+\label{eq:Neuron:Kirch}
+\end{equation}
 
-\ghtxt{We note that the axial currents (\fref{eq:Neuron:axialcurrents}) depend on intracellular potential $V_{\mathrm{i}}$, while the membrane currents (\fref{eq:Neuron:Imemb}) depend on the membrane potential, which means that the system of equations in \fref{eq:Neuron:Kirch} is underdetermined. In most MC models, this challenge is overcome by assuming that the membrane potential and the intracellular potentials are identical, i.e., that $V_{\mathrm{m},n} = V_{\mathrm{i},n}-V_{\mathrm{e},n} \approx V_{\mathrm{i},n}$, where $V_{\mathrm{e},n}$ is the extracellular potential immediately outside compartment $n$. Since this is done for all compartments, this amounts to assuming that the extracellular potential ($V_{\mathrm{e}}$)} \gex{is constant and set to zero. The assumed isopotentiality of the extracellular space corresponds to assuming an infinite
+The equations for the axial currents (\fref{eq:Neuron:axialcurrents}) become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} \ghtxt{offers standardized solutions for compartmentalizing neurons once the morphology is specified by the user. } \sout{facilitates customization of compartmentalization by the user once the neural morphology is specified.} \ehnote{Stemmer ikke helt -- NEURON lar brukeren sette $nseg$ for hver seksjon sant nok, men $nseg$ her vel en variabel brukeren maa definere selv som regel utfra en gitt regel/algoritme} \ghnote{Hva med det nye forslaget mitt? Poenget var her ikke stort annet enn aa si at NEURON gjoer ting lettere for oss. Facilitates customization of compartmentalization framsto som litt tungt og generelt - kunne vi ikke sagt det samme om C++ f.eks.?} Different strategies for determining a suitable spatial discretization of cable models such as the so-called \textit{\emph{d\_lambda rule}} are discussed in \citeasnoun**{Hines2001}. For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of MC modeling. 
+
+We note that the axial currents (\fref{eq:Neuron:axialcurrents}) depend on intracellular potential $V_{\mathrm{i}}$, while the membrane currents (\fref{eq:Neuron:Imemb}) depend on the membrane potential, which means that the system of equations in \fref{eq:Neuron:Kirch} is underdetermined. In most MC models, this challenge is overcome by assuming that the membrane potential and the intracellular potentials are identical, i.e., that $V_{\mathrm{m},n} = V_{\mathrm{i},n}-V_{\mathrm{e},n} \approx V_{\mathrm{i},n}$, where $V_{\mathrm{e},n}$ is the extracellular potential immediately outside compartment $n$. Since this is done for all compartments, it amounts to assuming that the extracellular potential ($V_{\mathrm{e}}$) is constant and set to zero. The assumed isopotentiality of the extracellular space corresponds to assuming an infinite
 extracellular conductivity, while the choice of setting the extracellular potential to zero is done simply for convenience. 
-The assumption of a fixed constant extracellular potential may seem peculiar in a book where the modeling and interpretation of the variation of the extracellular potential} \ghtxt{is the main topic, and we comment further on this assumption and its consequences towards the end of this chapter. For now, we simply note that although the extracellular potential in reality is not zero,} \gex{the variations in} \ghtxt{$V_\mathrm{e}$ is generally much smaller than in $V_\mathrm{m}$. The assumption made in MC models is thus that $V_\mathrm{e}$ is sufficiently small for the approximation $V_{\mathrm{m}} \approx V_{\mathrm{i}}$ to give acceptable predictions of the neurodynamics. In the following, we will make this assumption, and replace $V_\mathrm{i}$ in \fref{eq:Neuron:axialcurrents} with $V_\mathrm{m}$.}
+The assumption of a fixed constant extracellular potential may seem peculiar in a book where the modeling and interpretation of the variation of the extracellular potential is the main topic, and we comment further on this assumption and its consequences towards the end of this chapter. For now, we simply note that although the extracellular potential in reality is not zero, the variations in $V_\mathrm{e}$ is generally much smaller than in $V_\mathrm{m}$. The assumption made in MC models is thus that $V_\mathrm{e}$ is sufficiently small for the approximation $V_{\mathrm{m}} \approx V_{\mathrm{i}}$ to give acceptable predictions of the neurodynamics. In the following, we will make this assumption, and replace $V_\mathrm{i}$ in \fref{eq:Neuron:axialcurrents} with $V_\mathrm{m}$.
 
 
 %%%%%%%%%%%%
@@ -346,7 +348,8 @@ c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} = - \pi d L i_{\mathrm{ion},n} - \frac{I
 - \frac{d}{4 r_\text{a}} \frac{V_{\mathrm{m},n}-V_{\mathrm{m},n-1}}{L^2}  
 \label{eq:Neuron:multimainEND2}
 \end{equation}
-\ehnote{Kan det bli litt forvirrende med partial derivative her? En alternativ formulering er via `backward difference' approksimasjonen hvor $V_{n+1}$ termen faller ut: $dV_n/dt \propto (V_n - V_{n-1} / L)$.} \ghnote{Enig i at det var feil aa bruke derivert der, men det du beskriver er vel fortsatt forward difference? I diskretisert versjon er det, saa vidt jeg forstaar, bare aa sette $I_{n,n+1}$ lik null paa endepunktet, og luke den ut av ligninga. Jeg forstaar at det er dette som ogsaa gjoeres i NEURON: ligning 2 i: https://www.neuron.yale.edu/neuron/static/papers/nc97/nsimenv.pdf. Da blir det som beskrevet over. Var det en ok moesning?}
+\ehnote{Kan det bli litt forvirrende med partial derivative her? En alternativ formulering er via `backward difference' approksimasjonen hvor $V_{n+1}$ termen faller ut: $dV_n/dt \propto (V_n - V_{n-1} / L)$.} \ghnote{Enig i at det var feil aa bruke derivert der, men det du beskriver er vel fortsatt forward difference? I diskretisert versjon er det, saa vidt jeg forstaar, bare aa sette $I_{n,n+1}$ lik null paa endepunktet, og luke den ut av ligninga. Jeg forstaar at det er dette som ogsaa gjoeres i NEURON: ligning 2 i: https://www.neuron.yale.edu/neuron/static/papers/nc97/nsimenv.pdf. Da blir det som beskrevet over. Var det ok? }
+
 
 %%%%%%%%%%%%%%%%%
 \subsection{\blue{Passive multicompartment models}}
@@ -363,7 +366,7 @@ where $E_\text{m}$ is the membrane resting potential, and $g_\text{m}$ the speci
 Models that approximate the transmembrane ionic current density with \fref{eq:Neuron:mleak} are often called passive. In passive models it is customary to replace the specific membrane conductance $g_\text{m}$ with the specific membrane resistance $r_\text{m} = 1/g_\text{m}$ (\si{\ohm\square\centi\metre}). For MC models, the passive version of 
 \fref{eq:Neuron:multimain} then becomes:
 \begin{equation}
-c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} = \frac{E_\text{m}-V_{\mathrm{m},n}}{r_\text{m}} - \frac{I_\text{syn}}{\pi d L} + \frac{I_\text{ext}}{\pi d L} + \frac{d}{4r_\text{a}}\left(\frac{V_{\mathrm{m},n+1}-V_{\mathrm{m},n}}{L^2} - \frac{V_{\mathrm{m},n}-V_{\mathrm{m},n-1}}{L^2} \right) 
+c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} = \frac{E_\text{m}-V_{\mathrm{m},n}}{r_\text{m}} - \frac{I_{\text{syn},n}}{\pi d L} + \frac{I_{\text{ext},n}}{\pi d L} + \frac{d}{4r_\text{a}}\left(\frac{V_{\mathrm{m},n+1}-V_{\mathrm{m},n}}{L^2} - \frac{V_{\mathrm{m},n}-V_{\mathrm{m},n-1}}{L^2} \right) 
 \label{eq:Neuron:multipassive}
 \end{equation}
 
@@ -375,16 +378,40 @@ An illustration of passive signal propagation is shown in \fref{fig:Neuron:Semii
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/Neuron/Cablesims.png}
 \end{center}
-\caption[]{\textbf{Stick-neuron responding to transient and constant inputs received in one end.} (A) Finite cable of length $L = 1 \, \si{\milli\metre}$ simulated numerically as 100 compartments, and stimulated with an alpha-synapse in the first compartment ($0<x<10 \, \si{\micro\metre}$). Transient responses shown at different distances from the synapse. The peak response decreases and the time to peak increases with distance from the synapse. Eventually, $v_\mathrm{m}$ decays with the same time constant, the membrane time constant ($\tau_\mathrm{m} = r_\mathrm{m}c_\mathrm{m}$) at all point along the cable  \cite**{rall1969}. (B) Analytical steady-state solution for semi-infinite cable receiving a constant input $I_\text{stim} = 0.1 \, \si{\nano\ampere}$ in a sealed end at $x=0$. The membrane potential decays exponentially with distance from the stimulus site.  (A-B) Parameter choices: $c_\text{m}=1\, \si{\micro\farad\per\square\centi\metre}$, $d = 1\, \si{\micro\metre}$, $r_\text{a}=35.4\, \si{\ohm\centi\metre}$, $r_\text{m} = 10 \, \si{\kilo\ohm\square\centi\metre}$, which gives a length constant $\lambda = 840\, \si{\micro\metre}$.} \gen{Panel A er kanskje ikke noedvendig naar vi ikke har med tekst om transient respons til kabler? Men kanskje greit aa ha den med?} \ghnote{Jeg skriver jo noen ord om det over. Det er en eksempelsimulering med en passiv multicompartment-modell.}
+\caption[]{\textbf{Stick-neuron responding to transient and constant inputs received in one end.} (A) Finite cable of length $L = 1 \, \si{\milli\metre}$ simulated numerically as 100 compartments, and stimulated with an alpha-synapse in the first compartment ($0<x<10 \, \si{\micro\metre}$). Transient responses shown at different distances from the synapse. The peak response decreases and the time to peak increases with distance from the synapse. Eventually, $v_\mathrm{m}$ decays with the same time constant, the membrane time constant ($\tau_\mathrm{m} = r_\mathrm{m}c_\mathrm{m}$) at all point along the cable  \cite**{rall1969}. (B) Analytical steady-state solution for semi-infinite cable receiving a constant input $I_\text{stim} = 0.1 \, \si{\nano\ampere}$ in a sealed end at $x=0$. The membrane potential decays exponentially with distance from the stimulus site.  (A-B) Parameter choices: $c_\text{m}=1\, \si{\micro\farad\per\square\centi\metre}$, $d = 1\, \si{\micro\metre}$, $r_\text{a}=35.4\, \si{\ohm\centi\metre}$, $r_\text{m} = 10 \, \si{\kilo\ohm\square\centi\metre}$, which gives a length constant $\lambda = 840\, \si{\micro\metre}$.} \gen{Panel A er kanskje ikke noedvendig naar vi ikke har med tekst om transient respons til kabler? Men kanskje greit aa ha den med?} \ghnote{Jeg skriver jo noen ord om det over. Det er en eksempelsimulering med en passiv multicompartment-modell. Inn eller ut?}
 \label{fig:Neuron:Semiinf}
 \end{figure}
 
 
+\subsection{\blue{Two-compartment model}}
+\label{sec:Neuron:2comp}
+\ghtxt{
+As we explained in the beginning of this chapter (\fref{fig:Neuron:point_vs_multi}), the simplest model that can produce extracellular potentials is a two-compartment model. In this limiting case, the dynamics of compartments $n=1$ and $n=2$ is described by the edge-compartment formulas, \fref{eq:Neuron:multimainEND1} and \fref{eq:Neuron:multimainEND2}, respectively, so that the two-compartment model becomes:
+
+\begin{eqnarray}
+c_\text{m} \frac{dV_{\mathrm{m},1}}{dt} = - \pi d L i_{\mathrm{ion},1} - \frac{I_{\mathrm{syn},1}}{\pi d L} +  \frac{I_{\mathrm{ext},1}}{\pi d L}  
++ \frac{d}{4 r_\text{a}} \frac{V_{\mathrm{m},2}-V_{\mathrm{m},1}}{L^2}, \label{eq:Neuron:2comp1}, \\
+c_\text{m} \frac{dV_{\mathrm{m},2}}{dt} = - \pi d L i_{\mathrm{ion},2} - \frac{I_{\mathrm{syn},2}}{\pi d L} +  \frac{I_{\mathrm{ext},2}}{\pi d L}  
+- \frac{d}{4 r_\text{a}} \frac{V_{\mathrm{m},2}-V_{\mathrm{m},1}}{L^2}.
+\label{eq:Neuron:2comp2}
+\end{eqnarray}
+
+The passive version of the two-compartment model is:
+\begin{eqnarray}
+c_\text{m} \frac{dV_{\mathrm{m},1}}{dt} = \frac{E_\text{m}-V_{\mathrm{m},1}}{r_\text{m}} - \frac{I_{\text{syn},1}}{\pi d L} + \frac{I_{\text{ext},1}}{\pi d L} + \frac{d}{4 r_\text{a}} \frac{V_{\mathrm{m},2}-V_{\mathrm{m},1}}{L^2}, 
+\label{eq:Neuron:2comp1pas}\\
+c_\text{m} \frac{dV_{\mathrm{m},2}}{dt} = \frac{E_\text{m}-V_{\mathrm{m},2}}{r_\text{m}} - \frac{I_{\text{syn},2}}{\pi d L} + \frac{I_{\text{ext},2}}{\pi d L} - \frac{d}{4 r_\text{a}} \frac{V_{\mathrm{m},2}-V_{\mathrm{m},1}}{L^2}.
+\label{eq:Neuron:2comp1pas}
+\end{eqnarray}
+
+Although the two-compartment model fails to account for many important features of the extracellular potential, its simplicity gives it pedagogical value, and we will in \Fref{chap:Spikes} use it to establish some qualitative insights into the relationship between neural activity and extracellular potentials.}
+
+
 %%%%%%%%%%%%%%%%%%%%
-\subsection{\blue{Cable equation}}
+\section{\blue{Cable theory}}
 \label{sec:Neuron:cableeq}
 \index{Cable equation}
-If we in \fref{eq:Neuron:multipassive} let $L \rightarrow \delta x$, and take the limit $\delta x \rightarrow 0$, we can derive the cable equation (see e.g., \cite**{Sterratt2011}): 
+As we indicated in \fref{sec:Neuron:Passive_multicomp}, the passive model allows us to derive analytical results for how signals spread in cellular structures, such as e.g., neural dendrites. The idea is to start with an (infinitely long) chain of identical and interconnected cylinders, and each of let them become infinitesimally short, so that they form a continuum. That is, we let $L \rightarrow \delta x$ in \fref{eq:Neuron:multipassive}, and take the limit $\delta x \rightarrow 0$. From this, we can derive the cable equation (see e.g., \cite**{Sterratt2011}): 
 
 \begin{equation}
 c_\text{m} \frac{\partial V_\mathrm{m}}{\partial t} = \frac{E_\text{m}-V\mathrm{m}}{r_\text{m}} +  \frac{d}{4 r_\text{a}}  \frac{\partial^2 V\mathrm{m}}{\partial x^2} +  \frac{\mathcal{I}_{\mathrm{ext}}-\mathcal{I}_{\mathrm{syn}}}{\pi d},
@@ -400,7 +427,7 @@ where we have introduced the synaptic and external stimulus current per unit len
 
 To improve our analytical understanding of dendritic signaling, it is useful to reformulate the cable equation to:
 \begin{equation}
-\tau_\text{m} \frac{\partial V_\mathrm{m}}{\partial t} = E_\mathrm{m}-V_\mathrm{m} +   \lambda^2  \frac{\partial^2 V_\mathrm{m}}{\partial x^2}  + \frac{r_\mathrm{m} \mathcal{I}_{\mathrm{ext}} - \mathcal{I}_{\mathrm{syn}} }{\pi d},
+\tau_\text{m} \frac{\partial V_\mathrm{m}}{\partial t} = E_\mathrm{m}-V_\mathrm{m} +   \lambda^2  \frac{\partial^2 V_\mathrm{m}}{\partial x^2}  + \frac{r_\mathrm{m}}{\pi d} \left( \mathcal{I}_{\mathrm{ext}} - \mathcal{I}_{\mathrm{syn}}\right),
 \label{eq:Neuron:cable2}
 \end{equation}
 where we have multiplied all terms with $r_\text{m}$ and introduced the length constant \index{Length constant},
