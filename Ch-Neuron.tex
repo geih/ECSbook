@@ -407,6 +407,7 @@ c_\text{m} \frac{dV_{\mathrm{m},2}}{dt} = \frac{E_\text{m}-V_{\mathrm{m},2}}{r_\
 Although the two-compartment model fails to account for many important features of the extracellular potential, its simplicity gives it pedagogical value, and we will in \Fref{chap:Spikes} use it to establish some qualitative insights into the relationship between neural activity and extracellular potentials.}
 
 
+
 %%%%%%%%%%%%%%%%%%%%
 \section{\blue{Cable theory}}
 \label{sec:Neuron:cableeq}
@@ -474,7 +475,7 @@ We note that the general-solution to \fref{eq:Neuron:semiinf2} also has a term c
 
 To obtain the final solution of the problem, we need to specify the boundary value $V_\mathrm{m}(0)$, which will depend on the external stimulus. Since the stimulus is injected in a singular point ($x=0$), we go back to expressing in terms of a total current, $I_\text{ext}$ (and not as a current per unit length $\mathcal{I}_\text{ext}$). 
 \ehnote{igjen, var det noen grunn til \emph{ikke} aa bruke $i_\mathrm{stim}$ for stroem per lengdeenhet?}
-\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og trenger noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
+\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og da tenkte jeg at det var lurt aa innfoere noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
 \begin{equation}
 I_\text{ext} = - \frac{\pi d^2}{4}\frac{1}{r_\text{a}} \frac{\partial V}{\partial x}   \Big|_{x=0}.
 \end{equation}
@@ -531,9 +532,33 @@ Here $\tau_\text{m}$ is still the membrane time constant (\fref{eq:Neuron:timeco
 
 For a constant boundary condition ($I_\text{ext} = \text{constant}$ in \fref{eq:Neuron:semiinf4}) or, equivalently, $V_\mathrm{m}(0) = \text{constant}$ in \fref{eq:Neuron:semiinf3}), $\omega$ is zero, and $\lambda_{AC}$ becomes identical to the DC length constant $\lambda$. For an AC input, we see that $\lambda_{AC}$ decreases with $\omega$, and for high frequencies $\lambda_{AC} \propto (\omega \tau^{-1/2})$. Thus, low frequency input will tend to spread further in dendritic structures, while high frequency input will only affect dendritic structures more locally. 
 
-We note that $\lambda_{AC}$, which is the length constant for how $V_\mathrm{m}$ decays along the dendrite, is also the length constant for how the inputted current $I_\text{ext}$ returns to the extracellular space in the form of transmembrane currents ($I_\text{m}$) along the dendrite. Hence, $\lambda_{AC}$ determines the distribution of transmembrane currents resulting from a particular kind of stimulus, which is of great importance for the resulting extracellular potential (see \fref{sec:Spikes:approximate} and  \fref{sec:LFP:freq_content}).
+We note that $\lambda_{AC}$, the length constant for how $V_\mathrm{m}$ decays along the dendrite, is also the length constant for how the inputted current $I_\text{ext}$ returns to the extracellular space in the form of transmembrane currents ($I_\text{m}$) along the dendrite. Hence, $\lambda_{AC}$ determines the distribution of transmembrane currents resulting from a particular kind of stimulus, which is of great importance for the resulting extracellular potential (see \fref{sec:Spikes:approximate} and  \fref{sec:LFP:freq_content}).
 
 %%%%%%%%%%
+
+\subsection{\blue{The ball-and-stick model}}
+\label{sec:Neuron:ball-n-stick}\index{ball-and-stick neuron}
+The cable equation has played an important role in computational neuroscience, much due to the work by Winfried Rall, who showed that certain classes of dendritic trees can be reduced to a single, equivalent cylinder\index{equivalent cylinder}, preserving both the membrane area and the input conductance of the original dendritic tree (see e.g., \cite**{Rall1977}). For this reduction to be perfect, the dendritic tree must meet a set of geometrical conditions: 
+
+\begin{enumerate}
+\item All branches have the same $r_a$ and $r_m$. 
+\item All terminal branches must end with the same boundary conditions (e.g., the sealed end condition). 
+\item All terminal branches must end at the same electrotonic distance from the origin of the main branch. This (terminal-) electronic distance is found by summing the electrotonic distances of all branches along the path, where the electrotonic distance of a single branch $n$ equals its length divided by its length constant ($L_n/\lambda_n$).
+\item At every branch point, the diameter of the parent branch $d_0$ and its two daughters $d_1$ and $d_2$ must satisfy the so-called $d^{2/3}$-rule, stating that $d_0^{3/2} = d_1^{3/2}+d_2^{3/2}$.
+\item In the case of dendritic input (synaptic or external), the input must be identical in all locations at the same electotonic distance. 
+\end{enumerate}
+
+Although real dendritic trees rarely meet all the conditions listed above, the modeling of the entire dendritic tree as a cylinder has become a popular approximation, since it allows dendritic signaling to be computed analytically by solving the cable equation. Analytical solutions can also be derived for a system where one end the finite cylinder is connected to a single-compartment soma \cite**{Rall1959}. This system, commonly referred to as the ball-and-stick model (\fref{fig:Neuron:ballnstick}), is an often used simplified neuron model. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{Figures/Neuron/ballnstick.png}
+\end{center}
+\caption{\textbf{Ball-and-stick neuron.} Illustration of ball-and-stick neuron model receiving external input (green). Intra- (yellow) and transmembrane (orange) currents along the stick of length $L$ can be modeled with the cable equation. A single-compartment soma determines the boundary condition (pink) in one end ($x=0$) of the cable. \ghnote{Er det ikke det riktig aa si det slik?}
+}
+\label{fig:Neuron:ballnstick}
+\end{figure}
+
 
 \section{\blue{Ion concentration dynamics and reversal potentials}}
 \label{sec:Neuron:Ions_and_reversals}
