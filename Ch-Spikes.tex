@@ -378,13 +378,9 @@ of the return-current positions (see sidebox), will be.
 \label{sec:Spikes:far-spikes}
 For spikes recorded close to the soma, a single membrane current, the soma current, dominates the sum in Equation \gex{XX}, \ghtxt{as we described above}. For recording positions far away from the soma, the contribution from return membrane currents must also be included in the sum. For the ball-and-stick neuron, a membrane current entering the soma has to return to ECS through the cable stick, see \Fref{fig:Spikes:ball-and-stick-sketch}. When an oscillating membrane current enters through the soma \ghnote{Litt forvirrende med de ulike maatene aa beskrive denne injected-stroemmen paa. Kanskje bestemme oss for en fixed terminologi, definert der modellen introduseres helt i begynnelsen av seksjonen}, the spatial pattern of return current will depend on the frequency of the oscillation \ghtxt{\sout{due to}. This is an effect of the} capacitive properties of the membrane: For higher frequencies the capacitive membrane current will be larger, and the membrane effectively more leaky. Thus the injected soma current will return to the extracellular space closer to the soma for higher frequencies, as  seen in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}.  
 
-An approximate way of including the contribution to the spike from the dendritic return currents is to assume all return currents to leave the dendrite at a single point \ghtxt{\sout{on the dendrite}}. Then we are left with a current dipole where the transmembrane current entering at the soma is at all times balanced by an oppositely directed current with the same magnitude leaving at a single point on the dendrite. The current dipole length is then given by the distance between the soma and the dendritic position of the return current.  \ghnote{Er vi ikke tilbake til 2-comp-modellen naa? }
+An approximate way of including the contribution to the spike from the dendritic return currents is to assume all return currents to leave the dendrite at a single point \ghtxt{\sout{on the dendrite}}. \ghnote{Mener du her et punkt for hver frekvens, eller alle frekvenser i samme punkt. Uklart om du her snakker om en enkel sinus eller en frekvenspakke.} Then we are left with a current dipole where the transmembrane current entering at the soma is at all times balanced by an oppositely directed current with the same magnitude leaving at a single point on the dendrite. The current dipole length is then given by the distance between the soma and the dendritic position of the return current.  \ghnote{Er vi ikke tilbake til 2-comp-modellen naa? Kommentar?}
 
-As shown in \Fref{fig:Spikes:ball-and-stick-sketch} this current \ghnote{Her da? Skal det ikke vaere bindestrek her?!} dipole length will depend on frequency. A natural choice is to choose the dipole length to be equal to the frequency-dependent length constant $\lambda_\mathrm{AC}(f)$ of the stick,
-where the length constant corresponds to the mean value of the 
-envelope of the sinusoidally varying (normalized) membrane current
-$\hat{i}_\mathrm{m}$ weighted with distance $z$ from soma, see \Fref{fig:Spikes:ball-and-stick-sketch}. 
-For an infinite dendrite stick this corresponds to
+As shown in \Fref{fig:Spikes:ball-and-stick-sketch} this current\ghtxt{-}dipole \ghnote{Ka-ching!} length will depend on frequency. A natural choice is to choose the dipole length to be equal to the frequency-dependent length constant $\lambda_\mathrm{AC}(f)$ of the stick, where the length constant corresponds to the mean value of the envelope of the sinusoidally varying (normalized) membrane current $\hat{i}_\mathrm{m}$ weighted with distance $z$ from soma, see \Fref{fig:Spikes:ball-and-stick-sketch}. For an infinite dendrite stick this corresponds to
 %
 \begin{equation}
   \lambda_\mathrm{AC}^\infty(f) = \frac{\int_0^\infty z |\hat{i}_\mathrm{m}| dz}{\int_0^\infty |\hat{i}_\mathrm{m}| dz} 
@@ -392,8 +388,7 @@ For an infinite dendrite stick this corresponds to
 %=  \frac{\sqrt{2}\lambda}{\sqrt{\sqrt{W^2+1}+1}}.
 \end{equation}
 %
-For high frequencies ($f \gg 1/2 \pi r_\mathrm{m} c_\mathrm{m}$) this is after some algebra 
-found to give (see \citeasnoun[Appendix C]{Pettersen2008a} for details)
+For high frequencies ($f \gg 1/2 \pi r_\mathrm{m} c_\mathrm{m}$) this is after some algebra found to give (see \citeasnoun[Appendix C]{Pettersen2008a} for details)
 %
 \begin{equation}
  \lambda_\mathrm{AC}^\infty(f) =  \frac{\lambda}{\sqrt{\pi f \tau}} = 
@@ -401,11 +396,7 @@ found to give (see \citeasnoun[Appendix C]{Pettersen2008a} for details)
 \label{eq:Spikes:approx_lambda_ac}
 \end{equation}
 %
-where $\lambda$ is the cable length constant from Equation~\gex{XX}.
-
-
-Then the extracellular potential contribution from each frequency component can be approximated by using the 
-dipolar expression in Equation~\gex{XX}, that is,
+where $\lambda$ is the cable length constant from Equation~\gex{XX}. The extracellular potential contribution from each frequency component can then be approximated by using the dipolar expression in Equation~\gex{XX}, that is,
 %%%
 \begin{equation}
   |\hat{V}_\mathrm{e,far}(f,\vec{r})| =  \frac{|p(f) \cos \theta|}{4 \pi \sigma r^2} 
@@ -421,10 +412,10 @@ Thus for spikes measured far away from the soma we find
   \propto d^{2} \frac{|\cos \theta|}{r^2  r_\mathrm{a}} |\hat{V}_\mathrm{s}(f)| 
   \label{eq:Spikes:Ve_far_2}
 \end{equation}
-The suffix `far' is added because this expression only applies in the `far-field' limit, that is,
-far away from the soma. 
+The suffix `far' is added because this expression only applies in the `far-field' limit, that is, far away from the soma. 
 \ehnote{`far-field' limit har vel en noe mer generell definisjon?}
 \gen{Etter aa tenkt litt mer tror jeg det er OK aa si far-field limit siden dette dipolleddet vil dominere i denne grensen.}
+\ghnote{Skal lambda hete lambda infinity? }
 %
 %Equations~(\Fref{eq:Spikes:Ve_near_2}) and (\Fref{Spikes:box:equation:Ve_far_2}) describe how each frequency component of 
 %the soma membrane potential  $\hat{V}_\mathrm{s}(f)$ is `translated' into frequency components of the 
@@ -460,19 +451,11 @@ far away from the soma.
 %the spike-amplitude panel in \Fref{fig:Spikes:ball-and-stick-results}.
 
 \subsection{\blue{Spike amplitude dependence on distance}}
-
 \ehtxt{Beyond some distance, this amplitude decay is approximately inversely proportional to the distance squared~\cite**{Hagen2015}.}
 
+A prediction from the near-field formula in \Fref{eq:Spikes:Ve_near_2} is that the amplitude of each Fourier component decays as $1/r$ when moving away from the soma, as long as the position remains within distances where the `near-field' approximation still applies. Since this applies to all frequency components which together constitute the action potential, this implies that the amplitude of the spike will decay as $1/r$ in this regime as well. 
 
-A prediction from the near-field formula in \Fref{eq:Spikes:Ve_near_2} is that the amplitude of each Fourier component decays as $1/r$ when moving away from the soma, 
-as long as the position remains within distances where the `near-field' approximation still applies.
-Since this applies to all frequency components which together constitute the action potential, this implies that the amplitude of the 
-spike will decay as $1/r$ in this regime as well. 
-
-Far away, the far-field formula \Fref{eq:Spikes:Ve_far_2} implies that the spike amplitude depends not only on the radial distance $r$ from the neuron, but also the angle $\theta$ with the dipole axis, the direction of the dendritic stick. The amplitude will be largest above and below the neuron where $\theta=0^\circ$ and $\theta=180^\circ$, respectively. In the sideways direction 
-($\theta \sim 90^\circ$) the spike will be much smaller, as is characteristic for spatial patterns of potentials around a current
-dipole as illustrated in \Fref{fig:Spikes:DifferentNeuronModels}D. A qualitatively similar dipolar pattern, although not so distinct,
-is also seen for the spike generated by the biophysically detailed multi-compartment neuron in 
+Far away, the far-field formula \Fref{eq:Spikes:Ve_far_2} implies that the spike amplitude depends not only on the radial distance $r$ from the neuron, but also the angle $\theta$ with the dipole axis, the direction of the dendritic stick. The amplitude will be largest above and below the neuron where $\theta=0^\circ$ and $\theta=180^\circ$, respectively. In the sideways direction ($\theta \sim 90^\circ$) the spike will be much smaller, as is characteristic for spatial patterns of potentials around a current dipole as illustrated in \Fref{fig:Spikes:DifferentNeuronModels}D. A qualitatively similar dipolar pattern, although not so distinct, is also seen for the spike generated by the biophysically detailed multi-compartment neuron in 
 \Fref{fig:Spikes:DifferentNeuronModels}.
 Another difference of this far-field expression with the near-field expression in \Fref{eq:Spikes:Ve_near_2}, is that the
 amplitude decays as $1/r^2$, characteristic for potentials around dipolar sources, rather than $1/r$ which is characteristic for potentials around 
@@ -480,30 +463,20 @@ a single source. %This transition from a $1/r$ `monopolar' regime to a $1/r^2$ d
 %neurons \cite[Fig.~X]{Pettersen2008}.
 %\todo{Connect to Figure :EP-spike-ball-and-stick-results}
 
-An overall observation is that the spike is quite local, with the amplitude of the spike decaying rapidly with distance from the neuron soma. 
-For the pyramidal neuron considered in Figure~XX, for example, the spike amplitude decays from about
+An overall observation is that the spike is quite local, with the amplitude of the spike decaying rapidly with distance from the neuronal soma. For the pyramidal neuron considered in Figure~XX, for example, the spike amplitude decays from about
 300 microvolts a distance 20 micrometers from the soma centre to only about 10 microvolts a
-distance 100 micrometers away. \gen{Update when new figures are added}
-This rapid decay eases the interpretation of recorded spikes, since it implies
-that in practice an electrode contact will only pick up spikes from neurons with somas positioned within a radius of some tens of micrometers.
+distance 100 micrometers away. \gen{Update when new figures are added} This rapid decay eases the interpretation of recorded spikes, since it implies that in practice an electrode contact will only pick up spikes from neurons with somas positioned within a radius of some tens of micrometers.
 %\todo{GTE: Rewrite this to compare with our own figure spikes around multicompartmental model + refer to Pettersen2008}  
 
 %\paragraph{Spike amplitude dependence on neuronal parameters}
 \subsection{\blue{Spike amplitude dependence on neuronal parameters}}
 The spike amplitude is proportional to $d^{2}$ far away from the soma and to $d^{3/2}$ close to the soma,
-where $d$ is the diameter of the dendritic stick diameter. This implies that far away from the soma the spike amplitude is proportional to  the cross-sectional area of the dendrite. Close to the soma, the spike amplitude also increases with dendrite diameter, but slightly less so.
+where $d$ is the diameter of the dendritic stick diameter. This implies that far away from the soma the spike amplitude is proportional to  the cross-sectional area of the dendrite. Close to the soma, the spike amplitude also increases with dendrite diameter, but slightly less so.\ghnote{Referer til ligning.}
 
-Another observation is that the spike amplitude is independent of the membrane resistance $r_\mathrm{m}$ of the dendrite.
-This reflects that the frequencies dominating the spike are so high that the ionic membrane current, governed by $r_\mathrm{m}$, is
-much smaller than the capacitive membrane current, governed by membrane capacitance $c_\mathrm{m}$.  
-Thus the spatial distribution of the return current along the dendrite will depend only on the capacitive current. This dependence
-is seen through the presence of  $c_\mathrm{m}$ in the near-field formula in \Fref{eq:Spikes:Ve_far_2}. 
-Note that in the far-field formula \Fref{eq:Spikes:Ve_far_2},  $c_\mathrm{m}$ is absent due to cancellation with another factor containing $c_\mathrm{m}$ in the mathematical derivation, 
-cf. \citeasnoun[Equation 23]{Pettersen2008}.)
+Another observation is that the spike amplitude is independent of the membrane resistance $r_\mathrm{m}$ of the dendrite. This reflects that the frequencies dominating the spike are so high that the ionic membrane current, governed by $r_\mathrm{m}$, is much smaller than the capacitive membrane current, governed by membrane capacitance $c_\mathrm{m}$.  Thus the spatial distribution of the return current along the dendrite will depend only on the capacitive current. This dependence is seen through the presence of  $c_\mathrm{m}$ in the near-field formula in \Fref{eq:Spikes:Ve_far_2}. Note that in the far-field formula \Fref{eq:Spikes:Ve_far_2},  $c_\mathrm{m}$ is absent due to cancellation with another factor containing $c_\mathrm{m}$ in the mathematical derivation, cf. \citeasnoun[Equation 23]{Pettersen2008}.)
 
 In Equations~\Fref{eq:Spikes:Ve_near_2} and \Fref{eq:Spikes:Ve_far_2}, the spike amplitude is reduced when the 
-axial resistance $r_\mathrm{a}$ in the dendrites is increased. This reflects that an increased axial resistance implies that the current entering
-the soma during the first phase of an action potential will return closer to the soma. This implies shorter distances on average between the sink (soma) and the sources, where the current return to the ECS, and thus a smaller current dipole and a smaller spike.
+axial resistance $r_\mathrm{a}$ in the dendrites is increased. This reflects that an increased axial resistance implies that the current entering the soma during the first phase of an action potential will return closer to the soma. This implies shorter distances on average between the sink (soma) and the sources, where the current return to the ECS, and thus a smaller current dipole and a smaller spike.
 
 
 \subsection{\blue{Spike shape dependence on distance}}
@@ -582,12 +555,7 @@ roughly proportional to the sum of the cross-sectional areas for all dendrite br
 %account in the sum in \Fref{XX:equation:Ve-multi-compartment}. 
 
 \section{\blue{Soma spikes initiated in the axon}}
-
-In the investigations of the spike generated by the ball-and-stick neuron above, the assumption was that the action potential
-is generated by active conductances in the soma and that the spike is generated by a current dipole reflecting the distribution of return currents in the dendritic stick. 
-However, in some neurons the action potential is initiated some distance away from the soma along the axon 
-initial segment (AIS)\cite**{Goethals2020}. 
-This will in turn ignite the full soma action potential. In this initial phase of the action potential there will thus be a current dipole where current enters the neuron at AIS and leave through the soma. 
+In the investigations of the spike generated by the ball-and-stick neuron above, \ghtxt{\sout{the assumption was}we assumed} that the action potential is generated \ghtxt{\sou{by active conductances}} \ghnote{Vi brukte vel en injisert stroem som representerte dette, og hadde ikke med noen aktive konduktanser?} in the soma  and that the spike is generated by a current dipole reflecting the distribution of return currents in the dendritic stick. However, in some neurons the action potential is initiated some distance away from the soma along the axon initial segment (AIS)\cite**{Goethals2020}. This will in turn ignite the full soma action potential. In this initial phase of the action potential there will thus be a current dipole where current enters the neuron at AIS and leave through the soma. 
 
 In this scenario there will expectedly be a short-lasting somatic source prior to the longer-lasting somatic sink setting up the characteristic strong negative sodium peak. Model simulations have indeed confirmed that this is feasible and that a small and narrow positive peak can be seen prior to the negative sodium peak for recording close to the soma~\cite**{Telenczuk2018}.
 Interestingly, detailed experimental studies of the shape and amplitude of extracellular spikes recorded simultaneously around the soma and along the axon has now become possible by means of 
