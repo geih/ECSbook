@@ -214,8 +214,9 @@ I_\text{NMDA}(t) = \frac{\bar{G}_\text{NMDA}}{1+\mu [\text{Mg}^{2+}] e^{-\gamma 
 \label{eq:Neuron:NMDAsynapse}
 \end{equation}
 where $f(t)$ in principle can be any of the three kernels (i)-(iii) defined above, but is commonly taken to be a $\beta$-function (iii) \cite**{Koch1999,Sterratt2011}. Due to the dependence on $V_\mathrm{m}$ and Mg$^{2+}$, the conductance of the fully open NMDA synapse is not $\bar{G}_\text{syn}$, but $\bar{G}_\text{syn}/(1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}})$.
+\ehnote{$\bar{G}_\text{NMDA}$ i likninga, $\bar{G}_\text{syn}$ ser feil ut. Er $\mu, \gamma$ definert?}
 
-The conductance $\bar{G}_\text{syn}$  determines the strength of efficacy of the synaptic transmission, and must be tuned by the modeler to get the right peak amplitude of the synaptic current. We note that the synaptic strength can change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g.,  \citeasnoun**{DeSchutter2000}.
+The conductance $\bar{G}_\text{syn}$  determines the \ehtxt{\sout{strength of}} efficacy of the synaptic transmission, and must be tuned by the modeler to get the right peak amplitude of the synaptic current. We note that the synaptic strength can change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g.,  \citeasnoun**{DeSchutter2000}.
 
 \gen{Boer vi ha normaliserte utgaver av $f$ under slik at $\bar{G}_\text{syn}$  tilsvarer maximal conductance?}
 \ghnote{Ok. Naa er de normaliserte, bortsett fra NMDA.}
@@ -229,6 +230,7 @@ t_\mathrm{peak} &= \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau
 f(t) &= \frac{e^{-(t - t_\text{s}) / \tau_2} - e^{-(t - t_\text{s}) / \tau_1} }{e^{- t_\mathrm{peak} / \tau_2} - e^{- t_\mathrm{peak} / \tau_1}} \Theta(t-t_\text{s})
 \end{align}}
 \ghnote{Fint. Jeg har normalisert, og byttet $t_{peak}$ med $\tilde{t}$, da peak fikk meg til aa tenke at dette er peak-tiden, mens det egentlig er peak-tiden minus $t_s$.}
+\ehnote{trenger vi ikke $\tilde{u}$ notasjonen til noe annet? Brukes f.eks. til aa notere empirisk sannsynlighetsfordeling i litteraturen.}
 
 
 \subsubsection{Current-based synapses}
@@ -244,9 +246,9 @@ We can think of the current-based synapse as a conductance-based synapse where t
 \label{eq:Neuron:CurrentBasedAvg}
 \end{equation}
 where $\langle V_\mathrm{m}(t) \rangle_t$ denotes the temporal average of the membrane potential. The temporal kernel
-$f(t)$ can have the same exponential waveforms (i)-(iv) as for the conductance based synapses. Current-based synapses have been popular in point-neuron network simulations in particular, as such networks can subjected to rigorous mathematical analysis (e.g., \cite**{Brunel2000,Deco2008,Tetzlaff2012,Helias2013,deKamps2013,Schuecker2015,Bos2016}) and are also computationally efficient \cite**{Brette2007,Plesser2007,Helias2012,Kunkel2014}. For point-neuron networks, effects of conductance-based synapses vs. current-based synapses on network activity have been investigated, see for example \cite**{Richardson2004,Cavallari2014}.
+$f(t)$ can have the same exponential waveforms (i)-(iv) as for the conductance based synapses. Current-based synapses have been popular in point-neuron network simulations in particular, as such networks can subjected to rigorous mathematical analysis (e.g., \cite**{Brunel2000,Deco2008,Tetzlaff2012,Helias2013,deKamps2013,Schuecker2015,Bos2016}) and are also computationally efficient \cite**{Brette2007,Plesser2007,Helias2012,Kunkel2014,Jordan2018}. For point-neuron networks, effects of conductance-based synapses vs. current-based synapses on network activity have been investigated, see for example \cite**{Richardson2004,Cavallari2014}.
 
-\ghnote{Espen, legger du inn disse refs i bib-fila?}
+\ghnote{Espen, legger du inn disse refs i bib-fila?}\ehnote{gjort}
 \ehnote{Mer en notat til oss selv: Denne lineariseringen tar ikke hoyde for en eventuell endring i effektiv membran-tidskonstant og shift i $E_L$ paa grunn av synapsekonduktanser med tilhoerende reverseringspotensial som til enhver tid er aapne. Se Cavallari2014 for detaljer.}
 
 
@@ -321,7 +323,9 @@ I_{n-1,n} - I_{n,n+1} - I_{\mathrm{m},n} + I_{\mathrm{ext},n} = 0.
 \label{eq:Neuron:Kirch}
 \end{equation}
 
-The equations for the axial currents (\fref{eq:Neuron:axialcurrents}) become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} \ghtxt{offers standardized solutions for compartmentalizing neurons once the morphology is specified by the user. } \sout{facilitates customization of compartmentalization by the user once the neural morphology is specified.} \ehnote{Stemmer ikke helt -- NEURON lar brukeren sette $nseg$ for hver seksjon sant nok, men $nseg$ her vel en variabel brukeren maa definere selv som regel utfra en gitt regel/algoritme} \ghnote{Hva med det nye forslaget mitt? Poenget var her ikke stort annet enn aa si at NEURON gjoer ting lettere for oss. Facilitates customization of compartmentalization framsto som litt tungt og generelt - kunne vi ikke sagt det samme om C++ f.eks.?} Different strategies for determining a suitable spatial discretization of cable models such as the so-called \textit{\emph{d\_lambda rule}} are discussed in \citeasnoun**{Hines2001}. For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of MC modeling. 
+The equations for the axial currents (\fref{eq:Neuron:axialcurrents}) become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} \ghtxt{offers \sout{standardized} solutions for compartmentalizing neurons once the morphology is specified \sout{by the user}. } \sout{facilitates customization of compartmentalization by the user once the neural morphology is specified.} \ehnote{Stemmer ikke helt -- NEURON lar brukeren sette $nseg$ for hver seksjon sant nok, men $nseg$ her vel en variabel brukeren maa definere selv som regel utfra en gitt regel/algoritme} \ghnote{Hva med det nye forslaget mitt? Poenget var her ikke stort annet enn aa si at NEURON gjoer ting lettere for oss. Facilitates customization of compartmentalization framsto som litt tungt og generelt - kunne vi ikke sagt det samme om C++ f.eks.?} 
+\ehnote{Jeg synes vel begge forslagene er omtrent like kloenete :-/}
+Different strategies for determining a suitable spatial discretization of cable models such as the so-called \textit{\emph{d\_lambda rule}} are discussed in \citeasnoun**{Hines2001}. For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of MC modeling. 
 
 We note that the axial currents (\fref{eq:Neuron:axialcurrents}) depend on intracellular potential $V_{\mathrm{i}}$, while the membrane currents (\fref{eq:Neuron:Imemb}) depend on the membrane potential, which means that the system of equations in \fref{eq:Neuron:Kirch} is underdetermined. In most MC models, this challenge is overcome by assuming that the membrane potential and the intracellular potentials are identical, i.e., that $V_{\mathrm{m},n} = V_{\mathrm{i},n}-V_{\mathrm{e},n} \approx V_{\mathrm{i},n}$, where $V_{\mathrm{e},n}$ is the extracellular potential immediately outside compartment $n$. Since this is done for all compartments, it amounts to assuming that the extracellular potential ($V_{\mathrm{e}}$) is constant and set to zero. The assumed isopotentiality of the extracellular space corresponds to assuming an infinite
 extracellular conductivity, while the choice of setting the extracellular potential to zero is done simply for convenience. 
@@ -349,6 +353,7 @@ c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} = - \pi d L i_{\mathrm{ion},n} - \frac{I
 \label{eq:Neuron:multimainEND2}
 \end{equation}
 \ehnote{Kan det bli litt forvirrende med partial derivative her? En alternativ formulering er via `backward difference' approksimasjonen hvor $V_{n+1}$ termen faller ut: $dV_n/dt \propto (V_n - V_{n-1} / L)$.} \ghnote{Enig i at det var feil aa bruke derivert der, men det du beskriver er vel fortsatt forward difference? I diskretisert versjon er det, saa vidt jeg forstaar, bare aa sette $I_{n,n+1}$ lik null paa endepunktet, og luke den ut av ligninga. Jeg forstaar at det er dette som ogsaa gjoeres i NEURON: ligning 2 i: https://www.neuron.yale.edu/neuron/static/papers/nc97/nsimenv.pdf. Da blir det som beskrevet over. Var det ok? }
+\ehnote{Sikkert ok. Ellers er tittelen paa delkapitlet lite beskrivende for innholdet (avsporet av denne diskusjonen om endpoint boundary conditions).}
 
 
 %%%%%%%%%%%%%%%%%
@@ -474,7 +479,9 @@ We note that the general-solution to \fref{eq:Neuron:semiinf2} also has a term c
 
 To obtain the final solution of the problem, we need to specify the boundary value $V_\mathrm{m}(0)$, which will depend on the external stimulus. Since the stimulus is injected in a singular point ($x=0$), we go back to expressing in terms of a total current, $I_\text{ext}$ (and not as a current per unit length $\mathcal{I}_\text{ext}$). 
 \ehnote{igjen, var det noen grunn til \emph{ikke} aa bruke $i_\mathrm{stim}$ for stroem per lengdeenhet?}
-\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og da tenkte jeg at det var lurt aa innfoere noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
+\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og da tenkte jeg at det var lurt aa innfoere noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} 
+\ehnote{La oss diskutere -- aa introdusere $\mathcal{I}$ virker noe unoedvendig hvis disse symbolene ikke dukker opp seinere og termene kan substitueres med stroem $i$ (per areal) ganget med $d$}
+We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
 \begin{equation}
 I_\text{ext} = - \frac{\pi d^2}{4}\frac{1}{r_\text{a}} \frac{\partial V}{\partial x}   \Big|_{x=0}.
 \end{equation}
