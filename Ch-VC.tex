@@ -76,7 +76,7 @@ i_t({\bf r}) = i_t(r) = -\sigma_t \frac{dV(r)}{dr}.
 \end{equation}
 
 \snnote{Setningen under var ganske lang..hva med:}
-\sntxt{\sout{Knowing this, we may find $V$ by simply noting that, s} S}ince there can be no charge accumulation anywhere inside the sphere, the net current $I_k$ injected into the center of the spherical volume with radius $r$ must equal the net current leaving through the surface of the volume \sntxt{.\sout{, which} The net current escaping the surface can in turn be found by multiplying \sout{in turn must equal}} the current density $i_t(r)$ at the surface \sntxt{\sout{multiplied}} with the surface area $4\pi r^2$. We then get the relationship:
+\sntxt{\sout{Knowing this, we may find $V$ by simply noting that, s} S}ince there can be no charge accumulation anywhere inside the sphere, the net current $I_k$ injected into the center of the spherical volume with radius $r$ must equal the net current leaving through the surface of the volume \sntxt{.\sout{, which} The net current leaving the surface can in turn be found by multiplying \sout{in turn must equal}} the current density $i_t(r)$ at the surface \sntxt{\sout{multiplied}} with the surface area $4\pi r^2$. We then get the relationship:
 
 \begin{equation}
 I_k = -4\pi \sigma_t r^2  \frac{dV(r)}{dr} \, \iff \, \frac{dV(r)}{dr} = -\frac{I_k}{4\pi \sigma_t r^2 }.
@@ -220,15 +220,15 @@ where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, and $
 \nabla^2 V({\bf r}) = - \frac{I' \delta^3({\bf r-r'})}{\sigma_t}.
 \label{eq:VC:CSD5}
 \end{equation}
-
-We already listed the solution to this in \fref{eq:VC:pointsource2}, but we here provide a more rigorous derivation. We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume containing the source:
+\snnote{Byttet ut volum-V med $\Omega$. Er det uheldig, siden dette symbolet også brukes om motstand?}
+We already listed the solution to this in \fref{eq:VC:pointsource2}, but we here provide a more rigorous derivation. We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume \sntxt{$\Omega$} containing the source \sntxt{$I'$}:
 
 \begin{equation}
-\iiint_V \nabla^2V({\bf r}) \,dV =  - \frac{I'}{\sigma_t} \iiint_V \ \delta^3({\bf r-r'}) \, dV,
+\iiint_{\sntxt{\Omega}} \nabla^2V({\bf r}) \,d\sntxt{\Omega} =  - \frac{I'}{\sigma_t} \iiint_\sntxt{\Omega} \ \delta^3({\bf r-r'}) \, d\sntxt{\Omega},
 \label{eq:VC:marit}
 \end{equation}
 
-By the definition of the delta-function, the right hand side of \fref{eq:VC:marit} is simply $I'/\sigma$. Using Gauss' theorem, we can convert the volume integral on the left hand side of \fref{eq:VC:marit} to a surface integral, so that \fref{eq:VC:marit} becomes:
+By the definition of the delta-function, the right hand side of \fref{eq:VC:marit} is simply $I'/\sigma$. Using Gauss' theorem, we can convert the volume integral on the left hand side of \fref{eq:VC:marit} to \sntxt{an integral over the surface $S$ \sout{a surface integral}}, so that \fref{eq:VC:marit} becomes:
 
 \begin{equation}
 \oiint_{S} \nabla V({\bf r}) \cdot \, d{\bf S}  = - \frac{I'}{\sigma_t},
@@ -261,7 +261,7 @@ V({\bf r})= \frac{I'}{4\pi \sigma_t |{\bf r-r'}|},
 As earlier stated, the solution for a general CSD can be expressed as a convolution over the Green's function, so that:
 
 \begin{equation}
-V({\bf r}) = \frac{1}{4\pi \sigma_t}\iiint_V \frac{C({\bf r'})}{|{\bf r}-{\bf r'}|} \,dV,
+V({\bf r}) = \frac{1}{4\pi \sigma_t}\iiint_{\sntxt{\Omega}} \frac{C({\bf r'})}{|{\bf r}-{\bf r'}|} \,d\sntxt{\Omega},
 \label{eq:VC:csds}
 \end{equation}
 where the volume integral runs over all sources. Here, $C$ represents whatever approximation one used for the current sources, and \fref{eq:VC:csds} is the continuous counterpart to \fref{eq:VC:pointsources}. If we describe the CSD as a sum of point sources, i.e.,  $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$,  \fref{eq:VC:csds} reduces to \fref{eq:VC:pointsources}.
