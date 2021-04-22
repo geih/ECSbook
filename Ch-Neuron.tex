@@ -15,7 +15,7 @@ Frameworks exist for constructing neuronal models at various levels of detail an
 \label{fig:Neuron:point_vs_multi}
 \end{figure}
 
-To account for the spatial extension of neurons, we need to use \textit{multicompartmental} (MC) neuron models. \sntxt{\sout{Also in MC models} As always}, the total sum of transmembrane currents must be zero. However, in MC models, currents do not have to enter and leave the neuron at the same location. MC models therefore give rise to a spatial distribution of current sinks, i.e., currents that disappear from extracellular space, going inward through neural membranes, and sources, i.e., currents that appear in extracellular space, going outward through neural membranes (\fref{fig:Neuron:point_vs_multi}B-C).
+To account for the spatial extension of neurons, we need to use \textit{multicompartmental} (MC) neuron models. As always, the total sum of transmembrane currents must be zero. However, in MC models, currents do not have to enter and leave the neuron at the same location. MC models therefore give rise to a spatial distribution of current sinks, i.e., currents that disappear from extracellular space, going inward through neural membranes, and sources, i.e., currents that appear in extracellular space, going outward through neural membranes (\fref{fig:Neuron:point_vs_multi}B-C).
 
 The most common MC modeling framework combines a so-called \textit{Hodgkin-Huxley type} description of the neural membrane mechanisms (see e.g., \cite**{Hodgkin1952,KockSegev1998,Pospischil2008}) with cable theory to predict how signals propagate spatially in dendrites and axons (see, e.g., \cite**{Koch1999,rall2011}). This framework has become the gold standard for biophysically detailed neuronal simulations on the cellular and network level, and has been used for simulating the dynamics of large neuronal networks (see e.g., \cite**{traub2005,markram2015,Billeh_2020}.  We will here only present this standard framework, which we will refer to simply as the MC framework. 
 
@@ -44,7 +44,7 @@ In the case where the neuron is modeled as a single compartment, the currents en
 i_{\mathrm{cap}}+ i_{\mathrm{L}} + \sum_x{i_x} +  \frac{I_{\mathrm{syn}}}{A} - \frac{I_{\mathrm{ext}}}{A} = 0,
 \label{eq:Neuron:singlecomp_zerosum}
 \end{equation}
-where the point-currents must be divided by the compartment area $A$. \ghtxt{By convention, the \sntxt{first} four \sntxt{\sout{first}} of these currents are defined as positive when going outwards, i.e., from the intra- to the extracellular space, while the external stimulus is defined as positive when injected \textit{into} the neuron. These are rightfully referred to as transmembrane currents as they go through the membrane, from the intra- to the extracellular space. The external stimulus current is conceptually different from the other currents in that it is injected with an electrode into the intracellular compartment. This is important to keep in mind for the later chapters of this book, because it means that, unlike the transmembrane currents, the injected current does not (directly) evoke extracellular potentials. } \ghnote{Tidligere var alle stroemmer definert med samme fortegnskonvensjon, men naa byttet jeg konvensjon for external stim. Er det ikke slik at dette er den vanligste konvensjonen paa feltet?} 
+where the point-currents must be divided by the compartment area $A$. By convention, the first four of these currents are defined as positive when going outwards, i.e., from the intra- to the extracellular space, while the external stimulus is defined as positive when injected \textit{into} the neuron. These are rightfully referred to as transmembrane currents as they go through the membrane, from the intra- to the extracellular space. The external stimulus current is conceptually different from the other currents in that it is injected with an electrode into the intracellular compartment. This is important to keep in mind for the later chapters of this book, because it means that, unlike the transmembrane currents, the injected current does not (directly) evoke extracellular potentials. \ghnote{Tidligere var alle stroemmer definert med samme fortegnskonvensjon, men naa byttet jeg konvensjon for external stim. Er det ikke slik at dette er den vanligste konvensjonen paa feltet?} 
 \gen{Hmmm.. Vet ikke} Below, we define the various currents that go into \fref{eq:Neuron:singlecomp_zerosum}. 
 
 \subsection{\blue{Capacitive current}}
@@ -82,7 +82,16 @@ The leakage current density is given by
 i_{\mathrm{L}} = \bar{g}_{\mathrm{L}} (V_\mathrm{m} - E_{\mathrm{L}}),
 \label{eq:Neuron:HHleak}
 \end{equation}
-where $\bar{g}_{\mathrm{L}}$ is the leak conductance (the bar indicates that it's a constant). The factor $(V_\mathrm{m} - E_{\mathrm{L}})$ (\si{\milli\volt}) is often called the \textit{driving force} and $E_{\mathrm{L}}$ the \textit{leak reversal potential}\index{Reversal potential}. The biophysical origin of the reversal potential is explained later (see \fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. In reality, the leakage current is \snnote{not?} due to a single type of membrane mechanism, but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
+where $\bar{g}_{\mathrm{L}}$ is the leak conductance (the bar indicates that it's a constant). The factor $(V_\mathrm{m} - E_{\mathrm{L}})$ (\si{\milli\volt}) is often called the \textit{driving force} and $E_{\mathrm{L}}$ the \textit{leak reversal potential}\index{Reversal potential}. The biophysical origin of the reversal potential is explained later (see \fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. 
+
+In reality, the leakage current is not due to a single type of membrane mechanism. Rather, $i_{\mathrm{L}}$ can be seen as a means of summarizing the effect of all mechanisms present on the neural membrane which is not modelled explicitly 
+
+
+on a neural membrane that are not included explcitly in 
+modeled more explicitly
+
+
+but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
 
 Together, the capacitive current and the leakage current determine the passive properties of the membrane. If the neuron were to include only these two currents, it could be well modeled as an RC-circuit, and RC-neuron\index{RC-neuron} models are often used to simulate the subthreshold dynamics of neurons (\Fref{fig:Neuron:RC}). 
 
