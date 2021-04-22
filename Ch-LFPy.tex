@@ -947,7 +947,7 @@ further successive steps of simplification may be applied to point-neuron networ
 Such models are commonly referred to as \emph{rate models} as an umbrella term,
 and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} \ehnote{Ha!} (whole brain) level such as oscillations.
 Rate models may simply describe the mean activity of subsets of neurons (`populations') as function of time but may also explain activity both in space and time.
-The latter is some times referred to as \emph{neural fields} and may readily produce observed phenomena such as traveling waves of activity.
+The latter is some times referred to as \emph{neural fields} and may readily produce observed phenomena such as traveling waves of activity (see e.g., \cite**{Amari1977,Deco2008}).
 Certain rate model frameworks may also describe activity of individual neurons.
 Here, we will however not delve into much mathematical detail as the body of literature on both rate models and neural fields and their derivation is vast,
 see for example \cite**{Gerstner2014} and \cite**{Ermentrout2010}.
@@ -978,12 +978,12 @@ If that is not the case, the magnitude and physical unit(s) of the final signal 
 
 \item We let the continuous variable $\nu_X(t)$ describe the population-averaged firing rate (with unit spikes \si{\per\second}) for all $N_X$ neurons in each population $X$ as predicted by the rate model.
 \ehnote{legg til "spikes" som enhet til SI pakka}
-Conceptually this quantity is equivalent to the discrete population spike signal $s_X(t)$ convolved with some normalized temporal filter kernel or windowing function $\mathcal{N}(t)$, that is:
+Conceptually this quantity is equivalent to the discrete population spike signal $s_X(t)$ convolved with some normalized temporal filter kernel or windowing function $w(t)$, that is:
 \begin{eqnarray}
-\nu_X(t) &\equiv& \frac{1}{N_X} \left(s_X \ast \mathcal{N}\right)(t)~\text{, where} \\
-\int_{-\infty}^\infty \mathcal{N}(\tau) d\tau &=& 1 ~.
+\nu_X(t) &\equiv& \frac{1}{N_X} \left(s_X \ast w\right)(t)~\text{, where} \\
+\int_{-\infty}^\infty w(\tau) d\tau &=& 1 ~.
 \end{eqnarray}
-Choices for filter could be (but is not limited to) a boxcar, Gaussian or Hamming type windowing function which is symmetric around $\tau = 0$.
+Choices for filter $w$ could be (but is not limited to) a boxcar, Gaussian or Hamming type windowing function which is symmetric around $\tau = 0$.
 
 \end{enumerate}
 
@@ -1031,9 +1031,9 @@ around some mean depth $\langle z \rangle$ with standard deviation $\sigma_z$.
 \item Furthermore, we let the synaptic density be proportional to the membrane area of compartments $\mathbf{A}_Y$ weighted by $\mathcal{L}_{YXL}$.
 Hence the expectation value for synaptic in-degree per compartment indexed by $k$ can be defined as
 \begin{equation}
-\langle k_{\mathrm{syn}YX}[k] \rangle \coloneq \frac{K_{YX}}{N_Y} \frac{ \mathcal{L}_{YXL}(\mathbf{r}_k) \mathbf{A}_{Yk}}{\sum_k \mathcal{L}_{YXL}(\mathbf{r}_k) \mathbf{A}_{Yk}} ~,
+\langle k_{\mathrm{syn}YX}[k] \rangle \coloneq \frac{K_{YX}}{N_Y} \frac{ \mathcal{L}_{YXL}(\mathbf{r}[k]) \mathbf{A}_{Y}[k]}{\sum_k \mathcal{L}_{YXL}(\mathbf{r}[k]) \mathbf{A}_{Y}[k]} ~,
 \end{equation}
-where $\mathbf{r}_k$ denotes the center location of each compartment.
+where $\mathbf{r}[k]$ denotes the center location of each compartment.
 With this quantity one may define the transfer function  of firing rate of population $X$ to each per-compartment synaptic input current as
 \begin{equation}
 H_{\mathrm{syn}YX}(\tau)[k] = N_X \langle k_{\mathrm{syn}YX}[k] \rangle \overline{I}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX}\right)(\tau) ~.
@@ -1051,7 +1051,7 @@ $\mathbf{I} \in \{ \mathbf{I}_\mathrm{m}(\mathbf{r}, \tau), \mathbf{I}_\mathrm{a
 \hat{H}_{YX}(\mathbf{r}, \tau) = \mathbf{F}\mathbf{I}(\mathbf{r}, \tau) ~,
 \end{equation}
 however, this would would imply that the cell-body distribution in each postsynaptic population would be condensed to a point $\delta(\mathbf{r}_Y)$.
-Assuming that the $N_Y$ cell bodies are homogeneously distributed on the spatial domain $\Omega_Y \coloneq \Omega_Y(\mathbf{r})$
+Assuming that the $N_Y$ cell bodies are sampled from the distribution $\widetilde{\mathbf{r}}_Y$
 (recall our initial description of the biophysically detailed network model in \Fref{chap:LFPy:hybrid}),
 one could consider computing an equivalent volumetric current field by convolving the predicted currents $\mathbf{I}(\mathbf{r}, \tau)$ with the normalized spatial function
 $\Omega_Y(\mathbf{r}) / \int_\Omega \Omega_Y(\mathbf{r}) d\Omega$
