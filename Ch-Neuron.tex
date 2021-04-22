@@ -482,9 +482,9 @@ V_\mathrm{m}(x) = E_\mathrm{m} + \left( V_\mathrm{m}(0)-E_\mathrm{m} \right) e^{
 We note that the general-solution to \fref{eq:Neuron:semiinf2} also has a term containing $e^{+x/\lambda}$, but this term diverges when $x \rightarrow \infty$ and is excluded on the count of being unphysical.
 
 To obtain the final solution of the problem, we need to specify the boundary value $V_\mathrm{m}(0)$, which will depend on the external stimulus. Since the stimulus is injected in a singular point ($x=0$), we go back to expressing in terms of a total current, $I_\text{ext}$ (and not as a current per unit length $\mathcal{I}_\text{ext}$). 
-\ehnote{igjen, var det noen grunn til \emph{ikke} aa bruke $i_\mathrm{stim}$ for stroem per lengdeenhet?}
-\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og da tenkte jeg at det var lurt aa innfoere noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} 
-\ehnote{La oss diskutere -- aa introdusere $\mathcal{I}$ virker noe unoedvendig hvis disse symbolene ikke dukker opp seinere og termene kan substitueres med stroem $i$ (per areal) ganget med $d$}
+%\ehnote{igjen, var det noen grunn til \emph{ikke} aa bruke $i_\mathrm{stim}$ for stroem per lengdeenhet?}
+%\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og da tenkte jeg at det var lurt aa innfoere noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} 
+%\ehnote{La oss diskutere -- aa introdusere $\mathcal{I}$ virker noe unoedvendig hvis disse symbolene ikke dukker opp seinere og termene kan substitueres med stroem $I$ (enhet A) delt paa $L$}
 We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
 \begin{equation}
 I_\text{ext} = - \frac{\pi d^2}{4}\frac{1}{r_\text{a}} \frac{\partial V}{\partial x}   \Big|_{x=0}.

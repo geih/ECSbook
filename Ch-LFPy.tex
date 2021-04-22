@@ -85,7 +85,8 @@ where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\
 Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (\si{\ohm\metre}) and diameter (\si{\metre}) of the dendritic cable model, respectively (cf. \Fref{chap:Neuron}).
 The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere},
 while the transmembrane current is per unit length (\si{\ampere/\metre}).
-The location $x$ denotes the position along the piece of cable in one dimension (the cable equation is by definition 1D even if the different parts of a neuron may be assigned locations in 3D space).
+The location $x$ denotes the position along the piece of cable in one dimension (the cable equation is by definition 1D even if the different parts of a neuron may be assigned locations in 3D space). 
+Note that the transmembrane current $i_\mathrm{m}$ is here given in units of \si{\ampere\per\metre}.
 
 For spatially discretized cable models the axial currents can be estimated per-compartment by the central difference approximation as
 %
@@ -237,7 +238,7 @@ For some applications, such as computing the magnetic field $\mathbf{H}(\mathbf{
 the axial currents can be represented as a vector field by multiplication with the path vectors along the center axis of each compartment:
 %
 \begin{equation}
-\mathcal{I}_\mathrm{a}(t) \equiv
+\mathbb{I}_\mathrm{a}(t) \equiv
 \begin{bmatrix}
 \mathbf{I}_\mathrm{a}(\mathbf{r}_1, t)\\
 \mathbf{I}_\mathrm{a}(\mathbf{r}_2, t)\\
@@ -276,7 +277,7 @@ i_\mathrm{m}(\mathbf{r}_N, t) \Vert \mathbf{d}_N \Vert
 \end{equation}
 under the assumption that the transmembrane current density $i_\mathrm{m}(x_j, t)$ is constant along the compartment axis.
 Here, $\Vert\mathbf{d}_j \Vert$ denotes the norm of $\mathbf{d}_j$.
-Note that $\mathcal{I}_\mathrm{a}(t)$ is a 3D tensor array with unit \si{\ampere \metre} and shape $(N, 3, N_t)$,
+Note that $\mathbb{I}_\mathrm{a}(t)$ is a 3D tensor array with unit \si{\ampere \metre} and shape $(N, 3, N_t)$,
 while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} with shape $(N, N_t)$.
 $N_t$ is here the number of discrete time steps in the simulated output signals.
 
@@ -381,7 +382,7 @@ Cylindrical volumes can be useful for computing the ground truth CSD alongside a
 while the latter could be used to compute the ground truth CSD across evenly distributed voxels distributed in the full 3D space occupied by the neuronal sources.
 
 The formalism may also be adapted for higher-dimensional source elements, that is,
-the set of axial currents $\mathcal{I}_\mathrm{a}$ which in the present context can be represented by a 3D tensor array with shape $(M, 3, N_t)$.
+the set of axial currents $\mathbb{I}_\mathrm{a}$ which in the present context can be represented by a 3D tensor array with shape $(M, 3, N_t)$.
 To compute the magnetic field outside the neuron arising from axial currents one can
 either sum up the individual contributions using the relevant Biot-Savart law \cite**{Blagoev2007,Hagen2018} as
 %
@@ -626,7 +627,7 @@ We will also assume that connection weights $\overline{G}_{\mathrm{syn}YX}$ are 
 \item The conduction delay $d_{vu}$ from presynaptic action potential generation time  to activation time of the synapse is greater than zero and drawn from some function $\Delta_{YX}(t)$.
 For simplicity, we let conduction delays be independent of cell location and geometry.
 (Other use cases may also pick delays from a statistical distribution or compute delays based on distance between pre- and post-synaptic units assuming a typical value for axonal action potential propagation speed.)
-\item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathcal{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed.
+\item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathbb{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed.
 Here $X$ and $Y$ may be used interchangeably, however,
 presynaptic populations may also represent point processes, external stimuli and similar,
 which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
@@ -1054,26 +1055,46 @@ however, this would would imply that the cell-body distribution in each postsyna
 Assuming that the $N_Y$ cell bodies are sampled from the distribution $\widetilde{\mathbf{r}}_Y$
 (recall our initial description of the biophysically detailed network model in \Fref{chap:LFPy:hybrid}),
 one could consider computing an equivalent volumetric current field by convolving the predicted currents $\mathbf{I}(\mathbf{r}, \tau)$ with the normalized spatial function
-$\Omega_Y(\mathbf{r}) / \int_\Omega \Omega_Y(\mathbf{r}) d\Omega$
+$\widetilde{\mathbf{r}}_Y / \int_\Omega \widetilde{\mathbf{r}}_Y d\mathbf{r}$
 and then compute and apply the forward solution $\mathbf{F}$.
 A more straightforward and equivalent alternative, however,
 is simply to embed the spatial averaging in the mapping matrix $\mathbf{F}$ directly.
 In case of the point source formula for extracellular potentials its elements of can be computed as
 \begin{equation}
-f_{ij} = \frac{1}{4 \pi \sigma \int_\Omega \Omega_Y(\mathbf{r})}
-	\int_\Omega \frac{d\Omega}{\Vert \mathbf{R}_i - \mathbf{r}_j - \mathbf{r}_\Omega \Vert}~, 
+f_{ij} = \frac{1}{4 \pi \sigma \int_\Omega \widetilde{\mathbf{r}}_Y) d\mathbf{r}}
+	\int_\Omega \frac{d\mathbf{r}}{\Vert \mathbf{R}_i - \mathbf{r}_j - \mathbf{r}_\Omega \Vert}~, 
 \end{equation}
-where points $\mathbf{r}_\Omega \in \Omega_Y$. 
+where points $\mathbf{r}_\Omega \sim \widetilde{\mathbf{r}}_Y$. 
 Analytical solutions for are however only possible to derive for certain source geometries, 
 hence numerical integration methods will usually be required. 
 
 \end{enumerate}
 
+
 \section{\red{EH: Other approximations}}
 
-\cite**{Mazzoni2015}
+So far, we have showed by example that a linear approximation can well explain the extracellular potentials (and by extension magnetic signals) from populations of multicompartment neuron models.
+For the purpose of relating activity in point-neuron networks in particular to extracellular electric or magnetic measures of activity, 
+a number of approximations has been proposed and utilized in the literature. 
+As \textit{they for the most part are shite}, we will not go into much detail here, 
+but emphasize that the aforementioned linearity leaves hope for \textit{some} of these approximations. 
 
-
+Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016},   
+\cite**{Mazzoni2015} compared different LFP proxies (short for approximations) that could be extracted in two-population spiking point-neuron network models. 
+These proxies, which some times has been used to mimic the LFP, EEG or similar in past studies, 
+included the population-averaged firing rate $\sum_X \nu_X(t)$, 
+the population-averaged somatic voltages of the point neurons $\sum_X V_\text{soma}^{\langle X \rangle}(t)$,
+the summed synaptic currents resolved into excitatory (AMPA) and inhibitory (GABA) currents, 
+the absolute of the summed synaptic currents, 
+and finally a weighted sum of the mean-subtracted summed synaptic currents with added delays along the time axis.
+ 
+The task at hand was identifying which proxy maximises the fraction of variance explained ($R^2$) between the $z$-scored respective proxy predictions and ground-truth LFP signal. 
+The LFP signal was predicted using the standard MC formalism in combination with the line-source volume conductor model, as described earlier. \ehnote{kryssref}
+The LFP signal was also computed at different depths, 
+mimicking an experimental recording using a laminar probe down through a cortical column. 
+Hence, performance of the different proxies could be evaluated across different depths. 
+Synaptic activation times were determined by the spiking activity of a two-population point-neuron network model  with current-based synapses taken from a previous study \cite**{Cavallari2014}. 
+ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
