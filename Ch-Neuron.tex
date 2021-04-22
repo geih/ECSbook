@@ -31,13 +31,13 @@ An MC model is characterized by (i) its morphology, and (ii) its membrane mechan
 \label{fig:Neuron:multicomp}
 \end{figure}
 
-Below, we first present a framework for modeling the transmembrane currents in a single compartment in \fref{sec:Neuron:membranecurrents}, and then go on to show how a number of such compartments can be connected together to a MC model in \fref{sec:Neuron:morphology}. Together, those\sntxt{/these?} two sections provide a theoretical framework for modeling neurons\sntxt{,} that should be sufficient for most practical applications. Readers that crave further biophysical insight into the ionic movements that mediate the transmembrane neural currents can get a brief introduction to this in \fref{sec:Neuron:Ions_and_reversals}. Finally, we end the chapter by discussing in \fref{sec:Neuron:HHCassumptions} what we bring along from the MC models when we set out to model extracellular potentials in the following chapters. 
+Below, we first present a framework for modeling the transmembrane currents in a single compartment in \fref{sec:Neuron:membranecurrents}, and then go on to show how a number of such compartments can be connected together to a MC model in \fref{sec:Neuron:morphology}. Together, these two sections provide a theoretical framework for modeling neurons, that should be sufficient for most practical applications. Readers that crave further biophysical insight into the ionic movements that mediate the transmembrane neural currents can get a brief introduction to this in \fref{sec:Neuron:Ions_and_reversals}. Finally, we end the chapter by discussing in \fref{sec:Neuron:HHCassumptions} what we bring along from the MC models when we set out to model extracellular potentials in the following chapters. 
 
 
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in \sntxt{the} celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (current per membrane area). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a leakage current density ($i_{\mathrm{L}}$), and (iii) a current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive stimuli, normally represented as total currents. These can be either (iv) synaptic input ($I_{\mathrm{syn}}$), or (v) external current injections delivered by an experimentalist ($I_{\mathrm{ext}}$). In computer-modeling terminology, the membrane currents (i-iii) are often called distributed mechanisms, as they are membrane properties, and scale with the membrane area, while the stimuli (iv-v) are often called point-processes, as they are delivered on a singular point on the membrane. 
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in the celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (current per membrane area). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a leakage current density ($i_{\mathrm{L}}$), and (iii) a current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive stimuli, normally represented as total currents. These can be either (iv) synaptic input ($I_{\mathrm{syn}}$), or (v) external current injections delivered by an experimentalist ($I_{\mathrm{ext}}$). In computer-modeling terminology, the membrane currents (i-iii) are often called distributed mechanisms, as they are membrane properties, and scale with the membrane area, while the stimuli (iv-v) are often called point-processes, as they are delivered on a singular point on the membrane. 
 
 In the case where the neuron is modeled as a single compartment, the currents entering that compartment must sum to zero, so that:
 \begin{equation}
@@ -84,16 +84,12 @@ i_{\mathrm{L}} = \bar{g}_{\mathrm{L}} (V_\mathrm{m} - E_{\mathrm{L}}),
 \end{equation}
 where $\bar{g}_{\mathrm{L}}$ is the leak conductance (the bar indicates that it's a constant). The factor $(V_\mathrm{m} - E_{\mathrm{L}})$ (\si{\milli\volt}) is often called the \textit{driving force} and $E_{\mathrm{L}}$ the \textit{leak reversal potential}\index{Reversal potential}. The biophysical origin of the reversal potential is explained later (see \fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. 
 
-In reality, the leakage current is not due to a single type of membrane mechanism. Rather, $i_{\mathrm{L}}$ can be seen as a means of summarizing the effect of all mechanisms present on the neural membrane which is not modelled explicitly 
-
-
-on a neural membrane that are not included explcitly in 
-modeled more explicitly
-
-
-but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
+The neuronal membrane possesses an orchestra of mechanisms, and in general, only a small subset of these are explicitly 
+incorporated in a computational model. The reason may partly be that modeler wants to keep things simple, and partly that not all membrane mechanisms have been identified experimentally in the first place. In reality, $i_{\mathrm{L}}$ does not represent a single, particular type of membrane mechanism, but should rather be seen as a phenomenological way of summarizing the effect of all otherwise un-accounted for membrane mechanisms in terms of the potential $E_{\mathrm{L}}$ that they jointly drive the membrane towards. Mechanisms contributing to $i_{\mathrm{L}}$ may typically include ion-cotransporters, ion-pumps and active ion channels that are not included in the explicitly modeled set $i_x$.
 
 Together, the capacitive current and the leakage current determine the passive properties of the membrane. If the neuron were to include only these two currents, it could be well modeled as an RC-circuit, and RC-neuron\index{RC-neuron} models are often used to simulate the subthreshold dynamics of neurons (\Fref{fig:Neuron:RC}). 
+
+
 
 \begin{figure}[!ht]
 \begin{center}
@@ -215,17 +211,16 @@ Typical choices for $f(t)$ are\index{Synapse models}:
 &&& \;\; \text{with:} \;\; \tilde{t} = \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \nonumber,
 \label{eq:Neuron:sf4}
 \end{align}
-where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $\Theta(t< 0)=0$, and where parameters like $\gamma$,  $\tau$, $\tau_1$ and $\tau_2$ must be tuned to experimental data from the particular synapse type that one wants to model. The waveforms (i)-(iii) have been normalized so that their peak amplitude is 1, meaning that $\bar{G}_\text{syn}$ in \fref{eq:Neuron:chemicalsynapse} can be interpreted as the peak conductance of the synapse, i.e., analogously to how $\bar{g}_\text{x}$ was the peak conductance for fully open ion channels in \fref{sec:Neuron:active}. 
+where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $\Theta(t< 0)=0$, and where the parameters $\tau$, $\tau_1$ and $\tau_2$ must be tuned to experimental data from the particular synapse type that one wants to model. The waveforms (i)-(iii) have been normalized so that their peak amplitude is 1, meaning that $\bar{G}_\text{syn}$ in \fref{eq:Neuron:chemicalsynapse} can be interpreted as the peak conductance of the synapse, i.e., analogously to how $\bar{g}_\text{x}$ was the peak conductance for fully open ion channels in \fref{sec:Neuron:active}. 
 
 The simple waveforms (i)--(iii) are typically used for AMPA and GABA synapses. NMDA-synapses have an additional dependency on membrane voltage and the concentration of extracellular Mg$^{2+}$ \cite**{Koch1999,Sterratt2011}, and are commonly modeled as  \cite**{Koch1999,Sterratt2011}:
 \begin{equation}
-I_\text{NMDA}(t) = \frac{\bar{G}_\text{NMDA}}{1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}} } f(t) \left(V_\mathrm{m}(t)-E_\text{syn} \right)
+I_\text{NMDA}(t) = \frac{\bar{G}_\text{NMDA}}{1+\xi [\text{Mg}^{2+}] e^{-\zeta V_\mathrm{m}} } f(t) \left(V_\mathrm{m}(t)-E_\text{syn} \right)
 \label{eq:Neuron:NMDAsynapse}
 \end{equation}
-where $f(t)$ in principle can be any of the three kernels (i)-(iii) defined above, but is commonly taken to be a $\beta$-function (iii) \cite**{Koch1999,Sterratt2011}. Due to the dependence on $V_\mathrm{m}$ and Mg$^{2+}$, the conductance of the fully open NMDA synapse is not $\bar{G}_\text{syn}$, but $\bar{G}_\text{syn}/(1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}})$.
-\ehnote{$\bar{G}_\text{NMDA}$ i likninga, $\bar{G}_\text{syn}$ ser feil ut. Er $\mu, \gamma$ definert?}
+where $\xi$ and $\zeta$ are parameters that determine the Mg$^{2+}$ and voltage dependencies, respectively, and that must be tuned to data from the NMDA synapse being modeled. The temporal kernel ($f(t)$) can in principle be any of the three kernels (i)-(iii) defined above, but is commonly taken to be a $\beta$-function (iii) \cite**{Koch1999,Sterratt2011}. Due to the dependence on $V_\mathrm{m}$ and Mg$^{2+}$, the conductance of the fully open NMDA synapse is not $\bar{G}_\text{NMDA}$, but $\bar{G}_\text{NMDA}/(1+\xi [\text{Mg}^{2+}] e^{-\zeta V_\mathrm{m}})$.
 
-The conductance $\bar{G}_\text{syn}$  determines the \ehtxt{\sout{strength of}} efficacy of the synaptic transmission, and must be tuned by the modeler to get the right peak amplitude of the synaptic current. We note that the synaptic strength can change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g.,  \citeasnoun**{DeSchutter2000}.
+The conductance $\bar{G}_\text{syn}$  determines the efficacy of the synaptic transmission, and must be tuned by the modeler to get the right peak amplitude of the synaptic current. We note that the synaptic strength can change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g.,  \citeasnoun**{DeSchutter2000}.
 
 \gen{Boer vi ha normaliserte utgaver av $f$ under slik at $\bar{G}_\text{syn}$  tilsvarer maximal conductance?}
 \ghnote{Ok. Naa er de normaliserte, bortsett fra NMDA.}
