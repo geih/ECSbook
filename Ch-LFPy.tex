@@ -1073,15 +1073,15 @@ hence numerical integration methods will usually be required.
 
 \section{\red{EH: Other approximations}}
 
-So far, we have showed by example that a linear approximation can well explain the extracellular potentials (and by extension magnetic signals) from recurrently connected networks of multicompartment neuron models.
-For the purpose of relating activity in point-neuron networks in particular to extracellular electric or magnetic measures of activity, however,
-a number of approximations has been proposed and utilized in the literature. 
+So far, we have showed by example that a linear approximation can well explain the extracellular potentials (and by extension magnetic signals) from a recurrently connected network of multicompartment neuron models.
+For the purpose of relating in particular point-neuron network activity to extracellular electric or magnetic measures of activity, however,
+a number of heuristic signal approximations (``proxies'') has been proposed and utilized in the literature. 
 As they for the most part are \textit{shite}, we will not go into much detail here, 
 but emphasize that the aforementioned linearity leaves hope for \textit{some} of these approximations. 
 
-Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016},   
-\cite**{Mazzoni2015} compared different LFP proxies (short for approximations) that could be extracted in two-population spiking point-neuron network models. 
-These proxies, which has been used to mimic the LFP, EEG or similar in past studies, 
+Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016} outlined throughout \Fref{sec:LFPy:hybrid},   
+\cite**{Mazzoni2015} compared different LFP \textit{proxies} (short for approximations) that could be extracted in two-population spiking point-neuron network models. 
+These proxies, which have been used to mimic the LFP, EEG or similar in past studies, 
 included the summed population-averaged firing rate $\sum_X \nu_X(t)$, 
 the population-averaged somatic voltages of the point neurons $\sum_X V_\text{soma}^{\langle X \rangle}(t)$,
 the summed synaptic currents resolved into excitatory (AMPA) and inhibitory (GABA) currents, 
@@ -1091,10 +1091,11 @@ and finally a weighted sum of the mean-subtracted summed synaptic currents with 
 The task at hand was identifying which proxy maximises the fraction of variance explained ($R^2$) between the $z$-scored ground-truth LFP signal and the respective proxy predictions. 
 The LFP signal was predicted using the standard MC formalism in combination with the line-source volume conductor model, as described earlier. \ehnote{kryssref}
 Synaptic activation times were determined by the spiking activity of a two-population point-neuron network model  with current-based synapses taken from a previous study \cite**{Cavallari2014}. 
-The LFP signal was also computed at different depths, 
+The LFP signal was also computed at different depths and lateral offsets, 
 mimicking an experimental recording using a laminar probe down through a cortical column. 
 Hence, performance of the different proxies could be evaluated across different depths. 
-Each proxy could be separated in depth dependent and temporal component, that is, the approximation in each channel could be formulated as a scaling factor times the temporal component. 
+Each proxy could be separated in a position-dependent and temporal component, that is, 
+the approximation in each channel could be formulated as a scaling factor times the temporal component. 
 
 As expected, both the population firing rate proxy ($\sum_X \nu_X(t)$) performed poorly as it can not possibly account for any spatial or temporal filtering effects mediated by the actual spike-signal kernel functions $H_{YX}(\mathbf{r}, \tau)$. 
 While the somatic voltage proxy account for conduction delays and
@@ -1102,8 +1103,33 @@ temporal components of synaptic currents but without intrinsic dendritic filteri
 its performance is only marginally better as the signals in question reflect transmembrane currents which do not equate fluctuations the membrane voltages \ehnote{as discussed in XXXXX}. 
 That leaves the various linear combinations of synaptic input currents, 
 which \textit{a priori} ignore additional linear contributions by intrinsic dendritic filtering and the electrostatic forward model in question. 
+Using the nomenclature established throughout this Chapter, 
+these temporal components $g_\text{proxy}(t)$ of the proxy LFPs can be defined as \cite**{Mazzoni2015}:
+%
+\begin{eqnarray}
+z_\text{score}\left(u(t)\right) &=& \frac{u(t)-\mu_u}{\sigma_u} \\
+g_{\sum_I}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y K_{YX} \big( \nu_X \ast \Delta_{YX} \ast I_{\text{syn}YX})(t)  \bigg) \\
+g_{\sum_{|I|}}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| K_{YX} \big( \nu_X \ast \Delta_{YX} \ast I_{\text{syn}YX})(t) \big|  \bigg) \\
+g_\text{WS}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| \alpha_X K_{YX} \big( \nu_X \ast \Delta_{YX} \ast I_{\text{syn}YX} \ast \delta(-\tau_X) \big)(t) \big|  \bigg)~. 
+\end{eqnarray}
+%
+Here, the $z$-scoring function ensures temporal components with zero mean and unitary variance. 
+For the latter function \textit{weighted sum} temporal component $f_\text{WS}(t)$ the parameter $\alpha_X$ is scalar and for the excitatory connections $\alpha_{X=E} \coloneq 1$,
+while the term $\delta(-\tau_X)$ denotes a temporal delay. 
+In conjunction with corresponding spatial weighting functions $f_\text{proxy} (\mathbf{r}) \in \{ f_{\sum_I}(\mathbf{r}), f_{\sum_{|I|}}(\mathbf{r}), f_\text{WS}(\mathbf{r}) \}$ which allows for defining the proxy signal as
+\begin{equation}
+\phi_\text{proxy}(\mathbf{r}, t) = f_\text{proxy}(\mathbf{r}) \ast g_\text{proxy}(t)~.
+\end{equation}
+%
+In this formalism, the elements of each $f_\text{proxy}(\mathbf{r})$ and free parameters in $g_\mathrm{WS}(t)$ can then be trivially fitted by minimizing the mean squared difference between ground truth signal and proxy signal 
+\begin{equation}
+\text{MSE}_\text{proxy} = \langle \left(\phi_\text{GT}(\mathbf{r}, t) - \phi_\text{proxy}(\mathbf{r}, t)\right)^2 \rangle ~.
+\end{equation}
+%
+For the two-population set up in \cite**{Mazzoni2015} the best-fitting proxy was determined to be the weighted sum variant $\phi_\text{WS}(\mathbf{r}, t)$ with parameters entering the temporal component set as $\tau_\text{E} =~$\SI{6}{\milli\second}, $\tau_\text{I}=0$, $\alpha_\text{E}=1$ and $\alpha_\text{I} = 1.65$, 
+resulting in up to $93\%$ variance explained in certain locations $\mathbf{r}$. 
 
-As a proof of inprinciple
+As a proof of principle, we shall then compare these different LFP proxies against the ground truth LFP generated by our recurrently connected 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
