@@ -211,6 +211,7 @@ Typical choices for $f(t)$ are\index{Synapse models}:
 &&& \;\; \text{with:} \;\; \text{peak} = \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \nonumber,
 \label{eq:Neuron:sf4}
 \end{align}
+\ehnote{Dette uttrykket (iii) gir ikke lenger mening -- symbolet $\tau$ mangler her og der!}
 where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $\Theta(t< 0)=0$, and where the parameters $\tau$, $\tau_1$ and $\tau_2$ must be tuned to experimental data from the particular synapse type that one wants to model. The waveforms (i)-(iii) have been normalized so that their peak amplitude is 1, meaning that $\bar{G}_\text{syn}$ in \fref{eq:Neuron:chemicalsynapse} can be interpreted as the peak conductance of the synapse, i.e., analogously to how $\bar{g}_\text{x}$ was the peak conductance for fully open ion channels in \fref{sec:Neuron:active}. 
 
 The simple waveforms (i)--(iii) are typically used for AMPA and GABA synapses. NMDA-synapses have an additional dependency on membrane voltage and the concentration of extracellular Mg$^{2+}$, and are commonly modeled as  \cite**{Koch1999,Sterratt2011}:
