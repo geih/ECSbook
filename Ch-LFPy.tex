@@ -15,19 +15,27 @@ which can be summarized as:
 
 The MC+VC scheme is not self-consistent, since Step 1 computes the neurodynamics under the assumption that $\phi$ is \ehtxt{unaffected by transmembrane currents \sout{zero (grounded extracellular space)}},
 and Step 2 uses this neurodynamics to compute a non-zero extracellular potential.
-\ehnote{I wonder if we should elaborate more on pt. 1: It is entirely possible to impose potentials different from zero and time varying with the current scheme and simultaneously estimate transmembrane currents. The main problem is that cable theory is 1D while real neurons are 3D (with the exception of structures such as axonal tracts).
+\ehnote{I wonder if we should elaborate more on pt. 1: It is entirely possible to impose potentials different from zero and time varying with the current scheme and simultaneously estimate transmembrane currents. The main problem is that cable theory is 1D while real neurons are 3D (with the exception of structures such as axonal tracts which may be well approximated as 1D).
 Self-ephaptic effects should be entirely possible to account for using standard methods (NEURON) for cable models with 1D geometry (at least that's what I think!).}
-There exist more complete and consistent schemes that account for both the ephaptic effects from $\phi$ on neurodynamics as well as for effects of ion concentration dynamics on neuronal activity of extracelluar potentials. In general, these more complete schemes require numerical simulations of both the neural and extracellular dynamics using finite element or finite difference methods, and are very computationally expensive.
+There \ehtxt{are however \sout{exists}} more complete and consistent schemes that account for both the ephaptic effects from $\phi$ on neurodynamics as well as for effects of ion concentration dynamics on neuronal activity of extracelluar potentials. In general, these more complete schemes require numerical simulations of both the neural and extracellular dynamics using finite element or finite difference methods, and are very computationally expensive.
 
-In most scenarios, ephaptic effects from extracellular potentials on neurodynamics are small, and ion concentrations tend to stay close to baseline. When this is true, the simplifying approximations applied in the two-step scheme do not critically affect the accuracy of its predictions. As the MC+VC scheme is far more computationally efficient than any of the more complete schemes, it remains the gold standard for computing $\phi$ in large population models of neurons mimicking physiologically realistic scenarios. Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the MC+VC-framework.
+In most scenarios, ephaptic effects from extracellular potentials on neurodynamics \ehtxt{can be assumed to be \sout{are}} small, 
+and ion concentrations tend to stay close to baseline. 
+\ehtxt{Thus \sout{When this is true}}, the simplifying approximations applied in the two-step scheme do not critically affect the accuracy of its predictions. As the MC+VC scheme is far more computationally efficient than any of the more complete schemes, 
+it remains the gold standard for computing \ehtxt{extracellular electric signals from \sout{$\phi$ in}} large neuronal population models mimicking physiologically realistic scenarios. 
+Also, designated software has been developed that makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the MC+VC-framework.
 
-When aiming to make realistic simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC.
-\ehnote{Computational demands are linearly dependent on the total number of compartments, so this a "simple" problem to solve, just scale up your computer capability accordingly.}
+When aiming to make \ehtxt{biphysically detailed \sout{realistic}} simulations of extracellular potentials, one might need to simulate large networks containing thousands of neurons. This is computationally demanding, even on an efficient scheme like MC+VC.
+\ehnote{Computational demands are linearly dependent on the total number of compartments, so this a "simple" problem to solve, just scale up your computer capability accordingly. 
+Tuning your model with billions of parameters into a reasonable regime is a bigger problem.
+}
 As we showed in \Fref{chap:VC},
-VC theory gave us \ehtxt{linear} analytical expression\ehtxt{s} for $\phi$ as a direct function of the neural current sources (Step 2), meaning that it is \ehtxt{usually} the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. Below, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with two strategies that may be applied to reduce the computational cost when computing the neurodynamics (Sections \ref{sec:Schemes:HybridLFPy}-\ref{sec:Schemes:KernelLFPy}). We end the chapter with a brief introduction of an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).
+VC theory \ehtxt{provides linear \sout{gave us}} analytical expression\ehtxt{s} for $\phi$ as a direct function of the neural current sources (Step 2), meaning that it is \ehtxt{usually} the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. 
+We first briefly introduce an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).
+Then, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with different strategies that may be applied to reduce the computational cost when computing the neurodynamics using spiking point-neuron models or population-rate models (Sections \ref{sec:Schemes:HybridLFPy}, \ref{sec:Schemes:KernelLFPy}, \ref{sec:Schemes:proxies}). 
 
-\ehnote{For meg gir det mer mening og organisere dette i reduksjonistisk rekkefoelge: (1) self-consistent; (2) MC+VC; (3) point-neuron spiking + MC + VC; (4) firing-rate + MC + VC.
-Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4 endrer i prinsippet ingenting med MV+VC formalismen - man disassosierer bare simulering av nettverksaktivitet (korrelasjoner) fra (MC+VC)-formalismen.}
+\ehnote{For meg gir det mer mening og organisere dette i reduksjonistisk rekkefoelge: (1) self-consistent; (2) MC+VC; (3) point-neuron spiking + MC + VC; (4) firing-rate + MC + VC; (5) Proxies.
+Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4 endrer i prinsippet ingenting med MC+VC formalismen - man disassosierer bare simulering av nettverksaktivitet (korrelasjoner) fra (MC+VC)-formalismen.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,9 +43,12 @@ Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4
 \section{\blue{GH: Self-consistent scheme for intra- and extracellular potentials} }
 \label{sec:VC:EMI}
 \index{Ephaptic effects}
+
+\ehnote{har latt teksten i dette delkapitlet vaere}
+
 Ephaptic effects refers to the phenomenon where the extracellular potential affects the membrane potential dynamics of neurons. The possible importance of ephaptic effects has been the topic of many studies, addressing in various ways how extracellular electric fields may affect neuronal firing or signal propagation in axons (see e.g., \cite**{clark1970,Rall1977,Holt1999,Bokil2001,anastassiou2010,anastassiou2015,Goldwyn2016,capllonch2020,ruffini2020}).
 
-Most of these studies have been based on some simplified approximations as to how evoked fields from one neuron affects other neurons, and less focus has been put on how the presence of ephaptic effects will affect the extracellular potential itself. Rigorous modeling of this, requires that the intra- and extracellular dynamics are modeled simultaneously on a unified framework based on VC theory. Such a framework exists \cite**{Krassowska1994,Agudelo-Toro2013,Tveito 2017}, and was in a recent publication referred to as the extracellular-membrane-intracellular (EMI) framework \cite**{Tveito2017}.
+Most of these studies have been based on some simplified approximations as to how evoked fields from one neuron affects other neurons, and less focus has been put on how the presence of ephaptic effects will affect the extracellular potential itself. Rigorous modeling of this, requires that the intra- and extracellular dynamics are modeled simultaneously on a unified framework based on VC theory. Such a framework exists \cite**{Krassowska1994,Agudelo-Toro2013,Tveito2017}, and was in a recent publication referred to as the extracellular-membrane-intracellular (EMI) framework \cite**{Tveito2017}.
 
 We here only describe very briefly the essence of the EMI framework. It is based on (Ohmic) current conservation in the intra- and extracellular spaces, so that:
 \begin{equation}
@@ -56,7 +67,7 @@ There exist even more advanced framework than EMI, which, in addition to account
 
 %%%%%%
 
-\section{\ehnote{}\ehtxt{Forward-model predictions from multicompartment neuron models}}
+\section{\ehnote{}\ehtxt{Forward-model predictions from multicompartment neuron models and networks}}
 \label{sec:Schemes:LFPy}
 \index{Multicompartment models}
 
@@ -105,7 +116,7 @@ i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{a} (x, t)}{\partial x} = \frac
 \end{eqnarray}
 %
 where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}.
-Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (\si{\ohm\metre}) and diameter (\si{\metre}) of the dendritic cable model, respectively (cf. \Fref{chap:Neuron}).
+Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (w. unit \si{\ohm\metre}) and diameter (unit \si{\metre}) of the dendritic cable model, respectively (cf. \Fref{chap:Neuron}).
 The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere},
 while the transmembrane current is per unit length (\si{\ampere/\metre}).
 The location $x$ denotes the position along the piece of cable in one dimension (the cable equation is by definition 1D even if the different parts of a neuron may be assigned locations in 3D space). 
@@ -181,7 +192,9 @@ i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\ma
 
 
 This machinery may appear as a bit of a hurdle to implement for the purpose of computing extracellular potentials or magnetic signals,
-but thankfully MC neuron modeling software such as NEURON and Arbor provides native support for computing the transmembrane current (with unit \si{\ampere}) and/or transmembrane current density per surface membrane area (with unit \si{\ampere/\metre^2}) for each compartment.
+but thankfully MC neuron modeling software such as NEURON and Arbor provides native support for computing the transmembrane current (with unit \si{\ampere}) and/or transmembrane current density per surface membrane area (with unit \si{\ampere/\metre^2}) for each compartment. 
+We will typically assume that the transmembrane current density is equal along each constant-diameter cylindrical compartment (which violates our above assumption of constant axial current!). 
+
 Dependent on the implementation in the neural simulation software,
 a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
 %
@@ -195,7 +208,8 @@ For now, we will emphasize that typical extracellular measures of extracellular 
 \caption{\textbf{Equivalent circuits for computing axial and transmembrane currents}.
 ({\bf A}) One-compartment cable model with sealed ends.
 ({\bf B}) Continuous piece of MC cable model.
-({\bf C}) MC cable model with branch point.}
+({\bf C}) MC cable model with branch point.
+\ehnote{ordentlig figur kommer}}
 \label{fig:LFPy_circuits}
 \end{figure}
 
@@ -252,7 +266,8 @@ V_\mathrm{m}(\mathbf{r}_2, t)
 \end{bmatrix} ~,
 \end{eqnarray}
 %
-that is, similar to \Fref{eq:LFPy_linear_combination}.
+that is, mathematically similar to \Fref{eq:LFPy_linear_combination}. 
+Note that the constant terms have been moved out of the matrix multiplication.
 We encourage the interested reader of this book to show that the same approach hold for other model configurations, such
 as 3-compartment models without and with branching points as illustrated in \Fref{fig:LFPy_circuits}B and C.
 
@@ -278,7 +293,7 @@ I_\mathrm{a}(\mathbf{r}_N, t) \mathbf{d}_N
 \end{equation}
 %
 For compactness we introduced the current displacement $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$,
-where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start and end point coordinates of compartment $j$.
+where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start- and endpoint coordinates of compartment $j$.
 Consistent with the point-source formalism (cf. \Fref{sec:VC:pointsource}),
 we let the `location' of each axial current be the mid-point $\mathbf{r}_j$ of each cylindrical compartment $j$.
 In a similar manner we will represent the total transmembrane current per compartment as a matrix
@@ -300,7 +315,7 @@ i_\mathrm{m}(\mathbf{r}_N, t) \Vert \mathbf{d}_N \Vert
 \end{equation}
 under the assumption that the transmembrane current density $i_\mathrm{m}(x_j, t)$ is constant along the compartment axis.
 Here, $\Vert\mathbf{d}_j \Vert$ denotes the norm of $\mathbf{d}_j$.
-Note that $\mathbb{I}_\mathrm{a}(t)$ is a 3D tensor array with unit \si{\ampere \metre} and shape $(N, 3, N_t)$,
+Note that $\mathbb{I}_\mathrm{a}(t)$ is a 3D array with unit \si{\ampere \metre} and shape $(N, 3, N_t)$,
 while $\mathbf{I}_\mathrm{m}(t)$ is a 2D matrix with unit \si{A} with shape $(N, N_t)$.
 $N_t$ is here the number of discrete time steps in the simulated output signals.
 
@@ -322,17 +337,17 @@ v(\mathbf{R}_M, t)
 \end{bmatrix}
 &=& \mathbf{F}
 \begin{bmatrix}
-w(\mathbf{r}_1, t) \\
-w(\mathbf{r}_2, t) \\
+I(\mathbf{r}_1, t) \\
+I(\mathbf{r}_2, t) \\
 \vdots \\
-w(\mathbf{r}_N, t)
+I(\mathbf{r}_N, t)
 \end{bmatrix} ~,
 \end{eqnarray}
 %
 where $\mathbf{F}$ is a matrix with dimensions $(M, N)$ wherein each element $f_{ij}$ is the chosen forward solution mapping the contribution from each source to the corresponding measurement.
-For the sake of compactness, $w(\mathbf{r}_j, t)$ is here either represents the axial or transmembrane current of compartment $j$.
+For the sake of compactness, $I(\mathbf{r}_j, t)$ is here either represents the axial or transmembrane current of compartment $j$.
 A simple linear forward model mapping transmembrane currents of an $N$-compartment model to extracellular potentials in $M$ locations would be the point-source formalism,
-which models neuronal sources \textit{and} measurement sites as infinitesimally small points an infinite homogeneous isotropic and linear volume conductor.
+which models neuronal sources \textit{and} measurement sites as infinitesimally small points in an infinite homogeneous isotropic and linear volume conductor.
 The point-source formula (\Fref{eq:VC:pointsource}) results in elements
 %
 \begin{equation}
@@ -352,7 +367,7 @@ The full linear system for obtaining the extracellular potential may then be wri
 \begin{bmatrix}
 \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_N\Vert} \\
 \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_N\Vert} \\
-\vdots & \vdots & \cdots & \vdots \\
+\vdots & \vdots & \ddots & \vdots \\
 \frac{1}{\Vert\mathbf{R}_M - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_M - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_M - \mathbf{r}_N\Vert}
 \end{bmatrix}
 \begin{bmatrix}
@@ -390,7 +405,7 @@ z_j
 \end{equation}
 %
 Another example is computing the \textit{ground truth} current source density (CSD) \cite**{Pettersen2008,Hagen2016,Hagen2017},
-that is, assigning the contribution of different compartments' transmembrane current to $M$ different spatial domains $\Omega_i$ as
+that is, assigning the contribution of different compartments' transmembrane current to $M$ different volumetric domains $\Omega_i$ as
 %
 \begin{equation}
 f_{ij} = \frac{\Delta s_{ij\in \Omega_i}}{\Delta s_{ij} V_{\Omega_i}} ~,
@@ -398,19 +413,19 @@ f_{ij} = \frac{\Delta s_{ij\in \Omega_i}}{\Delta s_{ij} V_{\Omega_i}} ~,
 \end{equation}
 %
 where $(\Delta s_{ij\in \Omega_i} / \Delta s_{ij}) \in [0, 1]$ denotes the fraction of the length of the segment within the domain $\Omega_i$ and
-$V_{\Omega_i}$ the volume of the spatial domain.
+$V_{\Omega_i}$ the volume of the domain itself.
 The geometry of each volume is in principle arbitrary,
 however they are typically assumed to be cylindrical or cubic.
 Cylindrical volumes can be useful for computing the ground truth CSD alongside a laminar probe \cite**{Pettersen2008,Hagen2016,Hagen2017},
-while the latter could be used to compute the ground truth CSD across evenly distributed voxels distributed in the full 3D space occupied by the neuronal sources.
+while the latter could be used to compute the ground truth CSD across evenly distributed voxels distributed in the entire 3D space occupied by the neuronal sources.
 
-The formalism may also be adapted for higher-dimensional source elements, that is,
-the set of axial currents $\mathbb{I}_\mathrm{a}$ which in the present context can be represented by a 3D tensor array with shape $(M, 3, N_t)$.
+The formalism using linear combinations may also be adapted for higher-dimensional source elements, that is,
+the set of axial currents $\mathbb{I}_\mathrm{a}$ which in the present context can be represented by a 3D array with shape $(M, 3, N_t)$.
 To compute the magnetic field outside the neuron arising from axial currents one can
 either sum up the individual contributions using the relevant Biot-Savart law \cite**{Blagoev2007,Hagen2018} as
 %
 \begin{equation}
-\mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^M \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
+\mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^N \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
 \label{eq:LFPy_biotsavart1}
 \end{equation}
 %
@@ -425,7 +440,7 @@ f_{ij} = - \frac{1}{4\pi} \frac{I_3 \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert
 %
 where $I_3$ is the shape $(3, 3)$ identity matrix,
 thus the elements $f_{ij}$ are of shape $(3, 3)$ and $\mathbf{F}$ will be of shape (N, M, 3, 3).
-Assuming that each compartmental axial current $\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t)$ is represented as a $3 \times N_t$ matrix,
+Assuming that each compartmental axial current $\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t)$ is represented as a shape $(3, N_t)$ matrix,
 the calculation of the magnetic field $\mathbf{B}$ in location $\mathbf{R}_i$ from all contributions is
 %
 \begin{equation}
@@ -435,7 +450,7 @@ the calculation of the magnetic field $\mathbf{B}$ in location $\mathbf{R}_i$ fr
 %
 Note that application of \Fref{eq:LFPy_biotsavart1} or \Fref{eq:LFPy_biotsavart3} is interchangeable and context dependent.
 In situations where axial currents ($I_\mathrm{a}(\mathbf{r}_j, t)$),
-current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stored separately it may make sense to precompute the full $\mathbf{F}$-matrix for all $N$ measurement sites at once which may demand a lot of system memory.
+current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stored separately it may make sense to precompute the full $\mathbf{F}$-matrix for all $M$ measurement sites at once which may demand a lot of system memory.
 
 \ehnote{usikker paa hvor detaljert jeg skal gaa inn her. Python/numpy lar en gjoere en gjoere denne operasjonen for alle maaleposisjoner kompakt som}
 \ehtxt{\url{B=(F @ I).sum(axis=1); B.shape=(N,3,Nt); F.shape=(N,M,3,3); I.shape=(M,3,Nt)}}
@@ -465,7 +480,8 @@ I_\mathrm{m}(\mathbf{r}_N, t)
 \end{bmatrix} ~,
 \end{equation}
 which is equivalent to \Fref{eq:VC:dipole}.
-As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$ (the shape of the current dipole moment array will be $(3, n_t)$.
+As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$, 
+the resulting shape of the current dipole moment array will be $(3, N_t)$.
 
 In the relatively simple case of an infinite homogeneous volume conductor the extracellular potential resulting from the current dipole moment is
 \begin{equation}
@@ -483,7 +499,7 @@ these models generally can be written on the form of a linear combination
 \begin{equation}
 \phi(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
 \end{equation}
-where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is model dependent.
+where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is head-model dependent.
 From the current dipole moment potential (\Fref{eq:LFPy:dipolepotential}),
 the corresponding rows of $\mathbf{M}$ for each electrode site $\mathbf{R}_i$ can be computed as
 \begin{equation}
@@ -494,7 +510,8 @@ The resulting shape of $\mathbf{M}$ is $(M, 3)$.
 
 As the extracellular potential remains linearly dependent on the current dipole moment $\mathbf{P}$
 which in turn is linearly dependent on the transmembrane currents,
-one can with relative ease estimate a linear predictor of extracellular potentials from transmembrane currents via the current dipole moment by computing the matrices $\mathbf{M}$ and $\mathbf{F}$ and then estimate the final signal as
+one can with relative ease estimate a linear predictor of extracellular potentials from transmembrane currents via the current dipole moment by computing the matrices $\mathbf{M}$ and $\mathbf{F}$ independently, 
+and then estimate the final signal as
 \begin{equation}
 \phi(\mathbf{R}, t) = \mathbf{M}\mathbf{F}\mathbf{I}_\mathrm{m}(t)~.
 \end{equation}
@@ -504,14 +521,13 @@ one can with relative ease estimate a linear predictor of extracellular potentia
 
 
 
-\section{\red{EH: Forward-model predictions from point-neuron models}}
+\section{\blue{EH: Forward-model predictions from spiking point-neuron network models}}
 \label{sec:Schemes:HybridLFPy}
 \index{Point neuron model}
 
 %\ehnote{gammalt:}
 %%\sout{Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)}
 
-\ehnote{nytt:}
 Many biophysically detailed and phenomenological models of individual neurons and neuronal networks that have been developed in the past have incorporated spatial geometry of the neurons at various level of detail.
 To represent and simulate the dynamics of such neuron models using computers the multicompartment cable formalism (\Fref{chap:Neuron}) remains a common choice.
 For the purpose of predicting extracellular electric or magnetic measures of neural activity,
@@ -543,7 +559,7 @@ explaining observed phenomena such as asynchronous or synchronous, regular and i
 Linking activity of point neurons and point neuron network models to electric or magnetic extracellular measures of activity however poses a problem.
 One could attempt to extract equivalent transmembrane currents (synaptic, ionic, capacitive etc.) and quickly come to the conclusion that all currents \emph{must} sum to zero in the point(s) due to charge conservation.
 As such there can be no electric or magnetic signals arising from point neurons or networks thereof.
-Physics-based computational schemes for predicting signals such as the local field potential (LFP) is therefore required.
+Physics-based computational schemes for predicting signals such as the local field potential (LFP) is therefore \textit{a priori} required.
 
 \subsection{The hybrid scheme}
 \label{chap:LFPy:hybrid}
@@ -553,7 +569,7 @@ point neurons (or other simplified neuron representations) are more-often used i
 But for forward-model predictions,
 at least a two-compartment neuron model is \textit{a priori} required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields.
 
-One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was introduced by
+One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was proposed by
 \cite**{Hagen2016},
 referred to as a hybrid scheme.
 The scheme is hybrid in the sense that the common-place scheme of using multi-compartment neuron models in conjunction with electrostatic forward models is used for signal prediction,
@@ -591,7 +607,7 @@ Note that channel 1 is at the pial surface, so that channel 2 corresponds to a c
 One main assumption is that point-neuron network models can accurately capture observations present in experimental data gathered \textit{in vivo},
 including irregular firing patterns
 \ehnote{(Softky and Koch 1993; van Vreeswijk and Sompolinsky 1996; Amit and Brunel 1997; Shadlen and Newsome 1998), membrane-potential fluctuations (Destexhe and Pare 1999), asynchronous firing (Ecker et al. 2010; Renart et al. 2010; Ostojic 2014), correlations in neural activity (Gentet et al. 2010; Okun and Lampl 2008; Helias et al. 2013), self-sustained activity (Ohbayashi et al. 2003; Kriener et al. 2014), and realistic firing rates across laminar cortical populations (Potjans and Diesmann 2014).}
-Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the original model (see e.g., \cite**{Roessert2016,Billeh_2020}).
+Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the biophysically detailed model variants (see e.g., \cite**{Roessert2016,Billeh_2020}).
 In the case of \cite**{Roessert2016} the effect of dendritic filtering on synaptic input currents is captured by computing an equivalent filter for each possible synapse location and type using a Green's function formalism \cite**{Wybo_2013}.
 The point neurons are modeled using a generalized integrate-and-fire (GIF) formalism,
 and the linear filters applied to the synaptic currents result in  well-preserved post-synaptic potentials in the point neuron. \ehnote{perhaps I'll leave this last point out.}
@@ -625,10 +641,10 @@ that is,
 one spike generated by a network subpopulation would result in a fixed contribution to the extracellular signal resulting from synaptic and transmembrane currents on postsynaptic multicompartment neurons.
 So how can we make an argument about the validity of said scheme,
 e.g., in the presence of \emph{non-linear} synaptic and ion-specific channels?
-Conceptually, it is perhaps best to first consider a recurrently connected network of biophysically detailed neurons which allows for computing extracellular signals,
+Conceptually, it is perhaps best to \emph{first} consider a recurrently connected network of biophysically detailed neurons which allows for computing extracellular signals,
 and that the aforementioned point-neuron network model represents something of an idealized scenario obtained by reducing biophysical detail in a systematic manner.
 
-Let us first define some properties of the biophysically detailed model. 
+Let us first define some properties of the biophysically detailed model, as general as possible. 
 For compactness, 
 \begin{enumerate}
 \item Let $X \in \{ \ldots \}$ and $Y \subseteq X$ denote pre- and postsynaptic population, respectively. Each population corresponds to separate classes of neurons (derived from anatomy, electrical properties, gene expression etc.).
@@ -641,28 +657,30 @@ Assuming a random connectivity with binomial in- and out-degree distributions th
 For small connection probabilities the expression can be approximated by $C_{YX} = K_{YX} / (N_Y N_X)$.
 \item Let layer or region (e.g., cortical layer) be denoted by $L$.
 \item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
-Connection probability may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{A}_Y$.
-\item Synaptic currents for each connection are given as $I_{\mathrm{syn}YX}(t)=\overline{G}_{\mathrm{syn}YX} f_{YX}(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}Y})$
+Connection probabilities may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{A}_Y$.
+\item Synaptic currents for each connection are given as $I_{\mathrm{syn}YX}(t)=\overline{G}_{\mathrm{syn}YX} f_{YX}(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}X})$
 where $\overline{G}_{\mathrm{syn}YX}$ denotes the maximum synaptic conductance and $f_{YX}(t) \in [0, 1]$ one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}.
-$V_\mathrm{m}(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}Y}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory).
-For simplicity we will assume that conductance magnitude is independent of $L$.
-We will also assume that connection weights $\overline{G}_{\mathrm{syn}YX}$ are static, i.e., there are no synaptic plasticity rules in place.
-\item The conduction delay $d_{vu}$ from presynaptic action potential generation time  to activation time of the synapse is greater than zero and drawn from some function $\Delta_{YX}(t)$.
+$V_\mathrm{m}(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}X}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory).
+For simplicity we will assume that $\overline{G}_{\mathrm{syn}YX}$ is independent of $L$.
+We will also assume that connection weights $\overline{G}_{\mathrm{syn}YX}$ are static, 
+that is, there are no synaptic plasticity rules in place.
+\item Let the conduction delays resulting from presynaptic action potential generation time  to activation time of the synapse be greater than zero and randomly drawn from some function as $\Delta_{vu} \sim \widetilde{\Delta}_{YX}(t)$.
 For simplicity, we let conduction delays be independent of cell location and geometry.
-(Other use cases may also pick delays from a statistical distribution or compute delays based on distance between pre- and post-synaptic units assuming a typical value for axonal action potential propagation speed.)
+(Other use cases may also compute delays based on distance between pre- and post-synaptic units assuming a typical value for axonal action potential propagation speed.)
 \item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathbb{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed.
 Here $X$ and $Y$ may be used interchangeably, however,
-presynaptic populations may also represent point processes, external stimuli and similar,
-which we will assume give approximately zero direct contributions to the signals predicted by the full network model.
+presynaptic populations may also include, remote populations, point processes, external stimuli and similar,
+which we will assume give approximately zero direct contributions to the signals predicted by the full recurrent network model.
 \item Extracellular signal contributions in different spatial locations may be computed and summed up as
 $\sum_Y \sum_{v=1}^{N_Y} \mathbf{F}^{\langle v \rangle} \mathbf{I}_\mathrm{m}^{\langle v \rangle}$ and similar for axial currents.
 $\mathbf{F}^{\langle v \rangle}$ here denotes a linear mapping of transmembrane currents of cell $v$ to a linearly dependent signal.
-\item The sequence of spike times $s_u(t) = \sum_k \delta (t - t_k)$ \ehnote{$\{ t_\mathrm{s}^{\langle u \rangle} \}$} of each of each neuron $u \in X$ is recorded throughout the entire simulation interval $[0, t_\mathrm{sim} \rangle$.
+\item The sequence of spike times $s_u(t) = \sum_k \delta (t - t_k)$ of each of each neuron $u \in X$ is recorded throughout the entire simulation interval $[0, t_\mathrm{sim} \rangle$.
 We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with spectrally `flat' spiking statistics (e.g., fixed-rate Poisson point processes) into the recurrently connected network.
 \item We may store the weighted, directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic populations.
 This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full connectivity graph procedurally (at least statistically).
 Graph weights represent maximum synaptic conductances.
-The graph must also include the synaptic locations on the postsynaptic neurons.
+The graph must also include the synaptic locations on the postsynaptic neurons. 
+We will hereby let compartment index $w$ equate synaptic location.
 \end{enumerate}
 
 
@@ -693,10 +711,13 @@ The synaptic currents and associated transmembrane currents on the postsynaptic 
 \caption{\textbf{Stylized two-population multicompartment neuron network with predictions of extracellular potentials.}
 ({\bf A}) Cell and electrode geometry. The network is constructed of one excitatory (`E') and one inhibitory (`I') population.
 Only a subset of cells are shown from each population.
-({\bf B}) Synapse counts per connection along the vertical $z$-axis in bins of \SI{20}{\micro\metre}.
-({\bf C}) Network spike raster and mean population-averaged firing rates.
+The black point markers along the $z$-axis denote locations of electrode contact points with separation \SI{50}{\micro\metre}. 
+({\bf B}) Synapse counts per connection $K_{YX}$ along the vertical $z$-axis in bins of \SI{20}{\micro\metre}.
+({\bf C}) Network spike raster spanning \SI{500}{\milli\second} of spontaneous activity. 
+The mean population-averaged firing rates are given shown in the legend.
 ({\bf D}) Per-population spike-count histograms with bin size \SI{5}{\milli\second}.
 ({\bf E}) Extracellular potentials.
+\ehnote{legg til panel labels}
 }
 \label{fig:LFPy_network}
 \end{figure}
@@ -707,7 +728,7 @@ Only a subset of cells are shown from each population.
 At this point one could destroy every connection of the recurrently connected network,
 load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage,
 reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times
-$\left(s_u(t) \ast \delta(t-d_{vu})\right)$
+$\left(s_u(t) \ast \delta(t-\Delta_{vu})\right)$
 accounting for transmission delay,
 and otherwise keep neuron and synapse parameterization and locations the same.
 The asterisk symbol denotes a convolution operation.
@@ -715,18 +736,18 @@ This would result in exactly the same changes in membrane voltages and consequen
 However, what did we gain through these steps?
 
 \begin{enumerate}
+\item Full disassociation of simulations of neuronal network dynamics and simulations of extracellular signals,
+as illustrated in \Fref{fig:LFPy_hybrid}.
 \item HPC resources may have been required for simulating neural dynamics in the recurrently connected network in parallel in the first place,
 but one may now utilize a trivial parallelization scheme in order to compute extracellular signals as contributions of each cell is independent of the others.
 One could even do each single-cell simulation serially.
-\item Full disassociation of simulations of neuronal network dynamics and simulations of extracellular signals,
-as illustrated in \Fref{fig:LFPy_hybrid}.
 \item Little was gained in terms of overall computational cost -- the total number of state variables (for active ion channels etc.) remains approximately the same.
 The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials, etc.
 \end{enumerate}
 
 For the purpose of predicting extracellular signals \emph{only},
-let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents.
-We may also relax the requirement that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all):
+let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents on average.
+We will also relax the requirement that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all):
 \begin{enumerate}
 \item Approximate conductance-based synapses by equivalent current-based synapses:
 \begin{eqnarray}
@@ -743,24 +764,24 @@ We would also note that some rescaling of current amplitudes \emph{may} be requi
 Ignoring other conductances which may be present (active ion channels etc.) except the passive leak conductance,
 the total membrane conductance per postsynaptic compartment $w$ is
 \begin{equation}
-G_{\mathrm{tot}}(t) = G_L + \sum_X \sum_{u \subset X} \overline{G}_{\mathrm{syn}YX} \left( f_{YX} \ast s_u \ast \delta(t-d_{YX}) \right)(t)
+G_{\mathrm{tot}}(t) = G_L + \sum_X \sum_{u \subset X} \overline{G}_{\mathrm{syn}YX} \left( f_{YX} \ast s_u \ast \delta(t-\Delta_{vu}) \right)(t)
 \end{equation}
 where $G_L \coloneq g_L A_w$ is the total leak conductance from the specific conductivity $g_L$ and compartment area $A_w$,
 $s_u(t)$ the sequence of presynaptic spikes
-and $d_{YX}(t)$ the conduction delay.
+and $\Delta_{vu}$ the conduction delay.
 The double sum over presynaptic populations $X$ and units $u \in X$ imply that each presynaptic unit targeting the compartment is accounted for.
 Assuming a fixed average presynaptic spike rate $\langle \nu_u \rangle \coloneq \Delta t^{-1} \int_t^{t+\Delta t} s_u(t) dt$ for any time duration $\Delta t$ 
-and a normalized delay distribution ($\int_0^\infty \Delta_{YX}(t) dt \coloneq 1$),
+and a normalized delay distribution ($\int_0^\infty \widetilde{\Delta}_{YX}(t) dt \coloneq 1$),
 the time-averaged effective conductance is approximately
 \begin{equation}
-G_\mathrm{eff} \coloneq \langle G_\mathrm{tot} \rangle \approx G_L + \sum_X \sum_{u \subset X} \langle \nu_u \rangle \overline{G}_{\mathrm{syn}YX} \int_0^\infty f_{YX}(t) dt ~.
+G_\mathrm{eff} \coloneq \langle G_\mathrm{tot}(t) \rangle \approx G_L + \sum_X \sum_{u \subset X} \langle \nu_u \rangle \overline{G}_{\mathrm{syn}YX} \int_0^\infty f_{YX}(t) dt ~.
 \end{equation}
 
 \item Remove active ion channels if their net contributions to the total transmembrane currents can be assumed to be small around typical membrane voltage values. 
 
-\item Active ion channel currents on the form
+\item Active ion channel currents on the specific form
 \begin{equation}
-I_\mathrm{w}(t) = - \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~ \label{eq:Ch-LFPy:active}
+i_\mathrm{w}(t) = - \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~ \label{eq:Ch-LFPy:active}
 \end{equation}
 may be approximated by equivalent, linearly dependent currents \cite**{Remme_2010,Ness2016}
 if their maximum conductivity $\overline{g}_\mathrm{w}$ is significant.
@@ -810,22 +831,26 @@ but generalize also to current types with more than one gating variable (e.g., N
 \begin{equation}
 E_L^\text{mod} = \langle V_\mathrm{m}(t) \rangle + \sum_\mathrm{w} \frac{g_\mathrm{w} (\langle V_\mathrm{m}(t) \rangle - E_\mathrm{w})}{g_L} ~,
 \end{equation}
-which ensure that the resting potential of the quasi-active model is similar to that of the fully active model.
+which ensures that the resting potential of the quasi-active model is similar to that of the fully active model.
 
 \item Further reduction of number of state variables can be achieved by reducing the number of compartments per postsynaptic cell.
-This may reduce the accuracy of membrane voltage predictions, but more so at higher frequencies due to the intrinsic dendritic filtering.
+This may indeed reduce the accuracy of membrane voltage predictions, but more so at higher frequencies due to the intrinsic dendritic filtering.
 Extracellular signals like the LFP, EEG and MEG however carry more power at lower frequencies and may be less affected.
+Reducing compartment counts also enforces replacing synaptic locations by their nearest suitable location.
 
 \item Further reduction of number of state variables describing linearly summing synaptic currents can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment.
-It's activation times are defined as the concatenation of sequences $\left(s_u \ast \Delta_{YX} \right)(t)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on  compartment $w$.
+It's activation times are defined as the concatenation of sequences $\left(s_u \ast \Delta_{vu} \right)(t)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on  compartment $w$.
 
 \item With the exception of spike measurements, most electric and magnetic signals of interest carry most power at comparably low frequencies ($\lesssim$\SI{1}{\kilo\hertz}).
 Thus, the temporal step size ($\Delta t$) of the simulations can usually be multifold increased compared to $\Delta t$ in the actual network simulation without sacrificing much in terms of accuracy in the relevant low-frequency range.
 The computational cost is inversely proportional to the temporal step size,
-and a reasonable choice may be $\Delta t \lesssim \tau \in \{ \tau_\mathrm{m}, \tau_\mathrm{syn}, \ldots \}$,
-that is, shorter than the typical time constants for membranes, synapses etc.
+and a reasonable choice may be $\Delta t \lesssim \tau \in \{ \tau_\mathrm{m}, \tau_\mathrm{syn}, \tau_\mathrm{w}, \ldots \}$,
+that is, shorter than the typical time constants for membranes, synapses, ion channels etc.
 
 \end{enumerate}
+
+\ehnote{Sammenlikning av prediksjoner med `hybrid scheme' vs. ground truth kommer sammen med kernel-prediksjoner} 
+
 
 
 \begin{figure}[!ht]
@@ -836,7 +861,7 @@ that is, shorter than the typical time constants for membranes, synapses etc.
 Spatiotemporal functions $\langle H_{YX}(\mathbf{r}, \tau) \rangle$ for each connection between every possible pre- and postsynaptic network population $X$ and $Y$, respectively.
 The kernels are computed as the spike-averaged contribution by postsynaptic neurons to the extracellular potential in electrode contact locations shown in \Fref{fig:LFPy_network}{\bf A}.
 The kernels are computed either using fully passive (`pas') or with quasi-linearized (`Ih\_lin') cable models.
-\ehnote{placeholder - tenker fjerne current dipole moment}
+\ehnote{placeholder - tenker fjerne current dipole moment. EI og IE subfix er bytta om, skal fikses.}
 }
 \label{fig:LFPy_kernels}
 \end{figure}
@@ -851,7 +876,7 @@ The kernels are computed either using fully passive (`pas') or with quasi-linear
 with layout of extracellular laminar probe.
 {\bf B} Densities of somas along $z$-axis.
 {\bf C} Per-compartment synapse densities for each connection between the two populations.
-{\bf D} Normalized distributions of transmission delays $\Delta_{YX} (\tau)$ for each connection relative to presynaptic activation time.
+{\bf D} Normalized distributions of transmission delays $\widetilde{\Delta}_{YX} (\tau)$ for each connection relative to presynaptic activation time.
 {\bf E} Synaptic currents $I_{\mathrm{syn}YX}(\tau)$ relative to synaptic onset for each connection.
 \ehnote{placeholder}
 }
@@ -902,12 +927,14 @@ their covariance normalized by ground truth signal variance ($COV(\hat{\phi}, \p
 
 
 
-\subsubsection{Kernel tricks}
-\label{sec:LFPy:kerneltricks}
+\section{Filter (kernel) based prediction methods}
 
-The cable equation describing the membrane voltage dynamics across different neuron sections is already a linear partial differential equation.
+\subsection{Spiking point-neuron network models}
+\label{sec:Schemes:KernelLFPy}
+
+The cable equation describing the membrane voltage dynamics across different neuron sections is by definition a linear partial differential equation.
 Points 1--5 above allows for computing a \emph{linear} relation between spikes of each presynaptic neurons and resulting contribution to the extracellular signal(s),
-as every component including synaptic conductances and voltage-gated ion channels of this hybridized simulation scheme is linearized and linearly separable.
+as every component including synaptic conductances and voltage-gated ion channels of this hybridized simulation scheme is linearized and linearly separable with respect to time and space.
 The different effects of transmission delays (or transmission delay distributions),
 evoked synaptic currents,
 filtering of inputs by dendrites plus quasi-active approximation of active ion channels and
@@ -916,17 +943,16 @@ may then be combined into a spatiotemporal filter kernel $H_{vu}(\mathbf{r},\tau
 where $u$ and $v$ denote pre- and postsynaptic neuron indices, respectively.
 One may compute this filter as
 \begin{equation}
-H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{I}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~,
+H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{I}_{\mathrm{syn}YX} \left( \delta(t - \Delta_{vu} \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~,
 \end{equation}
-where $\Delta_{YX}(t) \coloneq \delta(t - d_{YX})$ and
-the Green's like functions $G_{vu}(\mathbf{r}, \tau)$ encompass all dendritic filtering effects on the synaptic input currents into each corresponding distribution of transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle ij \rangle}(\mathbf{r}, \tau)$.
+where the Green's like functions $G_{vu}(\mathbf{r}, \tau)$ encompass all dendritic filtering effects on the synaptic input currents into each corresponding distribution of transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle ij \rangle}(\mathbf{r}, \tau)$.
 If each kernel function which is specific to each pair of pre- and postsynaptic neuron can be computed,
-one could compute the signal as the sum over convolutions between presynaptic spike times and corresponding kernels
+one could compute the signal as the sum over convolutions between presynaptic spike times and corresponding kernels as
 \begin{equation}
-\phi(\mathbf{r}, t) = \sum_{u \in X} \sum_{v \subset Y} \left(s_u \ast H_{vu} \right)(\mathbf{r}, t)~.
+\phi(\mathbf{r}, t) = \sum_X \sum_Y \sum_{u \in X} \sum_{v \subset Y} \left(s_u \ast H_{vu} \right)(\mathbf{r}, t)~.
 \end{equation}
 In large networks however,
-computing the full set $H_{vu}(\mathbf{r},\tau)$ can become intractable as the number of connections (and consequently number of kernels) grow proportionally to the product $N_X N_Y$ if the connection probabilities are kept fixed.
+computing the full set $H_{vu}(\mathbf{r},\tau)$ can become intractable as the number of connections $K_{YX}$ (and consequently the number of kernels) grow proportionally to the product $N_X N_Y$ if the connection probabilities are kept fixed.
 However, \cite**{Hagen2016} showed that a good approximation to the signal $\phi(\mathbf{r}, t)$ could be obtained by estimating kernels averaged over all pre- and postsynaptic neurons in each population $X$ and $Y$. 
 These averaged kernels may be defined as
 \begin{equation}
@@ -942,9 +968,10 @@ and average the response as
 \end{equation}
 where $\tau$ denote time relative to $t_X$.
 It is worth mentioning that these kernels are causal, that is,
-by construction $H_{YX}(\mathbf{r}, \tau) \coloneq 0$ for $\tau < 0$ as any contribution to the signal $\phi(\mathbf{r}, t)$ is solely due to postsynaptic contributions which in this scenario can not occur before the presynaptic spike event at $\tau=0$.
+by construction $H_{YX}(\mathbf{r}, \tau) \coloneq 0$ for $\tau < 0$ as any contribution to the signal $\phi(\mathbf{r}, t)$ is solely postsynaptic which in this scenario can not occur before the presynaptic spike event at $\tau=0$.
 The time lags spanned by the kernels are also symmetric around $\tau=0$ and of finite duration --
-the postsynaptic responses typically decay to approximately zero after a few tens of milliseconds. 
+the postsynaptic responses typically decay to approximately zero after a few tens of milliseconds.
+This decay time is related to the time constants relevant to the neuronal dynamics (that is, $\tau_\mathrm{m}, \tau_\mathrm{syn}, \tau_\mathrm{w}, \ldots$).  
 In \Fref{fig:LFPy_kernels} we show a set of such kernels for the stylized two-population multicompartment neuron network illustrated in \Fref{fig:LFPy_network}, 
 computed with either quasi-active or fully passive membrane dynamics. 
 
@@ -962,14 +989,15 @@ The measured kernels are essentially finite impulse responses (FIR) that must be
 The kernel coefficients can also be applied as a (in)finite impulse response (IIR/FIR) function using a standard linear filter implementation such as scipy.signal.lfilter by discarding coefficients for $\tau < 0$ in the IIR case, 
 and $\tau <= 0$ in the FIR case.}
 
-\subsubsection{\red{Population firing rate models}}
+
+\subsubsection{\blue{Population firing rate models}}
 \label{sec:Schemes:populationmodels}
 \index{Firing rate model}
 
-Similar to how dynamics of large-scale multicompartment neuron networks as reflected by spikes of the individual neurons can some times be preserved in equivalent networks of few-compartment or point neurons after a series of simplifying steps,
+Similar to how dynamics of large-scale multicompartment neuron networks as reflected by spikes of the individual neurons can some times be preserved in equivalent networks of few-compartment or spiking point neurons after a series of simplifying steps,
 further successive steps of simplification may be applied to point-neuron networks in order to describe neuronal dynamics at the level of populations.
 Such models are commonly referred to as \emph{rate models} as an umbrella term,
-and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} \ehnote{Ha!} (whole brain) level such as oscillations.
+and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} (whole brain) level such as oscillations.
 Rate models may simply describe the mean activity of subsets of neurons (`populations') as function of time but may also explain activity both in space and time.
 The latter is some times referred to as \emph{neural fields} and may readily produce observed phenomena such as traveling waves of activity (see e.g., \cite**{Amari1977,Deco2008}).
 Certain rate model frameworks may also describe activity of individual neurons.
@@ -984,7 +1012,7 @@ where $\tau_\mathrm{m}$ is the time constant of the effective low pass filter ch
 
 
 What we will primarily focus on here,
-is how the hybrid forward modeling scheme and the above `kernel trick' idea may be adapted for use with population rate models in a self-consistent manner.
+is how the hybrid forward modeling scheme and the above `kernel trick' idea may be adapted for use with population rate models in a consistent manner.
 Let us first make a series of assumptions:
 \begin{enumerate}
 \item The rate model accurately captures the fluctuations in spike rate of different populations of recurrently connected network of point neurons.
@@ -996,16 +1024,16 @@ as many rate models are phenomenological or have had their parameters determined
 population sizes ($N_X, N_Y$) average synaptic in-degree ($\langle k_{YX} \rangle$) or connection probabilities $C_{YX}$,
 synaptic coupling strength ($\overline{I}_{\mathrm{syn}YX}$),
 synaptic temporal kernel ($f_{YX}(t)$) and
-conduction delay function $\Delta_{YX}(t)$ for each connection.
-Let us for now assume that these parameters are used to derive parameters and variables entering the actual rate equations.
+conduction delay distribution $\widetilde{\Delta}_{YX}(t)$ for each connection.
+Let us for now assume that these parameters are used to derive parameters and variables entering the actual rate equations (such as $\tau_m, g_\sigma$).
 If that is not the case, the magnitude and physical unit(s) of the final signal predictions may be arbitrary and dimensionless, respectively.
 
 \item We let the continuous variable $\nu_X(t)$ describe the population-averaged firing rate (with unit spikes \si{\per\second}) for all $N_X$ neurons in each population $X$ as predicted by the rate model.
 \ehnote{legg til "spikes" som enhet til SI pakka}
-Conceptually this quantity is equivalent to the discrete population spike signal $s_X(t)$ convolved with some normalized temporal filter kernel or windowing function $w(t)$, that is:
+Conceptually this quantity is equivalent to the discrete population spike signal $s_X(t)$ convolved with some normalized temporal filter kernel or windowing function $f_\mathrm{w}(\tau)$, that is:
 \begin{eqnarray}
-\nu_X(t) &\equiv& \frac{1}{N_X} \left(s_X \ast w\right)(t)~\text{, where} \\
-\int_{-\infty}^\infty w(\tau) d\tau &=& 1 ~.
+\nu_X(t) &\equiv& \frac{1}{N_X} \left(s_X \ast f_w \right)(t)~\text{, where} \\
+\int_{-\infty}^\infty f_\mathrm{w}(\tau) d\tau &=& 1 ~.
 \end{eqnarray}
 Choices for filter $w$ could be (but is not limited to) a boxcar, Gaussian or Hamming type windowing function which is symmetric around $\tau = 0$.
 
@@ -1018,7 +1046,7 @@ we could persevere and compute our signal as
 \end{equation}
 However, such an approach implies that we must first perform a series of very computationally demanding calculations
 in order to compute transfer functions averaged over many thousands of multicompartment neurons.
-Can we deduce a methodology to compute the set of $\hat{H}_{YX}(\mathbf{r}, \tau)$ we need for all pre- and postsynaptic populations $X$ and $Y$ directly,
+Can we deduce a methodology to compute the set of kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$ we need for all pre- and postsynaptic populations $X$ and $Y$ directly,
 based on some expectation values for cell and synaptic placements?
 Let's try!
 First, let us assume that:
@@ -1028,7 +1056,7 @@ Thus we may assume that each postsynaptic population can be represented by \emph
 In \Fref{fig:LFPy_kernel_predictor}{\bf A} we show geometries used for each population $E$ and $I$ in relation to points in space where extracellular potentials are computed. 
 Panel {\bf B} shows the assumed spatial distribution of somas along the vertical $z$-axis. 
 The somas are assumed to be placed with homogeneous density within a radius $R$ in the horizontal $xy-$plane (not shown).
-We can define the distribution of somas in space as the probability density function $\widetilde{r}_X$ introduced earlier. 
+We can define the distribution of somas in space as the probability density function $\widetilde{\mathbf{r}}_X$ introduced earlier. 
  
 \item Further we assume that the statistics of synaptic placements and currents would be preserved,
 which allows us to compute the average synaptic current density for each recurrent connection over the whole postsynaptic `neuron'.  
@@ -1042,7 +1070,7 @@ which allows us to compute the average synaptic current density for each recurre
 
 %\item $\rho_{\mathrm{syn}YX}(\mathbf{r}, \tau)$ 
 \item Synaptic placements depends on some spatial specificity of synaptic connections \( \mathcal{L}_{YXL}(\mathbf{r}) \) and areas of putative target sections.
-If we for instance only allow synaptic input within a certain depth interval $[z_1, z_2]$ where $z_1 < z_2$ (e.g., corresponding to a cortical layer),
+If we for instance only allow synaptic input within a certain depth interval $[z_1, z_2]$ where $z_1 < z_2$ (e.g., corresponding to the thickness of a cortical layer),
 this spatial specificity function may be defined as
 \begin{equation}
 \mathcal{L}_{YXL}(z) = \Theta(z - z_2) - \Theta(z - z_1) ~,
@@ -1052,67 +1080,102 @@ Alternatively, one could assume normal-distributed synaptic placements, that is,
 $\mathcal{L}_{YXL}(z)\propto \mathcal{\widetilde{N}}(\langle z \rangle, \sigma_z)$ 
 around some mean depth $\langle z \rangle$ with standard deviation $\sigma_z$.
 
-\item Furthermore, we let the synaptic density be proportional to the membrane area of compartments $\mathbf{A}_Y$ weighted by $\mathcal{L}_{YXL}$.
-Hence the expectation value for synaptic in-degree per compartment indexed by $k$ can be defined as
+\item Furthermore, we let the synaptic density be proportional to the membrane area of postsynaptic compartments $\mathbf{A}_Y$ weighted by $\mathcal{L}_{YXL}$.
+Hence the expectation value for synaptic in-degree per compartment indexed by $w$ can be defined as
 \begin{equation}
-\langle k_{\mathrm{syn}YX}[k] \rangle \coloneq \frac{K_{YX}}{N_Y} \frac{ \mathcal{L}_{YXL}(\mathbf{r}[k]) \mathbf{A}_{Y}[k]}{\sum_k \mathcal{L}_{YXL}(\mathbf{r}[k]) \mathbf{A}_{Y}[k]} ~,
+\langle k_{\mathrm{syn}YXw} \rangle \coloneq \frac{K_{YX}}{N_Y} \frac{ \mathcal{L}_{YXL}(z_w) \mathbf{A}_{Yw}}{\sum_w \mathcal{L}_{YXL}(z_w) \mathbf{A}_{Yw}} ~,
 \end{equation}
-where $\mathbf{r}[k]$ denotes the center location of each compartment.
+where $z_w$ denotes the center location of each compartment projected on the $z$-axis.
 With this quantity one may define the transfer function  of firing rate of population $X$ to each per-compartment synaptic input current as
 \begin{equation}
-H_{\mathrm{syn}YX}(\tau)[k] = N_X \langle k_{\mathrm{syn}YX}[k] \rangle \overline{I}_{\mathrm{syn}YX} \left( \Delta_{YX} \ast f_{YX}\right)(\tau) ~.
+H_{\mathrm{syn}YXw}(\tau) = N_X \langle k_{\mathrm{syn}YXw} \rangle \overline{I}_{\mathrm{syn}YX} \left( \widetilde{\Delta}_{YX} \ast f_{YX}\right)(\tau) ~.
 \end{equation}
 
-\item We will assume that the the linearization tricks applied to the membrane of neuron models representative of each population   is still valid for rate-based frameworks,
+\item We will assume that the the linearization tricks applied to the membrane of neuron models representative of each population remain valid for rate-based frameworks,
 meaning we allow for purely passive or quasi-active membrane descriptions.
 Then one may straightforwardly compute the resulting postsynaptic response
-(i.e., $V_\mathrm{m}(\mathbf{r}, \tau),{}\mathbf{I}_\mathrm{m}(\mathbf{r}, \tau),{}\mathbf{I}_\mathrm{a}(\mathbf{r}, \tau))$
-by applying synaptic currents of $H_{\mathrm{syn}YX}(\tau)$ in a single multicompartment neuron simulation for each pair of connection between populations $X$ and $Y$.
+(i.e., $\mathbf{I}_\mathrm{m}(\mathbf{r}, \tau),{}\mathbf{I}_\mathrm{a}(\mathbf{r}, \tau))$
+by applying synaptic currents of $H_{\mathrm{syn}YX}(\tau)$ in a single multicompartment neuron simulation for connections between populations $X$ and $Y$.
 
 \item One could now compute each rate-signal transfer function or kernel from the current distribution
 $\mathbf{I} \in \{ \mathbf{I}_\mathrm{m}(\mathbf{r}, \tau), \mathbf{I}_\mathrm{a}(\mathbf{r}, \tau) \}$ as
 \begin{equation}
 \hat{H}_{YX}(\mathbf{r}, \tau) = \mathbf{F}\mathbf{I}(\mathbf{r}, \tau) ~,
 \end{equation}
-however, this would would imply that the cell-body distribution in each postsynaptic population would be condensed to a point $\delta(\mathbf{r}_Y)$.
+however, this would would imply that the cell-body distribution in each postsynaptic population would be condensed to a point $\delta(\mathbf{r} - \mathbf{r}_Y)$.
 Assuming that the $N_Y$ cell bodies are sampled from the distribution $\widetilde{\mathbf{r}}_Y$
 (recall our initial description of the biophysically detailed network model in \Fref{chap:LFPy:hybrid}),
 one could consider computing an equivalent volumetric current field by convolving the predicted currents $\mathbf{I}(\mathbf{r}, \tau)$ with the normalized spatial function
-$\widetilde{\mathbf{r}}_Y / \int_\Omega \widetilde{\mathbf{r}}_Y d\mathbf{r}$
+$\widetilde{\mathbf{r}}_Y / \iiint_\Omega \widetilde{\mathbf{r}}_Y d\Omega$
 and then compute and apply the forward solution $\mathbf{F}$.
 A more straightforward and equivalent alternative, however,
 is simply to embed the spatial averaging in the mapping matrix $\mathbf{F}$ directly.
 In case of the point source formula for extracellular potentials its elements of can be computed as
 \begin{equation}
-f_{ij} = \frac{1}{4 \pi \sigma \int_\Omega \widetilde{\mathbf{r}}_Y) d\mathbf{r}}
-	\int_\Omega \frac{d\mathbf{r}}{\Vert \mathbf{R}_i - \mathbf{r}_j - \mathbf{r}_\Omega \Vert}~, 
+f_{ij} = \frac{1}{4 \pi \sigma \iiint_\Omega \widetilde{\mathbf{r}}_Y d\Omega}
+	\iiint_\Omega \frac{d\Omega}{\Vert \mathbf{R}_i - \mathbf{r}_j - \mathbf{r}_\Omega \Vert}~, 
 \end{equation}
 where points $\mathbf{r}_\Omega \sim \widetilde{\mathbf{r}}_Y$. 
-Analytical solutions for are however only possible to derive for certain source geometries, 
+Analytical solutions are however only possible to derive for certain source geometries, 
 hence numerical integration methods will usually be required. 
+Our assumption of point sources in this context in contrast to line sources is motivated by the fact that the typical segment extents are small compared to the extent of $\widetilde{\mathbf{r}}_Y$.
 
 \end{enumerate}
 
 
-\section{\red{EH: Other approximations}}
+\section{Intermezzo: Quantitative comparison of predictions using hybrid scheme and rate predictor}
+\label{sec:Schemes:comparison}
+
+Before considering other approximate schemes for predicting extracellular signals of interest, 
+we shall briefly compare predictions using the `hybrid scheme' (\Fref{sec:Schemes:HybridLFPy}),
+averaged hybrid scheme kernels (\Fref{sec:Schemes:KernelLFPy}),
+and the deterministic population firing rate kernel predictor (\Fref{sec:Schemes:populationmodels}) to the ground truth signal predictions of the recurrent multicompartment neuron network model. 
+
+The full network model constructed from two populations of active, stylized multicompartment neuron models and resulting activity is summarized in \Fref{fig:LFPy_network}. 
+The main basis of comparison is the `real' ground truth extracellular potential shown in panel E. 
+Together with the actual network specification (geometry, connectivity, cell properties), 
+the hybrid scheme mainly takes the spiking activity (panel C) as its input. 
+The kernel-based approximations utilize the corresponding firing rates (panel D). 
+
+For the hybrid scheme, 
+we will consider four different cases, that is, using quasi-active neuron models (`biophys:Ih\_lin') or fully passive (`biophys:pas') neuron models, 
+and ignore (`g\_eff:False') or account (`g\_eff:True') for changes to the effective membrane time constants resulting from synaptic conductances.  
+Comparing the extracellular potentials across depth in \Fref{fig:LFPy_predictions},
+it becomes immediately evident that predictions that do not account for changes in effective membrane time constants (columns 2 and 3) overestimate the typical signal amplitudes of the real signal, 
+irrespective of the choice of linear membrane model. 
+By visual inspection, the converse predictions utilizing an effectively reduced membrane time constant (columns 4 and 5) preserve both the signal amplitudes across channels and temporal dynamics of the ground-truth signal. 
+This excellent agreement is quite surprising as the hybrid-scheme predictions do not account for any signal contributions by action potentials. 
+Note however, that this observation can be explained by the fairly low on average per-neuron firing rates (cf. \Fref{fig:LFPy_network}C) which means that synaptic contributions govern the extracellular potentials.
+
+For signal predictions set up either using spatiotemporal filter kernels for each recurrent connection from the hybrid scheme ($\langle H_{YX}(\mathbf{r}, \tau)$ in \Fref{fig:LFPy_kernels}) or deterministic rate-model version  ($\hat{H}_{YX}(\mathbf{r}, \tau)$ \Fref{fig:LFPy_kernel_predictor}), 
+the final signal approximations shown in \Fref{fig:LFPy_predictions} columns 6-9 is virtually identical to the hybrid scheme predictions. 
+\Fref{fig:LFPy_correlations} compares across all channels both the Pearson correlation coefficients $CC(\hat{\phi}, \phi)$ between each approximation $\hat{\phi}$ and ground truth signal $\phi$ as well as covariance normalized by variance $COV(\hat{\phi}, \phi)/VAR(\phi)$. 
+In all respects, the hybrid scheme with effective membrane time constants as well as the different kernel predictions demonstrate excellent agreement with the ground truth, except for channel 18 which is subject to the lowest overall signal amplitude (due to local cancellation effects). 
+Otherwise $CC(\hat{\phi}, \phi) \lesssim 1$ which imply near perfect temporal agreements, 
+while the normalized covariance measure $COV(\hat{\phi}, \phi)/VAR(\phi) \gtrsim 1$ imply that the steps that were incorporated did not introduce some arbitrary scaling factor in the approximated signals. 
+The choice of cable model, that is, quasi-active linear or passive linear, has minor impact on the different predictions.   
+
+
+\section{\blue{EH: Other approximations}}
+\label{sec:Schemes:proxies}
 
 So far, we have showed by example that a linear approximation can well explain the extracellular potentials (and by extension magnetic signals) from a recurrently connected network of multicompartment neuron models.
 For the purpose of relating in particular point-neuron network activity to extracellular electric or magnetic measures of activity, however,
-a number of heuristic signal approximations (``proxies'') has been proposed and utilized in the literature. 
-As they for the most part are \textit{shite}, we will not go into much detail here, 
-but emphasize that the aforementioned linearity leaves hope for \textit{some} of these approximations. 
+a number of heuristic signal approximations (``proxies'') have been proposed and utilized in the literature. 
+As they for the most part are \textit{shite}, we will neither go into much detail here nor name perpetrators, 
+but emphasize that the aforementioned linearity leaves a bit of hope for \textit{some} of these approximations. 
 
-Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016} outlined throughout \Fref{sec:LFPy:hybrid},   
-\cite**{Mazzoni2015} compared different LFP \textit{proxies} (short for approximations) that could be extracted in two-population spiking point-neuron network models. 
+Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016} outlined throughout \Fref{sec:Schemes:HybridLFPy},   
+\cite**{Mazzoni2015} compared different LFP \textit{proxies} that could be extracted in two-population spiking point-neuron network models. 
 These proxies, which have been used to mimic the LFP, EEG or similar in past studies, 
 included the summed population-averaged firing rate $\sum_X \nu_X(t)$, 
-the population-averaged somatic voltages of the point neurons $\sum_X V_\text{soma}^{\langle X \rangle}(t)$,
+the population-averaged somatic voltages of the point neurons $\sum_Y V_\text{soma}^{\langle Y \rangle}(t) / N_Y$,
 the summed synaptic currents resolved into excitatory (AMPA) and inhibitory (GABA) currents, 
 the absolute of the summed synaptic currents amounting to the difference between them (as their sign is opposite), 
 and finally a weighted sum of the mean-subtracted summed synaptic currents with added delays along the time axis.
  
 The task at hand was identifying which proxy maximises the fraction of variance explained ($R^2$) between the $z$-scored ground-truth LFP signal and the respective proxy predictions. 
-The LFP signal was predicted using the standard MC formalism in combination with the line-source volume conductor model, as described earlier. \ehnote{kryssref}
+The LFP signal was predicted using the standard MC formalism in combination with the line-source volume conductor model, as described earlier in \Fref{sec:Schemes:LFPy}.
 Synaptic activation times were determined by the spiking activity of a two-population point-neuron network model  with current-based synapses taken from a previous study \cite**{Cavallari2014}. 
 The LFP signal was also computed at different depths and lateral offsets, 
 mimicking an experimental recording using a laminar probe down through a cortical column. 
@@ -1123,7 +1186,7 @@ the approximation in each channel could be formulated as a scaling factor times 
 As expected, both the population firing rate proxy ($\sum_X \nu_X(t)$) performed poorly as it can not possibly account for any spatial or temporal filtering effects mediated by the actual spike-signal kernel functions $H_{YX}(\mathbf{r}, \tau)$. 
 While the somatic voltage proxy account for conduction delays and
 temporal components of synaptic currents but without intrinsic dendritic filtering, 
-its performance is only marginally better as the signals in question reflect transmembrane currents which do not equate fluctuations the membrane voltages \ehnote{as discussed in XXXXX}. 
+its performance is only marginally better as the signals in question reflect transmembrane currents which do not equate fluctuations the membrane voltages. 
 That leaves the various linear combinations of synaptic input currents, 
 which \textit{a priori} ignore additional linear contributions by intrinsic dendritic filtering and the electrostatic forward model in question. 
 Using the nomenclature established throughout this Chapter, 
@@ -1131,9 +1194,9 @@ these temporal components $g_\text{proxy}(t)$ of the proxy LFPs can be defined a
 %
 \begin{eqnarray}
 z_\text{score}\left(u(t)\right) &=& \frac{u(t)-\mu_u}{\sigma_u} \\
-g_{\sum_I}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y K_{YX} \big( \nu_X \ast \Delta_{YX} \ast I_{\text{syn}YX})(t)  \bigg) \\
-g_{\sum_{|I|}}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| K_{YX} \big( \nu_X \ast \Delta_{YX} \ast I_{\text{syn}YX})(t) \big|  \bigg) \\
-g_\text{WS}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| \alpha_X K_{YX} \big( \nu_X \ast \Delta_{YX} \ast I_{\text{syn}YX} \ast \delta(-\tau_X) \big)(t) \big|  \bigg)~. 
+g_{\sum_I}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t)  \bigg) \\
+g_{\sum_{|I|}}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t) \big|  \bigg) \\
+g_\text{WS}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| \alpha_X K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX} \ast \delta(-\tau_X) \big)(t) \big|  \bigg)~. 
 \end{eqnarray}
 %
 Here, the $z$-scoring function ensures temporal components with zero mean and unitary variance. 
@@ -1153,5 +1216,9 @@ For the two-population set up in \cite**{Mazzoni2015} the best-fitting proxy was
 resulting in up to $93\%$ variance explained in certain locations $\mathbf{r}$. 
 
 As a proof of principle, we shall then compare these different LFP proxies against the ground truth LFP generated by our recurrently connected 
+
+
+
+
 
 
