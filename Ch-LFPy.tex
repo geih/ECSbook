@@ -957,7 +957,7 @@ computing the full set $H_{vu}(\mathbf{r},\tau)$ can become intractable as the n
 However, \cite**{Hagen2016} showed that a good approximation to the signal $\phi(\mathbf{r}, t)$ could be obtained by estimating kernels averaged over all pre- and postsynaptic neurons in each population $X$ and $Y$. 
 These averaged kernels may be defined as
 \begin{equation}
-\hat{H}_{YX}(\mathbf{r}, \tau) = \frac{1}{N_X} \sum_{u \in X} \sum_{j \subset Y} H_{vu}(\mathbf{r}, \tau)~.
+\langle H_{YX} (\mathbf{r}, \tau) \rangle = \frac{1}{N_X} \sum_{u \in X} \sum_{j \subset Y} H_{vu}(\mathbf{r}, \tau)~.
 \end{equation}
 In order to compute these kernels averaged directly,
 actual network spiking activity may first be replaced by simultaneous and deterministic events
@@ -965,11 +965,11 @@ $s_u(t) = \delta(t - t_X)$ where $t_X > 0$ is a chosen time for each population 
 compute via the disassociated network model the signal contributions of each postsynaptic population $\phi_{YX}(\mathbf{r}, t)$ around $t_X$
 and average the response as
 \begin{equation}
-\hat{H}_{YX}(\mathbf{r}, \tau) = \frac{1}{N_X} \phi_{YX} (\mathbf{r}, \tau)
+\langle H_{YX} (\mathbf{r}, \tau) \rangle = \frac{1}{N_X} \phi_{YX} (\mathbf{r}, \tau)
 \end{equation}
 where $\tau$ denote time relative to $t_X$.
 It is worth mentioning that these kernels are causal, that is,
-by construction $H_{YX}(\mathbf{r}, \tau) \coloneq 0$ for $\tau < 0$ as any contribution to the signal $\phi(\mathbf{r}, t)$ is solely postsynaptic which in this scenario can not occur before the presynaptic spike event at $\tau=0$.
+by construction $\langle H_{YX}(\mathbf{r}, \tau) \rangle \coloneq 0$ for $\tau < 0$ as any contribution to the signal $\phi(\mathbf{r}, t)$ is solely postsynaptic which in this scenario can not occur before the presynaptic spike event at $\tau=0$.
 The time lags spanned by the kernels are also symmetric around $\tau=0$ and of finite duration --
 the postsynaptic responses typically decay to approximately zero after a few tens of milliseconds.
 This decay time is related to the time constants relevant to the neuronal dynamics (that is, $\tau_\mathrm{m}, \tau_\mathrm{syn}, \tau_\mathrm{w}, \ldots$).  
@@ -981,7 +981,7 @@ computed with either quasi-active or fully passive membrane dynamics.
 Finally, if we define the presynaptic population spiking activity as the sequence of Dirac delta distributions $s_X(t) \coloneq \sum_{u \in X} s_u(t)$,
 the final signal approximation $\hat{\phi}(\mathbf{r}, t) \approx \phi(\mathbf{r}, t)$ may then be computed as the sum over convolutions
 \begin{equation}
-\hat{\phi}(\mathbf{r}, t) = \sum_X \sum_Y \left(s_X \ast \hat{H}_{YX} \right)(\mathbf{r}, t)~.
+\hat{\phi}(\mathbf{r}, t) = \sum_X \sum_Y \left(s_X \ast \langle H_{YX} \rangle \right)(\mathbf{r}, t)~.
 \end{equation}
 
 A valid implementation alternative to the linear convolutions showcased here is applying the kernels using a linear filter function implementation.
@@ -1040,14 +1040,14 @@ Choices for filter $w$ could be (but is not limited to) a boxcar, Gaussian or Ha
 
 \end{enumerate}
 
-Granted that we already computed population-averaged spatiotemporal kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$ for the particular pre and postsynaptic network populations ($X, Y \subseteq X$) our rate model represents as above,
+Granted that we already computed population-averaged spatiotemporal kernels $\langle H_{YX} (\mathbf{r}, \tau) \rangle$ for the particular pre and postsynaptic network populations ($X, Y \subseteq X$) our rate model represents as above,
 we could persevere and compute our signal as
 \begin{equation}
-\phi(\mathbf{r}, t) = \sum_X N_X \sum_Y \left( \nu_X \ast \hat{H}_{YX} \right)(\mathbf{r}, t) ~.
+\phi(\mathbf{r}, t) = \sum_X N_X \sum_Y \left( \nu_X \ast \langle H_{YX} \rangle \right)(\mathbf{r}, t) ~.
 \end{equation}
 However, such an approach implies that we must first perform a series of very computationally demanding calculations
 in order to compute transfer functions averaged over many thousands of multicompartment neurons.
-Can we deduce a methodology to compute the set of kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$ we need for all pre- and postsynaptic populations $X$ and $Y$ directly,
+Can we deduce a methodology to compute a set of deterministic kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$ we need for all pre- and postsynaptic populations $X$ and $Y$ directly,
 based on some expectation values for cell and synaptic placements?
 Let's try!
 First, let us assume that:
