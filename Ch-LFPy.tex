@@ -12,10 +12,9 @@ The established way of computing extracellular potentials is to use a two-step m
 
 \item {\bf Step 2:} Compute the extracellular potential $V_\mathrm{e}$ resulting from the neural transmembrane currents computed in Step 1, using Volume Conductor (VC) theory (\Fref{chap:VC}-\ref{chap:Sigma}).
 \end{itemize}
-\end{itemize}
 
 \ghtxt{\sout{
-The MC+VC scheme is not self-consistent, since Step 1 computes the neurodynamics under the assumption that $V_\mathrm{e}$ is unaffected by transmembrane currents, while Step 2 uses this neurodynamics to compute a non-zero extracellular potential.} The MC+VC scheme is not self-consistent, since Step 2 computes variations in $V_\mathrm{e}$ due to transmembrane currents, which were computed in Step 1, under the simplifying assumption that they do not affect V_\mathrm{e}$. Hence, it does not account from feedback-effect from membrane-current induced variations in $V_\mathrm{e}$ on membrane currents.}
+The MC+VC scheme is not self-consistent, since Step 1 computes the neurodynamics under the assumption that $V_\mathrm{e}$ is unaffected by transmembrane currents, while Step 2 uses this neurodynamics to compute a non-zero extracellular potential.} The MC+VC scheme is not self-consistent, since Step 2 computes variations in $V_\mathrm{e}$ due to transmembrane currents, which were computed in Step 1, under the simplifying assumption that they do not affect $V_\mathrm{e}$. Hence, it does not account from feedback-effect from membrane-current induced variations in $V_\mathrm{e}$ on membrane currents.}
 
 \ehnote{I wonder if we should elaborate more on pt. 1: It is entirely possible to impose potentials different from zero and time varying with the current scheme and simultaneously estimate transmembrane currents.} \ghnote{True. I tried to be more precise. }
 \ehnote{The main problem is that cable theory is 1D while real neurons are 3D (with the exception of structures such as axonal tracts which may be well approximated as 1D). Self-ephaptic effects should be entirely possible to account for using standard methods (NEURON) for cable models with 1D geometry (at least that's what I think!).} \ghnote{Yes, I think Rall 1977 did this for some 1D cable with an oil-coating, but I do not think this is a relevant model, except under very specific and rare experimental conditions. I think this should be discussed somewhere, but maybe not here?}
@@ -127,27 +126,22 @@ but we will not go into further detail here.
 
 We next outline how the membrane potential can be estimated at the end points of each compartment $x \in \{x_j-L_j/2, x_j+L_j/2\}$,
 which may connected to none, one or several other end points of other compartments,
-when the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment.
-For terminating compartments (i.e., one or both ends has no connecting compartments and sealed ends) we may define
+when the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment. For terminating compartments (i.e., one or both ends has no connecting compartments and sealed ends) we may define
 %
 \begin{eqnarray}
 V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{and/or} \nonumber \\
 V_\mathrm{m}(x_j + L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~, \nonumber
 \end{eqnarray}
 %
-depending on which end(s) has no electric connections.
-(This step effectively utilize the forward/backward difference approximation to first derivatives but only to terminating compartments.
-If both ends terminate, the axial current will be zero as the voltage is then implicitly assumed to be iso-potential along the compartment axis.)
-\ehnote{saa kanskje jeg introduserer for/backward difference over allikevel da.}
+depending on which end(s) has no electric connections. \ghtxt{\sout(}This step effectively \ghtxt{\sout{utilize}uses} the forward/backward difference approximation to first derivatives but only \ghtxt{\sout{to}in} terminating compartments. If both ends terminate, the axial current will be zero as the voltage is then implicitly assumed to be iso-potential along the compartment axis.\ghtxt{\sout)} \ehnote{saa kanskje jeg introduserer for/backward difference over allikevel da.} \ghnote{Kanskje, men jeg syntes uansett at dette var tydelig og fint. Man trenger ikke aa vite hva forward/backward difference er for aa henge med.}
 
-For a number $N$ child compartments connected at the end point location $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite**{Hagen2018}
+For a number $N$ \ghtxt{of} child compartments connected \ghtxt{\sout{at}to} the end point \ghtxt{\sout{location}} $(x_j+L_j/2)$ of the parent compartment (\Fref{fig:LFPy_circuits}C) the potential can be computed from the parent- and child-compartment mid-point potentials as \cite**{Hagen2018}
 
 \begin{equation}
 V_\mathrm{m}(x_j+L_j/2, t) = \frac{\sum_{n=0}^N V_\mathrm{m}(x_{j+n}, t) / R_{j+n}}{\sum_{n=0}^N 1 / R_{j+n}}~,
 \label{eq:LFPy_V_connect_point}
-\end{equation}
-%
-where the connecting node to mid point resistances
+\end{equation}%
+where the connecting node to mid point resistances \ghnote{skjoente ikke formuleringen. Where we have introduced the mid-point resistances:?}
 %
 \begin{eqnarray}
 R_{j+n} &=& \frac{2 R_\mathrm{a}L_{j+n}}{\pi d_{j+n}^2} ~.
@@ -159,12 +153,10 @@ the corresponding potential at the branch point seen by any number of child segm
 V_\mathrm{m}(x_{j+n}-L_{j+n} / 2, t) \equiv V_\mathrm{m}(x_j, t) ~.
 \end{equation}
 
-Up to this point, we have provided the basic `machinery' needed in order to compute the discrete axial currents in a MC neuron model,
-independently of specific and non-specific ion-channel currents, synaptic currents, capacitive currents etc. which may be present in the membrane of biophysically detailed MC neuron models.
-By our application of the central difference approximation to the first derivative,
-it is in these derivations then implicitly assumed that the axial current is approximately constant along the entire length of the compartment,
-which in turn imply that the the membrane voltage varies approximately linearly with position.
+Up to this point, we have provided the basic `machinery' needed \ghtxt{\sout{in order}} to compute the discrete axial currents in a MC neuron model, independently of \ghtxt{\sout{specific and non-specific ion-channel currents, synaptic currents, capacitive currents etc. which may be present in the membrane of biophysically detailed MC neuron models} any membrane currents present in the model}. By our application of the central difference approximation to the first derivative,
+it is in these derivations then implicitly assumed that the axial current is approximately constant along the entire length of the compartment, which in turn implies that the the membrane voltage varies approximately linearly with position.
 The naive computational neuroscientist should remind her/himself that this assumption is likely to be violated if the spatial discretization chosen for the model neuron(s) is too coarse.
+
 %
 Also the transmembrane currents may be estimated on a per-compartment basis in a similar manner using the central difference approximation to the 2nd derivative as
 %
@@ -174,16 +166,12 @@ i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\ma
 \label{eq:LFPy_im_discrete}
 \end{eqnarray}
 
+This machinery may appear as a bit of a hurdle to implement \ghtxt{\sout{for the purpose of computing extracellular potentials or magnetic signals}}, but thankfully MC neuron modeling software such as NEURON and Arbor provide native support for computing the transmembrane current (with unit \si{\ampere}) and/or transmembrane current density per surface membrane area (with unit \si{\ampere/\metre^2}) for each compartment. We will typically assume that the transmembrane current density is equal along each constant-diameter cylindrical compartment (which violates our above assumption of constant axial current!). 
+\ghnote{Uklart m/ We will typically assume... Menes: Such software typically assumes?}
 
-This machinery may appear as a bit of a hurdle to implement for the purpose of computing extracellular potentials or magnetic signals,
-but thankfully MC neuron modeling software such as NEURON and Arbor provides native support for computing the transmembrane current (with unit \si{\ampere}) and/or transmembrane current density per surface membrane area (with unit \si{\ampere/\metre^2}) for each compartment. 
-We will typically assume that the transmembrane current density is equal along each constant-diameter cylindrical compartment (which violates our above assumption of constant axial current!). 
-
-Dependent on the implementation in the neural simulation software,
-a more direct measure of the transmembrane currents is indeed computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
+Dependent on the implementation in the neural simulation software, a more direct measure of the transmembrane currents \ghtxt{\sout{is indeed}can be obtained with} computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
 %
-The current state is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite**{Hagen2018}).
-For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
+The current state \ghnote{forstaar ikke hva current state betyr} is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite**{Hagen2018}). For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
 
 \begin{figure}[!ht]
 \begin{center}
