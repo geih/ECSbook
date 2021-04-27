@@ -1148,7 +1148,7 @@ By visual inspection, the converse predictions utilizing an effectively reduced 
 This excellent agreement is quite surprising as the hybrid-scheme predictions do not account for any signal contributions by action potentials. 
 Note however, that this observation can be explained by the fairly low on average per-neuron firing rates (cf. \Fref{fig:LFPy_network}C) which means that synaptic contributions govern the extracellular potentials.
 
-For signal predictions set up either using spatiotemporal filter kernels for each recurrent connection from the hybrid scheme ($\langle H_{YX}(\mathbf{r}, \tau)$ in \Fref{fig:LFPy_kernels}) or deterministic rate-model version  ($\hat{H}_{YX}(\mathbf{r}, \tau)$ \Fref{fig:LFPy_kernel_predictor}), 
+For signal predictions set up either using spatiotemporal filter kernels for each recurrent connection from the hybrid scheme ($\langle H_{YX}(\mathbf{r}, \tau) \rangle$ in \Fref{fig:LFPy_kernels}) or deterministic rate-model version  ($\hat{H}_{YX}(\mathbf{r}, \tau)$ in \Fref{fig:LFPy_kernel_predictor}), 
 the final signal approximations shown in \Fref{fig:LFPy_predictions} columns 6-9 is virtually identical to the hybrid scheme predictions. 
 \Fref{fig:LFPy_correlations} compares across all channels both the Pearson correlation coefficients $CC(\hat{\phi}, \phi)$ between each approximation $\hat{\phi}$ and ground truth signal $\phi$ as well as covariance normalized by variance $COV(\hat{\phi}, \phi)/VAR(\phi)$. 
 In all respects, the hybrid scheme with effective membrane time constants as well as the different kernel predictions demonstrate excellent agreement with the ground truth, except for channel 18 which is subject to the lowest overall signal amplitude (due to local cancellation effects). 
@@ -1198,12 +1198,12 @@ these temporal components $g_\text{proxy}(t)$ of the proxy LFPs can be defined a
 z_\text{score}\left(u(t)\right) &=& \frac{u(t)-\mu_u}{\sigma_u} \\
 g_{\sum_I}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t)  \bigg) \\
 g_{\sum_{|I|}}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t) \big|  \bigg) \\
-g_\text{WS}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| \alpha_X K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX} \ast \delta(-\tau_X) \big)(t) \big|  \bigg)~. 
+g_\text{WS}(t) &=& z_\text{score}\bigg(  \sum_X \sum_Y \big| \alpha_X K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX} \ast \delta(t-\tau_X) \big)(t) \big|  \bigg)~. 
 \end{eqnarray}
 %
 Here, the $z$-scoring function ensures temporal components with zero mean and unitary variance. 
 For the latter function \textit{weighted sum} temporal component $f_\text{WS}(t)$ the parameter $\alpha_X$ is scalar and for the excitatory connections $\alpha_{X=E} \coloneq 1$,
-while the term $\delta(-\tau_X)$ denotes a temporal delay. 
+while the term $\delta(t-\tau_X)$ denotes a temporal delay. 
 In conjunction with corresponding spatial weighting functions $f_\text{proxy} (\mathbf{r}) \in \{ f_{\sum_I}(\mathbf{r}), f_{\sum_{|I|}}(\mathbf{r}), f_\text{WS}(\mathbf{r}) \}$ which allows for defining the proxy signal as
 \begin{equation}
 \phi_\text{proxy}(\mathbf{r}, t) = f_\text{proxy}(\mathbf{r}) \ast g_\text{proxy}(t)~.
