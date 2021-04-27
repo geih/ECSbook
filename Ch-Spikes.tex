@@ -201,7 +201,7 @@ Unlike anatomically detailed multi-compartment neuron models, it is is amenable 
 \includegraphics{Figures/Spikes/Spikes-ball-and-stick-results-w100-r150}
 \end{center}
 \caption[]{
-Spike widths (left) and (peak-to-peak) spike amplitudes (right) as a function of distance from soma for a detailed pyramidal cell model (pyramidal) and two types of ball-and-stick models: long, finite ball-and-stick model (fin.~stick, long) with diameter $d=2~\mu$m and length $l=1$~mm and a short, finite ball-and-stick model (fin.~stick, short) with diameter $d=1~\mu$m and length $l=0.2$~mm. The intracellular action potential shown in the inset in the left panel of \Fref{fig:Spikes:ball-and-stick-frequency} was imposed as a voltage-clamp in the soma, and the size and electrical properties of the soma thus did not affect the results. The EP was recorded in the somatic plane normal to the stick/primary apical dendrite. In right panels guidelines illustrating the power-law decays $1/r$ and $1/r^{2}$ have been added. For further details see \citeasnoun**[Figure 6]{Pettersen2008}. \gen{Figure + caption to be updated.}  Adapted from \citeasnoun**{Pettersen2008}. \gen{Her kunne man jo kjoert ut nye resultater for Hay-modellen, men det er vel like greit aa bare bruke figurene fra Pettersen2008?} \tvnnote{Gaar jo forsaavidt fort aa lage paa nytt, og kan jo vaere fint at det blir en del av koden leserne har tilgjengelig?}
+Spike widths (left) and (peak-to-peak) spike amplitudes (right) as a function of distance from soma for a detailed pyramidal cell model (pyramidal) and two types of ball-and-stick models: long, finite ball-and-stick model (fin.~stick, long) with diameter $d=2~\mu$m and length $l=1$~mm and a short, finite ball-and-stick model (fin.~stick, short) with diameter $d=1~\mu$m and length $l=0.2$~mm. The intracellular action potential shown in the inset in the left panel of \Fref{fig:Spikes:ball-and-stick-frequency} was imposed as a voltage-clamp in the soma, and the size and electrical properties of the soma thus did not affect the results. The EP was recorded in the somatic plane normal to the stick/primary apical dendrite. In right panels guidelines illustrating the power-law decays $1/r$ and $1/r^{2}$ have been added. For further details see \citeasnoun**[Figure 6]{Pettersen2008}. \gen{Figure + caption to be updated.}  Adapted from \citeasnoun**{Pettersen2008a}. \gen{Her kunne man jo kjoert ut nye resultater for Hay-modellen, men det er vel like greit aa bare bruke figurene fra Pettersen2008?} \tvnnote{Gaar jo forsaavidt fort aa lage paa nytt, og kan jo vaere fint at det blir en del av koden leserne har tilgjengelig?}
 \gen{Enig. I tilfelle maa ogsaa Fig. 8.7 lages paa nytt.} 
 }
 \label{fig:Spikes:ball-and-stick-results}
@@ -227,11 +227,61 @@ Spike widths (left) and (peak-to-peak) spike amplitudes (right) as a function of
 %%\figpermOurs
 %\end{figure}
 
-When modeling spikes with the ball-and-stick neuron, one option is to include spike-generating active sodium and potassium conductances in the soma compartment. Another option is to impose a voltage waveform mimicking a somatic action potential as a boundary condition in the soma end of the dendritic stick. \gex{This will produce an identical pattern of membrane currents returning to the ECS through the dendritic stick, see \Fref{fig:Spikes:ball-and-stick-sketch}. The soma membrane current will due to current conservation be given by the axial current entering the dendritic stick at the soma end. The extracellular potential can be computed using the standard formalism based on the pattern dendritic membrane currents and the soma membrane current. The only additional information needed is the position of the center of soma compared to the soma end of the dendritic stick. For the present analysis we will use this second option.}
-\gen{Mulig vi burde laget en liten figur for aa illustrere dette.}
+When modeling spikes with the ball-and-stick neuron, one option is to include spike-generating active sodium and potassium conductances in the soma compartment. Another option is to impose a voltage waveform mimicking a somatic action potential as a boundary condition in the soma end of the dendritic stick. \gex{This will produce an identical pattern of membrane currents returning to the ECS through the dendritic stick}. The soma membrane current will due to current conservation be the same as the axial current entering the dendritic stick at the soma end. 
 
+The extracellular potential can now be computed using the standard formalism based on the pattern dendritic membrane currents and the soma membrane current~\cite**{Pettersen2008a}:
+%
+\begin{equation}
+  V_\mathrm{e}(z,\rho) = 
+  \frac{1}{4 \pi \sigma} \frac{I_\mathrm{soma}}{\sqrt{(z-z_\mathrm{soma})^2+\rho^2}} +
+  \frac{1}{4 \pi \sigma} \int_0^l \frac{i_\mathrm{m}(z')~dz'}{\sqrt{(z-z')^2+\rho^2}},
+  \label{eq:Spikes:ball-and-stick-formula}
+\end{equation}
+%
+\gex{Here $\rho$ is the radial distance from the recording point to the dendritic stick axis, and $z_\mathrm{soma}$ 
+is the depth position of the soma, see  \Fref{fig:Spikes:ball-and-stick-model-sketch}. 
+For the present analysis we will use this second option.}
+\gen{Sjekk symbolene for soma membranstroem (Ampere) og stick membranstroem (A/m)} 
 
-Since the dendritic stick is passive, \ghtxt{\sout{it has linear response properties to imposed currents or voltages} its response to imposed currents or voltages is linear} \ghnote{Bare fordi jeg synes "properties to" laat rart}. It is then convenient to decompose the soma action potential into a Fourier sum of oscillatory components with different frequencies and consider each frequency component of the action potential separately. Each oscillatory component of the soma action potentials gives an oscillatory axial current entering the stick at the soma end. The spatial pattern of return current along the stick will depend on the frequency of the oscillation due to the capacitive properties of the membrane: For higher frequencies, the capacitive membrane current will be larger, and the  membrane effectively more leaky. Thus the imposed soma potential will result in dendritic membrane currents returning closer to the soma for higher frequencies,  as seen in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}. 
+%%%%%%%%%%
+% Figure: Spike widths and amplitudes
+%%%%%%%%%%
+%\begin{cnfigure}{Figures/mm/EP-spike-ball-and-stick-results-w100-r150}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-ball-and-stick-sketch}
+\end{center}
+\caption[]{Illustration of ball-and-stick model used in deriving approximate spike formulas.
+Arrows illustrate flow of current during the early part of the action potential where the 
+inward sodium current dominates.}
+\label{fig:Spikes:ball-and-stick-model-sketch}
+%\figpermOurs
+\end{figure}
+%%%%
+
+Since the dendritic stick is passive, its response to imposed currents or voltages is linear.  It is then convenient to decompose the soma action potential into a Fourier sum of oscillatory components with different frequencies and consider each frequency component of the action potential separately. Each oscillatory component of the soma action potentials gives an oscillatory axial current entering the stick at the soma end. The spatial pattern of return current along the stick will depend on the frequency of the oscillation due to the capacitive properties of the membrane: For higher frequencies, the capacitive membrane current will be larger, and the  membrane effectively more leaky. Thus the imposed soma potential will result in dendritic membrane currents returning closer to the soma for higher frequencies, as illustrated in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}.  
+
+%%%%%%%%%%
+% Figure: Frequency-dependent distribution of return currents
+%%%%%%%%%%
+%\begin{cnfigure}{Figures/mm/EP-spike-ball-and-stick-sketch-w70-r300}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{Figures/Spikes/Spikes-ball-and-stick-sketch-w70-r150}
+\end{center}
+\caption[]{Illustration of ball-and-stick neuron and its frequency-dependent 
+distribution of dendritic return currents following injection of a sinusoidal current into the soma.
+The net current entering the soma will enter the dendrite as an axial current, and return to the 
+ECS via the dendrite membrane. The inset shows the spatial distribution of this return current
+for different frequencies. The higher the frequency, the closer the return currents will be and
+the smaller the frequency-dependent length constant $\hat{\lambda}(f)$, reflecting the weighted mean 
+of the return-current positions (see sidebox), will be. 
+\gen{Figure + caption to be updated.} Adapted from \citeasnoun**{Pettersen2012}.
+}
+\label{fig:Spikes:ball-and-stick-sketch}
+%\figpermOurs
+\end{figure}
+%
 
 A Fourier sum of a signal such as the soma action potential can be constructed in various ways. The derivations presented below, building on \citeasnoun**{Pettersen2008a}, use the convention that a time signal $S(t)$ can be written as
 %%%
@@ -278,40 +328,32 @@ Pettersen2008?} \ghnote{mV/Hz paa y-aksen.}
 
 \subsection{\blue{Approximate spike formulas}}
 \label{sec:Spikes:approximate}
-To compute the extracellular potential generated by an imposed oscillatory voltage, the stick must be divided into small compartments and the multi-compartmental formula in Equation \gex{XX} used. \ghnote{Hva mente du her: Tenkte du paa passive multicompartment neuron-modell, eq:Neuron:multipassive, eller forward-modeling formelen? } This in general requires detailed knowledge of the resulting membrane currents in all compartments. While these can be computed for the ball-and-stick neuron (see, for example, \citeasnoun**{Pettersen2014}), the resulting formula for the spike becomes cumbersome and difficult to interpret. \ghnote{Henger ikke med. Virker som du i linjene over diskretiserte, og deretter gikk tilbake til analytisk loesning?} However, some useful insights can be obtained in two limiting cases: the recording being very near to the soma or very far from the soma.
+\gex{
+For the ball-and-stick model analytical expressions can be found from \Fref{eq:Spikes:ball-and-stick-formula}
+for the extracellular potential generated by an oscillatory voltage imposed in the soma, see \citeasnoun**{Pettersen2008}. The resulting formulas are cumbersome and difficult to interpret. However, some useful insights can be obtained in two limiting cases: the recording being very near to the soma or very far from the soma.}
 
-%\subsection{\blue{Frequency components of spikes}}
-%\label{sec:Spikes:Fourier}
-
-%For recording positions very close to the soma, the contribution from the soma current will dominate 
-%in the sum in \gex(XX). In this case the distance from the electrode
-%to the return currents in the dendrite will be much larger than the distance to soma. 
-%
-%%
-%With only the contribution from
-%the soma compartment included, the amplitude $|\hat{V}_\mathrm{e,near}(f,\vec{r})|$  
-%of the EP signal for each Fourier component with frequency $f$ is found to be
 
 \subsubsection{Spikes recorded near the soma}
 \label{sec:Spikes:near-spikes}
-For recording positions $\vec{r}$ very close to the soma, the contribution from the soma current will dominate over the contributions from the dendrite in the sum giving the extracellular potential in Equation \gex{XX}. \ghnote{Er dette en imposed waveform? The imposed (soma) current?} Then the amplitude of the predicted oscillating extracellular potential $|\hat{V}_\mathrm{e,near}(f,\vec{r})|$ is approximately given by 
+For recording positions $\vec{r}$ very close to the soma, the contribution from the soma current will dominate over the contributions from the dendrite in the sum giving the extracellular potential in \Fref{eq:Spikes:ball-and-stick-formula}. \gex{If we know the amplitude of the oscillatory soma membrane current $|\hat{I}_\mathrm{s}(f)|$,} the amplitude of the predicted oscillating extracellular potential $|\hat{V}_\mathrm{e,near}(f,\vec{r})|$ is approximately given by 
 %
 \begin{equation}
-  |\hat{V}_\mathrm{e,near}(f,\vec{r})| = \frac{|\hat{I}_\mathrm{s}(f)|}{4 \pi \sigma r} 
+  |\hat{V}_\mathrm{e,near}(f,\vec{r})| = \frac{|\hat{I}_\mathrm{s}(f)|}{4 \pi \sigma r} .
   \label{eq:Spikes:Ve_near_1}
 \end{equation}
 %
-where $|\hat{I}_\mathrm{s}(f)|$ is the amplitude of the oscillating current through the soma membrane.
+%where $|\hat{I}_\mathrm{s}(f)|$ is the amplitude of the oscillating current through the soma membrane.
 %and also the axial current entering the dendrite from the soma compartment. 
-For the relatively high frequencies of most relevance for the spike, this soma current is related to the soma membrane potential 
-$\hat{V}_\mathrm{s}(f)$ through~\cite**{Pettersen2008a}:
+\gex{This oscillating soma membrane current $|\hat{I}_\mathrm{s}(f)|$ is identical to the current entering the dendritic stick, 
+and for the relatively high frequencies of most relevance for the spike, it can be shown that the soma current is} related to the soma membrane potential 
+$\hat{V}_\mathrm{s}(f)$ through~\cite**{Pettersen2008a}
 %
 \begin{equation}
-  |\hat{I}_\mathrm{s}(f)| =  \frac{\pi^{3/2} d^{3/2}}{\sqrt{2}} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)|,
+  |\hat{I}_\mathrm{s}(f)| =  \frac{\pi^{3/2} d^{3/2}}{\sqrt{2}} \sqrt{ \frac{f c_\mathrm{m}}{r_\mathrm{a}} }  |\hat{V}_\mathrm{s}(f)|\,.
   \label{eq:Spikes:Isoma}
 \end{equation}
 %
-and the contribution to the spike is thus found to be
+\gex{The amplitude of the contribution to the spike from this oscillatory component} is thus found to be
 %
 \begin{equation}
   |\hat{V}_\mathrm{e,near}(f,\vec{r})| 
@@ -350,36 +392,21 @@ stick, $c_\mathrm{m}$ is the specific membrane capacitance, and $r_\mathrm{a}$ i
 %spike will decay as $1/r$ in this regime as well.
 %\gen{From David Sterratt: Intuition for the relationship witd $d, c_m, f, r_a$.}
 
-%%%%%%%%%%
-% Figure: Frequency-dependent distribution of return currents
-%%%%%%%%%%
-%\begin{cnfigure}{Figures/mm/EP-spike-ball-and-stick-sketch-w70-r300}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics{Figures/Spikes/Spikes-ball-and-stick-sketch-w70-r150}
-\end{center}
-\caption[]{Illustration of ball-and-stick neuron and its frequency-dependent 
-distribution of dendritic return currents following injection of a sinusoidal current into the soma.
-The net current entering the soma will enter the dendrite as an axial current, and return to the 
-ECS via the dendrite membrane. The inset shows the spatial distribution of this return current
-for different frequencies. The higher the frequency, the closer the return currents will be and
-the smaller the frequency-dependent length constant $\hat{\lambda}(f)$, reflecting the weighted mean 
-of the return-current positions (see sidebox), will be. 
-\gen{Figure + caption to be updated.} Adapted from \citeasnoun**{Pettersen2012}.
-}
-\label{fig:Spikes:ball-and-stick-sketch}
-%\figpermOurs
-\end{figure}
-%
-
 
 \subsubsection{Spikes recorded far away from soma}
 \label{sec:Spikes:far-spikes}
-For spikes recorded close to the soma, a single membrane current, the soma current, dominates the sum in Equation \gex{XX}, \ghtxt{as we described above}. For recording positions far away from the soma, the contribution from return membrane currents must also be included in the sum. For the ball-and-stick neuron, a membrane current entering the soma has to return to ECS through the cable stick, see \Fref{fig:Spikes:ball-and-stick-sketch}. When an oscillating membrane current enters through the soma \ghnote{Litt forvirrende med de ulike maatene aa beskrive denne injected-stroemmen paa. Kanskje bestemme oss for en fixed terminologi, definert der modellen introduseres helt i begynnelsen av seksjonen}, the spatial pattern of return current will depend on the frequency of the oscillation \ghtxt{\sout{due to}. This is an effect of the} capacitive properties of the membrane: For higher frequencies the capacitive membrane current will be larger, and the membrane effectively more leaky. Thus the injected soma current will return to the extracellular space closer to the soma for higher frequencies, as  seen in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}.  
+For spikes recorded close to the soma, a single membrane current, the soma current, dominates the sum in 
+\Fref{eq:Spikes:ball-and-stick-formula}, as we described above. For recording positions far away from the soma, the contribution from return membrane currents must also be included in the sum. For the ball-and-stick neuron, a membrane current entering the soma has to return to ECS through the cable stick, see \Fref{fig:Spikes:ball-and-stick-model-sketch}. When an oscillating
+\gex{potential is imposed in the soma,} the spatial pattern of return current will depend on the frequency of the oscillation.
+This is an effect of the capacitive properties of the membrane: For higher frequencies the capacitive membrane current will be larger, and the membrane effectively more leaky. Thus the injected soma current will return to the extracellular space closer to the soma for higher frequencies, as  seen in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}.  
 
-An approximate way of including the contribution to the spike from the dendritic return currents is to assume all return currents to leave the dendrite at a single point \ghtxt{\sout{on the dendrite}}. \ghnote{Mener du her et punkt for hver frekvens, eller alle frekvenser i samme punkt. Uklart om du her snakker om en enkel sinus eller en frekvenspakke.} Then we are left with a current dipole where the transmembrane current entering at the soma is at all times balanced by an oppositely directed current with the same magnitude leaving at a single point on the dendrite. The current dipole length is then given by the distance between the soma and the dendritic position of the return current.  \ghnote{Er vi ikke tilbake til 2-comp-modellen naa? Kommentar?}
+An approximate way of including the contribution from \gex{an oscillatory component to the spike} 
+from the dendritic return currents is to assume all return currents to leave the dendrite at a single point. 
+\gex{The position of this `return-current point' will depend on the frequency of the component.}
+Then we are left with a current dipole where the transmembrane current entering at the soma is at all times balanced by an oppositely directed current with the same magnitude leaving at a single point on the dendrite. The current dipole length is then given by the distance between the soma and the dendritic position of the return current, \gex{and we effectively 
+have a two-compartment model describing the contribution from this particular oscillatory component of the action potential.} 
 
-As shown in \Fref{fig:Spikes:ball-and-stick-sketch} this current\ghtxt{-}dipole \ghnote{Ka-ching!} length will depend on frequency. A natural choice is to choose the dipole length to be equal to the frequency-dependent length constant $\lambda_\mathrm{AC}(f)$ of the stick, where the length constant corresponds to the mean value of the envelope of the sinusoidally varying (normalized) membrane current $\hat{i}_\mathrm{m}$ weighted with distance $z$ from soma, see \Fref{fig:Spikes:ball-and-stick-sketch}. For an infinite dendrite stick this corresponds to
+As shown in \Fref{fig:Spikes:ball-and-stick-sketch} this current-dipole length will depend on frequency. A natural choice is to choose the dipole length to be equal to the frequency-dependent length constant $\lambda_\mathrm{AC}(f)$ of the stick, where the length constant corresponds to the mean value of the envelope of the sinusoidally varying (normalized) membrane current $\hat{i}_\mathrm{m}$ weighted with distance $z$ from soma, see \Fref{fig:Spikes:ball-and-stick-sketch}. For an infinite dendrite stick this corresponds to
 %
 \begin{equation}
   \lambda_\mathrm{AC}^\infty(f) = \frac{\int_0^\infty z |\hat{i}_\mathrm{m}| dz}{\int_0^\infty |\hat{i}_\mathrm{m}| dz} 
@@ -414,7 +441,7 @@ Thus for spikes measured far away from the soma we find
 The suffix `far' is added because this expression only applies in the `far-field' limit, that is, far away from the soma. 
 \ehnote{`far-field' limit har vel en noe mer generell definisjon?}
 \gen{Etter aa tenkt litt mer tror jeg det er OK aa si far-field limit siden dette dipolleddet vil dominere i denne grensen.}
-\ghnote{Skal lambda hete lambda infinity? }
+\ghnote{Skal lambda hete lambda infinity? } \gen{Ja, det var tanken siden vi bruker uttrykket for en uendelig stick}
 %
 %Equations~(\Fref{eq:Spikes:Ve_near_2}) and (\Fref{Spikes:box:equation:Ve_far_2}) describe how each frequency component of 
 %the soma membrane potential  $\hat{V}_\mathrm{s}(f)$ is `translated' into frequency components of the 
@@ -450,15 +477,17 @@ The suffix `far' is added because this expression only applies in the `far-field
 %the spike-amplitude panel in \Fref{fig:Spikes:ball-and-stick-results}.
 
 \subsection{\blue{Spike amplitude dependence on distance}}
-\ehtxt{Beyond some distance, this amplitude decay is approximately inversely proportional to the distance squared~\cite**{Hagen2015}.}
+
 
 A prediction from the near-field formula in \Fref{eq:Spikes:Ve_near_2} is that the amplitude of each Fourier component decays as $1/r$ when moving away from the soma, as long as the position remains within distances where the `near-field' approximation still applies. Since this applies to all frequency components which together constitute the action potential, this implies that the amplitude of the spike will decay as $1/r$ in this regime as well. 
 
 Far away, the far-field formula \Fref{eq:Spikes:Ve_far_2} implies that the spike amplitude depends not only on the radial distance $r$ from the neuron, but also the angle $\theta$ with the dipole axis, the direction of the dendritic stick. The amplitude will be largest above and below the neuron where $\theta=0^\circ$ and $\theta=180^\circ$, respectively. In the sideways direction ($\theta \sim 90^\circ$) the spike will be much smaller, as is characteristic for spatial patterns of potentials around a current dipole as illustrated in \Fref{fig:Spikes:DifferentNeuronModels}D. A qualitatively similar dipolar pattern, although not so distinct, is also seen for the spike generated by the biophysically detailed multi-compartment neuron in 
 \Fref{fig:Spikes:DifferentNeuronModels}.
 Another difference of this far-field expression with the near-field expression in \Fref{eq:Spikes:Ve_near_2}, is that the
-amplitude decays as $1/r^2$, characteristic for potentials around dipolar sources, rather than $1/r$ which is characteristic for potentials around 
-a single source. %This transition from a $1/r$ `monopolar' regime to a $1/r^2$ dipolar regime was also found in model studies with biophysically detailed 
+amplitude decays as $1/r^2$, characteristic for potentials around dipolar sources, rather than $1/r$ which is characteristic for potentials around a single source. 
+\gen{Dette er litt komplisert aa sammenligne med eksisterende resultater fra detaljerte nevronmodeller (Pettersen2008,Hagen2015) fordi disse resultatene er basert paa forflytning horisontalt utfra soma, noen som gjoer at en forventer at det gaar som 1/r$^3$. Vet ikke om vi trenger aa komme inn paa dette...} 
+
+%This transition from a $1/r$ `monopolar' regime to a $1/r^2$ dipolar regime was also found in model studies with biophysically detailed 
 %neurons \cite[Fig.~X]{Pettersen2008}.
 %\todo{Connect to Figure :EP-spike-ball-and-stick-results}
 
