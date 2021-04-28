@@ -628,29 +628,18 @@ The mean population-averaged firing rates are given shown in the legend.
 
 
 
-At this point one could destroy every connection of the recurrently connected network,
-load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage,
-reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times
-$\left(s_u(t) \ast \delta(t-\Delta_{vu})\right)$
-accounting for transmission delay,
-and otherwise keep neuron and synapse parameterization and locations the same.
-The asterisk symbol denotes a convolution operation.
-This would result in exactly the same changes in membrane voltages and consequently the same spatiotemporal distributions of transmembrane currents as in the recurrently connected case.
+At this point \ghnote{Definere "this point"? After running a simulation with the biophyiscally detailed network?} one could destroy every connection of the recurrently connected network, load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage, reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times $\left(s_u(t) \ast \delta(t-\Delta_{vu})\right)$ accounting for transmission delay,
+and otherwise keep neuron and synapse parameterization and locations the same. The asterisk symbol denotes a convolution operation. This would result in exactly the same changes in membrane voltages and consequently the same spatiotemporal distributions of transmembrane currents as in the recurrently connected case.
 However, what did we gain through these steps?
 
 \begin{enumerate}
 \item Full disassociation of simulations of neuronal network dynamics and simulations of extracellular signals,
 as illustrated in \Fref{fig:LFPy_hybrid}.
-\item HPC resources may have been required for simulating neural dynamics in the recurrently connected network in parallel in the first place,
-but one may now utilize a trivial parallelization scheme in order to compute extracellular signals as contributions of each cell is independent of the others.
-One could even do each single-cell simulation serially.
-\item Little was gained in terms of overall computational cost -- the total number of state variables (for active ion channels etc.) remains approximately the same.
-The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials, etc.
+\item HPC resources may have been required for simulating neural dynamics in the recurrently connected network in parallel in the first place, but one may now utilize a trivial parallelization scheme in order to compute extracellular signals as contributions of each cell is independent of the others. One could even do each single-cell simulation serially.
+\item Little was gained in terms of overall computational cost -- the total number of state variables (for active ion channels etc.) remains approximately the same. The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials, etc.
 \end{enumerate}
 
-For the purpose of predicting extracellular signals \emph{only},
-let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents on average.
-We will also relax the requirement that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all):
+For the purpose of predicting extracellular signals \emph{only}, let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents on average. We will also relax the requirement \ghnote{Har dette blitt satt opp som requirement? We will not require that ....?} that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all):
 \begin{enumerate}
 \item Approximate conductance-based synapses by equivalent current-based synapses:
 \begin{eqnarray}
