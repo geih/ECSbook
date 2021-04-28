@@ -90,7 +90,7 @@ aims to develop MC neuron simulation software from the ground up in order to ful
 
 \ehnote{nye symboler i samsvar med hva vi naa kommer opp med kommer.}
 
-Here we will refrain from going into details on the inner workings of the above software tools,
+Here, we will refrain from going into details on the inner workings of the above software tools,
 but reiterate that both axial currents and transmembrane currents can be estimated if the set of PDEs can be solved numerically for the membrane voltage of the MC neuron model(s).
 The membrane voltages of MC neuron models are typically assumed to be `measured' at the center of each compartment.
 The axial and transmembrane currents of a non-branching piece of cable is given in continuous form by
@@ -104,14 +104,15 @@ i_\mathrm{m}(x, t) &=& - \frac{\partial I_\mathrm{a} (x, t)}{\partial x} = \frac
 where the intracellular resistance per unit length $r_\mathrm{i}=4R_\mathrm{a}/\pi d^2$ can be given with unit \si{\ohm/\metre}.
 Here, $R_\mathrm{a}$  and $d$ is the axial resistivity (w. unit \si{\ohm\metre}) and diameter (unit \si{\metre}) of the dendritic cable model, respectively (cf. \Fref{chap:Neuron}).
 The unit for axial currents $I_\mathrm{a}(x, t)$ is \si{\ampere},
-while the transmembrane current is per unit length (\si{\ampere\per\metre}).
+while the transmembrane current \sntxt{$i_\mathrm{m}(x, t)$} is per unit length (\si{\ampere\per\metre}).
 The location $x$ denotes the position along the piece of cable in one dimension (the cable equation is by definition 1D even if the different parts of a neuron may be assigned locations in 3D space). 
 
 For spatially discretized cable models the axial currents can be estimated per-compartment by the central difference approximation as
 %
+\snnote{ser ut som om det er et fortegn for mye på andre linje, her:}
 \begin{eqnarray}
 I_\mathrm{a}(x_j, t) &\overset{h>0}{\approx}& - \frac{1}{r_\mathrm{i}} \frac{V_\mathrm{m}(x_j+\frac{h}{2}, t) - V_\mathrm{m}(x_j-\frac{h}{2}, t)}{h} \nonumber \\
-		  &\overset{L_j=h}{=}& - \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V_\mathrm{m}(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j} ~.
+		  &\overset{L_j=h}{=}& \sntxt{\sout{-}} \frac{\pi d_j^2}{4 R_\mathrm{a}} \frac{V_\mathrm{m}(x_j - \frac{L_j}{2}, t) - V_\mathrm{m}(x + \frac{L_j}{2}, t)}{L_j} ~.
 \label{eq:LFPy_ia_discrete}
 \end{eqnarray}
 %
@@ -126,9 +127,8 @@ but we will not go into further detail here.
 %For the purpose of computing extracellular signals that may arise from axial currents $I_\mathrm{a}$ we will simply assume that they are piecewise constant currents along the axis of each compartment.
 
 
-We next outline how the membrane potential can be estimated at the end points of each compartment $x \in \{x_j-L_j/2, x_j+L_j/2\}$,
-which may connected to none, one or several other end points of other compartments,
-when the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment. For terminating compartments (i.e., one or both ends has no connecting compartments and sealed ends) we may define
+\sntxt{\sout{We next} Next, we} outline how the membrane potential can be estimated at the end points of each compartment $x \in \{x_j-L_j/2, x_j+L_j/2\}$,
+which may \sntxt{be} connected to none, one or several other end points of other compartments\sntxt{\sout{, when}. Keep in mind that } the neural simulation software returns the midpoint potential $V_\mathrm{m}(x_j, t)$ for every $j \in \{1, \cdots, N \}$ compartment. For terminating compartments (i.e., one or both ends has no connecting compartments and sealed ends) we may define
 %
 \begin{eqnarray}
 V_\mathrm{m}(x_j - L_j/2, t) &\equiv& V_\mathrm{m}(x_j, t)~\mathrm{and/or} \nonumber \\
@@ -148,6 +148,16 @@ where the connecting node to mid point resistances \ghnote{skjoente ikke formule
 \begin{eqnarray}
 R_{j+n} &=& \frac{2 R_\mathrm{a}L_{j+n}}{\pi d_{j+n}^2} ~.
 \end{eqnarray}
+
+\snnote{Enig i at det er litt kjedelig aa skulle begynne aa snakke om node-til-midtpunkt-resistans. kan vi unngaa det paa denne maaten?}
+\sntxt{FORSLAG:
+\begin{equation}
+V_\mathrm{m}(x_j+L_j/2, t) = \frac{\frac{V_\mathrm{m}(x_j, t)}{r_\mathrm{i}^j L_j/2} + \sum_{n=0}^N \frac{V_\mathrm{m}(x_n, t)}{r_\mathrm{i}^n L_n/2}}{\frac{1}{r_\mathrm{i}^j L_j/2} + \sum_{n=0}^N \frac{1}{r_\mathrm{i}^n L_n/2}}~, \nonumber
+\label{eq:LFPy_V_connect_point}
+\end{equation}%
+where $r_\mathrm{i}^n$is the axial resistance of compartment $n$ with length $L_n$.
+}
+\snnote{Her har jeg latt parent compartment-leddene ($j$) staa for seg selv, for aa slippe aa bruke $j+n$-notasjon. vet ikke om det totalt sett ble noe bedre..}
 
 For child compartments connecting to the mid point of the parent compartment,
 the corresponding potential at the branch point seen by any number of child segments is per definition the same as the mid point potential of the parent, that is,
@@ -173,7 +183,8 @@ This machinery may appear as a bit of a hurdle to implement \ghtxt{\sout{for the
 
 Dependent on the implementation in the neural simulation software, a more direct measure of the transmembrane currents \ghtxt{\sout{is indeed}can be obtained with} computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
 %
-The current state \ghnote{forstaar ikke hva current state betyr} is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite**{Hagen2018}). For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
+\snnote{Hva med aa bare fjerne de neste to setningene?}
+The current state \ghnote{forstaar ikke hva current state betyr} is\sntxt{,} however\sntxt{,} a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite**{Hagen2018}). For now, we will emphasize that typical \sntxt{\sout{extracellular}} measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -242,10 +253,10 @@ V_\mathrm{m}(\mathbf{r}_2, t)
 %
 that is, mathematically similar to \Fref{eq:LFPy_linear_combination}. 
 Note that the constant terms have been moved out of the matrix multiplication.
-We encourage the interested reader of this book to show that the same approach hold for other model configurations, such
+We encourage the interested reader of this book to show that the same approach holds for other model configurations, such
 as 3-compartment models without and with branching points as illustrated in \Fref{fig:LFPy_circuits}B and C.
 
-So far the axial currents is represented as a scalar field.
+So far\sntxt{,} the axial currents is represented as a scalar field.
 For some applications, such as computing the magnetic field $\mathbf{H}(\mathbf{r}, t)$,
 the axial currents can be represented as a vector field by multiplication with the path vectors along the center axis of each compartment:
 %
@@ -266,8 +277,8 @@ I_\mathrm{a}(\mathbf{r}_N, t) \mathbf{d}_N
 \end{bmatrix} ~,
 \end{equation}
 %
-For compactness we introduced the current displacement $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$,
-where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denotes the start- and endpoint coordinates of compartment $j$.
+For compactness\sntxt{,} we introduced the current displacement $\mathbf{d}_j=\mathbf{r}_{\mathrm{f}j} - \mathbf{r}_{\mathrm{i}j}$,
+where $\mathbf{r}_{\mathrm{i}j}$ and $\mathbf{r}_{\mathrm{f}j}$ denote\sntxt{\sout{s}} the start- and endpoint coordinates of compartment $j$.
 Consistent with the point-source formalism (cf. \Fref{sec:VC:pointsource}),
 we let the `location' of each axial current be the mid-point $\mathbf{r}_j$ of each cylindrical compartment $j$.
 In a similar manner we will represent the total transmembrane current per compartment as a matrix
@@ -395,8 +406,10 @@ while the latter could be used to compute the ground truth CSD across evenly dis
 
 The formalism using linear combinations may also be adapted for higher-dimensional source elements, that is,
 the set of axial currents $\mathbb{I}_\mathrm{a}$ which in the present context can be represented by a 3D array with shape $(M, 3, N_t)$.
-To compute the magnetic field outside the neuron arising from axial currents one can
-either sum up the individual contributions using the relevant Biot-Savart law \cite**{Blagoev2007,Hagen2018} as
+\snnote{kanskje bare ta bort "either" i neste setning som den var. eller noe saannt:}
+\sntxt{\sout{To compute the magnetic field outside the neuron arising from axial currents one can
+either sum up the individual contributions using the relevant Biot-Savart law} \cite**{Blagoev2007,Hagen2018} \sout{as}}
+\sntxt{Using the Biot-Savart law, we can compute the magnetic field outside of neurons, by summing up the contributions from axial currents \cite**{Blagoev2007,Hagen2018}:} 
 %
 \begin{equation}
 \mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^N \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
@@ -429,7 +442,7 @@ current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stor
 \ehnote{usikker paa hvor detaljert jeg skal gaa inn her. Python/numpy lar en gjoere en gjoere denne operasjonen for alle maaleposisjoner kompakt som}
 \ehtxt{\url{B=(F @ I).sum(axis=1); B.shape=(N,3,Nt); F.shape=(N,M,3,3); I.shape=(M,3,Nt)}}
 \ehnote{ogsaa usikker paa notasjon for matriseprodukt med nD matriser som her.}
-
+\snnote{Hadde det holdt aa bytte ut 6.22 med B = F I?}
 
 \subsubsection{Forward models for current dipole moments}
 \ehnote{add some on combining current dipole moment to distal measures of activity (EEG, MEG)}
@@ -474,7 +487,7 @@ these models generally can be written on the form of a linear combination
 \phi(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
 \end{equation}
 where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is head-model dependent.
-From the current dipole moment potential (\Fref{eq:LFPy:dipolepotential}),
+\sntxt{\sout{From the current dipole moment potential} For the potential in an infinite homogeneous volume conductor} (\Fref{eq:LFPy:dipolepotential}),
 the corresponding rows of $\mathbf{M}$ for each electrode site $\mathbf{R}_i$ can be computed as
 \begin{equation}
 m_{i} = \frac{I_3 \cdot (\mathbf{R}_i-\mathbf{r})}{4 \pi \sigma \Vert \mathbf{R}_i-\mathbf{r} \Vert^3}~,
