@@ -148,6 +148,16 @@ where the connecting node to mid point resistances \ghnote{skjoente ikke formule
 R_{j+n} &=& \frac{2 R_\mathrm{a}L_{j+n}}{\pi d_{j+n}^2} ~.
 \end{eqnarray}
 
+\snnote{Enig i at det er litt kjedelig aa skulle begynne aa snakke om node-til-midtpunkt-resistans. kan vi unngaa det paa denne maaten?}
+\sntxt{FORSLAG:
+\begin{equation}
+V_\mathrm{m}(x_j+L_j/2, t) = \frac{\frac{V_\mathrm{m}(x_j, t)}{r_\mathrm{i}^j L_j/2} + \sum_{n=0}^N \frac{V_\mathrm{m}(x_n, t)}{r_\mathrm{i}^n L_n/2}}{\frac{1}{r_\mathrm{i}^j L_j/2} + \sum_{n=0}^N \frac{1}{r_\mathrm{i}^n L_n/2}}~, \nonumber
+\label{eq:LFPy_V_connect_point}
+\end{equation}%
+where $r_\mathrm{i}^n$is the axial resistance of compartment $n$ with length $L_n$.
+}
+\snnote{Her har jeg latt parent compartment-leddene ($j$) staa for seg selv, for aa slippe aa bruke $j+n$-notasjon. vet ikke om det totalt sett ble noe bedre..}
+
 For child compartments connecting to the mid point of the parent compartment,
 the corresponding potential at the branch point seen by any number of child segments is per definition the same as the mid point potential of the parent, that is,
 \begin{equation}
@@ -395,8 +405,10 @@ while the latter could be used to compute the ground truth CSD across evenly dis
 
 The formalism using linear combinations may also be adapted for higher-dimensional source elements, that is,
 the set of axial currents $\mathbb{I}_\mathrm{a}$ which in the present context can be represented by a 3D array with shape $(M, 3, N_t)$.
-To compute the magnetic field outside the neuron arising from axial currents one can
-either sum up the individual contributions using the relevant Biot-Savart law \cite**{Blagoev2007,Hagen2018} as
+\snnote{kanskje bare ta bort "either" i neste setning som den var. eller noe saannt:}
+\sntxt{\sout{To compute the magnetic field outside the neuron arising from axial currents one can
+either sum up the individual contributions using the relevant Biot-Savart law} \cite**{Blagoev2007,Hagen2018} \sout{as}}
+\sntxt{Using the Biot-Savart law, we can compute the magnetic field outside of neurons, by summing up the contributions from axial currents \cite**{Blagoev2007,Hagen2018}:} 
 %
 \begin{equation}
 \mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^N \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
@@ -429,7 +441,7 @@ current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stor
 \ehnote{usikker paa hvor detaljert jeg skal gaa inn her. Python/numpy lar en gjoere en gjoere denne operasjonen for alle maaleposisjoner kompakt som}
 \ehtxt{\url{B=(F @ I).sum(axis=1); B.shape=(N,3,Nt); F.shape=(N,M,3,3); I.shape=(M,3,Nt)}}
 \ehnote{ogsaa usikker paa notasjon for matriseprodukt med nD matriser som her.}
-
+\snnote{Hadde det holdt aa bytte ut 6.22 med B = F I?}
 
 \subsubsection{Forward models for current dipole moments}
 \ehnote{add some on combining current dipole moment to distal measures of activity (EEG, MEG)}
@@ -474,7 +486,7 @@ these models generally can be written on the form of a linear combination
 \phi(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
 \end{equation}
 where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is head-model dependent.
-From the current dipole moment potential (\Fref{eq:LFPy:dipolepotential}),
+\sntxt{\sout{From the current dipole moment potential} For the potential in an infinite homogeneous volume conductor} (\Fref{eq:LFPy:dipolepotential}),
 the corresponding rows of $\mathbf{M}$ for each electrode site $\mathbf{R}_i$ can be computed as
 \begin{equation}
 m_{i} = \frac{I_3 \cdot (\mathbf{R}_i-\mathbf{r})}{4 \pi \sigma \Vert \mathbf{R}_i-\mathbf{r} \Vert^3}~,
