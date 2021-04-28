@@ -66,7 +66,7 @@ There exist even more advanced framework than EMI, which, in addition to account
 \label{sec:Schemes:LFPy}
 \index{Multicompartment models}
 
-\ghtxt{\sout{Most models aiming to mimic the dynamics of a particular neuron or neural system except the simplest ball and stick like models are too complex to be solved analytically (cf. \Fref{chap:Neuron}).}With the exception of the simplest ball and stick like models, models aiming to mimic the dynamics of a particular neuron or neural system are generally too complex to be solved analytically (cf. \Fref{chap:Neuron}).} Thus the set of partial differential equations (PDEs) \ghtxt{\sout{and initial conditions}} representing voltage- and concentration-dependent ion channels, synapses, plasticity, neuronal geometry etc. of the full model will have to be solved numerically on computers. The numerical solution of geometrically detailed cable models entails a discretization of the geometry into multiple compartments (hence MC), wherein the states of variables and their derivatives are estimated on a temporal grid which may be fixed or irregular. \ghtxt{\sout{While one could utilize general-purpose numerical solvers in order to compute resulting voltage fluctuations, transmembrane currents or axial currents, a more feasible approach is utilization of one of several different software tools tailored for this purpose that have been developed in the past.}While the state variables in such a model could be computed with a general-purpose numerical solver, a more feasible approach is to use previously developed software tools tailored specifically for simulating neurons. } Such software greatly simplify the process of specifying the \ghtxt{\sout{phenomenological or biophysically detailed}} model and choosing the appropriate numerical schemes for solving the resulting set of PDEs. \ghtxt{\sout{Such tools will also by default usually account for one of the main assumptions of standard cable theory, that is, the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).}Most of these tools are by default based on the key assumption made in standard cable theory, i.e., the assumption that the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).}
+\ghtxt{\sout{Most models aiming to mimic the dynamics of a particular neuron or neural system except the simplest ball and stick like models are too complex to be solved analytically (cf. \Fref{chap:Neuron}).}With the exception of the simplest ball-and- stick-like models, models aiming to mimic the dynamics of a particular neuron or neural system are generally too complex to be solved analytically (cf. \Fref{chap:Neuron}).} Thus the set of partial differential equations (PDEs) \ghtxt{\sout{and initial conditions}} representing voltage- and concentration-dependent ion channels, synapses, plasticity, neuronal geometry etc. of the full model will have to be solved numerically on computers. The numerical solution of geometrically detailed cable models entails a discretization of the geometry into multiple compartments (hence MC), wherein the states of variables and their derivatives are estimated on a temporal grid which may be fixed or irregular. \ghtxt{\sout{While one could utilize general-purpose numerical solvers in order to compute resulting voltage fluctuations, transmembrane currents or axial currents, a more feasible approach is utilization of one of several different software tools tailored for this purpose that have been developed in the past.}While the state variables in such a model could be computed with a general-purpose numerical solver, a more feasible approach is to use previously developed software tools tailored specifically for simulating neurons. } Such software greatly simplify the process of specifying the \ghtxt{\sout{phenomenological or biophysically detailed}} model and choosing the appropriate numerical schemes for solving the resulting set of PDEs. \ghtxt{\sout{Such tools will also by default usually account for one of the main assumptions of standard cable theory, that is, the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).}Most of these tools are by default based on a key assumption made in standard cable theory, i.e., the assumption that the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).}
 
 The NEURON simulation environment\footnote{\href{https://neuron.yale.edu}{https://neuron.yale.edu}} \cite**{Hines1997} presently remains a prevalent choice for \ghtxt{\sout{empiric-based}data-based} simulations of MC neuron models as it supports both Windows-,linux- and unix-based operating systems including MacOS, and can be used with a GUI or in a programmatic fashion on laptops, desktop computers and in parallel on large-scale high-performance computing (HPC) facilities. NEURON is also utilized as a simulator backend for other higher-level software such as
 PyNN\footnote{\href{https://neuralensemble.org/PyNN/}{https://neuralensemble.org/PyNN/}} \cite**{Davison2008},
@@ -82,16 +82,16 @@ Another effort receiving funding from the EU Human Brain Project,
 named Arbor\footnote{\href{https://arbor.readthedocs.io}{https://arbor.readthedocs.io}} \cite**{Akar2019},
 aims to develop MC neuron simulation software from the ground up in order to fully exploit modern high-performance libraries and next generation hardware in the form of graphical processing units (GPUs) and massively parallel HPC facilities.
 
+\ghnote{Kan det her vaere en ide aa her presentere det som kommer. Noe ala: Vi skal gaa fra neurodynamics (step 1) til $V_e$. Vi trenger da f.eks. $I_m$. Noen ganger kan det vaere fordelaktig aa bruke $I_a$ for aa regne ut dipoler. Hvis vi trenger $I_m$ kan vi faa den direkte fra MC-modeller som spytter ut $I_m$ for oss. Alternativt kan vi bruke simuleringer som bare gir oss $V_m$, og fra disse regne ut baade $I_m$ og $I_a$ slik vi viser her nedenfor. Kanskje dele opp i to delkapitiler: (1) Regne ut $I_a$ fra $V_m$. (2) Regne ut $I_m$ fra $V_m$, og si (i sistnevnte) at $I_m$ som oftes tas direkte fra simuleringen?
+}
 
 \subsubsection{Predicting axial and transmembrane currents}
 \label{chap:LFPy_Ia_Im}
-
 \ehnote{nye symboler i samsvar med hva vi naa kommer opp med kommer.}
+\ghnote{Tror dette trenger en stoerre intro, for jeg ble litt forvirra. Kan godt bistaa naar jeg har skjoent det hele selv. Jeg pleier aa tenke paa MC modellering som at foerst definerer noen stroemer som funksjon av $V_m$, og saa loeser ligninger for $dV_m/dt$, men her er liksom $V_m$ kjent og saa skal vi finne stroemmene etterpaa... Dette handler vel kanskje om at vi har en simulering som spytter ut $V_m(t)$, men ikke saa mye annet, og saa trenger vi kanskje stroemmene i ettertida for aa regne ut $V_e$ og dipoler og saa videre? Kanskje vi boer gi en intro som i stoerre grad forklarer hvor vi vil.}
 
 Here we will refrain from going into details on the inner workings of the above software tools,
-but reiterate that both axial currents and transmembrane currents can be estimated if the set of PDEs can be solved numerically for the membrane voltage of the MC neuron model(s).
-The membrane voltages of MC neuron models are typically assumed to be `measured' at the center of each compartment.
-The axial and transmembrane currents of a non-branching piece of cable is given in continuous form by
+but reiterate that both axial currents and transmembrane currents can be estimated if the set of PDEs can be solved numerically for the membrane voltage of the MC neuron model(s). The membrane voltages of MC neuron models are typically assumed to be `measured' at the center of each compartment. The axial and transmembrane currents of a non-branching piece of cable is given in continuous form by
 %
 \begin{eqnarray}
 I_\mathrm{a}(x,t) &=& - \frac{1}{r_\mathrm{i}} \frac{\partial V_\mathrm{m}(x, t)}{\partial x} \text{~and} \\
@@ -167,9 +167,10 @@ i_\mathrm{m}(x_j, t) &\overset{h>0}{\approx}& \frac{1}{r_\mathrm{i}} \frac{V_\ma
 \end{eqnarray}
 
 This machinery may appear as a bit of a hurdle to implement \ghtxt{\sout{for the purpose of computing extracellular potentials or magnetic signals}}, but thankfully MC neuron modeling software such as NEURON and Arbor provide native support for computing the transmembrane current (with unit \si{\ampere}) and/or transmembrane current density per surface membrane area (with unit \si{\ampere/\metre^2}) for each compartment. We will typically assume that the transmembrane current density is equal along each constant-diameter cylindrical compartment (which violates our above assumption of constant axial current!). 
-\ghnote{Uklart m/ We will typically assume... Menes: Such software typically assumes?}
+\ghnote{Uklart m/ We will typically assume... Menes: When using this to compute extracellular potentials, one typically assumes
+...?}
 
-Dependent on the implementation in the neural simulation software, a more direct measure of the transmembrane currents \ghtxt{\sout{is indeed}can be obtained with} computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
+Dependent on the implementation in the neural simulation software, a more direct measure of the transmembrane currents \ghtxt{\sout{is indeed}can instead be obtained by} computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
 %
 The current state \ehtxt{of affairs} \ghnote{forstaar ikke hva current state betyr} is however a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite**{Hagen2018}). For now, we will emphasize that typical extracellular measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
 
@@ -295,10 +296,7 @@ $N_t$ is here the number of discrete time steps in the simulated output signals.
 %%%%%%%%%%%
 
 \subsubsection{Application of linear volume conductor models for extracellular potentials and magnetic fields}
-
-As derived from \textit{volume conductor theory} (\Fref{chap:VC}),
-the different electric and magnetic signals that can be computed from the electric activity of brain cells are \textit{linearly} dependent on either transmembrane currents or axial currents.
-Thus, some arbitrary signals $v(\mathbf{R}_i, t)$ in $M$ different spatial locations from the $N$ compartmental sources located at $r_j$ can be computed as
+As derived from \textit{volume conductor theory} (\Fref{chap:VC}), the different electric and magnetic signals that can be computed from the electric activity of brain cells are \textit{linearly} dependent on either transmembrane currents or axial currents. Thus, some arbitrary signals $v(\mathbf{R}_i, t)$ in $M$ different spatial locations from the $N$ compartmental sources located at $r_j$ can be computed as
 %
 \begin{eqnarray}
 \begin{bmatrix}
@@ -429,6 +427,7 @@ current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stor
 \ehnote{ogsaa usikker paa notasjon for matriseprodukt med nD matriser som her.}
 
 
+
 \subsubsection{Forward models for current dipole moments}
 \ehnote{add some on combining current dipole moment to distal measures of activity (EEG, MEG)}
 For forward-model predictions of distal electric and magnetic measures of neural activity such as EEG and MEG recordings,
@@ -496,40 +495,22 @@ and then estimate the final signal as
 \section{\blue{EH: Forward-model predictions from spiking point-neuron network models}}
 \label{sec:Schemes:HybridLFPy}
 \index{Point neuron model}
-
 %\ehnote{gammalt:}
 %%\sout{Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)}
-
+\ghtxt{\sout{
 Many biophysically detailed and phenomenological models of individual neurons and neuronal networks that have been developed in the past have incorporated spatial geometry of the neurons at various level of detail.
 To represent and simulate the dynamics of such neuron models using computers the multicompartment cable formalism (\Fref{chap:Neuron}) remains a common choice.
 For the purpose of predicting extracellular electric or magnetic measures of neural activity,
-the multicompartment formalism (or variants thereof) is \emph{a priori} required in order to predict the spatial distribution of transmembrane or axial currents required for the different forward models derived using volume conductor theory (\Fref{chap:VC}).
+the multicompartment formalism (or variants thereof) is \emph{a priori} required in order to predict the spatial distribution of transmembrane or axial currents required for the different forward models derived using volume conductor theory (\Fref{chap:VC}).} As we have seen, the multicompartment formalism (\Fref{chap:Neuron}) remains a common choice for computing the spatial distribution of transmembrane or axial currents needed to perform forward modeling of extracellular electric or magnetic fields  using volume conductor theory (\Fref{chap:VC}).} Biophysically detailed multicompartment neuron models (and recurrently connected networks thereof) are however computationally costly due to the large number of associated state variables \ghtxt{\sout{that must be predicted}}, resulting in long simulation times on typical hardware. For recurrent neuronal network simulations with more than a few hundred biophysically detailed neurons, distributed high-performance computing (HPC) facilities are generally required, unless the neuronal simulation software may utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.
 
-Biophysically detailed multicompartment neuron models (and recurrently connected networks thereof) are however computationally costly due to the large number of associated state variables that must be predicted,
-resulting in long simulation times on typical hardware.
-For recurrent neuronal network simulations with more than a few hundred biophysically detailed neurons, distributed high-performance computing (HPC) facilities are generally required,
-unless the neuronal simulation software may utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.
+As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes' - see \Fref{chap:Spikes}) and/or voltage traces, many (if not most) studies aiming to explain neuronal population dynamics \ghtxt{\sout{at the level of spikes and somatic voltages}} have deliberately chosen much-simpler mathematical abstractions of the individual neurons. \ghtxt{\sout{As an umbrella term such simple neuron models are often referred to as `point' neuron models if they can be considered as a singular compartment, that is, the neuron model has no description of how the membrane potential vary throughout the dendrites and axon which may be present in actual neurons. Point neuron models as a consequence also then carries no spatial information about neuronal geometry.}A common abstraction is to use so-called point-neuron models, i.e. neurons modeled as a single compartment, which does not account for how the membrane potential vary throughout the dendrites and axon, and thus contain no information about the neuronal geometry. } The individual point neurons (or \emph{point processes}) may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar, which may facilitate connection routines that depend on location and distance between the neurons.
 
-As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes' - see \Fref{chap:Spikes}) and/or voltage traces,
-many (if not most) studies aiming to explain neuronal population dynamics at the level of spikes and somatic voltages have deliberately chosen much-simpler mathematical abstractions of the individual neurons.
-As an umbrella term such simple neuron models are often referred to as `point' neuron models if they can be considered as a singular compartment,
-that is,
-the neuron model has no description of how the membrane potential vary throughout the dendrites and axon which may be present in actual neurons.
-Point neuron models as a consequence also then carries no spatial information about neuronal geometry.
-The individual point neurons (or \emph{point processes}) may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar,
-which may facilitate connection routines that depend on location and distance between the neurons.
+\ghtxt{\sout{Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model Lapicque1907,Brunel2007. We will here point out that describing the somatic voltage is not a strict requirement for point neurons in the present context - they may very well be some statistical model for spike time generation as function of presynaptic activity or some other stimuli.} Many point-neuron models are stripped down to a minimal degree of complexity also in terms of membrane mechanisms. For example, the commonly used leaky integrate-and-fire neuron model simulates only the sub-threshold membrane potential dynamically, but includes form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness \cite**{Lapicque1907,Brunel_2007}. Even if these models do not describe the somatic voltage trace in any detail, they may be suited as tools to predict spike time statistics as function of presynaptic activity or some other stimuli.}
 
-Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model \cite**{Lapicque1907,Brunel_2007}.
-We will here point out that describing the somatic voltage is not a strict requirement for point neurons in the present context - they may very well be some statistical model for spike time generation as function of presynaptic activity or some other stimuli.
-
-Their mathematical simplicity lends point neurons to be implemented and solved very efficiently in comparison to biophysically detailed multicompartment neuron models.
-As a consequence, dynamics of recurrently connected networks of spiking point neurons can be studied at a much grander scale and pace than similarly sized networks of multicompartment neuron models.
-As typical point neurons also have very few intrinsic parameters compared to any multicompartment neuron model,
-this has also allowed for separating effects of network connectivity from the cellular dynamics
+Their mathematical simplicity lends point neurons to be implemented and solved very efficiently in comparison to biophysically detailed multicompartment neuron models. As a consequence, dynamics of recurrently connected networks of spiking point neurons can be studied at a much grander scale and pace than similarly sized networks of multicompartment neuron models. As typical point neurons also have very few intrinsic parameters compared to any multicompartment neuron model, this has also allowed for separating effects of network connectivity from the cellular dynamics
 explaining observed phenomena such as asynchronous or synchronous, regular and irregular spiking activity also using rigorous mathematical analysis, see e.g., \cite**{Brunel2000}.
 
-Linking activity of point neurons and point neuron network models to electric or magnetic extracellular measures of activity however poses a problem.
-One could attempt to extract equivalent transmembrane currents (synaptic, ionic, capacitive etc.) and quickly come to the conclusion that all currents \emph{must} sum to zero in the point(s) due to charge conservation.
+Linking activity of point neurons and point neuron network models to electric or magnetic extracellular measures of activity however poses a problem. One could attempt to extract equivalent transmembrane currents (synaptic, ionic, capacitive etc.) and quickly come to the conclusion that all currents \emph{must} sum to zero in the point(s) due to charge conservation.
 As such there can be no electric or magnetic signals arising from point neurons or networks thereof.
 Physics-based computational schemes for predicting signals such as the local field potential (LFP) is therefore \textit{a priori} required.
 
