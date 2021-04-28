@@ -1125,10 +1125,10 @@ while the normalized covariance measure $COV(\hat{\phi}, \phi)/VAR(\phi) \gtrsim
 The choice of cable model, that is, quasi-active linear or passive linear, has minor impact on the different predictions.   
 
 
-\section{\blue{EH: Other approximations}}
+\section{\blue{EH: Heuristic signal approximations.}}
 \label{sec:Schemes:proxies}
 
-So far, we have showed by example that linearized computational schemes can well explain the extracellular potentials (and by extension magnetic signals) from recurrently connected networks of multicompartment neuron models. 
+So far, we have demonstrated that linearized computational schemes can well explain the extracellular potentials (and by extension magnetic signals) from recurrently connected networks of multicompartment neuron models. 
 These linear approximations were all derived from the recurrent network specification itself. 
 In order to predict signals from point-neuron networks or rate models however, 
 various assumptions on the anatomy of the neurons, connections etc. must be incorporated, 
@@ -1136,6 +1136,7 @@ which is made difficult by the fact that such anatomical data from experiments a
 For the purpose of relating in particular point-neuron network activity to extracellular electric or magnetic measures of activity,
 a number of heuristic signal approximations (``proxies'') have still been proposed and utilized in the literature. 
 These proxies are, however, for the most part poorly grounded in the biophysics of extracellular electric and magnetic signals. 
+As we shall demonstrate here, certain proxies can still provide excellent insight into the temporal properties of extracellular signals of neural activity.
 
 Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016} outlined throughout \Fref{sec:Schemes:HybridLFPy},   
 \cite**{Mazzoni2015} compared different LFP proxies that could be extracted in two-population spiking point-neuron network models. 
@@ -1148,9 +1149,9 @@ where the spatial function $f_\text{proxy}(\mathbf{r})$ defines the overall sign
 and $g_\text{proxy}(t)$ a position-independent temporal component. 
 By construction, the temporal component has zero mean and variance of unity. 
 As a ground truth extracellular potential signal $\phi(\mathbf{r}, t)$ was computed, 
-different choices of $g_\text{proxy}(t)$ could be evaluated while fitting the corresponding spatial functions $f_\text{proxy}(\mathbf{r})$. 
-The ground truth LFP signal was predicted using the standard MC formalism in combination with the line-source volume conductor model.
-Synaptic activation times were determined by the spiking activity of a two-population point-neuron network model  with current-based synapses taken from a previous study \cite**{Cavallari2014}. 
+accuracies of different choices of $g_\text{proxy}(t)$ could be evaluated while fitting the corresponding spatial functions $f_\text{proxy}(\mathbf{r})$. 
+The ground truth LFP signal was predicted using the standard MC formalism in combination with the line-source VC model.
+Synaptic activation times were determined by the spiking activity of a two-population point-neuron network model  with current-based \ehnote{dobbeltsjekk} synapses taken from a previous study \cite**{Cavallari2014}. 
 The LFP signal was also computed at different depths and lateral offsets, 
 mimicking an experimental recording using a laminar probe inserted down through a cortical column. 
 Hence, performance of the different proxies could be evaluated across different depths. 
@@ -1158,35 +1159,75 @@ Hence, performance of the different proxies could be evaluated across different 
 So which choices for $g_\text{proxy}(t)$ can be considered? 
 In spiking point-neuron networks one can with relative ease record events and compute 
 the population-averaged spike rates $\nu_X(t)$ for each population $X$, 
-the population-averaged voltages $\langle V_X(t) \rangle$ of the point neurons
+the population-averaged membrane voltages of the point neurons
 and the summed synaptic currents resolved into excitatory (AMPA) and inhibitory (GABA) contributions onto different subpopulations.
-Then one can also consider linear combinations of the synaptic currents. 
+Then, linear combinations of the synaptic currents can also be included in the comparison. 
 %the absolute of the summed synaptic currents amounting to the difference between them (as their sign is opposite), 
 %and finally a weighted sum of the mean-subtracted summed synaptic currents with added delays along the time axis.
 
-The task at hand was identifying which proxy maximises the fraction of variance explained ($R^2$) between the  ground-truth LFP signal and the respective proxy predictions. 
-
-As expected, both the population firing rate proxy ($\sum_X \nu_X(t)$) performed poorly as it can not possibly account for any spatial or temporal filtering effects mediated by the actual spike-signal kernel functions $H_{YX}(\mathbf{r}, \tau)$. 
-While the somatic voltage proxy account for conduction delays and
-temporal components of synaptic currents but without intrinsic dendritic filtering, 
-its performance is only marginally better as the signals in question reflect transmembrane currents which do not equate fluctuations the membrane voltages. 
-That leaves the various linear combinations of excitatory and inhibitory synaptic input currents, 
-which \textit{a priori} ignore additional linear contributions by intrinsic dendritic filtering and the electrostatic forward model in question. 
 Using the nomenclature established throughout this Chapter, 
 these temporal components $g_\text{proxy}(t)$ of the proxy LFPs can be defined as \cite**{Mazzoni2015}:
 %
 \begin{eqnarray}
-z_\text{score}\left(u(t)\right) &=& \frac{u(t)-\mu_u}{\sigma_u} \\
-g_{\sum I_E}(t) &=& z_\text{score} \bigg( \sum_{X=E} \sum_{Y=E} K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t) \bigg) \\
-g_{\sum I_I}(t) &=& z_\text{score} \bigg( \sum_{X=I} \sum_{Y=E} K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t) \bigg) \\
-g_{\sum I}(t) &=& z_\text{score}\bigg( \sum_X \sum_{Y=E} K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t) \bigg) \\
-g_{\sum {|I|}}(t) &=& z_\text{score} \bigg(  \sum_X \sum_{Y=E} \big| K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX})(t) \big|  \bigg) \\
-g_\text{WS}(t) &=& z_\text{score} \bigg(  \sum_X \sum_{Y=E} \big| \alpha_X K_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast I_{\text{syn}YX} \ast \delta(t-\tau_X) \big)(t) \big|  \bigg)~. 
+z_\text{score}\left(g(t)\right) &=& \frac{g(t)-\mu_g}{\sigma_g} \\
+g_{\sum \nu_X}(t) &=& z_\text{score} \bigg(\sum_X \nu_X \bigg) \\
+g_{V_\mathrm{m}}(t) = &=& z_\text{score} \bigg(\sum_Y \frac{1}{N_Y} \sum_{v\in Y}V_\mathrm{m}^{\langle v \rangle}(t) \bigg) \\
+g_{\sum I_E}(t) &=& z_\text{score} \bigg( \sum_{X\in\{E\}} \sum_{Y\in\{E\}} K_{YX} \overline{I}_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast f_{\text{syn}YX})(t) \bigg) \\
+g_{\sum I_I}(t) &=& z_\text{score} \bigg( \sum_{X\in\{I\}} \sum_{Y\in\{E\}} K_{YX} \overline{I}_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast f_{\text{syn}YX})(t) \bigg) \\
+g_{\sum I}(t) &=& z_\text{score}\bigg( g_{\sum I_E}(t) + g_{\sum I_I}(t) \bigg) \\
+g_{\sum {|I|}}(t) &=& z_\text{score} \bigg(\big| g_{\sum I_E}(t) + g_{\sum I_I}(t) \big|  \bigg) \\
+g_\text{WS}(t) &=& z_\text{score} \bigg(\big| g_{\sum I_E}(t) + \alpha \big(g_{\sum I_I} \ast \delta_{\tau_I}\big)(t) \big|  \bigg)~.
+%g_{\sum I}(t) &=& z_\text{score}\bigg( \sum_X \sum_{Y\in\{E\}} K_{YX} \overline{I}_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast f_{\text{syn}YX})(t) \bigg) \\
+%g_{\sum {|I|}}(t) &=& z_\text{score} \bigg(  \sum_X \sum_{Y\in\{E\}} \big| K_{YX} \overline{I}_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast f_{\text{syn}YX} )(t) \big|  \bigg) \\
+%g_\text{WS}(t) &=& z_\text{score} \bigg(  \sum_X \sum_{Y\in\{E\}} \big| \alpha_X K_{YX} \overline{I}_{YX} \big( \nu_X \ast \widetilde{\Delta}_{YX} \ast f_{\text{syn}YX} \ast \delta_{\tau_X} \big)(t) \big|  \bigg)~. 
 \end{eqnarray}
 %
-Here, the $z$-scoring function ensures temporal components with zero mean and unitary variance. 
-For the latter function \textit{weighted sum} temporal component $f_\text{WS}(t)$ the parameter $\alpha_X$ is scalar and for the excitatory connections $\alpha_{X=E} \coloneq 1$,
-while the term $\delta(t-\tau_X)$ denotes a temporal delay. 
+Here, the function $z_\text{score}(g(t))$ ensures that each $g_\mathrm{proxy}(t)$ has zero mean and unit variance. 
+For the last temporal component $g_\text{WS}(t)$ the parameter $\alpha$ is scalar 
+while the term $\delta_{\tau_I} \coloneq \delta(t-\tau_I)$ denotes a temporal delay of duration $\tau_I$.
+
+Snapshots of the different temporal kernels $g_\mathrm{proxy}(t)$ derived from our original MC network are compared in \Fref{fig:g_proxy}A.  
+As such, the task at hand is identifying which proxy maximises the fraction of variance explained ($R^2$) between the  ground-truth LFP signal and the respective proxy predictions in different locations, 
+as summarized in \Fref{fig:g_proxy}B. 
+As $R^2$ is defined as the squared correlation coefficient, $R^2 \lesssim 1$ imply a near linear dependence between the proxy and actual signal while $R^2 \gtrsim 0$ imply independence.
+
+As expected, the population firing rate proxy ($g_{\sum \nu_X}(t)$) performed poorly as it can not account for any spatial or temporal filtering effects captured by actual spike-signal kernel functions $H_{YX}(\mathbf{r}, \tau)$. 
+$g_{V_\mathrm{m}}(t)$ in contrast do account for conduction delays and
+temporal components of synaptic currents but without intrinsic dendritic filtering, 
+its performance is indeed better as the membrane voltages indeed reflect transmembrane currents but do not equate them. 
+That leaves the various linear combinations of excitatory and inhibitory synaptic input currents, 
+which \textit{a priori} ignore additional linear contributions by intrinsic dendritic filtering and the electrostatic forward model in question. 
+Here, $g_{\sum I_E}(t)$ display a somewhat surprisingly poor ability to explain the true signal across depth, 
+while components that include inhibitory synaptic current contributions (from $g_{\sum I_I}(t)$) boosts $R^2$ values across channels. 
+
+As the $R^2$ score for different proxies may be affected by systematic phase shifts between the real signal and the different choices of $g_\mathrm{proxy}(t)$, 
+\Fref{fig:g_proxy}C summarizes the performance of the components if a temporal shift is applied on a per-channel  basis in order to maximize $R^2$. 
+The mean and standard deviations of the temporal shifts are shown in the legend. 
+The time-shifted $g_{\sum \nu_X}(t)$ and $g_{\sum I_E}(t)$ components now result in about 50\% explained variance, 
+while the remaining components which already performed decently in terms of $R^2$ see minor improved performance. 
+Dependent on on location, 
+either the inhibitory synapse current or absolute sum of synaptic currents maximize proxy performance 
+-- thus for the sake of simplicity inhibitory synapse currents onto excitatory neurons could well provide a valid indication of the temporal properties of extracellular measurements of activity from simplified neuronal network models. 
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-g_proxy.pdf}
+\end{center}
+\caption{\textbf{Comparison of temporal proxy components $g_\mathrm{proxy}(t)$.} 
+{\bf A} Snapshots of normalized temporal components of different candidate proxy signals for mimicking extracellular signals from recurrent network model. 
+{\bf B} Ratio of variance (R2) explained by the different temporal components across channels without time shifts. 
+{\bf C} Same as panel B but for temporal delay values $\tau$ which maximizes R2 in each individual channel. 
+The legend shows the corresponding mean and standard deviation of the delays.
+\ehnote{todo: WS. Veit ikke om det er saa fryktelig viktig aa vise kurver for $f_{proxy}$ her.} 
+}
+\label{fig:g_proxy}
+\end{figure}
+
+
+
+\ehnote{Gammalt/fjernes:}
+ 
 In conjunction with corresponding spatial weighting functions $f_\text{proxy} (\mathbf{r}) \in \{ f_{\sum {I_I}}, f_{\sum {I_I}}, f_{\sum I}(\mathbf{r}), f_{\sum {|I|}}(\mathbf{r}), f_\text{WS}(\mathbf{r}) \}$ which allows for defining the proxy signal as
 \begin{equation}
 \phi_\text{proxy}(\mathbf{r}, t) = f_\text{proxy}(\mathbf{r}) \ast g_\text{proxy}(t)~.
@@ -1210,18 +1251,4 @@ Dependent on on location,
 either the inhibitory synapse current or absolute sum of synaptic currents maximize proxy performance 
 -- thus for the sake of simplicity inhibitory synapse currents could well provide a valid indication of the temporal properties of extracellular measurements of activity from simplified neuronal network models. 
 
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-g_proxy.pdf}
-\end{center}
-\caption{\textbf{Comparison of temporal proxy components $g_\mathrm{proxy}(t)$.} 
-{\bf A} Snapshots of normalized temporal components of different candidate proxy signals for mimicking extracellular signals from recurrent network model. 
-{\bf B} Ratio of variance (R2) explained by the different temporal components across channels without time shifts. 
-{\bf C} Same as panel B but for temporal delay values $\tau$ which maximizes R2 in each individual channel. 
-The legend shows the corresponding mean and standard deviation of the delays.
-\ehnote{todo: WS. Veit ikke om det er saa fryktelig viktig aa vise kurver for $f_{proxy}$ her.} 
-}
-\label{fig:g_proxy}
-\end{figure}
 
