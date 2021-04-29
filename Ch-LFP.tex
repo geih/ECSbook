@@ -17,72 +17,6 @@
 \item Focus here is on synaptic contribution
 \end{itemize}
 
-\section{\orange{LFP from single postsynaptic neuron}}
-
-\begin{itemize}
-\item The "building block" of LFPs
-\end{itemize}
-
-\subsection{\red{The dipolar nature of LFP signals}}
-
-\subsection{\red{Strong LFP signals require asymmetry}}
-
-\subsection{\red{Morphology matters}}
-
-\subsection{\red{Distance-decay LFP signals from different origins}}
-
-\subsection{\red{Intrinsic dendritic filtering}}
-
-\subsection{\red{TVN: Effect of subthreshold active conductances}}
-
-\section{\orange{LFP from single presynaptic neuron}}
-
-\subsection{\red{Unitary LFPs and the kernel method}}
-
-\begin{itemize}
-\item Add "thalamic" unitary LFP \cite**{Hagen2017}
-\end{itemize}
-
-\section{\orange{LFP from neural populations}}
-
-\begin{itemize}
-\item Full simulations \cite**{Linden2011,Leski2013}
-\item Analytical results \cite**{Einevoll2013a}
-\item Active dendrites \cite**{Ness2018}
-\end{itemize}
-
-\subsection{\red{TBV:Effect of synaptic correlations}}
-
-\subsection{\red{GTE: Example: How local is the local field potential?}}
-
-\subsection{\red{TVN: Effect of subthreshold active conductances(?)}}
-
-\subsection{\red{TVN/EH: Network LFPs}}
-
-\subsection{\red{Approximate schemes}}
-
-\begin{itemize}
-\item Kernel method \cite**{Hagen2016,Skaar2020}
-\item Magic formula \cite**{Mazzoni2015}
-\end{itemize}
-
-\section{\orange{LFPs from other sources}}
-
-\subsection{\red{TVN:Effect of spikes on the LFP}}
-
-\subsection{\red{Validation of framework}}
-
-\section{\orange{Analysis of LFPs (?)}}
-
-\subsection{\red{Current Source Density (CSD) analysis}}
-
-\noindent
-XXXXX - end of suggested organisation - XXXXX
-
-\
-
-
-%\subsection{\red{Introduction to Local Field Potentials}}
 Extracellular potentials measured in neural tissue reflects extracellular spikes, vast numbers of synaptic inputs, as well as different types of noise. The Local Field Potential (LFP) is the low-frequency part of these extracellular potentials, found by low-pass filtering the recorded signals below $\lesssim$ 500~Hz. The LFP is thought to primarily reflect synaptic inputs to populations of geometrically aligned pyramifdal cells.
 
 \begin{figure}[!ht]
@@ -96,12 +30,14 @@ Synaptic input to a population of 10 000 pyramidal cells.
 \end{figure}
 
 
+\section{\orange{LFP from single postsynaptic neuron}}
 
+\begin{itemize}
+\item The "building block" of LFPs
+\end{itemize}
 
+\subsection{\red{The dipolar nature of LFP signals}}
 
-
-
-\section{\red{The dipolar nature of LFP signals}}
 The LFP is thought to reflect synaptic inputs to thousands of pyramidal neurons, and the contribution to the LFP from any single neuron is typically considered negligible. However, a lot of qualitatively important insights about the biophysical origin of the LFP can still be gained from considering synaptic input to single neurons. 
 
 \begin{figure}[!ht]
@@ -117,9 +53,8 @@ Snapshot of the LFP around a neuron model from synaptic input (cyan dots). LFPs 
 
 One of the defining features of the LFP is its dipolar nature. This stems from current conservation, implying that current going into the cell at one location is exactly balanced by current going out of the cell at other locations, so that synaptic input always gives rise to a balanced set of current sources and sinks (see \fref{chap:Neuron}). The simulated LFP in the vicinity of a neuron stemming from a single synaptic input can be highly irregular in shape due to the morphological details of the cell. For example, different locations of a single excitatory synaptic inputs to the basal dendrite of a pyramidal cell can not be expected to result in similar LFPs, and will not necessarily be dipolar in shape (\fref{fig:LFP:LFP_dipoles}{\bf A-C}). However, for many simultaneous excitatory synaptic inputs to the basal dendrite of a pyramidal cell, we can expect that the irregularities largely cancel, and that the resulting LFP will be dominated by a basal sink (excitatory input gives negative transmembrane currents), and an apical source (\fref{fig:LFP:LFP_dipoles}{\bf D}). Similarly, many excitatory synaptic inputs to the apical dendrite of a pyramidal cell can be expected to result in an apical sink and a basal source (\fref{fig:LFP:LFP_dipoles}{\bf E}). Finally, synaptic input that is uniformly spread out over an entire neuronal morphology will tend to cause a more or less random distribution of current sources and sinks, leading to strong cancellations in the LFP and not in a dipolar shape of the LFP (\fref{fig:LFP:LFP_dipoles}{\bf F}) (but see also sec. XX (Ih)). 
 
+\subsection{\red{Strong LFP signals require asymmetry}}
 
-
-\section{\red{Strong LFP signals require asymmetry}}
 From the analysis in the previous paragraph, we can draw important conclusions about the origin of the LFP. 			
 Firstly, synaptic inputs to a population of neurons will cause much stronger LFP signals if the synaptic input is asymetrically distributed on the neurons. 
 This can happen if a given pre-synaptic neural population has a preferential synaptic target region on a given post-synaptic population. It is for example known that the inhibitory cortical Martinotti cells tend to make synaptic contacts on the distal apical dendrites of pyramidal neurons. 
@@ -140,7 +75,7 @@ cell in response to different types of synaptic input. The LFP signature depends
 \label{fig:LFP:LFP_lego}
 \end{figure}
 
-\section{\red{Morphology matters}}
+\subsection{\red{Morphology matters}}
 \label{sec:LFP:morph_matters}
 
 The LFP generated by synaptic input to a neuron is very dependent on the morphology, since the morphology fundamentally shapes the distribution of return currents. 
@@ -166,12 +101,11 @@ Synaptic input to the 'soma' for three different types of model morphology. The 
 \label{fig:LFP:morph_matters}
 \end{figure}
 
+\subsection{\red{Distance-decay LFP signals from different origins}}
 
+\tvnnote{Lurte litt paa aa ha med litt om hvordan LFP decayer som $1/r^2$ fra enkelt dipol, men $1/r^0$ fra uendelig stort dipol-plan. For eksempel vil LFP signal i L5 kanskje kunne vaere dominert av L23PC hvis en stor nok populasjon der faar input samtidig.}
 
-
-
-\section{\red{Frequency-content of LFP signals}}
-\label{sec:LFP:freq_content}
+\subsection{\red{Intrinsic dendritic filtering}}
 
 LFPs are often analyzed in terms of the frequency content.
 A clean way of illustrating the effect of the cellular morphology on the frequency-content of LFP signals
@@ -190,8 +124,8 @@ White-noise input to soma, measured 200 \si{\micro \metre} away.
 
 
 
-\subsection{\red{Intrinsic dendritic filtering}}
-\label{subsec:LFP:intrinsic_dend_filt}
+%\subsection{\red{Intrinsic dendritic filtering}}
+%\label{subsec:LFP:intrinsic_dend_filt}
 
 An important concept in understanding the origin of LFPs is intrinsic
 dendritic filtering \cite**{Linden2010}. This effect causes a low-pass filtering of the LFP with increasing distance from the neuronal sources.
@@ -232,36 +166,8 @@ The LFP will have different "power-laws" depending on the parameters. The total 
 \label{fig:LFP:psd_input}
 \end{figure}
 
+\subsection{\red{Effect of subthreshold active conductances}}
 
-
-\subsection{\red{TBV:Effect of synaptic correlations}}
-It has been demonstrated that correlations in synaptic inputs play a 
-vital role in shaping LFP signals, and that receiving correlated synaptic input 
-can increase the power of LFP signals from a simulated neural population with orders of magnitude \cite**{Linden2011,Leski2013}. The reason for this can be easily illustrated with a toy example:
-We start with a function with a shape slightly reminiscent of a synaptic input (discontinuous jump, followed by exponential decay) (\fref{fig:LFP:correlation_boost}{\bf A}). This function is then added to a much longer "signal" at different specific time points from different "spike trains" (lists of times to insert the function). These spike trains can be constructed to be "uncorrelated" so that each spike train is random and independent, or "correlated", so that each spike train is identical (\fref{fig:LFP:correlation_boost}{\bf B}). If we construct our spike trains so that each spike train has the exact same number of spikes, then necessarily the average value and the area under the curve of the signal will be the same, independent on whether the spike trains are correlated or uncorrelated (\fref{fig:LFP:correlation_boost}{\bf B}). However, if we look at the power spectral density of the signal (or the signal variance), the correlated signal has much more power (higher variance)  (\fref{fig:LFP:correlation_boost}{\bf D}). An intermediate case is when the spike trains are correlated, but a small random "delay" is introduced to the individual spike times (\fref{fig:LFP:correlation_boost}{\bf B}, yellow). This case has the same power as the correlated signal at low frequencies, and the same power as the uncorrelated signal at high frequencies (\fref{fig:LFP:correlation_boost}{\bf D}) (see also \cite**{ElBoustani2009})
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=1.\textwidth]{Figures/LFP/LFP_effect_correlation_illustration.png}
-\end{center}
-\caption{\textbf{Illustration of why correlation in synaptic input boosts LFP.}
-Basically, it is just because PSD is squared, and variability increase sum of squares: $(1+3) = (2 +2)$, but $(1^2 + 3^2) > (2^2 + 2^2)$
-}
-\label{fig:LFP:correlation_boost}
-\end{figure}
-
-
-\subsection{\red{TVN:Effect of spikes on the LFP}}
-\tvnnote{Hadde vaert fint aa gaa litt ordentlig igjennom dette, men vi faar se.}
-If spikes affect the LFP is not a yes or no question. Depends on many things. Some effect it will be, but maybe not so important
-Typically assumed to not be super important. A lot of the spikes are removed by low-pass filter (but see also Fig.~XX).
-Amplitude of LFP grows with population size, but spikes are only visible ~30~\si{\micro\metre} away from cell. Observed that LFP fluctuations are much larger, and has a different time course.
-\citeasnoun**{Reimann2013} says it is important. Probably is important for hippocampal sharp wave ripples \cite**{Schomburg2012,Luo2018}.
-\citeasnoun**{Haider2016} says it is synapses.
-Can definitely be expected to contribute somewhat to LFP PSDs.
-
-
-\subsection{\red{TVN: Effect of subthreshold active conductances}}
 Since the LFP is thought to mainly originate from large numbers of synaptic inputs and the resulting return currents, it is reasonable to expect that any ion channel on the cellular membrane that might affect the transmembrane currents, would also affect the LFP. Note that most ion channels are closed at the cells resting potential, and only becomes active during spiking. This is illustrated for a rat layer 5 pyramidal cell model from  \citeasnoun**{Hay2011} in \fref{fig:LFP:subtheshold_linear},
 where we see that the simulated somatic membrane potential response to an injected current was almost perfectly linear for a wide range of different subthreshold current amplitudes, and only deviates from this for suprathreshold current input. 
 
@@ -286,11 +192,15 @@ The $I_{\rm h}$-current can affect the LFP.}
 \label{fig:LFP:Ih_effect}
 \end{figure}
 
-\section{\red{Distance-decay LFP signals from different origins}}
-\tvnnote{Lurte litt paa aa ha med litt om hvordan LFP decayer som $1/r^2$ fra enkelt dipol, men $1/r^0$ fra uendelig stort dipol-plan. For eksempel vil LFP signal i L5 kanskje kunne vaere dominert av L23PC hvis en stor nok populasjon der faar input samtidig.}
+\section{\orange{LFP from single presynaptic neuron}}
 
-\section{\red{Unitary LFPs and the kernel method}}
+\subsection{\red{Unitary LFPs (and the kernel method)}}
 \index{Unitary LFP}
+
+\begin{itemize}
+\item Add "thalamic" unitary LFP \cite**{Hagen2017}
+\end{itemize}
+
 The LFP is mainly generated by the transmembrane currents from synaptic inputs.
 We have so far taken what can be called a post-synaptic viewpoint to the LFP, where the single-cell LFP contribution is generated by the synaptic input to the neuron. The total LFP is then the sum of all single-cell contributions. However, we can also take a pre-synaptic viewpoint, where the LFP is generated by all the outgoing synapses of a given neuron. When a neuron spikes, all the outgoing synapses on other neurons are activated (with slightly different delays), meaning that all spike-events are in principle followed by an LFP flash, sometimes referred to as a unitary LFP \cite**{Bazelot2010,Telenczuk2020b}.
 Since this approach to the LFP can also include all synaptic events, it is an equivalent way of thinking about the origin of the LFP, 
@@ -312,54 +222,35 @@ these claims are in fact perfectly compatible: The LFP itself is generated by tr
 Kernel method for populations: Populations: \cite**{Hagen2016,Skaar2020,Telenczuk2020a}
 \index{Kernel method}
 
-\section{\red{Current Source Density (CSD) analysis}}
-LFPs are only interesting in that they might reveal something
-about the underlying neural activity.
-Therefore, LFPs are often analysed in terms of the the CSD,
-since this is better linked to the underlying neural activity.
-iCSD is better than CSD.
-Problem of ground/baseline goes away for CSDs.
-\tvnnote{Hva skal vi ha med her?}
 
-\section{\red{Validation of framework}}
-\tvnnote{Jeg foeler vi typisk skriver "LFP is thought to mainly reflect synaptic input", og sleger paa en sitering til en kilde som vel egentlig bare sier akkurat det samme.
- Jeg har lyst til aa dedikere litt plass til
-"validering". Type: Hvilke beviser finnes for at LFP i hovedsak stammer fra synaptisk input?
-Jeg tror dette er paa sin plass, i og med at vi alltid uttrykker en viss usikkerhet angaaende opphavet til LFP, det er hvertfall litt kontroversielt, og vi paapeker at LFP er vanskelig aa tolke.
-Kan muligens flette dette inn i introduksjonen til LFP?
-}
+\section{\orange{LFP from neural populations}}
 
-What evidence do we have that measured LFP signals mostly reflect synaptic input to populations of neurons?
-It is well-established that changes in synaptic weights (plasticity) are reflected in the LFP amplitude, and for example long-term potentiation (LTP) was first discovered by changes in the LFP amplitude \cite**{Bliss1973}.
-
-Laminar distribution makes sense, and L4 has MUA but initially little LFP, as expected
-
-The time-course of LFP signals are perfectly in line with expectations from synapses, and synaptic input times.
-
-We lack any other reasonable candidate: Spikes can certainly be expected to contribute somewhat, but can not account for observed LFPs.
-
-Mono-synaptic unitary LFPs: First spike, then LFP \cite**{Swadlow2002,Bazelot2010}, is perfectly in sync with modelling \cite**{Hagen2017,Telenczuk2020b}.
-
-
-\section{\red{TVN: Other approaches}}
-
-\begin{itemize}
-\item "Magic" simple formula \cite**{Mazzoni2015}
-\item Kernel trick \cite**{Hagen2016,Skaar2020}
-\end{itemize}
-
-\subsection{\red{TBV:Population LFPs}}
 \begin{itemize}
 \item Full simulations \cite**{Linden2011,Leski2013}
 \item Analytical results \cite**{Einevoll2013a}
 \item Active dendrites \cite**{Ness2018}
-\item Effect of correlations
 \end{itemize}
 
+\subsection{\red{Analytical formulas for population LFPs}}
 
+\subsection{\red{Effect of synaptic correlations}}
 
+It has been demonstrated that correlations in synaptic inputs play a 
+vital role in shaping LFP signals, and that receiving correlated synaptic input 
+can increase the power of LFP signals from a simulated neural population with orders of magnitude \cite**{Linden2011,Leski2013}. The reason for this can be easily illustrated with a toy example:
+We start with a function with a shape slightly reminiscent of a synaptic input (discontinuous jump, followed by exponential decay) (\fref{fig:LFP:correlation_boost}{\bf A}). This function is then added to a much longer "signal" at different specific time points from different "spike trains" (lists of times to insert the function). These spike trains can be constructed to be "uncorrelated" so that each spike train is random and independent, or "correlated", so that each spike train is identical (\fref{fig:LFP:correlation_boost}{\bf B}). If we construct our spike trains so that each spike train has the exact same number of spikes, then necessarily the average value and the area under the curve of the signal will be the same, independent on whether the spike trains are correlated or uncorrelated (\fref{fig:LFP:correlation_boost}{\bf B}). However, if we look at the power spectral density of the signal (or the signal variance), the correlated signal has much more power (higher variance)  (\fref{fig:LFP:correlation_boost}{\bf D}). An intermediate case is when the spike trains are correlated, but a small random "delay" is introduced to the individual spike times (\fref{fig:LFP:correlation_boost}{\bf B}, yellow). This case has the same power as the correlated signal at low frequencies, and the same power as the uncorrelated signal at high frequencies (\fref{fig:LFP:correlation_boost}{\bf D}) (see also \cite**{ElBoustani2009})
 
-\section{\orange{GTE: Example: How local is the  local field potential?}}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1.\textwidth]{Figures/LFP/LFP_effect_correlation_illustration.png}
+\end{center}
+\caption{\textbf{Illustration of why correlation in synaptic input boosts LFP.}
+Basically, it is just because PSD is squared, and variability increase sum of squares: $(1+3) = (2 +2)$, but $(1^2 + 3^2) > (2^2 + 2^2)$
+}
+\label{fig:LFP:correlation_boost}
+\end{figure}
+
+\section{\orange{Example: How local is the  local field potential?}}
 \label{LFP:sec:how-local-is-the-local-field-potential}
 
 The recording of LFPs has a long history in neuroscience. Therefore maybe it is surprising that the question 
@@ -416,7 +307,7 @@ a spatial reach defined in this way exists. It turns out that a finite spatial r
 We next consider a simple qualitative model that illuminates what factors determine $\sigma(R)$ and when the conditions for
 which it converges to a finite value as $R$ increases. 
 
-\subsection{\orange{GTE: Qualitative model}}
+\subsection{\orange{Qualitative model}}
 Two factors are expected to be key in determining how the compound population LFP $\sigma(R)$ increases with $R$:
 (i) how sharply the single-neuron contribution, that is, the \index{shape function} $f(r)$, decays with distance from the neurons, and (ii) the number
 density $N(r)$ of neurons positioned in a ring of radius $r$ around the electrode. Here we are interested in the compound LFP for large values of
@@ -507,7 +398,7 @@ the ancient question of why the night sky is dark given the numerous stars in th
 Olbers' paradox and the link to the spatial-reach question is described in Box XX.
 
 
-\subsection{\red{GTE: Box:  Why is the night sky dark? Olbers' paradox}}
+\subsection{\red{Box:  Why is the night sky dark? Olbers' paradox}}
 \gen{Was a Box in chapter in Sterratt}
 %%%%%%%%%%
 % Box: Why is the night sky dark? Olbers' paradox
@@ -526,7 +417,7 @@ Why is the night sky dark? An interesting historical paradox from astronomy, kno
 %\end{boxfloat}
 %%%
 
-\subsection{\orange{GTE: Quantitative model}}
+\subsection{\orange{  Quantitative model}}
 
 The results from the qualitative modelling above demonstrates that the size of the compound LFP 
 from a population of neurons receiving synaptic inputs, depend critically on the level of 
@@ -688,14 +579,14 @@ LFPs are completely uncorrelated (Equation~\ref{LFP:equation:sigmaR2-uncorrelate
 (Equation~\ref{LFP:equation:sigmaR2-correlated-quantitative-2}). In reality one would expect the situation to be somewhere in between, that is,
 the single-neuron LFPs will be partially correlated. However, a corresponding formula for $\sigma_\text{c}(R)$ for arbitrarily levels of correlations can also be found, see Box~\ref{LFP:box:population-LFP-general}. 
 
-\gen{GTE: Note that the boost of LFPs requires asymmetric input.}
+\gen{  Note that the boost of LFPs requires asymmetric input.}
  
  
  
 %%%%%%%%%%
 % Box: General expression for compound LFP
 %%%%%%%%%%
-\subsection{\red{GTE: Box: General expression for population LFP}}
+\subsection{\red{  Box: General expression for population LFP}}
 \gen{This was a box in Sterratt chapter}
 %\begin{boxfloat}{General expression for population LFP}
 %  \label{LFP:box:population-LFP-general}
@@ -752,7 +643,7 @@ Thus, all else equal, the relative contribution from the correlated sources will
 %%%
 
 
-\subsection{\orange{GTE: How sharply does the LFP decay outside a population of neurons?}}
+\subsection{\orange{  How sharply does the LFP decay outside a population of neurons?}}
 
 Another way to phrase the question of how local the LFP is, is to measure how sharply the LFP decays outside a neuronal population receiving synaptic inputs.
 This can be explored with our quantitative model by computing how the recorded LFP will decay when the recording electrode is moved away from the center of 
@@ -794,7 +685,7 @@ the integral in Equation~\ref{LFP:equation:sigmaR2-correlated-quantitative} beco
 \label{LFP:equation:sigmaR2-X-correlated-quantitative}           
 \end{eqnarray}
 %%%
-\gen{GTE: Doublecheck formulae}
+\gen{  Doublecheck formulae}
 
 For the intermediate case with some, but not complete correlation of the single-neuron LFPs $(0 < c_\phi < 1)$ 
 (Equation~\ref{LFP:box:equation:phii-phij} in Box~\ref{LFP:box:population-LFP-general}), the population amplitude
@@ -853,11 +744,114 @@ and~\ref{LFP:equation:sigmaR2-X-correlated-quantitative} in fact reveals that in
 same large-X power-law behaviour as the single-neuron shape function $f(r)$, see \cite**{Einevoll2013a}.      
 
 
-\section{\red{TVN/EH: Network LFPs}}
+\section{\red{  Insights from LFP studies}} 
+
+\subsection{\red{Network LFPs}}
+
 \begin{itemize}
 \item Cortical LFPs from single corticothalamic neuron \cite**{Hagen2017}
 \item Cortical networks with passive dendrites with hybrid trick \cite**{Hagen2016}
 \item Cortical network with active dendrites \cite**{Reimann2013}
 \end{itemize}
 
-\section{\red{GTE: Insights from LFP studies}} 
+\subsection{\red{Approximate schemes}}
+
+\begin{itemize}
+\item "Magic" simple formula \cite**{Mazzoni2015}
+\item Kernel trick \cite**{Hagen2016,Skaar2020}
+\end{itemize}
+
+\subsection{\red{Population LFPs}}
+\begin{itemize}
+\item Full simulations \cite**{Linden2011,Leski2013}
+\item Analytical results \cite**{Einevoll2013a}
+\item Active dendrites \cite**{Ness2018}
+\item Effect of correlations
+\end{itemize}
+
+
+
+\section{\orange{LFPs from other sources}}
+
+\subsection{\red{Effect of spikes on the LFP}}
+
+\tvnnote{Hadde vaert fint aa gaa litt ordentlig igjennom dette, men vi faar se.}
+If spikes affect the LFP is not a yes or no question. Depends on many things. Some effect it will be, but maybe not so important
+Typically assumed to not be super important. A lot of the spikes are removed by low-pass filter (but see also Fig.~XX).
+Amplitude of LFP grows with population size, but spikes are only visible ~30~\si{\micro\metre} away from cell. Observed that LFP fluctuations are much larger, and has a different time course.
+\citeasnoun**{Reimann2013} says it is important. Probably is important for hippocampal sharp wave ripples \cite**{Schomburg2012,Luo2018}.
+\citeasnoun**{Haider2016} says it is synapses.
+Can definitely be expected to contribute somewhat to LFP PSDs.
+
+\subsection{\red{Validation of framework}}
+
+\tvnnote{Jeg foeler vi typisk skriver "LFP is thought to mainly reflect synaptic input", og sleger paa en sitering til en kilde som vel egentlig bare sier akkurat det samme.
+ Jeg har lyst til aa dedikere litt plass til
+"validering". Type: Hvilke beviser finnes for at LFP i hovedsak stammer fra synaptisk input?
+Jeg tror dette er paa sin plass, i og med at vi alltid uttrykker en viss usikkerhet angaaende opphavet til LFP, det er hvertfall litt kontroversielt, og vi paapeker at LFP er vanskelig aa tolke.
+Kan muligens flette dette inn i introduksjonen til LFP?
+}
+
+What evidence do we have that measured LFP signals mostly reflect synaptic input to populations of neurons?
+It is well-established that changes in synaptic weights (plasticity) are reflected in the LFP amplitude, and for example long-term potentiation (LTP) was first discovered by changes in the LFP amplitude \cite**{Bliss1973}.
+
+Laminar distribution makes sense, and L4 has MUA but initially little LFP, as expected
+
+The time-course of LFP signals are perfectly in line with expectations from synapses, and synaptic input times.
+
+We lack any other reasonable candidate: Spikes can certainly be expected to contribute somewhat, but can not account for observed LFPs.
+
+Mono-synaptic unitary LFPs: First spike, then LFP \cite**{Swadlow2002,Bazelot2010}, is perfectly in sync with modelling \cite**{Hagen2017,Telenczuk2020b}.
+
+\section{\orange{Analysis of LFPs (?)}}
+
+\subsection{\red{Current Source Density (CSD) analysis}}
+
+LFPs are only interesting in that they might reveal something
+about the underlying neural activity.
+Therefore, LFPs are often analysed in terms of the the CSD,
+since this is better linked to the underlying neural activity.
+iCSD is better than CSD.
+Problem of ground/baseline goes away for CSDs.
+\tvnnote{Hva skal vi ha med her?}
+
+
+\noindent
+XXXXX - end of suggested organisation - XXXXX
+
+\
+
+
+%\subsection{\red{Introduction to Local Field Potentials}}
+
+%\section{\red{The dipolar nature of LFP signals}}
+
+
+%\section{\red{Strong LFP signals require asymmetry}}
+
+%\section{\red{Frequency-content of LFP signals}}
+%\label{sec:LFP:freq_content}
+
+
+%\subsection{\red{ Effect of synaptic correlations}}
+
+
+%\subsection{\red{Effect of spikes on the LFP}}
+
+
+
+%\subsection{\red{Effect of subthreshold active conductances}}
+
+%\section{\red{Distance-decay LFP signals from different origins}}
+
+%\section{\red{Current Source Density (CSD) analysis}}
+
+%\section{\red{Validation of framework}}
+
+
+%\section{\red{Other approaches}}
+
+
+
+
+
