@@ -15,7 +15,7 @@ Frameworks exist for constructing neuronal models at various levels of detail an
 \label{fig:Neuron:point_vs_multi}
 \end{figure}
 
-To account for the spatial extension of neurons, we need to use \textit{multicompartmental} (MC) neuron models. \sntxt{\sout{Also in MC models} As always}, the total sum of transmembrane currents must be zero. However, in MC models, currents do not have to enter and leave the neuron at the same location. MC models therefore give rise to a spatial distribution of current sinks, i.e., currents that disappear from extracellular space, going inward through neural membranes, and sources, i.e., currents that appear in extracellular space, going outward through neural membranes (\fref{fig:Neuron:point_vs_multi}B-C).
+To account for the spatial extension of neurons, we need to use \textit{multicompartmental} (MC) neuron models. As always, the total sum of transmembrane currents must be zero. However, in MC models, currents do not have to enter and leave the neuron at the same location. MC models therefore give rise to a spatial distribution of current sinks, i.e., currents that disappear from extracellular space, going inward through neural membranes, and sources, i.e., currents that appear in extracellular space, going outward through neural membranes (\fref{fig:Neuron:point_vs_multi}B-C).
 
 The most common MC modeling framework combines a so-called \textit{Hodgkin-Huxley type} description of the neural membrane mechanisms (see e.g., \cite**{Hodgkin1952,KockSegev1998,Pospischil2008}) with cable theory to predict how signals propagate spatially in dendrites and axons (see, e.g., \cite**{Koch1999,rall2011}). This framework has become the gold standard for biophysically detailed neuronal simulations on the cellular and network level, and has been used for simulating the dynamics of large neuronal networks (see e.g., \cite**{traub2005,markram2015,Billeh_2020}.  We will here only present this standard framework, which we will refer to simply as the MC framework. 
 
@@ -31,20 +31,20 @@ An MC model is characterized by (i) its morphology, and (ii) its membrane mechan
 \label{fig:Neuron:multicomp}
 \end{figure}
 
-Below, we first present a framework for modeling the transmembrane currents in a single compartment in \fref{sec:Neuron:membranecurrents}, and then go on to show how a number of such compartments can be connected together to a MC model in \fref{sec:Neuron:morphology}. Together, those\sntxt{/these?} two sections provide a theoretical framework for modeling neurons\sntxt{,} that should be sufficient for most practical applications. Readers that crave further biophysical insight into the ionic movements that mediate the transmembrane neural currents can get a brief introduction to this in \fref{sec:Neuron:Ions_and_reversals}. Finally, we end the chapter by discussing in \fref{sec:Neuron:HHCassumptions} what we bring along from the MC models when we set out to model extracellular potentials in the following chapters. 
+Below, we first present a framework for modeling the transmembrane currents in a single compartment in \fref{sec:Neuron:membranecurrents}, and then go on to show how a number of such compartments can be connected together to a MC model in \fref{sec:Neuron:morphology}. Together, these two sections provide a theoretical framework for modeling neurons, that should be sufficient for most practical applications. Readers that crave further biophysical insight into the ionic movements that mediate the transmembrane neural currents can get a brief introduction to this in \fref{sec:Neuron:Ions_and_reversals}. Finally, we end the chapter by discussing in \fref{sec:Neuron:HHCassumptions} what we bring along from the MC models when we set out to model extracellular potentials in the following chapters. 
 
 
 \section{\blue{Membrane currents}}
 \label{sec:Neuron:membranecurrents}
 \index{Hodgkin-Huxley type model}
-Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in \sntxt{the} celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (current per membrane area). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a leakage current density ($i_{\mathrm{L}}$), and (iii) a current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive stimuli, normally represented as total currents. These can be either (iv) synaptic input ($I_{\mathrm{syn}}$), or (v) external current injections delivered by an experimentalist ($I_{\mathrm{ext}}$). In computer-modeling terminology, the membrane currents (i-iii) are often called distributed mechanisms, as they are membrane properties, and scale with the membrane area, while the stimuli (iv-v) are often called point-processes, as they are delivered on a singular point on the membrane. 
+Hodgkin-Huxley (HH) type models are called so because they describe the membrane mechanisms with a mathematical formalism similar to that used in the celebrated model by \citeasnoun**{Hodgkin1952}. In HH-type models, the membrane typically includes three autonomous classes of transmembrane currents, normally represented as current densities (current per membrane area). These are (i) a capacitive current density ($i_{\mathrm{cap}}$), (ii) a leakage current density ($i_{\mathrm{L}}$), and (iii) a current density through active ion channels ($i_x$), of which there may be several different kinds ($x$ is an index). In addition, a neuron may receive stimuli, normally represented as total currents. These can be either (iv) synaptic input ($I_{\mathrm{syn}}$), or (v) external current injections delivered by an experimentalist ($I_{\mathrm{ext}}$). In computer-modeling terminology, the membrane currents (i-iii) are often called distributed mechanisms, as they are membrane properties, and scale with the membrane area, while the stimuli (iv-v) are often called point-processes, as they are delivered on a singular point on the membrane. 
 
 In the case where the neuron is modeled as a single compartment, the currents entering that compartment must sum to zero, so that:
 \begin{equation}
 i_{\mathrm{cap}}+ i_{\mathrm{L}} + \sum_x{i_x} +  \frac{I_{\mathrm{syn}}}{A} - \frac{I_{\mathrm{ext}}}{A} = 0,
 \label{eq:Neuron:singlecomp_zerosum}
 \end{equation}
-where the point-currents must be divided by the compartment area $A$. \ghtxt{By convention, the \sntxt{first} four \sntxt{\sout{first}} of these currents are defined as positive when going outwards, i.e., from the intra- to the extracellular space, while the external stimulus is defined as positive when injected \textit{into} the neuron. These are rightfully referred to as transmembrane currents as they go through the membrane, from the intra- to the extracellular space. The external stimulus current is conceptually different from the other currents in that it is injected with an electrode into the intracellular compartment. This is important to keep in mind for the later chapters of this book, because it means that, unlike the transmembrane currents, the injected current does not (directly) evoke extracellular potentials. } \ghnote{Tidligere var alle stroemmer definert med samme fortegnskonvensjon, men naa byttet jeg konvensjon for external stim. Er det ikke slik at dette er den vanligste konvensjonen paa feltet?} 
+where the point-currents must be divided by the compartment area $A$. By convention, the first four of these currents are defined as positive when going outwards, i.e., from the intra- to the extracellular space, while the external stimulus is defined as positive when injected \textit{into} the neuron. These are rightfully referred to as transmembrane currents as they go through the membrane, from the intra- to the extracellular space. The external stimulus current is conceptually different from the other currents in that it is injected with an electrode into the intracellular compartment. This is important to keep in mind for the later chapters of this book, because it means that, unlike the transmembrane currents, the injected current does not (directly) evoke extracellular potentials. \ghnote{Tidligere var alle stroemmer definert med samme fortegnskonvensjon, men naa byttet jeg konvensjon for external stim. Er det ikke slik at dette er den vanligste konvensjonen paa feltet?} 
 \gen{Hmmm.. Vet ikke} Below, we define the various currents that go into \fref{eq:Neuron:singlecomp_zerosum}. 
 
 \subsection{\blue{Capacitive current}}
@@ -82,9 +82,14 @@ The leakage current density is given by
 i_{\mathrm{L}} = \bar{g}_{\mathrm{L}} (V_\mathrm{m} - E_{\mathrm{L}}),
 \label{eq:Neuron:HHleak}
 \end{equation}
-where $\bar{g}_{\mathrm{L}}$ is the leak conductance (the bar indicates that it's a constant). The factor $(V_\mathrm{m} - E_{\mathrm{L}})$ (\si{\milli\volt}) is often called the \textit{driving force} and $E_{\mathrm{L}}$ the \textit{leak reversal potential}\index{Reversal potential}. The biophysical origin of the reversal potential is explained later (see \fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. In reality, the leakage current is \snnote{not?} due to a single type of membrane mechanism, but represents an orchestra of physiological processes that together will drive the membrane potential towards the value $E_{\mathrm{L}}$. 
+where $\bar{g}_{\mathrm{L}}$ is the leak conductance (the bar indicates that it's a constant). The factor $(V_\mathrm{m} - E_{\mathrm{L}})$ (\si{\milli\volt}) is often called the \textit{driving force} and $E_{\mathrm{L}}$ the \textit{leak reversal potential}\index{Reversal potential}. The biophysical origin of the reversal potential is explained later (see \fref{sec:Neuron:Ions_and_reversals}). For now, we may simply think of $E_{\mathrm{L}}$ as the "target potential" that the leakage current will strive to drive the membrane potential towards. 
+
+The neuronal membrane possesses an orchestra of mechanisms, and in general, only a small subset of these are explicitly 
+incorporated in a computational model. The reason may partly be that modeler wants to keep things simple, and partly that not all membrane mechanisms have been identified experimentally in the first place. In reality, $i_{\mathrm{L}}$ does not represent a single, particular type of membrane mechanism, but should rather be seen as a phenomenological way of summarizing the effect of all otherwise un-accounted for membrane mechanisms in terms of the potential $E_{\mathrm{L}}$ that they jointly drive the membrane towards. Mechanisms contributing to $i_{\mathrm{L}}$ may typically include ion-cotransporters, ion-pumps and active ion channels that are not included in the explicitly modeled set $i_x$.
 
 Together, the capacitive current and the leakage current determine the passive properties of the membrane. If the neuron were to include only these two currents, it could be well modeled as an RC-circuit, and RC-neuron\index{RC-neuron} models are often used to simulate the subthreshold dynamics of neurons (\Fref{fig:Neuron:RC}). 
+
+
 
 \begin{figure}[!ht]
 \begin{center}
@@ -202,33 +207,21 @@ Typical choices for $f(t)$ are\index{Synapse models}:
 \begin{align}
 &\text{(i) exponential decay:} \;\; &f(t) &= e^{-(t-t_\text{s})/\tau}\, \Theta(t-t_\text{s}) \\
 &\text{(ii) $\alpha$-function:} \;\; &f(t) &=  \frac{(t-t_\text{s})}{\tau}e^{1-(t-t_\text{s})/\tau} \, \Theta(t-t_\text{s}) \\
-&\text{(iii) $\beta$-function:} \;\; &f(t) &= \left( \frac{e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2} }{e^{-\tilde{t}/\tau_1} - e^{-\tilde{t}/\tau_2} } \right) \, \Theta(t-t_\text{s}) \\
-&&& \;\; \text{with:} \;\; \tilde{t} = \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \nonumber,
+&\text{(iii) $\beta$-function:} \;\; &f(t) &= \left( \frac{e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2} }{e^{-\tau_\text{peak}/\tau_1} - e^{-\text{peak}/\tau_2} } \right) \, \Theta(t-t_\text{s}) \\
+&&& \;\; \text{with:} \;\; \text{peak} = \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \nonumber,
 \label{eq:Neuron:sf4}
 \end{align}
-where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $\Theta(t< 0)=0$, and where parameters like $\gamma$,  $\tau$, $\tau_1$ and $\tau_2$ must be tuned to experimental data from the particular synapse type that one wants to model. The waveforms (i)-(iii) have been normalized so that their peak amplitude is 1, meaning that $\bar{G}_\text{syn}$ in \fref{eq:Neuron:chemicalsynapse} can be interpreted as the peak conductance of the synapse, i.e., analogously to how $\bar{g}_\text{x}$ was the peak conductance for fully open ion channels in \fref{sec:Neuron:active}. 
+\ehnote{Dette uttrykket (iii) gir ikke lenger mening -- symbolet $\tau$ mangler her og der!}
+where $\Theta(t)$ is the (Heaviside) unit step function: $\Theta(t \ge 0)=1$,  $\Theta(t< 0)=0$, and where the parameters $\tau$, $\tau_1$ and $\tau_2$ must be tuned to experimental data from the particular synapse type that one wants to model. The waveforms (i)-(iii) have been normalized so that their peak amplitude is 1, meaning that $\bar{G}_\text{syn}$ in \fref{eq:Neuron:chemicalsynapse} can be interpreted as the peak conductance of the synapse, i.e., analogously to how $\bar{g}_\text{x}$ was the peak conductance for fully open ion channels in \fref{sec:Neuron:active}. 
 
-The simple waveforms (i)--(iii) are typically used for AMPA and GABA synapses. NMDA-synapses have an additional dependency on membrane voltage and the concentration of extracellular Mg$^{2+}$ \cite**{Koch1999,Sterratt2011}, and are commonly modeled as  \cite**{Koch1999,Sterratt2011}:
+The simple waveforms (i)--(iii) are typically used for AMPA and GABA synapses. NMDA-synapses have an additional dependency on membrane voltage and the concentration of extracellular Mg$^{2+}$, and are commonly modeled as  \cite**{Koch1999,Sterratt2011}:
 \begin{equation}
-I_\text{NMDA}(t) = \frac{\bar{G}_\text{NMDA}}{1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}} } f(t) \left(V_\mathrm{m}(t)-E_\text{syn} \right)
+I_\text{NMDA}(t) = \frac{\bar{G}_\text{NMDA}}{1+\xi [\text{Mg}^{2+}] e^{-\zeta V_\mathrm{m}} } f(t) \left(V_\mathrm{m}(t)-E_\text{syn} \right)
 \label{eq:Neuron:NMDAsynapse}
 \end{equation}
-where $f(t)$ in principle can be any of the three kernels (i)-(iii) defined above, but is commonly taken to be a $\beta$-function (iii) \cite**{Koch1999,Sterratt2011}. Due to the dependence on $V_\mathrm{m}$ and Mg$^{2+}$, the conductance of the fully open NMDA synapse is not $\bar{G}_\text{syn}$, but $\bar{G}_\text{syn}/(1+\mu [\text{Mg}^{2+}] e^{-\gamma V_\mathrm{m}})$.
+where $\xi$ and $\zeta$ are parameters that determine the Mg$^{2+}$ and voltage dependencies, respectively, and that must be tuned to data from the NMDA synapse being modeled. The temporal kernel ($f(t)$) can in principle be any of the waveforms (i)--(iii) defined above, but is commonly taken to be a $\beta$-function (iii) \cite**{Koch1999,Sterratt2011}. Due to the dependence on $V_\mathrm{m}$ and Mg$^{2+}$, the conductance of the fully open NMDA synapse is not $\bar{G}_\text{NMDA}$, but $\bar{G}_\text{NMDA}/(1+\xi [\text{Mg}^{2+}] e^{-\zeta V_\mathrm{m}})$.
 
-The conductance $\bar{G}_\text{syn}$  determines the strength of efficacy of the synaptic transmission, and must be tuned by the modeler to get the right peak amplitude of the synaptic current. We note that the synaptic strength can change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g.,  \citeasnoun**{DeSchutter2000}.
-
-\gen{Boer vi ha normaliserte utgaver av $f$ under slik at $\bar{G}_\text{syn}$  tilsvarer maximal conductance?}
-\ghnote{Ok. Naa er de normaliserte, bortsett fra NMDA.}
-\ehnote{NMDA: temporal dynamikk er vel fritt valgt ut fra i--iii eller?}
-\ghnote{Mulig... Vet ikke. Jeg formulerte det som over. Forslag ok?}
-\ehnote{Kanskje dynamisk vekt ($V$, [Mg], avhengighet) kan sammenstilles med synaptisk plastisitet nedenfor?} 
-\ghnote{Tror ikke det er helt det samme. Jeg vet ikke hvordan jeg skulle sammenstilt det. Vurder forslag over...}
-\ehnote{Ellers er normalisert $\beta$-kernel denne:}
-\ehtxt{\begin{align}
-t_\mathrm{peak} &= \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \\
-f(t) &= \frac{e^{-(t - t_\text{s}) / \tau_2} - e^{-(t - t_\text{s}) / \tau_1} }{e^{- t_\mathrm{peak} / \tau_2} - e^{- t_\mathrm{peak} / \tau_1}} \Theta(t-t_\text{s})
-\end{align}}
-\ghnote{Fint. Jeg har normalisert, og byttet $t_{peak}$ med $\tilde{t}$, da peak fikk meg til aa tenke at dette er peak-tiden, mens det egentlig er peak-tiden minus $t_s$.}
+The conductance $\bar{G}_\text{syn}$ (or $\bar{G}_\text{NMDA}$ for NMDA synapses) determines the efficacy of the synaptic transmission, and must be tuned by the modeler to get the right peak amplitude of the synaptic current. We note that the synaptic strength can change over time through various processes that are often grouped together under the term "synaptic plasticity". Synaptic plasticity work as a mechanism for learning and memory formation in the brain. We will not go further into this topic here, but for more sophisticated synapse models, see e.g., \citeasnoun**{DeSchutter2000}.
 
 
 \subsubsection{Current-based synapses}
@@ -244,10 +237,9 @@ We can think of the current-based synapse as a conductance-based synapse where t
 \label{eq:Neuron:CurrentBasedAvg}
 \end{equation}
 where $\langle V_\mathrm{m}(t) \rangle_t$ denotes the temporal average of the membrane potential. The temporal kernel
-$f(t)$ can have the same exponential waveforms (i)-(iv) as for the conductance based synapses. Current-based synapses have been popular in point-neuron network simulations in particular, as such networks can subjected to rigorous mathematical analysis (e.g., \cite**{Brunel2000,Deco2008,Tetzlaff2012,Helias2013,deKamps2013,Schuecker2015,Bos2016}) and are also computationally efficient \cite**{Brette2007,Plesser2007,Helias2012,Kunkel2014}. For point-neuron networks, effects of conductance-based synapses vs. current-based synapses on network activity have been investigated, see for example \cite**{Richardson2004,Cavallari2014}.
+$f(t)$ can have the same exponential waveforms (i)-(iv) as for the conductance based synapses. Current-based synapses have been popular in point-neuron network simulations in particular, as such networks can subjected to rigorous mathematical analysis (e.g., \cite**{Brunel2000,Deco2008,Tetzlaff2012,Helias2013,deKamps2013,Schuecker2015,Bos2016}) and are also computationally efficient \cite**{Brette2007,Plesser2007,Helias2012,Kunkel2014,Jordan2018}. For point-neuron networks, effects of conductance-based synapses vs. current-based synapses on network activity have been investigated, see for example \cite**{Richardson2004,Cavallari2014}.
 
-\ghnote{Espen, legger du inn disse refs i bib-fila?}
-\ehnote{Mer en notat til oss selv: Denne lineariseringen tar ikke hoyde for en eventuell endring i effektiv membran-tidskonstant og shift i $E_L$ paa grunn av synapsekonduktanser med tilhoerende reverseringspotensial som til enhver tid er aapne. Se Cavallari2014 for detaljer.}
+%\ehnote{Mer en notat til oss selv: Denne lineariseringen tar ikke hoyde for en eventuell endring i effektiv membran-tidskonstant og shift i $E_L$ paa grunn av synapsekonduktanser med tilhoerende reverseringspotensial som til enhver tid er aapne. Se Cavallari2014 for detaljer.}
 
 
 \subsubsection{Gap-junctions}
@@ -321,22 +313,23 @@ I_{n-1,n} - I_{n,n+1} - I_{\mathrm{m},n} + I_{\mathrm{ext},n} = 0.
 \label{eq:Neuron:Kirch}
 \end{equation}
 
-The equations for the axial currents (\fref{eq:Neuron:axialcurrents}) become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} \ghtxt{offers standardized solutions for compartmentalizing neurons once the morphology is specified by the user. } \sout{facilitates customization of compartmentalization by the user once the neural morphology is specified.} \ehnote{Stemmer ikke helt -- NEURON lar brukeren sette $nseg$ for hver seksjon sant nok, men $nseg$ her vel en variabel brukeren maa definere selv som regel utfra en gitt regel/algoritme} \ghnote{Hva med det nye forslaget mitt? Poenget var her ikke stort annet enn aa si at NEURON gjoer ting lettere for oss. Facilitates customization of compartmentalization framsto som litt tungt og generelt - kunne vi ikke sagt det samme om C++ f.eks.?} Different strategies for determining a suitable spatial discretization of cable models such as the so-called \textit{\emph{d\_lambda rule}} are discussed in \citeasnoun**{Hines2001}. For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of MC modeling. 
+The equations for the axial currents (\fref{eq:Neuron:axialcurrents}) become more complicated when the connected cylinders are of different length and diameter, and especially at branch points. However, the theory for computing the dynamics in branching structures with varying diameters is well established \cite**{Rall1977,Rall1989}, and designated software such as NEURON \cite**{Hines1997,Hines2009} offers solutions for compartmentalizing neurons once the morphology is specified. Different strategies for determining a suitable spatial discretization of cable models such as the so-called \textit{\emph{d\_lambda rule}} are discussed in \citeasnoun**{Hines2001}. For the reminder of this chapter, we limit ourselves to consider the simplified, unbranched scenario (\Fref{fig:Neuron:multikompisen}B), as we deem this as sufficient for establishing an understanding of the essentials of MC modeling. 
 
 We note that the axial currents (\fref{eq:Neuron:axialcurrents}) depend on intracellular potential $V_{\mathrm{i}}$, while the membrane currents (\fref{eq:Neuron:Imemb}) depend on the membrane potential, which means that the system of equations in \fref{eq:Neuron:Kirch} is underdetermined. In most MC models, this challenge is overcome by assuming that the membrane potential and the intracellular potentials are identical, i.e., that $V_{\mathrm{m},n} = V_{\mathrm{i},n}-V_{\mathrm{e},n} \approx V_{\mathrm{i},n}$, where $V_{\mathrm{e},n}$ is the extracellular potential immediately outside compartment $n$. Since this is done for all compartments, it amounts to assuming that the extracellular potential ($V_{\mathrm{e}}$) is constant and set to zero. The assumed isopotentiality of the extracellular space corresponds to assuming an infinite
 extracellular conductivity, while the choice of setting the extracellular potential to zero is done simply for convenience. 
 The assumption of a fixed constant extracellular potential may seem peculiar in a book where the modeling and interpretation of the variation of the extracellular potential is the main topic, and we comment further on this assumption and its consequences towards the end of this chapter. For now, we simply note that although the extracellular potential in reality is not zero, the variations in $V_\mathrm{e}$ is generally much smaller than in $V_\mathrm{m}$. The assumption made in MC models is thus that $V_\mathrm{e}$ is sufficiently small for the approximation $V_{\mathrm{m}} \approx V_{\mathrm{i}}$ to give acceptable predictions of the neurodynamics. In the following, we will make this assumption, and replace $V_\mathrm{i}$ in \fref{eq:Neuron:axialcurrents} with $V_\mathrm{m}$.
 
-
-%%%%%%%%%%%%
-\subsection{\blue{Active multicompartment models}}
-\label{sec:Neuron:Active_multicomp}
 If we insert the expressions for the axial currents (\fref{eq:Neuron:axialcurrents}) and the full expression for the membrane currents (\fref{eq:Neuron:Imemb}) into Kirchhoff's current law (\fref{eq:Neuron:Kirch}), we get the fundamental equation for multicompartmental models:
 \begin{equation}
 c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} = -i_{\mathrm{ion},n} - \frac{I_{\mathrm{syn},n}}{\pi d L} +  \frac{I_{\mathrm{ext},n}}{\pi d L} + \frac{d}{4r_\text{a}}\left(\frac{V_{\mathrm{m},n+1}-V_{\mathrm{m},n}}{L^2} - \frac{V_{\mathrm{i},n}-V_{\mathrm{m},n-1}}{L^2} \right),
 \label{eq:Neuron:multimain}
 \end{equation}
-where we now have assumed that the intracellular potential $V_{\mathrm{i}}$ is identical to the membrane potential  $V_{\mathrm{m}}$. \Fref{eq:Neuron:multimain} assumes that a compartment $n$ has two neighbors ($n-1$ and $n+1$), which will not be true for the endpoint compartments of the simulated structure. To solve it, we must therefore select appropriate boundary conditions for the endpoint compartments. The most commonly used boundary condition is the sealed-end condition, meaning that no axial currents leave at cable endpoints, so that $I_{n-1,n} = 0$ in one end of an unbranched cable, and $I_{n,n+1} =0$ in the other end. This is for example is the default boundary condition in the NEURON simulator. The equivalences of \fref{eq:Neuron:multimain} at the cable endpoints then become:
+where we now have assumed that the intracellular potential $V_{\mathrm{i}}$ is identical to the membrane potential  $V_{\mathrm{m}}$. 
+
+
+\subsection{\blue{Endpoint boundary conditions}}
+\label{sec:Neuron:Endpoints}
+\Fref{eq:Neuron:multimain} assumes that a compartment $n$ has two neighbors ($n-1$ and $n+1$), which will not be true for the endpoint compartments of the simulated structure. To solve it, we must therefore select appropriate boundary conditions for the endpoint compartments. The most commonly used boundary condition is the sealed-end condition, meaning that no axial currents leave at cable endpoints, so that $I_{n-1,n} = 0$ in one end of an unbranched cable, and $I_{n,n+1} =0$ in the other end. This is for example is the default boundary condition in the NEURON simulator. The equivalences of \fref{eq:Neuron:multimain} at the cable endpoints then become:
 \begin{equation}
 c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} = - \pi d L i_{\mathrm{ion},n} - \frac{I_{\mathrm{syn},n}}{\pi d L} +  \frac{I_{\mathrm{ext},n}}{\pi d L}  
 + \frac{d}{4 r_\text{a}} \frac{V_{\mathrm{m},n+1}-V_{\mathrm{m},n}}{L^2},
@@ -348,15 +341,13 @@ c_\text{m} \frac{dV_{\mathrm{m},n}}{dt} = - \pi d L i_{\mathrm{ion},n} - \frac{I
 - \frac{d}{4 r_\text{a}} \frac{V_{\mathrm{m},n}-V_{\mathrm{m},n-1}}{L^2}  
 \label{eq:Neuron:multimainEND2}
 \end{equation}
-\ehnote{Kan det bli litt forvirrende med partial derivative her? En alternativ formulering er via `backward difference' approksimasjonen hvor $V_{n+1}$ termen faller ut: $dV_n/dt \propto (V_n - V_{n-1} / L)$.} \ghnote{Enig i at det var feil aa bruke derivert der, men det du beskriver er vel fortsatt forward difference? I diskretisert versjon er det, saa vidt jeg forstaar, bare aa sette $I_{n,n+1}$ lik null paa endepunktet, og luke den ut av ligninga. Jeg forstaar at det er dette som ogsaa gjoeres i NEURON: ligning 2 i: https://www.neuron.yale.edu/neuron/static/papers/nc97/nsimenv.pdf. Da blir det som beskrevet over. Var det ok? }
 
 
 %%%%%%%%%%%%%%%%%
 \subsection{\blue{Passive multicompartment models}}
 \label{sec:Neuron:Passive_multicomp}
 \index{Multicompartmental neuron model}
-The neural response to small perturbations from the resting potential often has a close to linear relationship between the membrane potential and membrane currents \cite**{mauro1970,Koch1984}.\ghnote{Ha med disse refs eller ikke? Disse arbeidene driver jo med en linearisering og bruker ikke den enkle formen vi drar til med nedenfor. Samtidig gir de jo et argument for lineariteten vi postulerer.}  \gen{Hmm... Vi faar diskutere saken}
-When modeling subthreshold neural dynamics, a common simplification is therefore to assume that ionic membrane current density has the linear form,
+The neural response to small perturbations from the resting potential often has a close to linear relationship between the membrane potential and membrane currents \cite**{mauro1970,Koch1984}.\ghnote{Ha med disse refs eller ikke? Disse arbeidene driver jo med en linearisering og bruker ikke den enkle formen vi drar til med nedenfor. Samtidig gir de jo et argument for lineariteten vi postulerer.}  \gen{Hmm... Vi faar diskutere saken} When modeling subthreshold neural dynamics, a common simplification is therefore to assume that ionic membrane current density has the linear form,
 \begin{equation}
 i_{\mathrm{ion},n} = g_\text{m}(V_n - E_m),
 \label{eq:Neuron:mleak}
@@ -446,9 +437,9 @@ The cable equation is a continuous version of \fref{eq:Neuron:multipassive}. Whe
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsection{\blue{Steady state solution of the cable equation}}
+\subsection{\blue{Steady-state solution of the cable equation}}
 \label{sec:Neuron:cableSS}
-Let us find the steady state solution for a semi-infinite cable, containing no synapses, but receiving a constant external current injection at a sealed end in $x=0$ (\Fref{fig:Neuron:Semiinf}B). Since only the end-point receives the stimulus, we may attack this problem by solving \fref{eq:Neuron:cable2} for all other points $x>0$, and then incorporate the effects of the stimulus current later as a boundary condition. 
+Let us find the steady-state solution for a semi-infinite cable, containing no synapses, but receiving a constant external current injection at a sealed end in $x=0$ (\Fref{fig:Neuron:Semiinf}B). Since only the end-point receives the stimulus, we may attack this problem by solving \fref{eq:Neuron:cable2} for all other points $x>0$, and then account for the effects of the stimulus current afterwards as a boundary condition. 
 
 At steady-state, $\partial V_\mathrm{m}/\partial t = 0$, and \fref{eq:Neuron:cable2} becomes:
 \begin{equation}
@@ -473,8 +464,10 @@ V_\mathrm{m}(x) = E_\mathrm{m} + \left( V_\mathrm{m}(0)-E_\mathrm{m} \right) e^{
 We note that the general-solution to \fref{eq:Neuron:semiinf2} also has a term containing $e^{+x/\lambda}$, but this term diverges when $x \rightarrow \infty$ and is excluded on the count of being unphysical.
 
 To obtain the final solution of the problem, we need to specify the boundary value $V_\mathrm{m}(0)$, which will depend on the external stimulus. Since the stimulus is injected in a singular point ($x=0$), we go back to expressing in terms of a total current, $I_\text{ext}$ (and not as a current per unit length $\mathcal{I}_\text{ext}$). 
-\ehnote{igjen, var det noen grunn til \emph{ikke} aa bruke $i_\mathrm{stim}$ for stroem per lengdeenhet?}
-\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og da tenkte jeg at det var lurt aa innfoere noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
+%\ehnote{igjen, var det noen grunn til \emph{ikke} aa bruke $i_\mathrm{stim}$ for stroem per lengdeenhet?}
+%\ghnote{Hva spoer du om her? $i_\mathrm{ext}$ versus $\mathcal{I}_\text{ext}$? Vi har brukt liten $i$ som stroemtetthet, dvs. per membranareal, og da tenkte jeg at det var lurt aa innfoere noe nytt for stroem per lengdeenhet. Hvis du spoer om hvorfor vi gjeninnfoerer totalstroem $I_\text{ext}$ og ikke fortsetter med  $\mathcal{I}_\text{ext}$, saa er det fordi det matematisk sett blir enklere i dette tilfellet, da stroemmen kun eksisterer i ett punkt. Vi slipper aa innfoere en deltafunksjon i endepunktet.} 
+%\ehnote{La oss diskutere -- aa introdusere $\mathcal{I}$ virker noe unoedvendig hvis disse symbolene ikke dukker opp seinere og termene kan substitueres med stroem $I$ (enhet A) delt paa $L$}
+We can introduce it through a boundary condition demanding that the injected current must be identical to the axial current in the cable at $x=0$:
 \begin{equation}
 I_\text{ext} = - \frac{\pi d^2}{4}\frac{1}{r_\text{a}} \frac{\partial V}{\partial x}   \Big|_{x=0}.
 \end{equation}
@@ -494,7 +487,7 @@ V_\mathrm{m}(x) = E_\mathrm{m}+R_{\infty}I_\text{ext}  e^{-x/\lambda}.
 \label{eq:Neuron:semiinf5}
 \end{equation}
 
-The steady state solution to the semi-infinite cable (plotted in \Fref{fig:Neuron:Semiinf}B) is useful as it gives us analytical insight into signals spreading in e.g., passive dendrites. Some insights that can be derived from it is:
+The steady-state solution to the semi-infinite cable (plotted in \Fref{fig:Neuron:Semiinf}B) is useful as it gives us analytical insight into signals spreading in e.g., passive dendrites. Some insights that can be derived from it is:
 
 \begin{itemize}
 \item It follows from \fref{eq:Neuron:firstRinf} that $R_{\infty} = (E_\mathrm{m}-V_\mathrm{m}(0))/I_\text{ext}$ interprets as the steady-state input resistance of the semi-infinite cable. \Fref{eq:Neuron:Rinf} thus shows that the input resistance is proportional to $1/d^{3/2}$, i.e., the input resistance is higher the thinner the dendrite. 
@@ -544,16 +537,17 @@ The cable equation has played an important role in computational neuroscience, m
 \item All terminal branches must end with the same boundary conditions (e.g., the sealed end condition). 
 \item All terminal branches must end at the same electrotonic distance from the origin of the main branch. This (terminal-) electronic distance is found by summing the electrotonic distances of all branches along the path, where the electrotonic distance of a single branch $n$ equals its length divided by its length constant ($L_n/\lambda_n$).
 \item At every branch point, the diameter of the parent branch $d_0$ and its two daughters $d_1$ and $d_2$ must satisfy the so-called $d^{2/3}$-rule, stating that $d_0^{3/2} = d_1^{3/2}+d_2^{3/2}$.
+
 \item In the case of dendritic input (synaptic or external), the input must be identical in all locations at the same electotonic distance. 
 \end{enumerate}
 
-Although real dendritic trees rarely meet all the conditions listed above, the modeling of the entire dendritic tree as a cylinder has become a popular approximation, since it allows dendritic signaling to be computed analytically by solving the cable equation. Analytical solutions can also be derived for a system where one end the finite cylinder is connected to a single-compartment soma \cite**{rall1959}. This system, commonly referred to as the ball-and-stick model (\fref{fig:Neuron:ballnstick}), is an often used simplified neuron model. 
+Although real dendritic trees rarely meet all the conditions listed above, the modeling of the entire dendritic tree as a cylinder has become a popular approximation, since it allows dendritic signaling to be computed analytically by solving the cable equation. Analytical solutions can also be derived for a system where one end of the finite cylinder is connected to a single-compartment soma, see for example \citeasnoun**{Rall1959}, or \citeasnoun**[Sec. 4.5]{johnston1994foundations}. This system, commonly referred to as the ball-and-stick model (\fref{fig:Neuron:ballnstick}), is an often used simplified neuron model. 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{Figures/Neuron/ballnstick.png}
 \end{center}
-\caption{\textbf{Ball-and-stick neuron.} Illustration of ball-and-stick neuron model receiving external input (green). Intra- (yellow) and transmembrane (orange) currents along the stick of length $L$ can be modeled with the cable equation. A single-compartment soma determines the boundary condition (pink) in one end ($x=0$) of the cable. \ghnote{Er det ikke det riktig aa si det slik?}
+\caption{\textbf{Ball-and-stick neuron.} Illustration of ball-and-stick neuron model receiving external input. In the illustration, the stick (a cylinder with diameter $d$ and length $L$) receives a total input current (green) in a specific point. This causes intracellular (yellow) currents, and distributed transmembrane return currents (orange), represented as currents densities (per membrane area) times the membrane area of an infinitesimal cylinder segment, $\pi d \delta x$. A single-compartment soma determines the boundary condition in the end ($x=0$) of the cable, which in turn will determine the current leaving (pink) in the endpoint. 
 }
 \label{fig:Neuron:ballnstick}
 \end{figure}
@@ -634,8 +628,7 @@ V_{\text{i}}-V_{\text{e}} &= \frac{RT}{Fz_k} ln \frac{[k]_{\text{e}}} {[k]_{\tex
 \end{align}
 where $V_{\text{e}}$ is the extracellular potential immediately outside the membrane, and where the last equality follows from the definition of $E_k$ as the membrane potential $V_{\text{i}}-V_{\text{e}}$ for which the the net flux (in \fref{eq:Neuron:NP1D}) is zero. \Fref{eq:Neuron:revpots} was used to compute the reversal potentials listed in \Fref{tab:Neuron:ion-concentrations}. 
 
-\ghtxt{
-To illustrate how to interpret the reversal potential, we can use a K$^+$ channel as an example. For simplicity, let us assume that it opens at a time when the neuron is resting ($V_\mathrm{m} = V_{\text{in}}-V_{\text{out}} \sim -70 \, \si{\milli\volt}$), and that the K$^+$ is the only ion channel that opens. Since the intracellular space is more K$^+$-rich than the extracellular space, diffusion will drive K$^+$ out from the neuron, and since $V_\mathrm{m}$ is negative, electric drift will drive K$^+$ into the neuron. For the K$^+$ channel, the diffusive process will dominate, and give a net efflux of K$^+$, leading to a decrease (hyperpolarization) of $V_\mathrm{m}$ towards the K$^+$ reversal potential ($E_K = -100 \, \si{\milli\volt}$,  \fref{tab:Neuron:ion-concentrations}). As $V_\mathrm{m}$ becomes more negative, the drift component will become stronger, and when $V_\mathrm{m}$ reaches $E_K$, it becomes equal in magnitude to the diffusive component, and the net K$^+$ current becomes zero. $E_K$ is called the reversal potential, because if t$V_\mathrm{m}$ were to drop below this value, the current would reverse, i.e., the drift component would become dominant over diffusion, and K$^+$ would start to go inward into the neuron. }
+To illustrate how to interpret the reversal potential, let us use a K$^+$ channel as an example. For simplicity, we assume that it opens at a time when the neuron is resting ($V_\mathrm{m} = V_{\text{in}}-V_{\text{out}} \sim -70 \, \si{\milli\volt}$), and that it is the only ion channel that opens. Since the intracellular space is more K$^+$-rich than the extracellular space, diffusion will drive K$^+$ out from the neuron, and since $V_\mathrm{m}$ is negative, electric drift will drive K$^+$ into the neuron. For the K$^+$ channel, the diffusive process will dominate, and give a net efflux of K$^+$, leading to a decrease (hyperpolarization) of $V_\mathrm{m}$ towards the K$^+$ reversal potential ($E_K = -100 \, \si{\milli\volt}$,  \fref{tab:Neuron:ion-concentrations}). As $V_\mathrm{m}$ becomes more negative, the drift component will become stronger, and when $V_\mathrm{m}$ reaches $E_K$, it becomes equal in magnitude to the diffusive component, so that the net K$^+$ current becomes zero. $E_K$ is called the reversal potential, because if $V_\mathrm{m}$ were to drop below this value, the current would reverse, i.e., the drift component would become dominant over diffusion, and K$^+$ would start to go inward into the neuron.
 
 Since ion concentrations are generally assumed to remain constant in HH-type models, the reversal potentials are also assumed to be constant. As a consequence, one typically does not worry about ionic concentrations when constructing such models, but simply uses values for $E_k$ based or empirical measurements of the potentials at which the various membrane current reverse.
 
@@ -661,13 +654,7 @@ E_\text{x} = \frac{R T}{F}
 \label{eq:Neuron:Eleak_GHK}
 \end{equation}
 
-\ghtxt{An example of a non-specific ion channel is the leakage channel that we introduced in \fref{sec:Neuron:leak}. However,  indicated upon introduction, the simple expression for the leakage current given by \fref{eq:Neuron:Eleak_GHK} is phenomenological,}
-\gen{Litt rar start paa setning, og eq:Neuron:Eleak-GHK er ikke en ligning for stroem}  
-\ghtxt{and comprises quite a number of different processes that in sum drive the neuron towards the leakage reversal potential $E_\mathrm{L}$. Generally, the involved processes include ion pumps and co-transporters, which are not described by the GHK equation, meaning that $E_\mathrm{L}$ can not be exclusively defined through passive leakages such as in \fref{eq:Neuron:Eleak_GHK}.When constructing models, $E_\mathrm{L}$ is normally not measured or computed from biophysical principles, but instead simply adjusted to give the neuron the correct resting membrane potential. }
-
-\ghnote{Har inntrykk av at man ofte (f.eks. i Sterratt) foreslaar Goldmanligninga som modell av leak-reversal potential, men at dette er litt galt. Uten at jeg gidder aa gaa i clinch med noen, la til det siste avsnittet for a oppklare dette. Kan dere se om det jeg skrev virker fornuftig?}
-\gen{Foreslaar vi diskuterer det paa moetet.}
-
+An example of a non-specific ion channel is the phenomenological leakage channel that we introduced in \fref{sec:Neuron:leak}. However, as we explained there, the simple expression for the leakage current (\fref{eq:Neuron:HHleak}) summarizes quite a number of different processes that in sum drive the neuron towards the leakage reversal potential $E_\mathrm{L}$, including ion pumps and co-transporters, which generally do not obey the GHK equation. For this reason, the value for $E_\mathrm{L}$ in neural models is normally not measured separately or computed from \fref{eq:Neuron:Eleak_GHK}, but instead treated as a free parameter that is adjusted to give the model the correct resting membrane potential. The resting potential will generally not be identical to $E_\mathrm{L}$, as models can contain active ions channels that are partly open at rest, and thus contribute to the resting potential. 
 
 \subsection{\blue{Intracellular calcium dynamics}}
 \label{sec:Neuron:Calcium}

@@ -308,6 +308,7 @@ Disadvantage: HH becomes $i_\text{m} = i^\text{cap} + i_\text{Na} + i_\text{K} +
 	\item Yellow for intracellular currents: Incscape colorcode: ffcc00ff
 	\item Red for extracellular currents: Incscape colorcode: ff0c00ff
 	\end{itemize}
+	\item Nytt fra Espen: Matplotlib-syklus RGBA: (default: cycler('color', '\#1f77b4', '\#ff7f0e', '\#2ca02c', '\#d62728', '\#9467bd', '\#8c564b', '\#e377c2', '\#7f7f7f', '\#bcbd22', '\#17becf')) Legg til alfakode: + 'ff'. Mer info her: \href{https://matplotlib.org/stable/tutorials/colors/colors.html}{https://matplotlib.org/stable/tutorials/colors/colors.html}
 \item When to include Units and not?
 \item How to make this a "computational essay"?
 \item Real booky-books tend to have an Index at the end. Add \verb|\index| around words to add them to Index
@@ -357,8 +358,8 @@ Symbol 				& Unit 					& Description \\
 \hline
 $t$ 				& \si{\second}  		& time \\
 $q$					& \si{\coulomb} 		& electric charge \\
-$i$ 				& \si{\ampere} 			& electric current (scalar) \\
-$\mathbf{i}$		& \si{\ampere}			& electric current (directed) \\
+$I, \mathbf{I}$ 				& \si{\ampere} 			& electric current (scalar, directed) \\
+$i, \mathbf{i}$ 				& \si{\ampere\per\metre^2} 			& specific electric current (scalar) \\
 $E,\mathbf{E}$		& \si{\volt\per\metre} 	& electric field (scalar, directed) \\
 $V$ 				& \si{\volt} 			& electric potential \\
 $u \in \{ x,y,z \}$	& \si{\metre} 			& location on $u$-axis \\
@@ -382,13 +383,17 @@ $\mathbf{r}$		& \si{\metre} 			& position vector \\
 Notation/operator & Description \\
 \hline
 $\coloneq$											& definition operator \\
-$\nabla$											& gradient operator \\
+$\frac{\partial y}{\partial x}$ 					& partial derivative of $y$ with respect to $x$ \\ 
+$\nabla \coloneq [ \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z} ]^T $  & gradient operator \\
+$u$ 												& scalar value \\
+$u(t)$												& variable/function of $t$ \\
 $\langle u(t) \rangle $ 							& mean/expectation value of $u(t)$  \\
-$\vert u \vert$										& absolute value of u \\
+$\vert u \vert$										& absolute value of $u$ \\
 $\Vert \mathbf{r} \Vert$							& norm of $\mathbf{r}$ \\
 $\{ \mathbf{r}_1, \mathbf{r}_2, \ldots \mathbf{r}_n \}$	& set \\
-$\mathbf{u} \coloneq [u_1, u_2, \ldots u_n]$ 		& vector (1-dimensional matrix) \\
+$\mathbf{u} \coloneq [u_1, u_2, \ldots u_n]$ 		& length $n$ vector (1-dimensional matrix) \\
 $\mathbf{U} \coloneq [\mathbf{u}_1^T, \mathbf{u}_2^T, \ldots \mathbf{u}_n^T]$ 		& 2-dimensional matrix \\
+$\mathcal{U} \coloneq [\mathbf{U}_1, \mathbf{U}_2, \ldots \mathbf{U}_n]$ & 3-dimensional matrix/tensor \\
  & \\
 \hline
 \end{tabular}
