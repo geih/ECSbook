@@ -138,23 +138,23 @@ What \fref{eq:VC:CSD1} tells us, is that if a neuron outputs a current into a (i
 \label{fig:VC:CSD}
 \end{figure}
 
-If we (as we do throughout the current chapter) assume purely Ohmic extracellular current densities (${\bf i}_\mathrm{t}$) and constant, isotropic conductivity ($\sigma_\mathrm{t}$), eq. \fref{eq:VC:CSD1} reduces to a direct relationship between the laplacian (double spatial derivative) of the extracellular potential and the transmembrane current sources: 
+If we (as we do throughout the current chapter) assume purely Ohmic extracellular current densities (${\bf i}_\mathrm{t}$) and constant, isotropic conductivity ($\sigma_\mathrm{t}$), \fref{eq:VC:CSD1} reduces to a direct relationship between the laplacian (double spatial derivative) of the extracellular potential and the transmembrane current sources: 
 \begin{equation}
 \sigma_\text{t} \nabla^2{V_\mathrm{e}} = -C.
 \label{eq:VC:CSD3}
 \end{equation}
 We have seen these last two equations earlier as \fref{eq:Basics:continuity1} and \fref{eq:Basics:continuity3}.
 
-If we know the distribution of neuronal current sources, we can integrate \fref{eq:VC:continuity3} to predict $V_\mathrm{e}$. 
-Since it is a linear differential equation, we can solve it by first finding its Green's function, i.e., the solution to an impulse response $C({\bf r}) = I_1 \delta^3({\bf r}-{\bf r}_1)$, where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, and $I_1$ represents a singular current source at location ${\bf r}_1$. The general solution can then be expressed as a convolution over such Green's functions. 
+If we know the distribution of neuronal current sources, we can integrate \fref{eq:VC:CSD3} to predict $V_\mathrm{e}$. 
+Since it is a linear differential equation, we can solve it by first finding its Green's function, i.e., the solution to an impulse response $C({\bf r}) = I_1 \delta^3({\bf r}-{\bf r}_1)$, where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, and $I_1$ represents a singular current source at location ${\bf r}_1$\tvnnote{Slenge inn referanse til mattebok der dette staar, eller gjoere det klart at det staar i alle serioese matteboeker?}. The general solution can then be expressed as a convolution over such Green's functions. 
 
 Thus, we first seek the solution to:
 \begin{equation}
 \nabla^2 V({\bf r}) = - \frac{I' \delta^3({\bf r-r'})}{\sigma_t}.
 \label{eq:VC:CSD5}
 \end{equation}
-\snnote{Byttet ut volum-V med $\Omega$. Er det uheldig, siden dette symbolet også brukes om motstand?}
-The reader may realize that that this singular current source is equivalent to the point source that we considered earlier, meaning that the solution to this problem must be the one that we already found in \fref{eq:VC:pointsource2}. Nevertheless, we here provide an alternative (more mathematical) derivation based on the delta function. We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
+\snnote{Byttet ut volum-V med $\Omega$. Er det uheldig, siden dette symbolet også brukes om motstand?}\tvnnote{Jeg syntes det var lurt.}
+The reader may realize\tvnnote{Jeg er litt imot slike paastander, siden det rakker litt ned paa alle som ikke hadde tenkt paa dette (som alltid inkluderer meg). Hva med noe ala "Note that" istedet?} that this singular current source is equivalent to the point source that we considered earlier, meaning that the solution to this problem must be the one that we already found in \fref{eq:VC:pointsource2}. Nevertheless, we here provide an alternative (more mathematical) derivation based on the delta function. We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
 
 \begin{equation}
 \iiint_{\Omega} \nabla^2V({\bf r}) \,d\Omega =  - \frac{I'}{\sigma_t} \iiint_\Omega \ \delta^3({\bf r-r'}) \, d\Omega,
@@ -201,14 +201,14 @@ where the volume integral runs over all sources with source location denoted ${\
 \subsubsection{\blue{Derivation of the CSD equation}}
 \label{sec:VC:C2}
 \index{Current source density}
-Although the current source density equation (\fref{eq:VC:CSD1}) may seem intuitively reasonable, we have so far used it more or less as a postulate. A rigorous derivation of it was given by \citeasnoun**{Gratiy2017}. It is rather cumbersome, and we will not present it in full here, but for the interested reader we will go through the main steps of the derivation. 
+Although the current source density equation (\fref{eq:VC:CSD1}) may seem intuitively reasonable, we have so far used it more or less as a postulate. A \tvntxt{more} rigorous derivation of it was given by \citeasnoun**{Gratiy2017}. It is rather cumbersome, and we will not present it in full here, but for the interested reader we will go through the main steps of the derivation. 
 
 The starting point is the conservation law for the total current (density):
 \begin{equation}
 {\bf \nabla} \cdot {\bf i}_\text{tot} = 0.
 \label{eq:VC:Sergey1}
 \end{equation}
-This equation is valid at the spatial scale where it is meaningful to operate with continuous variables such as currents (cf. \fref{sec:Basics:scale_jump1}). This scale is sufficiently small for it to be meaningful to distinguish between ${\bf i}_\text{tot}$ being either an intracellular, extracellular or membrane current. When studying processes at the level of tissue, \fref{eq:VC:Sergey1} would not be practical to use: We would have map up the detailed structure of brain tissue with high resolution, to account for how the very definition of ${\bf i}_\text{tot}$ varies with space. 
+This equation is valid at the spatial scale \tvntxt{which is course-grained enough for it to be \sout{where it is}} meaningful to operate with continuous variables such as currents (cf. \fref{sec:Basics:scale_jump1})\tvntxt{\sout{. This scale is}, while still} sufficiently small for it to be meaningful to distinguish between ${\bf i}_\text{tot}$ being either an intracellular, extracellular or membrane current\tvnnote{Dette syntes jeg ble litt uklart. Kan vi kanskje si at volumet vi tenker paa enten er intracellulaert, extracellulaert eller at det gaar over membranen?}. When studying processes at the level of tissue, \fref{eq:VC:Sergey1} would not be practical to use: We would have map up the detailed structure of brain tissue with high resolution, to account for how the very definition of ${\bf i}_\text{tot}$ varies with space. 
 
 To get around this problem, we instead seek a version of \fref{eq:VC:Sergey1} that is applicable on a larger spatial scale ($\gg 1 \, \si{\cubic\micro\metre}$). The diameter of neural dendrites is typically $\sim 1 \,\si{\micro\metre}$, which means that a reference volume much greater than this will enclose the intracellular spaces of multiple neurites as well as the extracellular space between them. The idea is to chose a sufficiently large spatial scale for brain tissue to be homogeneous in the sense that equally sized reference volumes at different locations will contain the same intracellular to extracellular volume fractions (cf. \fref{sec:Basics:scale_jump2}). The advantage with such a \textit{coarse-grained}\index{Coarse-grained} resolution, is that both cellular and extracellular currents will be defined over the whole tissue-space, rather than within their respective sub-spaces.
 
@@ -217,7 +217,7 @@ To proceed, we define the tissue-coarse grained current $\left<{\bf i}_\text{tot
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle = 0.
 \label{eq:Basics:Sergey2}
 \end{equation}
-The next trick is to perform the averaging separately over the intracellular (i) and extracellular (e) domains of the reference volume, so that we can write: $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$, where the boundary between the i and e domains is chosen to be midways inside the neural membranes separating the domains \ghnote{Fremdeles ikke 100 prosent i maal her. Sergey skriver ikke noe om hvor grensa gaar, men bare at the surface bounding the volume is the cellular membrane. Tobjorn - hadde du en ref der Sergey saa paa effekter av aa legge grensa andre steder?}. With this, \fref{eq:Basics:Sergey2} becomes: 
+The next trick is to perform the averaging separately over the intracellular (i) and extracellular (e) domains of the reference volume, so that we can write: $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$, where the boundary between the i and e domains is chosen to be midways inside the neural membranes separating the domains \ghnote{Fremdeles ikke 100 prosent i maal her. Sergey skriver ikke noe om hvor grensa gaar, men bare at the surface bounding the volume is the cellular membrane. Tobjorn - hadde du en ref der Sergey saa paa effekter av aa legge grensa andre steder?}\tvnnote{Ikke sikker, men refererte kanskje til denne: Gratiy, Pettersen, Einevoll, Dale (2013) Pitfalls in the interpretation of multielectrode data: on the infeasibility of the neuronal current-source monopoles. J Neurophysiol 109:1681–1682.}. With this, \fref{eq:Basics:Sergey2} becomes: 
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  + {\bf \nabla}\cdot \langle{\bf i}_\text{tot}\rangle_\text{e} = 0
 \label{eq:Basics:Sergey3}
