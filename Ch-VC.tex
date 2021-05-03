@@ -20,7 +20,7 @@ A fairly general staring point for VC theory is the continuity equation (\fref{e
 defined in \Fref{chap:Basics}, which we will revisit and discuss thoroughly towards the end of this 
 chapter in \fref{sec:VC:CSD}. Before doing that, we will attempt to establish a basic and intuitive 
 understanding of VC theory by following a simpler path, using some simple idealized examples as venture points. 
-Before we begin, we note that the computations of $V_\mathrm{e}$ that we will show in this chapter, 
+Before we begin, we note that all computations of $V_\mathrm{e}$ in this chapter
 will be based on the assumptions that:
 
 \begin{enumerate}
@@ -45,22 +45,13 @@ This assumption implies that (i) we have made the quasi-static approximation of 
 (see \fref{sec:Eldiff}).
 
 \item The effective conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
-the same in all directions (isotropic medium), and frequency independent (no capacitive effects on tissue currents).
+the same in all spatial directions (isotropic medium), and frequency independent (no capacitive effects on tissue currents).
 Although these assumptions are not strictly true, they will still in many cases give good predictions 
 of $V_\mathrm{e}$. However, ways to relax these assumptions on $\sigma_\mathrm{t}$ 
 are discussed in \Fref{chap:sigma}.
 \end{enumerate}
 
 \ghnote{Flyttet alt vi hadde om assumptions opp hit, og fjernet delkapittelet paa slutten der vi tok opp disse antakelsene.}
-
-
-\section{\blue{Approximations used in VC theory}}
-\label{sec:VC:approximations}
-
-Finally, the extracellular conductivity was throughout this chapter assumed to be isotropic, homogeneous and frequency independent, but it is possible to relax these assumptions. Given its important role, we have devoted an entire chapter of this book to the extracellular conductivity (\fref{chap:Sigma}), where we discuss how the VC theory can be applied also to cases with an anisotropic medium and non-homogeneous medium.
-Ephaptic effects on 
-\fref{sec:Neuron:HHCassumptions}
-
 
 \section{\blue{Point source approximation}}
 \label{sec:VC:pointsource}
@@ -81,7 +72,7 @@ $I_k$ at the point ${\bf r_k}=0$ (\fref{fig:VC:pointsource}{\bf A}).
 \end{figure}
 
 Due to the spherical symmetry of this simple case, we know that the current density 
-must be radially directed, and that its magnitude must be solely a function of distance $r$ from the source.
+must be radially directed, and that its magnitude must be solely a function of distance $r = |{\br r}|$ from the source.
 In this case, \fref{eq:VC:ohmici} can be written as:
 
 \begin{equation}
@@ -122,9 +113,10 @@ V({\bf r}) = \frac{I_k}{4\pi \sigma_t |{\bf r-r_k}|}.
 \label{eq:VC:pointsource2}
 \end{equation}
 
-If we have several point-current sources, $I_{1}, I_2, I_3, ... $, in locations ${\bf r_1}, {\bf r_2}, {\bf r_3} ... $, 
-their contributions add up linearly \tvntxt{(see assumptions at the start of this chapter)}, 
-and the potential in a point ${\bf r}$ is given by:
+As we stated in the beginning of this chapter, we will assume that the extracellular medium is linear.
+This implies that if we have several point-current sources, $I_{1}, I_2, I_3, ... $, 
+in locations ${\bf r_1}, {\bf r_2}, {\bf r_3} ... $, 
+their contributions add up linearly, and the potential in a point ${\bf r}$ is given by:
 
 \begin{equation}
 V({\bf r}) = \frac{I_1}{4\pi  \sigma_t {\bf |r-r_1|}} + \frac{I_2}{4\pi  \sigma_t {\bf |r-r_2|} } + \frac{I_3}{4\pi  \sigma_t {\bf |r-r_3|} } + ... = \sum_k \frac{I_k}{4\pi  \sigma_t {\bf |r-r_k|} }.
@@ -259,7 +251,7 @@ between the laplacian (double spatial derivative) of the extracellular potential
 
 We have seen these last two equations earlier as \fref{eq:Basics:continuity1} and \fref{eq:Basics:continuity3}. 
 \tvnnote{Dette gjelder kun utenfor sinks/sources da. Nevne det?} 
-\ghnote{Den kommentaren stemmer vel ikke? }
+\ghnote{Den kommentaren stemmer vel ikke?}
 
 If we know the distribution of neuronal current sources, 
 we can integrate \fref{eq:VC:continuity3} to predict $V_\mathrm{e}$. 
@@ -275,7 +267,10 @@ Thus, we first seek the solution to:
 \label{eq:VC:CSD5}
 \end{equation}
 
-The reader may realize\tvnnote{Jeg er litt imot slike paastander, siden det rakker litt ned paa alle som ikke hadde tenkt paa dette (som alltid inkluderer meg). Hva med noe ala "Note that" istedet?} that this singular current source is equivalent to the point source that we considered earlier, meaning that the solution to this problem must be the one that we already found in \fref{eq:VC:pointsource2}. Nevertheless, we here provide an alternative (more mathematical) derivation based on the delta function. We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
+Note that this singular current source is equivalent to the point source that we considered earlier, 
+meaning that the solution to this problem is the one that we already found in \fref{eq:VC:pointsource2}. 
+Nevertheless, we here provide an alternative (more generally applicable) derivation based on the delta function. 
+We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
 
 \begin{equation}
 \iiint_{\Omega} \nabla^2V({\bf r}) \,d\Omega =  - \frac{I'}{\sigma_t} \iiint_\Omega \ \delta^3({\bf r-r'}) \, d\Omega,
@@ -339,12 +334,11 @@ $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$,
 
 Although the CSD equation (\fref{eq:VC:CSD1}) may seem intuitively reasonable, 
 we have so far used it more or less as a postulate. Its theoretical and practical basis
-was established by the early works by Charles Nicholson and coworkers
-\cite**{Nicholson1971,nicholson1973,nicholson1975}.
-
-A more rigorous derivation of it was given by \citeasnoun**{Gratiy2017}. 
-It is rather cumbersome, and we will not present it in full here, 
-but we will walk the interested reader through the main steps of the derivation. 
+was established in the early works by Charles Nicholson and coworkers
+\cite**{Nicholson1971,nicholson1973,nicholson1975,freeman1975},
+and a more rigorous derivation was presented later by \citeasnoun**{Gratiy2017}. 
+We will not present this derivation in full here, 
+but we will walk the interested reader through the main steps. 
 
 The starting point is the conservation law for the total current (density):
 \begin{equation}
@@ -353,14 +347,16 @@ The starting point is the conservation law for the total current (density):
 \end{equation}
 
 This equation is valid at the spatial scale sufficiently coarse-grained for it to be meaningful 
-to operate with continuous variables such as currents (cf. \fref{sec:Basics:scale_jump1}), 
-while still sufficiently small for the currents to be defined meaningfully as either 
-intracellular, extracellular or transmembrane currents. 
-\tvnnote{Dette syntes jeg ble litt uklart. Kan vi kanskje si at volumet vi tenker paa enten er intracellulaert, extracellulaert eller at det gaar over membranen?}.
-As such, \fref{eq:VC:Sergey1} would not be practical to use for large-scale tissue processes:
-We would have map up the detailed structure of brain tissue with high resolution, 
-to account for how the very definition of ${\bf i}_\text{tot}$ varies with space, depending
-on whether we are inside or outside of cells.
+to operate with continuous variables such as currents (cf. \fref{sec:Basics:scale_jump1}),
+while still sufficiently small for a reference volume to be either entirely inside or entirely outside
+of a membrane. 
+\ghnote{Er dette ok? Membranen er noe dritt. Foelte jeg burde hatt den med i siste setning, 
+men den er ikke helt med paa skala-notene vaare. Jeg regnet tidligere ut at $(10 nm)^3$ ECS bare inneholder 2 kaliumioner,
+og ikke alltid er stort nok til at vi kan stole paa en deterministisk kontinuumsbeskrivelse. Og der er vi jo  paa membrantykkelsen.... Saa jeg loeste dette her ved ikke aa nevne membranen. }
+As such, \fref{eq:VC:Sergey1} would not be practical to use for describing 
+large-scale tissue processes: We would have map up the detailed structure of brain tissue with high resolution, 
+to account for how the very definition of ${\bf i}_\text{tot}$ varies spatially 
+between being an intracellular, extracellular or transmembrane current.
 
 To get around this problem, we instead seek a version of \fref{eq:VC:Sergey1} 
 that is applicable on a larger spatial scale ($\gg 1 \, \si{\cubic\micro\metre}$). 
@@ -385,13 +381,12 @@ Since current conservation must apply also at this larger spatial scale, we have
 \end{equation}
 
 The next trick is to perform the averaging separately over 
-the intracellular (i) and extracellular (e) domains of the reference volume, so that we can write: 
+the cellular (c) and extracellular (e) domains of the reference volume, so that we can write: 
 $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$, 
-where the boundary between the i and e domains is chosen to be midways 
-inside the neural membranes separating the domains 
-\ghnote{Fremdeles ikke 100 prosent i maal her. Sergey skriver ikke noe om hvor grensa gaar, men bare at the surface bounding the volume is the cellular membrane. Tobjorn - hadde du en ref der Sergey saa paa effekter av aa legge grensa andre steder?}. 
-\tvnnote{Ikke sikker, men refererte kanskje til denne: Gratiy, Pettersen, Einevoll, Dale (2013) Pitfalls in the interpretation of multielectrode data: on the infeasibility of the neuronal current-source monopoles. J Neurophysiol 109:1681–1682.}. With this, \fref{eq:Basics:Sergey2} 
+where the boundary of the cellular domain(s) run on the external surface of the cellular membranes,
+so that $\langle{\bf i}_\text{tot}\rangle_\text{c}$ is the cellular current averaged over the cytoplasm \emph{and} membrane.
 With this, \fref{eq:Basics:Sergey2} becomes: 
+\ghnote{Vi har styret litt med dette, men jeg mener aa ha forstaatt Sergey naa. Cellular betyr intracellular + membrane. Dette gir jo mening jmf Gauss divergesteorem: Divergensen av det inni er det som kommer ut. Sergey skriver det ogsaa: averaging over cytoplasm and membrane.}
 
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  + {\bf \nabla}\cdot \langle{\bf i}_\text{tot}\rangle_\text{e} = 0
