@@ -36,6 +36,7 @@ and defined in further detail in \fref{chap:sigma}.
 
 \item The extracellular current density in this medium is linear and given by 
 Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
+
 \begin{equation}
 {\bf i_t}({\bf r}) = - \sigma_\mathrm{t} \nabla V\mathrm{e}({\bf r}).
 \label{eq:VC:ohmici}
@@ -45,7 +46,7 @@ This assumption implies that (i) we have made the quasi-static approximation of 
 
 \item The effective conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
 the same in all directions (isotropic medium), and frequency independent (no capacitive effects on tissue currents).
-Although these assumptions are not strictly true, they may still in many cases give fairly good predictions 
+Although these assumptions are not strictly true, they will still in many cases give good predictions 
 of $V_\mathrm{e}$. However, ways to relax these assumptions on $\sigma_\mathrm{t}$ 
 are discussed in \Fref{chap:sigma}.
 \end{enumerate}
@@ -78,8 +79,11 @@ $I_k$ at the point ${\bf r_k}=0$ (\fref{fig:VC:pointsource}{\bf A}).
 }
 \label{fig:VC:pointsource}
 \end{figure}
+
 Due to the spherical symmetry of this simple case, we know that the current density 
-must be radially directed, and that its magnitude must be solely a function of distance $r$ from the source:
+must be radially directed, and that its magnitude must be solely a function of distance $r$ from the source.
+In this case, \fref{eq:VC:ohmici} can be written as:
+
 \begin{equation}
 i_t({\bf r}) = i_t(r) = -\sigma_t \frac{dV_\mathrm{e}(r)}{dr}.
 \end{equation}
@@ -114,12 +118,13 @@ For a point source located in an arbitrary point ${\bf r_k} $ (\fref{fig:VC:poin
 the corresponding expression for the extracellular potential is:
 
 \begin{equation}
-V({\bf r}) = \frac{I_k}{4\pi \sigma_t |{\bf r-r_k}|},
+V({\bf r}) = \frac{I_k}{4\pi \sigma_t |{\bf r-r_k}|}.
 \label{eq:VC:pointsource2}
 \end{equation}
 
 If we have several point-current sources, $I_{1}, I_2, I_3, ... $, in locations ${\bf r_1}, {\bf r_2}, {\bf r_3} ... $, 
-their contributions add up linearly, and the potential in a point ${\bf r}$ is given by:
+their contributions add up linearly \tvntxt{(see assumptions at the start of this chapter)}, 
+and the potential in a point ${\bf r}$ is given by:
 
 \begin{equation}
 V({\bf r}) = \frac{I_1}{4\pi  \sigma_t {\bf |r-r_1|}} + \frac{I_2}{4\pi  \sigma_t {\bf |r-r_2|} } + \frac{I_3}{4\pi  \sigma_t {\bf |r-r_3|} } + ... = \sum_k \frac{I_k}{4\pi  \sigma_t {\bf |r-r_k|} }.
@@ -246,10 +251,12 @@ must be zero at all times.
 If we (as we do throughout the current chapter) assume purely Ohmic extracellular current densities (${\bf i}_\mathrm{t}$) 
 and constant, isotropic conductivity ($\sigma_\mathrm{t}$), eq. \fref{eq:VC:CSD1} reduces to a direct relationship 
 between the laplacian (double spatial derivative) of the extracellular potential and the transmembrane current sources: 
+
 \begin{equation}
 \sigma_\text{t} \nabla^2{V_\mathrm{e}} = -C.
 \label{eq:VC:CSD3}
 \end{equation}
+
 We have seen these last two equations earlier as \fref{eq:Basics:continuity1} and \fref{eq:Basics:continuity3}. 
 \tvnnote{Dette gjelder kun utenfor sinks/sources da. Nevne det?} 
 \ghnote{Den kommentaren stemmer vel ikke? }
@@ -268,12 +275,7 @@ Thus, we first seek the solution to:
 \label{eq:VC:CSD5}
 \end{equation}
 
-The reader may realize that that this singular current source is equivalent to the point source 
-that we considered earlier. The solution of \fref{eq:VC:CSD5} must therefore be the same 
-that we already found in \fref{eq:VC:pointsource2}. 
-However, we here provide an alternative (more mathematical) derivation applicable
-to more general problems. We start by integrating both sides of \fref{eq:VC:CSD5} 
-over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
+The reader may realize\tvnnote{Jeg er litt imot slike paastander, siden det rakker litt ned paa alle som ikke hadde tenkt paa dette (som alltid inkluderer meg). Hva med noe ala "Note that" istedet?} that this singular current source is equivalent to the point source that we considered earlier, meaning that the solution to this problem must be the one that we already found in \fref{eq:VC:pointsource2}. Nevertheless, we here provide an alternative (more mathematical) derivation based on the delta function. We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
 
 \begin{equation}
 \iiint_{\Omega} \nabla^2V({\bf r}) \,d\Omega =  - \frac{I'}{\sigma_t} \iiint_\Omega \ \delta^3({\bf r-r'}) \, d\Omega,
@@ -334,12 +336,13 @@ $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$,
 \subsubsection{\blue{Derivation of the current-source density equation}}
 \label{sec:VC:C2}
 \index{Current source density}
+
 Although the CSD equation (\fref{eq:VC:CSD1}) may seem intuitively reasonable, 
 we have so far used it more or less as a postulate. Its theoretical and practical basis
 was established by the early works by Charles Nicholson and coworkers
 \cite**{Nicholson1971,nicholson1973,nicholson1975}.
 
-A rigorous derivation of it was given by \citeasnoun**{Gratiy2017}. 
+A more rigorous derivation of it was given by \citeasnoun**{Gratiy2017}. 
 It is rather cumbersome, and we will not present it in full here, 
 but we will walk the interested reader through the main steps of the derivation. 
 
@@ -348,9 +351,12 @@ The starting point is the conservation law for the total current (density):
 {\bf \nabla} \cdot {\bf i}_\text{tot} = 0.
 \label{eq:VC:Sergey1}
 \end{equation}
-This equation is valid at the spatial scale where it is meaningful to operate with continuous variables 
-such as currents (cf. \fref{sec:Basics:scale_jump1}), and is sufficiently localized for the currents
-to be defined meaningfully as either intracellular, extracellular or transmembrane currents. 
+
+This equation is valid at the spatial scale sufficiently coarse-grained for it to be meaningful 
+to operate with continuous variables such as currents (cf. \fref{sec:Basics:scale_jump1}), 
+while still sufficiently small for the currents to be defined meaningfully as either 
+intracellular, extracellular or transmembrane currents. 
+\tvnnote{Dette syntes jeg ble litt uklart. Kan vi kanskje si at volumet vi tenker paa enten er intracellulaert, extracellulaert eller at det gaar over membranen?}.
 As such, \fref{eq:VC:Sergey1} would not be practical to use for large-scale tissue processes:
 We would have map up the detailed structure of brain tissue with high resolution, 
 to account for how the very definition of ${\bf i}_\text{tot}$ varies with space, depending
@@ -372,6 +378,7 @@ continuously over the whole tissue-space, rather than within their respective su
 To proceed, we define the tissue-coarse grained current $\left<{\bf i}_\text{tot}\right>$ 
 as the total current when averaged over the above introduced reference volume. 
 Since current conservation must apply also at this larger spatial scale, we have that:
+
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle = 0.
 \label{eq:Basics:Sergey2}
@@ -382,7 +389,10 @@ the intracellular (i) and extracellular (e) domains of the reference volume, so 
 $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$, 
 where the boundary between the i and e domains is chosen to be midways 
 inside the neural membranes separating the domains 
-\ghnote{Fremdeles ikke 100 prosent i maal her. Sergey skriver ikke noe om hvor grensa gaar, men bare at the surface bounding the volume is the cellular membrane. Tobjorn - hadde du en ref der Sergey saa paa effekter av aa legge grensa andre steder?}. With this, \fref{eq:Basics:Sergey2} becomes: 
+\ghnote{Fremdeles ikke 100 prosent i maal her. Sergey skriver ikke noe om hvor grensa gaar, men bare at the surface bounding the volume is the cellular membrane. Tobjorn - hadde du en ref der Sergey saa paa effekter av aa legge grensa andre steder?}. 
+\tvnnote{Ikke sikker, men refererte kanskje til denne: Gratiy, Pettersen, Einevoll, Dale (2013) Pitfalls in the interpretation of multielectrode data: on the infeasibility of the neuronal current-source monopoles. J Neurophysiol 109:1681–1682.}. With this, \fref{eq:Basics:Sergey2} 
+With this, \fref{eq:Basics:Sergey2} becomes: 
+
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  + {\bf \nabla}\cdot \langle{\bf i}_\text{tot}\rangle_\text{e} = 0
 \label{eq:Basics:Sergey3}
@@ -396,11 +406,11 @@ Further, if we rename the average current running extracellularly through tissue
 $\langle{\bf i}_\text{tot}\rangle_\text{e}$ to ${\bf i}_\text{t}$, 
 we see that \fref{eq:Basics:Sergey3} becomes identical to  \fref{eq:VC:CSD1}. 
 
-Importantly, ${\bf i}_\text{t}$ interprets as the average current running extracellularly through tissue, 
+Importantly, ${\bf i}_\text{t}$ denotes the average current running extracellularly through tissue, 
 defined as extracellular current per unit \textit{tissue} cross section area 
 and not per \textit{extracellular} cross section area 
 (although it only runs through the extracellular parts of this cross section area). 
-Related to this, $\sigma_\text{t}$ in \fref{eq:VC:CSD3} interprets as average conductivity 
+Related to this, $\sigma_\text{t}$ in \fref{eq:VC:CSD3} denotes the average conductivity 
 experienced by the current ${\bf i}_\text{t}$. 
 As this current will face cellular obstacles, 
 and is restricted to run only through the extracellular parts of the tissue, 
@@ -442,7 +452,7 @@ where we have expressed $C_\mathrm{dipole}$ in terms of the current dipole momen
 and the angle ($\theta$) between the current dipole moment and the distance vector 
 ($\mathbf{R} = {\bf r} - {\bf r}_c$), as explained in Appendix \ref{app:dipoleappendix}.
 
-The current dipole moment is a function of the sum of all the transmembrane currents in a neuron \cite**{Pettersen2008,Pettersen2014,Nunez2006}:
+The current dipole moment is a function of the sum of all the transmembrane currents in a neuron \cite**{Pettersen2008,Pettersen2014,Nunez2006,Naess2020}:
 \begin{equation}
 \mathbf{p} = \sum_{k=1}^N I_k \mathbf{r}_k.
 \label{eq:VC:dipole}
@@ -456,12 +466,10 @@ giving the length $d$ and direction of the current dipole.
 
 As we mentioned above, 
 the current dipole approximation is only applicable when we are at some distance away from the source distribution. 
-As a rule of thumb, the approximation is thought to be good when $R$ is three to four times greater than the dipole length: 
-$R > 3d$ or $R > 4d$ \cite**{Nunez2006}. 
+As a rule of thumb, the approximation is expected to be good when $R$ is three to four times greater than the dipole length: 
+$R > 3d$ or $R > 4d$ \cite**{Nunez2006}. \tvnnote{Her hadde det kanskje passet med en figur?}
 It has been found to work well for predicting the extracranial EEG signal, 
 but less well for intracranial electrocorticography (ECoG) \cite**{Naess2020}.
-
-
 
 
 \section{\blue{\ghtxt{Modeling \sout{recording electrodes} }recorded potentials}}
