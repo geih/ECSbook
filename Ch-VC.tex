@@ -33,7 +33,7 @@ do not act back on neurodynamics.
 
 \item The extracellular space of brain tissue can be represented as a continuous 
 medium\index{continuous medium}, as argued in \fref{sec:Basics:ECSpot}, 
-and defined in further detail in \fref{chap:sigma}. 
+and defined in further detail in \fref{chap:Sigma}. 
 
 \item The extracellular current density in this medium is linear and given by 
 Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
@@ -50,7 +50,7 @@ This assumption implies that (i) we have made the quasi-static approximation of 
 the same in all spatial directions (isotropic medium), and frequency independent (no capacitive effects on tissue currents).
 Although these assumptions are not strictly true, they will still in many cases give good predictions 
 of $V_\mathrm{e}$. However, ways to relax these assumptions on $\sigma_\mathrm{t}$ 
-are discussed in \Fref{chap:sigma}.
+are discussed in \Fref{chap:Sigma}.
 \end{enumerate}
 
 \gen{Antagelse 4 er vel litt annerledes enn de tre f{\o}rste som vel er fundamentale for VC. Den 4. antagelsen om konstant sigma-t er kun en forenkling vi gjoer her. Nevne?} 
@@ -637,7 +637,7 @@ Under some experimental conditions  $V_\mathrm{e}$} varies substantially across 
 either because the electrodes are large (like ECoG electrodes at the cortical surface), 
 or because \ghtxt{\sout{the extracellular potential}$V_\mathrm{e}$} varies substantially over small distances 
 (like extracellular spikes from axons). 
-In such cases, we can use \ghtxt{\sout{the point-electrode approximation}VC-theory} to calculate \ghtxt{\sout{the potential}$V_\mathrm{e}$} at \ghtxt{\sout{many}all} points across the electrode surface 
+In such cases, we can use \ghtxt{\sout{the point-electrode approximation}VC-theory}\tvnnote{syntes det er fint aa ha med at dette egentlig bare er en triviell utvidelse av punk-kilde approksimasjonen} to calculate \ghtxt{\sout{the potential}$V_\mathrm{e}$} at \ghtxt{\sout{many}all} points across the electrode surface 
 and compute the average potential \ghtxt{as a proxy for $V_\mathrm{Rec}$}, 
 an approach referred to as the disc-electrode approximation \cite**{CamunasMesa2013,Linden2014,Hagen2015,Ness2015,Viswam2019}. 
 \ghtxt{\sout{This approach takes into account}The disc-electrode approximation accounts for} the physical extent of the electrodes, \ghtxt{\sout{and the disc-electrode approximation can therefore account} and therefore also} for the spatial filtering effects introduced by electrodes that are large compared to the spatial variations of the \ghtxt{\sout{extracellular potential}$V_\mathrm{e}$}. See \fref{sec:Spikes:electrode_size} for an example of this approach applied to calculating extracellular 
