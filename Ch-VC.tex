@@ -256,10 +256,7 @@ between the laplacian (double spatial derivative) of the extracellular potential
 \sigma_\text{t} \nabla^2{V_\mathrm{e}} = -C.
 \label{eq:VC:CSD3}
 \end{equation}
-
 We have seen these last two equations earlier as \fref{eq:Basics:continuity1} and \fref{eq:Basics:continuity3}. 
-\tvnnote{Dette gjelder kun utenfor sinks/sources da. Nevne det?} 
-\ghnote{Den kommentaren stemmer vel ikke?}
 
 If we know the distribution of neuronal current sources, 
 we can integrate \fref{eq:VC:CSD3} to predict $V_\mathrm{e}$. 
@@ -281,7 +278,7 @@ Nevertheless, we here provide an alternative (more generally applicable) derivat
 We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
 
 \begin{equation}
-\iiint_{\Omega} \nabla^2V({\bf r}) \,d\Omega =  - \frac{I'}{\sigma_t} \iiint_\Omega \ \delta^3({\bf r-r'}) \, d\Omega,
+\iiint_{\Omega} \nabla^2V({\bf r}) \,d\Omega =  - \frac{I'}{\sigma_t} \iiint_\Omega \ \delta^3({\bf r-r'}) \, d\Omega.
 \label{eq:VC:marit}
 \end{equation}
 
@@ -404,7 +401,7 @@ With this, \fref{eq:Basics:Sergey2} becomes:
 In \citeasnoun**[Appendix A]{Gratiy2017} it was shown that the divergence of the coarse-grained current density 
 over the cellular domain (i.e., the first term on the right in \fref{eq:Basics:Sergey3}) 
 can be expressed as a sum of transmembrane currents, 
-i.e., as as a current source density ($C$), like in \fref{eq:VC:CSD1}. 
+i.e., as a current source density ($C$), like in \fref{eq:VC:CSD1}. 
 Further, if we rename the average current running extracellularly through tissue 
 $\langle{\bf i}_\text{tot}\rangle_\text{e}$ to ${\bf i}_\text{t}$, 
 we see that \fref{eq:Basics:Sergey3} becomes identical to  \fref{eq:VC:CSD1}. 
