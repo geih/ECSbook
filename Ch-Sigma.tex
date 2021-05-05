@@ -2,10 +2,52 @@
 \label{chap:Sigma}
 \index{Conductivity}
 %\tvnnote{Is the book about 'modelling extracellular potentials', or more broadly 'extracellular potentials'? If it is the latter, maybe we should say "key concept" instead of "key parameter/variable"?}
-In most applications of volume conductor (VC) theory, the conductivity of brain tissue, $\sigma_\text{t}$, is assumed to be a constant, and its value is normally taken from some experimental measurement. Estimates of $\sigma_\text{t}$ can vary greatly between different recordings, but common values are between 0.1 and 0.5~S/m. 
+In most applications of volume conductor (VC) theory, 
+the conductivity of brain tissue, $\sigma_\text{t}$, is assumed to be a constant, 
+and its value is normally taken from some experimental measurement. 
+Estimates of $\sigma_\text{t}$ vary between different recordings, 
+but common values are between 0.1 and 0.5  \si{S/m}.
 
-Throughout the previous section, we assumed that $\sigma_\text{t}$ was homogeneous, isotropic and frequency independent. In this chapter we discuss these assumptions. In addition, we discuss some experimental and theoretical estimates of  $\sigma_\text{t}$. Before doing so, however, we introduce the continuous, porous medium approximation in some detail, to show what $\sigma_\text{t}$ actually represents.
+Assuming a constant $\sigma_\text{t}$ amounts to assuming that brain tissue 
+is homogeneous, isotropic and frequency independent, as we did throughout \Fref{chap:VC}.
+In reality, $\sigma_\text{t}$ is neither strictly homogeneous, isotropic nor frequency independent, 
+and in this chapter we discuss these assumptions and ways to relax them. 
+In addition, we discuss some experimental and theoretical estimates of  $\sigma_\text{t}$. 
 
+Before we start examining the properties of $\sigma_\text{t}$, we must establish a clear picture
+of what it represents, i.e., what $\sigma_\text{t}$ is the conductivity \textit{of}.
+Such a picture is established through the continuous, porous medium approximation 
+that we introduce in the following section. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\blue{Continuous, porous medium approximation}}
+\label{sec:Sigma:continuous}
+\index{Continuous medium}\index{Porous medium}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+When we presented the theory for modeling single neurons (in \Fref{chap:Neuron}), 
+we may have given the impression that they are solitary creatures 
+living in a vast extracellular space with long distances to their nearest cell neighbors. 
+This mental image may stem from early staining procedures developed by Santiago Ram\'{o}n y Cajal, 
+based on the Golgi-method \cite**{cajal1899}, 
+where only a small fraction of the neurons were stained and observed. 
+Judging from the beautiful images produced by Cajal, 
+the brain appeared rather sparsely populated by neurons, 
+and if this had been the case, 
+the tissue conductivity would have been close to that of the extracellular fluid. 
+However, in reality the brain is so densely packed with neurons and glial cells 
+that if they all had been stained, Cajal's images would have been pure black. 
+
+As illustrated in \fref{fig:Sigma:ECS}, the extracellular space (colored light blue in the figure) 
+occupies only about 20\% of the the total tissue volume, 
+and has a highly tortuous \index{Tortuosity} geometry, 
+with an average extracellular distance between cell membranes of only about 40-60~nm \cite**{Sykova2008}.
+Currents moving through tissue are typically assumed to move predominantly through the extracellular space, 
+while the cell bodies are effectively non-conducting obstacles \cite**{Robinson1968,Nunez2006}. 
+Tissue currents are then restricted to follow narrow winding paths 
+through the small extracellular fraction of the tissue volume,
+and we therefore expect the effective tissue conductivity to be lower than 
+that of an obstacle-free saline solution. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -18,22 +60,17 @@ Throughout the previous section, we assumed that $\sigma_\text{t}$ was homogeneo
 \label{fig:Sigma:ECS}
 \end{figure}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\blue{Continuous, porous medium approximation}}
-\label{sec:Sigma:continuous}
-\index{Continuous medium}\index{Porous medium}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-When we presented the theory for modeling single neurons (in \Fref{chap:Neuron}), we may have given the impression that they are solitary creatures living in a vast extracellular space with long distances to their nearest cell neighbors. This mental image may stem from early staining procedures developed by Santiago Ram\'{o}n y Cajal, based on the Golgi-method \cite**{cajal1899}, where only a small fraction of the neurons were stained and observed. Judging from the beautiful images produced by Cajal, the brain appeared rather sparsely populated by neurons, and if this had been the case, the tissue conductivity would have been close to that of the extracellular fluid. 
-
-However, in reality the brain is so densely packed with neurons and glial cells that if they all had been stained, Cajal's images would have been pure black. As illustrated in \fref{fig:Sigma:ECS}, the extracellular space (colored light blue in the figure) occupies only about 20\% of the the total tissue volume. Currents moving through tissue are typically assumed to move mostly through the extracellular space, while the cells are effectively non-conducting bodies \cite**{Robinson1968,Nunez2006}. Tissue currents are therefore restricted to follow winding paths through the small fraction of the total tissue volume that is extracellular.  We therefore expect the effective tissue conductivity to be lower than that of the saline solution.
-
 \ghnote{Torbjorn foreslo:} \ghtxt{"From this, we can already make a first rough estimate of the extracellular conductivity: The extracellular saline solution has a conductivity of about 1.5~\si{\siemens\per\metre}, but only occupies about 20\% of the space, meaning that we might expect the extracellular conductivity to be on the order of 1.5~\si{\siemens\per\metre} $\cdot$ 0.2 = 0.3~\si{\siemens\per\metre}. This value fits well with the values typically measured in experiments, although the calculation itself vastly underestimates the complex electrical properties of neural tissue. "} \ghnote{Ganske fint, men tar ikke hensyn til tortuositeten, noe jeg gjoer i punktlisten ikke langt nedenfor her. Frykter derfor at dette grovestimatet vil forvirre leseren, naar et anelsen mindre grovt estimat foelger saa tett nedenfor.}
 
-The extracellular space has a highly tortuous \index{Tortuosity} geometry, with an average \tvntxt{extracellular distance between cell membranes of only} about 40-60~nm \cite**{Sykova2008}. At the micrometer scale, the extracellular conductivity \index{Conductivity} $\sigma$ is \tvntxt{therefore} highly non-homogeneous and anisotropic. For example, the local conductivity in a certain spatial direction will depend on whether there locally is a free extracellular passage in that direction (high conductivity), or whether this passage is blocked by a nearby membrane (low conductivity) (\fref{fig:Sigma:ECS}{\bf A}). 
+
+At the spatial scale of micrometers and below, the extracellular conductivity \index{Conductivity} 
+$\sigma$ is \tvntxt{therefore} highly non-homogeneous and anisotropic. 
+For example, the local conductivity in a certain spatial direction will depend on whether there locally is a free extracellular passage in that direction (high conductivity), 
+or whether this passage is blocked by a nearby membrane (low conductivity) (\fref{fig:Sigma:ECS}{\bf A}). 
 %Likewise, also the electric potential $\phi$ will vary greatly over tiny distances, depending on the proximity to neural membranes, especially when approaching the nanometer thick Debye-layers building up the membrane charge \cite**{Pods2013}\tvnnote{Kanskje denne setningen hoerer mer hjemme i VC eller Basics?}.
 %When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. Electrodes used to record extracellular potentials typically have sizes ranging from 5 $\mu$m to 125 $\mu$m in diameter \cite**{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). In practice, the electrodes therefore perform such an averaging, and include contributions from several nearby neurons \tvnnote{Remove last half of sentence? Seems like a different issue to me}. \tvnnote{Tok bort dette, da jeg tenker vi dekker dette et annet sted?}
-At a slightly larger spatial scale, of tens or hundreds of micrometers, it is however reasonable to assume that these micrometer scale inhomogeneities average out (\fref{fig:Sigma:ECS}{\bf B}), and that brain tissue can be treated as a continuous, porous medium \cite**{Nicholson1981,Gratiy2017}. This assumption is further motivated by the lack of any alternative way to approach the problem, since we in most experimental settings do not know the exact microstructure of the brain. The VC theory presented in the previous chapter was based on the continuous, porous medium approximation, and thus describes the extracellular dynamics on a coarse-grained spatial resolution larger than at least a few micrometers.
+At a larger spatial scale, of tens or hundreds of micrometers, 
+it is however reasonable to assume that these micrometer scale inhomogeneities average out (\fref{fig:Sigma:ECS}{\bf B}), and that brain tissue can be treated as a continuous, porous medium \cite**{Nicholson1981,Gratiy2017}. This assumption is further motivated by the lack of any alternative way to approach the problem, since we in most experimental settings do not know the exact microstructure of the brain. The VC theory presented in the previous chapter was based on the continuous, porous medium approximation, and thus describes the extracellular dynamics on a coarse-grained spatial resolution larger than at least a few micrometers.
 
 A continuous, porous medium is defined by two key parameters \cite**{Nicholson1981}. The first parameter, $\alpha$, is the fraction of the tissue volume that is extracellular space. The second parameter is $\lambda$, the tortuousity of the extracellular medium \cite**{Nicholson1981}. It is defined as the ratio between the shortest extracellular pathway between two points in space and the euclidian distance between these two points. The tortuousity accounts for the fact that ions traveling through the medium do not travel in straight lines, but need to take detours around cellular obstacles. The parameters $\alpha$ and $\lambda$ can be measured experimentally. Typical values are $\alpha = 0.2$ and $\lambda = 1.6$ \cite**{Sykova2008}, although these values vary between brain regions, and also locally with in a brain region, due to brain-state dependent cellular swelling or shrinkage \cite**{Sykova2008,rasmussen2020}.
 
