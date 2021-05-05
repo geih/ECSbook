@@ -442,11 +442,11 @@ $C_\mathrm{dipole}$ is the dipolar contribution from the CSD to $V_\mathrm{e}$,
 and so on. The derivation of this expression can be found in Appendix \ref{app:dipoleappendix}.
 
 As we explained in \fref{sec:Neuron:membranecurrents}, 
-the net sum of currents over a neuronal membrane is always zero, 
+the net sum of currents over a neuronal membrane is always zero \gex{($C_\mathrm{monopole}=0$)} 
 meaning that the monopolar contribution, i.e., first term in \fref{eq:VC:multipole}, vanishes. 
 Furthermore, the quadrupole, octopole and higher-order contributions to $V_\mathrm{e}$ 
 decay rapidly with distance $R$. Provided that we are sufficiently far away from the source distribution, 
-$V_\mathrm{e}$ can therefore be well approximated by dipole contribution alone:
+$V_\mathrm{e}$ can therefore be well approximated by the dipole contribution alone:
 
 \begin{equation}\label{eq:VC:CDA}
 V_\mathrm{e}({\bf r}) \approx \frac{1}{4 \pi \sigma_t} \frac{|{\bf p}| \cos \theta}{|{\bf r} - {\bf r}_c|^2},
@@ -473,10 +473,11 @@ As a rule of thumb, the approximation is expected to be good when $R$ is three t
 $R > 3d$ or $R > 4d$ \cite**{Nunez2006}. \tvnnote{Her hadde det kanskje passet med en figur?}
 It has been found to work well for predicting the extracranial EEG signal, 
 but less well for intracranial electrocorticography (ECoG) \cite**{Naess2020}.
+\gen{Har vi kontroll paa denne "rule of thumb"?}
 
 
 %\section{\blue{\ghtxt{Modeling \sout{recording electrodes} }recorded potentials}}
-\section{\blue{\ghtxt{Modeling recorded potentials}}}
+\section{\blue{\ghtxt{Modeling recorded potentials} \gex{Modeling recroding electrodes?}}}
 \label{sec:VC:electrodes}
 \index{Electrode model}
 \tvnnote{Paa sikt vil jeg gjerne spoerre noen elektrode-folk vi kjenner om aa kontroll-lese denne seksjonen, for eksempel Martinsen, Nelson, Frey eller Obien.}
@@ -491,6 +492,7 @@ depending both on electrode properties and features of $V_\mathrm{e}$.
 Below, we present a short review of different approaches to model such effects. 
 
 Recording electrodes essentially consist of an electrode surface in direct contact with neural tissue, 
+\gen{Boer kanskje spesifisere at vi ikke snakker om liquid electrodes?}
 connected with a wire to an amplifier that measures the potential relative to a reference electrode \cite**{Martinsen2008}, 
 see \fref{fig:VC:elec_circuit}{\bf A}. To accurately measure the potential at the electrode surface, 
 the measurement electrodes themselves must have a very low resistance 
@@ -541,6 +543,8 @@ In reality there are however several different complicating factors that can cau
 to differ from the "physiolological" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}.
 }
 \ghnote{Er dette bedre? Tenkte at sannheten kan vaere sannheten selv om den er paavirket av en elektrode, og proevde aa skille mellom true og physiological.}
+\gen{Kan kanskje ogsaa snakke om "ideal point electrode" hvor $V_\mathrm{Rec}$ er lik $V_\mathrm{Phys}$?
+Det er jo dette vi stort sett antar.}
 
 
 %We have demonstrated how we can use VC theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. 
@@ -597,6 +601,7 @@ remove the unobservable DC-potential.
 \ehnote{jeg er ogsaa overrasket over at metallelektroder ikke kan maale konstante potensialforskjeller i en loesning (i all den tid det finnes frie ioner i loesningen)?}
 \tvnnote{Jeg vet ikke om noen laerebok referanse, men det var det som ble oppgitt som nedre grense baade av Dirk og Anna (altsaa alle tilfeller jeg har vaert borti eksperimentell data), se Miceli-artikkelen, Uhlivora-artikkelen, og ogsaa Einevoll et al., 2007. Fra en av Anna's nyere artikler fant jeg frem til dokumentasjonen paa amplifieren de har brukt, og der staar det "Lower cutoff frequency configurable from 0.1 Hz to 500 Hz", men jeg vet ikke helt om forklaringen jeg har gitt over er helt riktig.}
 \ehnote{Det er vel da mer en begrensning med sampling apparat enn selve elektrodemaalingen. Si du sampler mange kanaler med int16 presisjon - det blir da et problem hvis DC-verdiene fluktuerer mye mer enn selve signalet (e.g., LFP).}
+\gen{Slik jeg forstod det da jeg snakket med Ulbert om saken i urtiden er det alltid et DC "kontaktpotensial" mellom metallkontakter og elektrolytter. Dette er i praksis ukjent og vil variere fra kontakt til kontakt, f.eks., i en MEA. Ulbert sa at DC potensialer derfor kun kunne måles med liquid elektroder.}
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -628,9 +633,13 @@ electrode properties \ghtxt{\sout{can still affect the}} \ghtxt{will nevertheles
 \subsection{\blue{Point-electrode approximation}}
 \label{sec:VC:point-electrode}
 \index{Point-electrode}
+
+\gen{Burde noe av teksten over vaert i en egen subsection?}
+
 The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to ignoring \ghtxt{\sout{any potential effect}possible effects} from recording electrodes or electrode shanks, \ghtxt{assuming that the recorded potential, $V_\mathrm{Rec}$, is identical to the physiological potential, which in turn is identical to $V_\mathrm{e}$ as computed using VC theory.} \ghtxt{\sout{and calculating 
 the extracellular potential at single points.}} For relatively small micro-electrodes this has been found to be a reasonable approximation \cite**{Moffitt2005,Moulin2008,Ness2015,Buccino2019}.
 \ghnote{Er ikke det rett: Point-electrode approximation = VC-teori uten no knussel?}
+\gen{Men i prinsipp kunne man vel ha en daarlig amplifier. Saa det er vel "ideal" point-electrode approximation som tilsvarer knusselfri VC-teori?}
 
 \subsection{\blue{Disc-electrode approximation}}
 \label{sec:VC:disc-electrode}
@@ -671,6 +680,7 @@ In certain cases, like in ECoG \index{ECoG} measurements from the cortical surfa
 \subsection{\blue{Effect of the electrode shanks}}
 \label{sec:VC:elec_shafts}
 Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}, while no such effects were found for small microwires \cite**{Buccino2019}. \tvnnote{Can also hurt the brain to push large objects into it, with cell-death, eudema and encapsulation (Moffitt and McIntyre, 2005).}
+\gen{Virkelig? Da maa jeg slutte med det .. :-)} 
 %%%%%%
 
 \subsection{\blue{Effect of position of reference electrode}}
@@ -689,3 +699,29 @@ Large multi-contact electrode shanks can be expected to have a substantial effec
 
 \ghnote{Lykke til!}
 \tvnnote{Takk takk :-) Men det at det virker veldig ambisioest og argumentere for at selve hoved-rammeverket vaart, som vi selv har stor tiltro til, i det hele tatt er gyldig, kan jo ogsaa sees paa som et argument for at det er viktig aa gjoere det :-)}
+
+\gex{Absolutt en god ide aa samle argumenter for hvorfor vi tror paa vaart framework. 
+Det viktigste argumentet er vel at MC og VC er validert godt hver for seg, men ogsaa 
+beregnede spikes og LFPs har stemt rimelig godt med eksperimenter.
+Her er starten paa en liste:
+\begin{itemize}
+\item MC
+\begin{itemize}
+\item Antagelsen om at MC modellering (kabelligning) fungerer for aa regne ut intracellulaere membranpotensialer er vel rimelig godt bekreftet, going back to Hodgkin og Huxley og aksonet deres
+\item Antagelsen om at MC modellering (kabelligning) derved fungerer for aa regne ut transmembrane strommer er vel kanskje ikke sjekket direkte mot eksperimenter(?), men det er er rimelig aa tenke at dette maa fungere ogsaa, gitt at 
+MC fungerer for intracellulaere membranpotensialer 
+\item ...
+\end{itemize}
+\item VC
+\begin{itemize}
+\item VC-antagelsen om relasjonen mellom injisert str{\o}m og maalte potensialer er godt bekreftet for stroemmer injisert med elektroder, fra centimeterskala og vel egentlig ned til 0.1 mm skala \cite{Miceli2017}
+\item ....
+\end{itemize}
+\item MC+VC 
+\begin{itemize}
+\item Beregnede spikes ligner til dels veldig paa det som sees eksperimentelt, cf. \Fref{fig:Spikes:Henze}. Dette er ogsaa for smaa avstander hvor vel VC antagelsen ikke er testet direkte.
+\item Beregnet unitary thalamocortical LFP ligner veldig paa det som sees eksperimentelt \cite{Hagen2017}
+\item ...
+\end{itemize}
+\end{itemize}
+}
