@@ -10,11 +10,13 @@ of extracellular potentials at different spatial scales, from extracellular spik
 LFPs and MUAs, to ECoGs and EEGs. 
 
 The essential idea behind VC theory (in a neuroscience context) is that currents that come 
-out through a neural membrane must continue as distributed currents in the extracellular space 
-of the surrounding medium, which in turn means that the extracellular potential $V_\mathrm{e}$ 
+out through a neural membrane must continue as distributed currents in the surrounding tissue, 
+which in turn means that the extracellular potential $V_\mathrm{e}$ 
 must change accordingly. Likewise, currents that go inwards through a neural membrane must come 
-from distributed currents in the extracellular space of the surrounding medium, and must also be consistent 
+from distributed currents in the surrounding tissue, and must also be consistent 
 with changes in $V_\mathrm{e}$. 
+
+\ghnote{Lot }
 
 A fairly general starting point for VC theory is the current continuity equation (\fref{eq:Basics:continuity1}):
 \begin{equation}
@@ -34,28 +36,31 @@ As discussed in \fref{sec:Neuron:HHCassumptions}, ephaptic effects are then
 not accounted for, i.e., changes in $V_\mathrm{e}$ evoked by neurodynamics 
 do not act back on neurodynamics.
 
-\item The extracellular space of brain tissue can be represented as a continuous 
+\item Brain tissue can be represented as a continuous 
 medium\index{continuous medium}, as argued in \fref{sec:Basics:ECSpot}, 
 and defined in further detail in \fref{chap:Sigma}. 
 
-\item The extracellular current density in this medium is linear and given by 
+\item The current density in the tissue is linear and given by 
 Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
 
 \begin{equation}
 {\bf i}_\mathrm{t}({\bf r}) = - \sigma_\mathrm{t} \nabla V_\mathrm{e}({\bf r}).
 \label{eq:VC:ohmici}
 \end{equation}
-\gen{Er det riktig aa bruke subscript "t"?}
 This assumption implies that (i) we have made the quasi-static approximation of Maxwell's equations (see \fref{sec:Basics:Quasistatic}), and assume that diffusive currents in the extracellular space can be neglected
-(see \fref{sec:Eldiff}).
+(see \fref{sec:Eldiff}). 
 
-\item The effective conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
+We note that we have used the subfix "t" to indicate that ${\bf i}_\mathrm{t}$ is a macroscopic current density through \textit{tissue}, defined as current unit per tissue cross section area. Tissue currents are assumed to move predominantly through the extracellular part of tissue \cite**{Robinson1968,Nunez2006}, but may contain contributions from intracellular pathways
+\cite**{Okada1994}. The linearity assumption (3) implies that both the extracellular and (possible) intracellular contributions to the total tissue current are proportional to the extracellular potential gradient. This issue is discussed in further detail in \fref{chap:Sigma}. 
+
+
+\item The effective tissue conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
 the same in all spatial directions (isotropic medium), and frequency independent (no capacitive effects on tissue currents).
 Although these assumptions are not strictly true, they will still in many cases give good predictions 
 of $V_\mathrm{e}$. 
 \end{enumerate}
 
-Note that while the three first assumptions (1-3) are prerequisites for using VC theory in the form presented here, the assumption (4) that $\sigma_\mathrm{t}$ is a constant is just a simplification that we make in the current chapter. Ways to apply VC theory with an inhomogeneous, anisotropic and frequency dependent $\sigma_\mathrm{t}$ are discussed in \Fref{chap:Sigma}.
+We note that while the three first assumptions (1-3) are prerequisites for using VC theory in the standard form presented here, the assumption (4) that $\sigma_\mathrm{t}$ is a constant is just a simplification that we make in the current chapter. Ways to apply VC theory with an inhomogeneous, anisotropic and frequency dependent $\sigma_\mathrm{t}$ are discussed in \Fref{chap:Sigma}.
 
 
 \section{\blue{Point source approximation}}
@@ -238,7 +243,7 @@ extracellular current (the $\nabla \cdot {\bf i_t}$ term).
 \includegraphics[width=0.5\textwidth]{Figures/VC/CSD.png}
 \end{center}
 \caption{\textbf{Neuronal current sources.}  
-{\bf (A)} When simulated on a numerical scheme, the transmembrane currents 
+{\bf (A)} When simulated using a numerical scheme, the transmembrane currents 
 are known at a discrete set of neuronal segments, i.e., as a set of point sources.  
 {\bf (B)} As a mathematical generality, we can describe the transmembrane currents 
 as a current source density (CSD) distribution, $C({\bf r},t)$. 
