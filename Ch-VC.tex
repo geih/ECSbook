@@ -2,11 +2,10 @@
 \label{chap:VC} % EH need this
 \index{Volume conductor theory}
 As we saw in the previous chapter, multicompartment (MC) models of morphologically complex neurons 
-allow us to compute the transmembrane 
-\gen{Skal vi bruke "transmembrane" eller "membrane" currents?} currents at various locations on the neural membrane. 
+allow us to compute the membrane currents at various locations on the neural membrane. 
 This chapter is about how we, when we know the distribution of neuronal membrane currents, 
 can use volume conductor (VC) theory to predict the resulting extracellular potential ($V_\mathrm{e}$) 
-at any given point in space. Volume conductor (VC) theory is the fundament \gex{foundation?} for forward modeling 
+at any given point in space. Volume conductor (VC) theory is the foundation for forward modeling 
 of extracellular potentials at different spatial scales, from extracellular spikes, 
 LFPs and MUAs, to ECoGs and EEGs. 
 
@@ -17,8 +16,12 @@ must change accordingly. Likewise, currents that go inwards through a neural mem
 from distributed currents in the extracellular space of the surrounding medium, and must also be consistent 
 with changes in $V_\mathrm{e}$. 
 
-A fairly general starting point for VC theory is the continuity equation \gen{"continuity equation" for what? charge?} (\fref{eq:Basics:continuity1}) 
-defined in \Fref{chap:Basics}, which we will revisit and discuss thoroughly towards the end of this 
+A fairly general starting point for VC theory is the current continuity equation (\fref{eq:Basics:continuity1}):
+\begin{equation}
+{\bf \nabla} \cdot {\bf i}_\text{t} = -C,
+\label{eq:VC:continuity1}
+\end{equation}
+defined previously in \Fref{chap:Basics}, which we will revisit and discuss thoroughly towards the end of this 
 chapter in \fref{sec:VC:CSD}. Before doing that, we will attempt to establish a basic and intuitive 
 understanding of VC theory by following a simpler path, using some simple idealized examples as venture points. 
 Before we begin, we note that all computations of $V_\mathrm{e}$ in this chapter
@@ -49,12 +52,11 @@ This assumption implies that (i) we have made the quasi-static approximation of 
 \item The effective conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
 the same in all spatial directions (isotropic medium), and frequency independent (no capacitive effects on tissue currents).
 Although these assumptions are not strictly true, they will still in many cases give good predictions 
-of $V_\mathrm{e}$. However, ways to relax these assumptions on $\sigma_\mathrm{t}$ 
-are discussed in \Fref{chap:Sigma}.
+of $V_\mathrm{e}$. 
 \end{enumerate}
 
-\gen{Antagelse 4 er vel litt annerledes enn de tre f{\o}rste som vel er fundamentale for VC. Den 4. antagelsen om konstant sigma-t er kun en forenkling vi gjoer her. Nevne?} 
-\ghnote{Flyttet alt vi hadde om assumptions opp hit, og fjernet delkapittelet paa slutten der vi tok opp disse antakelsene.}
+Note that while the three first assumptions (1-3) are prerequisites for using VC theory in the form presented here, the assumption (4) that $\sigma_\mathrm{t}$ is a constant is just a simplification that we make in the current chapter. Ways to apply VC theory with an inhomogeneous, anisotropic and frequency dependent $\sigma_\mathrm{t}$ are discussed in \Fref{chap:Sigma}.
+
 
 \section{\blue{Point source approximation}}
 \label{sec:VC:pointsource}
