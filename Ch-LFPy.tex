@@ -71,7 +71,7 @@ We will \ehtxt{introduce} this in \Fref{chap:Eldiff}, where we consider electrod
 
 %%%%%%
 
-\section{\ehnote{}\ehtxt{Forward-model predictions from multicompartment neuron models and networks}}
+\section{\ehnote{}\ehtxt{Forward-model predictions from multicompartment neuron models}}
 \label{sec:Schemes:LFPy}
 \index{Multicompartment models}
 
@@ -452,7 +452,7 @@ the set of axial currents $\mathbb{I}_\mathrm{a}$ which in the present context c
 %\snnote{kanskje bare ta bort "either" i neste setning som den var. eller noe saannt:}
 %\sntxt{\sout{To compute the magnetic field outside the neuron arising from axial currents one can
 %either sum up the individual contributions using the relevant Biot-Savart law} \cite**{Blagoev2007,Hagen2018} \sout{as}}
-\sntxt{Using the Biot-Savart law, we can compute the magnetic field outside of neurons by summing up the contributions from the set of axial currents \cite**{Blagoev2007,Hagen2018}:} 
+Using the Biot-Savart law, we can compute the magnetic field outside of neurons by summing up the contributions from the set of axial currents \cite**{Blagoev2007,Hagen2018} as 
 %
 \begin{equation}
 \mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^N \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
@@ -556,6 +556,53 @@ and then estimate the final signal as
 \index{network model}
 
 \ehnote{Tanken var aa flytte nettverksbeskrivelsen ut av hybrid-scheme delen}
+
+Throughout \Fref{sec:Schemes:LFPy} we defined a formalism based on linear combinations for predicting extracellular signals of neuronal activity from MC models. 
+The number $N$ current sources could, without loss of generality, denote the count of compartments per neuron model, 
+or the total count for sets of neurons. 
+Thus for the purpose of computing extracellular signals from recurrently connected networks of MC neurons, 
+we have the two feasible options:
+\begin{enumerate}
+\item Compute the signal as the sum of single-neuron contributions
+	\begin{equation}
+	\phi(\mathbf{R}, t) = \sum_{u =1}^{N_X} \mathbf{F}_u\mathbf{I}_u~,
+	\end{equation}
+	where $ \mathbf{F}_u \equiv \mathbf{F}_u(\mathbf{R},\mathbf{r}_u)$  and $ \mathbf{I}_u$ denotes the VC forward solution and current sources of the number $N_X$ different neurons included in the network. 
+	This formulation then requires some intermediate storage of single-cell contributions to the signal.
+\item Compute the signal as the product
+	\begin{equation}
+	\phi(\mathbf{R}, t) = \mathbf{F}\mathbf{I}~, 
+	\end{equation}
+	that is, the forward solution $\mathbf{F} \equiv \mathbf{F}(\mathbf{R},\mathbf{r})$ is precomputed for all neuronal compartments across all $N_X$ neurons at once, and is multiplied with all currents $\mathbf{I} \equiv \mathbf{I}(t)$ irrespective of source neurons. 
+	This formulation which avoids explicit for-loops does not allow for storing single-cell contributions to the signal, 
+	but as the typical signals of interests are population signals this is perhaps less of an issue. 
+	One can in any case compute single-cell contributions by extracting the corresponding rows and columns of the matrices and multiply them.
+\end{enumerate}
+
+
+As it will become quite useful for the computational schemes possible for predicting extracellular signals from networks of simplified neuron representations later in this Chapter, let us first define some properties of a recurrently connected network of MC neurons, 
+and display some predictions:
+
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-network.pdf}
+\end{center}
+\caption{\textbf{Stylized two-population multicompartment neuron network with predictions of extracellular potentials.}
+({\bf A}) Cell and electrode geometry. The network is constructed of one excitatory (`E') and one inhibitory (`I') population.
+Only a subset of cells are shown from each population.
+The black point markers along the $z$-axis denote locations of electrode contact points with separation \SI{50}{\micro\metre}. 
+({\bf B}) Synapse counts per connection $K_{YX}$ along the vertical $z$-axis in bins of \SI{20}{\micro\metre}.
+({\bf C}) Network spike raster spanning \SI{500}{\milli\second} of spontaneous activity. 
+The mean population-averaged firing rates are given shown in the legend.
+({\bf D}) Per-population spike-count histograms with bin size \SI{5}{\milli\second}.
+({\bf E}) Extracellular potentials.
+\ehnote{legg til panel labels}
+}
+\label{fig:LFPy_network}
+\end{figure}
+
 
 
 \section{\blue{EH: Forward-model predictions from spiking point-neuron network models}}
@@ -738,25 +785,6 @@ Here, synaptic activation times are set from pre-recorded spike times recorded t
 The synaptic currents and associated transmembrane currents on the postsynaptic neurons allows for computing the extracellular potential independently of the recurrent network dynamics.
 }
 \label{fig:LFPy_hybrid}
-\end{figure}
-
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-network.pdf}
-\end{center}
-\caption{\textbf{Stylized two-population multicompartment neuron network with predictions of extracellular potentials.}
-({\bf A}) Cell and electrode geometry. The network is constructed of one excitatory (`E') and one inhibitory (`I') population.
-Only a subset of cells are shown from each population.
-The black point markers along the $z$-axis denote locations of electrode contact points with separation \SI{50}{\micro\metre}. 
-({\bf B}) Synapse counts per connection $K_{YX}$ along the vertical $z$-axis in bins of \SI{20}{\micro\metre}.
-({\bf C}) Network spike raster spanning \SI{500}{\milli\second} of spontaneous activity. 
-The mean population-averaged firing rates are given shown in the legend.
-({\bf D}) Per-population spike-count histograms with bin size \SI{5}{\milli\second}.
-({\bf E}) Extracellular potentials.
-\ehnote{legg til panel labels}
-}
-\label{fig:LFPy_network}
 \end{figure}
 
 
