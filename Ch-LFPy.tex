@@ -280,12 +280,13 @@ which can be rewritten as the linear combination
 I_\mathrm{a}(\mathbf{r}_1, t)\\
 I_\mathrm{a}(\mathbf{r}_2, t)
 \end{bmatrix}
-=
+= \underbrace{
 - \frac{\pi d_{1}^{2} d_{2}^{2}}{4 R_{a} \left(L_{1} d_{2}^{2} + L_{2} d_{1}^{2}\right)}
 \begin{bmatrix}
 1 & -1 \\
 1 & -1
 \end{bmatrix}
+}_{\mathbf{G}}
 \begin{bmatrix}
 V_\mathrm{m}(\mathbf{r}_1, t) \\
 V_\mathrm{m}(\mathbf{r}_2, t)
@@ -352,7 +353,7 @@ $N_t$ is here the number of discrete time steps in the simulated output signals.
 
 As derived from \textit{volume conductor theory} (\Fref{chap:VC}),
 the different electric and magnetic signals that can be computed from the electric activity of brain cells are \textit{linearly} dependent on either transmembrane currents or axial currents.
-Thus, some arbitrary signals $v(\mathbf{R}_i, t)$ in $M$ different spatial locations from the $N$ compartmental sources located at $r_j$ can be computed as
+Thus, some arbitrary signals $v(\mathbf{R}_i, t)$ in $M$ different spatial locations $\mathbf{R}_i$ from the $N$ compartmental sources located at $r_j$ can be computed as
 %
 \begin{eqnarray}
 \begin{bmatrix}
@@ -371,13 +372,13 @@ I(\mathbf{r}_N, t)
 \end{eqnarray}
 %
 where $\mathbf{F}$ is a matrix with dimensions $(M, N)$ wherein each element $f_{ij}$ is the chosen forward solution mapping the contribution from each source to the corresponding measurement.
-For the sake of compactness, $I(\mathbf{r}_j, t)$ is here either represents the axial or transmembrane current of compartment $j$.
+For the sake of compactness, $I(\mathbf{r}_j, t)$ here either represents the axial or transmembrane current of compartment $j$.
 A simple linear forward model mapping transmembrane currents of an $N$-compartment model to extracellular potentials in $M$ locations would be the point-source formalism,
-which models neuronal sources \textit{and} measurement sites as infinitesimally small points in an infinite homogeneous isotropic and linear volume conductor.
+which models neuronal sources \textit{and} measurement sites as infinitesimally small points in an infinite homogeneous, isotropic and linear volume conductor \ehtxt{with conductivity $\sigma$}.
 The point-source formula (\Fref{eq:VC:pointsource}) results in elements
 %
 \begin{equation}
-f_{ij} = \frac{1}{4\pi\sigma_\mathrm{e}}\frac{1}{\Vert\mathbf{R}_i - \mathbf{r}_j\Vert}  ~.
+f_{ij} = \frac{1}{4\pi\sigma}\frac{1}{\Vert\mathbf{R}_i - \mathbf{r}_j\Vert}  ~.
 \end{equation}
 %
 The full linear system for obtaining the extracellular potential may then be written out as the linear combination
@@ -389,7 +390,7 @@ The full linear system for obtaining the extracellular potential may then be wri
 \vdots \\
 \phi(\mathbf{R}_M, t)
 \end{bmatrix}
-= \frac{1}{4\pi\sigma_\mathrm{e}}
+= \frac{1}{4\pi\sigma}
 \begin{bmatrix}
 \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_1 - \mathbf{r}_N\Vert} \\
 \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_1\Vert} & \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_2\Vert} & \cdots & \frac{1}{\Vert\mathbf{R}_2 - \mathbf{r}_N\Vert} \\
@@ -408,13 +409,13 @@ Note that the constant terms have been moved out of the matrix multiplication.
 Similarly, for line sources (\Fref{eq:VC:linesource}), the elements of $\mathbf{F}$ may be calculated as
 %
 \begin{equation}
-f_{ij} = \frac{1}{4\pi \sigma_\mathrm{e} \Delta s_{ij}} \log \left| \frac{\sqrt{h_{ij}^2+\rho_{ij}^2}-h_{ij}}{\sqrt{\ell_i^2+\rho_{ij}^2}-\ell_{ij}} \right| ~,
+f_{ij} = \frac{1}{4\pi \sigma \Delta s_{ij}} \log \left| \frac{\sqrt{h_{ij}^2+\rho_{ij}^2}-h_{ij}}{\sqrt{\ell_i^2+\rho_{ij}^2}-\ell_{ij}} \right| ~,
 \label{eq:LFPy:linesources}
 \end{equation}
 %
-where $\rho_{ij}$ is the distance perpendicular to line segment (compartment) $j$,
-$h_{ij}$ the longitudinal distance from the end of the segment
-and $\ell_{ij} = \delta s_{ij} + h_{ij}$ the longitudinal distance from the start of the segment to some electrode contact located at $\mathbf{R}_i$.
+where $\rho_{ij}$ is the distance perpendicular to line source (compartment) $j$,
+$h_{ij}$ the longitudinal distance from the end of the line source
+and $\ell_{ij} = \delta s_{ij} + h_{ij}$ the longitudinal distance from the start of the line source to some electrode contact located at $\mathbf{R}_i$.
 
 The approach is applicable also to other types of measurements which are linearly dependent on the transmembrane current sources,
 such as the current dipole moment (\Fref{eq:VC:dipole}).
@@ -428,6 +429,7 @@ x_j \\
 y_j \\
 z_j
 \end{bmatrix} ~.
+\label{eq:LFPy:dipolemapping}
 \end{equation}
 %
 Another example is computing the \textit{ground truth} current source density (CSD) \cite**{Pettersen2008,Hagen2016,Hagen2017},
@@ -447,17 +449,18 @@ while the latter could be used to compute the ground truth CSD across evenly dis
 
 The formalism using linear combinations may also be adapted for higher-dimensional source elements, that is,
 the set of axial currents $\mathbb{I}_\mathrm{a}$ which in the present context can be represented by a 3D array with shape $(M, 3, N_t)$.
-\snnote{kanskje bare ta bort "either" i neste setning som den var. eller noe saannt:}
-\sntxt{\sout{To compute the magnetic field outside the neuron arising from axial currents one can
-either sum up the individual contributions using the relevant Biot-Savart law} \cite**{Blagoev2007,Hagen2018} \sout{as}}
-\sntxt{Using the Biot-Savart law, we can compute the magnetic field outside of neurons, by summing up the contributions from axial currents \cite**{Blagoev2007,Hagen2018}:} 
+%\snnote{kanskje bare ta bort "either" i neste setning som den var. eller noe saannt:}
+%\sntxt{\sout{To compute the magnetic field outside the neuron arising from axial currents one can
+%either sum up the individual contributions using the relevant Biot-Savart law} \cite**{Blagoev2007,Hagen2018} \sout{as}}
+\sntxt{Using the Biot-Savart law, we can compute the magnetic field outside of neurons by summing up the contributions from the set of axial currents \cite**{Blagoev2007,Hagen2018}:} 
 %
 \begin{equation}
 \mathbf{B}(\mathbf{R}_i, t) = \frac{\mu}{4\pi} \sum_{j=1}^N \frac{\mathbf{I}_\mathrm{a}(\mathbf{r}_j, t) \times (\mathbf{R}_i - \mathbf{r}_j) }{\Vert \mathbf{R}_i - \mathbf{r}_j \Vert^3} ~,
 \label{eq:LFPy_biotsavart1}
 \end{equation}
 %
-where the magnetic permeability $\mu \approx \mu_0=4\pi\times 10^7$~\si{\henry/\metre} that is, approximately equal to the permeability in vacuum.
+where the magnetic permeability $\mu \approx \mu_0=4\pi\times 10^7$~\si{\henry/\metre}, that is, 
+approximately equal to the permeability in vacuum.
 Alternatively,
 one can build up a forward model matrix $\mathbf{F}$ element by element as
 %
@@ -478,20 +481,23 @@ the calculation of the magnetic field $\mathbf{B}$ in location $\mathbf{R}_i$ fr
 %
 Note that application of \Fref{eq:LFPy_biotsavart1} or \Fref{eq:LFPy_biotsavart3} is interchangeable and context dependent.
 In situations where axial currents ($I_\mathrm{a}(\mathbf{r}_j, t)$),
-current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stored separately it may make sense to precompute the full $\mathbf{F}$-matrix for all $M$ measurement sites at once which may demand a lot of system memory.
-
+current displacement ($\mathbf{d}_j$) and locations ($\mathbf{r}_j$) can be stored separately it may make sense to precompute the full $\mathbf{F}$-matrix for all $M$ measurement sites at once which may demand a lot of system memory. 
+\ehtxt{Note that some programming languages like Python provides designated operators for compact infix multiplication of ND arrays\footnote{\href{https://www.python.org/dev/peps/pep-0465}{https://www.python.org/dev/peps/pep-0465}}, 
+thus additional for-loops from the summing operation in \Fref{eq:LFPy_biotsavart3} can be avoided.}
 \ehnote{usikker paa hvor detaljert jeg skal gaa inn her. Python/numpy lar en gjoere en gjoere denne operasjonen for alle maaleposisjoner kompakt som}
 \ehtxt{\url{B=(F @ I).sum(axis=1); B.shape=(N,3,Nt); F.shape=(N,M,3,3); I.shape=(M,3,Nt)}}
 \ehnote{ogsaa usikker paa notasjon for matriseprodukt med nD matriser som her.}
 \snnote{Hadde det holdt aa bytte ut 6.22 med B = F I?}
+\ehnote{Nei, jeg tror ikke det er riktig notasjonsmessig ifht produkt med høyereordens (ND, N>2) matriser som kun er veldefinert for 2D arrays. Se f.eks. python PEP465 som beskriver motivasjonen bak infix multiplikasjon operatoren i detalj.}
 
 \subsubsection{Forward models for current dipole moments}
-\ehnote{add some on combining current dipole moment to distal measures of activity (EEG, MEG)}
+
 For forward-model predictions of distal electric and magnetic measures of neural activity such as EEG and MEG recordings,
 some simplifying steps can be made.
 As these signals are measured at distances much greater than the typical extent of the neuronal sources,
 the discrete spatial distribution of transmembrane currents $\mathbf{I}_\mathrm{m}(t)$ may be
-treated as an equivalent current dipole moment (\Fref{sec:VC:dipole}) defined as the product
+treated as an equivalent current dipole moment (cf. \Fref{sec:VC:dipole}), 
+defined as the product
 \begin{equation}
 \mathbf{P}(t) =
 \begin{bmatrix}
@@ -508,7 +514,7 @@ I_\mathrm{m}(\mathbf{r}_N, t)
 \end{bmatrix} ~,
 \end{equation}
 which is equivalent to \Fref{eq:VC:dipole}.
-As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$, 
+As $\mathbf{r}_j \equiv [x_j, y_j, z_j]^\top$ (cf. \Fref{eq:LFPy:dipolemapping}), 
 the resulting shape of the current dipole moment array will be $(3, N_t)$.
 
 In the relatively simple case of an infinite homogeneous volume conductor the extracellular potential resulting from the current dipole moment is
@@ -521,14 +527,14 @@ For the sake of computing EEG surface potentials however,
 an infinite homogeneous volume conductor model is arguably a quite poor approximation to the different tissues of the head.
 As discussed in more detail throughout \Fref{chap:EEG} different forward models for EEG-like potentials has been developed in the past,
 either relying on representing different tissues as a series of concentric shells with different conductivities for each main tissue (gray matter, cerebral spinal fluid, skull etc.) \cite**{Nunez2006,Naess2017,Naess2020},
-or even more detailed head models based on anatomical reconstruction such as the New York Head model \cite**{Huang2016}.
+or even more detailed head models based on anatomical reconstructions such as the New York Head model \cite**{Huang2016}.
 Without going into any mathematical detail here (more on that in \Fref{chap:EEG}),
-these models generally can be written on the form of a linear combination
+\ehtxt{signal predictions using} these \ehtxt{head} models can generally be written on the form of a linear combination
 \begin{equation}
 \phi(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
 \end{equation}
 where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is head-model dependent.
-\sntxt{\sout{From the current dipole moment potential} For the potential in an infinite homogeneous volume conductor} (\Fref{eq:LFPy:dipolepotential}),
+For the potential in an infinite homogeneous volume conductor (\Fref{eq:LFPy:dipolepotential}),
 the corresponding rows of $\mathbf{M}$ for each electrode site $\mathbf{R}_i$ can be computed as
 \begin{equation}
 m_{i} = \frac{I_3 \cdot (\mathbf{R}_i-\mathbf{r})}{4 \pi \sigma \Vert \mathbf{R}_i-\mathbf{r} \Vert^3}~,
@@ -544,9 +550,12 @@ and then estimate the final signal as
 \phi(\mathbf{R}, t) = \mathbf{M}\mathbf{F}\mathbf{I}_\mathrm{m}(t)~.
 \end{equation}
 
-\ehnote{show code examples from LFPykit?}
 
+\section{\blue{EH: Forward-model predictions from network models using the MC+VC scheme}}
+\label{sec:Schemes:networkLFPy}
+\index{network model}
 
+\ehnote{Tanken var aa flytte nettverksbeskrivelsen ut av hybrid-scheme delen}
 
 
 \section{\blue{EH: Forward-model predictions from spiking point-neuron network models}}
