@@ -582,11 +582,13 @@ we have the two feasible options:
 
 As it will become quite useful for the computational schemes possible for predicting extracellular signals from networks of simplified neuron representations later in this Chapter, let us first define some properties of a recurrently connected network of MC neurons, 
 and display some predictions using the MC+VC scheme. 
-For compactness, we choose a symbolic notation wherever possible as we will reuse these symbols later:
+For compactness, we choose a symbolic notation wherever possible as we will reuse these symbols later. 
+Their particular values are summarized in \ehnote{legg/ref til tabell med verdier}.
+Then:
 
 \begin{enumerate}
-\item Let $X \in \{ \ldots \}$ and $Y \subseteq X$ denote pre- and postsynaptic population, respectively. Each population corresponds to separate classes of neurons (derived from anatomy, electrical properties, gene expression etc.).
-\item Let $N_X$ and $N_Y$ denote the sizes of population $X$ and $Y$.
+\item Let $X \in \{ \ldots \}$ and $Y \subseteq X$ denote pre- and postsynaptic population, respectively. Each population corresponds to separate classes of neurons (derived from anatomy, electrical properties, gene expression, phenomenology, etc.).
+\item Let lists $N_X$ and $N_Y$ denote the sizes of population $X$ and $Y$.
 \item Let $u \in \{ 1, \ldots , N_X \}$ and $v \in \{ 1, \ldots , N_Y \}$ denote pre- and postsynaptic neuron index, respectively.
 \item Let $\mathbf{r}_u \sim \widetilde{\mathbf{r}}_X$ denote the discretely sampled somatic location of neuron $u$,
 where $\widetilde{\mathbf{r}}_X$ describes the probability density function of somatic locations of population $X$ in space.
@@ -598,10 +600,12 @@ For small connection probabilities the expression can be approximated by $C_{YX}
 Connection probabilities may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{A}_Y$.
 \item Synaptic currents for each connection are given as $I_{\mathrm{syn}YX}(t)=\overline{G}_{\mathrm{syn}YX} f_{YX}(t)(V_\mathrm{m}(t)-E_{\mathrm{syn}X})$
 where $\overline{G}_{\mathrm{syn}YX}$ denotes the maximum synaptic conductance and $f_{YX}(t) \in [0, 1]$ one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}.
-$V_\mathrm{m}(t)$ denotes the postsynaptic potential and $E_{\mathrm{syn}X}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory).
-For simplicity we will assume that $\overline{G}_{\mathrm{syn}YX}$ is independent of $L$.
+$V_\mathrm{m}(t)$ denotes the postsynaptic membrane potential and 
+$E_{\mathrm{syn}X}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory).
+For simplicity we will assume that $\overline{G}_{\mathrm{syn}YX}$ is independent of position.
 We will also assume that connection weights $\overline{G}_{\mathrm{syn}YX}$ are static, 
-that is, there are no synaptic plasticity rules in place.
+that is, there are no synaptic plasticity rules or stochastic processes in place. 
+Weights can, however, be drawn from a distribution with probability density function $\widetilde{G}_{\mathrm{syn}YX}$
 \item Let the conduction delays resulting from presynaptic action potential generation time  to activation time of the synapse be greater than zero and randomly drawn from some function as $\Delta_{vu} \sim \widetilde{\Delta}_{YX}(t)$.
 For simplicity, we let conduction delays be independent of cell location and geometry.
 (Other use cases may also compute delays based on distance between pre- and post-synaptic units assuming a typical value for axonal action potential propagation speed.)
@@ -613,12 +617,14 @@ which we will assume give approximately zero direct contributions to the signals
 $\sum_Y \sum_{v=1}^{N_Y} \mathbf{F}^{\langle v \rangle} \mathbf{I}_\mathrm{m}^{\langle v \rangle}$ and similar for axial currents.
 $\mathbf{F}^{\langle v \rangle}$ here denotes a linear mapping of transmembrane currents of cell $v$ to a linearly dependent signal.
 \item The sequence of spike times $s_u(t) = \sum_k \delta (t - t_k)$ of each of each neuron $u \in X$ is recorded throughout the entire simulation interval $[0, t_\mathrm{sim} \rangle$.
-We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with spectrally `flat' spiking statistics (e.g., fixed-rate Poisson point processes) into the recurrently connected network.
+We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with spectrally `flat' spiking statistics (e.g., fixed-rate Poisson point processes) into the recurrently connected network. 
+\ehnote{gaa inn i detalj hvorfor?}
 \item We may store the weighted, directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic populations.
 This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full connectivity graph procedurally (at least statistically).
 Graph weights represent maximum synaptic conductances.
 The graph must also include the synaptic locations on the postsynaptic neurons. 
 We will hereby let compartment index $w$ equate synaptic location.
+By convention, all connections are outgoing from the soma (or alternatively the axon hillock compartment or similar). 
 \end{enumerate}
 
 
@@ -635,11 +641,14 @@ The black point markers along the $z$-axis denote locations of electrode contact
 The mean population-averaged firing rates are given shown in the legend.
 ({\bf D}) Per-population spike-count histograms with bin size \SI{5}{\milli\second}.
 ({\bf E}) Extracellular potentials.
-\ehnote{legg til panel labels}
+({\bf F}) Components of the current dipole moment along the $x,y,z-$axes.
+\ehnote{legg til panel labels.}
 }
 \label{fig:LFPy_network}
 \end{figure}
 
+
+In \Fref{fig:LFPy_network}
 
 
 \section{\blue{EH: Forward-model predictions from spiking point-neuron network models}}
@@ -688,7 +697,7 @@ Physics-based computational schemes for predicting signals such as the local fie
 As constraining activity in large scale multicompartment neuron network models are inherently difficult due to the large number of parameters and huge computational demands,
 point neurons (or other simplified neuron representations) are more-often used in simulation studies of network activity.
 But for forward-model predictions,
-at least a two-compartment neuron model is \textit{a priori} required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields.
+at least a two-compartment neuron model is required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields.
 
 One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was proposed by
 \cite**{Hagen2016},
@@ -726,8 +735,12 @@ Note that channel 1 is at the pial surface, so that channel 2 corresponds to a c
 
 
 One main assumption is that point-neuron network models can accurately capture observations present in experimental data gathered \textit{in vivo},
-including irregular firing patterns
-\ehnote{(Softky and Koch 1993; van Vreeswijk and Sompolinsky 1996; Amit and Brunel 1997; Shadlen and Newsome 1998), membrane-potential fluctuations (Destexhe and Pare 1999), asynchronous firing (Ecker et al. 2010; Renart et al. 2010; Ostojic 2014), correlations in neural activity (Gentet et al. 2010; Okun and Lampl 2008; Helias et al. 2013), self-sustained activity (Ohbayashi et al. 2003; Kriener et al. 2014), and realistic firing rates across laminar cortical populations (Potjans and Diesmann 2014).}
+including irregular firing patterns \ehtxt{\cite**{Softky1993,van_Vreeswijk1997,Amit1997,Shadlen1998}, 
+fluctuations of the membrane potential \cite**{Destexhe1999},
+asynchronous firing patterns \cite**{Renart2010,Ecker2010,Ostojic2014},
+correlations in neural activity \cite**{Okun2008,Gentet2010,Helias2013},
+self-sustained activity \cite**{Kriener2014},
+realistic firing rates across cortical lamina \cite**{Potjans2014}.}
 Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the biophysically detailed model variants (see e.g., \cite**{Roessert2016,Billeh_2020}).
 In the case of \cite**{Roessert2016} the effect of dendritic filtering on synaptic input currents is captured by computing an equivalent filter for each possible synapse location and type using a Green's function formalism \cite**{Wybo_2013}.
 The point neurons are modeled using a generalized integrate-and-fire (GIF) formalism,
