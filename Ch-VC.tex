@@ -16,12 +16,10 @@ must change accordingly. Likewise, currents that go inwards through a neural mem
 from distributed currents in the surrounding tissue, and must also be consistent 
 with changes in $V_\mathrm{e}$. 
 
-\ghnote{Lot }
-
 A fairly general starting point for VC theory is the current continuity equation (\fref{eq:Basics:continuity1}):
 \begin{equation}
 {\bf \nabla} \cdot {\bf i}_\text{t} = -C,
-\label{eq:VC:continuity1}
+\label{eq:VC:CSD0}
 \end{equation}
 defined previously in \Fref{chap:Basics}, which we will revisit and discuss thoroughly towards the end of this 
 chapter in \fref{sec:VC:CSD}. Before doing that, we will attempt to establish a basic and intuitive 
@@ -340,10 +338,9 @@ $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$,
 \fref{eq:VC:csds} reduces to \fref{eq:VC:pointsources}.
 
 
-\subsubsection{\blue{Derivation of the current-source density equation}}
+\subsection{\blue{Derivation of the current-source density equation}}
 \label{sec:VC:C2}
 \index{Current source density}
-
 Although the CSD equation (\fref{eq:VC:CSD1}) may seem intuitively reasonable, 
 we have so far used it more or less as a postulate. Its theoretical and practical basis
 was established in the early works by Charles Nicholson and coworkers
@@ -354,44 +351,41 @@ but we will walk the interested reader through the main steps.
 
 The starting point is the conservation law for the total current (density):
 \begin{equation}
-{\bf \nabla} \cdot {\bf i}_\text{tot} = 0.
+{\bf \nabla} \cdot {\bf i}_\text{tot} = 0, 
 \label{eq:VC:Sergey1}
 \end{equation}
+which can be defined at any point in space, 
+assuming that a continuity description is warranted (cf. \fref{sec:Basics:scale_jump1}).
+By "total current density", we simply mean that all current components 
+(ohmic, and capacitive when relevant) are included. 
 
-\gen{Hvorfor itot og ikke it som over?} 
-This equation is valid at the spatial scale sufficiently coarse-grained for it to be meaningful 
-to operate with continuous variables such as currents (cf. \fref{sec:Basics:scale_jump1}),
-while still sufficiently small for a reference volume to be either entirely inside or entirely outside
-of a membrane. 
-\ghnote{Er dette ok? Membranen er noe dritt. Foelte jeg burde hatt den med i siste setning, 
-men den er ikke helt med paa skala-notene vaare. Jeg regnet tidligere ut at $(10 nm)^3$ ECS bare inneholder 2 kaliumioner,
-og ikke alltid er stort nok til at vi kan stole paa en deterministisk kontinuumsbeskrivelse. Og der er vi jo  paa membrantykkelsen.... Saa jeg loeste dette her ved ikke aa nevne membranen. }
-As such, \fref{eq:VC:Sergey1} would not be practical to use for describing 
-large-scale tissue processes: We would have \sntxt{to} map up the detailed structure of brain tissue with high resolution, 
-to account for how the very definition of ${\bf i}_\text{tot}$ varies spatially 
-between being an intracellular, extracellular or transmembrane current.
+Depending on spatial position, ${\bf i}_\text{tot}$ will vary between being
+an intracellular, extracellular or membrane total current density, 
+For this reason, \fref{eq:VC:Sergey1} would not be practical to use when describing 
+large-scale tissue processes: We would have to map up the detailed structure of brain tissue with high resolution, 
+to account for how the very definition of ${\bf i}_\text{tot}$ varies spatially. 
 
-To get around this problem, we instead seek a version of \fref{eq:VC:Sergey1} 
+To get around this problem, we seek a version of \fref{eq:VC:Sergey1} 
 that is applicable on a larger spatial scale ($\gg 1 \, \si{\cubic\micro\metre}$). 
 The diameter of neural dendrites is typically $\sim 1 \,\si{\micro\metre}$, 
 which means that a reference volume much greater than this will enclose 
 the intracellular spaces of multiple neurites as well as the extracellular space between them. 
 The idea is to chose a sufficiently large spatial scale for brain tissue to be homogeneous 
-in the sense that any equally sized and arbitrarilly placed reference volume will contain roughly 
-the same intracellular to extracellular volume fraction (cf. \fref{sec:Basics:scale_jump2}). 
-The advantage with such a \textit{coarse-grained}\index{Coarse-grained} resolution
-\gen{"coarse-grained" har blitt brukt tidligere ...} 
-is that it introduces a bi-domain representation\index{Bi-domain model}, where we may think of brain tissue
-as consisting of two co-existing and interacting domains that are both defined 
-continuously over the whole tissue-space, rather than within their respective sub-spaces.
+in the sense that any equally sized and arbitrarily placed reference volume will contain roughly 
+the same intracellular to extracellular volume fractions (cf. \fref{sec:Basics:scale_jump2}). 
+The advantage with such a coarse-grained resolution\index{Coarse-grained} 
+is that it introduces a \textit{bi-domain representation}\index{Bi-domain model}, 
+where we may think of brain tissue as consisting of two co-existing and interacting domains 
+that are both defined continuously over the whole tissue-space, 
+rather than within their respective sub-spaces.
 
 To proceed, we define the tissue-coarse grained current $\left<{\bf i}_\text{tot}\right>$ 
-as the total current when averaged over the above introduced reference volume. 
+as the total current when averaged over the above introduced coarse-grained reference volume. 
 Since current conservation must apply also at this larger spatial scale, we have that:
 
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle = 0.
-\label{eq:Basics:Sergey2}
+\label{eq:VC:Sergey2}
 \end{equation}
 
 The next trick is to perform the averaging separately over 
@@ -399,33 +393,110 @@ the cellular (c) and extracellular (e) domains of the reference volume, so that 
 $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$, 
 where the boundary of the cellular domain(s) run on the external surface of the cellular membranes,
 so that $\langle{\bf i}_\text{tot}\rangle_\text{c}$ is the cellular current averaged over the cytoplasm \emph{and} membrane.
-With this, \fref{eq:Basics:Sergey2} becomes: 
-\ghnote{Vi har styret litt med dette, men jeg mener aa ha forstaatt Sergey naa. Cellular betyr intracellular + membrane. Dette gir jo mening jmf Gauss divergesteorem: Divergensen av det inni er det som kommer ut. Sergey skriver det ogsaa: averaging over cytoplasm and membrane.}
+With this, \fref{eq:VC:Sergey2} becomes: 
 
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  + {\bf \nabla}\cdot \langle{\bf i}_\text{tot}\rangle_\text{e} = 0
-\label{eq:Basics:Sergey3}
+\label{eq:VC:Sergey3}
 \end{equation}
 
 In \citeasnoun**[Appendix A]{Gratiy2017} it was shown that the divergence of the coarse-grained current density 
-over the cellular domain (i.e., the first term on the right \gen{left?} in \fref{eq:Basics:Sergey3}) 
+over the cellular domain (i.e., the first term on the left in \fref{eq:VC:Sergey3}) 
 can be expressed as a sum of transmembrane currents, 
-i.e., as a current source density ($C$), like in \fref{eq:VC:CSD1}. 
-Further, if we rename the average current running extracellularly through tissue 
-$\langle{\bf i}_\text{tot}\rangle_\text{e}$ to ${\bf i}_\text{t}$, 
-we see that \fref{eq:Basics:Sergey3} becomes identical to  \fref{eq:VC:CSD1}. 
+i.e., as a current source density ($C_\mathrm{all}$), like in \fref{eq:VC:CSD1}:
 
-Importantly, ${\bf i}_\text{t}$ denotes the average current running extracellularly through tissue, 
+\begin{equation}
+{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  = C_\mathrm{all}.
+\label{eq:VC:Sergey4}
+\end{equation}
+The subfix "all" indicates that the current source density includes all membrane sources present in the tissue, 
+and the reason for introducing it will become clear in the net subsection, where we compare 
+the theoretically derived CSD equation with the version used in VC theory. 
+
+Further, we define the average current density in the extracellular part of the tissue as, 
+\begin{equation}
+\langle{\bf i}_\text{tot}\rangle_\text{e} = {\bf i}_\text{e}.
+\label{eq:VC:Sergey5}
+\end{equation}
+where we let it be implicit that ${\bf i}_\text{e}$ is defined on a coarse-grained tissue scale. 
+Importantly, ${\bf i}_\text{e}$ denotes the average current running extracellularly through tissue, 
 defined as extracellular current per unit \textit{tissue} cross section area 
 and not per \textit{extracellular} cross section area 
 (although it only runs through the extracellular parts of this cross section area). 
-Related to this, $\sigma_\text{t}$ in \fref{eq:VC:CSD3} denotes the average conductivity 
-experienced by the current ${\bf i}_\text{t}$. 
-As this current will face cellular obstacles, 
-and is restricted to run only through the extracellular parts of the tissue, 
-$\sigma_\text{t}$ is generally lower than the conductivity of the extracellular saline solution 
-(see \fref{chap:Sigma} for further discussion). 
+
+
+With the definitions in \fref{eq:VC:Sergey4} and \fref{eq:VC:Sergey5}, 
+\fref{eq:VC:Sergey3} becomes the CSD equation:
+\begin{equation}
+\nabla \cdot {\bf i_\mathrm{e}}({\bf r}) = - C_\mathrm{all}({\bf r}).
+\label{eq:VC:CSDie}
+\end{equation}
+The interpretation of this CSD equation is such that if all the sources $C_\mathrm{all}$ are known, 
+then ${\bf i}_\text{e}$ is the current density in the (exclusively) extracellular part of tissue. 
+
 \gen{Betyr det at it betyr noe annet her enn tidligere i kapitlet?}
+\ghnote{Ja, du hadde et poeng der. Naa heter den $i_e$ og jeg maatte skrive et nytt delkapittel.}
+
+
+\subsection{\blue{Tissue currents versus extracellular currents}}
+\label{sec:VC:C3}
+\index{Current source density}
+If we compare \fref{eq:VC:CSDie} to the similar \fref{eq:VC:CSD1} used in VC theory:
+\begin{equation}
+\nabla \cdot {\bf i_\mathrm{t}}({\bf r}) = - C({\bf r}).
+\label{eq:VC:CSDit}
+\end{equation}
+we see that they differ in that the former contains ${\bf i}_\text{e}$ and $C_\mathrm{all}$, 
+where the latter contains ${\bf i}_\text{t}$ and $C$. 
+
+The explanation behind this discrepancy 
+is that in the theoretical derivation of \fref{eq:VC:CSDie}, $C_\mathrm{all}$ by definition
+includes all current sources present in the tissue. Consequently,
+the remaining tissue currents exist exclusively in the extracellular subvolume of tissue,
+and were therefore denoted ${\bf i}_\text{e}$.
+
+In contrast, when performing forward modeling using the two-step MC+VC scheme, 
+we generally have knowledge only of the sources ($C$) that we ourselves have simulated
+and impressed onto the tissue. If we do not want to limit VC studies to scenarios where
+$C$ accounts for absolutely all membrane currents present in the tissue, we may instead assume
+that some (unknown) fraction of the tissue currents evoked by $C$ will cross other (not simulated) 
+cellular membranes, so that (i) they travel partially through intracellular pathways (${\bf i}_\text{t} \neq {\bf i}_\text{e}$), 
+and thus (ii) evoke(unknown) current sources additional to those simulated ($C \neq C_\text{all}$).
+Hence, $C$ in \fref{eq:VC:CSDit} will generally not include all sources present in the tissue, 
+and additional (e.g., ephaptically evoked) sources are somehow accounted for
+by ${\bf i}_\text{t}$ not being a purely extracellular current. 
+
+As we have seen, the tissue current is normally assumed to be linear and ohmic, 
+${\bf i}_\text{t} = \sigma_\text{t} \nabla V_\text{e}$. Assuming that this is true, 
+the effective tissue conductivity, $\sigma_\text{t}$, can be found experimentally 
+by measuring gradients in $V\text{e}$ evoked by a controlled current injection into the tissue.
+In these measurements no assumptions need to be made as to whether the
+current pathways between the stimulus and measurement electrode
+are purely extracellular or partially intracellular, although there is strong experimental evidence
+that the measured magnitude of $\sigma_\text{t}$ reflects that a fair fraction
+of the tissue currents take intracellular pathways \cite**{Okada1994}. 
+
+In conclusion, to use VC theory, we do not have to make any assumption
+regarding the pathways taken by the currents evoked by the simulated sources $C$. 
+However, when assuming the ohmic relationship ${\bf i}_\text{t} = \sigma_\text{t} \nabla V_\text{e}$, 
+we implicitly make the assumption that both the intracellular and extracellular 
+components of the tissue currents are linearly dependent on the extracellular
+potential gradient $\nabla V_\text{e}$.
+
+\ghnote{Og hva skal man si om det? Det er sikkert ok, men laater knappest som noen selvfoelge.}
+
+%\begin{ennumerate}
+%\item The tissue currents do not cross any membranes. In this case, they will (i)
+%stay confined to the extracellular space (${\bf i_\mathrm{t}} = {\bf i_\mathrm{e}}$), 
+%and (ii) will not generate any sources additional to those simulated ($C = C_\text{all}$).
+%\Fref{eq:VC:CSDsome} and \fref{eq:VC:CSDall} then become identical.
+%
+%\item The tissue currents do cross neural membranes. In this case, they will (i) 
+%\emph{not} stay confined to the extracellular space (${\bf i_\mathrm{t}} \neq {\bf i_\mathrm{e}}$), 
+%but will (ii) generate (unknown) membrane sources in addition to those simulated ($C \neq C_\text{all}$).
+%\end{ennumerate}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
