@@ -32,7 +32,7 @@ This is computationally demanding, even \ehtxt{using a more computationally} eff
 
 \ehtxt{\sout{We first briefly introduce an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).}}
 \ehnote{noen vill ha sammenlikning av performance foer beskrivelsen. Er ikke overbevist om at det gir mening}\ehtxt{In \Fref{sec:Schemes:comparison} we compare between different methods based on the MC+VC methodology that may be used for signal predictions.}
-Then, we present computational schemes for the standard MC+VC approach, based on multicompartment neural models (Section \ref{sec:Schemes:LFPy}), and follow up with different strategies that may be applied to reduce the computational cost when computing the neurodynamics using spiking point-neuron models or population-rate models (Sections \ref{sec:Schemes:HybridLFPy}, \ref{sec:Schemes:KernelLFPy}, \ref{sec:Schemes:proxies}). 
+Then, we present computational schemes for the standard MC+VC approach, based on MC neural models (Section \ref{sec:Schemes:LFPy}), and follow up with different strategies that may be applied to reduce the computational cost when computing the neurodynamics using spiking point-neuron models or population-rate models (Sections \ref{sec:Schemes:HybridLFPy}, \ref{sec:Schemes:KernelLFPy}, \ref{sec:Schemes:proxies}). 
 \ehtxt{Towards the end of this Chapter, we briefly introduce an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).}
 
 \ehnote{For meg gir det mer mening og organisere dette i reduksjonistisk rekkefoelge: (1) self-consistent; (2) MC+VC; (3) point-neuron spiking + MC + VC; (4) firing-rate + MC + VC; (5) Proxies.
@@ -71,9 +71,9 @@ We will \ehtxt{introduce} this in \Fref{chap:Eldiff}, where we consider electrod
 
 %%%%%%
 
-\section{\ehnote{}\ehtxt{Forward-model predictions from multicompartment neuron models}}
+\section{\ehnote{}\ehtxt{Forward-model predictions from MC neuron models}}
 \label{sec:Schemes:LFPy}
-\index{Multicompartment models}
+\index{MC models}
 
 With the exception of the simplest ball-and-stick-like models, models aiming to mimic the dynamics of a particular neuron or neural system are generally too complex to be solved analytically (cf. \Fref{chap:Neuron}). 
 Thus the set of partial differential equations (PDEs) representing voltage- and concentration-dependent ion channels, synapses, plasticity, neuronal geometry etc. of the full model will have to be solved numerically on computers. The numerical solution of geometrically detailed cable models entails a discretization of the geometry into multiple compartments (hence MC), wherein the states of variables and their derivatives are estimated on a temporal grid which may be fixed or irregular. 
@@ -609,7 +609,7 @@ Weights can, however, be drawn from a distribution with probability density func
 \item Let the conduction delays resulting from presynaptic action potential generation time  to activation time of the synapse be greater than zero and randomly drawn from some function as $\Delta_{vu} \sim \widetilde{\Delta}_{YX}(t)$.
 For simplicity, we let conduction delays be independent of cell location and geometry.
 (Other use cases may also compute delays based on distance between pre- and post-synaptic units assuming a typical value for axonal action potential propagation speed.)
-\item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathbb{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed.
+\item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' MC neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathbb{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed.
 Here $X$ and $Y$ may be used interchangeably, however,
 presynaptic populations may also include, remote populations, point processes, external stimuli and similar,
 which we will assume give approximately zero direct contributions to the signals predicted by the full recurrent network model.
@@ -632,7 +632,7 @@ By convention, all connections are outgoing from the soma (or alternatively the 
 \begin{center}
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-network.pdf}
 \end{center}
-\caption{\textbf{Stylized two-population multicompartment neuron network with predictions of extracellular potentials.}
+\caption{\textbf{Stylized two-population MC neuron network with predictions of extracellular potentials.}
 ({\bf A}) Cell and electrode geometry. The network is constructed of one excitatory (`E') and one inhibitory (`I') population.
 Only a subset of cells are shown from each population.
 The black point markers along the $z$-axis denote locations of electrode contact points with separation \SI{50}{\micro\metre}. 
@@ -659,14 +659,14 @@ In \Fref{fig:LFPy_network}
 %%\sout{Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)}
 
 Many biophysically detailed and phenomenological models of individual neurons and neuronal networks that have been developed in the past have incorporated spatial geometry of the neurons at various level of detail.
-To represent and simulate the dynamics of such neuron models using computers the multicompartment cable formalism (\Fref{chap:Neuron}) remains a common choice.
+To represent and simulate the dynamics of such neuron models using computers the MC cable formalism (\Fref{chap:Neuron}) remains a common choice.
 For the purpose of predicting extracellular electric or magnetic measures of neural activity,
-the multicompartment formalism (or variants thereof) is \emph{a priori} required in order to predict the spatial distribution of transmembrane or axial currents required for the different forward models derived using volume conductor theory (\Fref{chap:VC}).
+the MC formalism (or variants thereof) is \emph{a priori} required in order to predict the spatial distribution of transmembrane or axial currents required for the different forward models derived using volume conductor theory (\Fref{chap:VC}).
 
-Biophysically detailed multicompartment neuron models (and recurrently connected networks thereof) are however computationally costly due to the large number of associated state variables that must be predicted,
+Biophysically detailed MC neuron models (and recurrently connected networks thereof) are however computationally costly due to the large number of associated state variables that must be predicted,
 resulting in long simulation times on typical hardware.
 For recurrent neuronal network simulations with more than a few hundred biophysically detailed neurons, distributed high-performance computing (HPC) facilities are generally required,
-unless the neuronal simulation software may utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.
+unless the neuronal simulation software can utilize some other form of hardware acceleration as facilitated by desktop graphical processing units (GPUs) for instance.
 
 As the most common observables used to experimentally assess evoked and ongoing neuronal activity have historically been timings of somatic action potentials (`spikes' - see \Fref{chap:Spikes}) and/or voltage traces,
 many (if not most) studies aiming to explain neuronal population dynamics at the level of spikes and somatic voltages have deliberately chosen much-simpler mathematical abstractions of the individual neurons.
@@ -677,24 +677,25 @@ Point neuron models as a consequence also then carries no spatial information ab
 The individual point neurons (or \emph{point processes}) may however be assigned locations corresponding to brain area, cortical layer, feature space (e.g., desired orientation tuning) or similar,
 which may facilitate connection routines that depend on location and distance between the neurons.
 
-Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model \cite**{Lapicque1907,Brunel_2007}.
+Many point-neuron models describe at a minimum the sub-threshold membrane potential and may include some form of additional non-linearity representing times of emitted spikes and corresponding periods of refractoriness such as the leaky integrate-and-fire neuron model \cite**{Lapicque1907,Brunel_2007}. 
+\ehtxt{Quite often, the point neuron formalism do not account for the shape of the action potential itself, as the membrane voltage is simply reset to a predetermined sub-threshold value.}
 We will here point out that describing the somatic voltage is not a strict requirement for point neurons in the present context - they may very well be some statistical model for spike time generation as function of presynaptic activity or some other stimuli.
 
-Their mathematical simplicity lends point neurons to be implemented and solved very efficiently in comparison to biophysically detailed multicompartment neuron models.
-As a consequence, dynamics of recurrently connected networks of spiking point neurons can be studied at a much grander scale and pace than similarly sized networks of multicompartment neuron models.
-As typical point neurons also have very few intrinsic parameters compared to any multicompartment neuron model,
+Their mathematical simplicity lends point neurons to be implemented and solved very efficiently in comparison to biophysically detailed MC neuron models.
+As a consequence, dynamics of recurrently connected networks of spiking point neurons can be studied at a much grander scale and pace than similarly sized networks of MC neuron models.
+As typical point neurons also have very few intrinsic parameters compared to any MC neuron model,
 this has also allowed for separating effects of network connectivity from the cellular dynamics
 explaining observed phenomena such as asynchronous or synchronous, regular and irregular spiking activity also using rigorous mathematical analysis, see e.g., \cite**{Brunel2000}.
 
 Linking activity of point neurons and point neuron network models to electric or magnetic extracellular measures of activity however poses a problem.
 One could attempt to extract equivalent transmembrane currents (synaptic, ionic, capacitive etc.) and quickly come to the conclusion that all currents \emph{must} sum to zero in the point(s) due to charge conservation.
 As such there can be no electric or magnetic signals arising from point neurons or networks thereof.
-Physics-based computational schemes for predicting signals such as the local field potential (LFP) is therefore \textit{a priori} required.
+Physics-based computational schemes for predicting signals such as the local field potential (LFP) is therefore required.
 
 \subsection{The hybrid scheme}
 \label{chap:LFPy:hybrid}
 
-As constraining activity in large scale multicompartment neuron network models are inherently difficult due to the large number of parameters and huge computational demands,
+As constraining the activity in large scale MC neuron network models is inherently difficult due to the large number of parameters and huge computational demands,
 point neurons (or other simplified neuron representations) are more-often used in simulation studies of network activity.
 But for forward-model predictions,
 at least a two-compartment neuron model is required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields.
@@ -702,36 +703,41 @@ at least a two-compartment neuron model is required for it to account for spatia
 One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was proposed by
 \cite**{Hagen2016},
 referred to as a hybrid scheme.
-The scheme is hybrid in the sense that the common-place scheme of using multi-compartment neuron models in conjunction with electrostatic forward models is used for signal prediction,
+The scheme is hybrid in the sense that the common-place scheme of using MC neuron models in conjunction with electrostatic forward models is used for signal prediction,
 while it assumes that simulations of the actual network activity can be done independently using neuron models with arbitrary levels of detail, including point processes (LIF neurons etc.).
 In a latter step,
-generated spike times are used for activation times of synapses distributed onto multicompartment neuron models which allows using the standard computational scheme for predicting extracellular signals.
+generated spike times are used for activation times of synapses distributed onto MC neuron models which allows using the standard computational scheme for predicting extracellular signals.
 We will next go through the number of assumptions and methodology underlying this scheme in detail.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=\columnwidth]{Figures/Ch-LFPy/hybridmodel}
-\caption{\ehnote{Hagen 2016 caption:}
-Overview of the hybrid LFP modeling scheme for a cortical microcircuit model.
-(A) Sketch of the point-neuron network representing a
-\SI{1}{\milli\metre} patch of early sensory cortex (adapted from Potjans2014).
-The network consists of 8 populations of LIF neurons, representing excitatory (E) and inhibitory neurons (I) in cortical layers 2/3, 4, 5, and 6.
-External input is provided by a population of TC neurons and cortico-cortical afferents.
-The color coding of neuron populations is used consistently throughout this paper.
-Red arrows: excitatory connections. Blue arrows: inhibitory connections.
-See Tables 1-2, 5-6 for details on the network model.
-(B) Spontaneous (t < \SI{900}{\milli\second}) and stimulus-evoked spiking activity (synchronous firing of TC neurons at time $t = $\SI{900}{\milli\second}, denoted by thin vertical line) generated by the point-neuron network model shown in panel A, sampled from all neurons in each population. Each dot represents the spike time of a particular neuron.
-(C) Populations of LFP-generating multicompartment model neurons with reconstructed, layer- and cell-type specific morphologies.
-Cells are distributed within a cylinder spanning the cortex. Layer boundaries are marked by horizontal black lines (at depths $z$ relative to cortex surface $z = 0$). Only one representative neuron for each population is shown
-(see Fig. 4 for a detailed overview of cell types and morphologies).
-Sketch of a laminar recording electrode (gray) with 16 contacts separated by \SI{100}{\micro\metre} (black dots).
-(D) Depth-resolved LFP traces predicted by the model (cf. Tables 3 and 4).
-Note that channel 1 is at the pial surface, so that channel 2 corresponds to a cortical depth of \SI{100}{\micro\metre} and so forth.
+\caption{Example application of the hybrid scheme to a cortical microcircuit model in \ehnote{citeasnoun Hagen2016}. 
+({\bf A}) Sketch of point-neuron network w. 8 cortical  populations spanning layers 2/3, 4, 5 and 6, with one excitatory (E) and inhibitory (I) population each. 
+The excitatory thalamocortical (TC) population projects mainly to layer 4 and layer 6. 
+({\bf B}) Population spike raster plots. The TC population is activated at $t=900~$\si{ms} denoted by vertical line.
+({\bf C}) MC neuron models, cortical column geometry and recording electrode geometry used for LFP predictions using the hybrid scheme.
+({\bf D}) Predicted LFP signal resulting from synaptic activations on the postsynaptic MC neuron models.
 }
 \label{fig:LFPy:hybridmodel}
 \end{center}
 \end{figure}
-
+%\ehnote{Hagen 2016 caption:}
+%Overview of the hybrid LFP modeling scheme for a cortical microcircuit model.
+%(A) Sketch of the point-neuron network representing a
+%\SI{1}{\milli\metre} patch of early sensory cortex (adapted from Potjans2014).
+%The network consists of 8 populations of LIF neurons, representing excitatory (E) and inhibitory neurons (I) in cortical layers 2/3, 4, 5, and 6.
+%External input is provided by a population of TC neurons and cortico-cortical afferents.
+%The color coding of neuron populations is used consistently throughout this paper.
+%Red arrows: excitatory connections. Blue arrows: inhibitory connections.
+%See Tables 1-2, 5-6 for details on the network model.
+%(B) Spontaneous (t < \SI{900}{\milli\second}) and stimulus-evoked spiking activity (synchronous firing of TC neurons at time $t = $\SI{900}{\milli\second}, denoted by thin vertical line) generated by the point-neuron network model shown in panel A, sampled from all neurons in each population. Each dot represents the spike time of a particular neuron.
+%(C) Populations of LFP-generating MC model neurons with reconstructed, layer- and cell-type specific morphologies.
+%Cells are distributed within a cylinder spanning the cortex. Layer boundaries are marked by horizontal black lines (at depths $z$ relative to cortex surface $z = 0$). Only one representative neuron for each population is shown
+%(see Fig. 4 for a detailed overview of cell types and morphologies).
+%Sketch of a laminar recording electrode (gray) with 16 contacts separated by \SI{100}{\micro\metre} (black dots).
+%(D) Depth-resolved LFP traces predicted by the model (cf. Tables 3 and 4).
+%Note that channel 1 is at the pial surface, so that channel 2 corresponds to a cortical depth of \SI{100}{\micro\metre} and so forth.
 
 
 One main assumption is that point-neuron network models can accurately capture observations present in experimental data gathered \textit{in vivo},
@@ -741,22 +747,22 @@ asynchronous firing patterns \cite**{Renart2010,Ecker2010,Ostojic2014},
 correlations in neural activity \cite**{Okun2008,Gentet2010,Helias2013},
 self-sustained activity \cite**{Kriener2014},
 realistic firing rates across cortical lamina \cite**{Potjans2014}.}
-Similarly, reduced models derived from biophysically detailed multicompartment neuron models has shown that point-neuron network models can accurately capture spiking statistics of the biophysically detailed model variants (see e.g., \cite**{Roessert2016,Billeh_2020}).
+Similarly, reduced models derived from biophysically detailed MC neuron models has shown that point-neuron network models can accurately capture spiking statistics of the biophysically detailed model variants (see e.g., \cite**{Roessert2016,Billeh_2020}).
 In the case of \cite**{Roessert2016} the effect of dendritic filtering on synaptic input currents is captured by computing an equivalent filter for each possible synapse location and type using a Green's function formalism \cite**{Wybo_2013}.
 The point neurons are modeled using a generalized integrate-and-fire (GIF) formalism,
-and the linear filters applied to the synaptic currents result in  well-preserved post-synaptic potentials in the point neuron. \ehnote{perhaps I'll leave this last point out.}
+and the linear filters applied to the synaptic currents result in  well-preserved post-synaptic potentials in the point neuron.
 
 Another main assumption underlying the hybrid scheme is that spatial information, that is, neuronal geometry and locations of synapses can be incorporated for the purpose of computing extracellular signals,
 based on rules derived from available anatomical knowledge.
 This assumption entails that a point-neuron network population representing for instance a set of layer 5 pyramidal cells,
-will be represented by a corresponding population of geometrically detailed multicompartment neuron models,
+will be represented by a corresponding population of geometrically detailed MC neuron models,
 placed at a cortical depth and density in accordance with the overall network size and available anatomical constraints.
 Similarly, incoming synaptic connections onto the same point-neuron population from each presynaptic population,
 for instance layer 4 inhibitory interneurons,
 should be positioned onto the layer 5 pyramidal cell geometries according to rules derived from available data on such connections,
 while also preserving the typical number of incoming synapses (aka synaptic in-degree).
 
-In the original application of the hybrid scheme \cite**{Hagen2016} to a point-neuron network model representing a generic cortical microcircuit \cite**{Potjans2014},
+In the original application of the hybrid scheme \cite**{Hagen2016} to a point-neuron network model representing a generic cortical microcircuit \cite**{Potjans2014} \ehtxt{illustrated in \Fref{fig:LFPy:hybridmodel}},
 a number of parameters of the network model were inherited by the  forward-modeling step.
 In order to preserve synaptic currents,
 the same current-based synapse type (see \Fref{sec:Ch-Neuron:current-based-syn}) with an exponentially decaying temporal kernel were used,
@@ -765,18 +771,21 @@ and with activation delays drawn from the same conduction delay distribution as 
 Synapse sites on the postsynaptic morphologies were derived from a connectivity dataset resolving numbers of synapses per layer between 16 different excitatory and inhibitory neuron types spanning layers 2/3, 4, 5 and 6.
 The total numbers of synapses per connection (from each presynaptic to postsynaptic population) were preserved.
 Furthermore, membrane time constants of the reconstructed morphologies which utilized purely passive compartments throughout were set similar to those of the point neurons.
-\ehnote{kunne lagt til noe om ekspandering av enkelte punktnevronpopulasjoner til forskjellige celletyper som vi gjorde den gang.}
 
 
-\subsubsection{Hybrid scheme -- step by step}
-\ghnote{Tanke: Er det mulig aa heller skrive dette som en kokebokoppskrift - punktlister for Step 1, Step 2, og Step 3 (som vel er bankers) foerst, og saa ta all diskusjon om eventuell validitet til slutt? Slik det staar blir det saapass mange forbehold introdusert underveis at det er lett aa miste traaden. Den foerste store lista (under) er ei liste over noe som egentlig ikke brukes direkte i hybrid-skjemaet. Den brukes kun under en validering som gaar ut paa aa bytte ut Step 1 med en ordentlig MC-simulering? Jeg tenker at kokebokoppskriften boer komme i forgrunnen. }
+\subsubsection{Hybrid scheme -- a cookbook}
+\ghnote{Tanke: Er det mulig aa heller skrive dette som en kokebokoppskrift - punktlister for Step 1, Step 2, og Step 3 (som vel er bankers) foerst, og saa ta all diskusjon om eventuell validitet til slutt? Slik det staar blir det saapass mange forbehold introdusert underveis at det er lett aa miste traaden. Den foerste store lista (under) er ei liste over noe som egentlig ikke brukes direkte i hybrid-skjemaet. Den brukes kun under en validering som gaar ut paa aa bytte ut Step 1 med en ordentlig MC-simulering? Jeg tenker at kokebokoppskriften boer komme i forgrunnen.}
+\ehnote{MC-nettverk er naa en ny del som kommer foer dette. OK?}
 
-One key feature of the this hybrid scheme application as devised by \cite**{Hagen2016} was an assumed-to-be \emph{linear} spike-LFP relationship, that is, one spike generated by a network subpopulation would result in a fixed contribution to the extracellular signal resulting from synaptic and transmembrane currents on postsynaptic multicompartment neurons.
+One key feature of the this hybrid scheme application as devised by \cite**{Hagen2016} was an assumed-to-be \emph{linear} spike-LFP relationship, that is, 
+one spike generated by a \ehtxt{point neuron in any} network subpopulation would result in a fixed \ehtxt{(additive)} contribution 
+to the extracellular signal resulting from synaptic and transmembrane currents on postsynaptic MC neurons.
 So how can we make an argument about the validity of said scheme,
 e.g., in the presence of \emph{non-linear} synaptic and ion-specific channels?
-Conceptually, it is perhaps best to \emph{first} consider a recurrently connected network of biophysically detailed neurons which allows for computing extracellular signals,
+Conceptually, it is perhaps best to \emph{first} consider the recurrently connected network of biophysically detailed neurons which allows for computing extracellular signals 
+\ehtxt{introduced in \Fref{sec:Schemes:networkLFPy},}
 and that the aforementioned point-neuron network model represents something of an idealized scenario obtained by reducing biophysical detail in a systematic manner.
-\ehtxt{Here, we choose to base this on the MC neuron network described in \Fref{sec:Schemes:networkLFPy}.}
+\ehtxt{Here, we choose to \ehtxt{apply this hybrid scheme idea} on the MC neuron network described in \Fref{sec:Schemes:networkLFPy}.}
 
 %Let us first define some properties of the biophysically detailed model, as general as possible. 
 %For compactness, 
@@ -802,7 +811,7 @@ and that the aforementioned point-neuron network model represents something of a
 %\item Let the conduction delays resulting from presynaptic action potential generation time  to activation time of the synapse be greater than zero and randomly drawn from some function as $\Delta_{vu} \sim \widetilde{\Delta}_{YX}(t)$.
 %For simplicity, we let conduction delays be independent of cell location and geometry.
 %(Other use cases may also compute delays based on distance between pre- and post-synaptic units assuming a typical value for axonal action potential propagation speed.)
-%\item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' multicompartment neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathbb{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed.
+%\item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' MC neuron formalism such that their transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle v \rangle}(t)$ or axial currents $\mathbb{I}_\mathrm{a}^{\langle v \rangle}(t)$ can be computed.
 %Here $X$ and $Y$ may be used interchangeably, however,
 %presynaptic populations may also include, remote populations, point processes, external stimuli and similar,
 %which we will assume give approximately zero direct contributions to the signals predicted by the full recurrent network model.
@@ -818,14 +827,13 @@ and that the aforementioned point-neuron network model represents something of a
 %We will hereby let compartment index $w$ equate synaptic location.
 %\end{enumerate}
 
-
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_A.pdf}
 \includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_B.pdf}
 \end{center}
 \caption{\textbf{Disassociation between simulations of network activity and extracellular potentials.}
-({\bf A}) Illustration of self-consistent multicompartment neuron network simulation where the primary output are single-unit spike trains (bottom left),
+({\bf A}) Illustration of self-consistent MC neuron network simulation where the primary output are single-unit spike trains (bottom left),
 which is in turn stored in a database or file (bottom).
 Extracellular potentials can optionally be computed,
 here illustrated by the laminar probe outlined in gray.
@@ -838,10 +846,8 @@ The synaptic currents and associated transmembrane currents on the postsynaptic 
 \label{fig:LFPy_hybrid}
 \end{figure}
 
-
-
-
-At this point one could destroy every connection of the recurrently connected network,
+\ehtxt{As illustrated in \Fref{fig:LFPy_hybrid}, one could}
+at this point could destroy every connection of the recurrently connected network,
 load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage,
 reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times
 $\left(s_u(t) \ast \delta(t-\Delta_{vu})\right)$
@@ -861,7 +867,14 @@ One could even do each single-cell simulation serially.
 The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials, etc.
 \end{enumerate}
 
-For the purpose of predicting extracellular signals \emph{only}, let us now do some model simplification -- assuming we can preserve the spatiotemporal distributions of transmembrane currents on average. We will also relax the requirement \ghnote{Har dette blitt satt opp som et requirement som kan relaxes? We will not require that ....?} that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all): \ghnote{Kan det beskrives tydeligere hva vi her faar en liste over. Det som foelger er MC modellen vi skal mate spike-times inn i.}
+For the purpose of predicting extracellular signals \emph{only}, 
+let us now do some model simplification -- assuming we can preserve the \ehtxt{overall} spatiotemporal distributions of transmembrane currents. 
+We will\ehtxt{, however,} relax the requirement 
+%\ghnote{Har dette blitt satt opp som et requirement som kan relaxes? We will not require that ....?} 
+that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all). 
+%\ghnote{Kan det beskrives tydeligere hva vi her faar en liste over. Det som foelger er MC modellen vi skal mate spike-times inn i.}
+\ehtxt{With that in mind, we will approximate the different constituents of the model that may give \textit{non-linear} contributions to the extracellular signal via the following steps:}
+\ehnote{@GH: OK?}
 
 \begin{enumerate}
 \item Approximate conductance-based synapses by equivalent current-based synapses:
@@ -875,23 +888,41 @@ where $\langle V_\mathrm{m}(t) \rangle$ denotes the spatiotemporally averaged po
 We here use the sub-fix $YX$ notation to emphasize that some of these parameters may be connection specific.
 We would also note that some rescaling of current amplitudes \emph{may} be required for certain synapse instances if the postsynaptic targets are characterized by very high input impedances (e.g., oblique dendrites).
 
-\item In absence of conductance-based synapses, incorporate the \emph{effective membrane conductance} $G_\mathrm{eff}$.
-\ghnote{Incorporate faar det til aa virke som om denne settes inn blant andre. Er det bedre med noe ala: "replace all present membrane conductances in terms of a single effective membrane conductance?"} \ghtxt{\sout{Ignoring other conductances which may be present (active ion channels etc.) except the passive leak conductance, } Assuming it depends only on synaptic currents and the passive leakage current,} the total membrane conductance per postsynaptic compartment $w$ is
+\item In absence of conductance-based synapses, incorporate the \emph{effective membrane conductance} $G_\mathrm{eff}$ 
+\ehtxt{which amounts to a modified passive leak conductance}.
+%\ghnote{Incorporate faar det til aa virke som om denne settes inn blant andre. Er det bedre med noe ala: "replace all present membrane conductances in terms of a single effective membrane conductance?"} 
+%\ghtxt{ %\sout{Ignoring other conductances which may be present (active ion channels etc.) except the passive leak conductance, } 
+Assuming the total membrane conductance depends only on synaptic currents and the passive leakage current,
+the total membrane conductance per postsynaptic compartment $w$ is
 \begin{equation}
-G_{\mathrm{tot}}(t) = G_L + \sum_X \sum_{u \subset X} \overline{G}_{\mathrm{syn}YX} \left( f_{YX} \ast s_u \ast \delta(t-\Delta_{vu}) \right)(t)
+G_{\mathrm{tot}}(t) = \overline{G}_\mathrm{L} + \sum_X \sum_{u \subset X} \overline{G}_{\mathrm{syn}YX} \left( f_{YX} \ast s_u \ast \delta(t-\Delta_{vu}) \right)(t)
 \end{equation}
-where $G_L \coloneq g_L A_w$ is the total leak conductance from the specific conductivity $g_L$ and compartment area $A_w$, $s_u(t)$ the sequence of presynaptic spikes and $\Delta_{vu}$ the conduction delay. The double sum over presynaptic populations $X$ and units $u \in X$ \ghtxt{\sout{imply}implies} that each presynaptic unit targeting the compartment is accounted for. Assuming a fixed average presynaptic spike rate $\langle \nu_u \rangle \coloneq \Delta t^{-1} \int_t^{t+\Delta t} s_u(t) dt$ for any time duration $\Delta t$ and a normalized delay distribution ($\int_0^\infty \widetilde{\Delta}_{YX}(t) dt \coloneq 1$), the time-averaged effective conductance is approximately
+where $\overline{G}_\mathrm{L} \coloneq \overline{g}_\mathrm{L} A_w$ is the total leak conductance from the specific conductivity $\overline{g}_\mathrm{L}$ and compartment area $A_w$, 
+$s_u(t)$ the sequence of presynaptic spikes and $\Delta_{vu}$ the conduction delay. 
+The double sum over presynaptic populations $X$ and units $u \in X$ implies that each presynaptic unit targeting the compartment is accounted for. 
+Assuming a fixed average presynaptic spike rate $\langle \nu_u \rangle \coloneq \Delta t^{-1} \int_t^{t+\Delta t} s_u(t) dt$ for any time duration $\Delta t$ and a normalized delay distribution ($\int_0^\infty \widetilde{\Delta}_{YX}(t) dt \coloneq 1$), 
+the time-averaged effective conductance is approximately
 \begin{equation}
-G_\mathrm{eff} \coloneq \langle G_\mathrm{tot}(t) \rangle \approx G_L + \sum_X \sum_{u \subset X} \langle \nu_u \rangle \overline{G}_{\mathrm{syn}YX} \int_0^\infty f_{YX}(t) dt ~.
+G_\mathrm{eff} \coloneq \langle G_\mathrm{tot}(t) \rangle \approx \overline{G}_\mathrm{L} + \sum_X \sum_{u \subset X} \langle \nu_u \rangle \overline{G}_{\mathrm{syn}YX} \int_0^\infty f_{YX}(t) dt ~.
 \end{equation}
+\ehtxt{Then, the original $\overline{G}_\mathrm{L}$ value is replaced by $G_\mathrm{eff}$ on a per-compartment basis.}
 
-\item Remove active ion channels if their net contributions to the total transmembrane currents can be assumed to be small around typical membrane voltage values. \ghnote{Kan ikke dette angis som en parantes i punktet nedenfor. Disse kan vel lineariseres som alle andre?}
-
-\item Active ion channel currents on the specific form
+\item \ehtxt{Independent of accounting for an effective membrane time constant, one can approximate} 
+active ion channel currents on the specific form
 \begin{equation}
 i_\mathrm{w}(t) = - \overline{g}_\mathrm{w} \omega(t)\left( V_\mathrm{m}(t) - E_\mathrm{w} \right)~ \label{eq:Ch-LFPy:active}
 \end{equation}
-may be \ghnote{May be or are?} approximated by equivalent, linearly dependent currents \cite**{Remme_2010,Ness2016} if their maximum \ghtxt{\sout{conductivity}conductance} $\overline{g}_\mathrm{w}$ is significant. \ghnote{Jmf. punkt over - her kan man kanskje si if g is significant, or ignored if not?} Here, $E_\mathrm{w}$ is the channel reversal potential and
+%may be 
+\ghnote{May be or are?}
+\ehnote{holder paa "may" siden disse nye induktanstermene gir veldig lite signalbidrag i det jeg viser. En rein passiv modell funker kanskje like bra.}
+%approximated 
+by equivalent, linearly dependent currents \cite**{Remme_2010,Ness2016} if their maximum 
+\ehtxt{conductivity}
+%\ghtxt{\sout{conductivity}conductance}
+\ehnote{@GH: liten bokstav var med intensjon.} 
+$\overline{g}_\mathrm{w}$ is significant. 
+%\ghnote{Jmf. punkt over - her kan man kanskje si if g is significant, or ignored if not?} 
+Here, $E_\mathrm{w}$ is the channel reversal potential and
 $\omega(t)$ the gating variable which dynamics are given in terms of an activation time function $\tau_\mathrm{w}(V)$ and activation function $\omega_\infty(V)$ as
 \begin{equation}
 \tau_\mathrm{w}(V_\mathrm{m}(t)) \frac{\partial\omega(t)}{\partial t} = \omega_\infty(V_\mathrm{m}(t)) - \omega(t)~.
@@ -907,14 +938,15 @@ c_\mathrm{m}\frac{\partial V_\mathrm{m}(t)}{\partial t} =
 one can obtain the so-called \emph{quasi-active approximation} \cite**{Koch1984,Remme_2010,Ness2016} by linearizing each voltage dependent term around the steady state value $\langle V_\mathrm{m}(t) \rangle$ resulting in
 \begin{eqnarray}
 c_\mathrm{m}\frac{\partial V_\mathrm{m}(t)}{\partial t} &=&
-	- g_\mathrm{L} \left( \gamma_\mathrm{R}
+	- \overline{g}_\mathrm{L} \left( \gamma_\mathrm{R}
 						  \left( V_\mathrm{m}(t) - \langle V_\mathrm{m}(t) \rangle \right)
 						  + \eta m(t)  \right)
 	+ I_\mathrm{a} ~\text{, where} \\
-\gamma_\mathrm{R} &\coloneq& 1 + \overline{g}_\mathrm{w} \omega_\infty(\langle V_\mathrm{m}(t) \rangle) / g_\mathrm{L} ~\text{, and} \\
-\eta &\coloneq& \frac{\overline{g}_\mathrm{w} ( \langle V_\mathrm{m}(t) \rangle - E_\mathrm{w} )}{g_\mathrm{L}} \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~.
+\gamma_\mathrm{R} &\coloneq& 1 + \frac{\overline{g}_\mathrm{w} \omega_\infty(\langle V_\mathrm{m}(t) \rangle)}{\overline{g}_\mathrm{L}} ~\text{, and} \\
+\eta &\coloneq& \frac{\overline{g}_\mathrm{w} ( \langle V_\mathrm{m}(t) \rangle - E_\mathrm{w} )}{\overline{g}_\mathrm{L}} \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~.
 \end{eqnarray}
-\ghnote{Overline forsvinner fra konduktansene underveis.}
+%\ghnote{Overline forsvinner fra konduktansene underveis.}
+%\ehnote{fixa}
 Here, an equivalent gating variable was defined as
 \begin{equation}
 m(t) \coloneq \left( \omega(t) - \omega_\infty ( \langle V_\mathrm{m}(t) \rangle ) \right) / \frac{\partial\omega_\infty (\langle V_\mathrm{m}(t) \rangle)}{\partial V_\mathrm{m}}~,
@@ -927,23 +959,34 @@ and its linear dynamics is governed by
 Above, $\gamma_\mathrm{R}$ denotes the ratio between the total and leak conductance
 while $\eta$ characterize whether the quasi-active current approximation act as positive $(\eta < 0)$ or negative $(\eta > 0)$ feedback.
 %
-For the special case $\eta=0$ the quasi-active current is `frozen', acting as a static, passive current \cite**{Ness2016}.
-\ehnote{@TBN; hva mente du egentlig naar du skrev dette? Den kvasi-aktive stroembidraget er vel lineaert avhengig av $V_\mathrm{m}(t)$ hvis $\eta=0$ og foelgelig ikke statisk.}
+For the special case $\eta=0$ the quasi-active current is `frozen', acting as a passive current \cite**{Ness2016}.
+%\ehnote{@TBN; hva mente du egentlig naar du skrev dette? Den kvasi-aktive stroembidraget er vel lineaert avhengig av $V_\mathrm{m}(t)$ hvis $\eta=0$ og foelgelig ikke statisk.}
 %
 Note that the above sets of equations corresponds to channels usually modelled with a single state variable (e.g., Na$^+$- and h-type currents),
 but generalize also to current types with more than one gating variable (e.g., Na$^+$- and K$^+$ type currents), see \cite**{Remme_2010} for details. \ghnote{Litt mye aa ha med teori for linearisering av ionekanaler som et enkelt punkt i denne punktlista. Er det noe vi skal ha et kapittel om i Neuron istedet? Eller noe som kan kortes ned, og las hvile paa referanser til andres arbeid?} 
+\ehnote{"for the sake of completeness" tenker jeg at jeg vil beholde dette her. Jeg veit ikke om dette er fryktelig relevant andre steder i boka.}
 
-\item The leak conductance $E_L$ is modified as
+\item Remove active ion channels \ehtxt{omitting the above quasi-active linearization tricks} if their net contributions to the total transmembrane currents can be assumed to be miniscular around typical membrane voltage values. 
+%\ghnote{Kan ikke dette angis som en parantes i punktet nedenfor. Disse kan vel lineariseres som alle andre?}
+
+\item The leak conductance $E_\mathrm{L}$ is modified as
 \begin{equation}
-E_L^\text{mod} = \langle V_\mathrm{m}(t) \rangle + \sum_\mathrm{w} \frac{g_\mathrm{w} (\langle V_\mathrm{m}(t) \rangle - E_\mathrm{w})}{g_L} ~,
+E_\mathrm{L}^\text{mod} = \langle V_\mathrm{m}(t) \rangle + \sum_\mathrm{w} \frac{\overline{g}_\mathrm{w} (\langle V_\mathrm{m}(t) \rangle - E_\mathrm{w})}{\overline{g}_\mathrm{L}} ~,
 \end{equation}
 which ensures that the resting potential of the quasi-active model is similar to that of the fully active model.
 \ghnote{Henger ikke helt med. Hvor ble det av den effektive avg-konduktansen definert i punkt 2?}
+\ehnote{jeg highlighter naa at quasi-active greier er uavhengig av Geff i pkt 3. OK?}
 
-\item Further reduction of number of state variables can be achieved by reducing the number of compartments per postsynaptic cell. This may indeed reduce the accuracy of membrane voltage predictions, but more so at higher frequencies due to the intrinsic dendritic filtering. Extracellular signals like the LFP, EEG and MEG however carry more power at lower frequencies and may be less affected. Reducing compartment counts also enforces replacing synaptic locations by their nearest suitable location.
+\item Further reduction of number of state variables 
+\ehtxt{(and reduced compute times)} 
+can be achieved by reducing the number of compartments per postsynaptic cell. 
+This may indeed reduce the accuracy of \ehtxt{transmembrane current} predictions, 
+but more so at higher frequencies due to the intrinsic dendritic filtering \ehtxt{\cite**{Linden2010}}. 
+Extracellular signals like the LFP, EEG and MEG, however, carry more power at lower frequencies and may be less affected. 
+Reducing compartment counts also enforces replacing synaptic locations by their nearest suitable location.
 
-\item Further reduction of number of state variables describing linearly summing synaptic currents can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment.
-It's activation times are defined as the concatenation of sequences $\left(s_u \ast \Delta_{vu} \right)(t)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on  compartment $w$.
+\item Further reduction of number of state variables describing linearly summing synaptic currents can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment \ehtxt{indexed by $w$}.
+Its activation times are defined as the concatenation of sequences $\left(s_u \ast \Delta_{vu} \right)(t)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on  compartment $w$.
 
 \item With the exception of spike measurements, most electric and magnetic signals of interest carry most power at comparably low frequencies ($\lesssim$\SI{1}{\kilo\hertz}).
 Thus, the temporal step size ($\Delta t$) of the simulations can usually be multifold increased compared to $\Delta t$ in the actual network simulation without sacrificing much in terms of accuracy in the relevant low-frequency range.
@@ -976,13 +1019,13 @@ The kernels are computed either using fully passive (`pas') or with quasi-linear
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-ratepredictor.pdf}
 \end{center}
 \caption{\textbf{Components for predictor of spike-signal filter kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$.}
-{\bf A} Multicompartment neuron models representative of each population `E' and `I',
+{\bf A} MC neuron models representative of each population `E' and `I',
 with layout of extracellular laminar probe.
 {\bf B} Densities of somas along $z$-axis.
 {\bf C} Per-compartment synapse densities for each connection between the two populations.
 {\bf D} Normalized distributions of transmission delays $\widetilde{\Delta}_{YX} (\tau)$ for each connection relative to presynaptic activation time.
 {\bf E} Synaptic currents $I_{\mathrm{syn}YX}(\tau)$ relative to synaptic onset for each connection.
-\ehnote{placeholder}
+\ehnote{placeholder -- maa gaa over XY notasjon med lupe}
 }
 \label{fig:LFPy_kernel_predictor}
 \end{figure}
@@ -1008,8 +1051,8 @@ but here computed using a computationally fast method accounting for the expecta
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
 \end{center}
 \caption{\textbf{Ground truth signals vs. approximations.}
-Here, extracellular potentials predicted from a multicompartment neuron network model (left) is compared to predictions made using the hybrid scheme (columns 2-5)
-with either passive or quasi-linear multicompartment neurons,
+Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the hybrid scheme (columns 2-5)
+with either passive or quasi-linear MC neurons,
 ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively),
 as well as kernel-based approximations obtained by convolving presynaptic population firing rates ($\nu_X(t)$) with respective kernels ($H_{YX}(\mathbf{r}, t)$) and summing the contributions (columns 6-9).
 }
@@ -1076,7 +1119,7 @@ by construction $\langle H_{YX}(\mathbf{r}, \tau) \rangle \coloneq 0$ for $\tau 
 The time lags spanned by the kernels are also symmetric around $\tau=0$ and of finite duration --
 the postsynaptic responses typically decay to approximately zero after a few tens of milliseconds.
 This decay time is related to the time constants relevant to the neuronal dynamics (that is, $\tau_\mathrm{m}, \tau_\mathrm{syn}, \tau_\mathrm{w}, \ldots$).  
-In \Fref{fig:LFPy_kernels} we show a set of such kernels for the stylized two-population multicompartment neuron network illustrated in \Fref{fig:LFPy_network}, 
+In \Fref{fig:LFPy_kernels} we show a set of such kernels for the stylized two-population MC neuron network illustrated in \Fref{fig:LFPy_network}, 
 computed with either quasi-active or fully passive membrane dynamics. 
 
 
@@ -1097,7 +1140,7 @@ and $\tau <= 0$ in the FIR case.}
 \subsubsection{\blue{Population firing rate models}}
 \label{sec:Schemes:populationmodels}
 \index{Firing rate model}
-Similar to how \ghtxt{spiking} dynamics of large-scale multicompartment neuron networks \ghtxt{\sout{as reflected by spikes of the individual neurons}} can sometimes be preserved in \ghtxt{\sout{equivalent}simplified} networks of few-compartment or spiking point neurons \ghtxt{\sout{after a series of simplifying steps}}, further successive steps of simplification may be applied to point-neuron networks in order to describe neuronal dynamics at the level of populations. Such models are commonly referred to as \emph{rate models} as an umbrella term, and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} (whole brain) level such as oscillations.
+Similar to how \ghtxt{spiking} dynamics of large-scale MC neuron networks \ghtxt{\sout{as reflected by spikes of the individual neurons}} can sometimes be preserved in \ghtxt{\sout{equivalent}simplified} networks of few-compartment or spiking point neurons \ghtxt{\sout{after a series of simplifying steps}}, further successive steps of simplification may be applied to point-neuron networks in order to describe neuronal dynamics at the level of populations. Such models are commonly referred to as \emph{rate models} as an umbrella term, and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} (whole brain) level such as oscillations.
 
 
 \ghtxt{\sout{Rate models may simply describe the mean activity of subsets of neurons (`populations') as function of time but may also explain activity both in space and time.} The simplest rate models describe the mean activity of subsets of neurons (`populations') as function of time alone, but other versions exist that describe activity both in space and time. } The latter is sometimes referred to as \emph{neural fields} and may readily produce observed phenomena such as traveling waves of activity (see e.g., \cite**{Amari1977,Deco2008}). Certain rate model frameworks may also describe activity of individual neurons. Here, we will however not delve into much mathematical detail as the body of literature on both rate models and neural fields and their derivation is vast, see for example \cite**{Gerstner2014} and \cite**{Ermentrout2010}. As an example, we will merely show that in their simplest form the activity $A(t)$ in a rate model may be described by (Equation 15.17 in \cite**{Gerstner2014})
@@ -1113,7 +1156,7 @@ is how the hybrid forward modeling scheme and the above `kernel trick' idea may 
 Let us first make a series of assumptions:
 \begin{enumerate}
 \item The rate model accurately captures the fluctuations in spike rate of different populations of recurrently connected network of point neurons.
-As before, the point-neuron network \textit{may} even have been derived by systematic reduction of detail in a biophysically detailed multicompartment neuron network.
+As before, the point-neuron network \textit{may} even have been derived by systematic reduction of detail in a biophysically detailed MC neuron network.
 We do not make that a strict requirement however,
 as many rate models are phenomenological or have had their parameters determined by parameter fitting to either experimental or model data.
 
@@ -1142,7 +1185,7 @@ we could persevere and compute our signal as
 \phi(\mathbf{r}, t) = \sum_X N_X \sum_Y \left( \nu_X \ast \langle H_{YX} \rangle \right)(\mathbf{r}, t) ~.
 \end{equation}
 However, such an approach implies that we must first perform a series of very computationally demanding calculations
-in order to compute transfer functions averaged over many thousands of multicompartment neurons.
+in order to compute transfer functions averaged over many thousands of MC neurons.
 Can we deduce a methodology to compute a set of deterministic kernels $\hat{H}_{YX}(\mathbf{r}, \tau)$ we need for all pre- and postsynaptic populations $X$ and $Y$ directly,
 based on some expectation values for cell and synaptic placements?
 Let's try!
@@ -1192,7 +1235,7 @@ H_{\mathrm{syn}YXw}(\tau) = N_X \langle k_{\mathrm{syn}YXw} \rangle \overline{I}
 meaning we allow for purely passive or quasi-active membrane descriptions.
 Then one may straightforwardly compute the resulting postsynaptic response
 (i.e., $\mathbf{I}_\mathrm{m}(\mathbf{r}, \tau),{}\mathbf{I}_\mathrm{a}(\mathbf{r}, \tau))$
-by applying synaptic currents of $H_{\mathrm{syn}YX}(\tau)$ in a single multicompartment neuron simulation for connections between populations $X$ and $Y$.
+by applying synaptic currents of $H_{\mathrm{syn}YX}(\tau)$ in a single MC neuron simulation for connections between populations $X$ and $Y$.
 
 \item One could now compute each rate-signal transfer function or kernel from the current distribution
 $\mathbf{I} \in \{ \mathbf{I}_\mathrm{m}(\mathbf{r}, \tau), \mathbf{I}_\mathrm{a}(\mathbf{r}, \tau) \}$ as
@@ -1227,9 +1270,9 @@ Our assumption of point sources in this context in contrast to line sources is m
 Before considering other approximate schemes for predicting extracellular signals of interest, 
 we shall briefly compare predictions using the `hybrid scheme' (\Fref{sec:Schemes:HybridLFPy}),
 averaged hybrid scheme kernels (\Fref{sec:Schemes:KernelLFPy}),
-and the deterministic population firing rate kernel predictor (\Fref{sec:Schemes:populationmodels}) to the ground truth signal predictions of the recurrent multicompartment neuron network model. 
+and the deterministic population firing rate kernel predictor (\Fref{sec:Schemes:populationmodels}) to the ground truth signal predictions of the recurrent MC neuron network model. 
 
-The full network model constructed from two populations of active, stylized multicompartment neuron models and resulting activity is summarized in \Fref{fig:LFPy_network}. 
+The full network model constructed from two populations of active, stylized MC neuron models and resulting activity is summarized in \Fref{fig:LFPy_network}. 
 The main basis of comparison is the `real' ground truth extracellular potential shown in panel E. 
 Together with the actual network specification (geometry, connectivity, cell properties), 
 the hybrid scheme mainly takes the spiking activity (panel C) as its input. 
@@ -1257,7 +1300,7 @@ The choice of cable model, that is, quasi-active linear or passive linear, has m
 \section{\blue{EH: Heuristic signal approximations.}}
 \label{sec:Schemes:proxies}
 
-So far, we have demonstrated that linearized computational schemes can well explain the extracellular potentials (and by extension magnetic signals) from recurrently connected networks of multicompartment neuron models. 
+So far, we have demonstrated that linearized computational schemes can well explain the extracellular potentials (and by extension magnetic signals) from recurrently connected networks of MC neuron models. 
 These linear approximations were all derived from the recurrent network specification itself. 
 In order to predict signals from point-neuron networks or rate models however, 
 various assumptions on the anatomy of the neurons, connections etc. must be incorporated, 
@@ -1376,8 +1419,8 @@ The legend shows the corresponding mean and standard deviation of the delays.
 %For the two-population set up in \cite**{Mazzoni2015} the best-fitting proxy was determined to be the weighted sum variant $\phi_\text{WS}(\mathbf{r}, t)$ with parameters entering the temporal component set as $\tau_\text{E} =~$\SI{6}{\milli\second}, $\tau_\text{I}=0$, $\alpha_\text{E}=1$ and $\alpha_\text{I} = 1.65$, 
 %resulting in up to $93\%$ variance explained in certain locations $\mathbf{r}$. 
 %
-%As a proof of principle, we compare these different LFP proxies against the ground truth LFP generated by our recurrently connected multicompartment network model. 
-%In \Fref{fig:g_proxy}A different temporal components $g_\mathrm{proxy}(t)$ derived similar to \cite**{Mazzoni2015} but from the recurrent multicompartment neuron network are compared. 
+%As a proof of principle, we compare these different LFP proxies against the ground truth LFP generated by our recurrently connected MC network model. 
+%In \Fref{fig:g_proxy}A different temporal components $g_\mathrm{proxy}(t)$ derived similar to \cite**{Mazzoni2015} but from the recurrent MC neuron network are compared. 
 %The corresponding panel B shows their fraction of variance explained (R2) against the ground truth extracellular potential measured across different depths. 
 %These results show that the temporal fluctuations in the extracellular potential are very well explained by the summed inhibitory synaptic current onto the excitatory population across most channels. 
 %The firing rate and excitatory synaptic currents shows the worst agreement,  
