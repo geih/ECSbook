@@ -2,23 +2,26 @@
 \label{chap:VC} % EH need this
 \index{Volume conductor theory}
 As we saw in the previous chapter, multicompartment (MC) models of morphologically complex neurons 
-allow us to compute the transmembrane 
-\gen{Skal vi bruke "transmembrane" eller "membrane" currents?} currents at various locations on the neural membrane. 
+allow us to compute the membrane currents at various locations on the neural membrane. 
 This chapter is about how we, when we know the distribution of neuronal membrane currents, 
 can use volume conductor (VC) theory to predict the resulting extracellular potential ($V_\mathrm{e}$) 
-at any given point in space. Volume conductor (VC) theory is the fundament \gex{foundation?} for forward modeling 
+at any given point in space. Volume conductor (VC) theory is the foundation for forward modeling 
 of extracellular potentials at different spatial scales, from extracellular spikes, 
 LFPs and MUAs, to ECoGs and EEGs. 
 
 The essential idea behind VC theory (in a neuroscience context) is that currents that come 
-out through a neural membrane must continue as distributed currents in the extracellular space 
-of the surrounding medium, which in turn means that the extracellular potential $V_\mathrm{e}$ 
+out through a neural membrane must continue as distributed currents in the surrounding tissue, 
+which in turn means that the extracellular potential $V_\mathrm{e}$ 
 must change accordingly. Likewise, currents that go inwards through a neural membrane must come 
-from distributed currents in the extracellular space of the surrounding medium, and must also be consistent 
+from distributed currents in the surrounding tissue, and must also be consistent 
 with changes in $V_\mathrm{e}$. 
 
-A fairly general starting point for VC theory is the continuity equation \gen{"continuity equation" for what? charge?} (\fref{eq:Basics:continuity1}) 
-defined in \Fref{chap:Basics}, which we will revisit and discuss thoroughly towards the end of this 
+A fairly general starting point for VC theory is the current continuity equation (\fref{eq:Basics:continuity1}):
+\begin{equation}
+{\bf \nabla} \cdot {\bf i}_\text{t} = -C,
+\label{eq:VC:CSD0}
+\end{equation}
+defined previously in \Fref{chap:Basics}, which we will revisit and discuss thoroughly towards the end of this 
 chapter in \fref{sec:VC:CSD}. Before doing that, we will attempt to establish a basic and intuitive 
 understanding of VC theory by following a simpler path, using some simple idealized examples as venture points. 
 Before we begin, we note that all computations of $V_\mathrm{e}$ in this chapter
@@ -31,46 +34,47 @@ As discussed in \fref{sec:Neuron:HHCassumptions}, ephaptic effects are then
 not accounted for, i.e., changes in $V_\mathrm{e}$ evoked by neurodynamics 
 do not act back on neurodynamics.
 
-\item The extracellular space of brain tissue can be represented as a continuous 
+\item Brain tissue can be represented as a continuous 
 medium\index{continuous medium}, as argued in \fref{sec:Basics:ECSpot}, 
 and defined in further detail in \fref{chap:Sigma}. 
 
-\item The extracellular current density in this medium is linear and given by 
+\item The current density in the tissue is linear and given by 
 Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
 
 \begin{equation}
 {\bf i}_\mathrm{t}({\bf r}) = - \sigma_\mathrm{t} \nabla V_\mathrm{e}({\bf r}).
 \label{eq:VC:ohmici}
 \end{equation}
-\gen{Er det riktig aa bruke subscript "t"?}
 This assumption implies that (i) we have made the quasi-static approximation of Maxwell's equations (see \fref{sec:Basics:Quasistatic}), and assume that diffusive currents in the extracellular space can be neglected
-(see \fref{sec:Eldiff}).
+(see \fref{sec:Eldiff}). 
 
-\item The effective conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
+We note that we have used the subfix "t" to indicate that ${\bf i}_\mathrm{t}$ is a macroscopic current density through \textit{tissue}, defined as current unit per tissue cross section area. Tissue currents are assumed to move predominantly through the extracellular part of tissue \cite**{Robinson1968,Nunez2006}, but may contain contributions from intracellular pathways
+\cite**{Okada1994}. The linearity assumption (3) implies that both the extracellular and (possible) intracellular contributions to the total tissue current are proportional to the extracellular potential gradient. This issue is discussed in further detail in \fref{chap:Sigma}. 
+
+
+\item The effective tissue conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
 the same in all spatial directions (isotropic medium), and frequency independent (no capacitive effects on tissue currents).
 Although these assumptions are not strictly true, they will still in many cases give good predictions 
-of $V_\mathrm{e}$. However, ways to relax these assumptions on $\sigma_\mathrm{t}$ 
-are discussed in \Fref{chap:Sigma}.
+of $V_\mathrm{e}$. 
 \end{enumerate}
 
-\gen{Antagelse 4 er vel litt annerledes enn de tre f{\o}rste som vel er fundamentale for VC. Den 4. antagelsen om konstant sigma-t er kun en forenkling vi gjoer her. Nevne?} 
-\ghnote{Flyttet alt vi hadde om assumptions opp hit, og fjernet delkapittelet paa slutten der vi tok opp disse antakelsene.}
+We note that while the three first assumptions (1-3) are prerequisites for using VC theory in the standard form presented here, the assumption (4) that $\sigma_\mathrm{t}$ is a constant is just a simplification that we make in the current chapter. Ways to apply VC theory with an inhomogeneous, anisotropic and frequency dependent $\sigma_\mathrm{t}$ are discussed in \Fref{chap:Sigma}.
 
-\section{\blue{Point source approximation}}
+
+\section{\blue{Point-source approximation}}
 \label{sec:VC:pointsource}
-\index{Point source approximation}
+\index{Point-source approximation}
 Currents that come out from MC model simulations are typically represented as 
 a set of discrete current sources, i.e., one source per neuronal segment, as we illustrated previously in \fref{fig:Basics:CSDillustration}. Let us therefore start as simple as possible, 
 and derive the contribution to $V_\mathrm{e}$ from a single neuronal point source 
-$I_k$ at the point ${\bf r_k}=0$ (\fref{fig:VC:pointsource}{\bf A}).
-\gen{Kanskje riktig med boldface subscript her, men det boer vel vaere samme for valg for Ik og rk?}
+$I_{k}$ at the point ${\bf r}_k=0$ (\fref{fig:VC:pointsource}{\bf A}).
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Figures/VC/EP_from_pointsource_illustration.png}
 \end{center}
 \caption{\textbf{Extracellular potential from single neuronal point source current.} 
-\ghnote{Praktfull, men trenger index $t$ paa $\sigma_t$, og $i_t$ erstatter J.}
+\ghnote{Praktfull, men trenger index $t$ paa $\sigma_\mathrm{t}$, og $i_t$ erstatter J.}
 }
 \label{fig:VC:pointsource}
 \end{figure}
@@ -80,67 +84,68 @@ must be radially directed, and that its magnitude must be solely a function of d
 In this case, \fref{eq:VC:ohmici} can be written as:
 
 \begin{equation}
-i_t({\bf r}) = i_t(r) = -\sigma_t \frac{dV_\mathrm{e}(r)}{dr}.
+i_\mathrm{t}({\bf r}) = i_\mathrm{t}(r) = -\sigma_\mathrm{t} \frac{dV_\mathrm{e}(r)}{dr}.
 \end{equation}
-\gen{Subscript "t" skal vel ikek vaere i "italics" her?}
 
 Since there can be no charge accumulation anywhere inside the sphere, 
 the net current $I_k$ injected into the center of the spherical volume with radius $r$ 
 must equal the net current leaving through the surface of the volume. 
 The net current leaving the surface can in turn be found by multiplying 
-the current density $i_t(r)$ at the surface with the surface area $4\pi r^2$. 
-We then get the relationship:
+the current density $i_\mathrm{t}(r)$ at the surface with the surface area $4\pi r^2$. 
+We then get the relationship, 
 \begin{equation}
-I_k = -4\pi \sigma_t r^2  \frac{dV_\mathrm{e}(r)}{dr} \, \iff \, \frac{dV_\mathrm{e}(r)}{dr} = -\frac{I_k}{4\pi \sigma_t r^2 }.
+I_k = -4\pi \sigma_\mathrm{t} r^2  \frac{dV_\mathrm{e}(r)}{dr}, 
+\end{equation}
+which we can rearrange to get:
+\begin{equation}
+\frac{dV_\mathrm{e}(r)}{dr} = -\frac{I_k}{4\pi \sigma_\mathrm{t} r^2 }.
 \label{eq:VC:knut}
 \end{equation}
-\gen{Spandere en egen linje og ligningsnummer paa den siste ligningen?}
 
-
-To obtain the final solution for $V_\mathrm{e}$, we integrate eq. \ref{eq:VC:knut} from \sntxt{$\infty$ to }$r$:
+To obtain the final solution for $V_\mathrm{e}$, we integrate eq. \ref{eq:VC:knut} from $\infty$ to $r$:
 \begin{equation}
-\int_{\infty}^r \frac{dV_\mathrm{e}(r')}{dr'} dr' = \int_{\infty}^r -\frac{I_k}{4\pi \sigma_t r'^2 } dr'.
+\int_{\infty}^r \frac{dV_\mathrm{e}(r')}{dr'} dr' = \int_{\infty}^r -\frac{I_k}{4\pi \sigma_\mathrm{t} r'^2 } dr'.
 \label{eq:VC:knut2}
 \end{equation}
-Since $V_\mathrm{e}({\infty}) = 0$, this leads to the final expression\tvnnote{Skal vaere Ve her og under?}:
+Since $V_\mathrm{e}({\infty}) = 0$, this leads to the final expression:
 
 \begin{equation}
-V({\bf r}) = V(r) = \frac{I_k}{4\pi \sigma_t r},
+V_\mathrm{e}({\bf r}) = V_\mathrm{e}(r) = \frac{I_k}{4\pi \sigma_\mathrm{t} r},
 \label{eq:VC:pointsource}
 \end{equation}
 where $r$ is the distance from the source.
 
 In the example above, we made things mathematically simple by assuming 
-that the current source was placed in the origin ${\bf r} = 0$. \gen{Kanskje ikke boldface siden 0 er en skalar?}
+that the current source was placed in the origin $r = 0$.
 For a point source located in an arbitrary point ${\bf r_k} $ (\fref{fig:VC:pointsource}{\bf B}), 
 the corresponding expression for the extracellular potential is:
 
 \begin{equation}
-V({\bf r}) = \frac{I_k}{4\pi \sigma_t |{\bf r-r_k}|}.
+V_\mathrm{e}({\bf r}) = \frac{I_k}{4\pi \sigma_\mathrm{t} |{\bf r-r_k}|}.
 \label{eq:VC:pointsource2}
 \end{equation}
 
 As we stated in the beginning of this chapter, we will assume that the extracellular medium is linear.
 This implies that if we have several point-current sources, $I_{1}, I_2, I_3, ... $, 
-in locations ${\bf r_1}, {\bf r_2}, {\bf r_3} ... $, 
+in locations ${\bf r}_1, {\bf r}_2, {\bf r}_3 ... $, 
 their contributions add up linearly, and the potential in a point ${\bf r}$ is given by:
 
 \begin{equation}
-V({\bf r}) = \frac{I_1}{4\pi  \sigma_t {\bf |r-r_1|}} + \frac{I_2}{4\pi  \sigma_t {\bf |r-r_2|} } + \frac{I_3}{4\pi  \sigma_t {\bf |r-r_3|} } + ... = \sum_k \frac{I_k}{4\pi  \sigma_t {\bf |r-r_k|} }.
+V_\mathrm{e}({\bf r}) = \frac{I_1}{4\pi  \sigma_\mathrm{t} |{\bf r}-{\bf r}_1| } + \frac{I_2}{4\pi  \sigma_\mathrm{t}  |{\bf r}-{\bf r}_2| } + \frac{I_3}{4\pi  \sigma_\mathrm{t}  |{\bf r}-{\bf r}_3|} + ... = \sum_k \frac{I_k}{4\pi  \sigma_\mathrm{t} |{\bf r}-{\bf r}_k| }.
 \label{eq:VC:pointsources}
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Fref{eq:VC:pointsources} is referred to as the point-source approximation \cite**{Holt1999}, 
 since it approximates the neuron as a set of point current sources, 
-i.e., the neuron delivers \sntxt{\sout{to the extracellular space}} a singular current source per neuronal segment \sntxt{to the extracellular space}, 
+i.e., the neuron delivers a singular current source per neuronal segment to the extracellular space, 
 located in the segment midpoint.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\blue{Line source approximation}}
+\section{\blue{Line-source approximation}}
 \label{sec:VC:linesource}
-\index{Line source approximation}
+\index{Line-source approximation}
 Instead of using the point-source approximation, a more sophisticated choice may be 
 to assume that the transmembrane current is evenly distributed over the segment axis, 
 a choice which is referred to as the \textit{line-source approximation} \cite**{Holt1999,Linden2014}. 
@@ -150,8 +155,8 @@ of the compartment (see Appendix \ref{app:linesource} or \citeasnoun**{Holt1998}
 For a segment with length $\Delta s_k$, the contribution to the extracellular potential will be:
 
 \begin{equation}
-V_\mathrm{e}({\bf r})_k = \frac{I_k}{4\pi \sigma_t} \int \frac{dr_k}{|{\bf r-r_k}|} =
-\frac{I_k}{4\pi \sigma_t \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
+V_\mathrm{e}({\bf r})_k = \frac{I_k}{4\pi \sigma_\mathrm{t}} \int \frac{dr_k}{|{\bf r}-{\bf r}_k|} =
+\frac{I_k}{4\pi \sigma_\mathrm{t} \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
 \label{eq:VC:linesource}
 \end{equation}
 
@@ -168,7 +173,7 @@ That is, if we have multiple segments $k$,
 the extracellular potential can be computed as:
 
 \begin{equation}
-V_\mathrm{e}({\bf r}) = \sum_k \frac{I_k}{4\pi \sigma_t \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
+V_\mathrm{e}({\bf r}) = \sum_k \frac{I_k}{4\pi \sigma_\mathrm{t} \Delta s_k} \log \left| \frac{\sqrt{h_k^2+\rho_k^2}-h_k}{\sqrt{\ell_k^2+\rho_k^2}-\ell_k} \right|.
 \label{eq:VC:linesources}
 \end{equation}
 
@@ -211,15 +216,17 @@ and less than 1\% for distances greater than $\sim$35~\si{\micro\metre}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\blue{Current-source-density description}}
+\section{\blue{Current-source density description}}
 \label{sec:VC:CSD}
 \index{Current source density}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \gen{Maa vel vaere en bindestrek for mye i overskirften? :-)} 
+\ghnote{Javel, men jeg skjoenner ikke logikken. Vi skriver "Line-Source Approximation". Da tenker jeg: alt som staar foran "approximation" skal bindes sammen til en enhet - det som skal approksimeres. Hvorfor skal ikke her alt bindes sammen til en enhet for det som skal beskrives? Hva ville du skrevet om det het Current Density description? Current-density description, vil jeg anta? Hvorfor skal det at det finnes en klide gjoere at density slipper unna bindestrekstyranniet? P.s. De fleste skriver Current Source Density uten bindestrek. Nicholson og Freeman skriver Current Source-Density. Pettersen skriver Current-Source density.}
+
 Instead of representing neural output as a set of point- or line sources, 
 we can express it more generally in terms of a spatially continuous density 
 of current sources (\fref{fig:VC:CSD}B), $C({\bf r})$, 
-which we call the \textit{current source density}\index{Current source density} (CSD), 
+which we call the \textit{current-source density}\index{Current-source density} (CSD), 
 with units \si{A/m^3}. 
 The extracellular potential evoked by such a distribution can be computed 
 from the general continuity equation:
@@ -229,14 +236,14 @@ from the general continuity equation:
 \end{equation}
 What \fref{eq:VC:CSD1} tells us, is that if a neuron outputs a current into a (infinitesimal) 
 volume of space (the $C$ term), an equally large current leaves that volume as an 
-extracellular current (the $\nabla \cdot {\bf i_t}$ term).
+extracellular current (the $\nabla \cdot {\bf i}_\mathrm{t}$ term).
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.5\textwidth]{Figures/VC/CSD.png}
 \end{center}
 \caption{\textbf{Neuronal current sources.}  
-{\bf (A)} When simulated on a numerical scheme, the transmembrane currents 
+{\bf (A)} When simulated using a numerical scheme, the transmembrane currents 
 are known at a discrete set of neuronal segments, i.e., as a set of point sources.  
 {\bf (B)} As a mathematical generality, we can describe the transmembrane currents 
 as a current source density (CSD) distribution, $C({\bf r},t)$. 
@@ -261,68 +268,68 @@ We have seen these last two equations earlier as \fref{eq:Basics:continuity1} an
 If we know the distribution of neuronal current sources, 
 we can integrate \fref{eq:VC:CSD3} to predict $V_\mathrm{e}$. 
 Since it is a linear differential equation, we can solve it by first finding its Green's function, 
-i.e., the solution to an impulse response $C({\bf r}) = I_1 \delta^3({\bf r}-{\bf r}_1)$, 
+i.e., the solution to an impulse response $C({\bf r}) = I_k \delta^3({\bf r}-{\bf r}_k)$, 
 where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, 
-and $I_1$ represents a singular current source at location ${\bf r}_1$. 
+and $I_k$ represents a singular current source at location ${\bf r}_k$. 
 The general solution can then be expressed as a convolution over such Green's functions. 
 
 Thus, we first seek the solution to:
 \begin{equation}
-\nabla^2 V({\bf r}) = - \frac{I' \delta^3({\bf r-r'})}{\sigma_t}.
+\nabla^2 V_\mathrm{e}({\bf r}) = - \frac{I_k \delta^3({\bf r}-{\bf r}_k)}{\sigma_\mathrm{t}}.
 \label{eq:VC:CSD5}
 \end{equation}
 
 Note that this singular current source is equivalent to the point source that we considered earlier, 
 meaning that the solution to this problem is the one that we already found in \fref{eq:VC:pointsource2}. 
 Nevertheless, we here provide an alternative (more generally applicable) derivation based on the delta function. 
-We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_1$:
+We start by integrating both sides of \fref{eq:VC:CSD5} over an arbitrary 3D volume $\Omega$ containing the source $I_k$:
 
 \begin{equation}
-\iiint_{\Omega} \nabla^2V({\bf r}) \,d\Omega =  - \frac{I'}{\sigma_t} \iiint_\Omega \ \delta^3({\bf r-r'}) \, d\Omega.
+\iiint_{\Omega} \nabla^2V_\mathrm{e}({\bf r}) \,d\Omega =  - \frac{I_k}{\sigma_\mathrm{t}} \iiint_\Omega \ \delta^3({\bf r}-{\bf r}_k) \, d\Omega.
 \label{eq:VC:marit}
 \end{equation}
 
-By the definition of the delta function, the right hand side of \fref{eq:VC:marit} is simply $I_1/\sigma$. 
+By the definition of the delta function, the right hand side of \fref{eq:VC:marit} is simply $-I_k/\sigma$. 
 Using Gauss' theorem, we can convert the volume integral on the left hand side of \fref{eq:VC:marit} 
 to an integral over the surface $S$ (enclosing the volume $\Omega$), 
 so that \fref{eq:VC:marit} becomes:
 
 \begin{equation}
-\oiint_{S} \nabla V({\bf r}) \cdot \, d{\bf S}  = - \frac{I'}{\sigma_t}.
+\oiint_{S} \nabla V_\mathrm{e}({\bf r}) \cdot \, d{\bf S}  = - \frac{I_k}{\sigma_\mathrm{t}}.
 \label{eq:VC:berit1}
 \end{equation}
 To solve this surface integral, it is convenient to chose the volume that we integrate over 
-to be a sphere centered at the source location ${\bf r}_1$, 
-and with radius $R = |{\bf r}-{\bf r}_1|$ (\fref{fig:VC:pointsource}{\bf B}). 
+to be a sphere centered at the source location ${\bf r}_k$, 
+and with radius $R = |{\bf r}-{\bf r}_k|$ (\fref{fig:VC:pointsource}{\bf B}). 
 Due to the symmetry of problem, we then know that the electric potential 
 is the same for all ${\bf r}$ on the spherical surface, so that $V({\bf r}) = V(R)$. 
 We also know that its gradient $\nabla V({\bf r}) = d V(R)/dR ~{\bf e}_R$ is constant over the surface, 
 and perpendicular to the surface increment $d{\bf S} = dS {~\bf e}_R$. 
 If we use this, \fref{eq:VC:berit1} becomes:
 \begin{equation}
-\oiint_{S} \frac{d V(R)}{dR} d{S}  = - \frac{I_1}{\sigma_t},
+\oiint_{S} \frac{d V_\mathrm{e}(R)}{dR} d{S}  = - \frac{I_k}{\sigma_\mathrm{t}},
 \label{eq:VC:berit1ogenhalv}
 \end{equation}
 which has the solution:
 \begin{equation}
-4\pi R^2 \frac{d V(R)}{dR} = -\frac{I_1}{\sigma_t}.
+4\pi R^2 \frac{d V_\mathrm{e}(R)}{dR} = -\frac{I_k}{\sigma_\mathrm{t}}.
 \label{eq:VC:berit2}
 \end{equation}
-If we integrate this from $\infty$ to $R$, and use that $V(\infty) = 0$, we get:
+If we integrate this from $\infty$ to $R$, and use that $V_\mathrm{e}(\infty) = 0$, we get:
 \begin{equation}
-V(R) =  \frac{I_1}{4\pi \sigma_t R}.
+V_\mathrm{e}(R) =  \frac{I_k}{4\pi \sigma_\mathrm{t} R}.
 \label{eq:VC:berit3}
 \end{equation}
-We may now insert back for $V(R)= V({\bf r})$ and $R = |{\bf r}-{\bf r}_1|$ to obtain the desired Green's function:
+We may now insert back for $V_\mathrm{e}(R)= V_\mathrm{e}({\bf r})$ and $R = |{\bf r}-{\bf r}_k|$ to obtain the desired Green's function:
 
 \begin{equation}
-V({\bf r})= \frac{I_1}{4\pi \sigma_t |{\bf r}-{\bf r}_1|}.
+V_\mathrm{e}({\bf r})= \frac{I_k}{4\pi \sigma_\mathrm{t} |{\bf r}-{\bf r}_k|}.
 \label{eq:VC:berit4}
 \end{equation}
 As earlier stated, the solution for a general CSD can be expressed as a convolution over the Green's function, so that:
 
 \begin{equation}
-V({\bf r}) = \frac{1}{4\pi \sigma_t}\iiint_{\Omega} \frac{C({\bf r}_s)}{|{\bf r}-{\bf r}_s|} \,d\Omega,
+V_\mathrm{e}({\bf r}) = \frac{1}{4\pi \sigma_\mathrm{t}}\iiint_{\Omega} \frac{C({\bf r}_s)}{|{\bf r}-{\bf r}_s|} \,d\Omega,
 \label{eq:VC:csds}
 \end{equation}
 where the volume integral runs over all sources with source location denoted ${\bf r}_s$. 
@@ -333,92 +340,173 @@ $C({\bf r}) = \sum_k I_k \delta^3({\bf r} - {\bf r_k})$,
 \fref{eq:VC:csds} reduces to \fref{eq:VC:pointsources}.
 
 
-\subsubsection{\blue{Derivation of the current-source density equation}}
+\subsection{\blue{Derivation of the current-source density equation}}
 \label{sec:VC:C2}
 \index{Current source density}
-
 Although the CSD equation (\fref{eq:VC:CSD1}) may seem intuitively reasonable, 
 we have so far used it more or less as a postulate. Its theoretical and practical basis
 was established in the early works by Charles Nicholson and coworkers
 \cite**{Nicholson1971,nicholson1973,nicholson1975,freeman1975},
-and a more rigorous derivation was presented later by \citeasnoun**{Gratiy2017}. 
+and a more detailed derivation was presented later by \citeasnoun**{Gratiy2017}. 
 We will not present this derivation in full here, 
 but we will walk the interested reader through the main steps. 
 
 The starting point is the conservation law for the total current (density):
 \begin{equation}
-{\bf \nabla} \cdot {\bf i}_\text{tot} = 0.
+{\bf \nabla} \cdot {\bf i}_\text{tot} = 0, 
 \label{eq:VC:Sergey1}
 \end{equation}
+which can be defined at any point in space, 
+assuming that a continuity description is warranted (cf. \fref{sec:Basics:scale_jump1}).
+By "total current density", we simply mean that all current components 
+(ohmic, and capacitive when relevant) are included. 
 
-\gen{Hvorfor itot og ikke it som over?} 
-This equation is valid at the spatial scale sufficiently coarse-grained for it to be meaningful 
-to operate with continuous variables such as currents (cf. \fref{sec:Basics:scale_jump1}),
-while still sufficiently small for a reference volume to be either entirely inside or entirely outside
-of a membrane. 
-\ghnote{Er dette ok? Membranen er noe dritt. Foelte jeg burde hatt den med i siste setning, 
-men den er ikke helt med paa skala-notene vaare. Jeg regnet tidligere ut at $(10 nm)^3$ ECS bare inneholder 2 kaliumioner,
-og ikke alltid er stort nok til at vi kan stole paa en deterministisk kontinuumsbeskrivelse. Og der er vi jo  paa membrantykkelsen.... Saa jeg loeste dette her ved ikke aa nevne membranen. }
-As such, \fref{eq:VC:Sergey1} would not be practical to use for describing 
-large-scale tissue processes: We would have \sntxt{to} map up the detailed structure of brain tissue with high resolution, 
-to account for how the very definition of ${\bf i}_\text{tot}$ varies spatially 
-between being an intracellular, extracellular or transmembrane current.
+Depending on spatial position, ${\bf i}_\text{tot}$ will vary between being
+an intracellular, extracellular or membrane current density.
+For this reason, \fref{eq:VC:Sergey1} would not be practical to use when describing 
+large-scale tissue processes: We would have to map up the detailed structure of brain tissue with high resolution, 
+to account for how the very definition of ${\bf i}_\text{tot}$ varies spatially. 
 
-To get around this problem, we instead seek a version of \fref{eq:VC:Sergey1} 
-that is applicable on a larger spatial scale ($\gg 1 \, \si{\cubic\micro\metre}$). 
+To get around this problem, we seek a version of \fref{eq:VC:Sergey1} 
+that is applicable on a larger spatial scale. 
 The diameter of neural dendrites is typically $\sim 1 \,\si{\micro\metre}$, 
-which means that a reference volume much greater than this will enclose 
-the intracellular spaces of multiple neurites as well as the extracellular space between them. 
+which means that a reference volume much greater than $1 \, \si{\cubic\micro\metre}$,
+it will enclose the intracellular spaces of multiple neurites as well as the extracellular space between them. 
 The idea is to chose a sufficiently large spatial scale for brain tissue to be homogeneous 
-in the sense that any equally sized and arbitrarilly placed reference volume will contain roughly 
-the same intracellular to extracellular volume fraction (cf. \fref{sec:Basics:scale_jump2}). 
-The advantage with such a \textit{coarse-grained}\index{Coarse-grained} resolution
-\gen{"coarse-grained" har blitt brukt tidligere ...} 
-is that it introduces a bi-domain representation\index{Bi-domain model}, where we may think of brain tissue
-as consisting of two co-existing and interacting domains that are both defined 
-continuously over the whole tissue-space, rather than within their respective sub-spaces.
+in the sense that any equally sized and arbitrarily placed reference volume will contain roughly 
+the same intracellular to extracellular volume fractions (cf. \fref{sec:Basics:scale_jump2}). 
+The advantage with such a coarse-grained resolution\index{Coarse-grained} 
+is that it introduces a \textit{bi-domain representation}\index{Bi-domain model}, 
+where we may think of brain tissue as consisting of two co-existing and interacting domains 
+that are both defined continuously over the whole tissue-space, 
+rather than within their respective sub-spaces.
 
-To proceed, we define the tissue-coarse grained current $\left<{\bf i}_\text{tot}\right>$ 
-as the total current when averaged over the above introduced reference volume. 
+To proceed, we define the tissue-coarse grained current density $\left<{\bf i}_\text{tot}\right>$ 
+as the total current density averaged over the above introduced coarse-grained reference volume
+($\gg 1 \, \si{\cubic\micro\metre}$). 
 Since current conservation must apply also at this larger spatial scale, we have that:
 
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle = 0.
-\label{eq:Basics:Sergey2}
+\label{eq:VC:Sergey2}
 \end{equation}
 
 The next trick is to perform the averaging separately over 
 the cellular (c) and extracellular (e) domains of the reference volume, so that we can write: 
 $\langle{\bf i}_\text{tot}\rangle = \langle{\bf i}_\text{tot}\rangle_\text{c} + \langle{\bf i}_\text{tot}\rangle_\text{e}$, 
 where the boundary of the cellular domain(s) run on the external surface of the cellular membranes,
-so that $\langle{\bf i}_\text{tot}\rangle_\text{c}$ is the cellular current averaged over the cytoplasm \emph{and} membrane.
-With this, \fref{eq:Basics:Sergey2} becomes: 
-\ghnote{Vi har styret litt med dette, men jeg mener aa ha forstaatt Sergey naa. Cellular betyr intracellular + membrane. Dette gir jo mening jmf Gauss divergesteorem: Divergensen av det inni er det som kommer ut. Sergey skriver det ogsaa: averaging over cytoplasm and membrane.}
+so that $\langle{\bf i}_\text{tot}\rangle_\text{c}$ is the cellular current density averaged over the cytoplasm \emph{and} membrane. With this, \fref{eq:VC:Sergey2} becomes: 
 
 \begin{equation}
 {\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  + {\bf \nabla}\cdot \langle{\bf i}_\text{tot}\rangle_\text{e} = 0
-\label{eq:Basics:Sergey3}
+\label{eq:VC:Sergey3}
 \end{equation}
 
 In \citeasnoun**[Appendix A]{Gratiy2017} it was shown that the divergence of the coarse-grained current density 
-over the cellular domain (i.e., the first term on the right \gen{left?} in \fref{eq:Basics:Sergey3}) 
-can be expressed as a sum of transmembrane currents, 
-i.e., as a current source density ($C$), like in \fref{eq:VC:CSD1}. 
-Further, if we rename the average current running extracellularly through tissue 
-$\langle{\bf i}_\text{tot}\rangle_\text{e}$ to ${\bf i}_\text{t}$, 
-we see that \fref{eq:Basics:Sergey3} becomes identical to  \fref{eq:VC:CSD1}. 
+over the cellular domain (i.e., the first term on the left in \fref{eq:VC:Sergey3}) 
+can be expressed as a sum of transmembrane current sources, 
+i.e., as a current source density (CSD), like in \fref{eq:VC:CSD1}:
 
-Importantly, ${\bf i}_\text{t}$ denotes the average current running extracellularly through tissue, 
+\begin{equation}
+{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  = C_\mathrm{all}.
+\label{eq:VC:Sergey4}
+\end{equation}
+The subfix "all" indicates that the CSD includes all membrane sources present in the tissue, 
+and the reason for introducing it will become clear in the next subsection, where we compare 
+the theoretically derived CSD equation with the version used in forward modeling. 
+
+Further, we define the average current density in the extracellular part of the tissue as, 
+\begin{equation}
+\langle{\bf i}_\text{tot}\rangle_\text{e} = {\bf i}_\text{e}.
+\label{eq:VC:Sergey5}
+\end{equation}
+where we let it be implicit that ${\bf i}_\text{e}$ is defined on a coarse-grained tissue scale. 
+Importantly, ${\bf i}_\text{e}$ denotes the average current density running extracellularly through tissue, 
 defined as extracellular current per unit \textit{tissue} cross section area 
-and not per \textit{extracellular} cross section area 
-(although it only runs through the extracellular parts of this cross section area). 
-Related to this, $\sigma_\text{t}$ in \fref{eq:VC:CSD3} denotes the average conductivity 
-experienced by the current ${\bf i}_\text{t}$. 
-As this current will face cellular obstacles, 
-and is restricted to run only through the extracellular parts of the tissue, 
-$\sigma_\text{t}$ is generally lower than the conductivity of the extracellular saline solution 
-(see \fref{chap:Sigma} for further discussion). 
+and not per \textit{extracellular} cross section area, 
+although it by definition only runs through the extracellular parts of this cross section area.
+
+
+With the definitions in \fref{eq:VC:Sergey4} and \fref{eq:VC:Sergey5}, 
+\fref{eq:VC:Sergey3} becomes the CSD equation:
+\begin{equation}
+\nabla \cdot {\bf i_\mathrm{e}}({\bf r}) = - C_\mathrm{all}({\bf r}).
+\label{eq:VC:CSDie}
+\end{equation}
+The interpretation of this CSD equation is such that if all the sources $C_\mathrm{all}$ are known, 
+then ${\bf i}_\text{e}$ is the current density in the (exclusively) extracellular part of tissue. 
+
 \gen{Betyr det at it betyr noe annet her enn tidligere i kapitlet?}
+\ghnote{Ja, du hadde et poeng der. Naa heter den $i_e$ og jeg maatte skrive et nytt delkapittel.}
+
+
+
+\subsection{\blue{Tissue currents versus extracellular currents}}
+\label{sec:VC:C3}
+\index{Current source density}
+If we compare \fref{eq:VC:CSDie} to the similar \fref{eq:VC:CSD1} used in VC theory:
+\begin{equation}
+\nabla \cdot {\bf i_\mathrm{t}}({\bf r}) = - C({\bf r}).
+\label{eq:VC:CSDit}
+\end{equation}
+we see that they differ in that the former contains ${\bf i}_\text{e}$ and $C_\mathrm{all}$
+where the latter contains ${\bf i}_\text{t}$ and $C$. 
+
+The explanation behind this discrepancy 
+is that in the theoretical derivation of \fref{eq:VC:CSDie}, $C_\mathrm{all}$ by definition
+includes absolutely all current sources present in the tissue. Since all cellular currents
+thereby are accounted for in $C_\mathrm{all}$, the remaining tissue current density
+is exclusively extracellular, and was therefore denoted ${\bf i}_\text{e}$.
+
+In contrast, when performing forward modeling using the two-step MC+VC scheme, 
+we generally have knowledge only of the sources ($C$) that we ourselves have simulated
+and impressed onto the tissue. It is reasonable to expect that tissue currents evoked
+by these sources at least to some degree will affect other (not simulated) cells in the tissue,
+and thus to evoke ephaptically induced membrane currents that are not 
+accounted for by the impressed sources $C$. 
+Hence, to use VC theory and still allow for this possibility, 
+we may assume that some (unknown) fraction of the tissue current density
+(i) crosses membranes and evokes (unknown) current sources additional to those simulated ($C \neq C_\text{all}$), 
+and (ii) travels through intracellular pathways (${\bf i}_\text{t} \neq {\bf i}_\text{e}$).
+By assumption, the sources not accounted for by $C$ in \fref{eq:VC:CSDit} 
+are then accounted for by allowing ${\bf i}_\text{t}$ to be partially intracellular. 
+
+As we have seen, the tissue current density is typically assumed to be linear and ohmic, 
+so that ${\bf i}_\text{t} = \sigma_\text{t} \nabla V_\text{e}$. Based on this assumption,
+the effective tissue conductivity ($\sigma_\text{t}$) can be found experimentally 
+by measuring gradients in $V\text{e}$ resulting from a controlled current injection into the tissue.
+To perform such measurements, no assumptions need to be made as to whether the
+current pathways between the stimulus and measurement electrode
+are purely extracellular or partially intracellular, but there
+is strong experimental evidence that its measured magnitude
+indicates that a fair fraction of the tissue currents take intracellular pathways \cite**{Okada1994}. 
+The effective tissue conductivity is discussed in greater detail in the next chapter.
+
+In conclusion, when using \fref{eq:VC:CSDit} together with 
+and ohmic model for the tissue current, and a measured value for $\sigma_\text{t}$, 
+we do not need to make any assumption regarding the pathways 
+taken by the currents evoked by the simulated sources $C$.
+However, when assuming the ohmic relationship ${\bf i}_\text{t} = \sigma_\text{t} \nabla V_\text{e}$, 
+we implicitly make the assumption that both the intracellular and extracellular 
+components of the tissue current density are linearly dependent on the extracellular
+potential gradient $\nabla V_\text{e}$. 
+
+
+\ghnote{Her kom det altsaa et nytt delkapittel basert paa det vi snakket om i mail-utvekslingene. Jeg foelte det var noedvendig aa klargjoere hvorfor teoretisk utleda CSD-ligning inneholder denne rent ekstracellulaere stroemtettheten fordi alle kilder er kjente, mens vi i forward-modelling burde noeye oss med en mer generell tissue-stroemtetthet fordi vi kun kjenner vaare egne kilder. Kapittelet ender litt utilfredsstillende, synes jeg, med at vi da vaersaagod faar anta at baade intra- og extracellulaere tissue-stroemmer maa avhenge lineart av det EKSTRACELLULAERE potensialet, noe som saann i farta kan hoeres litt snodig ut. 
+Jeg vet ikke hva jeg skal si om dette. Det  er sikkert rimelig nok, men laater ikke som noen selvfoelge. Det er sikkert usant dersom "the unaccounted for sources" inneholder festglade nevroner som lager mye rabalder, men sikkert noksaa sant dersom det kun er snakk om smaa ephaptiske polariseringer, slik jeg indikerte i teksten, men ikke vaaget aa skrive helt ut. Tar gjerne imot kommentarer paa dette.}
+
+%\begin{ennumerate}
+%\item The tissue currents do not cross any membranes. In this case, they will (i)
+%stay confined to the extracellular space (${\bf i_\mathrm{t}} = {\bf i_\mathrm{e}}$), 
+%and (ii) will not generate any sources additional to those simulated ($C = C_\text{all}$).
+%\Fref{eq:VC:CSDsome} and \fref{eq:VC:CSDall} then become identical.
+%
+%\item The tissue currents do cross neural membranes. In this case, they will (i) 
+%\emph{not} stay confined to the extracellular space (${\bf i_\mathrm{t}} \neq {\bf i_\mathrm{e}}$), 
+%but will (ii) generate (unknown) membrane sources in addition to those simulated ($C \neq C_\text{all}$).
+%\end{ennumerate}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -449,7 +537,7 @@ decay rapidly with distance $R$. Provided that we are sufficiently far away from
 $V_\mathrm{e}$ can therefore be well approximated by the dipole contribution alone:
 
 \begin{equation}\label{eq:VC:CDA}
-V_\mathrm{e}({\bf r}) \approx \frac{1}{4 \pi \sigma_t} \frac{|{\bf p}| \cos \theta}{|{\bf r} - {\bf r}_c|^2},
+V_\mathrm{e}({\bf r}) \approx \frac{1}{4 \pi \sigma_sigma_\mathrm{t}t} \frac{|{\bf p}| \cos \theta}{|{\bf r} - {\bf r}_c|^2},
 \end{equation}
 where we have expressed $C_\mathrm{dipole}$ in terms of the current dipole moment ($\mathbf{p}$) 
 and the angle ($\theta$) between the current dipole moment and the distance vector 
