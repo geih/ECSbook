@@ -205,9 +205,9 @@ as well as the theory needed to model such effects, should it be deemed necessar
 
 As we stated earlier, extracellular currents often are assumed to move mostly through the extracellular saline solution
 between cells that constitute passive, non-conducting obstacles (\fref{sec:Sigma:continuous}). 
-If this is true, we would expect $\sigma_\text{t}$ to be frequency-independent, 
-since saline is known to be a purely resistive medium, except in
-the very high frequency range  ($> 1 \, \si{\mega\hertz}$) not relevant for physiological signals \cite**{Martinsen2008}
+If this is true, we would expect $\sigma_\text{t}$ to be frequency-independent,
+since saline is known to be a purely resistive medium, at least up to frequencies in the megahertz range
+\cite**{cooper1946,Martinsen2008}.
 
 A frequency dependent $\sigma_\text{t}$ would, however, not be surprising.
 Capacitive neural membranes have a highly frequency dependent conductivity (\fref{sec:Neuron:Cap}),
@@ -223,14 +223,14 @@ by this, and EEG has "only" low frequencies \cite**{Logothetis2007}, and 1/f pow
 
 Early investigations indicated that $\sigma_\text{t}$ has little or no frequency dependence \cite**{Ranck1963,nicholson1975,Pfurtscheller1975}.
 This was later challenged by \citeasnoun**{Gabriel1996}, who measured
-a substantial frequency dependence, in particular below 100~\si{\hertz} (\fref{fig:Sigma:freq_dep}). 
+a substantial frequency dependence of $\sigma_\text{t}$, in particular below 100~\si{\hertz} (\fref{fig:Sigma:freq_dep}). 
 A series of more recent studies again seemed to reconfirm the early finings, 
-and measured a $\sigma_\text{t}$ that depended very on frequency $\sigma_\text{t}$ \cite**{Logothetis2007,Elbohouty2013,Wagner2014,Dowrick2015,Miceli2017,Ranta2017,Avery2017}. 
-Notably, many of these studies consistently measured a moderate increase of $\sigma_\text{t}$ 
+and measured a $\sigma_\text{t}$ that depended very little on stimulus frequency \cite**{Logothetis2007,Elbohouty2013,Wagner2014,Dowrick2015,Miceli2017,Ranta2017,Avery2017}. 
+Notably, many of these recent studies consistently measured a moderate increase of $\sigma_\text{t}$ 
 by about 20-50\% when the stimulus frequency was increased from a few hertz to some hundreds or thousands of hertz, 
 but two of them also measured a similar frequency dependence in (pure) saline, 
-indicating that this frequency dependence at least partially originated in the recording equipment \cite**{Logothetis2007,Miceli2017}. \ghnote{Argumentet forutsetter at saline IKKE har en f-avhengighet. Er dette aapenbart, eller noe vi boer kommentere? De som maaler epsilon og sigma for saltloesninger snakker vanligvis om "the low-frequency conductivity", som antyder en eller annen f-avhengighet. Men low betyr nok da alt under gigahertz (charge relaxation), saa det er sikkert rett aa forvente null f-avhengighet for vaare omstendigheter.}
-\tvnnote{Vi boer vel kommentere paa dette ja. Saltvann har ikke noen mekanisme (over molekylaer skala) for aa binde ladninger, og derfor kan man vel anta fravaer av kapasitive effekter. Men for veldig hoeye frekvenser, kan man vel faa selve molekylene til a riste litt, saa da faar man kapasitive effekter der.}
+indicating that this frequency dependence at least partially originated in the recording equipment \cite**{Logothetis2007,Miceli2017}. 
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/frequency_dependence.png}
