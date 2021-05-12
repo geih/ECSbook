@@ -8,16 +8,14 @@ and its value is normally taken from some experimental measurement.
 Estimates of $\sigma_\text{t}$ vary between different recordings, 
 but common values are between 0.1 and 0.5  \si{S/m}.
 
-Assuming a constant $\sigma_\text{t}$ amounts to assuming that brain tissue 
-is homogeneous, isotropic and frequency independent, as we did throughout \Fref{chap:VC}.
-In reality, $\sigma_\text{t}$ is neither strictly homogeneous, isotropic nor frequency independent, 
-and in this chapter we discuss these assumptions and ways to relax them. 
-In addition, we discuss some experimental and theoretical estimates of  $\sigma_\text{t}$. 
+Throughout \Fref{chap:VC}, we assumed that $\sigma_\text{t}$ was constant, 
+which amounts to assuming that brain tissue is homogeneous, isotropic and frequency independent.
+In this chapter we discuss these assumptions and ways to relax them, since neither of them are strictly true.
+In addition, we review some experimental and theoretical estimates of $\sigma_\text{t}$. 
 
 Before we start examining the properties of $\sigma_\text{t}$, we must establish a clear picture
 of what it represents, i.e., what $\sigma_\text{t}$ is the conductivity \textit{of}.
-Such a picture is established through the continuous, porous medium approximation 
-that we introduce in the following section. 
+Such a picture is established through the continuous, porous medium approximation that we introduce below. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -25,26 +23,23 @@ that we introduce in the following section.
 \label{sec:Sigma:continuous}
 \index{Continuous medium}\index{Porous medium}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-given the impression 
-that they are solitary creatures 
-living in a vast extracellular space with long distances to their nearest cell neighbors. 
-
-
-This mental image may stem from early staining procedures developed by Santiago Ram\'{o}n y Cajal, 
-based on the Golgi-method \cite**{cajal1899}, 
+The first detailed illustrations of neural tissue were the beautiful drawings by Santiago Ram\'{o}n y Cajal
+from the late 19th century. 
+In these drawings, neurons appeared to be rather solitary creatures, 
+living in a vast extracellular space with long distances to their nearest cell neighbors.
+Had brain tissue been this sparsely populated, 
+its conductivity would have been close to that of the extracellular fluid. 
+However, Cajal's drawings were based on data obtained using the Golgi-method \cite**{cajal1899}, 
 where only a small fraction of the neurons were stained and observed. 
-Judging from the beautiful images produced by Cajal, 
-the brain appeared rather sparsely populated by neurons, 
-and had this been the case, the tissue conductivity would have been close to that of the extracellular fluid. 
-However, in reality the brain is so densely packed with neurons and glial cells 
+In reality, the brain is so densely packed with neurons and glial cells 
 that if they all had been stained, Cajal's images would have been pure black. 
 
 As illustrated in \fref{fig:Sigma:ECS}, the extracellular space (colored light blue in the figure) 
 occupies only about 20\% of the the total tissue volume, 
 and has a highly tortuous \index{Tortuosity} geometry, 
 with an average extracellular distance between cell membranes of only about 40-60~nm \cite**{Sykova2008}.
-Currents moving through tissue are typically assumed to move predominantly through the extracellular space, 
-while the cell bodies are effectively non-conducting obstacles \cite**{Robinson1968,Nunez2006}. 
+Currents passing through tissue are typically assumed to move predominantly through the extracellular space,
+while the cell bodies largely act as non-conducting obstacles \cite**{Robinson1968,Nunez2006}. 
 Tissue currents are then restricted to follow narrow winding paths 
 through the small extracellular fraction of the tissue volume,
 and we therefore expect the effective tissue conductivity to be lower than 
@@ -63,35 +58,67 @@ that of an obstacle-free saline solution.
 
 \ghnote{Torbjorn foreslo:} \ghtxt{"From this, we can already make a first rough estimate of the extracellular conductivity: The extracellular saline solution has a conductivity of about 1.5~\si{\siemens\per\metre}, but only occupies about 20\% of the space, meaning that we might expect the extracellular conductivity to be on the order of 1.5~\si{\siemens\per\metre} $\cdot$ 0.2 = 0.3~\si{\siemens\per\metre}. This value fits well with the values typically measured in experiments, although the calculation itself vastly underestimates the complex electrical properties of neural tissue. "} \ghnote{Ganske fint, men tar ikke hensyn til tortuositeten, noe jeg gjoer i punktlisten ikke langt nedenfor her. Frykter derfor at dette grovestimatet vil forvirre leseren, naar et anelsen mindre grovt estimat foelger saa tett nedenfor.}
 
-
-At the spatial scale of micrometers and below, the extracellular conductivity \index{Conductivity} 
-$\sigma$ is \tvntxt{therefore} highly non-homogeneous and anisotropic. 
-For example, the local conductivity in a certain spatial direction will depend on whether there locally is a free extracellular passage in that direction (high conductivity), 
+On a small spatial scale, the local conductivity in a certain spatial direction 
+will depend on whether there locally is a free extracellular passage in that direction (high conductivity), 
 or whether this passage is blocked by a nearby membrane (low conductivity) (\fref{fig:Sigma:ECS}{\bf A}). 
+At the spatial scale of micrometers and below, the extracellular conductivity\index{Conductivity} 
+is therefore highly non-homogeneous and anisotropic. 
+
 %Likewise, also the electric potential $\phi$ will vary greatly over tiny distances, depending on the proximity to neural membranes, especially when approaching the nanometer thick Debye-layers building up the membrane charge \cite**{Pods2013}\tvnnote{Kanskje denne setningen hoerer mer hjemme i VC eller Basics?}.
 %When we study extracellular potentials, we are typically not interested in these microscopic variations in $\sigma$ and $\phi$, but rather in the values of these entities when averaged over some spatial volume. Electrodes used to record extracellular potentials typically have sizes ranging from 5 $\mu$m to 125 $\mu$m in diameter \cite**{Viswam2019}, which is larger than the typical diameter of a dendrite ($\sim$ 1 $\mu$m). In practice, the electrodes therefore perform such an averaging, and include contributions from several nearby neurons \tvnnote{Remove last half of sentence? Seems like a different issue to me}. \tvnnote{Tok bort dette, da jeg tenker vi dekker dette et annet sted?}
 At a larger spatial scale, of tens or hundreds of micrometers, 
-it is however reasonable to assume that these micrometer scale inhomogeneities average out (\fref{fig:Sigma:ECS}{\bf B}), and that brain tissue can be treated as a continuous, porous medium \cite**{Nicholson1981,Gratiy2017}. This assumption is further motivated by the lack of any alternative way to approach the problem, since we in most experimental settings do not know the exact microstructure of the brain. The VC theory presented in the previous chapter was based on the continuous, porous medium approximation, and thus describes the extracellular dynamics on a coarse-grained spatial resolution larger than at least a few micrometers.
+it is however reasonable to assume that the micrometer scale inhomogeneities average out (\fref{fig:Sigma:ECS}{\bf B}), 
+and that brain tissue can be treated as a continuous, porous medium \cite**{Nicholson1981,Gratiy2017}. 
+This assumption is further motivated by the lack of any alternative way to approach the problem, 
+since we in most experimental settings do not know the exact microstructure of the brain. 
+The VC theory presented in the previous chapter was based on the continuous, porous medium approximation, 
+and thus describes the extracellular dynamics on a coarse-grained spatial resolution ($\gg 1 \si{\micro\metre}$)
+as defined in \fref{sec:Basics:ECSpot}.
 
-A continuous, porous medium is defined by two key parameters \cite**{Nicholson1981}. The first parameter, $\alpha$, is the fraction of the tissue volume that is extracellular space. The second parameter is $\lambda$, the tortuousity of the extracellular medium \cite**{Nicholson1981}. It is defined as the ratio between the shortest extracellular pathway between two points in space and the euclidian distance between these two points. The tortuousity accounts for the fact that ions traveling through the medium do not travel in straight lines, but need to take detours around cellular obstacles. The parameters $\alpha$ and $\lambda$ can be measured experimentally. Typical values are $\alpha = 0.2$ and $\lambda = 1.6$ \cite**{Sykova2008}, although these values vary between brain regions, and also locally with in a brain region, due to brain-state dependent cellular swelling or shrinkage \cite**{Sykova2008,rasmussen2020}.
+A continuous, porous medium is defined by two key parameters \cite**{Nicholson1981}. 
+The first parameter, $\alpha$, is the fraction of the tissue volume that is extracellular space. 
+The second parameter is $\lambda$, the tortuousity of the extracellular medium, 
+defined as the ratio between the shortest extracellular pathway between two points in space 
+and the euclidian distance between these two points. 
+The tortuousity accounts for the fact that ions traveling through the medium do not travel in straight lines, 
+but need to take detours around cellular obstacles. 
+The parameters $\alpha$ and $\lambda$ can be measured experimentally. 
+Typical values are $\alpha = 0.2$ and $\lambda = 1.6$ \cite**{Sykova2008}, 
+although these values vary between brain regions, 
+and also locally with in a brain region, due to brain-state dependent cellular swelling or shrinkage \cite**{Sykova2008,rasmussen2020}.
 
-The continuous, porous medium approximation has implications for how we interpret the various concepts and variables that we use to compute extracellular potentials. In particular, it is important for how we understand the conductivity of the tissue medium. 
-Below, we give an interpretation of what the tissue conductivity ($\sigma_\text{t}$) represents. To do this, we first define two other conductivity measures: (i) that of the extracellular saline solution ($\sigma_\text{saline}$), and (ii) that of the extracellular medium ($\sigma_\text{e}$), and then explain how (iii) the tissue conductivity ($\sigma_\text{t}$) relates to those. 
+The continuous, porous medium approximation has implications 
+for how we interpret the various concepts and variables that we use to compute extracellular potentials. 
+In particular, it is important for how we understand the conductivity of the tissue medium. 
+Below, we give an interpretation of what the tissue conductivity ($\sigma_\text{t}$) represents. 
+To do this, we first define two additional conductivity measures: 
+(i) that of the extracellular saline solution ($\sigma_\text{saline}$), and 
+(ii) that of the extracellular medium ($\sigma_\text{e}$), and then explain how 
+(iii) the tissue conductivity ($\sigma_\text{t}$) relates to those. 
 
 
 \subsection{\blue{Conductivity of saline: $\sigma_\text{saline}$}}
 \label{sec:Sigma:Ssaline}
 \index{Conductivity! of saline solution}
-$\sigma_\text{saline}$ (S/m) is the conductivity of the saline solution that fills up the extracellular space. Since this saline solution only exists in the small gaps of space between cells, $\sigma_\text{saline}$ defines the (very) local conductivity within these gaps, and is not the conductivity of brain tissue as a whole. 
+$\sigma_\text{saline}$ (\si{S/m}) is the conductivity of the saline solution that fills up the extracellular space. 
+$\sigma_\text{saline}$ defines the (very) local conductivity within the small gaps between cellular bodies,
+and is not the conductivity of brain tissue as a whole. 
 
-The conductivity depends on the availability of free charge carriers, and $\sigma_\text{saline}$ is therefore determined by the ion concentrations in the saline solution:
+The conductivity generally depends on the availability of free charge carriers, 
+and $\sigma_\text{saline}$ is therefore determined by the ion concentrations in the saline solution:
 \begin{equation}
 \sigma_\text{saline} = \frac{F^2}{RT}\sum_{k} D_k z_{k}^2 c_{k}.
 \label{eq:Sigma:sigma1}
 \end{equation}
 We have previously shown how this definition of the conductivity follows from the Nernst-Planck equation (see \fref{eq:Basics:sigma_conc}). We recall that $z_{k}$, $D_k$ and $c_{k}$ denote the valency, diffusion coefficient and concentration, respectively, of ion species $k$, while $F = 96485.3\, \si{\coulomb\per\mol}$ is the Faraday constant, $R = 8.314 \,\si{\joule\per\kelvin\per\mol}$ is the gas constant, and $T$ (\si{\kelvin}) the temperature.
 
-The concentrations of the most abundant ions in the extracellular space of the brain were listed in \fref{tab:Neuron:ion-concentrations}. To compute $\sigma_\text{saline}$ for this solution, we also need the diffusion coefficients of the involved ions, which are given in \fref{tab:Sigma:diffconsts}. If we insert the values from \fref{tab:iNeuron:on-concentrations} and \fref{tab:Sigma:diffconsts} into \fref{eq:Sigma:sigma1}, and assume a body temperature of $T = 310\, \si{\kelvin}$, we get a conductivity $\sigma_\text{saline} = 1.72 \, \si{\siemens\per\metre}$ This agrees well with experimental measures of $\sigma_\text{saline}$, which typically report values in the range between 1.3 and 1.8~\si{\siemens\per\metre}\cite**{Okada1994,Baumann1997,Logothetis2007,Martinsen2008,Miceli2017}.
+Typical concentrations of the most abundant ions in the extracellular saline solution were listed in 
+\fref{tab:Neuron:ion-concentrations}, and their diffusion constants are given in \fref{tab:Sigma:diffconsts}. 
+If we insert the values from \fref{tab:iNeuron:on-concentrations} and \fref{tab:Sigma:diffconsts} into \fref{eq:Sigma:sigma1}, 
+and assume a body temperature of $T = 310\, \si{\kelvin}$, 
+we get a conductivity $\sigma_\text{saline} = 1.72 \, \si{S/m}$. 
+This agrees well with experimental measures of $\sigma_\text{saline}$, 
+which typically report values in the range between 1.3 and 1.8~\si{S/m}\cite**{Okada1994,Baumann1997,Logothetis2007,Martinsen2008,Miceli2017}.
 
 \begin{table}[h!]
 \begin{center}
@@ -112,41 +139,97 @@ The concentrations of the most abundant ions in the extracellular space of the b
 
 \subsection{\blue{Conductivity of extracellular space: $\sigma_\text{e}$}}
 \label{sec:Sigma:Se}
-$\sigma_\text{e}$ (\si{\siemens\per\metre}) is the conductivity of the \textit{extracellular medium}\index{Extracellular medium}. It is a theoretical quantity, defined as the conductivity experienced by a \textit{theoretical} macroscopic (coarse-grained) current assumed to travel exclusively trough the extracellular part of brain tissue. This current does not move through a 3D volume filled entirely by extracellular saline, but is (i) restricted to move only through the fraction $\alpha$ of the total medium volume that is extracellular, and (ii) must take detours around neural and glial obstacles, as reflected through the tortuousity $\lambda$ \cite**{Nicholson1998,Nunez2006}. 
+$\sigma_\text{e}$ (\si{\siemens\per\metre}) is the conductivity of the \textit{extracellular medium}\index{Extracellular medium}. 
+As we define it here, it is a theoretical quantity, 
+representing the conductivity experienced by a \textit{theoretical} macroscopic (coarse-grained) current 
+assumed to travel exclusively trough the extracellular part of brain tissue. 
+This current does not pass through a 3D volume filled entirely by extracellular saline, 
+but is (i) restricted to move only through the fraction $\alpha$ of the total medium volume that is extracellular, 
+and (ii) must take detours around neural and glial obstacles, 
+as reflected through the tortuousity $\lambda$ \cite**{Nicholson1998,Nunez2006}. 
 
-If we account for the extracellular volume fraction and tortuous structure of the extracellular space, the extracellular conductivity should theoretically be a factor $\alpha/\lambda^2$ lower than saline conductivity\cite**{Okada1994}:
+If we account for the extracellular volume fraction and tortuous structure of the extracellular space, 
+the extracellular conductivity should theoretically be a factor $\alpha/\lambda^2$ lower than saline conductivity\cite**{Okada1994}:
 
 \begin{equation}
 \sigma_\text{e} = \frac{\alpha}{\lambda^2} \sigma_\text{saline}.
 \label{eq:Sigma:sigmat}
 \end{equation}
-Typical values for $\alpha$ and $\lambda$ for the extracellular space of brain tissue are 0.2 and 1.6, respectively \cite**{Nicholson1981,Nicholson1998}. With these values, $\sigma_\text{e}$ becomes almost a factor 13 lower than $\sigma_\text{saline}$, and with the above estimate, $\sigma_\text{saline} = 1.72 \, \si{\siemens\per\metre}$, we get a an estimated value $\sigma_\text{e} = 0.134\, \si{\siemens\per\metre}$. 
+Typical values for $\alpha$ and $\lambda$ for the extracellular space of brain tissue 
+are 0.2 and 1.6, respectively \cite**{Nicholson1981,Nicholson1998}. 
+With these values, $\sigma_\text{e}$ becomes almost a factor 13 lower than $\sigma_\text{saline}$, 
+and with the above estimate, $\sigma_\text{saline} = 1.72 \, \si{\siemens\per\metre}$, 
+we get a an estimated value $\sigma_\text{e} = 0.134\, \si{\siemens\per\metre}$. 
 
+We note that the extracellular solution contains many ion species (such as e.g., H$^+$ and HPO4$^{2-}$ ) 
+that we did not include in Table \ref{Neuron:tab:ion-concentrations} and thus not in our calculation of $\sigma_\text{e}$. 
+However, since concentrations of ions others than those in Table \ref{Neuron:tab:ion-concentrations} are quite low, 
+they are expected to have only a minor impact on the conductivity.
 
 \subsection{\blue{Conductivity of brain tissue: $\sigma_\text{t}$}}
 \label{sec:Sigma:St}
-$\sigma_\text{t}$ (\si{\siemens\per\metre}) is the macroscopic (coarse-grained) conductivity of the brain tissue, i.e., the conductivity experienced by a macroscopic (coarse-grained) current traveling through the tissue. It is $\sigma_\text{t}$ that one normally measures experimentally, and it is $\sigma_\text{t}$ that is the relevant for use in VC theory. 
+$\sigma_\text{t}$ (\si{\siemens\per\metre}) is the macroscopic (coarse-grained) conductivity of the brain tissue, 
+i.e., the conductivity experienced by a macroscopic (coarse-grained) current traveling through the tissue. 
+It is $\sigma_\text{t}$ that one normally measures experimentally, 
+and it is $\sigma_\text{t}$ that is the relevant conductivity for use in VC theory. 
 
-If currents through brain tissue were indeed confined to stay exclusively in the extracellular part of it, $\sigma_\text{t}$ should be identical to $\sigma_\text{e}$, defined above. However, if tissue currents cross membranes and to some degree take intracellular pathways in addition to the extracellular ones, we would expect $\sigma_\text{t}$ to be greater than $\sigma_\text{e}$ \cite**{Okada1994}.
+If currents through brain tissue were indeed confined to stay exclusively in the extracellular part of it, 
+$\sigma_\text{t}$ should be identical to $\sigma_\text{e}$, defined above. 
+However, if tissue currents to some degree cross membranes and take intracellular pathways 
+in addition to the extracellular ones, 
+we would expect $\sigma_\text{t}$ to be greater than $\sigma_\text{e}$.
 
-Measured values of $\sigma_\text{t}$ vary quite much between different experiments, but a typical value is $\geq 0.2 \, \si{\siemens\per\metre}$, which is higher than the value $\sigma_\text{e} = 0.134\, \si{\siemens\per\metre}$ that we estimated above. The reason why the estimated $\sigma_\text{e}$ is lower than $\sigma_\text{t}$, is expectedly that a fraction of the real tissue currents do travel through intracellular pathways. For example, in cerebellum, it has been estimated that about 50 \% of tissue currents travel through intracellular paths \cite**{Okada1994}. A possible additional explanation is that the extracellular solution contains many ions (such as e.g., H$^+$ and HPO4$^{2-}$ ) that we did not include in Table \ref{Neuron:tab:ion-concentrations} and thus not in our calculation of $\sigma_\text{t}$. However, since concentrations of ions others than those in Table \ref{Neuron:tab:ion-concentrations} are quite low, they will probably have only a minor impact on the conductivity.
+Measured values of $\sigma_\text{t}$ vary quite much between different experiments, 
+but a typical value is $\geq 0.2 \, \si{\siemens\per\metre}$, 
+which is higher than the value $\sigma_\text{e} = 0.134\, \si{\siemens\per\metre}$ that we estimated above. 
+The reason why the estimated $\sigma_\text{e}$ is lower than $\sigma_\text{t}$, 
+is expectedly that a fraction of the real tissue currents do travel through intracellular pathways. 
+For example, in experiments done in the turtle cerebellum, 
+it was estimated that about 50 \% of tissue currents travel through intracellular paths \cite**{Okada1994}. 
 
 \ghnote{Muligens putte inn noe Meffin-greier her.}
 
 
-\section{\red{Frequency dependence of the conductivity}}
+\section{\red{Frequency dependence of the tissue conductivity}}
 \label{sec:Sigma:f-independent}
 \index{Conductivity!Frequency dependence}
 %\ghnote{GH: Skrev skisse til dette. Puttet figuren m/ sigma-maalinger inn her, da disse ser ut til aa primaert diskuteres opp mot eventuell frekvensavhengighet. Mulig vi burde ha med "eksperimentelle maalinger i kapittel-tittelen?}
 %Regardless of the level of isotropy and homogeneity of a medium, its response to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that accounts for capacitive and inductive effects that are frequency dependent.
-An important question when modeling and interpreting electric signals in neuroscience is whether the conductivity of neural tissue is frequency dependent. If a substantial frequency dependence is present, this would mean that the recorded signals are distorted as they propagate through the tissue, and it would bias recordings towards certain parts of the frequency spectrum. In this subsection we will briefly cover the experimental measurements investigating this issue, as well as the theory needed to model such effects, should it be deemed necessary.
+An important question when modeling and interpreting electric signals in neuroscience 
+is whether the conductivity of neural tissue ($\sigma_\text{t}$) has a frequency dependence 
+(also called the impedance spectrum). 
+If it does, recorded signals will be distorted as they propagate through the tissue, 
+which in turn will bias recordings towards certain parts of the frequency spectrum. 
+In this subsection we will briefly review some experimental measurements investigating this issue, 
+as well as the theory needed to model such effects, should it be deemed necessary.
 
-As we stated earlier, extracellular currents often are assumed to move mostly through the extracellular saline solution, so that the cells can basically be treated as passive, non-conducting obstacles (\fref{sec:Sigma:continuous}). If this is true, we would expect the extracellular conductivity to be frequency-independent, since saline is known to be a purely resistive medium \cite**{Martinsen2008}. 
+As we stated earlier, extracellular currents often are assumed to move mostly through the extracellular saline solution
+between cells that constitute passive, non-conducting obstacles (\fref{sec:Sigma:continuous}). 
+If this is true, we would expect $\sigma_\text{t}$ to be frequency-independent, 
+since saline is known to be a purely resistive medium, except in
+the very high frequency range  ($> 1 \, \si{\mega\hertz}$) not relevant for physiological signals \cite**{Martinsen2008}
 
-A frequency dependent tissue conductivity would, however, not in itself be surprising: As we have seen, the extracellular space is tightly packed with neurons, and because of the capacitive properties of their membranes, their membrane conductivity is highly frequency dependent (\fref{sec:Neuron:Cap}). One could therefore easily imagine that low-frequency extracellular currents are more confined to move resistively through the extracellular space, while high-frequency extracellular currents could move both resistively through the extracellular space and capacitively through the cells. This would effectively introduce a higher conductivity for higher frequencies, thereby reducing the amplitude of high-frequency extracellular potentials (see \fref{eq:Sigma:pointsource_freq_dep}). This would for example imply that the low-frequency LFP signals are less attenuated than the high-frequency spikes. It has been suggested that "stability" of LFP and sensitivity of spikes to position is caused by this, and EEG has "only" low frequencies \cite**{Logothetis2007}, and 1/f power-laws in LFP \tvnnote{Expand a little on this and cite the French}.
+A frequency dependent $\sigma_\text{t}$ would, however, not be surprising.
+Capacitive neural membranes have a highly frequency dependent conductivity (\fref{sec:Neuron:Cap}),
+and one could easily imagine that low-frequency tissue currents are prone to pass resistively through the extracellular space, 
+while high-frequency tissue currents pass both resistively through the extracellular space and capacitively through cells. 
+This would effectively cause $\sigma_\text{t}$ to increase with frequency and, as a consequence, 
+the amplitude of extracellular potentials to decrease with frequency (see \fref{eq:Sigma:pointsource_freq_dep}). 
+If such effects were present, we would for example expect the low-frequency LFP signals 
+to be less attenuated with distance compared to high-frequency spikes. 
+Such a frequency bias has been suggested as the explanation behind ...
+It has been suggested that "stability" of LFP and sensitivity of spikes to position is caused 
+by this, and EEG has "only" low frequencies \cite**{Logothetis2007}, and 1/f power-laws in LFP \tvnnote{Expand a little on this and cite the French}. \ghnote{Forsto ikke helt setningen, men antar, som du antyder, at den er uferdig.}
 
-Earlier investigations of the frequency dependence of the extracellular conductivity (also called the impedance spectrum) reported little or no frequency dependence \cite**{Ranck1963,nicholson1975,Pfurtscheller1975}. However, a later study by \citeasnoun**{Gabriel1996} reported a substantial frequency dependence, in particular below 100~\si{\hertz} (\fref{fig:Sigma:freq_dep}). More recent studies again seemed to measure little or no frequency dependence of the extracellular conductivity \cite**{Logothetis2007,Elbohouty2013,Wagner2014,Dowrick2015,Miceli2017,Ranta2017,Avery2017}. 
-Many of these studies consistently measured an increase of the conductivity of about 20-50\% from a few hertz to some hundreds or thousands of hertz. However, at least in some cases, a similar frequency dependence was also measured in saline, indicating that this frequency dependence at least partially originated in the recording equipment \cite**{Logothetis2007,Miceli2017}. \ghnote{Argumentet forutsetter at saline IKKE har en f-avhengighet. Er dette aapenbart, eller noe vi boer kommentere? De som maaler epsilon og sigma for saltloesninger snakker vanligvis om "the low-frequency conductivity", som antyder en eller annen f-avhengighet. Men low betyr nok da alt under gigahertz (charge relaxation), saa det er sikkert rett aa forvente null f-avhengighet for vaare omstendigheter.}
+Early investigations indicated that $\sigma_\text{t}$ has little or no frequency dependence \cite**{Ranck1963,nicholson1975,Pfurtscheller1975}.
+This was later challenged by \citeasnoun**{Gabriel1996}, who measured
+a substantial frequency dependence, in particular below 100~\si{\hertz} (\fref{fig:Sigma:freq_dep}). 
+A series of more recent studies again seemed to reconfirm the early finings, 
+and measured a $\sigma_\text{t}$ that depended very on frequency $\sigma_\text{t}$ \cite**{Logothetis2007,Elbohouty2013,Wagner2014,Dowrick2015,Miceli2017,Ranta2017,Avery2017}. 
+Notably, many of these studies consistently measured a moderate increase of $\sigma_\text{t}$ 
+by about 20-50\% when the stimulus frequency was increased from a few hertz to some hundreds or thousands of hertz, 
+but two of them also measured a similar frequency dependence in (pure) saline, 
+indicating that this frequency dependence at least partially originated in the recording equipment \cite**{Logothetis2007,Miceli2017}. \ghnote{Argumentet forutsetter at saline IKKE har en f-avhengighet. Er dette aapenbart, eller noe vi boer kommentere? De som maaler epsilon og sigma for saltloesninger snakker vanligvis om "the low-frequency conductivity", som antyder en eller annen f-avhengighet. Men low betyr nok da alt under gigahertz (charge relaxation), saa det er sikkert rett aa forvente null f-avhengighet for vaare omstendigheter.}
 \tvnnote{Vi boer vel kommentere paa dette ja. Saltvann har ikke noen mekanisme (over molekylaer skala) for aa binde ladninger, og derfor kan man vel anta fravaer av kapasitive effekter. Men for veldig hoeye frekvenser, kan man vel faa selve molekylene til a riste litt, saa da faar man kapasitive effekter der.}
 \begin{figure}[!ht]
 \begin{center}
