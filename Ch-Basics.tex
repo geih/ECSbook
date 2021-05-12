@@ -458,7 +458,7 @@ To link the extracellular potentials to transmembrane currents, we start with ex
 
 The sources will evoke a current density in the surrounding tissue, which we denote ${\bf i}_{\rm t}$(\fref{fig:Basics:CSDillustration}C). When the tissue currents are exclusively due to the current source density, $C$, current conservation can be expressed mathematically through the continuity equation \cite**{nicholson1973,nicholson1975}:
 \begin{equation}
-{\bf \nabla} \cdot {\bf i}_\text{t} = -C,
+{\bf \nabla} \cdot {\bf i}_\text{t} = C,
 \label{eq:Basics:continuity1}
 \end{equation}
 %where the source term, $C$ (with units \si{\ampere\per\cubic\metre}), is called the current source density (CSD). 
@@ -473,7 +473,7 @@ Throughout most parts of this book, we shall approximate brain tissue as a \text
 {\bf \nabla} \cdot \left(\sigma_\text{t} {\bf \nabla} {V} \right) = -C,
 \label{eq:Basics:continuity2}
 \end{equation}
-where we have used the index $t$ to denote that $\sigma_\text{t}$ is the \textit{tissue} conductivity. \ghtxt{Generally, $\sigma_\text{t}$ can be a tensor, i.e., it can vary with space and can be different in different spatial directions.} If $\sigma_\text{t}$ does not vary across space, \fref{eq:Basics:continuity2} simplifies to the often used form:
+where we have used the index $t$ to denote that $\sigma_\text{t}$ is the \textit{tissue} conductivity. Generally, $\sigma_\text{t}$ can be a tensor, i.e., it can vary with space and can be different in different spatial directions. If $\sigma_\text{t}$ is the same in all directions, and does not vary across space, \fref{eq:Basics:continuity2} simplifies to the often used form:
 \begin{equation}
 \sigma_\text{t} \nabla^2{V} = -C.
 \label{eq:Basics:continuity3}
