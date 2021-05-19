@@ -18,7 +18,7 @@ with changes in $V_\mathrm{e}$.
 
 A fairly general starting point for VC theory is the current continuity equation (\fref{eq:Basics:continuity1}):
 \begin{equation}
-{\bf \nabla} \cdot {\bf i}_\text{t} = -C,
+{\bf \nabla} \cdot {\bf i}_\text{t} = C,
 \label{eq:VC:CSD0}
 \end{equation}
 defined previously in \Fref{chap:Basics}, which we will revisit and discuss thoroughly towards the end of this 
@@ -231,7 +231,7 @@ with units \si{A/m^3}.
 The extracellular potential evoked by such a distribution can be computed 
 from the general continuity equation:
 \begin{equation}
-\nabla \cdot {\bf i_\mathrm{t}}({\bf r}) = - C({\bf r}).
+\nabla \cdot {\bf i_\mathrm{t}}({\bf r}) = C({\bf r}).
 \label{eq:VC:CSD1}
 \end{equation}
 What \fref{eq:VC:CSD1} tells us, is that if a neuron outputs a current into a (infinitesimal) 
@@ -404,11 +404,10 @@ so that $\langle{\bf i}_\text{tot}\rangle_\text{c}$ is the cellular current dens
 
 In \citeasnoun**[Appendix A]{Gratiy2017} it was shown that the divergence of the coarse-grained current density 
 over the cellular domain (i.e., the first term on the left in \fref{eq:VC:Sergey3}) 
-can be expressed as a sum of transmembrane current sources, 
-i.e., as a current source density (CSD), like in \fref{eq:VC:CSD1}:
-
+can be expressed as a current source density (CSD), representing the
+sum of all transmembrane current sources within the averaging volume: 
 \begin{equation}
-{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  = C_\mathrm{all}.
+{\bf \nabla} \cdot \langle{\bf i}_\text{tot}\rangle_\text{c}  = - C_\mathrm{all}.
 \label{eq:VC:Sergey4}
 \end{equation}
 The subfix "all" indicates that the CSD includes all membrane sources present in the tissue, 
@@ -430,7 +429,7 @@ although it by definition only runs through the extracellular parts of this cros
 With the definitions in \fref{eq:VC:Sergey4} and \fref{eq:VC:Sergey5}, 
 \fref{eq:VC:Sergey3} becomes the CSD equation:
 \begin{equation}
-\nabla \cdot {\bf i_\mathrm{e}}({\bf r}) = - C_\mathrm{all}({\bf r}).
+\nabla \cdot {\bf i_\mathrm{e}}({\bf r}) = C_\mathrm{all}({\bf r}).
 \label{eq:VC:CSDie}
 \end{equation}
 The interpretation of this CSD equation is such that if all the sources $C_\mathrm{all}$ are known, 
@@ -446,7 +445,7 @@ then ${\bf i}_\text{e}$ is the current density in the (exclusively) extracellula
 \index{Current source density}
 If we compare \fref{eq:VC:CSDie} to the similar \fref{eq:VC:CSD1} used in VC theory:
 \begin{equation}
-\nabla \cdot {\bf i_\mathrm{t}}({\bf r}) = - C({\bf r}).
+\nabla \cdot {\bf i_\mathrm{t}}({\bf r}) =  C({\bf r}).
 \label{eq:VC:CSDit}
 \end{equation}
 we see that they differ in that the former contains ${\bf i}_\text{e}$ and $C_\mathrm{all}$
@@ -472,9 +471,9 @@ By assumption, the sources not accounted for by $C$ in \fref{eq:VC:CSDit}
 are then accounted for by allowing ${\bf i}_\text{t}$ to be partially intracellular. 
 
 As we have seen, the tissue current density is typically assumed to be linear and ohmic, 
-so that ${\bf i}_\text{t} = \sigma_\text{t} \nabla V_\text{e}$. Based on this assumption,
+so that ${\bf i}_\text{t} = -\sigma_\text{t} \nabla V_\text{e}$. Based on this assumption,
 the effective tissue conductivity ($\sigma_\text{t}$) can be found experimentally 
-by measuring gradients in $V\text{e}$ resulting from a controlled current injection into the tissue.
+by measuring gradients in $V_\text{e}$ resulting from a controlled current injection into the tissue.
 To perform such measurements, no assumptions need to be made as to whether the
 current pathways between the stimulus and measurement electrode
 are purely extracellular or partially intracellular, but there
@@ -483,10 +482,10 @@ indicates that a fair fraction of the tissue currents take intracellular pathway
 The effective tissue conductivity is discussed in greater detail in the next chapter.
 
 In conclusion, when using \fref{eq:VC:CSDit} together with 
-and ohmic model for the tissue current, and a measured value for $\sigma_\text{t}$, 
+an ohmic model for the tissue current, and a measured value for $\sigma_\text{t}$, 
 we do not need to make any assumption regarding the pathways 
 taken by the currents evoked by the simulated sources $C$.
-However, when assuming the ohmic relationship ${\bf i}_\text{t} = \sigma_\text{t} \nabla V_\text{e}$, 
+However, when assuming the ohmic relationship ${\bf i}_\text{t} = -\sigma_\text{t} \nabla V_\text{e}$, 
 we implicitly make the assumption that both the intracellular and extracellular 
 components of the tissue current density are linearly dependent on the extracellular
 potential gradient $\nabla V_\text{e}$. 
