@@ -1,16 +1,22 @@
 \chapter{Extracellular conductivity}
 \label{chap:Sigma}
 \index{Conductivity}
-%\tvnnote{Is the book about 'modelling extracellular potentials', or more broadly 'extracellular potentials'? If it is the latter, maybe we should say "key concept" instead of "key parameter/variable"?}
-In most applications of volume conductor (VC) theory, 
+\tvntxt{In \fref{chap:Neuron} we saw that neural activity causes transmembrane currents, and 
+in \fref{chap:VC} we introduced volume conductor (VC) theory, a framework that links such transmembrane currents to extracellular 
+potentials, based on some simple assumptions about how
+currents move through the extracellular space.
+}
+In most applications of \tvntxt{\sout{volume conductor (VC)} VC} theory, 
 the conductivity of brain tissue ($\sigma_\text{t}$) is assumed to be a constant, 
 and its value is normally taken from some experimental measurement. 
 Estimates of $\sigma_\text{t}$ vary between different recordings, 
 but common values are between 0.1 and 0.5  \si{S/m}.
 
 Throughout \Fref{chap:VC}, we assumed that $\sigma_\text{t}$ was constant, 
-which amounts to assuming that brain tissue is homogeneous, isotropic and frequency independent.
-In this chapter we discuss these assumptions and ways to relax them, since neither of them are strictly true.
+which amounts to assuming that brain tissue is \tvntxt{infinite, }homogeneous, isotropic and frequency independent.
+\tvntxt{While these assumptions are in many cases appropriate, there are
+also many cases where they are not appropriate, and}
+in this chapter we discuss these assumptions and ways to relax them\tvntxt{\sout{, since neither of them are strictly true}}\tvnnote{Syntes dette ga inntrykk av at man alltid har lyst til aa bli kvitt disse forenklingene, men det er jo ikke tilfellet.}.
 In addition, we review some experimental and theoretical estimates of $\sigma_\text{t}$. 
 
 Before we start examining the properties of $\sigma_\text{t}$, we must establish a clear picture
@@ -59,7 +65,7 @@ were actually stained and observed. In reality, the brain is so densely packed w
 that if they all had been stained, Cajal's images would have been pure black. 
 
 As illustrated in \fref{fig:Sigma:ECS}B, the extracellular space (colored light blue in the figure) 
-occupies only about 20\% of the the total tissue volume, and has a highly tortuous \index{Tortuosity} geometry, 
+occupies only about 20\% of the total tissue volume, and has a highly tortuous \index{Tortuosity} geometry, 
 with an average extracellular distance between cell membranes of only about 40-60~nm \cite**{Sykova2008}.
 Currents passing through tissue are typically assumed to move predominantly through the extracellular space,
 while the cell bodies largely act as non-conducting obstacles \cite**{Robinson1968,Nunez2006}. 
