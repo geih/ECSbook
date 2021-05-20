@@ -4,5 +4,78 @@
 \ghnote{
 Here we must understand the relationship between "impressed currents" and "primary currents" as they are used in the MEG litterature, i.e., in the book Brain Signals. So far, we have MEG only as an application-chapter. Should we have a theory chapter magnetic fields it in Part 1, or will we sneak the theory in here as we go along?}
 
+\sntxt{
+I've looked into this matter as part of writing my kappe, and this is my conclusion.
+
+We write the continuity equation as follows:
+
+\begin{equation} \label{eq:MEG:continuity}
+{\bf \nabla} {\bf i}_t = C
+\end{equation}
+based on \citep{Gratiy2017}.
+
+${\bf i}_\mathrm{t}$ is here the tissue current density resulting from the current source density $C$. All "impressed currents" (i.e. transmembrane currents), are in our case included in $C$.
+
+Next, we write Ohm's law this way:
+
+\begin{equation}\label{eq:MEG:ohm_1}
+{\bf i}_\mathrm{t} = \sigma {\bf E}.
+\end{equation}
+
+Inserting Equation \eqref{eq:MEG:ohm_1} into Equation \eqref{eq:MEG:continuity}, applying ${\bf E} = -{bf \nabla} V$, gives the Poisson equation:
+
+\begin{equation}\label{eq:MEG:poisson1}
+{\bf \nabla} \cdot (\sigma {\bf \nabla} V) = -C.
+\end{equation}
+
+
+
+%The quasistatic version of Maxwell's fourth equation explains how an electric current gives rise to a magnetic field {\bf B}. In the brain, the magnetic permeability $\mu$ is very close to the magnetic permeability in vacuum $\mu_0$ \cite{Hamalainen}, such that:
+%
+%\begin{equation}\label{eq:MW4_qs_2}
+%\nabla \times {\bf B} = \mu_0 {\bf i}
+%\end{equation}
+%
+%In order to derive an expression for ${\bf B}$ (as in \cite{Griffiths1999}), we start by defining the vector potential ${\bf A}$
+%
+%\begin{equation}\label{eq:defA}
+%{\bf B} = {\bf \nabla} \times {\bf A},
+%\end{equation}
+%
+%with zero divergence ${\bf \nabla \cdot A} = 0$. Inserting \eqref{eq:defA} into \eqref{eq:MW4_qs_2}, we see that:
+%
+%\begin{equation*}
+%\nabla \times {\bf B} = \nabla \times ({\bf \nabla} \times {\bf A})
+%					 = {\bf \nabla} ({\bf \nabla} \cdot {\bf A})
+%					    - {\bf \nabla}^2 {\bf A}
+%					 = \mu_0 {\bf i}
+%\end{equation*}
+%
+%Since we have defined ${\bf \nabla} \cdot {\bf A} = 0$ (see \cite{Griffiths1999}), we end up with the Poisson equation:
+%
+%\begin{equation}\label{eq:poisson_A}
+%{\bf \nabla}^2 {\bf A} = -\mu_0 {\bf i},
+%\end{equation}
+%
+%which can be solved in the same way as \sntxt{the electric field Poisson equation}, assuming that {\bf i} goes to zero at infinity:
+%
+%\begin{equation}\label{eq:A}
+%{\bf A}({\bf r}) = \frac{\mu_0}{4\pi} \int \frac{{\bf i}({\bf r}')}{|{\bf r} - {\bf r}'|} dV'.
+%\end{equation}
+%
+%We now obtain the following expression for the magnetic field:
+%
+%\begin{equation}\label{eq:B}
+%{\bf B}({\bf r}) = \frac{\mu_0}{4\pi} \int {\bf \nabla} \times \frac{ {\bf i}({\bf r}')}{|{\bf r} - {\bf r}'|} dV'.
+%\end{equation}
+%
+%Using the identity
+%
+%${\bf i} = {\bf i}_p - \sigma {\bf \nabla} V$
+
+
+
+}
+
 \section{\red{TVN: Insights from MEG studies} }
 The human being is essentially just a very weak electromagnet. 
