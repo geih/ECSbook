@@ -1,5 +1,7 @@
 \chapter{Derivation of the current dipole approximation}
 \label{app:dipoleappendix}
+\tvnnote{Hmm, litt dumt at ligninger, underseksjoner og figurer alle faar navn B.1, B.2 etc, 
+men dette ordner kanskje forlaget for oss senere eller noe?}
 A volume containing a set of current sinks and sources will set up an electric potential given by the following equation:
 \begin{equation}\label{eq:point_source}
 \Phi(\mathbf{r}) = \frac{1}{4 \pi \sigma} \sum_{k=1}^N \frac{I_k}{|\mathbf{r} - \mathbf{r}_k|},
@@ -11,7 +13,7 @@ From this, we outline the current dipole approximation, as an approximate altern
 \section{Current multipole expansion}
 Analogous to how we can formulate the electric potential from a set of electric charges with the charge multipole expansion, we can similarly derive the current multipole expansion for a set of currents.
 
-We picture $N$ currents $I_k$ located at $\mathbf{r}_k$ in a volume centered around position $\mathbf{r}_c = \sum_{k = 1}^N \frac{\mathbf{r}_k}{N}$. Our measurement electrode is positioned a distance $R = |\mathbf{R}| = |\mathbf{r}_c - \mathbf{r}|$ away from the current distribution, see Fig.~\ref{fig:current_volume}.
+We picture $N$ currents $I_k$ located at $\mathbf{r}_k$ in a volume centered around position $\mathbf{r}_c = \sum_{k = 1}^N \frac{\mathbf{r}_k}{N}$. Our measurement electrode is positioned a distance $R = |\mathbf{R}| = |\mathbf{r}_c - \mathbf{r}|$ away from the current distribution, see \fref{fig:current_volume}.
 
 \begin{figure}[!ht]
 	\begin{center}
@@ -21,13 +23,13 @@ We picture $N$ currents $I_k$ located at $\mathbf{r}_k$ in a volume centered aro
 	\label{fig:current_volume}
 \end{figure}
 
-Our first step is to write $\frac{1}{|{\bf r} - {\bf r}_k|} = \frac{1}{R_k}$ from Eq.~\ref{eq:point_source} as an infinite series. Here, $R_k$ is the distance between current $I_k$ at ${\bf r}_k$ and the electrode position ${\bf r}$.
+Our first step is to write $\frac{1}{|{\bf r} - {\bf r}_k|} = \frac{1}{R_k}$ from \fref{eq:point_source} as an infinite series. Here, $R_k$ is the distance between current $I_k$ at ${\bf r}_k$ and the electrode position ${\bf r}$.
 
 We start by applying the cosine rule,
 \begin{equation}\label{eq:cos}
 R_k^2 = R^2 + r_{ck}^2 - 2 R r_{ck} \cos \theta_k.
 \end{equation}
-where $r_{ck} = |{\bf r}_{ck}|$ is the length of the distance vector between the volume mid point ${\bf r}_c$ and current location ${\bf r}_k$, and $\theta_k$ is the angle between ${\bf r}_{ck}$ and ${\bf R}$, see Fig.~\ref{fig:theta_k}.
+where $r_{ck} = |{\bf r}_{ck}|$ is the length of the distance vector between the volume mid point ${\bf r}_c$ and current location ${\bf r}_k$, and $\theta_k$ is the angle between ${\bf r}_{ck}$ and ${\bf R}$, see \fref{fig:theta_k}.
 
 \begin{figure}[!ht]
 	\begin{center}
@@ -37,7 +39,7 @@ where $r_{ck} = |{\bf r}_{ck}|$ is the length of the distance vector between the
 	\label{fig:theta_k}
 \end{figure}
 
-Further, we rewrite Eq.~\ref{eq:cos} above to get the following expression for $R_k$:
+Further, we rewrite \fref{eq:cos} above to get the following expression for $R_k$:
 
 \begin{align*}
 R_k^2 &= R^2\big[1 -  \frac{r_{ck}}{R} 2 \cos \theta_k + \big(\frac{r_{ck}}{R}\big)^2  \big] \\
@@ -66,7 +68,7 @@ P_3 (\cos \theta_k) &= \frac{5}{2} \cos^3 \theta_k - \frac{3}{2}\cos \theta_k \\
 &\;\;\vdots \notag
 \end{align*}
 
-Inserting our infinite series expression for $\frac{1}{|{\bf r} - {\bf r}_k|}$ into Eq.~\ref{eq:point_source}, we arrive at the current multipole expansion:
+Inserting our infinite series expression for $\frac{1}{|{\bf r} - {\bf r}_k|}$ into \fref{eq:point_source}, we arrive at the current multipole expansion:
 
 \begin{equation}\label{eq:multipole_compact}
 \Phi (R) = \frac{1}{4 \pi \sigma}\frac{1}{R} \sum_{k=1}^N I_k \sum_{l = 0}^\infty \big(\frac{r_{ck}}{R}\big)^l P_l(\cos \theta_k) \quad \forall~ R > r_{ck}.
@@ -90,7 +92,7 @@ Here, the first four terms are known as the monopole $\Phi^{\mathrm{mono}}$, dip
 
 Now, we are going to take a look at how the first four terms of the current multipole expansion contribute to the extracellular potential in neural tissue.
 
-\section{Monopole contribution in neural tissue}\label{subsec:mono}
+\section{Monopole contribution in neural tissue}\label{sec:mono}
 Due to current conservation in neural tissue, the transmembrane current sinks and sources for a whole number of neurons will always sum to zero: $\sum_k I_k = 0$. This means that the monopole contribution term will always be zero in neural tissue:
 
 \begin{equation*}
@@ -117,11 +119,11 @@ Since $\sum_k I_k {\bf r}_k = {\bf p}$ and $\sum_k I_k = 0$, we here end up with
 
 Here, $\theta$ is the angle between ${\bf p}$ and ${\bf R}$. Since the current dipole approximation is based on the multipole expansion, the constraint $\text{R} > r_{ck}$ still holds.
 
-In \ref{subsec:mono}, we saw that there are no monopole contributions to electric potentials from a whole number of neurons. However, applying the current-dipole approximation, we neglect the higher-order terms in the current multipole expansion, which calls for stricter constraints: $R >> r_ck$. In order to get an intuition about when $R$ is "large enough", we will look into the quadrupole and octopole contributions ($\Phi^{\mathrm{quadrupole}}$, $\Phi^{\mathrm{octopole}}$) from a single current sink and a current source.
+In \fref{sec:mono}, we saw that there are no monopole contributions to electric potentials from a whole number of neurons. However, applying the current-dipole approximation, we neglect the higher-order terms in the current multipole expansion, which calls for stricter constraints: $R >> r_ck$. In order to get an intuition about when $R$ is "large enough", we will look into the quadrupole and octopole contributions ($\Phi^{\mathrm{quadrupole}}$, $\Phi^{\mathrm{octopole}}$) from a single current sink and a current source.
 
-\section{Quadrupole contribution from a single current sink source pair}\label{subsec:quad}
+\section{Quadrupole contribution from a single current sink source pair}\label{sec:quad}
 
-From Eq.~\ref{eq:multipole}, we see that the quadrupole contribution for a current sink $I_1$ at $r_1$ and a current source $I_2$ at $r_2$ is
+From \fref{eq:multipole}, we see that the quadrupole contribution for a current sink $I_1$ at $r_1$ and a current source $I_2$ at $r_2$ is
 
 \begin{equation}\label{eq:phi_quad}
 \Phi^{\mathrm{quadrupole}} = \frac{1}{R^3} \left[ I_1 r_{c1}^2 \left( \frac{3}{2} \cos^2 \theta_1 - \frac{1}{2} \right) + I_2 r_{c2}^2 \left( \frac{3}{2} \cos^2 \theta_2 - \frac{1}{2} \right) \right].
@@ -135,11 +137,11 @@ When the center of the volume is defined halfway between the sink and the source
 \implies \cos^2 \theta_2 &= \cos^2 \theta_1.
 \end{align*}
 
-Inserting this into \eqref{eq:phi_quad}, we see that $\Phi^{\mathrm{quadrupole}} = 0$, meaning that there is no quadrupole contribution to the extracellular potential from a sink-source pair.
+Inserting this into \fref{eq:phi_quad}, we see that $\Phi^{\mathrm{quadrupole}} = 0$, meaning that there is no quadrupole contribution to the extracellular potential from a sink-source pair.
 
 Since all terms of Legendre polynomials for $l = 4, 6, 8, ...$ contain $\cos \theta_k$ raised to the power of an even number, multipole expansion term number 3, 5, 7, 9, etc are all equal zero for a sink-source pair.
 
-\section{Octopole contribution from a single current sink source pair}\label{subsec:octo}
+\section{Octopole contribution from a single current sink source pair}\label{sec:octo}
 
 For a sink-source current pair, $I_1$ at ${\bf r}_1$ and $I_2$ at ${\bf r}_2$, we have the following octopole contribution:
 
@@ -179,7 +181,7 @@ Including the octopole contribution when estimating the extracellular potential 
 \big| \frac{\Phi^{\mathrm{octopole}}}{\Phi^{\mathrm{quad}}} \big|_{\mathrm{max}} = \big|\frac{d^2}{R^2} \frac{5 \cos^2 \theta - 3}{8}\big|_{\mathrm{max}} = \frac{3}{8} \frac{d^2}{R^2}
 \end{equation*}
 
-In \cite**{Nunez2006}, it is suggested that the current dipole approximation is applicable when $R > 3d$ or $R > 4d$.
+In \citeasnoun**{Nunez2006}, it is suggested that the current dipole approximation is applicable when $R > 3d$ or $R > 4d$.
 
 For a sink-source pair, the octopole contribution is maximum $\Phi^{\mathrm{octo}}(R = 3d) = \frac{1}{24} \Phi^{\mathrm{dipole}}$ and $\Phi^{\mathrm{octo}}(R = 4d) = \frac{3}{128} \Phi^{\mathrm{dipole}}$.
 

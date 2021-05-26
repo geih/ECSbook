@@ -45,10 +45,10 @@ Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
 {\bf i}_\mathrm{t}({\bf r}) = - \sigma_\mathrm{t} \nabla V_\mathrm{e}({\bf r}).
 \label{eq:VC:ohmici}
 \end{equation}
-This assumption implies that (i) we have made the quasi-static approximation of Maxwell's equations (see \fref{sec:Basics:Quasistatic}), and assume that diffusive currents in the extracellular space can be neglected
-(see \fref{sec:Eldiff}). 
+This assumption implies that \tvntxt{\sout{(i)}} we have made the quasi-static approximation of Maxwell's equations (see \fref{sec:Basics:Quasistatic}), and assume that diffusive currents in the extracellular space can be neglected
+(see \fref{sec:Eldiff})\tvnnote{Men andre steder sier vi at denne loven er "constitutive"? Kanskje bare referere til "Note on Ohm's law" i Basics?}. 
 
-We note that we have used the subfix "t" to indicate that ${\bf i}_\mathrm{t}$ is a macroscopic current density through \textit{tissue}, defined as current unit per tissue cross section area. Tissue currents are assumed to move predominantly through the extracellular part of tissue \cite**{Robinson1968,Nunez2006}, but may contain contributions from intracellular pathways
+We note that we have used the subfix "t" to indicate that ${\bf i}_\mathrm{t}$ is a macroscopic current density through \textit{tissue}, defined as current unit per tissue cross section area. \tvnnote{Jeg foreslaar aa fjerne resten av dette avsnittet, og bare henvise til Sigma-kapittelet. Hvertfall hvis vi ikke noedvendigvis tror paa at stroem gaar mest ekstracellulart.}Tissue currents are assumed to move predominantly through the extracellular part of tissue \cite**{Robinson1968,Nunez2006}, but may contain contributions from intracellular pathways
 \cite**{Okada1994}. The linearity assumption (3) implies that both the extracellular and (possible) intracellular contributions to the total tissue current are proportional to the extracellular potential gradient. This issue is discussed in further detail in \fref{chap:Sigma}. 
 
 
@@ -101,7 +101,6 @@ which we can rearrange to get:
 \frac{dV_\mathrm{e}(r)}{dr} = -\frac{I_k}{4\pi \sigma_\mathrm{t} r^2 }.
 \label{eq:VC:knut}
 \end{equation}
-
 To obtain the final solution for $V_\mathrm{e}$, we integrate eq. \ref{eq:VC:knut} from $\infty$ to $r$:
 \begin{equation}
 \int_{\infty}^r \frac{dV_\mathrm{e}(r')}{dr'} dr' = \int_{\infty}^r -\frac{I_k}{4\pi \sigma_\mathrm{t} r'^2 } dr'.
@@ -272,13 +271,11 @@ i.e., the solution to an impulse response $C({\bf r}) = I_k \delta^3({\bf r}-{\b
 where $\delta^3({\bf r})$ is the Dirac delta function in three dimensions, 
 and $I_k$ represents a singular current source at location ${\bf r}_k$. 
 The general solution can then be expressed as a convolution over such Green's functions. 
-
 Thus, we first seek the solution to:
 \begin{equation}
 \nabla^2 V_\mathrm{e}({\bf r}) = - \frac{I_k \delta^3({\bf r}-{\bf r}_k)}{\sigma_\mathrm{t}}.
 \label{eq:VC:CSD5}
 \end{equation}
-
 Note that this singular current source is equivalent to the point source that we considered earlier, 
 meaning that the solution to this problem is the one that we already found in \fref{eq:VC:pointsource2}. 
 Nevertheless, we here provide an alternative (more generally applicable) derivation based on the delta function. 
@@ -301,7 +298,7 @@ so that \fref{eq:VC:marit} becomes:
 To solve this surface integral, it is convenient to chose the volume that we integrate over 
 to be a sphere centered at the source location ${\bf r}_k$, 
 and with radius $R = |{\bf r}-{\bf r}_k|$ (\fref{fig:VC:pointsource}{\bf B}). 
-Due to the symmetry of problem, we then know that the electric potential 
+Due to the symmetry of the problem, we then know that the electric potential 
 is the same for all ${\bf r}$ on the spherical surface, so that $V({\bf r}) = V(R)$. 
 We also know that its gradient $\nabla V({\bf r}) = d V(R)/dR ~{\bf e}_R$ is constant over the surface, 
 and perpendicular to the surface increment $d{\bf S} = dS {~\bf e}_R$. 
@@ -489,7 +486,7 @@ However, when assuming the ohmic relationship ${\bf i}_\text{t} = -\sigma_\text{
 we implicitly make the assumption that both the intracellular and extracellular 
 components of the tissue current density are linearly dependent on the extracellular
 potential gradient $\nabla V_\text{e}$. 
-
+\tvnnote{Boer vise tilbake til der vi sier at det er godt dokumentert at dette stemmer}
 
 \ghnote{Her kom det altsaa et nytt delkapittel basert paa det vi snakket om i mail-utvekslingene. Jeg foelte det var noedvendig aa klargjoere hvorfor teoretisk utleda CSD-ligning inneholder denne rent ekstracellulaere stroemtettheten fordi alle kilder er kjente, mens vi i forward-modelling burde noeye oss med en mer generell tissue-stroemtetthet fordi vi kun kjenner vaare egne kilder. Kapittelet ender litt utilfredsstillende, synes jeg, med at vi da vaersaagod faar anta at baade intra- og extracellulaere tissue-stroemmer maa avhenge lineart av det EKSTRACELLULAERE potensialet, noe som saann i farta kan hoeres litt snodig ut. 
 Jeg vet ikke hva jeg skal si om dette. Det  er sikkert rimelig nok, men laater ikke som noen selvfoelge. Det er sikkert usant dersom "the unaccounted for sources" inneholder festglade nevroner som lager mye rabalder, men sikkert noksaa sant dersom det kun er snakk om smaa ephaptiske polariseringer, slik jeg indikerte i teksten, men ikke vaaget aa skrive helt ut. Tar gjerne imot kommentarer paa dette.}
@@ -518,7 +515,7 @@ like in the case of EEG.
 
 To be more precise, if the distance from the center of the volume containing the current sources 
 to the measurement point is larger than the maximal distance from volume center to any source \cite**{Jackson1998}, 
-we can reformulate \fref{eq:VC:pointsources} by using the the multipole expansion \cite**{Nunez2006}:
+we can reformulate \fref{eq:VC:pointsources} by using the the multipole expansion \cite**{Nunez2006}\tvnnote{Syntes vi burde faa det bedre frem at dette foreloebig ikke er noen approksimasjon}:
 \begin{equation}
 V_\mathrm{e}({\bf r}) = V_\mathrm{e}(R) = \frac{C_\mathrm{monopole}}{R} + \frac{C_\mathrm{dipole}}{R^2} + \frac{C_\mathrm{quadrupole}}{R^3} + \frac{C_\mathrm{octopole}}{R^4} + ...
 \label{eq:VC:multipole}
@@ -536,7 +533,7 @@ decay rapidly with distance $R$. Provided that we are sufficiently far away from
 $V_\mathrm{e}$ can therefore be well approximated by the dipole contribution alone:
 
 \begin{equation}\label{eq:VC:CDA}
-V_\mathrm{e}({\bf r}) \approx \frac{1}{4 \pi \sigma_sigma_\mathrm{t}t} \frac{|{\bf p}| \cos \theta}{|{\bf r} - {\bf r}_c|^2},
+V_\mathrm{e}({\bf r}) \approx \frac{1}{4 \pi \sigma_\mathrm{t}} \frac{|{\bf p}| \cos \theta}{|{\bf r} - {\bf r}_c|^2},
 \end{equation}
 where we have expressed $C_\mathrm{dipole}$ in terms of the current dipole moment ($\mathbf{p}$) 
 and the angle ($\theta$) between the current dipole moment and the distance vector 
