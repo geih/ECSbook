@@ -5,8 +5,10 @@
 Here we must understand the relationship between "impressed currents" and "primary currents" as they are used in the MEG litterature, i.e., in the book Brain Signals. So far, we have MEG only as an application-chapter. Should we have a theory chapter magnetic fields it in Part 1, or will we sneak the theory in here as we go along?}
 
 \snnote{I've looked into this difference in notation, and explained my findings below.=)}
+\ghnote{Glimrende. Jeg synes vi kan ha med alt du har skrevet. Vi kan begynne med aa si noe som at "vi har ikke fokusert saa mye paa magnetiske felter her i boka, men gir en rask oppsummering av saken her, der vi inkluderer baade teori samt noen referanser til applikasjoner. Kan dele opp i to deler, teoridel + applikasjon der vi viser et enkelt eksempel fra disse multimodal-simuleringene.}
 \snnote{I ended up spending way too much time on magnetic field theory, so I thought I might as well write down the derivation of the Amp\`ere-Laplace law, and some notes on contributions from the primary currents and volume currents. Don't know if this is the place for this theory, or if any of it should be included at all, so feel free to rewrite, move and delete it as you like, just thought I'd write it down just in case.}
 \snnote{If we end up using the term "primary current" ${\bf i}_\mathrm{p}$, we need a different notation, as p means dipole. Most magnetic people use ${\bf J}_\mathrm{p}$, some use ${\bf J}_\mathrm{i}$..}
+
 \sntxt{
 The difference between our notation and the \cite**{Ilmoniemi2019} notation, is that they include the impressed current sources (which they call primary currents, i.e. transmembrane currents) in the total current. We, on the other hand, keep a strict distinction between impressed currents and the resulting tissue current, by keeping the impressed current in the current source density term $C$.
 
@@ -19,8 +21,11 @@ We write the continuity equation as follows:
 \end{equation}
 based on \citeasnoun**{Gratiy2017}.
 
-${\bf i}_\mathrm{t}$ is here the tissue current density resulting from the current source density $C$. All "impressed currents" (i.e. transmembrane currents), are in our case included in $C$.
+${\bf i}_\mathrm{t}$ is here the tissue current density resulting from the current source density $C$. All "impressed currents" (i.e. transmembrane currents), are in our case included in $C$.}
 
+\ghnote{Yes, all that we know of, i.e., all that we have simulated, but in prinsiple, the tissue current could go partially through cell bodies, and thus, would then in reality contain some transmembrane currents.}
+
+\slntxt{
 Next, we write Ohm's law this way:
 
 \begin{equation}\label{eq:MEG:ohm_1}
@@ -31,10 +36,17 @@ Inserting Equation \eqref{eq:MEG:ohm_1} into Equation \eqref{eq:MEG:continuity_1
 
 \begin{equation}\label{eq:MEG:poisson1}
 {\bf \nabla} \cdot (\sigma {\bf \nabla} V_\mathrm{e}) = -C.
-\end{equation}
+\end{equation}}
+
+\ghnote{Yes. I think that we here (and perhaps earlier, when deriving the CSD eq. should make clear that it is the starting point for several kinds of applications with somewhat different cosmologies. 
+
+In a way I like the non-binding definition of $C$ as representing primary currents, and the definition of primary currents as representing everything not represented in the macroscopic volume currents (Ilmoniemi2019). Hence, primary currents could contain the impressed currents (transmembrane, simulated), as well as possible other stuff such as e.g., diffusive currents in the ECS.
+
+I think that we have (1) Forward: $C$ is simulated source, while the left hand side is volume current in tissue with measured $\sigma$ and no assumption on whether or not these currents are purely extracellular. (2) Theoretical approach (ala Gratiy or Freeman) where $C$ is absolutely ALL sources, and left hand side is purely extracellular. (3) Backward modeling where $C$ is inferred from measured $V_e$ under some assumptions that I do not have an overview over, but that probably affect how to interpret the predicted $C$.)  
+}
 
 
-
+\slntxt{
 In \citeasnoun**{Ilmoniemi2019},\citeasnoun**{Sarvas1987} and \citeasnoun**{Hamalainen1993} they write the continuity equation as
 
 \begin{equation} \label{eq:MEG:continuity_2}
@@ -45,7 +57,9 @@ Where {\bf i} is the total current density:
 \begin{equation}\label{eq:MEG:ohm_2}
 {\bf i} = {\bf i}_\mathrm{p} - \sigma {\bf \nabla} V_\mathrm{e}.
 \end{equation}
-Here ${\bf i}_\mathrm{p}$ is referred to as the \textit{source current density}/ \textit{primary current density}.  All current sources, i.e. transmembrane currents, that we have knowledge of are included in ${\bf i}_\mathrm{p}$, so we could as well have named ${\bf i}_\mathrm{p}$ the "impressed current density". In terms of \Fref{eq:VC:Sergey4}, ${\bf i}_\mathrm{p}$ would be the same as $\left< {\bf i}_\mathrm{tot} \right>_c$, given that all membrane source currents were simulated.
+Here ${\bf i}_\mathrm{p}$ is referred to as the \textit{source current density}/ \textit{primary current density}.  All current sources, i.e. transmembrane currents, that we have knowledge of} 
+\ghnote{Hva betyr "knowledge of" her? I Gratiy2017 er jo $\left< {\bf i}_\mathrm{tot} \right>_c$ en teoretisk definisjon} 
+\slntxt{are included in ${\bf i}_\mathrm{p}$, so we could as well have named ${\bf i}_\mathrm{p}$ the "impressed current density". In terms of \Fref{eq:VC:Sergey4}, ${\bf i}_\mathrm{p}$ would be the same as $\left< {\bf i}_\mathrm{tot} \right>_c$, given that all membrane source currents were simulated.
 
 The second term on the right hand side of Equation \eqref{eq:MEG:ohm_2} $- \sigma {\bf \nabla} V_\mathrm{e}$ is the ohmic/ volume current density generated by the primary/ impressed current density ${\bf i}_\mathrm{p}$. This volume current density is the same as our tissue current density.
 
@@ -74,7 +88,6 @@ V_\mathrm{e}({\bf r}) = \frac{1}{4\pi \sigma_\mathrm{t}} \iiint_\Omega \frac{C({
 V_\mathrm{e}({\bf r}) = - \frac{1}{4\pi \sigma_\mathrm{t}} \iiint_\Omega \frac{{\bf \nabla}' \cdot {\bf i}_\mathrm{p}({\bf r}')}{|{\bf r} - {\bf r}'|} d\Omega'.
 \end{equation}
 }
-
 
 \snnote{If we're going to include the full derivation of the Biot-Savart law, we could do something along these lines:}
 
@@ -180,9 +193,10 @@ where
 \begin{equation}\label{eq:MEG:B0}
 {\bf B}_0({\bf r}) = \frac{\mu_0}{4\pi} \int \frac{ {\bf i}_\mathrm{p}({\bf r}') \times ({\bf r} - {\bf r}')}{|{\bf r} - {\bf r}'|^3} dV'.
 \end{equation}
-
-In an infinite, homogeneous conductor ${\bf \nabla}'\sigma = 0$, and we can write ${\bf B} = {\bf B}_\mathrm{0}$, meaning that we don't need to consider volume currents. In this case, it can be useful to express the magnetic field as a function of the current dipole moment. The current density ${\bf i}_\mathrm{p}$ from a current dipole ${\bf p}$ at position ${\bf r}_\mathrm{p}$ can be expressed as
-
+In an infinite, homogeneous conductor ${\bf \nabla}'\sigma = 0$, and we can write ${\bf B} = {\bf B}_\mathrm{0}$, meaning that we don't need to consider volume currents. In this case, it can be useful to express the magnetic field as a function of the current dipole moment. The current density ${\bf i}_\mathrm{p}$ from a current dipole ${\bf p}$ at position ${\bf r}_\mathrm{p}$ can be 
+expressed as}
+\ghnote{Ilmoniemi ligning 3.34 gir eksempler paa andre ting. Nevne det?}
+\slntxt{
 \begin{equation}\label{eq:MEG:i_dipole}
 {\bf i}_\mathrm{p} = {\bf p}({\bf r}_\mathrm{p}) \delta ({\bf r} - {\bf r}_\mathrm{p}).
 \end{equation}
@@ -193,7 +207,6 @@ Inserting \Fref{eq:MEG:i_dipole} into \Fref{eq:MEG:B0}, we obtain
 {\bf B}_\mathrm{p} &= \frac{\mu_0}{4 \pi} \int \frac{{\bf p}({\bf r}_\mathrm{p}) \times ({\bf r} - {\bf r}_\mathrm{p}) \delta ({\bf r} - {\bf r}_\mathrm{p})}{|{\bf r}_\mathrm{p}|^3} \nonumber \\
 &= \frac{\mu_0}{4 \pi} \frac{{\bf p}({\bf r}_\mathrm{p}) \times ({\bf r} - {\bf r}_\mathrm{p})}{|{\bf r} - {\bf r}_\mathrm{p}|^3}.
 \end{align}
-
 
 }
 
