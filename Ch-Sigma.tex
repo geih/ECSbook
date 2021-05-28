@@ -12,6 +12,16 @@ and its value is normally taken from some experimental measurement.
 Estimates of $\sigma_\text{t}$ vary between different recordings, 
 but common values are between 0.1 and 0.5  \si{S/m}.
 
+
+$\sigma_\text{t}$ range from 0.03 -- 0.4 \si{S/m} \cite*{Martinsen2008}
+$\sigma_\text{t} = 0.47 \pm 0.24 \, \si{S/m}$ \cite*{mccann2019}
+$\sigma_\text{t}$ ranges from 0.03 to 0.7 \si{S/m} \cite*{Miceli2017}
+= 0.47 \pm 0.24 \, \si{S/m}$ \cite*{mccann2019}
+
+
+
+\ghnote{Hva er en bra range aa angi her? Micelifiguren oppsummerer studier som har sett paa f-avhengighet, men det finnes vel i tillegg mange maalinger som ikke har den ambisjonen. I Oerjanboka staar det at $\sigma$ for grey matter er 0.03 -- 0.4 S/m i omraadet 1 Hz til 10 kHz. McCann 2019 oppsummerer et sammensurium av ulike maaleteknikker. Det vi er interessert i er nok det de der kaller Directly Applied Current, som er den mest invasive metoden. Uansett lander McCann paa $0.47 \pm 0.24 \,\si{S/m}$, som da lander paa mye hoeyere verdier enn Oerjan. }
+
 Throughout \Fref{chap:VC}, we assumed that $\sigma_\text{t}$ was constant, 
 which amounts to assuming that brain tissue is \tvntxt{infinite, }homogeneous, isotropic and frequency independent.
 \tvntxt{While these assumptions are in many cases appropriate, there are
@@ -102,7 +112,7 @@ The tortuousity accounts for the fact that ions traveling through the medium do 
 but need to take detours around cellular obstacles. 
 The parameters $\alpha$ and $\lambda$ can be measured experimentally. 
 Typical values are $\alpha = 0.2$ and $\lambda = 1.6$ \cite**{Sykova2008}, 
-although these values vary between brain regions, 
+although these values can vary quite substantially between brain regions, 
 and also locally with in a brain region, due to brain-state dependent cellular swelling or shrinkage \cite**{Sykova2008,rasmussen2020}.
 
 The continuous, porous medium approximation has implications 
@@ -153,12 +163,15 @@ we get a conductivity $\sigma_\text{saline} = 1.72 \, \si{S/m}$.
 \end{center}
 \end{table}
 
-We note that the extracellular solution contains many ion species (such as e.g., H$^+$ and HPO4$^{2-}$ ) 
-that we did not include in Table \ref{tab:Neuron:ion-concentrations} and thus not in our calculation of $\sigma_\text{e}$. 
+Note that the extracellular solution contains many ion species (such as e.g., H$^+$ and HPO4$^{2-}$ ) 
+that were not included in Table \ref{tab:Neuron:ion-concentrations}, and thus not in our calculation of $\sigma_\text{saline}$. 
 However, concentrations of ions others than those in Table \ref{tab:Neuron:ion-concentrations} are generally quite low, 
-and therefore not likely to have any major impact on the conductivity. 
-The estimate calculated above agrees well with experimental measures of $\sigma_\text{saline}$, 
-which typically report values in the range between 1.3 and 1.8~\si{S/m}\cite**{Okada1994,Baumann1997,Logothetis2007,Martinsen2008,Miceli2017}.
+and therefore not likely to have any major impact on the conductivity. Note also that the the extracellular concentrations 
+listed in \fref{tab:Neuron:ion-concentrations} were based on reported values in the human cerebrospinal fluid, 
+and that saline concentrations may deviate from this in other tissues. 
+Our estimated value of $\sigma_\text{saline}$ nevertheless seems to be quite representative,
+and agrees well with experimentally reported values of $\sigma_\text{saline}$, 
+which typically range between 1.3 and 1.8~\si{S/m}\cite**{Okada1994,Baumann1997,Logothetis2007,Martinsen2008,Miceli2017}.
 
 
 
@@ -166,8 +179,8 @@ which typically report values in the range between 1.3 and 1.8~\si{S/m}\cite**{O
 \label{sec:Sigma:Se}
 $\sigma_\text{e}$ (\si{S/m}) is the conductivity of the \textit{extracellular medium}\index{Extracellular medium}. 
 As we define it here, it is a theoretical quantity, 
-representing the conductivity experienced by a \textit{theoretical} macroscopic (coarse-grained) current 
-assumed to travel exclusively trough the extracellular part of brain tissue. 
+representing the conductivity experienced by a \textit{hypothetical} macroscopic (coarse-grained) current 
+that travels exclusively trough the extracellular part of brain tissue. 
 This current does not pass through a 3D volume filled entirely by extracellular saline, 
 but is (i) restricted to move only through the fraction $\alpha$ of the total medium volume that is extracellular, 
 and (ii) must take detours around neural and glial obstacles, 
@@ -185,6 +198,8 @@ are 0.2 and 1.6, respectively \cite**{Nicholson1981,Nicholson1998,Sykova2008}.
 With these values, $\sigma_\text{e}$ becomes almost a factor 13 lower than $\sigma_\text{saline}$, 
 and with the above estimate, $\sigma_\text{saline} = 1.72 \, \si{S/m}$, 
 we get a an estimated value $\sigma_\text{e} = 0.134\, \si{S/m}$. 
+
+
 
 
 \subsection{\blue{Conductivity of brain tissue: $\sigma_\text{t}$}}
