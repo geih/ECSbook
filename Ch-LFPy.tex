@@ -568,7 +568,7 @@ we have the two feasible options:
 	\phi(\mathbf{R}, t) = \sum_{u =1}^{N_X} \mathbf{F}_u\mathbf{I}_u~,
 	\end{equation}
 	where $ \mathbf{F}_u \equiv \mathbf{F}_u(\mathbf{R},\mathbf{r}_u)$  and $ \mathbf{I}_u$ denotes the VC forward solution and current sources of the number $N_X$ different neurons included in the network. 
-	This formulation then requires some intermediate storage of single-cell contributions to the signal.
+	This formulation then requires some intermediate storage of single-cell contributions to the signal before summing
 \item Compute the signal as the product
 	\begin{equation}
 	\phi(\mathbf{R}, t) = \mathbf{F}\mathbf{I}~, 
@@ -576,14 +576,14 @@ we have the two feasible options:
 	that is, the forward solution $\mathbf{F} \equiv \mathbf{F}(\mathbf{R},\mathbf{r})$ is precomputed for all neuronal compartments across all $N_X$ neurons at once, and is multiplied with all currents $\mathbf{I} \equiv \mathbf{I}(t)$ irrespective of source neurons. 
 	This formulation which avoids explicit for-loops does not allow for storing single-cell contributions to the signal, 
 	but as the typical signals of interests are population signals this is perhaps less of an issue. 
-	One can in any case compute single-cell contributions by extracting the corresponding rows and columns of the matrices and multiply them.
+	One can in any case compute single-cell contributions by extracting the corresponding rows and columns of the matrices and multiply them separately.
 \end{enumerate}
 
 
 As it will become quite useful for the computational schemes possible for predicting extracellular signals from networks of simplified neuron representations later in this Chapter, let us first define some properties of a recurrently connected network of MC neurons, 
 and display some predictions using the MC+VC scheme. 
-For compactness, we choose a symbolic notation wherever possible as we will reuse these symbols later. 
-Their particular values are summarized in \ehnote{legg/ref til tabell med verdier}.
+For compactness, we choose a symbolic notation wherever possible as we will also reuse these symbols later. 
+Their particular values are summarized in \Fref{tab:Ch-LFPy:MC-network}.
 Then:
 
 \begin{enumerate}
@@ -592,9 +592,10 @@ Then:
 \item Let $u \in \{ 1, \ldots , N_X \}$ and $v \in \{ 1, \ldots , N_Y \}$ denote pre- and postsynaptic neuron index, respectively.
 \item Let $\mathbf{r}_u \sim \widetilde{\mathbf{r}}_X$ denote the discretely sampled somatic location of neuron $u$,
 where $\widetilde{\mathbf{r}}_X$ describes the probability density function of somatic locations of population $X$ in space.
-\item Let $K_{YX}$ denote the total number of synapses between presynaptic population $X$ and postsynaptic population $Y$.
+\item Let $K_{YX}$ denote the total number of pairwise connections between presynaptic population $X$ and postsynaptic population $Y$.
 Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}.
 For small connection probabilities the expression can be approximated by $C_{YX} = K_{YX} / (N_Y N_X)$.
+\item Let $k_{uv} \sim \widetilde{k}_{YX}$ denote the number of synapses per connection if a connection exist between neurons $u$ and $v$ 
 \item Let layer or region (e.g., cortical layer) be denoted by $L$.
 \item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
 Connection probabilities may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{A}_Y$.
@@ -645,6 +646,43 @@ The mean population-averaged firing rates are given shown in the legend.
 }
 \label{fig:LFPy_network}
 \end{figure}
+
+
+\begin{table}[htp]
+\caption{MC neuron and network parameters}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Symbol & Value/definition & Description \\
+\hline
+$X$ & $\{\text{Excitatory (E)}, \text{inhibitory (I)} \}$ & Presynaptic cell types/populations \\
+$Y$ & $X$ & Postsynaptic cell types/populations \\
+$N_X \in \{N_E, N_I\}$ & $\{4096, 1024\}$ & Number of neurons in population $X$ \\
+$r$ & $\sqrt{x^2 + y^2}$ & Radius around vertical $z-$axis \\
+$\mathcal{N}(\mu, \sigma)(x)$ &  $\frac{1}{\sqrt{2 \pi \sigma^2}} \exp^{-\frac{(x - \mu)^2}{2 \sigma^2}}$ & Gaussian distribution \\
+$\widetilde{\mathbf{r}}_X$ & $\mathcal{N}(0, 100\si{\micro\metre})(z) \ast r^2~\text{for}~r\in[0, 100\si{\micro\metre}]$ & Cell body probability density function \\
+$C_{YX}$ & $0.05~\text{for all $Y$ and $X$}$ & Pairwise connection probability \\
+$\widetilde{k}_{YX}$ & \( \displaystyle \mathcal{N}(2, 0.5)~\text{for}~X=E \\ \mathcal{N}(5, 1)~\text{for}~X=I \) & Multapse distribution function \\
+$\overline{G}_{\mathrm{syn}YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(0.2\si{\nano\siemens}, 0.02\si{\nano\siemens})~\text{for}~X=E \\ \mathcal{N}(4\si{\nano\siemens}, 0.4\si{\nano\siemens})~\text{for}~X=Y \end{cases} \) & Maximum synaptic conductance \\
+$E_{\mathrm{syn}X}$ & $\{0, -80\si{\milli\volt}\}$ & Synaptic reversal potential \\
+\hline
+\hspace
+\hline
+Symbol & Value/definition & Description \\
+\hline
+$l_\mathrm{soma}, $ & & \\
+$\overline{g}_\mathrm{Na}$ & & \\
+$\overline{g}_\mathrm{K}$ & & \\
+$\overline{g}_\mathrm{Ih}$ & & \\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:Ch-LFPy:MC-network}
+\end{table}
+
+
+
+
 
 
 In \Fref{fig:LFPy_network}
