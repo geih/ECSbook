@@ -633,7 +633,7 @@ By convention, all connections are outgoing from the soma (or alternatively the 
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-network.pdf}
 \end{center}
 \caption{\textbf{Stylized two-population MC neuron network with predictions of extracellular potentials.}
-({\bf A}) Cell and electrode geometry. The network is constructed of one excitatory (`E') and one inhibitory (`I') population.
+({\bf A}) Neuronal populations and electrode geometry. The network is constructed of one excitatory (`E') and one inhibitory (`I') population.
 Only a subset of cells are shown from each population.
 The black point markers along the $z$-axis denote locations of electrode contact points with separation \SI{50}{\micro\metre}. 
 ({\bf B}) Synapse counts per connection $K_{YX}$ along the vertical $z$-axis in bins of \SI{20}{\micro\metre}.
@@ -642,7 +642,6 @@ The mean population-averaged firing rates are given shown in the legend.
 ({\bf D}) Per-population spike-count histograms with bin size \SI{5}{\milli\second}.
 ({\bf E}) Extracellular potentials.
 ({\bf F}) Components of the current dipole moment along the $x,y,z-$axes.
-\ehnote{legg til panel labels.}
 }
 \label{fig:LFPy_network}
 \end{figure}
@@ -657,6 +656,18 @@ In \Fref{fig:LFPy_network}
 
 %\ehnote{gammalt:}
 %%\sout{Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)}
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Figures/Ch-LFPy/Ch-LFPy-geirsketch}
+\end{center}
+\caption{\textbf{Predictions of signals from simplified neuron network model descriptions}.
+({\bf A}) blabla
+\ehnote{Geir's motiverende utkast for forenkla prediksjoner}}
+\label{fig:LFPy_circuits}
+\end{figure}
+
 
 Many biophysically detailed and phenomenological models of individual neurons and neuronal networks that have been developed in the past have incorporated spatial geometry of the neurons at various level of detail.
 To represent and simulate the dynamics of such neuron models using computers the MC cable formalism (\Fref{chap:Neuron}) remains a common choice.
@@ -712,7 +723,7 @@ We will next go through the number of assumptions and methodology underlying thi
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=\columnwidth]{Figures/Ch-LFPy/hybridmodel}
-\caption{Example application of the hybrid scheme to a cortical microcircuit model in \ehnote{citeasnoun Hagen2016}. 
+\caption{Example application of the hybrid scheme to a cortical microcircuit model in \protect\citeasnoun{Hagen2016}. 
 ({\bf A}) Sketch of point-neuron network w. 8 cortical  populations spanning layers 2/3, 4, 5 and 6, with one excitatory (E) and inhibitory (I) population each. 
 The excitatory thalamocortical (TC) population projects mainly to layer 4 and layer 6. 
 ({\bf B}) Population spike raster plots. The TC population is activated at $t=900~$\si{ms} denoted by vertical line.
@@ -1091,7 +1102,7 @@ may then be combined into a spatiotemporal filter kernel $H_{vu}(\mathbf{r},\tau
 where $u$ and $v$ denote pre- and postsynaptic neuron indices, respectively.
 One may compute this filter as
 \begin{equation}
-H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{I}_{\mathrm{syn}YX} \left( \delta(t - \Delta_{vu} \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~,
+H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{I}_{\mathrm{syn}YX} \left( \delta(t - \Delta_{vu}) \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~,
 \end{equation}
 where the Green's like functions $G_{vu}(\mathbf{r}, \tau)$ encompass all dendritic filtering effects on the synaptic input currents into each corresponding distribution of transmembrane currents $\mathbf{I}_\mathrm{m}^{\langle ij \rangle}(\mathbf{r}, \tau)$.
 If each kernel function which is specific to each pair of pre- and postsynaptic neuron can be computed,
