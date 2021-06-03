@@ -637,14 +637,15 @@ the extracellular potential surrounding a set of point current sources $I_k$ is 
 \phi(x,y,z) = \sum_k \frac{I_k}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}}.
 \label{eq:Sigma:Panisos}
 \end{equation}
+A derivation of this equation is found in \fref{app:Aniso}. 
+
 If we use the CSD-description of the sources (eq.~\ref{VC:eq:csds}), the corresponding expression is:
 \begin{equation}
 \phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}} \, dV.
 \label{eq:Sigma:Canisos}
 \end{equation}
-\tvnnote{Should we derive this in an appendix? 
-It seems it is quite hard to find a derivation of this in the literature, but I managed to find one eventually. (Parasnis1986)}
-\ghnote{Sure... Har du den boka?}
+
+
 %\ghnote{Trenger vi en presisering her? Hva betyr det at effekten er lav? Jeg tenker at 50 prosent stoerre sigma burde gi 50 prosent stoerre amplituder, og det er vel ikke en svak effekt? Mener vi at spenningen i en utvalgt retning er relativt upaavirket av anisotropi i andre retninger enn den utvalgte?}
 %\tvnnote{La til figur. Vi ble overasket i Ness et al. (2015), over at det nesten ikke var noe synlig effect, hverken naar det var simulert med FEM eller med punktkilde-formlene. Forskjellen kan kanskje kvantifiseres bedre, men er det noe vits?}
 
