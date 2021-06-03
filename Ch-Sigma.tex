@@ -10,7 +10,7 @@ and its value is normally taken from some experimental measurement.
 Estimates of $\sigma_\text{t}$ vary between different recordings, 
 but common values are between 0.1 and 0.5  \si{S/m}.
 
-\ghtxt{Hva er en bra range aa oppgi her? Micelifiguren oppsummerer studier som har sett paa f-avhengighet, men det finnes i tillegg mange maalinger som ikke har den ambisjonen. I Oerjanboka staar det at $\sigma$ for grey matter er 0.03 -- 0.4 S/m i omraadet 1 Hz til 10 kHz. Nunez sier 0.29 \,\si{S/m} for cortex, 5 Hz. McCann 2019 oppsummerer et sammensurium av ulike maaleteknikker som gir ganske ulike resultater, men lander en slags konklusjon om $0.47 \pm 0.24 \,\si{S/m}$ (grey matter), som da lander paa mye hoeyere verdier enn Oerjan Martinsens 0.03 -- 0.4 \si{S/m}  (grey matter). Miceli ligger ml. 0.03 og 0.7. Grodzinsky har en tabell der de angir verdier paa 1 kHz, og en range  0.13 (kanin) -- 0.22 (misc) \, \si{S/m}. Okada 1994 sa at skillpaddecerebellum laa paa 0.15 (molecular layer) -- 0.25 (granular layer). Er dette noe vi skal skrive om?}
+\ghtxt{Hva er en bra range aa oppgi her? Micelifiguren oppsummerer studier som har sett paa f-avhengighet, men det finnes i tillegg mange maalinger som ikke har den ambisjonen. I Oerjanboka staar det at $\sigma$ for grey matter er 0.03 -- 0.4 S/m i omraadet 1 Hz til 10 kHz. Nunez sier 0.29 \,\si{S/m} for cortex, 5 Hz. McCann 2019 oppsummerer et sammensurium av ulike maaleteknikker som gir ganske ulike resultater, men lander en slags konklusjon om $0.47 \pm 0.24 \,\si{S/m}$ (grey matter), som da lander paa mye hoeyere verdier enn Oerjan Martinsens 0.03 -- 0.4 \si{S/m}  (grey matter). Miceli ligger ml. 0.03 og 0.7. Grodzinsky har en tabell der de angir verdier paa 1 kHz, og en range  0.13 (kanin) -- 0.22 (misc) \, \si{S/m}. Okada 1994 sa at skillpaddecerebellum laa paa 0.15 (molecular layer) -- 0.25 (granular layer). Er dette noe vi skal skrive om? Goto 2010 sier 0.3 S/m grey matter/cortex.}
 
 %$\sigma_\text{greymatter}$ range from 0.03 -- 0.4 \si{S/m} in grey matter \cite**{Martinsen2008}
 %$\sigma_\text{greymatter} = 0.47 \pm 0.24 \, \si{S/m}$ \cite**{mccann2019}
@@ -637,14 +637,15 @@ the extracellular potential surrounding a set of point current sources $I_k$ is 
 \phi(x,y,z) = \sum_k \frac{I_k}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}}.
 \label{eq:Sigma:Panisos}
 \end{equation}
+A derivation of this equation is found in \fref{app:Aniso}. 
+
 If we use the CSD-description of the sources (eq.~\ref{VC:eq:csds}), the corresponding expression is:
 \begin{equation}
 \phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}} \, dV.
 \label{eq:Sigma:Canisos}
 \end{equation}
-\tvnnote{Should we derive this in an appendix? 
-It seems it is quite hard to find a derivation of this in the literature, but I managed to find one eventually. (Parasnis1986)}
-\ghnote{Sure... Har du den boka?}
+
+
 %\ghnote{Trenger vi en presisering her? Hva betyr det at effekten er lav? Jeg tenker at 50 prosent stoerre sigma burde gi 50 prosent stoerre amplituder, og det er vel ikke en svak effekt? Mener vi at spenningen i en utvalgt retning er relativt upaavirket av anisotropi i andre retninger enn den utvalgte?}
 %\tvnnote{La til figur. Vi ble overasket i Ness et al. (2015), over at det nesten ikke var noe synlig effect, hverken naar det var simulert med FEM eller med punktkilde-formlene. Forskjellen kan kanskje kvantifiseres bedre, men er det noe vits?}
 

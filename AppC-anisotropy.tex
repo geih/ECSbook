@@ -1,0 +1,89 @@
+\chapter{Derivation of the point-source equation for an anisotropic medium}
+\label{app:Aniso}
+We here give a derivation of the point source equation for an anisotropic medium
+(\fref{eq:Sigma:Panisos}. We start with demanding current continuity 
+for point source $I$ in position ${\bf r} = 0$: 
+\begin{equation}
+\nabla\cdot{\mathbf{i}} = I \delta^3({\bf r}), 
+\label{eq:AppAniso:1}
+\end{equation}
+and integrate this over arbitrary an volume $\Omega$ containing the source to get: 
+\begin{equation}
+\iiint_{\Omega} \nabla {\bf i} \,d\Omega =  I.
+\label{eq:AppAniso:marit}
+\end{equation}
+
+We assume that current densities in any direction $x,y,z$ depend on the field in that direction only, 
+but that the conductivity may differ between the directions. The current density is then given by: 
+\begin{equation}
+{\bf i} = - \left(\sigma_x \frac{\partial V}{\partial x} {\bf e}_x +
+ \sigma_y \frac{\partial V}{\partial y} {\bf e}_y +
+  \sigma_z \frac{\partial V}{\partial z} {\bf e}_z \right), 
+\label{eq:AppAniso:i}
+\end{equation}
+and its divergence by: 
+\begin{equation}
+\nabla \cdot {\bf i} = -\left(\sigma_x \frac{\partial^2 V}{\partial x^2} +
+ \sigma_y \frac{\partial^2 V}{\partial y^2}+
+  \sigma_z \frac{\partial^2 V}{\partial z^2} \right).
+\label{eq:AppAniso:nablai}
+\end{equation}
+
+To proceed, we make the coordinate substitutions \cite**{Parasnis1986}: 
+$\xi = x/\sqrt{\sigma_x}$, $\eta = y/\sqrt{\sigma_y}$, $\zeta = z/\sqrt{\sigma_z}$, 
+so that:
+\begin{equation}
+\tilde{\nabla} {\bf i} = - \tilde{\nabla}^2 V = - \left(\frac{\partial^2 V}{\partial \xi^2} + \frac{\partial^2 V}{\partial \eta^2}+ \frac{\partial^2 V}{\partial \zeta^2} \right).
+\label{eq:AppAniso:nablai2}
+\end{equation}
+where $\tilde{\nabla}$ is the gradient operator in the new coordinate system, and
+\begin{equation}
+d\tilde{\Omega} = d\xi d\eta d\zeta =  \sqrt{\sigma_x\sigma_y\sigma_z} d\Omega
+\label{eq:AppAniso:domega}
+\end{equation}
+is the volume increment in the new coordinate system. These substitutions are made because the field will be spherically symmetric in the new coordinate system. With the new variables, \fref{eq:AppAniso:marit} becomes:
+\begin{equation}
+\iiint_{\tilde{\Omega}} \tilde{\nabla}^2 V \,d\tilde{\Omega} =  - \sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\label{eq:AppAniso:marit2}
+\end{equation}
+
+Using Gauss' theorem, we convert the volume integral on the left hand side
+to an integral over the surface $\tilde{S}$ (enclosing the volume $\tilde{\Omega}$), 
+so that \fref{eq:AppAniso:marit2} becomes:
+
+\begin{equation}
+\oiint_{\tilde{S}} \tilde{\nabla}V({\bf \tilde{r}}) \cdot \, d{\bf \tilde{S}}  = -\sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\label{eq:AppAniso:berit1}
+\end{equation}
+where 
+\begin{equation}
+{\bf \tilde{r}} = \frac{x{\bf e}_x}{\sqrt{\sigma_x}} + \frac{y{\bf e}_y}{\sqrt{\sigma_y}}+\frac{z{\bf e}_z}{\sqrt{\sigma_z}}
+\end{equation}
+is the position vector in the $\xi\eta\zeta$-coordinate system. Due to spherical symmetry, this can be rewritten as
+\begin{equation}
+\oiint_{\tilde{S}} \frac{d V(\tilde{R})}{d\tilde{R}} d{\tilde{S}}  = -\sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\label{eq:AppAniso:berit1ogenhalv}
+\end{equation}
+where:
+\begin{equation}
+\tilde{R} = |{\bf \tilde{r}}| = \sqrt{x^2/\sigma_x + y^2/\sigma_y + z^2/\sigma_z}
+\label{eq:AppAniso:R}
+\end{equation}
+is the radius of the sphere (in $\xi\eta\zeta$), and $V(\tilde{R})$ is the same for all positions on its surface. 
+\Fref{eq:AppAniso:berit1ogenhalv} has the solution:
+
+\begin{equation}
+4\pi \tilde{R}^2 \frac{d V(\tilde{R})}{d\tilde{R}} = -\sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\label{eq:AppAniso:berit2}
+\end{equation}
+If we integrate this from $\infty$ to $\tilde{R}$, and use that $V(\infty) = 0$, we get:
+\begin{equation}
+\frac{4\pi V (\tilde{R})}{\tilde{R}} = \sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\label{eq:AppAniso:berit3}
+\end{equation}
+Finally, we substitute back for $\tilde{R}$ (\fref{eq:AppAniso:R}) to obtain the final solution: 
+\begin{equation}
+V(x,y,z) = \frac{I_k}{4 \pi \sqrt{\sigma_y\sigma_z x^2 + \sigma_x\sigma_z y^2 + \sigma_x\sigma_y z^2}}
+\label{eq:VC:berit3}
+\end{equation}
+which is the same as \fref{eq:Sigma:Panisos} postulated earlier. 
