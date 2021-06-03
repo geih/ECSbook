@@ -477,9 +477,6 @@ In conclusion, the computation of $V_\text{e}$ by use of \fref{eq:VC:CSDit} toge
 an ohmic model for the tissue current, and a measured value for $\sigma_\text{t}$, 
 does not require any \textit{a-priori} assumption regarding the pathways 
 taken by the currents evoked by the (simulated) sources $C$.
-\tvnnote{Boer vise tilbake til der vi sier at det er godt dokumentert at dette stemmer}
-\ghnote{At hva stemmer? Forstaar ikke hva du mener.}
-
 
 %\begin{ennumerate}
 %\item The tissue currents do not cross any membranes. In this case, they will (i)
@@ -554,6 +551,7 @@ but less well for intracranial electrocorticography (ECoG) \cite**{Naess2020}.
 \section{\blue{Modeling recording electrodes}}
 \label{sec:VC:electrodes}
 \index{Electrode model}
+\tvnnote{Jeg har restrukturert hele denne seksjonen.}
 \tvnnote{Paa sikt vil jeg gjerne spoerre noen elektrode-folk vi kjenner om aa kontroll-lese denne seksjonen, for eksempel Martinsen, Nelson, Frey eller Obien.}
 %\gen{Kanskje det kunne vaere en ide aa ogsaa beskrive methods-of-imaging og modellering i MEAs her?
 %Hadde foerst tenkt aa ta det med i Spikes-kapitlet. Men den gjelder jo like mye for LFP og har blitt brukt av oss i denne
@@ -573,11 +571,13 @@ the measurement electrodes themselves must have a very low resistance
 so that no potential drop occurs from the measurement site to the amplifier. 
 The electrodes are therefore typically made of a highly conductive metal like silver or platinum, 
 and the potential directly on the inside of the electrode surface is in practice homogeneous. 
-In contrast, the amplifier must have a very high impedance \ghtxt{(frequency dependent resistance)}, 
+In contrast, the amplifier must have a very high impedance \tvntxt{(a generalized version of resistance that can incorporate capacitive effects and be frequency dependent)}, 
 so that a negligible amount of current will cross the tissue-electrode interface, 
 as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Martinsen2008,Moulin2008,Ishai2013}. 
 The homogeneous potential inside the recording electrode ideally corresponds to a spatial average 
 of the potential across the outer surface of the electrode \cite**{Nelson2008,Nelson2010,Ness2015,Vermaas2020b}.
+\tvntxt{We start by ignoring any possible temporal signal distortion introduced by the
+recording equipment, but get back to this in \fref{sec:VC:elec_distrotions}.}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -591,6 +591,70 @@ of the potential across the outer surface of the electrode \cite**{Nelson2008,Ne
 \label{fig:VC:elec_circuit}
 \end{figure}
 
+\subsection{\blue{Point-electrode approximation}}
+\label{sec:VC:point-electrode}
+\index{Point-electrode}
+
+The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to ignoring possible effects from recording electrodes or electrode shanks, and assuming that the recorded potential is identical to $V_\mathrm{e}$, as computed using VC theory at single points, for example through \fref{eq:VC:pointsource2}. For relatively small micro-electrodes this has been found to be a reasonable approximation \cite**{Moffitt2005,Moulin2008,Ness2015,Buccino2019}.
+%\ghnote{Er ikke det rett: Point-electrode approximation = VC-teori uten no knussel?}
+%\gen{Men i prinsipp kunne man vel ha en daarlig amplifier. Saa det er vel "ideal" point-electrode approximation som tilsvarer knusselfri VC-teori?}
+
+\subsection{\blue{Disc-electrode approximation}}
+\label{sec:VC:disc-electrode}
+\index{Disc-electrode approximation}
+Under some experimental conditions  $V_\mathrm{e}$ varies substantially across the electrode surface, 
+either because the electrodes are large (like ECoG electrodes at the cortical surface), 
+or because $V_\mathrm{e}$ varies substantially over small distances 
+(like extracellular spikes from axons). 
+The potential directly on the inside of the electrode surface is in practice homogeneous (since it is made of a highly conductive metal), and ideally corresponds to a spatial average of the potential directly on the outside of the electrode. Therefore, the area of the electrode surface will affect how large a region the extracellular potential is averaged over. 
+
+To account for the effect of the electrode size we can use \ghtxt{\sout{the point-electrode approximation}VC-theory}\tvnnote{syntes det er fint aa ha med at dette egentlig bare er en triviell utvidelse av punk-kilde approksimasjonen} to calculate $V_\mathrm{e}$ at many different points across the electrode surface 
+and compute the average potential, 
+an approach referred to as the disc-electrode approximation \cite**{CamunasMesa2013,Linden2014,Hagen2015,Ness2015,Viswam2019}. 
+The disc-electrode approximation accounts for the physical extent of the electrodes, and therefore also for the spatial filtering effects introduced by electrodes that are large compared to the spatial variations of the $V_\mathrm{e}$. See \fref{sec:Spikes:electrode_size} for an example of this approach applied to calculating extracellular 
+spikes recorded with electrodes of different sizes.
+
+%Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, 
+%electrode properties \ghtxt{\sout{can still affect the}} \ghtxt{will nevertheless affect the relationship between the true potential and the} recorded potential \ghtxt{so that $V_\mathrm{Rec} \neq V_\mathrm{True}$}. 
+%For example, since the (homogeneous) potential directly on the inside of the electrode surface corresponds to a spatial average of the potential on the outside, the area of the electrode surface will affect how large a region the extracellular potential is averaged over. In practice, this means for example that extracellular spikes (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~\si{\micro\metre} \cite**{Moffitt2005,Moulin2008,Viswam2019}, see \fref{sec:Spikes:electrode_size}. \ghnote{Kan dette skrivers klarere? Less prominent when larger than 30 mum - less than what, hvorfor 30? Antar det kan skrives generelt: Less prominent the larger the diameter. Er dette rett: Difficult to detect when larger than 30 mum?}
+
+Very close to electrodes the electrodes can themselves affect the close-by extracellular potential, 
+since they represent a region of a highly conductive material in contact with the tissue being measured from.
+The effect of the presence of highly conductive electrodes can be investigated using the Finite Element Method (FEM)\index{Finite Element Method}. \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point-current source more than $\sim$2 times the electrode radius away from the electrode. The point-electrode approximation was found to be fairly accurate for distanced greater than $\sim$4 times the electrode radius away from the electrode, see \fref{fig:VC:FEM_elec}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1\textwidth]{Figures/VC/fig_FEM_elec.pdf}
+\end{center}
+\caption[]{\textbf{Finite Element Method versus the point and disc electrode approximations.}
+{\bf A:} The lead-field from an electrode surface at $x$,$y$=0, simulated with the Finite Element Method (FEM). The highly conductive material of the electrode was included in the simulation, as a cylinder protruding out of the bottom of an otherwise homogeneous and isotropic volume conductor. The $x$- and $y$-axes are shown in units of the electrode radius, which in this specific example was 10~\si{\micro\metre}.
+{\bf B:} The lead-field from a point current source at the bottom of an homogeneous and isotropic volume conductor, $x$,$y$=0.
+{\bf C:} The lead-field from 500 point current source randomly distributed across the electrode surface, centered at $x$,$y$=0. Each current source was scaled by 1/500.
+The Method of Images (Sec.~\ref{sec:Sigma:nonhomo}) was used to account for the bottom of the volume for the point- and disc-electrode approximation.
+See \citeasnoun**{Ness2015} for full simulation details.
+}
+\label{fig:VC:FEM_elec}
+\end{figure}
+
+In certain cases, like in ECoG \index{ECoG} measurements from the cortical surface, the recording electrodes are both large ($\sim$~2-5~mm diameter) and close to the neuronal sources (the thickness of the human cortex is $\sim$3~mm). In such cases the electrode properties can therefore be expected to have large effect on measured potentials, see for example \citeasnoun**{Vermaas2020b} and \citeasnoun**{Rogers2020}, as well as \fref{chap:ECoG}.
+
+\gen{Her maa vi sjekke:} \citeasnoun**{Viswam2019}
+
+\subsection{\blue{Effect of the electrode shanks}}
+\label{sec:VC:elec_shafts}
+Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}, while no such effects were found for small microwires \cite**{Buccino2019}. \tvnnote{Can also hurt the brain to push large objects into it, with cell-death, eudema and encapsulation (Moffitt and McIntyre, 2005).}
+\gen{Virkelig? Da maa jeg slutte med det .. :-)} 
+%%%%%%
+
+\subsection{\blue{Signal distortion from recording equipment}}
+\label{sec:VC:elec_distrotions}
+\tvntxt{It is commonly assumed that if the proper recording equipment is used, 
+electrode impedance or other electrode properties should not substantially distort recorded potentials. In other words, it is assumed that the recorded potential, $V_{Rec}$ is identical to the average potential across the electrode surface, which we will here refer to as $V_{True}$ 
+\cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}.
+In reality there are however several different complicating factors that can cause the recorded potential 
+to differ from the "physiolological" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}
+}
+\tvnnote{Dette er jeg ikke ferdig med!}
 \ghtxt{
 For the sake of examining electrode effects, let us consider a specific recording location, and define for
 this location:
@@ -610,7 +674,7 @@ In reality there are however several different complicating factors which can ca
 measured potential to differ from the "true" potential Robinson1968,Martinsen2008,Nelson2008}}
 
 \ghtxt{
-With an an "ideal" electrode\index{ideal electrode}, $V_\mathrm{Rec}$ would be identical to $V_\mathrm{True}$ 
+With an "ideal" electrode\index{ideal electrode}, $V_\mathrm{Rec}$ would be identical to $V_\mathrm{True}$ 
 at the tip of the recording electrode, and $V_\mathrm{True}$ would be unaffected by the electrode itself, 
 and thus identical to $V_\mathrm{Phys}$. 
 In reality there are however several different complicating factors that can cause the recorded potential 
@@ -641,7 +705,7 @@ Importantly, the values of both $R_\mathrm{e}$ and $C_\mathrm{e}$ are typically
 expected to be highly frequency dependent \cite**{Martinsen2008,Nelson2008,Viswam2019}, 
 and are often considered to be approximately proportional to $1/\sqrt{f}$ \cite**{Robinson1968}, 
 where $f$ is the frequency of the recorded signal (implications of this frequency dependence is discussed below). 
-The resistance of wire from the electrode-electrolyte interface to the amplifier is denoted $R_\mathrm{m}$, 
+The resistance of the wire from the electrode-electrolyte interface to the amplifier is denoted $R_\mathrm{m}$, 
 and is typically assumed to be negligible. 
 $C_\mathrm{sh}$ and $R_\mathrm{sh}$ represent all the shunt capacitance and resistance to ground 
 that occur between the electrode surface and the amplifier, through wires, connections etc., 
@@ -658,10 +722,9 @@ If this is not fulfilled, the recorded potential will have frequency-dependent p
 Importantly, the effective electrode impedance, $Z_e'$, increases strongly for low frequencies 
 and is typically much more frequency dependent than the effective amplifier input impedance, 
 $Z_a'$ \cite**{Nelson2008}. 
-This means that some given recording equipment might be able to measure \ghtxt{rapidly varying signals, such as}
+This means that some given recording equipment might be able to measure rapidly varying signals, such as
 extracellular spikes, with negligible distortion, while at the same time substantial 
-phase and amplitude distortions might be present in \ghtxt{slower signals, such as local field potentials,} 
-\ghtxt{\sout{LFP signals}} measured with the same equipment \cite**{Nelson2008,Nelson2010,Viswam2019}.
+phase and amplitude distortions might be present in slower signals, such as local field potentials, measured with the same equipment \cite**{Nelson2008,Nelson2010,Viswam2019}.
 
 Note that \tvntxt{\sout{metallic recording electrodes are typically} the measurement equipment typically used in neuroscience is} unable to measure static (DC) potentials, 
 or capture changes slower than $\sim$ 0.1 Hz.
@@ -676,6 +739,7 @@ remove the unobservable DC-potential.
 \tvnnote{Jeg vet ikke om noen laerebok referanse, men det var det som ble oppgitt som nedre grense baade av Dirk og Anna (altsaa alle tilfeller jeg har vaert borti eksperimentell data), se Miceli-artikkelen, Uhlivora-artikkelen, og ogsaa Einevoll et al., 2007. Fra en av Anna's nyere artikler fant jeg frem til dokumentasjonen paa amplifieren de har brukt, og der staar det "Lower cutoff frequency configurable from 0.1 Hz to 500 Hz", men jeg vet ikke helt om forklaringen jeg har gitt over er helt riktig.}
 \ehnote{Det er vel da mer en begrensning med sampling apparat enn selve elektrodemaalingen. Si du sampler mange kanaler med int16 presisjon - det blir da et problem hvis DC-verdiene fluktuerer mye mer enn selve signalet (e.g., LFP).}
 \gen{Slik jeg forstod det da jeg snakket med Ulbert om saken i urtiden er det alltid et DC "kontaktpotensial" mellom metallkontakter og elektrolytter. Dette er i praksis ukjent og vil variere fra kontakt til kontakt, f.eks., i en MEA. Ulbert sa at DC potensialer derfor kun kunne maales med liquid elektroder.}
+\tvnnote{Er det greit naa, som jeg har byttet til "measurement equipment typically used in neuroscience"?}
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -696,66 +760,13 @@ because of electrode polarization, see \fref{sec:EPI}.
 
 \ghnote{Hang ikke helt med. I avsn. over sto det "electrode properties should not distort recorded potentials. Under staar det electrode properties can still affect the recorded potential. Hva er forskjellen? Tipper at du foerst mente at elektroden er slik at $V_\mathrm{True} = V_\mathrm{Phys}$, men i neste tilfelle at det ikke noedvendigvis er slik at $V_\mathrm{Rec} \neq V_\mathrm{True}$. Har laget en versjon basert paa den forstaaelsen.}
 
-Under the assumption that the proper recording equipment is used \cite**{Nelson2008,Nelson2010}, 
-electrode properties \ghtxt{\sout{can still affect the}} \ghtxt{will nevertheless affect the relationship between the true potential and the} recorded potential \ghtxt{so that $V_\mathrm{Rec} \neq V_\mathrm{True}$}. For example, since the (homogeneous) potential directly on the inside of the electrode surface corresponds to a spatial average of the potential on the outside, the area of the electrode surface will affect how large a region the extracellular potential is averaged over. In practice, this means for example that extracellular \ghtxt{\sout{action potentials}spikes} (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~\si{\micro\metre} \cite**{Moffitt2005,Moulin2008,Viswam2019}, see \fref{sec:Spikes:electrode_size}. \ghnote{Kan dette skrivers klarere? Less prominent when larger than 30 mum - less than what, hvorfor 30? Antar det kan skrives generelt: Less prominent the larger the diameter. Er dette rett: Difficult to detect when larger than 30 mum?}
 
 %if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials.
 %\gen{Her maa vi vaere presise. Potensialet paa selve elektroden vil vaere det samme, det som vil variere er hva potensialet ville vaert paa denne "virtuelle" flaten hvis det ikke hadde vaert en metallisk elektrode der.}
 %In practice, this means for example that extracellular action potentials (which are very spatially confined) will be less prominent on electrodes with diameters larger than $\sim$30~$\mu$m \cite**{Moffitt2005,Moulin2008,Viswam2019}, see Section~\ref{Spikes:sec:elec_size}.
+%\gen{Burde noe av teksten over vaert i en egen subsection?}
 
 
-\subsection{\blue{Point-electrode approximation}}
-\label{sec:VC:point-electrode}
-\index{Point-electrode}
-
-\gen{Burde noe av teksten over vaert i en egen subsection?}
-
-The most straightforward and also most common approach when modeling extracellular recordings is to use the ideal point electrode approximation. This corresponds to ignoring \ghtxt{\sout{any potential effect}possible effects} from recording electrodes or electrode shanks, \ghtxt{assuming that the recorded potential, $V_\mathrm{Rec}$, is identical to the physiological potential, which in turn is identical to $V_\mathrm{e}$ as computed using VC theory.} \ghtxt{\sout{and calculating 
-the extracellular potential at single points.}} For relatively small micro-electrodes this has been found to be a reasonable approximation \cite**{Moffitt2005,Moulin2008,Ness2015,Buccino2019}.
-\ghnote{Er ikke det rett: Point-electrode approximation = VC-teori uten no knussel?}
-\gen{Men i prinsipp kunne man vel ha en daarlig amplifier. Saa det er vel "ideal" point-electrode approximation som tilsvarer knusselfri VC-teori?}
-
-\subsection{\blue{Disc-electrode approximation}}
-\label{sec:VC:disc-electrode}
-\index{Disc-electrode approximation}
-\ghtxt{\sout{In some cases recording electrodes are large enough that the the extracellular potential}
-Under some experimental conditions  $V_\mathrm{e}$} varies substantially across the electrode surface, 
-either because the electrodes are large (like ECoG electrodes at the cortical surface), 
-or because \ghtxt{\sout{the extracellular potential}$V_\mathrm{e}$} varies substantially over small distances 
-(like extracellular spikes from axons). 
-In such cases, we can use \ghtxt{\sout{the point-electrode approximation}VC-theory}\tvnnote{syntes det er fint aa ha med at dette egentlig bare er en triviell utvidelse av punk-kilde approksimasjonen} to calculate \ghtxt{\sout{the potential}$V_\mathrm{e}$} at \ghtxt{\sout{many}all} points across the electrode surface 
-and compute the average potential \ghtxt{as a proxy for $V_\mathrm{Rec}$}, 
-an approach referred to as the disc-electrode approximation \cite**{CamunasMesa2013,Linden2014,Hagen2015,Ness2015,Viswam2019}. 
-\ghtxt{\sout{This approach takes into account}The disc-electrode approximation accounts for} the physical extent of the electrodes, \ghtxt{\sout{and the disc-electrode approximation can therefore account} and therefore also} for the spatial filtering effects introduced by electrodes that are large compared to the spatial variations of the \ghtxt{\sout{extracellular potential}$V_\mathrm{e}$}. See \fref{sec:Spikes:electrode_size} for an example of this approach applied to calculating extracellular 
-spikes recorded with electrodes of different sizes.
-
-However, very close to electrodes the electrodes can themselves affect the close-by extracellular potential, 
-since they represent a region of a highly conductive material in contact with the tissue being measured from.
-The effect of the presence of highly conductive electrodes can be investigated using the Finite Element Method (FEM) \index{Finite Element Method}. \citeasnoun**{Ness2015} found that the disc-electrode approximation was fairly accurate for estimating measured potentials from a point current source more than $\sim$2 times the electrode radius away from the electrode. The point-electrode approximation was \ghtxt{\sout{also}} found to be fairly accurate for distanced greater than $\sim$4 times the electrode radius away from the electrode, see \fref{fig:VC:FEM_elec}.
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=1\textwidth]{Figures/VC/fig_FEM_elec.pdf}
-\end{center}
-\caption[]{\textbf{Finite Element Method versus the point and disc electrode approximations.}
-{\bf A:} The lead-field from an electrode surface at $x$,$y$=0, simulated with the Finite Element Method (FEM). The highly conductive material of the electrode was included in the simulation, as a cylinder protruding out of the bottom of an otherwise homogeneous and isotropic volume conductor. The $x$- and $y$-axes are shown in units of the electrode radius, which in this specific example was 10~\si{\micro\metre}.
-{\bf B:} The lead-field from a point current source at the bottom of an homogeneous and isotropic volume conductor, $x$,$y$=0.
-{\bf C:} The lead-field from 500 point current source randomly distributed across the electrode surface, centered at $x$,$y$=0. Each current source was scaled by 1/500.
-The Method of Images (Sec.~\ref{sec:Sigma:nonhomo}) was used to account for the bottom of the volume for the point- and disc-electrode approximation.
-See \citeasnoun**{Ness2015} for full simulation details.
-}
-\label{fig:VC:FEM_elec}
-\end{figure}
-
-In certain cases, like in ECoG \index{ECoG} measurements from the cortical surface, the recording electrodes are both large ($\sim$~2-5~mm diameter) and close to the neuronal sources (the thickness of the human cortex is $\sim$3~mm). In such cases the electrode properties can therefore be expected to have large effect on measured potentials, see for example \citeasnoun**{Vermaas2020b} and \citeasnoun**{Rogers2020}.
-
-\gen{Her maa vi sjekke:} \citeasnoun**{Viswam2019}
-
-\subsection{\blue{Effect of the electrode shanks}}
-\label{sec:VC:elec_shafts}
-Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}, while no such effects were found for small microwires \cite**{Buccino2019}. \tvnnote{Can also hurt the brain to push large objects into it, with cell-death, eudema and encapsulation (Moffitt and McIntyre, 2005).}
-\gen{Virkelig? Da maa jeg slutte med det .. :-)} 
-%%%%%%
 
 \subsection{\blue{Effect of position of reference electrode}}
 \label{sec:VC:ref_elec}
