@@ -764,39 +764,3 @@ Large multi-contact electrode shanks can be expected to have a substantial effec
 \snnote{Jeg snakket med Malin og de pleier aa gjoere det slik: For LFP-maalinger pleier de aa sette en jordingsskrue paa skallen, ganske langt unna der maaleelektrodene skal settes ned (for aa unngaa aa skade maaleomraadet.) Dette kommer i tillegg til jording av selve systemet. For MUA-maalinger har de i tillegg en referanseelektrode per elektrode, og denne vil vaere plassert i naerheten av maaleelektroden, et sted der raasignalet er mest mulig likt. Istedenfor referanseelektrode kan de evt bruke en median/snitt-verdi for alle kanaler i en hemisfaere, evt innenfor en tetrode.}
 
 
-
-
-\section{\red{Validation of framework}}
-\tvnnote{Jeg foeler vi typisk skriver "extracellular potentials can be modelled by well-established VC theory", og sleger paa en sitering til en kilde som vel egentlig bare sier akkurat det samme.
- Jeg har lyst til aa dedikere litt plass til
-"validering". Type: Hvilke beviser finnes for at ECP kan modelleres med transmembrane stroemmer fra kabel-ligning kombinert med VC?}
-
-\ghnote{Lykke til!}
-\tvnnote{Takk takk :-) Men det at det virker veldig ambisioest og argumentere for at selve hoved-rammeverket vaart, som vi selv har stor tiltro til, i det hele tatt er gyldig, kan jo ogsaa sees paa som et argument for at det er viktig aa gjoere det :-)}
-
-\gex{Absolutt en god ide aa samle argumenter for hvorfor vi tror paa vaart framework. 
-Det viktigste argumentet er vel at MC og VC er validert godt hver for seg, men ogsaa 
-beregnede spikes og LFPs har stemt rimelig godt med eksperimenter.
-Her er starten paa en liste:
-\begin{itemize}
-\item MC
-\begin{itemize}
-\item Antagelsen om at MC modellering (kabelligning) fungerer for aa regne ut intracellulaere membranpotensialer er vel rimelig godt bekreftet, going back to Hodgkin og Huxley og aksonet deres
-\item Antagelsen om at MC modellering (kabelligning) derved fungerer for aa regne ut transmembrane strommer er vel kanskje ikke sjekket direkte mot eksperimenter(?), men det er er rimelig aa tenke at dette maa fungere ogsaa, gitt at 
-MC fungerer for intracellulaere membranpotensialer 
-\item ...
-\end{itemize}
-\item VC
-\begin{itemize}
-\item VC-antagelsen om relasjonen mellom injisert str{\o}m og maalte potensialer er godt bekreftet for stroemmer injisert med elektroder, fra centimeterskala og vel egentlig ned til 0.1 mm skala \cite{Miceli2017}
-\item .... \ghnote{Pods2015 simulerte AP-signaturer utenfor et stykke med akson med elektrodiffusjon: PNP vs elektronoyetralt skjema, samt line-source approximation. Konklusjon: De tre skjemaene gir: (1) Debye-lag $< \si{0.5}{\mu m}$ fra membranen: Alle tre skjema gir ulike resulater. (2) Diffusjons-lag $< \si{4}{\mu m}$: PNP og elektronoyetralt skjema konvergerer, men LSA henger litt etter. (3) Bulk $> \si{10}{\mu m}$ fra membran: Samtlige skjema konvergerer}
-
-\end{itemize}
-\item MC+VC 
-\begin{itemize}
-\item Beregnede spikes ligner til dels veldig paa det som sees eksperimentelt, cf. \Fref{fig:Spikes:Henze}. Dette er ogsaa for smaa avstander hvor vel VC antagelsen ikke er testet direkte.
-\item Beregnet unitary thalamocortical LFP ligner veldig paa det som sees eksperimentelt \cite{Hagen2017}
-\item ... \ghnote{Gaute foreslo aa her ta fig 8.1 og reprodusere den i simulering: Plugg inn $V_m$ som maalt og simuler $V_e$ som maalt (forhaapentligvis).}
-\end{itemize}
-\end{itemize}
-}
