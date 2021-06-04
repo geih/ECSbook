@@ -649,10 +649,11 @@ The mean population-averaged firing rates are given shown in the legend.
 \end{figure}
 
 
-\begin{table}[htp]
-\caption{MC neuron and network parameters. 
+\begin{table}[!htp]
+\caption{MC neuron and recurrent network parameters. 
 The leak, Na$^+$ and K$^+$ channel dynamics are those of \protect\citeasnoun{Hodgkin1952}. 
-The hyperpolarization-activated current Ih is taken from \protect\citeasnoun{Hay2011}.}
+The hyperpolarization-activated current Ih is taken from \protect\citeasnoun{Hay2011}.
+\ehnote{Skal definere multapse dist som diskret fordeling. Legg til params for ext. input.}}
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -660,7 +661,7 @@ Symbol & Value/definition & Description \\
 \hline
 $X$ & $\{\text{Excitatory (E)}, \text{inhibitory (I)} \}$ & Presynaptic cell types/populations \\
 $Y$ & $X$ & Postsynaptic cell types/populations \\
-$N_X \in \{N_E, N_I\}$ & $\{4096, 1024\}$ & Number of neurons in population $X$ \\
+$N_X \in \{N_E, N_I\}$ & $\{4096, 1024\}$ & Number of neurons in population \\
 $r$ & $\sqrt{x^2 + y^2}$ & Radius around vertical $z-$axis \\
 $\mathcal{N}(\mu, \sigma)(x)$ &  $\frac{1}{\sqrt{2 \pi \sigma^2}} \exp^{-\frac{(x - \mu)^2}{2 \sigma^2}}$ & Gaussian distribution \\
 $\widetilde{\mathbf{r}}_X$ & $\propto \mathcal{N}(0, 100\si{\micro\metre})(z) \ast r^2~\text{for}~r\in[0, 100\si{\micro\metre}]$ & Cell body probability density function \\
