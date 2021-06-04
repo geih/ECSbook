@@ -111,6 +111,16 @@
 
 % fancyrefs and hyperrefs
 \usepackage[plain]{fancyref}
+\newcommand*{\fancyrefapplabelprefix}{app}
+\fancyrefaddcaptions{english}{%
+  \providecommand*{\frefappname}{appendix}%
+  \providecommand*{\Frefappname}{Appendix}%
+} 
+\frefformat{plain}{\fancyrefapplabelprefix}{\frefappname\fancyrefdefaultspacing#1}
+\Frefformat{plain}{\fancyrefapplabelprefix}{\Frefappname\fancyrefdefaultspacing#1}
+ 
+
+
 \usepackage[colorlinks = true,
             linkcolor = blue,
             urlcolor  = blue,
