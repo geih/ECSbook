@@ -595,7 +595,8 @@ where $\widetilde{\mathbf{r}}_X$ describes the probability density function of s
 \item Let $K_{YX}$ denote the total number of pairwise connections between presynaptic population $X$ and postsynaptic population $Y$.
 Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}.
 For small connection probabilities the expression can be approximated by $C_{YX} = K_{YX} / (N_Y N_X)$.
-\item Let $k_{uv} \sim \widetilde{k}_{YX}$ denote the number of synapses per connection if a connection exist between neurons $u$ and $v$ 
+\item Let $k_{uv} \sim \widetilde{k}_{YX}$ denote the number of synapses per connection if a connection exist between neurons $u$ and $v$. 
+$\widetilde{k}_{YX}$ here describes a discrete distribution from which integer numbers greater than 0 are drawn.  
 \item Let layer or region (e.g., cortical layer) be denoted by $L$.
 \item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
 Connection probabilities may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{A}_Y$.
@@ -649,7 +650,9 @@ The mean population-averaged firing rates are given shown in the legend.
 
 
 \begin{table}[htp]
-\caption{MC neuron and network parameters}
+\caption{MC neuron and network parameters. 
+The leak, Na$^+$ and K$^+$ channel dynamics are those of \protect\citeasnoun{Hodgkin1952}. 
+The hyperpolarization-activated current Ih is taken from \protect\citeasnoun{Hay2011}.}
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -662,18 +665,26 @@ $r$ & $\sqrt{x^2 + y^2}$ & Radius around vertical $z-$axis \\
 $\mathcal{N}(\mu, \sigma)(x)$ &  $\frac{1}{\sqrt{2 \pi \sigma^2}} \exp^{-\frac{(x - \mu)^2}{2 \sigma^2}}$ & Gaussian distribution \\
 $\widetilde{\mathbf{r}}_X$ & $\mathcal{N}(0, 100\si{\micro\metre})(z) \ast r^2~\text{for}~r\in[0, 100\si{\micro\metre}]$ & Cell body probability density function \\
 $C_{YX}$ & $0.05~\text{for all $Y$ and $X$}$ & Pairwise connection probability \\
-$\widetilde{k}_{YX}$ & \( \displaystyle \mathcal{N}(2, 0.5)~\text{for}~X=E \\ \mathcal{N}(5, 1)~\text{for}~X=I \) & Multapse distribution function \\
-$\overline{G}_{\mathrm{syn}YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(0.2\si{\nano\siemens}, 0.02\si{\nano\siemens})~\text{for}~X=E \\ \mathcal{N}(4\si{\nano\siemens}, 0.4\si{\nano\siemens})~\text{for}~X=Y \end{cases} \) & Maximum synaptic conductance \\
-$E_{\mathrm{syn}X}$ & $\{0, -80\si{\milli\volt}\}$ & Synaptic reversal potential \\
+$\widetilde{k}_{YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(2, 0.5)~\text{for}~X=E \\ \mathcal{N}(5, 1)~\text{for}~X=I \end{cases} \) & Multapse distribution function \\
 \hline
-\hspace
+$L_\text{soma}, L_\text{apic}, L_\text{basal} $ & \(\displaystyle \begin{cases} &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=E \\ &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section length \\
+$d_\text{soma}, d_\text{apic}, d_\text{basal} $ & \(\displaystyle \begin{cases} &\{30, 3, 2\}~\si{\micro\metre}~\text{for}~X=E \\ &\{15, 2, 2\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section diameter \\
+$n^\text{seg}_\text{soma}, n^\text{seg}_\text{apic}, n^\text{seg}_\text{basal} $ & \(\displaystyle \begin{cases} &\{1, 21, 5\}~\text{for}~X=E \\ & \{1, 5, 5\} ~\text{for}~X=I  \end{cases} \) & \# segments per section \\
+$c_\text{m}$ & \SI{1}{\micro\farad\per\square\centi\metre} & Membrane capacitance \\
+$R_\text{a}$ &\SI{100}{\ohm\centi\metre}  & Axial resistivity \\
+$g_\text{L}$ & \SI{0.0003}{\siemens\per\square\centi\metre} & Passive leak conductance \\
+$E_\text{L}$ & \SI{-54.3}{\milli\volt} & Passive leak reversal potential \\
+$\overline{g}_\mathrm{Na}$ & 0.12, 0.012, 0.012 \si{\siemens\per\square\centi\metre}& Na$^+$  conductance \\
+$E_\text{Na}$ & \SI{50}{\milli\volt} & Na$^+$ reversal potential \\
+$\overline{g}_\mathrm{K}$ & 0.036, 0.0036, 0.0036 \si{\siemens\per\square\centi\metre} & K$^+$ conductance  \\
+$E_\text{K}$ & \SI{-77}{\milli\volt} & K$^+$ reversal potential \\
+$\overline{g}_\mathrm{Ih}$ & 0.002, 0.01, 0.01 \si{\siemens\per\square\centi\metre} & Ih-current conductance \\
 \hline
-Symbol & Value/definition & Description \\
-\hline
-$l_\mathrm{soma}, $ & & \\
-$\overline{g}_\mathrm{Na}$ & & \\
-$\overline{g}_\mathrm{K}$ & & \\
-$\overline{g}_\mathrm{Ih}$ & & \\
+$\overline{G}_{\mathrm{syn}YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(\SI{0.2}{\nano\siemens}, \SI{0.02}{\nano\siemens})~\text{for}~X=E \\ \mathcal{N}(\SI{4}{\nano\siemens}, \SI{0.4}{\nano\siemens})~\text{for}~X=I \end{cases} \) & Maximum synaptic conductance \\
+$E_{\mathrm{syn}X}$ & \SI{0}{\milli\volt} for $X=E$, \SI{-80}{\milli\volt} for $X=I$ & Synaptic reversal potential \\
+$f_{YX}(t)$ & $\beta$-function (\fref{eq:Ch-Neuron-Beta-function}) & Synaptic temporal kernel \\
+$\tau_1$ & \SI{0.2}{\milli\second} for $X=E$, \SI{0.1}{\milli\second} for $X=I$ & Synaptic rise time constant \\
+$\tau_2$ & \SI{1.8}{\milli\second} for $X=E$, \SI{9.0}{\milli\second} for $X=I$ & Synaptic decay time constant \\
 \hline
 \end{tabular}
 \end{center}
