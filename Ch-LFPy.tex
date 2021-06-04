@@ -663,28 +663,42 @@ $Y$ & $X$ & Postsynaptic cell types/populations \\
 $N_X \in \{N_E, N_I\}$ & $\{4096, 1024\}$ & Number of neurons in population $X$ \\
 $r$ & $\sqrt{x^2 + y^2}$ & Radius around vertical $z-$axis \\
 $\mathcal{N}(\mu, \sigma)(x)$ &  $\frac{1}{\sqrt{2 \pi \sigma^2}} \exp^{-\frac{(x - \mu)^2}{2 \sigma^2}}$ & Gaussian distribution \\
-$\widetilde{\mathbf{r}}_X$ & $\mathcal{N}(0, 100\si{\micro\metre})(z) \ast r^2~\text{for}~r\in[0, 100\si{\micro\metre}]$ & Cell body probability density function \\
+$\widetilde{\mathbf{r}}_X$ & $\propto \mathcal{N}(0, 100\si{\micro\metre})(z) \ast r^2~\text{for}~r\in[0, 100\si{\micro\metre}]$ & Cell body probability density function \\
 $C_{YX}$ & $0.05~\text{for all $Y$ and $X$}$ & Pairwise connection probability \\
 $\widetilde{k}_{YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(2, 0.5)~\text{for}~X=E \\ \mathcal{N}(5, 1)~\text{for}~X=I \end{cases} \) & Multapse distribution function \\
 \hline
-$L_\text{soma}, L_\text{apic}, L_\text{basal} $ & \(\displaystyle \begin{cases} &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=E \\ &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section length \\
-$d_\text{soma}, d_\text{apic}, d_\text{basal} $ & \(\displaystyle \begin{cases} &\{30, 3, 2\}~\si{\micro\metre}~\text{for}~X=E \\ &\{15, 2, 2\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section diameter \\
-$n^\text{seg}_\text{soma}, n^\text{seg}_\text{apic}, n^\text{seg}_\text{basal} $ & \(\displaystyle \begin{cases} &\{1, 21, 5\}~\text{for}~X=E \\ & \{1, 5, 5\} ~\text{for}~X=I  \end{cases} \) & \# segments per section \\
+$\mathcal{S}$ & $\{\text{soma, apic, basal} \} $ & Morphology sections \\
+$L_\mathcal{S} $ & \(\displaystyle \begin{cases} &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=E \\ &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section length \\
+$d_\mathcal{S} $ & \(\displaystyle \begin{cases} &\{30, 3, 2\}~\si{\micro\metre}~\text{for}~X=E \\ &\{15, 2, 2\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section diameter \\
+$n_\text{seg}^\mathcal{S} $ & \(\displaystyle \begin{cases} &\{1, 21, 5\}~\text{for}~X=E \\ & \{1, 5, 5\} ~\text{for}~X=I  \end{cases} \) & \# segments per section \\
+\hline
 $c_\text{m}$ & \SI{1}{\micro\farad\per\square\centi\metre} & Membrane capacitance \\
 $R_\text{a}$ &\SI{100}{\ohm\centi\metre}  & Axial resistivity \\
 $g_\text{L}$ & \SI{0.0003}{\siemens\per\square\centi\metre} & Passive leak conductance \\
 $E_\text{L}$ & \SI{-54.3}{\milli\volt} & Passive leak reversal potential \\
-$\overline{g}_\mathrm{Na}$ & 0.12, 0.012, 0.012 \si{\siemens\per\square\centi\metre}& Na$^+$  conductance \\
+$\overline{g}_\mathrm{Na}^\mathcal{S}$ & $\{0.12, 0.012, 0.012\}$ \si{\siemens\per\square\centi\metre}& Na$^+$  conductance \\
 $E_\text{Na}$ & \SI{50}{\milli\volt} & Na$^+$ reversal potential \\
-$\overline{g}_\mathrm{K}$ & 0.036, 0.0036, 0.0036 \si{\siemens\per\square\centi\metre} & K$^+$ conductance  \\
+$\overline{g}_\mathrm{K}^\mathcal{S}$ & $\{0.036, 0.0036, 0.0036\}$ \si{\siemens\per\square\centi\metre} & K$^+$ conductance  \\
 $E_\text{K}$ & \SI{-77}{\milli\volt} & K$^+$ reversal potential \\
-$\overline{g}_\mathrm{Ih}$ & 0.002, 0.01, 0.01 \si{\siemens\per\square\centi\metre} & Ih-current conductance \\
+$\overline{g}_\mathrm{Ih}^\mathcal{S}$ & $\{0.002, 0.01, 0.01\}$ \si{\siemens\per\square\centi\metre} & Ih-current conductance \\
 \hline
 $\overline{G}_{\mathrm{syn}YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(\SI{0.2}{\nano\siemens}, \SI{0.02}{\nano\siemens})~\text{for}~X=E \\ \mathcal{N}(\SI{4}{\nano\siemens}, \SI{0.4}{\nano\siemens})~\text{for}~X=I \end{cases} \) & Maximum synaptic conductance \\
 $E_{\mathrm{syn}X}$ & \SI{0}{\milli\volt} for $X=E$, \SI{-80}{\milli\volt} for $X=I$ & Synaptic reversal potential \\
 $f_{YX}(t)$ & $\beta$-function (\fref{eq:Ch-Neuron-Beta-function}) & Synaptic temporal kernel \\
 $\tau_1$ & \SI{0.2}{\milli\second} for $X=E$, \SI{0.1}{\milli\second} for $X=I$ & Synaptic rise time constant \\
 $\tau_2$ & \SI{1.8}{\milli\second} for $X=E$, \SI{9.0}{\milli\second} for $X=I$ & Synaptic decay time constant \\
+\hline
+$\mathcal{L}_{YXL}(z)$ & 
+\(
+	\begin{cases}
+		& \frac{\mathcal{N}(0, 100)(z)}{3} + \frac{2\mathcal{N}(500, 100)(z)}{3}, \\
+		& \quad X=E, Y=E, \mathcal{S} \setminus \{\text{soma}\} \\
+		& \mathcal{N}(50, 100)(z), X=E, Y=I, \mathcal{S} \setminus \{\text{soma}\} \\
+		& \mathcal{N}(-50, 100)(z), X=I, Y=E\\
+		& \mathcal{N}(-100, 100)(z), X=I, Y=I \\
+	\end{cases}
+\)
+& depth-dependence of synaptic density \\
 \hline
 \end{tabular}
 \end{center}
