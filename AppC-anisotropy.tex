@@ -38,12 +38,12 @@ so that:
 \end{equation}
 where $\tilde{\nabla}$ is the gradient operator in the new coordinate system, and
 \begin{equation}
-d\tilde{\Omega} = d\xi d\eta d\zeta =  \sqrt{\sigma_x\sigma_y\sigma_z} d\Omega
+d\tilde{\Omega} = d\xi d\eta d\zeta =  \frac{d\Omega}{\sqrt{\sigma_x\sigma_y\sigma_z} }
 \label{eq:AppAniso:domega}
 \end{equation}
 is the volume increment in the new coordinate system. These substitutions are made because the field will be spherically symmetric in the new coordinate system. With the new variables, \fref{eq:AppAniso:marit} becomes:
 \begin{equation}
-\iiint_{\tilde{\Omega}} \tilde{\nabla}^2 V \,d\tilde{\Omega} =  - \sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\iiint_{\tilde{\Omega}} \tilde{\nabla}^2 V \,d\tilde{\Omega} =  - \frac{I_k}{\sqrt{\sigma_x\sigma_y\sigma_z}}
 \label{eq:AppAniso:marit2}
 \end{equation}
 
@@ -52,16 +52,16 @@ to an integral over the surface $\tilde{S}$ (enclosing the volume $\tilde{\Omega
 so that \fref{eq:AppAniso:marit2} becomes:
 
 \begin{equation}
-\oiint_{\tilde{S}} \tilde{\nabla}V({\bf \tilde{r}}) \cdot \, d{\bf \tilde{S}}  = -\sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\oiint_{\tilde{S}} \tilde{\nabla}V({\bf \tilde{r}}) \cdot \, d{\bf \tilde{S}}  = - \frac{I_k}{\sqrt{\sigma_x\sigma_y\sigma_z}}
 \label{eq:AppAniso:berit1}
 \end{equation}
 where 
 \begin{equation}
 {\bf \tilde{r}} = \frac{x{\bf e}_x}{\sqrt{\sigma_x}} + \frac{y{\bf e}_y}{\sqrt{\sigma_y}}+\frac{z{\bf e}_z}{\sqrt{\sigma_z}}
 \end{equation}
-is the position vector in the $\xi\eta\zeta$-coordinate system. Due to spherical symmetry, this can be rewritten as
+is the position vector in the $\xi\eta\zeta$-coordinate system. Due to spherical symmetry, this can be rewritten as:
 \begin{equation}
-\oiint_{\tilde{S}} \frac{d V(\tilde{R})}{d\tilde{R}} d{\tilde{S}}  = -\sqrt{\sigma_x\sigma_y\sigma_z}I_k
+\oiint_{\tilde{S}} \frac{d V(\tilde{R})}{d\tilde{R}} d{\tilde{S}}  = - \frac{I_k}{\sqrt{\sigma_x\sigma_y\sigma_z}}
 \label{eq:AppAniso:berit1ogenhalv}
 \end{equation}
 where:
@@ -73,12 +73,12 @@ is the radius of the sphere (in $\xi\eta\zeta$), and $V(\tilde{R})$ is the same 
 \Fref{eq:AppAniso:berit1ogenhalv} has the solution:
 
 \begin{equation}
-4\pi \tilde{R}^2 \frac{d V(\tilde{R})}{d\tilde{R}} = -\sqrt{\sigma_x\sigma_y\sigma_z}I_k
+4\pi \tilde{R}^2 \frac{d V(\tilde{R})}{d\tilde{R}} = - \frac{I_k}{\sqrt{\sigma_x\sigma_y\sigma_z}}
 \label{eq:AppAniso:berit2}
 \end{equation}
 If we integrate this from $\infty$ to $\tilde{R}$, and use that $V(\infty) = 0$, we get:
 \begin{equation}
-\frac{4\pi V (\tilde{R})}{\tilde{R}} = \sqrt{\sigma_x\sigma_y\sigma_z}I_k
+V(\tilde{R}) = \frac{I_k}{4\pi \tilde{R}\sqrt{\sigma_x\sigma_y\sigma_z}}
 \label{eq:AppAniso:berit3}
 \end{equation}
 Finally, we substitute back for $\tilde{R}$ (\fref{eq:AppAniso:R}) to obtain the final solution: 
