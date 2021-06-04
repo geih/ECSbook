@@ -207,8 +207,8 @@ Typical choices for $f(t)$ are\index{Synapse models}:
 \begin{align}
 &\text{(i) exponential decay:} \;\; &f(t) &= e^{-(t-t_\text{s})/\tau}\, \Theta(t-t_\text{s}) \\
 &\text{(ii) $\alpha$-function:} \;\; &f(t) &=  \frac{(t-t_\text{s})}{\tau}e^{1-(t-t_\text{s})/\tau} \, \Theta(t-t_\text{s}) \\
-&\text{(iii) $\beta$-function:} \;\; &f(t) &= \left( \frac{e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2} }{e^{-\tau_\text{peak}/\tau_1} - e^{-\text{peak}/\tau_2} } \right) \, \Theta(t-t_\text{s}) \\
-&&& \;\; \text{with:} \;\; \text{peak} = \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \nonumber,
+&\text{(iii) $\beta$-function:} \;\; &f(t) &= \left( \frac{e^{-(t-t_\text{s})/\tau_1} - e^{-(t-t_\text{s})/\tau_2} }{e^{-\tau_\text{peak}/\tau_1} - e^{-\text{peak}/\tau_2} } \right) \, \Theta(t-t_\text{s}) \label{eq:Ch-Neuron-Beta-function}\\
+&&& \;\; \text{with:} \;\; \ehtxt{\tau}_\text{peak} = \frac{\tau_2 \tau_1}{\tau_2 - \tau_1} \log(\frac{\tau_2}{\tau_1}) \nonumber,
 \label{eq:Neuron:sf4}
 \end{align}
 \ehnote{Dette uttrykket (iii) gir ikke lenger mening -- symbolet $\tau$ mangler her og der!}
