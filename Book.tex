@@ -111,6 +111,16 @@
 
 % fancyrefs and hyperrefs
 \usepackage[plain]{fancyref}
+\newcommand*{\fancyrefapplabelprefix}{app}
+\fancyrefaddcaptions{english}{%
+  \providecommand*{\frefappname}{appendix}%
+  \providecommand*{\Frefappname}{Appendix}%
+} 
+\frefformat{plain}{\fancyrefapplabelprefix}{\frefappname\fancyrefdefaultspacing#1}
+\Frefformat{plain}{\fancyrefapplabelprefix}{\Frefappname\fancyrefdefaultspacing#1}
+ 
+
+
 \usepackage[colorlinks = true,
             linkcolor = blue,
             urlcolor  = blue,
@@ -282,10 +292,11 @@ your eyes only
 	\end{itemize}
 Disadvantage: HH becomes $i_\text{m} = i^\text{cap} + i_\text{Na} + i_\text{K} + i_\text{L}$ with cap as superfix but the rest as subfix. But maybe that's okay?
 \ehnote{Jeg bruker lowercase consistent, i.e., $i_\mathrm{cap}$ -- en kan indeksere som $i_\mathrm{cap}^{\langle i \rangle} \equiv i_\mathrm{cap}[i]$}
-\item Potential: $\phi$ or $V$? My favorite is $\phi$. This is greek to Gaute, who seems to prefer $V$. 
+\item Potential: Use $V$!
 \item Refer to main Sections as "Chapters", subsections as Sections? Answer: YES. This is also implicit in the Cambridge-template. 
 	\ehnote{Jeg la til en import av fancyref over. Den definerer kommandoen {\textbackslash}Fref\{\} og skal kunne skjoenne forskjellen paa chapter og section utfra innhold i label (chap:*, sec:*, eq:*, etc.), og faa ting internt konsistent. Test:} 
 	\ehtxt{{\textbackslash}label\{sec:Intro\}: \Fref{sec:Intro}; {\textbackslash}label\{chap:Intro\}: \Fref{chap:Intro}}
+	\ghtxt{La inn ny kommando for appendix: {\textbackslash}label\{app:Aniso\}: \fref{app:Aniso}}. 
 	\ehnote{En del labels er ikke riktig formattert naar det er sagt: {\textbackslash}label\{Basics:eq:UE\} vil ikke fungere for eksempel og boer endres til {\textbackslash}label\{eq:Basics:UE\} e.l.}
 \item Reference style: 
 	\begin{itemize} 
