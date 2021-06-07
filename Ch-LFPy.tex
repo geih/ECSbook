@@ -583,7 +583,7 @@ we have the two feasible options:
 As it will become quite useful for the computational schemes possible for predicting extracellular signals from networks of simplified neuron representations later in this Chapter, let us first define some properties of a recurrently connected network of MC neurons, 
 and display some predictions using the MC+VC scheme. 
 For compactness, we choose a symbolic notation wherever possible as we will also reuse these symbols later. 
-Their particular values are summarized in \Fref{tab:Ch-LFPy:MC-network}.
+Their particular values are summarized in \Fref{tab:Ch-LFPy:MC-network-I}, \ref{tab:Ch-LFPy:MC-network-II} and \ref{tab:Ch-LFPy:MC-network-III}.
 Then:
 
 \begin{enumerate}
@@ -649,8 +649,8 @@ The mean population-averaged firing rates are given shown in the legend.
 \end{figure}
 
 
-\begin{table}[htp]
-\caption{MC neuron and network parameters. 
+\begin{table}[!htp]
+\caption{MC neuron and recurrent network parameters (continued in \Fref{tab:Ch-LFPy:MC-network-II}).
 The leak, Na$^+$ and K$^+$ channel dynamics are those of \protect\citeasnoun{Hodgkin1952}. 
 The hyperpolarization-activated current Ih is taken from \protect\citeasnoun{Hay2011}.}
 \begin{center}
@@ -660,39 +660,106 @@ Symbol & Value/definition & Description \\
 \hline
 $X$ & $\{\text{Excitatory (E)}, \text{inhibitory (I)} \}$ & Presynaptic cell types/populations \\
 $Y$ & $X$ & Postsynaptic cell types/populations \\
-$N_X \in \{N_E, N_I\}$ & $\{4096, 1024\}$ & Number of neurons in population $X$ \\
+$N_X \in \{N_\text{E}, N_\text{I}\}$ & $\{4096, 1024\}$ & Number of neurons in population \\
 $r$ & $\sqrt{x^2 + y^2}$ & Radius around vertical $z-$axis \\
 $\mathcal{N}(\mu, \sigma)(x)$ &  $\frac{1}{\sqrt{2 \pi \sigma^2}} \exp^{-\frac{(x - \mu)^2}{2 \sigma^2}}$ & Gaussian distribution \\
-$\widetilde{\mathbf{r}}_X$ & $\mathcal{N}(0, 100\si{\micro\metre})(z) \ast r^2~\text{for}~r\in[0, 100\si{\micro\metre}]$ & Cell body probability density function \\
+$\widetilde{\mathbf{r}}_X$ & $\propto \mathcal{N}(0, 100\si{\micro\metre})(z) \ast r^2~\text{for}~r\in[0, 100\si{\micro\metre}]$ & Cell body probability density function \\
 $C_{YX}$ & $0.05~\text{for all $Y$ and $X$}$ & Pairwise connection probability \\
-$\widetilde{k}_{YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(2, 0.5)~\text{for}~X=E \\ \mathcal{N}(5, 1)~\text{for}~X=I \end{cases} \) & Multapse distribution function \\
+$\widetilde{k}_{YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(2, 0.5)~\text{for}~X=\text{E} \\ \mathcal{N}(5, 1)~\text{for}~X=\text{I} \end{cases} \) & Multapse distribution function \\
 \hline
-$L_\text{soma}, L_\text{apic}, L_\text{basal} $ & \(\displaystyle \begin{cases} &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=E \\ &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section length \\
-$d_\text{soma}, d_\text{apic}, d_\text{basal} $ & \(\displaystyle \begin{cases} &\{30, 3, 2\}~\si{\micro\metre}~\text{for}~X=E \\ &\{15, 2, 2\}~\si{\micro\metre}~\text{for}~X=I \end{cases} \)  & Section diameter \\
-$n^\text{seg}_\text{soma}, n^\text{seg}_\text{apic}, n^\text{seg}_\text{basal} $ & \(\displaystyle \begin{cases} &\{1, 21, 5\}~\text{for}~X=E \\ & \{1, 5, 5\} ~\text{for}~X=I  \end{cases} \) & \# segments per section \\
+$\mathcal{S}$ & $\{\text{soma, apic, basal} \} $ & Morphology sections \\
+$L_\mathcal{S} $ & \(\displaystyle \begin{cases} &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=\text{E} \\ &\{30, 1000, 200\}~\si{\micro\metre}~\text{for}~X=\text{I} \end{cases} \)  & Section length \\
+$d_\mathcal{S} $ & \(\displaystyle \begin{cases} &\{30, 3, 2\}~\si{\micro\metre}~\text{for}~X=\text{E} \\ &\{15, 2, 2\}~\si{\micro\metre}~\text{for}~X=\text{I} \end{cases} \)  & Section diameter \\
+$n_\text{seg}^\mathcal{S} $ & \(\displaystyle \begin{cases} &\{1, 21, 5\}~\text{for}~X=\text{E} \\ & \{1, 5, 5\} ~\text{for}~X=\text{I}  \end{cases} \) & \# of segments per section \\
+\hline
 $c_\text{m}$ & \SI{1}{\micro\farad\per\square\centi\metre} & Membrane capacitance \\
 $R_\text{a}$ &\SI{100}{\ohm\centi\metre}  & Axial resistivity \\
 $g_\text{L}$ & \SI{0.0003}{\siemens\per\square\centi\metre} & Passive leak conductance \\
 $E_\text{L}$ & \SI{-54.3}{\milli\volt} & Passive leak reversal potential \\
-$\overline{g}_\mathrm{Na}$ & 0.12, 0.012, 0.012 \si{\siemens\per\square\centi\metre}& Na$^+$  conductance \\
+$\overline{g}_\mathrm{Na}^\mathcal{S}$ & $\{0.12, 0.012, 0.012\}$ \si{\siemens\per\square\centi\metre}& Na$^+$  conductance \\
 $E_\text{Na}$ & \SI{50}{\milli\volt} & Na$^+$ reversal potential \\
-$\overline{g}_\mathrm{K}$ & 0.036, 0.0036, 0.0036 \si{\siemens\per\square\centi\metre} & K$^+$ conductance  \\
+$\overline{g}_\mathrm{K}^\mathcal{S}$ & $\{0.036, 0.0036, 0.0036\}$ \si{\siemens\per\square\centi\metre} & K$^+$ conductance  \\
 $E_\text{K}$ & \SI{-77}{\milli\volt} & K$^+$ reversal potential \\
-$\overline{g}_\mathrm{Ih}$ & 0.002, 0.01, 0.01 \si{\siemens\per\square\centi\metre} & Ih-current conductance \\
-\hline
-$\overline{G}_{\mathrm{syn}YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(\SI{0.2}{\nano\siemens}, \SI{0.02}{\nano\siemens})~\text{for}~X=E \\ \mathcal{N}(\SI{4}{\nano\siemens}, \SI{0.4}{\nano\siemens})~\text{for}~X=I \end{cases} \) & Maximum synaptic conductance \\
-$E_{\mathrm{syn}X}$ & \SI{0}{\milli\volt} for $X=E$, \SI{-80}{\milli\volt} for $X=I$ & Synaptic reversal potential \\
-$f_{YX}(t)$ & $\beta$-function (\fref{eq:Ch-Neuron-Beta-function}) & Synaptic temporal kernel \\
-$\tau_1$ & \SI{0.2}{\milli\second} for $X=E$, \SI{0.1}{\milli\second} for $X=I$ & Synaptic rise time constant \\
-$\tau_2$ & \SI{1.8}{\milli\second} for $X=E$, \SI{9.0}{\milli\second} for $X=I$ & Synaptic decay time constant \\
+$\overline{g}_\mathrm{Ih}^\mathcal{S}$ & $\{0.002, 0.01, 0.01\}$ \si{\siemens\per\square\centi\metre} & Ih-current conductance \\
 \hline
 \end{tabular}
 \end{center}
-\label{tab:Ch-LFPy:MC-network}
+\label{tab:Ch-LFPy:MC-network-I}
 \end{table}
 
 
+\begin{table}[!htp]
+\caption{Synaptic parameters for recurrent network (continued from \Fref{tab:Ch-LFPy:MC-network-I}).}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Symbol & Value/definition & Description \\
+\hline
+$\overline{G}_{\mathrm{syn}YX}$ & \( \displaystyle \sim \begin{cases} \mathcal{N}(\SI{0.2}{\nano\siemens}, \SI{0.02}{\nano\siemens})\Theta(G_\mathrm{syn})~\text{for}~X=\text{E} \\ \mathcal{N}(\SI{4}{\nano\siemens}, \SI{0.4}{\nano\siemens})\Theta(0)~\text{for}~X=\text{I} \end{cases} \) & Maximum synaptic conductance \\
+$E_{\mathrm{syn}X}$ & \SI{0}{\milli\volt} for $X=\text{E}$, \SI{-80}{\milli\volt} for $X=\text{I}$ & Synaptic reversal potential \\
+$f_{YX}(t)$ & $\beta$-function (\fref{eq:Ch-Neuron-Beta-function}) & Synaptic temporal kernel \\
+$\tau_1$ & \SI{0.2}{\milli\second} for $X=\text{E}$, \SI{0.1}{\milli\second} for $X=\text{I}$ & Synaptic rise time constant \\
+$\tau_2$ & \SI{1.8}{\milli\second} for $X=\text{E}$, \SI{9.0}{\milli\second} for $X=\text{I}$ & Synaptic decay time constant \\
+$\widetilde{\Delta}_{YX}$ & 
+\(
+	\begin{cases}
+		& \mathcal{N}(\SI{1.5}{\milli\second}, \SI{0.3}{\milli\second})\Theta(t-\SI{0.3}{\milli\second})~\text{for}~X=\text{E}, Y=\text{E} \\
+		& \mathcal{N}(\SI{1.4}{\milli\second}, \SI{0.4}{\milli\second})\Theta(t-\SI{0.3}{\milli\second})~\text{for}~X=\text{E}, Y=\text{I} \\
+		& \mathcal{N}(\SI{1.3}{\milli\second}, \SI{0.5}{\milli\second})\Theta(t-\SI{0.3}{\milli\second})~\text{for}~X=\text{I}, Y=\text{E} \\
+		& \mathcal{N}(\SI{1.2}{\milli\second}, \SI{0.6}{\milli\second})\Theta(t-\SI{0.3}{\milli\second})~\text{for}~X=\text{I}, Y=\text{I}
+	\end{cases}
+\) & Conduction delay distributions \\
+\hline
+$\mathcal{L}_{YXL}(z)$ & 
+\(
+	\begin{cases}
+		& \frac{\mathcal{N}(0, 100)(z)}{3} + \frac{2\mathcal{N}(500, 100)(z)}{3}, \\
+		& \quad X=\text{E}, Y=\text{E}, \mathcal{S} \setminus \{\text{soma}\} \\
+		& \mathcal{N}(50, 100)(z), X=\text{E}, Y=\text{I}, \mathcal{S} \setminus \{\text{soma}\} \\
+		& \mathcal{N}(-50, 100)(z), X=\text{I}, Y=\text{E}\\
+		& \mathcal{N}(-100, 100)(z), X=\text{I}, Y=\text{I} \\
+	\end{cases}
+\)
+& depth-dependence of synaptic density \\
+\hline
+$\overline{G}_\mathrm{syn,ext}$ & \( \SI{0.5}{\nano\siemens} \) & External synapse conductance \\
+$E_{\mathrm{syn,ext}}$ & \SI{0}{\milli\volt} & Ext. synapse rev. potential \\
+$f_\text{ext}(t) $ & $\beta$-function (\fref{eq:Ch-Neuron-Beta-function}) & Ext. synapse temporal kernel \\
+$\tau_1$ & \SI{0.2}{\milli\second} & Ext. synapse rise time constant \\
+$\tau_2$ & \SI{1.8}{\milli\second} & Ext. synapse decay time constant \\
+$k^\text{ext}_Y$ & \{172, 64\} & \# ext. synapses per neuron \\
+$\nu_\text{ext} $ & \SI{40}{\per\second} & Ext. syn. activation rate \\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:Ch-LFPy:MC-network-II}
+\end{table}
 
+
+\begin{table}[!htp]
+\caption{Measurement and simulation parameters for recurrent network (continued from \Fref{tab:Ch-LFPy:MC-network-II}).}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Symbol & Value/definition & Description \\
+\hline
+$dt$ & \SI{0.0625}{\milli\second} & Temporal step size \\
+$T$ & \SI{2200}{\milli\second} & Simulation duration \\
+$T_\text{transient}$ &  \SI{200}{\milli\second} & Transient period \\
+$C^\circ$ & \SI{6.5}{\celsius} & Simulation temperature \\
+$V_\text{m}(0)$ & \SI{-65}{\milli\volt} & Initial membrane voltage \\
+\hline
+$\phi$ & $\{V_\mathrm{e}(\mathbf{r}, t), \mathbf{P}(t) \} $ & Predicted extracellular signals \\ 
+$\sigma$ & \SI{0.3}{\siemens\per\metre} & extracellular conductivity \\
+$\mathbf{x}_\text{ch.}=\mathbf{y}_\text{ch.}$ & $[0, \ldots, 0 ]$ & $x,y$-positions of electrode contacts \\
+$\mathbf{z}_\text{ch.}$ & $[1000, 950, \ldots, -150, -200 ]\si{\micro\metre}$  & $z$-positions of electrode contacts \\
+$r_\text{contact}$ & \SI{5}{\micro\metre} & Electrode contact radiis \\
+$\mathbf{n}_\text{contact}$ & $[0, 1, 0]$ & Electrode contact surface normals \\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:Ch-LFPy:MC-network-III}
+\end{table}
 
 
 
@@ -933,7 +1000,7 @@ We will\ehtxt{, however,} relax the requirement
 %\ghnote{Har dette blitt satt opp som et requirement som kan relaxes? We will not require that ....?} 
 that postsynaptic neurons in the hybrid scheme predict correct action potential times (or in fact \emph{any} action potentials or correct membrane potential statistics at all). 
 %\ghnote{Kan det beskrives tydeligere hva vi her faar en liste over. Det som foelger er MC modellen vi skal mate spike-times inn i.}
-\ehtxt{With that in mind, we will approximate the different constituents of the model that may give \textit{non-linear} contributions to the extracellular signal via the following steps:}
+\ehtxt{With that in mind, we will make \textit{linear} approximations to the different constituents of the model that may give \textit{non-linear} contributions to the extracellular signal via the following steps:}
 \ehnote{@GH: OK?}
 
 \begin{enumerate}
