@@ -385,10 +385,10 @@ The full linear system for obtaining the extracellular potential may then be wri
 %
 \begin{equation}
 \begin{bmatrix}
-\phi(\mathbf{R}_1, t) \\
-\phi(\mathbf{R}_2, t) \\
+V_\text{e}(\mathbf{R}_1, t) \\
+V_\text{e}(\mathbf{R}_2, t) \\
 \vdots \\
-\phi(\mathbf{R}_M, t)
+V_\text{e}(\mathbf{R}_M, t)
 \end{bmatrix}
 = \frac{1}{4\pi\sigma}
 \begin{bmatrix}
@@ -519,7 +519,7 @@ the resulting shape of the current dipole moment array will be $(3, N_t)$.
 
 In the relatively simple case of an infinite homogeneous volume conductor the extracellular potential resulting from the current dipole moment is
 \begin{equation}
-\phi(\mathbf{R}, t) = \frac{\mathbf{P}(t) \cdot (\mathbf{R-r})}{4 \pi \sigma \Vert \mathbf{R-r} \Vert^3} ~,
+V_\text{e}(\mathbf{R}, t) = \frac{\mathbf{P}(t) \cdot (\mathbf{R-r})}{4 \pi \sigma \Vert \mathbf{R-r} \Vert^3} ~,
 \label{eq:LFPy:dipolepotential}
 \end{equation}
 where $\mathbf{R}$ denotes the measurement site and $\mathbf{r}$ the assumed dipole location.
@@ -531,7 +531,7 @@ or even more detailed head models based on anatomical reconstructions such as th
 Without going into any mathematical detail here (more on that in \Fref{chap:EEG}),
 \ehtxt{signal predictions using} these \ehtxt{head} models can generally be written on the form of a linear combination
 \begin{equation}
-\phi(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
+V_\text{e}(\mathbf{R, r}) = \mathbf{M}\mathbf{P}
 \end{equation}
 where the coefficients of the matrix $\mathbf{M}\equiv \mathbf{M}(\mathbf{R, r})$ is head-model dependent.
 For the potential in an infinite homogeneous volume conductor (\Fref{eq:LFPy:dipolepotential}),
@@ -547,7 +547,7 @@ which in turn is linearly dependent on the transmembrane currents,
 one can with relative ease estimate a linear predictor of extracellular potentials from transmembrane currents via the current dipole moment by computing the matrices $\mathbf{M}$ and $\mathbf{F}$ independently, 
 and then estimate the final signal as
 \begin{equation}
-\phi(\mathbf{R}, t) = \mathbf{M}\mathbf{F}\mathbf{I}_\text{m}(t)~.
+V_\text{e}(\mathbf{R}, t) = \mathbf{M}\mathbf{F}\mathbf{I}_\text{m}(t)~.
 \end{equation}
 
 
@@ -560,7 +560,9 @@ and then estimate the final signal as
 Throughout \Fref{sec:Schemes:LFPy} we defined a formalism based on linear combinations for predicting extracellular signals of neuronal activity from MC models. 
 The number $N$ current sources could, without loss of generality, denote the count of compartments per neuron model, 
 or the total count for sets of neurons. 
-Thus for the purpose of computing extracellular signals from recurrently connected networks of MC neurons, 
+Thus for the purpose of computing extracellular signals 
+$\phi$ \ehnote{Jeg vil bruke $\phi$ som generisk signal symbol for $V_e$, $P$, $B$ osv. OK?} 
+from recurrently connected networks of MC neurons, 
 we have the two feasible options:
 \begin{enumerate}
 \item Compute the signal as the sum of single-neuron contributions
@@ -568,7 +570,7 @@ we have the two feasible options:
 	\phi(\mathbf{R}, t) = \sum_{u =1}^{N_X} \mathbf{F}_u\mathbf{I}_u~,
 	\end{equation}
 	where $ \mathbf{F}_u \equiv \mathbf{F}_u(\mathbf{R},\mathbf{r}_u)$  and $ \mathbf{I}_u$ denotes the VC forward solution and current sources of the number $N_X$ different neurons included in the network. 
-	This formulation then requires some intermediate storage of single-cell contributions to the signal before summing
+	This formulation then requires some intermediate storage of single-cell contributions to the signal before summing.
 \item Compute the signal as the product
 	\begin{equation}
 	\phi(\mathbf{R}, t) = \mathbf{F}\mathbf{I}~, 
@@ -740,7 +742,7 @@ $f_\text{ext}(t) $ & $\beta$-function (\fref{eq:Ch-Neuron-Beta-function}) & Ext.
 $\tau_1$ & \SI{0.2}{\milli\second} & Ext. synapse rise time constant \\
 $\tau_2$ & \SI{1.8}{\milli\second} & Ext. synapse decay time constant \\
 $k^\text{ext}_Y$ & \{172, 64\} & \# ext. synapses per neuron \\
-$\nu_\text{ext} $ & \SI{40}{\per\second} & Ext. syn. activation rate \\
+$\nu_\text{ext} $ & \SI{40}{\per\second} (Poisson statistics) & Ext. syn. activation rate \\
 \hline
 \end{tabular}
 \end{center}
@@ -786,7 +788,7 @@ These oscillations can be expected to be expressed in extracellular signals, and
 The oscillations are prominently captured also in the current dipole moment (panel G), however only in the vertical $z-$component $P_z$. 
 Due to symmetry of the neural populations around the $z-$axis, the orthogonal components $P_x$ and $P_z$ are expected to cancel and indeed that is the case. 
 Next, we discuss how such signals may be captured in simplified network models that do not explicitly account for the neuronal geometries, 
-assuming that these models capture the spiking statistics well. 
+assuming that these models capture the spiking statistics of this MC network model well. 
 }
 
 \section{\blue{EH: Forward-model predictions from spiking point-neuron network models}}
@@ -845,10 +847,10 @@ Physics-based computational schemes for predicting signals such as the local fie
 \subsection{The hybrid scheme}
 \label{chap:LFPy:hybrid}
 
-As constraining the activity in large scale MC neuron network models is inherently difficult due to the large number of parameters and huge computational demands,
+\ehtxt{\sout{As constraining the activity in large scale MC neuron network models is inherently difficult due to the large number of parameters and huge computational demands,
 point neurons (or other simplified neuron representations) are more-often used in simulation studies of network activity.
 But for forward-model predictions,
-at least a two-compartment neuron model is required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields.
+at least a two-compartment neuron model is required for it to account for spatial variations of in- and outgoing transmembrane currents giving rise to extracellular potentials or magnetic fields.}}
 
 One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was proposed by
 \cite**{Hagen2016},
@@ -935,60 +937,23 @@ e.g., in the presence of \emph{non-linear} synaptic and ion-specific channels?
 Conceptually, it is perhaps best to \emph{first} consider the recurrently connected network of biophysically detailed neurons which allows for computing extracellular signals 
 \ehtxt{introduced in \Fref{sec:Schemes:networkLFPy},}
 and that the aforementioned point-neuron network model represents something of an idealized scenario obtained by reducing biophysical detail in a systematic manner.
-\ehtxt{Here, we choose to \ehtxt{apply this hybrid scheme idea} on the MC neuron network described in \Fref{sec:Schemes:networkLFPy}.}
-
-%Let us first define some properties of the biophysically detailed model, as general as possible. 
-%For compactness, 
-%
-%\begin{enumerate}
-%\item Let $X \in \{ \ldots \}$ and $Y \subseteq X$ denote pre- and postsynaptic population, respectively. Each population corresponds to separate classes of neurons (derived from anatomy, electrical properties, gene expression etc.).
-%\item Let $N_X$ and $N_Y$ denote the sizes of population $X$ and $Y$.
-%\item Let $u \in \{ 1, \ldots , N_X \}$ and $v \in \{ 1, \ldots , N_Y \}$ denote pre- and postsynaptic neuron index, respectively.
-%\item Let $\mathbf{r}_u \sim \widetilde{\mathbf{r}}_X$ denote the discretely sampled somatic location of neuron $u$,
-%where $\widetilde{\mathbf{r}}_X$ describes the probability density function of somatic locations of population $X$ in space.
-%\item Let $K_{YX}$ denote the total number of synapses between presynaptic population $X$ and postsynaptic population $Y$.
-%Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}.
-%For small connection probabilities the expression can be approximated by $C_{YX} = K_{YX} / (N_Y N_X)$.
-%\item Let layer or region (e.g., cortical layer) be denoted by $L$.
-%\item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$.
-%Connection probabilities may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{A}_Y$.
-%\item Synaptic currents for each connection are given as $I_{\text{syn}YX}(t)=\overline{G}_{\text{syn}YX} f_{YX}(t)(V_\text{m}(t)-E_{\text{syn}X})$
-%where $\overline{G}_{\text{syn}YX}$ denotes the maximum synaptic conductance and $f_{YX}(t) \in [0, 1]$ one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}.
-%$V_\text{m}(t)$ denotes the postsynaptic potential and $E_{\text{syn}X}$ denotes the reversal potential of the synapse which is determined by the presynaptic cell type (i.e., excitatory or inhibitory).
-%For simplicity we will assume that $\overline{G}_{\text{syn}YX}$ is independent of $L$.
-%We will also assume that connection weights $\overline{G}_{\text{syn}YX}$ are static, 
-%that is, there are no synaptic plasticity rules in place.
-%\item Let the conduction delays resulting from presynaptic action potential generation time  to activation time of the synapse be greater than zero and randomly drawn from some function as $\Delta_{vu} \sim \widetilde{\Delta}_{YX}(t)$.
-%For simplicity, we let conduction delays be independent of cell location and geometry.
-%(Other use cases may also compute delays based on distance between pre- and post-synaptic units assuming a typical value for axonal action potential propagation speed.)
-%\item Each postsynaptic neuron $v \in Y$ is modeled using the  `standard' MC neuron formalism such that their transmembrane currents $\mathbf{I}_\text{m}^{\langle v \rangle}(t)$ or axial currents $\mathbb{I}_\text{a}^{\langle v \rangle}(t)$ can be computed.
-%Here $X$ and $Y$ may be used interchangeably, however,
-%presynaptic populations may also include, remote populations, point processes, external stimuli and similar,
-%which we will assume give approximately zero direct contributions to the signals predicted by the full recurrent network model.
-%\item Extracellular signal contributions in different spatial locations may be computed and summed up as
-%$\sum_Y \sum_{v=1}^{N_Y} \mathbf{F}^{\langle v \rangle} \mathbf{I}_\text{m}^{\langle v \rangle}$ and similar for axial currents.
-%$\mathbf{F}^{\langle v \rangle}$ here denotes a linear mapping of transmembrane currents of cell $v$ to a linearly dependent signal.
-%\item The sequence of spike times $s_u(t) = \sum_k \delta (t - t_k)$ of each of each neuron $u \in X$ is recorded throughout the entire simulation interval $[0, t_\text{sim} \rangle$.
-%We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with spectrally `flat' spiking statistics (e.g., fixed-rate Poisson point processes) into the recurrently connected network.
-%\item We may store the weighted, directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic populations.
-%This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full connectivity graph procedurally (at least statistically).
-%Graph weights represent maximum synaptic conductances.
-%The graph must also include the synaptic locations on the postsynaptic neurons. 
-%We will hereby let compartment index $w$ equate synaptic location.
-%\end{enumerate}
+\ehtxt{Here, we choose to \ehtxt{apply this hybrid scheme idea} on the MC neuron network described in \Fref{sec:Schemes:networkLFPy}, 
+and show that the extracellular signal and current dipole moment (\Fref{fig:LFPy_network}F,G) can be accurately predicted.}
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_A.pdf}
-\includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_B.pdf}
+%\includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_A.pdf}
+%\includegraphics[width=0.49\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid_B.pdf}
+\includegraphics[width=0.75\textwidth]{Figures/Ch-LFPy/Ch-LFPy-hybrid.pdf}
 \end{center}
-\caption{\textbf{Disassociation between simulations of network activity and extracellular potentials.}
+\caption{\textbf{Disassociation between simulations of network activity and extracellular potentials in the hybrid scheme.}
 ({\bf A}) Illustration of self-consistent MC neuron network simulation where the primary output are single-unit spike trains (bottom left),
 which is in turn stored in a database or file (bottom).
 Extracellular potentials can optionally be computed,
 here illustrated by the laminar probe outlined in gray.
 Outgoing colored lines from each ball-and-stick neuron model denotes a connection from the soma of presynaptic neurons to synapses distributed on postsynaptic neurons.
-({\bf B}) `Hybrid` simulation where recurrent network connections (dashed lines) have been removed,
+\ehtxt{({\bf B}) `Point-neuron' network simulation that accurately captures the spiking activity of original MC network.}
+({\bf C}) `Hybrid' simulation where recurrent network connections (dashed lines) have been removed,
 but synaptic locations have been preserved.
 Here, synaptic activation times are set from pre-recorded spike times recorded to a database (bottom).
 The synaptic currents and associated transmembrane currents on the postsynaptic neurons allows for computing the extracellular potential independently of the recurrent network dynamics.
