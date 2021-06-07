@@ -8,9 +8,34 @@ currents move through the extracellular space.
 In most applications of VC theory, the conductivity of brain tissue ($\sigma_\text{t}$) is assumed to be a constant, 
 and its value is normally taken from some experimental measurement. 
 Estimates of $\sigma_\text{t}$ vary between different recordings, 
-but common values are between 0.1 and 0.5  \si{S/m}.
+but common values are between 0.3 and 0.5  \si{S/m} \cite**{Ranck1963,Logothesis2007,Goto2010,Elbohouty2013,Wagner2014,Miceli2017,McCann2019}.
 
-\ghtxt{Hva er en bra range aa oppgi her? Micelifiguren oppsummerer studier som har sett paa f-avhengighet, men det finnes i tillegg mange maalinger som ikke har den ambisjonen. I Oerjanboka staar det at $\sigma$ for grey matter er 0.03 -- 0.4 S/m i omraadet 1 Hz til 10 kHz. Nunez sier 0.29 \,\si{S/m} for cortex, 5 Hz. McCann 2019 oppsummerer et sammensurium av ulike maaleteknikker som gir ganske ulike resultater, men lander en slags konklusjon om $0.47 \pm 0.24 \,\si{S/m}$ (grey matter), som da lander paa mye hoeyere verdier enn Oerjan Martinsens 0.03 -- 0.4 \si{S/m}  (grey matter). Miceli ligger ml. 0.03 og 0.7. Grodzinsky har en tabell der de angir verdier paa 1 kHz, og en range  0.13 (kanin) -- 0.22 (misc) \, \si{S/m}. Okada 1994 sa at skillpaddecerebellum laa paa 0.15 (molecular layer) -- 0.25 (granular layer). Er dette noe vi skal skrive om? Goto 2010 sier 0.3 S/m grey matter/cortex.}
+\ghnote{Forsoekte aa oppsummere estimater av "typisk sigma" i en tabell, men det ble saa mye bal at jeg kommenterte den bort. 
+Det ble krevende aa fordi maalingene generelt rapporterer masse greier og spesialtilfeller, noen er grey matter, noen er cortex, noen er brain, noen ser paa f-avhengighet, lagavhengighet, anisotropi etc. Og saa rapporteres det alltid en del ulike verdier i hvert paper - dvs. hvis vi skal skrive om det maa vi muligens gaa grundigere til verks og forklare eksperimentelle detaljer. Er det noe vi vil? Miceli-figuren som kommer lenger ned har jo gjort en del av dette arbeidet, og oppsummert eksperimenter som ser paa  f-avhengighet. Det finnes dog eksperimenter som ser paa andre ting.
+
+Den angitte typiske range 0.3 -- 0.5 er ok nok, selv om de fleste av siteringene begynner paa 0.3 men ofte strekker seg utover dette. Unntaket er Goto som legger seg fast rundt 0.3. Saa finnes det jo dessuten saanne som Gabriel og greier samt noen eldre maalinge i ei bok av Y Fung, som ligger lavere enn 0.3. Vil vi gaa mer inn paa dette, eller rekker det med det som staar? Jeg har brukt 0.3 som en typisk verdi i noen regneeksempler under. Boer den byttes, eller er 0.3 ok?
+
+Hvis vi (dere) har brukt en standardverdi for sigma i deres simuleringer saa kan dette vaere et ok sted aa oppgi den paa.
+}
+%\begin{table}[h!]
+%\begin{center}
+%\caption[Tissue conductivity]{$\sigma_\text{t}$ (\si{S/m}) estimates from various sources in the frequency range up to 10 kHz.}
+%\label{tab:Sigma:diffconsts}
+%    \begin{tabular}{l|l}
+%    \hline
+%    $Grey matter$ & 0.03--0.4$ \, \si{S/m} & \cite**{Martinsen2008}\\ \hline
+%    $Grey matter$ & $0.47 \pm 0.24$\, \si{S/m} & \cite**{McCann2019} \\ \hline
+%    $Cortex$ & 0.03 --0.1 \, \si{S/m} $ \cite**{Gabriel1996}\\ \hline 
+%    $Cortex$ & 0.3 --0.6 \, \si{S/m} $ \cite**{Wagner2014}\\ \hline 
+%    $Cortex$ & 0.3 --0.4 \, \si{S/m} $ \cite**{Elbohouty2013}\\ \hline 
+%    $Cortex$ & 0.4 -- 0.6 \, \si{S/m} $ \cite**{Miceli2017}\\ \hline 
+%    $Cortex$ & 0.3 -- 0.4 \, \si{S/m} $ \cite**{Ranck1963}\\ \hline 
+%    $Cortex$ & 0.4 -- 0.5 \, \si{S/m} $ \cite**{Logothesis2007}\\ \hline 
+%    \end{tabular}
+%\end{center}
+%\end{table}
+
+%\ghtxt{Hva er en bra range aa oppgi her? Micelifiguren oppsummerer studier som har sett paa f-avhengighet, men det finnes i tillegg mange maalinger som ikke har den ambisjonen. I Oerjanboka staar det at $\sigma$ for grey matter er 0.03 -- 0.4 S/m i omraadet 1 Hz til 10 kHz. Nunez sier 0.29 \,\si{S/m} for cortex, 5 Hz. McCann 2019 oppsummerer et sammensurium av ulike maaleteknikker som gir ganske ulike resultater, men lander en slags konklusjon om $0.47 \pm 0.24 \,\si{S/m}$ (grey matter), som da lander paa mye hoeyere verdier enn Oerjan Martinsens 0.03 -- 0.4 \si{S/m}  (grey matter). Miceli ligger ml. 0.03 og 0.7. Grodzinsky har en tabell der de angir verdier paa 1 kHz, og en range  0.13 (kanin) -- 0.22 (misc) \, \si{S/m}. Okada 1994 sa at skillpaddecerebellum laa paa 0.15 (molecular layer) -- 0.25 (granular layer). Er dette noe vi skal skrive om? Goto 2010 sier 0.3 S/m grey matter/cortex.}
 
 %$\sigma_\text{greymatter}$ range from 0.03 -- 0.4 \si{S/m} in grey matter \cite**{Martinsen2008}
 %$\sigma_\text{greymatter} = 0.47 \pm 0.24 \, \si{S/m}$ \cite**{mccann2019}
@@ -541,10 +566,10 @@ because the permittivity $\epsilon(f)$ of tissue decreases rather sharply with $
 Data from \citeasnoun**{gabriel1996compilation} suggests that relative permittivity of grey matter, 
 $\epsilon_\text{r}$, decreases from $4\times10^7$ to $1.6\times 10^5$ over the frequency range from 10 to 1000 \si{\hertz}. 
 In comparison, the conductivity does not vary as much with frequency, 
-and and if we assume that it is constant and has commonly measured value 
-$\sigma_\text{R} = \sigma_\text{t} = 0.2 \, \si{S/m}$, 
-the ratio $2\pi\epsilon_\text{r}\epsilon_0/\sigma_\text{t}$ becomes $\approx 0.1$ at $f = 10 \, \si{\hertz}$ 
-and $\approx 0.04 $ at $f = 1000 \, \si{\hertz}$. 
+and and if we assume that it is constant and has a typically measured value 
+$\sigma_\text{R} = \sigma_\text{t} = 0.3 \, \si{S/m}$ \cite**{Goto2010}, 
+the ratio $2\pi f \epsilon_\text{r}\epsilon_0/\sigma_\text{t}$ becomes $\approx 0.07$ at $f = 10 \, \si{\hertz}$ 
+and $\approx 0.03 $ at $f = 1000 \, \si{\hertz}$. 
 These values are much larger than the corresponding value found for the extracellular saline solution, 
 reflecting the fact that currents passing through tissue to some degree interact with neural membranes. 
 Nevertheless, the relative contribution of the capacitive current is fairly low also in tissue, 
