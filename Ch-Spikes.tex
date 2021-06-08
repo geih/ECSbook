@@ -385,21 +385,30 @@ Spike widths (left) and (peak-to-peak) spike amplitudes (right) as a function of
 %%\figpermOurs
 %\end{figure}
 
-When modeling spikes with the ball-and-stick neuron, one option is to include spike-generating active sodium and potassium conductances in the soma compartment. Another option is to impose a voltage waveform mimicking a somatic action potential as a boundary condition in the soma end of the dendritic stick. \gex{This will produce an identical pattern of membrane currents returning to the ECS through the dendritic stick}. The soma membrane current will due to current conservation be the same as the axial current entering the dendritic stick at the soma end. 
+When modeling spikes with the ball-and-stick neuron, one option is to include spike-generating active sodium and potassium conductances in the soma compartment. Another option \ghtxt{(which we will use in all cases studied in this book) is to impose a voltage waveform mimicking a somatic action potential as a boundary condition in the soma end of the dendritic stick. \ghtxt{\sout{This}Both options} will produce an identical pattern of membrane currents returning to the ECS through the dendritic stick. The soma membrane current will due to current conservation be the same as the axial current entering the dendritic stick at the soma end. 
 
-The extracellular potential can now be computed using the standard formalism based on the pattern dendritic membrane currents and the soma membrane current~\cite**{Pettersen2008a}:
+\ghtxt{\sout{The extracellular potential can now be computed using the standard formalism based on the pattern dendritic membrane currents and the soma membrane current Pettersen2008a}} \ghnote{Rar setning. Pattern OF dendritic and somatic membrane currents? Synes ogsaa det var rart aa kalle dette standard formalism da vi ikke har introdusert den tidligere i boka.
+Se forslag under. }
+
+\ghtxt{The pattern of dendritic and somatic membrane currents give rise to an extracellular potential
+that can be computed with ~\cite**{Pettersen2008a}: }
 %
 \begin{equation}
   V_\mathrm{e}(z,\rho) = 
   \frac{1}{4 \pi \sigma} \frac{I_\mathrm{soma}}{\sqrt{(z-z_\mathrm{soma})^2+\rho^2}} +
-  \frac{1}{4 \pi \sigma} \int_0^l \frac{i_\mathrm{m}(z')~dz'}{\sqrt{(z-z')^2+\rho^2}},
+  \frac{1}{4 \pi \sigma} \int_0^l \frac{i_\mathrm{m}(z')~dz'}{\sqrt{(z-z')^2+\rho^2}}.
   \label{eq:Spikes:ball-and-stick-formula}
 \end{equation}
-%
-\gex{Here $\rho$ is the radial distance from the recording point to the dendritic stick axis, and $z_\mathrm{soma}$ 
-is the depth position of the soma, see  \Fref{fig:Spikes:ball-and-stick-model-sketch}. 
-For the present analysis we will use this second option.}
+Here $\rho$ is the radial distance from the recording point to the dendritic stick axis, and $z_\mathrm{soma}$ 
+is the depth position of the soma (see  \Fref{fig:Spikes:ball-and-stick-model-sketch}). 
+\ghtxt{\sout{For the present analysis we will use this second option.}}
+\ghtxt{We recognize the somatic contribution (first term on the right) as the point-source equation 
+(\fref{eq:VC:pointsource2}), while the contribution from the dendritic stick (second term on the right)
+is essentially a continuous version of \fref{eq:VC:pointsources}, i.e., a continuum of point sources
+distributed along the stick.}
 \gen{Sjekk symbolene for soma membranstroem (Ampere) og stick membranstroem (A/m)} 
+
+%
 
 %%%%%%%%%%
 % Figure: Spike widths and amplitudes
@@ -417,7 +426,15 @@ inward sodium current dominates.}
 \end{figure}
 %%%%
 
-Since the dendritic stick is passive, its response to imposed currents or voltages is linear.  It is then convenient to decompose the soma action potential into a Fourier sum of oscillatory components with different frequencies and consider each frequency component of the action potential separately. Each oscillatory component of the soma action potentials gives an oscillatory axial current entering the stick at the soma end. The spatial pattern of return current along the stick will depend on the frequency of the oscillation due to the capacitive properties of the membrane: For higher frequencies, the capacitive membrane current will be larger, and the  membrane effectively more leaky. Thus the imposed soma potential will result in dendritic membrane currents returning closer to the soma for higher frequencies, as illustrated in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}.  
+Since the dendritic stick is passive, its response to imposed currents or voltages is linear.  
+It is then convenient to decompose the soma action potential into a Fourier sum of oscillatory components with different 
+frequencies and consider each frequency component of the action potential separately. 
+Each oscillatory component of the soma action potentials gives an oscillatory axial current entering the stick at the soma end. The spatial pattern of return current along the stick will depend on the frequency of the oscillation 
+due to the capacitive properties of the membrane: 
+For higher frequencies, the capacitive membrane current will be larger, 
+and the membrane effectively more leaky. 
+Thus the imposed soma potential will result in dendritic membrane currents returning closer to the soma for higher frequencies, 
+as illustrated in the inset in \Fref{fig:Spikes:ball-and-stick-sketch}.  
 
 %%%%%%%%%%
 % Figure: Frequency-dependent distribution of return currents
