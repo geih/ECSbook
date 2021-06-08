@@ -21,15 +21,22 @@ Adapted from \citeasnoun**{Henze2000}.
 
 \ghnote{Avsnittet nedenfor var langt, og inneholdt veldig mye forskjellig. Jeg delte det opp. Foreslaar at vi ogsaa legger inn referanser til underkapitler hvor de ulike tema behandles.}
 
-\gex{The amplitude of the membrane-potential deflection during an action potential is about 100~mV. The amplitude of \ghtxt{a }spike\sout{s}, a term which we in the present book restrict to the extracellular signature of action potentials,} \ghtxt{\sout{are} is} typically less than 1~mV. Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}). \ghnote{La inn avsnitt: De to setn. over la opp til at naa skal vi sammenligne APs vs Spikes, men det som kom under handler om aa beskrive spikes. Kanskje en setning til her om sammenligning: F.eks. si at spike-shape utenfor soma er saann ca invertert jmf AP?}
+\gex{The amplitude of the membrane-potential deflection during an action potential is about 100~mV. The amplitude of \ghtxt{a }spike\sout{s}, a term which we in the present book restrict to \ghtxt{mean} the extracellular signature of \ghtxt{an} action potential\ghtxt{\sout{s},} \ghtxt{\sout{are} is} typically less than 1~mV. Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}). \ghnote{La inn avsnitt: De to setn. over la opp til at naa skal vi sammenligne APs vs Spikes, men det som kom under handler om aa beskrive spikes. Kanskje en setning til her om sammenligning: F.eks. si at spike-shape utenfor soma er saann ca invertert jmf AP?}
 
-The initial sharp negative peak is often referred to as the `sodium peak' as it mainly stems from sodium ions flowing into the soma (and axon hillock) during the initial phase of the action potential. The later blunter positive peak is likewise sometimes referred to as the `potassium peak', as it is dominated by potassium ions flowing out of the soma. \ghnote{Her er det vel implisitt at vaar spike er i naerheten av soma? Burde kanskje si dette eksplisitt?} 
+\ghtxt{When recorded in the vicinity of the neural soma, the spike is typically characterized by an initial sharp negative peak
+followed by a later positive peak.} The initial \ghtxt{\sout{sharp negative}} peak is often referred to as the `sodium peak' 
+as it mainly stems from sodium ions flowing into the soma (and axon hillock) during the initial phase of the action potential. 
+The later blunter positive peak is likewise sometimes referred to as the `potassium peak', 
+as it is dominated by potassium ions flowing out of the soma. 
+\ghnote{Her er det vel implisitt at vaar spike er i naerheten av soma slik jeg skrev? } 
 
 \ghnote{Byttet avsnitt: Nytt tema: Detection:} When detecting spikes, the main issue is that the spike amplitude must be larger than the ambient noise level, typically some tens of \si{\micro\volt}. \ghnote{Har litt problemer med ansatsen: The main issue er noise - og saa snakker vi ikke mer om det...}
 %\gen{Har vi et godt tall med medhoerende referanse her?} 
 %\ehnote{Tja. Ambient noise er jo veldig avhengig av forskjellige faktorer, elektrode-type og impedans, in vivo vs. in vitro, vaaken vs. bedoevet tilstand osv, valg av filter, osv.}
 %\tvnnote{Alessio sa de typisk ikke tar med spikes med amplitude under 30 uV, og det var dette vi brukte i Buccino et al., 2018, J Neurophysiol, men han hadde ikke noe god kilde ellers}
-For the detection of spikes, the detailed spike shape is of less importance. However \ghnote{er dette et "men" til forrige paastand?}, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. In this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. Spike shapes are also used to distinguish spikes from different neuron types~\cite**{Bartho2004}. The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes), but a more detailed separation into subgroups is also possible~\cite**{Buccino2018}. 
+For the detection of spikes, the detailed spike shape is of less importance. 
+However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. 
+To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. In this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. Spike shapes are also used to distinguish spikes from different neuron types~\cite**{Bartho2004}. \ghnote{Also used to....? Meningen i siste setning var den samme jeg leste ut av den foregaaende. Men i foregaaende setning mente du kanskje "finne igjen samme spike i ulike kanaler? Kanskje skrive dette ut litt?} The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes), but a more detailed separation into subgroups is also possible~\cite**{Buccino2018}. 
 
 Detailed modeling of spikes are important for several reasons: for example, (i) to understand the relationship between single-neuron properties and spike shapes \cite**{Holt1999,Gold2006,Pettersen2008a,Anastassiou2013}, (ii) to estimate biases regarding which types of neurons that are most likely to generate the spikes recorded by electrodes \cite**{Pettersen2008a},
 (iii) to provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}, and (iv) to fit model parameters in multicompartment neuron models \cite**{Gold2007}.
@@ -830,21 +837,19 @@ along the axon initial segment (AIS)\cite**{Goethals2020}.
 This will in turn ignite the full soma action potential. 
 In this initial phase of the action potential there will thus be a current dipole 
 where current enters the neuron at AIS and leave through the soma. }
-In the initial phase of the action potential, 
-there will expectedly be a short-lasting somatic source 
-prior to the longer-lasting somatic sink setting up the characteristic strong negative sodium peak.
-That is, we expect there to be a briefly lasting current dipole where current enters at the AIS
-and leaves through the soma, before
-eventually the full soma action potential is ignited. }
+In the initial phase of the action potential, we may then 
+expect there to be a briefly lasting current dipole where current enters at the AIS
+and leaves through the soma, before eventually the full soma action potential is ignited. }
 \ghnote{Bytta fordi forrige versjon fikk det til aa laate som
 "this initial phase" kom etter at soma var ignited}
-
 \ghtxt{\sout{In this scenario there will expectedly be a short-lasting somatic source prior to the longer-lasting somatic sink setting up the characteristic strong negative sodium peak.}} \ghnote{Dette sa vi nettopp at var tilfelle. Naa forventer vi det?}
-
-Model simulations have indeed confirmed that this is feasible and that a small and narrow positive peak can be seen prior to the negative sodium peak for recording close to the soma~\cite**{Telenczuk2018}.
-Interestingly, detailed experimental studies of the shape and amplitude of extracellular spikes recorded simultaneously around the soma and along the axon has now become possible by means of high-density microelectrode arrays (HD-MEAs)~\cite**{Emmenegger2019}.
+Model simulations have indeed confirmed that this is feasible 
+and that a small and narrow positive peak can be seen prior to the negative sodium peak for recording close to the soma~\cite**{Telenczuk2018}.
+Interestingly, detailed experimental studies of the shape and amplitude of extracellular spikes 
+recorded simultaneously around the soma and along the axon has now become possible by means of high-density microelectrode arrays (HD-MEAs)~\cite**{Emmenegger2019}.
 \gen{Comment on axon-representations in Hay-model and Mainen-model.} 
 \ehnote{Hay-modellen har ikke et realistisk axon. APs er generert i soma, ikke i akson-stumpen} 
+\ghnote{Avslutter med aa si at man kan studere dette eksperimentelt, men sier ingenting om funn. }
 
 
 \section{\blue{Spikes in neurons with active dendrites}} 
@@ -852,6 +857,7 @@ Interestingly, detailed experimental studies of the shape and amplitude of extra
 In the above investigation of the ball-and-stick neuron, the assumption of an electrically passive dendritic stick was
 essential. This assumption made the problem of relating intracellular potentials recorded in the soma to extracellular potentials recorded outside the neuron \emph{linear} and essentially independent of the detailed shape of the intracellular action potential:
 the shape of the intracellular action potential only affected the weight of each frequency component in the Fourier sum.
+\ghnote{Boer vi forklare  bedre? Hva skulle det ellers ha paavirket? }
 Thus the above analytical insights apply in principle to all intracellular action-potential waveforms.
 
 However, real neurons have active conductances also in the dendrites \cite**{Stuart2007}, making 
@@ -860,20 +866,46 @@ instead one has to resort to numerical investigations using the general formula 
 all active conductances are included explicitly. 
 
 Using this scheme, Gold and coworkers \cite**{Gold2006,Gold2007} performed thorough investigations of the extracellular signatures of spikes from pyramidal neurons in hippocampus CA1 where active dendritic conductances were included in the model. Their results were in qualitative agreement with many of the observations seen above 
-for neurons with passive dendrites: (i) the spike width was seen to increase with distance from the soma (cf.~Fig.~5A in Ref.~\citeasnoun**{Gold2006}), (ii) the spike amplitude was seen to decay with distance from the soma with a power between 1 and 2 for distances less than 50 $\mu$m (cf.~Fig.~14 in 
-Ref.~\citeasnoun**{Gold2006}), and (iii) the spike amplitude was also seen to change significantly with varying axial resistance $r_\mathrm{a}$ and capacitance $c_\mathrm{m}$, but not so much with varying membrane resistance \cite**{Gold2007}. They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, suggesting that extracellular spikes could be useful for constraining compartmental models.
+for neurons with passive dendrites: 
+(i) the spike width was seen to increase with distance from the soma (cf.~Fig.~5A in Ref.~\citeasnoun**{Gold2006}), 
+(ii) the spike amplitude was seen to decay with distance from the soma 
+with a power between 1 and 2 for distances less than 50 $\mu$m (cf.~Fig.~14 in Ref.~\citeasnoun**{Gold2006}), 
+and (iii) the spike amplitude was also seen to change significantly with varying axial resistance $r_\mathrm{a}$ 
+and capacitance $c_\mathrm{m}$, but not so much with varying membrane resistance \cite**{Gold2007}. 
+They also found that extracellular waveforms provide tight constraints on some of the neuronal model parameters, 
+suggesting that extracellular spikes could be useful for constraining compartmental models.
+
 
 \section{\blue{Axonal spikes}}
+The focus in this chapter is on somatic spikes, 
+that is, spikes where the dominating membrane currents setting up the spike during an action potential are in the soma. However, action potentials also propagate along the axons towards other neurons, 
+and the associated axonal membrane currents will also generate extracellular potentials, 
+that is, \emph{axonal spikes}.
 
-The focus in this chapter is on somatic spikes, that is, spikes where the dominating membrane currents setting up the spike during an action potential are in the soma. However, action potentials also propagate along the axons towards other neurons, 
-and the associated axonal membrane currents will also generate extracellular potentials, that is, \emph{axonal spikes}.
-
-For two reasons such axonal spikes are often assumed to be small, at least much smaller than somatic spikes.
-For one, the diameters of axons are typically less than a micrometer in mammalian brains. This implies a small surface area compared to the surface area of somas, and thus in turn smaller membrane currents and generated spikes. The second reason is that an action potential travelling down an axonal cable do not generate a clear dipolar extracellular potential around the axon.Rather, the potential is more resembling that generated by two opposing dipolar sources largely canceling each other and
-effectively generating a much smaller \emph{quadrupolar} extracellular potential around the axon~\cite**{Plonsey1977}.
+For two reasons such axonal spikes are often assumed to be small, 
+at least much smaller than somatic spikes.
+For one, the diameters of axons are typically less than a micrometer in mammalian brains. 
+This implies a small surface area compared to the surface area of somas, 
+and thus in turn smaller membrane currents and generated spikes. 
+The second reason is that an action potential traveling down an axonal cable does 
+not generate a clear dipolar extracellular potential around the axon.
+Rather, the potential is more resembling that generated by two opposing dipolar sources 
+largely canceling each other and effectively generating a much smaller \emph{quadrupolar} 
+extracellular potential around the axon~\cite**{Plonsey1977}.
 A thorough exposition of this effect is given in \citeasnoun**[Ch. 8]{Plonsey2007}.
 
-However, axons generally branch out to make many synapses with other neurons, and around such branching points the amplitude of axonal spikes may be much larger. \citeasnoun**{McColgan2017} explored this effect in detail, and key findings from this study is shown in \Fref{fig:Spikes:AxonalSpikes}. Comparison of panels A--D shows that the amplitude of the axonal spike can be strongly boosted when a single axonal cable branches into numerous cables. In real brains one often has synaptic terminal zones where many axons branch of and terminate within a confined region of space. Panel E shows that in this case many action potentials in several axons arriving simultaneously in the terminal zone, may give a sizable net axonal spike. In this case, axonal spikes can and have been be used as a measure of synaptic inputs onto neuronal populations like, for example, in the barn owl auditory brainstem~\cite**{Kuokkanen2018}.
+However, axons generally branch out to make many synapses with other neurons, 
+and around such branching points the amplitude of axonal spikes may be much larger. 
+\citeasnoun**{McColgan2017} explored this effect in detail, 
+and key findings from this study is shown in \Fref{fig:Spikes:AxonalSpikes}. 
+Comparison of panels A--D shows that the amplitude of the axonal spike 
+can be strongly boosted when a single axonal cable branches into numerous cables. 
+In real brains one often has synaptic terminal zones where many axons branch off 
+and terminate within a confined region of space. 
+Panel E shows that in this case many action potentials in several axons arriving simultaneously in the terminal zone, 
+may give a sizable net axonal spike. 
+In this case, axonal spikes can and have been be used as a measure of synaptic inputs onto neuronal populations like, 
+for example, in the barn owl auditory brainstem~\cite**{Kuokkanen2018}.
 
 
 %%%%%%%%%%
@@ -895,15 +927,32 @@ Text from McColgan2017: Relationship between axon morphology and extracellular p
 
 
 \section{\blue{Effects of measurement device on spike recordings}}
-In the above examples we have assumed an infinite volume conductor, that is, the extracellular conductivity has been assumed to be the same everywhere. We have also employed the point-electrode approximation, that is, the recording electrode has been assumed  to record the potential at one particular position in space (\Fref{sec:VC:point-electrode}). Also it has been assumed to faithfully record the extracellular potential without disturbing the potentials around the neuron in any way.  As discussed in \Fref{sec:VC:electrodes}, however, real recording devices will in general affect the measured potentials in several ways.  
+In the above examples we \ghtxt{assumed that the tissue surrounding the studied neuron was
+an infinite, homogeneous and isotropic volume conductor, i.e., that the
+tissue conductivity was the same everywhere. \sout{have assumed an infinite volume conductor, 
+that is, the extracellular conductivity has been assumed to be the same everywhere.}}
+We \ghtxt{\sout{have}} also employed the point-electrode approximation, that is, 
+the recording electrode \ghtxt{\sout{has been}was} assumed to record the potential at one particular position in space (\Fref{sec:VC:point-electrode}). 
+Also it \ghtxt{\sout{has been}was} assumed to faithfully record the extracellular potential 
+without disturbing the potentials around the neuron in any way.  
+As discussed in \Fref{sec:VC:electrodes}, however, 
+real recording devices will in general affect the measured potentials in several ways.  
 
 \subsection{\blue{Physical sizes of contacts and shafts of recording electrode}}
 \label{sec:Spikes:electrode_size}
 Most electrodes presently used for extracellular recordings inside the brain consist of electrode contacts made of
-highly conductive materials embedded in an electrically insulating electrode shaft. The amplitudes and shapes of 
-recorded spikes are affected by the size of the electrode contacts, and as discussed in \Fref{sec:VC:disc-electrode}
-this effect can be modelled by use of the disc-electrode approximation. In this approximation the spike potential is computed
-by averaging results from using the point approximation across the surface of the electrode, and it is thus straightforward to implement. An example of its use is provided by \Fref{fig:Spikes:electrode_size} showing spikes recorded with circular electrodes of different radii. A key observation is that the spike amplitude is seen to be reduced with increasing contact sizes (panel B). The spikes shape is also affected as the averaging of the potentials across the contact surface will reduce high-frequency components of the spike (panel C).
+highly conductive materials embedded in an electrically insulating electrode shaft. 
+The amplitudes and shapes of recorded spikes are affected by the size of the electrode contacts, 
+and as discussed in \Fref{sec:VC:disc-electrode} 
+this effect can be modeled by use of the disc-electrode approximation. 
+In this approximation the spike potential is computed
+by averaging results from using the point approximation across the surface of the electrode, 
+and it is thus straightforward to implement. 
+An example of its use is provided by \Fref{fig:Spikes:electrode_size} 
+showing spikes recorded with circular electrodes of different radii. 
+A key observation is that the spike amplitude is seen to be reduced with increasing contact sizes (panel B). 
+The spikes shape is also affected as the averaging of the potentials across the contact surface 
+will reduce high-frequency components of the spike (panel C).
 
 %%%
 \begin{figure}[!ht]
@@ -918,16 +967,20 @@ by averaging results from using the point approximation across the surface of th
 %%%
 
 \gex{The insulating electrode shaft in multicontact electrodes may have a substantial effect on the recorded potentials. 
-Detailed studies of this requires comprehensive numerical investigations by use of FEM modeling. Such studies have shown that the signal from neurons placed close to the shaft on the contact side may be amplified, while signals
-from neurons positioned close to the back side of the shaft may be dampened~\cite**{Mechler2011,Mechler2012,Buccino2019}. }
+Detailed studies of this requires comprehensive numerical investigations by use of FEM modeling. 
+Such studies have shown that the signal from neurons placed close to the shaft on the contact side may be amplified, 
+while signals from neurons positioned close to the back side of the shaft may be dampened~\cite**{Mechler2011,Mechler2012,Buccino2019}. }
 
 
 \subsection{\blue{Microelectrode arrays (MEAs)}}
-Spikes are not only recorded in living brains. In \emph{in vitro} recordings, small slices of excised brain tissue are
+Spikes are not only recorded in living brains. 
+In \emph{in vitro} recordings, small slices of excised brain tissue are
 placed in suitably designed dishes where physiological properties of cells and networks can be probed in detail for hours.
 In so-called \emph{microelectrode arrays (MEAs)}, the bottom of the device is covered by a grid of electrode
-contacts which record electrical signals generated by the neurons above. The brain slice and the MEA are both
-covered with a liquid, typically saline, to protect the cells from drying out and keep them alive for the duration of the experiment, see \Fref{fig:Spikes:MEA-setup}.
+contacts which record electrical signals generated by the neurons above. 
+The brain slice and the MEA are both covered with a liquid, typically saline, 
+to protect the cells from drying out and keep them alive for the duration of the experiment, 
+see \Fref{fig:Spikes:MEA-setup}.
 
 %%%
 \begin{figure}[!ht]
@@ -941,12 +994,15 @@ Figure is adapted from \citeasnoun**{Ness2015}.}
 %%%
 
 In MEAs the electrode contacts are embedded in an insulating glass plate with very 
-low electrical conductivity, while the covering liquid typically has a higher electrical conductivity than the brain slice it covers. In this setup the extracellular conductivity around the signal-generating neurons will not be constant as assumed above for the \textit{in vivo} recordings, and this will affect the amplitude and shape of the recorded spikes. 
+low electrical conductivity, while the covering liquid typically has a higher electrical conductivity than the brain slice it covers. 
+In this setup the extracellular conductivity around the signal-generating neurons will not be constant 
+as assumed above for the \textit{in vivo} recordings, 
+and this will affect the amplitude and shape of the recorded spikes. 
 
 In general, FEM modeling will be required to solve the forward-modeling for situations such as this where
-the the conductivity $\sigma$ varies with position. However, if we assume that the MEA substrate, slice and saline
-all extend infinitely in the lateral directions so that $\sigma$ can be assumed to only have planar step-wise discontinuities, 
-formulas analogous to \Fref{eq:XX:Vr} can be derived by use of the \emph{method of images} from electrostatics. \gen{Referer til section i VC.}
+the the conductivity $\sigma$ varies with position. However, if we assume that the MEA substrate, 
+slice and saline all extend infinitely in the lateral directions so that $\sigma$ can be assumed to only have planar 
+step-wise discontinuities, formulas analogous to \Fref{eq:XX:Vr} can be derived by use of the \emph{method of images} from electrostatics \ghtxt{(see \Fref{sec:Sigma:nonhomo:MoI})}. \gen{Referer til section i VC.}
 
 
 %%%
@@ -960,12 +1016,19 @@ Figure is adapted from \citeasnoun**{Ness2015}.}
 \end{figure}
 %%%
 
-An example result is shown in \Fref{fig:Spikes:MEA-spikes}. The largest effect on the spike from the measurement device comes from the insulating glass substrate which roughly doubles the amplitude of the recorded spikes, \gex{but this effect is not illustrated in the figure. Rather, the figure illustrates the effect of having a highly conductive saline layer covering the brain slice. Specifically, the saline reduces the size of the spike compared to the hypothetical situation where the saline had the same value of the electrical conductivity as the less conductive brain slice (`semi-infinite slice').}
+An example result is shown in \Fref{fig:Spikes:MEA-spikes}. 
+The largest effect on the spike from the measurement device comes from the insulating glass substrate 
+which roughly doubles the amplitude of the recorded spikes, \gex{but this effect is not illustrated in the figure. 
+Rather, the figure illustrates the effect of having a highly conductive saline layer covering the brain slice. 
+Specifically, the saline reduces the size of the spike compared to the hypothetical situation 
+where the saline had the same value of the electrical conductivity as the less conductive brain slice (`semi-infinite slice').}
 \gen{Mulig vi boer bruke andre labels paa de to situasjonene i figuren.}
 
+
 \section{\blue{Multi-unit activity (MUA)}}
-In general, a recording contact will pick up spikes from several neurons positioned in its vicinity, that is, from `multiple units'.
-The term \emph{multi-unit activity (MUA)} refers to this total spiking activity seen in the high-frequency part of recorded extracellular potentials. 
+In general, a recording contact will pick up spikes from several neurons positioned in its vicinity, 
+that is, from `multiple units'. The term \emph{multi-unit activity (MUA)} refers to this total spiking activity seen 
+in the high-frequency part of recorded extracellular potentials. 
 
 %%%
 \begin{figure}[!ht]
