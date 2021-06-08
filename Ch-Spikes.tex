@@ -36,26 +36,51 @@ Detailed modeling of spikes are important for several reasons: for example, (i) 
 %%%%
 \section{\blue{Recording of spikes: GH - nytt forslag}}
 \label{sec:Spikes:recording}
-
-
-
-
-Spike recordings are typically done in living brains, and the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz. In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013},
+\ghnote{Skrev et nytt forslag til dette delkapittelet basert paa kommentarer til forrige versjon.}
+Spike recordings are typically done in living brains. 
+As we have seen, an action potential is a rapid deflection in the neuronal membrane potential
+taking place within a time window of just a few milliseconds.
+As its extracellular signature, the spike, will have a similarly fast time coarse, 
+it is common to study it by concentrating on the high frequencies of the extracellular potential.
+Accordingly, the signal used for analyzing spiking activity is 
+typically obtained by high-pass filtering the extracellular potential using a lower cut-off set at some hundred hertz. 
+In contrast, the low-frequency part, the local field potential (LFP), 
+is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013}, 
 see \Fref{chap:LFP}.
 
-\snnote{Jeg lurte paa om det kanskje hadde vaert fint aa starte enda mer basic? Hva med aa forst forklare hva spikes har med high-pass filtering aa gjore, og videre motivere high-pass filtering ved aa flytte det nest siste avsnittet i denne seksjonen opp hit? Har et forslag, men det er kanskje litt too much:}
+The above does not imply that the spike is built up exclusively of high-frequency components.
+This is a common misunderstanding, and the reasoning behind it is that, 
+since a spike typically lasts only a couple of milliseconds and an oscillation with a period of, say, 
+2 milliseconds corresponds to a frequency of 500 hertz, 
+frequencies lower that this should be absent or at least very weak. 
+However, this is not generally true for spikes ~\cite**{Pettersen2008,Schomburg2012,Ray2011,Scheffer-Teixeira2013},
+and the main reason is that spikes are not single frequency oscillations.
+In general, one can not deduce the frequency content of a signal merely from its briefness. 
+This is perhaps best illustrated by the so-called Dirac $\delta$ function 
+which essentially is infinitely sharp and has zero width, 
+but is built up of equal amounts of frequency components for all frequencies (\Fref{fig:Spikes:freq_dep_delta}). 
 
-\sntxt{Since action potentials travel fast \ghnote{"travel" faar meg til aa tenke propagering opp akson, men det er vel ikke det som er poenget?)}, the resulting spikes picked up by electrodes in brain tissue represent rapid changes in the electric potential. The suddenness of spikes implies that these signals contain high frequencies. When studying spiking activity, we can concentrate on the high frequencies by \textit{high-pass filtering} the electric potentials. The lower cutoff is typically set at a few hundred hertz.}
+%%%%%%%%%
+% Figure
+%%%%%%%%%
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
+\includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_delta_pulse_freq_content.png}
+\end{center}
+\caption{\textbf{Delta pulses and frequency content.}
+A single delta-pulse (panel A, red) has frequency components with equal contributions for all frequencies (panel B, red).
+An asymmetric pair of delta-pulses, caricaturing the spike in \Fref{fig:Spikes:freq_dep}B with a negative sodium peak followed by a weaker positive potassium peak (panel A, black), instead has an oscillating frequency spectrum (panel B, black). This spectrum has its (first) maximum at 625 Hz, but also has substantial contributions from frequencies all the way down to zero.
+\gen{Kanskje la x-aksen faa fra 0 till 2000 Hz som i Fig. 8.2B? Tar vel ogsaa bort bakgrunns-rutegrid i B? Enhet paa y-akse i B maa fikses. Kanskje vi kan velge -100 $mu$V som amplitude paa sodium-pulse i A slik at det ligner mer paa  Fig. 8.2?}
+}
+\label{fig:Spikes:freq_dep_delta}
+\end{figure}
+%%%
 
-\snnote{Og saa legge til avsnittet "The high-pass filtering of the extracellular potential..."?}
-
-A common misunderstanding is that a spike is built up only of high-frequency components. The reasoning is that, since a spike typically lasts only a couple of milliseconds and an oscillation with a period of, say, 2 milliseconds corresponds to a frequency of 500 hertz, lower frequencies will be absent or at least very weak. However, this is not generally true~\cite**{Pettersen2008,Schomburg2012,Ray2011,Scheffer-Teixeira2013}. Even a fast sodium spike contains frequency components with frequencies as low as 100 Hz \cite**{Pettersen2008a}. 
-\ehnote{Edit: Artikkelen jeg hadde i tankene var Anastassiou et al 2015: 10.1152/jn.00628.2014. Abstract: "... We found that spiking of excitatory neurons can significantly impact the LFP at frequencies as low as 20 Hz. Our results question the common assertion that the LFP acts as proxy for synaptic activity."} 
-\gen{Nyttig tips: Men slik jeg leser artikkelen saa er tolkningen at dette skyldes spike "afterhypolarization". Har lagt inn en setning om det lenger ned.} 
-This is illustrated in \Fref{fig:Spikes:freq_dep} showing that also very narrow spikes may contain low-frequency components. In fact, the so-called Dirac $\delta$ function which essentially is infinitely sharp and has zero width, is built up of equal amounts of frequency components for all frequencies. In addition, the sodium spike may coincide with slower spike-associated phenomena such as calcium spikes~\cite**{Stuart2007} and spike afterhyperpolarization \cite**{Buzsaki1988} which may further contribute to increased low-frequency components~\cite**{Buzsaki2012}.
+Even a fast sodium spike contains frequency components with frequencies as low as 100 Hz \cite**{Pettersen2008a}. 
+This is illustrated in \Fref{fig:Spikes:freq_dep} showing that also very narrow spikes may contain low-frequency components. 
+In addition, the sodium spike may coincide with slower spike-associated phenomena such as calcium spikes~\cite**{Stuart2007} and spike afterhyperpolarization \cite**{Buzsaki1988} which may further contribute to increased low-frequency components~\cite**{Buzsaki2012}.
 \gex{\citeasnoun**{anastassiou2015b} found, for example, spike contributions to the LFPs for frequencies as low as 20 Hz for cortical pyramidal neurons, likely stemming from such spike afterhyperpolarization.}
-
-
 
 %%%%%%%%%
 % Figure
@@ -79,29 +104,14 @@ at ikke bare spike-formen i tid, men ogsaa i frekvens, er veldig forskjellig?}
 \end{figure}
 %%%%%
 
-%%%%%%%%%
-% Figure
-%%%%%%%%%
-\begin{figure}[!ht]
-\begin{center}
-%\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
-\includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_delta_pulse_freq_content.png}
-\end{center}
-\caption{\textbf{Delta pulses and frequency content.}
-A single delta-pulse (panel A, red) has frequency components with equal contributions for all frequencies (panel B, red).
-An asymmetric pair of delta-pulses, caricaturing the spike in \Fref{fig:Spikes:freq_dep}B with a negative sodium peak followed by a weaker positive potassium peak (panel A, black), instead has an oscillating frequency spectrum (panel B, black). This spectrum has its (first) maximum at 625 Hz, but also has substantial contributions from frequencies all the way down to zero.
-\gen{Kanskje la x-aksen faa fra 0 till 2000 Hz som i Fig. 8.2B? Tar vel ogsaa bort bakgrunns-rutegrid i B? Enhet paa y-akse i B maa fikses. Kanskje vi kan velge -100 $mu$V som amplitude paa sodium-pulse i A slik at det ligner mer paa  Fig. 8.2?}
-}
-\label{fig:Spikes:freq_dep_delta}
-\end{figure}
-%%%
+The motivation for performing a high-pass filtering of extracellular potential when detecting spikes
+is not that spikes do not contain frequency components below the cut-off, 
+but rather that one in that way may hope to isolate the spike signal from other slower neural processes. 
+While these other slower processes typically dominate the extracellular potential in terms of overall signal power, 
+they have very little power above a few hundred hertz and can thus be removed with high-pass filtering ~\cite**{Pettersen2008,Einevoll2013}.
 
-\gex{The high-pass filtering of the extracellular signal typically used when detecting spikes in extracellular recordings, is done to isolate the spike signal from other slower neural processes. While the signals from these other slower processes typically
-dominate in terms of overall signal power, they have very little power above a few hundred hertz and can thus be removed with high-pass filtering ~\cite**{Pettersen2008,Einevoll2013}.} 
-%\ghnote{Er ikke dette en tautologi? The low-frequency part has little power in the high frequencies?}
+Overviews over the challenges when measuring spikes can be found in  \citeasnoun**{Anastassiou2013} and \citeasnoun**{Whittingstall2013}. \gen{Noen andre mulige referanser her?} 
 
-Overviews over the challenges when measuring spikes can be found in  \citeasnoun**{Anastassiou2013} and \citeasnoun**{Whittingstall2013}.
-\gen{Noen andre mulige referanser her?} 
 
  %%%%%%%%%%
 % Figure: Spike from multi-compartment model
@@ -137,10 +147,6 @@ Det boer nevnes hva som driver depolariseringen, ser ut som en step current?}
 %%%
 \section{\blue{Recording of spikes}}
 \label{sec:Spikes:recording}
-
-
-
-
 Spike recordings are typically done in living brains, and the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz. In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013},
 see \Fref{chap:LFP}.
 
