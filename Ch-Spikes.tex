@@ -19,7 +19,7 @@ Adapted from \citeasnoun**{Henze2000}.
 \end{figure}
 %%%%%%%%%%%
 
-\gex{The amplitude of the membrane-potential deflection during an action potential is about 100~mV. The amplitude of \ghtxt{a }spike\sout{s}, a term which we in the present book restrict to the extracellular signature of action potentials,} \ghtxt{\sout{are} is} typically less than 1~mV. Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}). \ghnote{Byttet avsnitt: De to setn. over la opp til at naa skal vi sammenligne APs vs Spikes, men det som kom under handler om aa beskrive spikes. Kanskje en setning til her om at spike-shape utenfor soma er saann ca invertert jmf AP?}
+\gex{The amplitude of the membrane-potential deflection during an action potential is about 100~mV. The amplitude of \ghtxt{a }spike\sout{s}, a term which we in the present book restrict to the extracellular signature of action potentials,} \ghtxt{\sout{are} is} typically less than 1~mV. Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}). \ghnote{Byttet avsnitt: De to setn. over la opp til at naa skal vi sammenligne APs vs Spikes, men det som kom under handler om aa beskrive spikes. Kanskje en setning til her om sammenligning: F.eks. si at spike-shape utenfor soma er saann ca invertert jmf AP?}
 
 The initial sharp negative peak is often referred to as the `sodium peak' as it mainly stems from sodium ions flowing into the soma (and axon hillock) during the initial phase of the action potential. The later blunter positive peak is likewise sometimes referred to as the `potassium peak', as it is dominated by potassium ions flowing out of the soma. \ghnote{Her er det vel implisitt at vaar spike er i naerheten av soma? Burde kanskje si dette eksplisitt?} 
 
@@ -32,15 +32,121 @@ For the detection of spikes, the detailed spike shape is of less importance. How
 Detailed modeling of spikes are important for several reasons: for example, (i) to understand the relationship between single-neuron properties and spike shapes \cite**{Holt1999,Gold2006,Pettersen2008a,Anastassiou2013}, (ii) to estimate biases regarding which types of neurons that are most likely to generate the spikes recorded by electrodes \cite**{Pettersen2008a},
 (iii) to provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}, and (iv) to fit model parameters in multicompartment neuron models \cite**{Gold2007}.
 
-%%%
-\section{\blue{Recording of spikes}}
+
+%%%%
+\section{\blue{Recording of spikes: GH - nytt forslag}}
 \label{sec:Spikes:recording}
+
+
+
+
 Spike recordings are typically done in living brains, and the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz. In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013},
 see \Fref{chap:LFP}.
 
 \snnote{Jeg lurte paa om det kanskje hadde vaert fint aa starte enda mer basic? Hva med aa forst forklare hva spikes har med high-pass filtering aa gjore, og videre motivere high-pass filtering ved aa flytte det nest siste avsnittet i denne seksjonen opp hit? Har et forslag, men det er kanskje litt too much:}
 
-\sntxt{Since action potentials travel fast, the resulting spikes picked up by electrodes in brain tissue represent rapid changes in the electric potential. The suddenness of spikes implies that these signals contain high frequencies. When studying spiking activity, we can concentrate on the high frequencies by \textit{high-pass filtering} the electric potentials. The lower cutoff is typically set at a few hundred hertz.}
+\sntxt{Since action potentials travel fast \ghnote{"travel" faar meg til aa tenke propagering opp akson, men det er vel ikke det som er poenget?)}, the resulting spikes picked up by electrodes in brain tissue represent rapid changes in the electric potential. The suddenness of spikes implies that these signals contain high frequencies. When studying spiking activity, we can concentrate on the high frequencies by \textit{high-pass filtering} the electric potentials. The lower cutoff is typically set at a few hundred hertz.}
+
+\snnote{Og saa legge til avsnittet "The high-pass filtering of the extracellular potential..."?}
+
+A common misunderstanding is that a spike is built up only of high-frequency components. The reasoning is that, since a spike typically lasts only a couple of milliseconds and an oscillation with a period of, say, 2 milliseconds corresponds to a frequency of 500 hertz, lower frequencies will be absent or at least very weak. However, this is not generally true~\cite**{Pettersen2008,Schomburg2012,Ray2011,Scheffer-Teixeira2013}. Even a fast sodium spike contains frequency components with frequencies as low as 100 Hz \cite**{Pettersen2008a}. 
+\ehnote{Edit: Artikkelen jeg hadde i tankene var Anastassiou et al 2015: 10.1152/jn.00628.2014. Abstract: "... We found that spiking of excitatory neurons can significantly impact the LFP at frequencies as low as 20 Hz. Our results question the common assertion that the LFP acts as proxy for synaptic activity."} 
+\gen{Nyttig tips: Men slik jeg leser artikkelen saa er tolkningen at dette skyldes spike "afterhypolarization". Har lagt inn en setning om det lenger ned.} 
+This is illustrated in \Fref{fig:Spikes:freq_dep} showing that also very narrow spikes may contain low-frequency components. In fact, the so-called Dirac $\delta$ function which essentially is infinitely sharp and has zero width, is built up of equal amounts of frequency components for all frequencies. In addition, the sodium spike may coincide with slower spike-associated phenomena such as calcium spikes~\cite**{Stuart2007} and spike afterhyperpolarization \cite**{Buzsaki1988} which may further contribute to increased low-frequency components~\cite**{Buzsaki2012}.
+\gex{\citeasnoun**{anastassiou2015b} found, for example, spike contributions to the LFPs for frequencies as low as 20 Hz for cortical pyramidal neurons, likely stemming from such spike afterhyperpolarization.}
+
+
+
+%%%%%%%%%
+% Figure
+%%%%%%%%%
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
+\includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_spike_freq_content_amp.png}
+\end{center}
+\caption[]{\textbf{Spike and frequency components.}
+A: Membrane potential during firing of action potential of Hay neuron \cite**{Hay2011}. \ghnote{For aa sitere i figurtest, legg inn en klamme rett etter caption[].}
+B: Corresponding extracellular spike measured \gex{XX $\mu$m} outside of soma neurons. Raw signal (black),
+low-pass filtered signal (red), high-pass filtered signal (blue).
+C: Frequency content of signals in B, that is, amplitudes for frequency components found by Fourier transformation.
+\gen{Kanskje vi kunne legge til Fourier spektrum for intracellular action potentials ogsaa slik at vi kan kommentere
+at ikke bare spike-formen i tid, men ogsaa i frekvens, er veldig forskjellig?}
+\gen{Enhet paa y-akse i C maa fikses. Tar vel ogsaa bort bakgrunns-rutegrid i C?}
+\ehnote{hvordan er den cella stimulert? Ser ut som en stroempuls som vil gi et stort bidrag i PSD. Jeg foreslaar DC input som gir persistent fyring med lav rate, saa kan du heller regne ut PSD fra en enkelt spike.}  
+}
+\label{fig:Spikes:freq_dep}
+\end{figure}
+%%%%%
+
+%%%%%%%%%
+% Figure
+%%%%%%%%%
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width=0.6\textwidth]{Figures/Spikes/Spikes-eap_illustration.png}
+\includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_delta_pulse_freq_content.png}
+\end{center}
+\caption{\textbf{Delta pulses and frequency content.}
+A single delta-pulse (panel A, red) has frequency components with equal contributions for all frequencies (panel B, red).
+An asymmetric pair of delta-pulses, caricaturing the spike in \Fref{fig:Spikes:freq_dep}B with a negative sodium peak followed by a weaker positive potassium peak (panel A, black), instead has an oscillating frequency spectrum (panel B, black). This spectrum has its (first) maximum at 625 Hz, but also has substantial contributions from frequencies all the way down to zero.
+\gen{Kanskje la x-aksen faa fra 0 till 2000 Hz som i Fig. 8.2B? Tar vel ogsaa bort bakgrunns-rutegrid i B? Enhet paa y-akse i B maa fikses. Kanskje vi kan velge -100 $mu$V som amplitude paa sodium-pulse i A slik at det ligner mer paa  Fig. 8.2?}
+}
+\label{fig:Spikes:freq_dep_delta}
+\end{figure}
+%%%
+
+\gex{The high-pass filtering of the extracellular signal typically used when detecting spikes in extracellular recordings, is done to isolate the spike signal from other slower neural processes. While the signals from these other slower processes typically
+dominate in terms of overall signal power, they have very little power above a few hundred hertz and can thus be removed with high-pass filtering ~\cite**{Pettersen2008,Einevoll2013}.} 
+%\ghnote{Er ikke dette en tautologi? The low-frequency part has little power in the high frequencies?}
+
+Overviews over the challenges when measuring spikes can be found in  \citeasnoun**{Anastassiou2013} and \citeasnoun**{Whittingstall2013}.
+\gen{Noen andre mulige referanser her?} 
+
+ %%%%%%%%%%
+% Figure: Spike from multi-compartment model
+%%%%%%%%%%
+%\begin{cnfigure}{Figures/mm/EP-spike-MultiCompartment-w100-r150}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{Figures/Spikes/Spikes-fig_hay_eap_simpler}
+\end{center}
+\caption[]{\textbf{Spike from action potential for a multi-compartmental neuron model.}
+A: Spikes computed at different positions around example Hay-neuron \cite**{Hay2011} using \gex{Eq. XX}.
+B: Corresponding membrane potential. C: Spike shapes at different lateral positions in A as depicted by colouring. Spike shapes
+are normalized to have the same magnitude of the negative peak.
+The action potential was generated by injection of synaptic currents into the soma of the model neuron. 
+\ehnote{Figure adapted from Fig4. i Hagen2015 kanskje? Aksonet peker i "feil" retning ogsaa. 
+Det boer nevnes hva som driver depolariseringen, ser ut som en step current?}
+\tvnnote{Vi ville ha en litt enklere versjon enn Fig. 4 i Hagen2015, men enig i at vi kanskje boer vurdere aa fikse retningen til axonet. Har du koden for dette? Stimuli er foreloebig synaptisk input i soma} \ghnote{Denne figuren er panel A i neste figur. Foreslaar at den fjernes, og at vi refererer dit.} 
+\gen{Synes det er fint aa ha den her i stort format siden den paa en maate er "ground truth" i denne sammenheng.}
+}. 
+%Active sodium
+%and potassium conductances in the soma compartment and computed from 
+%\Fref{XX:equation:Ve-multi-compartment}.
+%Left panel shows the EP at different spatial positions, while right panel shows the corresponding
+%soma membrane potential during the action potential. 
+%\gen{Figure + caption to be updated. Change to Hay-model,}
+\label{fig:Spikes:MultiCompartment}
+%\figpermOurs
+\end{figure}
+
+
+
+
+%%%
+\section{\blue{Recording of spikes}}
+\label{sec:Spikes:recording}
+
+
+
+
+Spike recordings are typically done in living brains, and the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz. In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013},
+see \Fref{chap:LFP}.
+
+\snnote{Jeg lurte paa om det kanskje hadde vaert fint aa starte enda mer basic? Hva med aa forst forklare hva spikes har med high-pass filtering aa gjore, og videre motivere high-pass filtering ved aa flytte det nest siste avsnittet i denne seksjonen opp hit? Har et forslag, men det er kanskje litt too much:}
+
+\sntxt{Since action potentials travel fast \ghnote{"travel" faar meg til aa tenke propagering opp akson, men det er vel ikke det som er poenget?)}, the resulting spikes picked up by electrodes in brain tissue represent rapid changes in the electric potential. The suddenness of spikes implies that these signals contain high frequencies. When studying spiking activity, we can concentrate on the high frequencies by \textit{high-pass filtering} the electric potentials. The lower cutoff is typically set at a few hundred hertz.}
 
 \snnote{Og saa legge til avsnittet "The high-pass filtering of the extracellular potential..."?}
 
