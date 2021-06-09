@@ -149,6 +149,7 @@ Overviews over the challenges when measuring spikes can be found in  \citeasnoun
 %%%
 \section{\blue{Recording of spikes}}
 \label{sec:Spikes:recording}
+\ghnote{Dette er den gamle versjonen av delkapittelet over. Ett av dem velges. }
 Spike recordings are typically done in living brains, and the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz. In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013},
 see \Fref{chap:LFP}.
 
@@ -252,13 +253,16 @@ The somatic intracellular action potential in a given neuron has a quite stereot
 i.e., all action potentials fired by the same neuron have more or less the same shape. 
 The shape and amplitude of the extracellular spike that it generates will, however, 
 depend strongly on the position where it is recorded. 
-This is illustrated in \Fref{fig:Spikes:MultiCompartment} showing computed spikes at various positions around a neuron during the firing of an action potential. 
-Here the scheme described in \Fref{sec:Schemes:LFPy} is used with a biophysically detailed neuron model for a layer-5 pyramidal cell. 
-\ghnote{Mange schemes ble vel beskrevet i det kapittelet. Kanskje putte denne info inn i figurtekst og vaere mer presis?}
+This is illustrated in \Fref{fig:Spikes:MultiCompartment} showing computed spikes 
+at various positions around a neuron during the firing of an action potential. 
+Here the \ghtxt{MC + VC} scheme described in \Fref{sec:Schemes:LFPy} 
+is used with a biophysically detailed neuron model for a layer-5 pyramidal cell. 
+\ghnote{Flytte slik info inn i figurtekst de ganger det lar seg gjoere?}
 One striking feature is the rapid decay of spike amplitude with distance from the soma. 
 Another is the changing shape of the spike highlighted in panel C: 
-The sharpest spikes are seen for recording close to the soma. 
-This blunting, or low-pass filtering, of the spike with distance stems from the cable properties of the neuron, 
+The sharpest spikes are seen \ghtxt{\sout{for recording}when the recording position is} close to the soma. 
+\ghtxt{\sout{This}The} blunting, or low-pass filtering, of the spike with distance 
+stems from the cable properties of the neuron, 
 and has been referred to as `intrinsic dendritic filtering' \cite**{Linden2010,Pettersen2012} 
 (as opposed to, say, possible filtering by the extracellular medium itself~\cite**{Bedard2012}). 
 The origin of this intrinsic dendritic filtering effect is described below in \Fref{sec:Spikes:ball-and-stick}.
@@ -435,6 +439,8 @@ is the depth position of the soma (see  \Fref{fig:Spikes:ball-and-stick-model-sk
 is essentially a continuous version of \fref{eq:VC:pointsources}, i.e., a continuum of point sources
 distributed along the stick.}
 \gen{Sjekk symbolene for soma membranstroem (Ampere) og stick membranstroem (A/m)} 
+\ghnote{Ja, i figuren fig:Neuron:ballnstick skrev jeg dette som $i_m \pi d$ der $i_m$ er stroem per membranareal 
+og produktet stroem per kabellengdeenhet.}
 
 %
 
@@ -668,6 +674,7 @@ The suffix `far' is added because this expression only applies in the `far-field
 \ehnote{`far-field' limit har vel en noe mer generell definisjon?}
 \gen{Etter aa tenkt litt mer tror jeg det er OK aa si far-field limit siden dette dipolleddet vil dominere i denne grensen.}
 \ghnote{Skal lambda hete lambda infinity? } \gen{Ja, det var tanken siden vi bruker uttrykket for en uendelig stick}
+\ghnote{Infinityen mangler i den nest siste ligninga. Den skal vel vaere med der ogsaa?}
 %
 %Equations~(\Fref{eq:Spikes:Ve_near_2}) and (\Fref{Spikes:box:equation:Ve_far_2}) describe how each frequency component of 
 %the soma membrane potential  $\hat{V}_\mathrm{s}(f)$ is `translated' into frequency components of the 
