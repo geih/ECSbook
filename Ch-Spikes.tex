@@ -1,7 +1,38 @@
 \chapter{Spikes}
 \label{chap:Spikes}
 \ghtxt{\sout{If a neuroscientist is asked by a layman about what we have learned about brain networks from electrical recordings, there is a high chance she first highlights the studies of Hubel and Wiesel in the 1950s and 60s of neural representations in the primary visual cortex. In their pioneering studies, they measured spikes, the extracellular signatures of action potentials, of cortical cells in cat following visual stimulation by use of sharp recording electrodes.} 
-If a neuroscientist is asked what we have learned about brain networks from electrical recordings, there is a high chance she first highlights the work done by Hubel and Wiesel in the 1950s and 60s. In their pioneering studies of neural representations in the cat primary visual cortex, Hubel and Wiesel used sharp electrodes to measure spikes, the extracellular signatures of action potentials, evoked by visual stimulation.} They found, for example, that many of the cells responded most vigorously, that is, with the highest number of spikes, to bar-like stimuli oriented in specific directions~\cite**{Hubel1959}. Later, the same approach has been used throughout the nervous system to map out how different neurons encode information on sensory stimuli, objects, spatial positions and more. Spike measurements did not start with Hubel and Wiesel, \sntxt{\sout{ however} see} \cite**{Adrian1928}, and the spike has arguably been the most important brain signal in systems neuroscience.\snnote{<- var 1 uke paa skrivekurs paa simula i 2017 og det som festa seg var at jeg ikke fikk lov til aa skrive "however" bak en fullstendig setning.=)}
+If a neuroscientist is asked what we have learned about brain networks from electrical recordings, there is a high chance she first highlights the work done by Hubel and Wiesel in the 1950s and 60s. In their pioneering studies of neural representations in the cat primary visual cortex, Hubel and Wiesel used sharp electrodes to measure spikes, the extracellular signatures of action potentials, evoked by visual stimulation.} They found, for example, that many of the cells responded most vigorously, that is, with the highest number of spikes, to bar-like stimuli oriented in specific directions~\cite**{Hubel1959}. Later, the same approach has been used throughout the nervous system to map out how different neurons encode information on sensory stimuli, objects, spatial positions and more. \ghtxt{Since the first spike measurements, which were performed decades before the works of Hubel and Wiesel (see e.g., \cite**{Adrian1928}), the spike has arguably been the most important brain signal in systems neuroscience.} \ghtxt{\sout{Spike measurements did not start with Hubel and Wiesel, \sntxt{\sout{ however} see} Adrian1928, and the spike has arguably been the most important brain signal in systems neuroscience.}}\snnote{<- var 1 uke paa skrivekurs paa simula i 2017 og det som festa seg var at jeg ikke fikk lov til aa skrive "however" bak en fullstendig setning.=)}
+
+\ghnote{Synes vi maa sette opp problemstillingen tydeligere. Skisse: }
+
+\ghnote{In this book we will restrict the term \emph{spike} to mean the the extracellular signature of a neuronal 
+action potential. The purpose of spike measurements is normally that we want to quantify the activity of
+a neural population in terms of the firing times of the individual neurons.
+This is not a trivial problem: since electrodes generally will pick up signals from several
+nearby neurons, it is often difficult to determine which voltage deflection (spike) in the recorded signal
+that belongs to which neuron. In addition, one has to distinguish between 
+voltage deflections that reflect actual spikes, 
+and voltage deflections caused by ambient noise in the system. 
+To tackle these problems it is important that we obtain a good understanding of how firing activity
+of individual neurons are reflected in the extracellular potential, 
+i.e., how neuronal action potentials give rise to extracellular spikes, 
+and how the shape of these spikes depend on the properties of
+the neuron that generated them, and the position of the neuron
+relative to the recording electrode. Forward modeling, based on 
+the MC + VC framework can provide good insights in this regard, 
+and in this chapter we aim to present the most important of these insights.
+
+Spike recordings are typically done in living brains. 
+Throughout most of this chapter we will therefore assume
+that the tissue surrounding the neurons that we record spikes from
+is homogeneous and isotropic, but exceptions to this
+are briefly treated in the final subchapter....
+
+Ikke ferdigtenkt her.
+}
+
+
+
 
 %%%%%%%%%%
 % Figure: Intracellular and extracellular action potentials
@@ -21,7 +52,7 @@ Adapted from \citeasnoun**{Henze2000}.
 
 \ghnote{Avsnittet nedenfor var langt, og inneholdt veldig mye forskjellig. Jeg delte det opp. Foreslaar at vi ogsaa legger inn referanser til underkapitler hvor de ulike tema behandles.}
 
-\gex{The amplitude of the membrane-potential deflection during an action potential is about 100~mV. The amplitude of \ghtxt{a }spike\sout{s}, a term which we in the present book restrict to \ghtxt{mean} the extracellular signature of \ghtxt{an} action potential\ghtxt{\sout{s},} \ghtxt{\sout{are} is} typically less than 1~mV. Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}). \ghnote{La inn avsnitt: De to setn. over la opp til at naa skal vi sammenligne APs vs Spikes, men det som kom under handler om aa beskrive spikes. Kanskje en setning til her om sammenligning: F.eks. si at spike-shape utenfor soma er saann ca invertert jmf AP?}
+The amplitude of the membrane-potential deflection during an action potential is about 100~mV. The amplitude of \ghtxt{a }spike\sout{s}, a term which we in the present book restrict to \ghtxt{mean} the extracellular signature of \ghtxt{an} action potential\ghtxt{\sout{s},} \ghtxt{\sout{are} is} typically less than 1~mV. Also, the shape of the spike is very different from the shape of intracellularly recorded action potentials (\Fref{fig:Spikes:Henze}). \ghnote{La inn avsnitt: De to setn. over la opp til at naa skal vi sammenligne APs vs Spikes, men det som kom under handler om aa beskrive spikes. Kanskje en setning til her om sammenligning: F.eks. si at spike-shape utenfor soma er saann ca invertert jmf AP?}
 
 \ghtxt{When recorded in the vicinity of the neural soma, the spike is typically characterized by an initial sharp negative peak
 followed by a later positive peak.} The initial \ghtxt{\sout{sharp negative}} peak is often referred to as the `sodium peak' 
@@ -36,7 +67,8 @@ as it is dominated by potassium ions flowing out of the soma.
 %\tvnnote{Alessio sa de typisk ikke tar med spikes med amplitude under 30 uV, og det var dette vi brukte i Buccino et al., 2018, J Neurophysiol, men han hadde ikke noe god kilde ellers}
 For the detection of spikes, the detailed spike shape is of less importance. 
 However, an extracellular electrode will in general measure spikes from several neurons positioned in the vicinity of the electrode contact. 
-To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. In this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. Spike shapes are also used to distinguish spikes from different neuron types~\cite**{Bartho2004}. \ghnote{Also used to....? Meningen i siste setning var den samme jeg leste ut av den foregaaende. Men i foregaaende setning mente du kanskje "finne igjen samme spike i ulike kanaler? Kanskje skrive dette ut litt?} The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes), but a more detailed separation into subgroups is also possible~\cite**{Buccino2018}. 
+To obtain spike trains from individual neurons, the recorded spikes must thus be sorted in a process referred to as spike sorting~\cite**{Quiroga2007}. In this process, the differences in spike shapes are crucial~\cite**{Einevoll2012}. Spike shapes are also used to distinguish spikes from different neuron types~\cite**{Bartho2004}. \ghnote{Also used to....? Altsaa i tillegg til noe annet, som ikke ble beskrevet i foregaaende setning. Men i foregaaende setning mente du kanskje "finne igjen samme spike i ulike kanaler? Fordele spikes paa ulike nevroner av samme type avhengig av deres posisjon i forhold til maaleelektrode?
+Dette boer skrives ut.} The temporal width of the spike is, for example, used to separate putative inhibitory neurons (narrow spikes) from excitatory neurons (broad spikes), but a more detailed separation into subgroups is also possible~\cite**{Buccino2018}. 
 
 Detailed modeling of spikes are important for several reasons: for example, (i) to understand the relationship between single-neuron properties and spike shapes \cite**{Holt1999,Gold2006,Pettersen2008a,Anastassiou2013}, (ii) to estimate biases regarding which types of neurons that are most likely to generate the spikes recorded by electrodes \cite**{Pettersen2008a},
 (iii) to provide benchmarking data for development and testing of methods for spike sorting or spike-based neuron identification \cite**{Einevoll2012,CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}, and (iv) to fit model parameters in multicompartment neuron models \cite**{Gold2007}.
@@ -47,6 +79,11 @@ Detailed modeling of spikes are important for several reasons: for example, (i) 
 \label{sec:Spikes:recording}
 \ghnote{Skrev et nytt forslag til dette delkapittelet basert paa kommentarer til forrige versjon.}
 Spike recordings are typically done in living brains. 
+\ghnote{Og derfor antar vi konstant $\sigma_\text{t}$? Er det det som er poenget med aa si dette? 
+Kanskje boer vi skrive noen ord om dette paa et tidlig stadium -
+at all modellering vi viser er basert paa denne antakelsen, bortsett fra i siste delkapittel.
+Dette oppgis senere, men da som et slags vedheng foer vi begynner med MoI.}
+
 As we have seen, an action potential is a rapid deflection in the neuronal membrane potential
 taking place within a time window of just a few milliseconds.
 As its extracellular signature, the spike, will have a similarly fast time coarse, 
@@ -128,6 +165,7 @@ Overviews over the challenges when measuring spikes can be found in  \citeasnoun
 %%%
 \section{\blue{Recording of spikes}}
 \label{sec:Spikes:recording}
+\ghnote{Dette er den gamle versjonen av delkapittelet over. Ett av dem velges. }
 Spike recordings are typically done in living brains, and the signal is obtained by high-pass filtering the extracellular potentials, with a lower cut-off set at some hundred hertz. In contrast, the low-frequency part, the local field potential (LFP), is thought to mostly reflect synaptic inputs onto populations neurons around the contact~\cite**{Einevoll2013},
 see \Fref{chap:LFP}.
 
@@ -231,13 +269,16 @@ The somatic intracellular action potential in a given neuron has a quite stereot
 i.e., all action potentials fired by the same neuron have more or less the same shape. 
 The shape and amplitude of the extracellular spike that it generates will, however, 
 depend strongly on the position where it is recorded. 
-This is illustrated in \Fref{fig:Spikes:MultiCompartment} showing computed spikes at various positions around a neuron during the firing of an action potential. 
-Here the scheme described in \Fref{sec:Schemes:LFPy} is used with a biophysically detailed neuron model for a layer-5 pyramidal cell. 
-\ghnote{Mange schemes ble vel beskrevet i det kapittelet. Kanskje putte denne info inn i figurtekst og vaere mer presis?}
+This is illustrated in \Fref{fig:Spikes:MultiCompartment} showing computed spikes 
+at various positions around a neuron during the firing of an action potential. 
+Here the \ghtxt{MC + VC} scheme described in \Fref{sec:Schemes:LFPy} 
+is used with a biophysically detailed neuron model for a layer-5 pyramidal cell. 
+\ghnote{Flytte slik info inn i figurtekst de ganger det lar seg gjoere?}
 One striking feature is the rapid decay of spike amplitude with distance from the soma. 
 Another is the changing shape of the spike highlighted in panel C: 
-The sharpest spikes are seen for recording close to the soma. 
-This blunting, or low-pass filtering, of the spike with distance stems from the cable properties of the neuron, 
+The sharpest spikes are seen \ghtxt{\sout{for recording}when the recording position is} close to the soma. 
+\ghtxt{\sout{This}The} blunting, or low-pass filtering, of the spike with distance 
+stems from the cable properties of the neuron, 
 and has been referred to as `intrinsic dendritic filtering' \cite**{Linden2010,Pettersen2012} 
 (as opposed to, say, possible filtering by the extracellular medium itself~\cite**{Bedard2012}). 
 The origin of this intrinsic dendritic filtering effect is described below in \Fref{sec:Spikes:ball-and-stick}.
@@ -392,7 +433,7 @@ Spike widths (left) and (peak-to-peak) spike amplitudes (right) as a function of
 %%\figpermOurs
 %\end{figure}
 
-When modeling spikes with the ball-and-stick neuron, one option is to include spike-generating active sodium and potassium conductances in the soma compartment. Another option is to impose a voltage waveform mimicking a somatic action potential as a boundary condition in the soma end of the dendritic stick. \ghtxt{\sout{This}The two options} will produce an identical pattern of membrane currents returning to the ECS through the dendritic stick, \ghtxt{and for the cases that we study in this book we will use the latter}. The soma membrane current will due to current conservation be the same as the axial current entering the dendritic stick at the soma end. 
+When modeling spikes with the ball-and-stick neuron, one option is to include spike-generating active sodium and potassium conductances in the soma compartment. Another option is to impose a voltage waveform mimicking a somatic action potential as a boundary condition in the soma end of the dendritic stick. \ghtxt{\sout{This}The two options} will produce an identical pattern of membrane currents returning to the ECS through the dendritic stick, \ghtxt{and for the cases that we study in this book we will use the latter}. \ghnote{Kanskje litt uenig med meg selv her. Hva driver vi med? Vi guider leseren gjennom en teori, og trenger vel ikke aa ha gjort noen egne simuleringer? Kanskje bare si at vi vil simply refer to it as the soma current, og saa holde oss konsekvent til det. Jeg ble litt forvirra forrige gang jeg leste fordi jeg lurte paa om det var en simulering som slumret i bakgrunnen eller ikke....} The soma membrane current will due to current conservation be the same as the axial current entering the dendritic stick at the soma end. 
 
 \ghtxt{\sout{The extracellular potential can now be computed using the standard formalism based on the pattern dendritic membrane currents and the soma membrane current Pettersen2008a}} \ghnote{Rar setning. Pattern OF dendritic and somatic membrane currents? Synes ogsaa det var rart aa kalle dette standard formalism da vi ikke har introdusert den tidligere i boka.
 Se forslag under. }
@@ -414,6 +455,8 @@ is the depth position of the soma (see  \Fref{fig:Spikes:ball-and-stick-model-sk
 is essentially a continuous version of \fref{eq:VC:pointsources}, i.e., a continuum of point sources
 distributed along the stick.}
 \gen{Sjekk symbolene for soma membranstroem (Ampere) og stick membranstroem (A/m)} 
+\ghnote{Ja, i figuren fig:Neuron:ballnstick skrev jeg dette som $i_m \pi d$ der $i_m$ er stroem per membranareal 
+og produktet stroem per kabellengdeenhet.}
 
 %
 
@@ -647,6 +690,7 @@ The suffix `far' is added because this expression only applies in the `far-field
 \ehnote{`far-field' limit har vel en noe mer generell definisjon?}
 \gen{Etter aa tenkt litt mer tror jeg det er OK aa si far-field limit siden dette dipolleddet vil dominere i denne grensen.}
 \ghnote{Skal lambda hete lambda infinity? } \gen{Ja, det var tanken siden vi bruker uttrykket for en uendelig stick}
+\ghnote{Infinityen mangler i den nest siste ligninga. Den skal vel vaere med der ogsaa?}
 %
 %Equations~(\Fref{eq:Spikes:Ve_near_2}) and (\Fref{Spikes:box:equation:Ve_far_2}) describe how each frequency component of 
 %the soma membrane potential  $\hat{V}_\mathrm{s}(f)$ is `translated' into frequency components of the 
@@ -1056,16 +1100,48 @@ Adapted from \citeasnoun**{Hagen2015}.
 
 
 \subsection{\blue{Spike extraction and sorting}}  
-With only a single recording contact, the most direct way to analyse the MUA is to simply detect and count the spikes in the recorded signal trace. Here a suitable detection procedure must be used. This typically involves thresholding where only voltage deflections larger than a preset threshold depending on the ambient noise level, are counted as spikes.
-\gen{Kanskje vi kunne laget en enkel figur her som illustrerte spike detection her (kanskje inspirert av noen av panelene i Figur 1 i Einevoll2020? Jeg synes ikke vi trenger aa gaa inn paa prisnipper for spike sorting siden dette vel er mer "dataanalyse" enn vi ellers har planlagt aa ha med i boka.
-}
+With only a single recording contact, 
+the most direct way to analyze the MUA is to simply detect and count the spikes in the recorded signal trace. 
+\ghtxt{The detection procedure typically involves thresholding, 
+where only voltage deflections larger than a preset threshold 
+depending on the ambient noise level, are counted as spikes. }
+\ghtxt{\sout{
+Here a suitable detection procedure must be used. 
+This typically involves thresholding where only voltage deflections larger than a preset threshold 
+depending on the ambient noise level, are counted as spikes.}}
+\gen{Kanskje vi kunne laget en enkel figur her som illustrerte spike detection her (kanskje inspirert av noen av panelene i Figur 1 i Einevoll2020? Jeg synes ikke vi trenger aa gaa inn paa prisnipper for spike sorting siden dette vel er mer "dataanalyse" enn vi ellers har planlagt aa ha med i boka.}
 
-Today, spikes are typically recorded with multielectrodes, for example, tetrodes with four closely positioned recording contacts (\Fref{fig:Spikes:MUA-tetrode}), linear multielectrodes (polytrodes) with tens of contacts positioned along a straight line, or spade-like multielectrodes with many hundred tiny contacts arranged in rectangular patterns on an electrode shaft \cite**{Jun2017}.  On these multielectrodes, the same spike will in general show up on several contacts, and a process known as \emph{spike sorting}~\cite**{Quiroga2007} is required to (i) properly count spikes and (ii) to sort recorded spikes into contributions from individual neurons as is often the goal. 
+Today, spikes are typically recorded with multielectrodes, for example, 
+tetrodes with four closely positioned recording contacts (\Fref{fig:Spikes:MUA-tetrode}), 
+linear multielectrodes (polytrodes) with tens of contacts positioned along a straight line, 
+or spade-like multielectrodes with many hundred tiny contacts arranged in rectangular patterns on an electrode shaft \cite**{Jun2017}.  
+On these multielectrodes, the same spike will in general show up on several contacts, 
+and a process known as \emph{spike sorting}~\cite**{Quiroga2007} is required to 
+(i) properly count spikes and 
+(ii) to sort recorded spikes into contributions from individual neurons as is often the goal. 
 
-To develop and validate methods for spike sorting, benchmarking data where the `ground truth' is known is highly desirable. Experimental benchmarking data is hard to come by as they require simultaneous recording of intracellular action potentials and corresponding extracellular spikes. However, model-based benchmarking data is an attractive alternative~\cite**{Einevoll2012} and the generation of such data has been pursued in several projects
+To develop and validate methods for spike sorting, 
+benchmarking data where the `ground truth' is known is highly desirable. 
+Experimental benchmarking data is hard to come by as they require simultaneous recording 
+of intracellular action potentials and corresponding extracellular spikes. 
+However, model-based benchmarking data is an attractive alternative~\cite**{Einevoll2012} 
+and the generation of such data has been pursued in several projects
 \cite**{CamunasMesa2013,Hagen2015,MondragonGonzalez2017,Buccino2020}. 
 
-An example is given in \Fref{fig:Spikes:MUA-tetrode} where virtual MUA signals recorded by a tetrode are simulated  \cite**{Hagen2015}. In the simulation, six cortical neurons were placed around a tetrode, and driven to action-potential firing by a combination of excitatory and inhibitory synaptic inputs. The true firing times of the neurons are shown in Panel B, which shows their somatic membrane potential dynamics. The raw extracellular signals are shown in Panel C \gex{where} the simultaneous extracellular signatures of this firing can be seen as sharp negative peaks in some or all of the four channels. To mimic the situation seen in experiments, noise with the same statistical properties as what is seen in real tetrode experiments, is added to the signal in panel D. Panel E shows high-pass filtered signals, that is, the MUA signals to be used as benchmarking data for testing spike-sorting algorithms.
+An example \ghtxt{of model-based benchmarking data} is given in \Fref{fig:Spikes:MUA-tetrode} 
+where virtual MUA signals recorded by a tetrode are simulated  \cite**{Hagen2015}. 
+In the simulation, six cortical neurons were placed around a tetrode, 
+and driven to action-potential firing by a combination of excitatory and inhibitory synaptic inputs. 
+The true firing times of the neurons are shown in Panel B, 
+which shows their somatic membrane potential dynamics. 
+The raw extracellular signals are shown in Panel C 
+\gex{where} the simultaneous extracellular signatures of this firing 
+can be seen as sharp negative peaks in some or all of the four channels. 
+To mimic the situation seen in experiments, 
+noise with the same statistical properties as what is seen in real tetrode experiments, 
+is added to the signal in panel D. 
+Panel E shows high-pass filtered signals, 
+that is, the MUA signals to be used as benchmarking data for testing spike-sorting algorithms.
 
 \ghnote{Action potentials om hva nevroner gjoer (Vm) og spikes om hva man ser utenfor. I traad med det vil det kanskje bli feil aa si true spike-times? Nevroner spiker ikke. De fyrer aksjonspotensialer....}
 %The final MUA data clearly shows how an action potential from a single neuron is seen
@@ -1088,12 +1164,35 @@ An example is given in \Fref{fig:Spikes:MUA-tetrode} where virtual MUA signals r
 
 \subsection{\blue{Population firing-rate estimation from MUA}}  
 \gex{Whether or not a spike from a particular neuron rises above the ambient noise level and 
-can be identified from an electrode recording, depends on several factors.} One is the volume density and morphological shapes of active neurons around the contact. Another is the impedance and size of the contact itself. As discussed in \Fref{sec:Spikes:electrode_size} large electrode contacts will tend to reduce the spike amplitude through a spatial averaging effect, making it difficult to identify individual spikes from the recorded signal. 
-\gex{In situations where individual spikes cannot be identified}, the MUA signal can instead be used to provide useful insight into the combined firing rate of the neurons surrounding the contact ~\cite**{Schroeder1998,Schroeder2001,Ulbert2001}. To extract such information, the high-pass filtered extracellular potential recorded by the electrode is rectified, i.e., its absolute value is taken. 
+can be identified from an electrode recording, depends on several factors.} 
+One is the volume density and morphological shapes of active neurons around the contact. 
+Another is the impedance and size of the contact itself. 
+As discussed in \Fref{sec:Spikes:electrode_size} large electrode contacts will tend to reduce the spike amplitude through a spatial averaging effect, 
+making it difficult to identify individual spikes from the recorded signal. 
 
-The principle behind this `rectification' approach is illustrated in \Fref{fig:Spikes:MUA-rectifify}. \gex{The basic assumption, namely that the rectified MUA signal is proportional to the combined firing rate, is intuitively justified if only a single neuron contributes with spikes. Then the rectified spike signal will signal whether a spike has occurred or not. With several neurons  contributing, all producing identical spikes, the rectified MUA signal will still be expected to be proportional to the combined firing rate as long as the firing is sparse so that there is little overlap in time between the spikes of the contributing neurons. However, if there is a substantial temporal overlap between the spikes there will be cancellation effects from negative `sodium signals' in one spike overlapping the positive `potassium signal' in another spike. The rectified summed signal will then become smaller than the sum of the individual rectified spikes, resulting in an underestimated firing rate.
+\gex{In situations where individual spikes cannot be identified}, 
+the MUA signal can instead be used to provide useful insight into the combined firing rate of the neurons surrounding the contact ~\cite**{Schroeder1998,Schroeder2001,Ulbert2001}. 
+To extract such information, the high-pass filtered extracellular potential recorded by the electrode is rectified, 
+i.e., its absolute value is taken. 
 
-Another possible complication is that the contributions from the various spiking neurons around the recording contact will vary in size. However, if the contributing neurons belong to the same neuronal population and have statistically the same firing behaviour, the rectified MUA should still reflect the population firing rate. 
+The principle behind this `rectification' approach is illustrated in \Fref{fig:Spikes:MUA-rectifify}. 
+\gex{The basic assumption, namely that the rectified MUA signal is proportional to the combined firing rate, 
+is intuitively justified if only a single neuron contributes with spikes. 
+Then the rectified spike signal will signal whether a spike has occurred or not. 
+With several neurons contributing, all producing identical spikes, 
+the rectified MUA signal will still be expected to be proportional to the combined firing rate 
+as long as the firing is sparse so that there is little overlap in time between the spikes of the contributing neurons. 
+\ghnote{Sliter litt med beskrivelsen. Hva er proportionalt m/ fyringsraten? Amplituden? Amplituden er vel gitt av amplituden til en enkeltspike? Men du skriver kanskje her om rectified + low pass filtered signal?}
+However, if there is a substantial temporal overlap between the spikes 
+there will be cancellation effects from negative `sodium signals' in one spike 
+overlapping the positive `potassium signal' in another spike. 
+The rectified summed signal will then become smaller than the sum of the individual rectified spikes, 
+resulting in an underestimated firing rate.
+
+Another possible complication is that the contributions from the various spiking neurons 
+around the recording contact will vary in size. 
+However, if the contributing neurons belong to the same neuronal population 
+and have statistically the same firing behaviour, the rectified MUA should still reflect the population firing rate. 
 }
 
 
@@ -1117,8 +1216,17 @@ according to the spike-times from {\bf A}. For each spike time the spike shape i
 \end{figure}
 %%%
 
-This rectification approach was used to estimate firing rates of cortical populations of neuron in the rat barrel (somatosensory) cortex based on multielectrode laminar recordings~\cite**{Einevoll2007,Blomquist2009}. To test the validity of the method, a modeling study was pursued where an analogous virtual (in silico) experiment was performed~\cite**{Pettersen2008}. Specifically, about thousand layer-5 cortical pyramidal neurons with somas arranged in a cylindrical disc, mimicking a neuronal population in rat barrel cortex, was considered (\Fref{fig:Spikes:MUA-population}). 
-\gex{The neurons received synaptic inputs resembling those seen experimentally following whisker flicks}. Extracellular potentials were computed for a set of contact positions along the central axis of the cylinder (\Fref{fig:Spikes:MUA-population}B).
+\ghtxt{\sout{This rectification approach was}The rectification approach described above has been} 
+used to estimate firing rates of cortical populations of neurons 
+in the rat barrel (somatosensory) cortex based on multielectrode laminar recordings~\cite**{Einevoll2007,Blomquist2009}. 
+\ghtxt{\sout{To test the validity of the method, a modeling study was pursued where an analogous virtual (in silico) experiment was performed Pettersen2008. Specifically, about thousand layer-5 cortical pyramidal neurons with somas arranged in a cylindrical disc, mimicking a neuronal population in rat barrel cortex, was considered (fig:Spikes:MUA-population). }
+The validity of the method has been tested in a modeling study 
+simulating an analogous virtual (in silico) experiment. 
+The simulation included about thousand layer-5 cortical pyramidal neurons with somas arranged in a cylindrical disc, 
+mimicking a neuronal population in rat barrel cortex~\cite**{Pettersen2008}. 
+}
+\gex{The neurons received synaptic inputs resembling those seen experimentally following whisker flicks}. 
+Extracellular potentials were computed for a set of contact positions along the central axis of the cylinder (\Fref{fig:Spikes:MUA-population}B).
 
 %%%
 \begin{figure}[!ht]
@@ -1132,8 +1240,16 @@ segments of the displayed branches are modeled as line segments with uniform cur
 \end{figure}
 %%%
 
-An example result is shown in \Fref{fig:Spikes:MUA-ApicalSynapses}. Here panel A shows the total extracellular potential following the synaptic activation of the population. The signal is dominated by the low-frequency response to the synaptic input, that is, the local-field potential (LFP). The spatial pattern of the signal across recording channels reflects the
-spatial distribution of synaptic inputs onto the pyramidal neurons. In this example, excitatory synapses are placed on the apical dendrites while inhibitory synapses are placed on the basal dendrites. \ghnote{Kan de to figurene som viser dette eksempelet slaaes sammen? Trengs panel C i den foerste?} \gen{Denne kommentaren er kanskje ikke lenger aktuell?}
+An example result is shown in \Fref{fig:Spikes:MUA-ApicalSynapses}. 
+\ghtxt{\sout{Here p}P}anel A shows the total extracellular potential following the synaptic activation of the population. 
+The signal is dominated by the low-frequency response to the synaptic input, 
+that is, the local-field potential (LFP). 
+The spatial pattern of the signal across recording channels reflects the
+spatial distribution of synaptic inputs onto the pyramidal neurons. 
+In this example, excitatory synapses are placed on the apical dendrites 
+while inhibitory synapses are placed on the basal dendrites. 
+\ghnote{Kan de to figurene som viser dette eksempelet slaaes sammen? Trengs panel C i den foerste?} 
+\gen{Denne kommentaren er kanskje ikke lenger aktuell?}
 %The dominance of low frequencies in the signal is illustrated in panel B showing the Fourier transformed signal, that is, the amplitude of each frequency component, for three of the channels. Here it can be seen that the frequencies up to 100 Hz dominate the signal completely, that is, have the highest amplitudes (and power, corresponding to the amplitude squared) \ghnote{Er det noe med at power er disse koeffesientene delt paa roten av 2? Har aa gjoere med at man faar bidrag fra pluss og minus-amplituder etc. Christine, masterstudent, styrte litt med dette, og det er visst noen bugs i en PSD-utregning Torbjorn sendte oss. Maa finne ut av dette.}. 
 
 %%%
@@ -1161,15 +1277,52 @@ The mean synaptic onset times are stochastically distributed around 20 ms with a
 \end{figure}
 %%%
 
-While the spikes are buried by the low-frequency components in the raw signal, they can be extracted by high-pass filtering 
-and subsequent rectification. \gex{Results are shown in \Fref{fig:Spikes:MUA-ApicalSynapses}B.} 
-A first observation is that the remaining signal is confined to channels deep in the cortex, that is, close to the somas of the neurons in the populations.This reflects that extracellular signatures of action potentials are typically confined to within 100~$\mu$m from the soma, cf. \Fref{fig:Spikes:DifferentNeuronModels}. A second observation is that the MUA signals only last for about 20~ms, which turns out to be the time period in which the neurons in the model fire action potentials~\cite**{Pettersen2008}. A third observation is that the MUA signal is not smooth, but `noisy' in the sense that it consists of a collections of sharp peaks of different heights. This `noisiness' stems from the inherent randomness both in the times of spiking and the positions of the somas of the low number (40) of spiking neurons in the population. 
+While the spikes are buried by the low-frequency components in the raw signal, 
+they can be extracted by high-pass filtering 
+and subsequent rectification. 
+\gex{Results are shown in \Fref{fig:Spikes:MUA-ApicalSynapses}B.} 
+A first observation is that the remaining signal is confined to channels deep in the cortex, 
+that is, close to the somas of the neurons in the populations.
+This reflects that extracellular signatures of action potentials are typically confined to within 100~$\mu$m from the soma, 
+cf. \Fref{fig:Spikes:DifferentNeuronModels}. 
+A second observation is that the MUA signals only last for about 20~ms, 
+which turns out to be the time period in which the neurons in the model fire action potentials~\cite**{Pettersen2008}. 
+A third observation is that the MUA signal is not smooth, 
+but `noisy' in the sense that it consists of a collections of sharp peaks of different heights. 
+This `noisiness' stems from the inherent randomness 
+both in the times of spiking and the positions of the somas of the low number (40) of spiking neurons in the population. 
 
-In sensory systems it has been common to measure trial-averaged responses, that is, the response averaged over many repetitions of the same stimulus. The rationale is that this procedure highlights the contributions from sensory input in that the effects of other synaptic inputs and noise in sensory neurons are reduced. The trial-averaged MUA found from averaging MUA results from forty model trials, is shown in panel C of \Fref{fig:Spikes:MUA-population}, revealing a much less `noisy' signal. 
+In sensory systems it has been common to measure trial-averaged responses, 
+that is, the response averaged over many repetitions of the same stimulus. 
+The rationale is that this procedure highlights the contributions from sensory input 
+in that the effects of other synaptic inputs and noise in sensory neurons are reduced. 
+\ghnote{Kom ikke paa bedre forslag, men er highlight og reduced det beste ordparet her?
+Burde det staa noe om cancel out/filter out? Better reveal the contribution of ... by filtering out ...}
+The trial-averaged MUA found from averaging MUA results from forty model trials, 
+is shown in panel C of \Fref{fig:Spikes:MUA-population}, revealing a much less `noisy' signal. 
 
-The obvious next question is to what extent the resulting MUA signal gives a good measure of the population firing rate. Unlike in experiments, the true underlying firing rate is known in the model, allowing for a quantitative comparison. The question was studied in detail for the model in question in \citeasnoun**{Pettersen2008}. The noisyness of MUA signals from individual trials (\Fref{fig:Spikes:MUA-population}B) did not allow for accurate estimation of firing rates in individual trials. However, accurate estimates for trial-averaged firing rates (commonly referred to as Post Stimulus Time Historgrams (PSTHs)) could be obtained from trial-averaged MUA signals. An example is given in \Fref{fig:Spikes:MUA-ApicalSynapses}D. Here a firing-rate estimate based on the MUA signal from one of the recording channels positioned at a depth in the midst of somas of the population is compared with the true, temporally smoothed firing rate. The overall agreement is observed to be quite good.
+The obvious next question is to what extent the resulting MUA signal gives a good measure of the population firing rate. 
+Unlike in experiments, the true underlying firing rate is known in the model, 
+allowing for a quantitative comparison. 
+The question was studied in detail for the model in question in \citeasnoun**{Pettersen2008}. 
+The noisyness of MUA signals from individual trials (\Fref{fig:Spikes:MUA-population}B) 
+did not allow for accurate estimation of firing rates in individual trials. 
+However, accurate estimates for trial-averaged firing rates 
+(commonly referred to as Post Stimulus Time Historgrams (PSTHs)) 
+could be obtained from trial-averaged MUA signals. 
+An example is given in \Fref{fig:Spikes:MUA-ApicalSynapses}D. 
+Here a firing-rate estimate based on the MUA signal from one of the recording channels 
+positioned at a depth in the midst of somas of the population is compared with the true, 
+temporally smoothed firing rate. The overall agreement is observed to be quite good.
 
-One deviation between the real and predicted firing rate is that the \gex{MUA-based analysis} predicts a non-zero firing rate prior to the onset of true firing, the reason being that the synaptic input current itself gives a contribution to the MUA signal. Another deviation is that the \gex{MUA analysis} predicts a too low maximum firing rate, due to cancellations of signal contributions from temporally overlapping spikes from different neurons. This latter effect increases with increasing firing rates and can be remedied by assuming a supralinear relationship between the MUA signal and firing rate \cite**{Pettersen2008}.  The accuracy of the population firing rate can also be improved by using MUA signals from several adjacent recording channels in the estimation \cite**{Pettersen2008}.  
+One deviation between the real and predicted firing rate is that the \gex{MUA-based analysis} 
+predicts a non-zero firing rate prior to the onset of true firing, 
+the reason being that the synaptic input current itself gives a contribution to the MUA signal. 
+Another deviation is that the \gex{MUA analysis} predicts a too low maximum firing rate, 
+due to cancellations of signal contributions from temporally overlapping spikes from different neurons. 
+This latter effect increases with increasing firing rates 
+and can be remedied by assuming a supralinear relationship between the MUA signal and firing rate \cite**{Pettersen2008}.  The accuracy of the population firing rate can also be improved by using MUA signals 
+from several adjacent recording channels in the estimation \cite**{Pettersen2008}.  
  
 The accuracy of this MUA-based estimation of population firing rates will depend on the specific situation considered. In \citeasnoun**{Pettersen2008}, it was, for example, found that the prediction was slightly more accurate when the population in \Fref{fig:Spikes:MUA-population} is driven by excitatory inputs onto the basal dendrites rather than onto the
 apical dendrites as in \Fref{fig:Spikes:MUA-ApicalSynapses}.
