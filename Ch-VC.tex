@@ -649,40 +649,40 @@ Large multi-contact electrode shanks can be expected to have a substantial effec
 \subsection{\blue{Signal distortion from recording equipment}}
 \label{sec:VC:elec_distrotions}
 \tvntxt{It is commonly assumed that if the proper recording equipment is used, 
-electrode impedance or other electrode properties should not substantially distort recorded potentials. In other words, it is assumed that the recorded potential, $V_{Rec}$ is identical to the average potential across the electrode surface, which we will here refer to as $V_{True}$ 
+electrode impedance or other electrode properties should not substantially distort recorded potentials. In other words, it is assumed that the recorded potential, $V_\mathrm{Rec}$ is identical to the average potential across the electrode surface, which we will here refer to as $V_\mathrm{True}$ 
 \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}.
-In reality there are however several different complicating factors that can cause the recorded potential 
-to differ from the "physiolological" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}
-}
-\tvnnote{Dette er jeg ikke ferdig med!}
-\ghtxt{
-For the sake of examining electrode effects, let us consider a specific recording location, and define for
-this location:
-\begin{itemize}
-\item $V_\mathrm{Phys}$: The "physiological" potential, defined as the $V_\mathrm{e}$ that we \textit{would have} at this location in the absence of any measurement equipment. This is the $V_\mathrm{e}$ that we simulate with VC theory.
+Note that $V_\mathrm{True}$ here includes the effects from the electrode size and the presence of the electrode itself. The assumption that $V_\mathrm{Rec}$ equals $V_\mathrm{True}$
+is typically referred to as assuming "ideal" electrodes.
+There are however several different complicating factors that can cause the recorded potential 
+to differ from the "true" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}.}
+%\ghtxt{
+%For the sake of examining electrode effects, let us consider a specific recording location, and define for
+%this location:
+%\begin{itemize}
+%\item $V_\mathrm{Phys}$: The "physiological" potential, defined as the $V_\mathrm{e}$ that we \textit{would have} at this location in the absence of any measurement equipment. This is the $V_\mathrm{e}$ that we simulate with VC theory.
+%
+%\item $V_\mathrm{True}$: The "true" potential, which can differ from $V_\mathrm{Phys}$ if it is affected by the electrode. 
+%
+%\item $V_\mathrm{Rec}$: The recorded potential, reported by the electrode amplifier system to the experimentalist. 
+%\end{itemize}
+%}
 
-\item $V_\mathrm{True}$: The "true" potential, which can differ from $V_\mathrm{Phys}$ if it is affected by the electrode. 
+%\ghtxt{\sout{An "ideal" electrode\index{ideal electrode} is the hypothetical case where the measured potential 
+%reported by the amplifier is identical to the "true" extracellular potential at the tip of the recording electrode 
+%(with the extracellular potential unaffected by the electrode itself). 
+%In reality there are however several different complicating factors which can cause the 
+%measured potential to differ from the "true" potential Robinson1968,Martinsen2008,Nelson2008}}
 
-\item $V_\mathrm{Rec}$: The recorded potential, reported by the electrode amplifier system to the experimentalist. 
-\end{itemize}
-}
-
-\ghtxt{\sout{An "ideal" electrode\index{ideal electrode} is the hypothetical case where the measured potential 
-reported by the amplifier is identical to the "true" extracellular potential at the tip of the recording electrode 
-(with the extracellular potential unaffected by the electrode itself). 
-In reality there are however several different complicating factors which can cause the 
-measured potential to differ from the "true" potential Robinson1968,Martinsen2008,Nelson2008}}
-
-\ghtxt{
-With an "ideal" electrode\index{ideal electrode}, $V_\mathrm{Rec}$ would be identical to $V_\mathrm{True}$ 
-at the tip of the recording electrode, and $V_\mathrm{True}$ would be unaffected by the electrode itself, 
-and thus identical to $V_\mathrm{Phys}$. 
-In reality there are however several different complicating factors that can cause the recorded potential 
-to differ from the "physiolological" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}.
-}
-\ghnote{Er dette bedre? Tenkte at sannheten kan vaere sannheten selv om den er paavirket av en elektrode, og proevde aa skille mellom true og physiological.}
-\gen{Kan kanskje ogsaa snakke om "ideal point electrode" hvor $V_\mathrm{Rec}$ er lik $V_\mathrm{Phys}$?
-Det er jo dette vi stort sett antar.}
+%\ghtxt{
+%With an "ideal" electrode\index{ideal electrode}, $V_\mathrm{Rec}$ would be identical to $V_\mathrm{True}$ 
+%at the tip of the recording electrode, and $V_\mathrm{True}$ would be unaffected by the electrode itself, 
+%and thus identical to $V_\mathrm{Phys}$. 
+%In reality there are however several different complicating factors that can cause the recorded potential 
+%to differ from the "physiolological" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}.
+%}
+%\ghnote{Er dette bedre? Tenkte at sannheten kan vaere sannheten selv om den er paavirket av en elektrode, og proevde aa skille mellom true og physiological.}
+%\gen{Kan kanskje ogsaa snakke om "ideal point electrode" hvor $V_\mathrm{Rec}$ er lik $V_\mathrm{Phys}$?
+%Det er jo dette vi stort sett antar.}
 
 
 %We have demonstrated how we can use VC theory to make predictions about the extracellular potentials at any point in space following some neural activity. However, in experiments these extracellular potentials must be measured through some kind of measurement electrode. The presence of such a measurement electrode might itself affect the measured potentials in several different ways, depending on both the electrode and the extracellular potential that is being measured. 
@@ -751,14 +751,16 @@ remove the unobservable DC-potential.
 %\label{VC:fig:elec_circuit}
 %\end{figure}
 
-Apart from the issues discussed above \ghnote{Hvilke issues? Alle? De som angaar DC-potensialet? Eller mener vi "despite the issues?"}\tvnnote{Jeg tenkte paa DC-potensialet. Min forstaaelse av dette er at siden Ze er veldig frekvens-avhengig, blir ikke Za' mye stoerre enn Ze' naar f er liten, men jeg vet ikke om dette er riktig tolkning.}, it has been convincingly argued that, provided that the proper recording equipment is used (so that $Z_a' \gg Z_e'$), 
+Apart from the issue \tvntxt{discussed above with the unobservable DC-potential, } 
+%\ghnote{Hvilke issues? Alle? De som angaar DC-potensialet? Eller mener vi "despite the issues?"}\tvnnote{Jeg tenkte paa DC-potensialet. Min forstaaelse av dette er at siden Ze er veldig frekvens-avhengig, blir ikke Za' mye stoerre enn Ze' naar f er liten, men jeg vet ikke om dette er riktig tolkning.}
+it has been convincingly argued that, provided that the proper recording equipment is used (so that $Z_a' \gg Z_e'$), 
 electrode impedance or other electrode properties should not substantially distort recorded potentials 
-\ghtxt{i.e., we can assume that  $V_\mathrm{True} \approx V_\mathrm{Phys}$} \tvnnote{Ha med VRec?} \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}.
+i.e., we can assume that  $V_\mathrm{Rec} \approx V_\mathrm{True}$ \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}.
 Note that this only applies to recording electrodes, and that substantially more complex 
 electrode models might be needed to accurately represent current stimulation electrodes 
 because of electrode polarization, see \fref{sec:EPI}.
 
-\ghnote{Hang ikke helt med. I avsn. over sto det "electrode properties should not distort recorded potentials. Under staar det electrode properties can still affect the recorded potential. Hva er forskjellen? Tipper at du foerst mente at elektroden er slik at $V_\mathrm{True} = V_\mathrm{Phys}$, men i neste tilfelle at det ikke noedvendigvis er slik at $V_\mathrm{Rec} \neq V_\mathrm{True}$. Har laget en versjon basert paa den forstaaelsen.}
+%\ghnote{Hang ikke helt med. I avsn. over sto det "electrode properties should not distort recorded potentials. Under staar det electrode properties can still affect the recorded potential. Hva er forskjellen? Tipper at du foerst mente at elektroden er slik at $V_\mathrm{True} = V_\mathrm{Phys}$, men i neste tilfelle at det ikke noedvendigvis er slik at $V_\mathrm{Rec} \neq V_\mathrm{True}$. Har laget en versjon basert paa den forstaaelsen.}
 
 
 %if the extracellular potential changes across the outer surface of the recording electrode, this can introduce a spatial filtering effect on the measured potentials.
