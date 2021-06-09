@@ -966,7 +966,7 @@ The synaptic currents and associated transmembrane currents on the postsynaptic 
 \end{figure}
 
 \ehtxt{As illustrated in \Fref{fig:LFPy_hybrid}C, one could}
-at this point could destroy every connection of the recurrently connected network,
+at this point could destroy every connection of the recurrently connected network \ehtxt{in panel A},
 load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage  \ehtxt{(panel A)},
 reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times
 $\left(s_u(t) \ast \delta(t-\Delta_{vu})\right)$
@@ -1092,9 +1092,9 @@ E_\text{L}^\text{mod} = \langle V_\text{m}(t) \rangle + \sum_\text{w} \frac{\ove
 \end{equation}
 which ensures that the resting potential of the quasi-active model is similar to that of the fully active model.
 \ghnote{Henger ikke helt med. Hvor ble det av den effektive avg-konduktansen definert i punkt 2?}
-\ehnote{jeg highlighter naa at quasi-active greier er uavhengig av $G_{eff}$ i pkt 3. OK? Implementasjonen (min) av $G_{eff}$ inkluderer heller ingen endring i $E_L$ som her (tror ikke det vil ha noe aa si).}
+\ehnote{jeg highlighter naa at quasi-active greier er uavhengig av $G_\text{eff}$ i pkt 3. OK? Implementasjonen (min) av $G_\text{eff}$ inkluderer heller ingen endring i $E_L$ som her (tror ikke det vil ha noe aa si).}
 
-\item Remove active ion channels \ehtxt{omitting the above quasi-active linearization tricks} if their net contributions to the total transmembrane currents can be assumed to be miniscular around typical membrane voltage values. 
+\item Remove active ion channels \ehtxt{omitting the above quasi-active linearization tricks} if their net contributions to the total transmembrane currents can be assumed to be minuscular around typical membrane voltage values. 
 %\ghnote{Kan ikke dette angis som en parantes i punktet nedenfor. Disse kan vel lineariseres som alle andre?}
 
 \item Further reduction of number of state variables 
