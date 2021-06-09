@@ -4,6 +4,7 @@
 If a neuroscientist is asked what we have learned about brain networks from electrical recordings, there is a high chance she first highlights the work done by Hubel and Wiesel in the 1950s and 60s. In their pioneering studies of neural representations in the cat primary visual cortex, Hubel and Wiesel used sharp electrodes to measure spikes, the extracellular signatures of action potentials, evoked by visual stimulation.} They found, for example, that many of the cells responded most vigorously, that is, with the highest number of spikes, to bar-like stimuli oriented in specific directions~\cite**{Hubel1959}. Later, the same approach has been used throughout the nervous system to map out how different neurons encode information on sensory stimuli, objects, spatial positions and more. \ghtxt{Since the first spike measurements, which were performed decades before the works of Hubel and Wiesel (see e.g., \cite**{Adrian1928}), the spike has arguably been the most important brain signal in systems neuroscience.} \ghtxt{\sout{Spike measurements did not start with Hubel and Wiesel, \sntxt{\sout{ however} see} Adrian1928, and the spike has arguably been the most important brain signal in systems neuroscience.}}\snnote{<- var 1 uke paa skrivekurs paa simula i 2017 og det som festa seg var at jeg ikke fikk lov til aa skrive "however" bak en fullstendig setning.=)}
 
 \ghnote{Synes vi maa sette opp problemstillingen tydeligere. Skisse: }
+
 \ghnote{In this book we will restrict the term \emph{spike} to mean the the extracellular signature of a neuronal 
 action potential. The purpose of spike measurements is normally that we want to quantify the activity of
 a neural population in terms of the firing times of the individual neurons.
@@ -19,8 +20,18 @@ and how the shape of these spikes depend on the properties of
 the neuron that generated them, and the position of the neuron
 relative to the recording electrode. Forward modeling, based on 
 the MC + VC framework can provide good insights in this regard, 
-and in this chapter we aim to present some of these insights.
+and in this chapter we aim to present the most important of these insights.
+
+Spike recordings are typically done in living brains. 
+Throughout most of this chapter we will therefore assume
+that the tissue surrounding the neurons that we record spikes from
+is homogeneous and isotropic, but exceptions to this
+are briefly treated in the final subchapter....
+
+Ikke ferdigtenkt her.
 }
+
+
 
 
 %%%%%%%%%%
@@ -68,6 +79,11 @@ Detailed modeling of spikes are important for several reasons: for example, (i) 
 \label{sec:Spikes:recording}
 \ghnote{Skrev et nytt forslag til dette delkapittelet basert paa kommentarer til forrige versjon.}
 Spike recordings are typically done in living brains. 
+\ghnote{Og derfor antar vi konstant $\sigma_\text{t}$? Er det det som er poenget med aa si dette? 
+Kanskje boer vi skrive noen ord om dette paa et tidlig stadium -
+at all modellering vi viser er basert paa denne antakelsen, bortsett fra i siste delkapittel.
+Dette oppgis senere, men da som et slags vedheng foer vi begynner med MoI.}
+
 As we have seen, an action potential is a rapid deflection in the neuronal membrane potential
 taking place within a time window of just a few milliseconds.
 As its extracellular signature, the spike, will have a similarly fast time coarse, 
