@@ -642,10 +642,14 @@ In certain cases, like in ECoG \index{ECoG} measurements from the cortical surfa
 
 \subsection{\blue{Effect of the electrode shanks}}
 \label{sec:VC:elec_shafts}
-Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}, while no such effects were found for small microwires \cite**{Buccino2019}.
-\tvntxt{Note that efforts to model large non-conducting volumes such as this are also briefly covered in \fref{sec:Sigma:nonhomo}.}
- \tvnnote{Can also hurt the brain to push large objects into it, with cell-death, eudema and encapsulation (Moffitt and McIntyre, 2005).}
-\gen{Virkelig? Da maa jeg slutte med det .. :-)} 
+Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. 
+\tvntxt{While such effects can be expected to be
+negligible for small microwires \cite**{Buccino2019},
+it has been demonstrated that large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}.
+Efforts to model large non-conducting volumes such as this are also briefly covered in \fref{sec:Sigma:nonhomo}, which concerns modelling of
+planar boundaries to non-conducting regions.
+Finally, note that insertion of large probes into neural tissue 
+can cause tissue damage, leading to eudema and encapsulation \cite**{Moffitt2005}, as well as cell death, but we do not cover such issues here.}
 %%%%%%
 
 \subsection{\blue{Signal distortion from recording equipment}}
@@ -784,7 +788,7 @@ exclude signals from sources far away, since the potential difference between th
 In cases like this, the reference electrode will often be embedded on the electrode shank.
 
 When measuring signals with more spatially distributed origins, like LFPs (\fref{chap:LFP}), ECoGs (\fref{chap:ECoG}) or EEGs (\fref{chap:EEG}),
-the reference electrode should be sufficiently far away that it is not itself affected
+the reference electrode should be placed sufficiently far away that it is not itself affected
 by the neural activity we want to measure from. In cases like this, the reference electrode can for example be embedded in the skull of the animal.
 
 When modelling extracellular potentials, the reference electrode is typically (and often implicitly) placed at "infinity". This is mostly a sensible approach, since we typically only include in our modelling the neural sources we are interested in recording from. When trying to mimic experimental data, it is however important to keep the location of the reference electrode in mind, to exclude this as a possible source of confusion. For modelling a specific location for the reference electrode, it is sufficient to calculate the potential with respect to "infinity" (using e.g. \fref{eq:VC:pointsource2}) both at the location of the measurement electrode, and at the location of the reference electrode, and subtract the latter from the former.
