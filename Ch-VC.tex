@@ -642,7 +642,9 @@ In certain cases, like in ECoG \index{ECoG} measurements from the cortical surfa
 
 \subsection{\blue{Effect of the electrode shanks}}
 \label{sec:VC:elec_shafts}
-Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}, while no such effects were found for small microwires \cite**{Buccino2019}. \tvnnote{Can also hurt the brain to push large objects into it, with cell-death, eudema and encapsulation (Moffitt and McIntyre, 2005).}
+Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. It has been demonstrated that such large probes can amplify or dampen recorded potentials from nearby cells by almost a factor of two, depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}, while no such effects were found for small microwires \cite**{Buccino2019}.
+\tvntxt{Note that efforts to model large non-conducting volumes such as this are also briefly covered in \fref{sec:Sigma:nonhomo}.}
+ \tvnnote{Can also hurt the brain to push large objects into it, with cell-death, eudema and encapsulation (Moffitt and McIntyre, 2005).}
 \gen{Virkelig? Da maa jeg slutte med det .. :-)} 
 %%%%%%
 
@@ -716,7 +718,7 @@ and the effective amplifier input impedance, $Z_a'$. The former is the combined 
 extracellular medium ($R_s$), the electrode-electrolyte interface ($R_e$, $C_e$) and the metal wire ($R_m$), 
 while the latter is the total impedance to ground from after the metal wire, 
 and includes the shunt currents and the amplifier itself. 
-For the recorded potential, $V_{\rm Rec}$ to be as similar as possible to the true potential, $V_{\rm True}$,  
+For the recorded potential, $V_{\rm Rec}$, to be as similar as possible to the true potential, $V_{\rm True}$,  
 it is vital that $Z_a' \gg Z_e'$. 
 If this is not fulfilled, the recorded potential will have frequency-dependent phase- and amplitude distortions \cite**{Nelson2008,Nelson2010,Obien2015,Viswam2019}.
 Importantly, the effective electrode impedance, $Z_e'$, increases strongly for low frequencies 
@@ -772,8 +774,26 @@ because of electrode polarization, see \fref{sec:EPI}.
 
 \subsection{\blue{Effect of position of reference electrode}}
 \label{sec:VC:ref_elec}
-\ghnote{En eventuell diskusjon av hvor man plasserer referanseelektrodene kan inngaa her. Kommentarene under er sakset inn fra tidligere diskusjoner i Basics-kapittelet:} 
-\tvntxt{When recording extracellular potentials in the brain, we are in principle free to arbitrarily choose the location of the reference electrode. The ideal location for the reference electrode depends on several different factors, but it is commonly placed "far away" from the neural activity that is being measured from so that the measured potential is not dependent on an unknown varying electrical activity around the reference electrode. When modelling extracellular potentials, the reference electrode is typically (and often implicitly) placed at "infinity". } \ghnote{Stemmer egentlig dette? Slik jeg forsto Sharott vil man i motsetning til det dere skriver ofte ha referanseelektroden naer maaleelektroden naar man maaler MUA, for paa den maaten aa filtrere bort effekter fra "nest naermeste nabo". Hva var galt med mitt (mer vage) forslag:} \ghtxt{When we record extracellular potentials in the brain, we can choose to place the reference electrode close or far away from the recording electrode, depending on the kind of signal one wishes to measure \cite**{Sharott2015}.} \ghnote{Kanskje si: Naar man modellerer er den i infinity. Stort sett skal vaere langt unna.} \gen{Kanskje si enda klarere at man oensker at potensialet paa referanseelektroden skal vaere saa konstant som mulig under eksperimentet (eller blir dette sirkulaert?), husker at Anna plasserte referanseelektroden i nakken paa rottene hun gjorde maalinger fra. Kanskje vi kan hoere med eksperimentalistene paa CINPLA hva de gjoer?} \ghnote{Sikkert lurt aa spoerre noen, ja, men saa vidt jeg skjoenner er dette et vanskelig spoersmaal der mange avveininger maa gjoeres.} \ghnote{Poenget er aa plassere den der det er mest praktisk - best mulig signal for det du er ute etter. }
-\snnote{Jeg snakket med Malin og de pleier aa gjoere det slik: For LFP-maalinger pleier de aa sette en jordingsskrue paa skallen, ganske langt unna der maaleelektrodene skal settes ned (for aa unngaa aa skade maaleomraadet.) Dette kommer i tillegg til jording av selve systemet. For MUA-maalinger har de i tillegg en referanseelektrode per elektrode, og denne vil vaere plassert i naerheten av maaleelektroden, et sted der raasignalet er mest mulig likt. Istedenfor referanseelektrode kan de evt bruke en median/snitt-verdi for alle kanaler i en hemisfaere, evt innenfor en tetrode.}
+%\ghnote{En eventuell diskusjon av hvor man plasserer referanseelektrodene kan inngaa her. Kommentarene under er sakset inn fra tidligere diskusjoner i Basics-kapittelet:} 
+\tvntxt{When we record extracellular potentials in the brain, we are in principle free to arbitrarily choose the location of the reference electrode,
+and the best location for the reference electrode will
+depend on what we want to measure \cite**{Sharott2015}.
+
+If we are interested in signals originating in the close vicinity of the measurement electrode, like for example spikes or MUA (\fref{chap:Spikes}), it makes sense to have the reference electrode close to the recording electrode. This will automatically 
+exclude signals from sources far away, since the potential difference between the measurement and reference electrode will be small for these distant sources.
+In cases like this, the reference electrode will often be embedded on the electrode shank.
+
+When measuring signals with more spatially distributed origins, like LFPs (\fref{chap:LFP}), ECoGs (\fref{chap:ECoG}) or EEGs (\fref{chap:EEG}),
+the reference electrode should be sufficiently far away that it is not itself affected
+by the neural activity we want to measure from. In cases like this, the reference electrode can for example be embedded in the skull of the animal.
+
+When modelling extracellular potentials, the reference electrode is typically (and often implicitly) placed at "infinity". This is mostly a sensible approach, since we typically only include in our modelling the neural sources we are interested in recording from. When trying to mimic experimental data, it is however important to keep the location of the reference electrode in mind, to exclude this as a possible source of confusion. For modelling a specific location for the reference electrode, it is sufficient to calculate the potential with respect to "infinity" (using e.g. \fref{eq:VC:pointsource2}) both at the location of the measurement electrode, and at the location of the reference electrode, and subtract the latter from the former.
+}
+
+%\tvntxt{When recording extracellular potentials in the brain, we are in principle free to arbitrarily choose the location of the reference electrode. 
+%The ideal location for the reference electrode depends on several different factors, but it is commonly placed "far away" from the neural activity that is being measured from so that the measured potential is not dependent on an unknown varying electrical activity around the reference electrode. When modelling extracellular potentials, the reference electrode is typically (and often implicitly) placed at "infinity". } \ghnote{Stemmer egentlig dette? Slik jeg forsto Sharott vil man i motsetning til det dere skriver ofte ha referanseelektroden naer maaleelektroden naar man maaler MUA, for paa den maaten aa filtrere bort effekter fra "nest naermeste nabo". Hva var galt med mitt (mer vage) forslag:} \ghtxt{When we record extracellular potentials in the brain, we can choose to place the reference electrode close or far away from the recording electrode, depending on the kind of signal one wishes to measure \cite**{Sharott2015}.} 
+
+%\gen{Kanskje si enda klarere at man oensker at potensialet paa referanseelektroden skal vaere saa konstant som mulig under eksperimentet (eller blir dette sirkulaert?), husker at Anna plasserte referanseelektroden i nakken paa rottene hun gjorde maalinger fra. Kanskje vi kan hoere med eksperimentalistene paa CINPLA hva de gjoer?} \ghnote{Sikkert lurt aa spoerre noen, ja, men saa vidt jeg skjoenner er dette et vanskelig spoersmaal der mange avveininger maa gjoeres.} \ghnote{Poenget er aa plassere den der det er mest praktisk - best mulig signal for det du er ute etter. }
+%\snnote{Jeg snakket med Malin og de pleier aa gjoere det slik: For LFP-maalinger pleier de aa sette en jordingsskrue paa skallen, ganske langt unna der maaleelektrodene skal settes ned (for aa unngaa aa skade maaleomraadet.) Dette kommer i tillegg til jording av selve systemet. For MUA-maalinger har de i tillegg en referanseelektrode per elektrode, og denne vil vaere plassert i naerheten av maaleelektroden, et sted der raasignalet er mest mulig likt. Istedenfor referanseelektrode kan de evt bruke en median/snitt-verdi for alle kanaler i en hemisfaere, evt innenfor en tetrode.}
 
 

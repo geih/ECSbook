@@ -396,6 +396,52 @@ def make_white_noise_stimuli(cell, input_idx, weight=None):
     if syn is None:
         raise RuntimeError("Wrong stimuli index")
     syn.dur = 1E9
+    
+def point_axon_down(self, cell):
+    '''
+    MUST BE UPDATED
+    make the axon point downwards, start at soma mid point,
+    comp for soma diameter
+    
+    Keyword arguments:
+    ::
+        
+        cell : LFPy.TemplateCell instance
+    
+    '''
+    iaxon = cell.get_idx(section='axon')
+    isoma = cell.get_idx(section='soma')
+    cell.xstart[iaxon] = cell.xmid[isoma]
+    cell.xmid[iaxon] = cell.xmid[isoma]
+    cell.xend[iaxon] = cell.xmid[isoma]
+    
+    cell.ystart[iaxon] = cell.ymid[isoma]
+    cell.ymid[iaxon] = cell.ymid[isoma]
+    cell.yend[iaxon] = cell.ymid[isoma]
+    
+    j = 0
+    for i in iaxon:
+        cell.zstart[i] = cell.zmid[isoma] \
+                - cell.diam[isoma]/2 - cell.length[i] * j
+        cell.zmid[i] = cell.zmid[isoma] \
+                - cell.diam[isoma]/2 - cell.length[i]/2  - cell.length[i]*j
+        cell.zend[i] = cell.zmid[isoma] \
+                - cell.diam[isoma]/2 - cell.length[i] - cell.length[i]*j
+        j += 1
+    
+    ##point the pt3d axon as well
+    for sec in cell.allseclist:
+        if sec.name().rfind('axon') >= 0:
+            x0 = cell.xstart[cell.get_idx(sec.name())[0]]
+            y0 = cell.ystart[cell.get_idx(sec.name())[0]]
+            z0 = cell.zstart[cell.get_idx(sec.name())[0]]
+            L = sec.L
+            for j in xrange(int(neuron.h.n3d())):
+                neuron.h.pt3dchange(j, x0, y0, z0,
+                                 sec.diam)
+                z0 -= L / (neuron.h.n3d()-1)
+    
+
     syn.delay = 0
     noise_vec.play(syn._ref_amp, cell.dt)
     return cell, syn, noise_vec
