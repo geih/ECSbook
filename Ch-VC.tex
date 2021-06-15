@@ -47,13 +47,6 @@ Ohm's law for volume conductors (see \fref{eq:Basics:Ohm_3D_phi}):
 %This assumption implies that we have made the quasi-static approximation of Maxwell's equations 
 %(see \fref{sec:Basics:Quasistatic}), and assume that diffusive currents in the extracellular space can be neglected
 %(see \fref{sec:Eldiff})
-\tvnnote{Men andre steder sier vi at denne loven er "constitutive"? Kanskje bare referere til "Note on Ohm's law" i Basics?}. 
-\ghnote{Godt poeng. Jeg skrev at Ohms forutsetter kvasistatisk + null diffusjon, men tok det vekk. 
-Greia er vel uansett at disse to i prinsippet kan (for hoeye frekvenser eller store gradienter) gjoere 
-at Ohms lov blir en daarlig approkimasjon. AA referere til "Notes on Ohms lov" tror jeg ikke er saa relevant her.
-Det handler jo mer om "nanoverden" versus "mikroverden". Jeg tenker at vi har troeblet nok med dette tidligere, 
-og foreslaar at vi ikke sier annet enn at vi bruker Ohms lov.}
-
 We note that we have used the subfix "t" to indicate that ${\bf i}_\mathrm{t}$ is a macroscopic current density through \textit{tissue}, defined as current unit per tissue cross section area (for more details on this definition, see \Fref{chap:Sigma}).
 
 \item The effective tissue conductivity ($\sigma_\mathrm{t}$) is constant (does not vary with space or time), 
@@ -502,21 +495,18 @@ taken by the currents evoked by the (simulated) sources $C$.
 \ghnote{Skiftet rekkefoelgen paa avsnittene her. Tror det ble bedre, men ta en ny gjennomlesning.}
 If the distance from the center of the volume containing the current sources 
 to the measurement point is larger than the maximal distance from volume center to any source \cite**{Jackson1998}, 
-we can reformulate \fref{eq:VC:pointsources} by using the the multipole expansion \cite**{Nunez2006}:
-\tvnnote{Syntes vi burde faa det bedre frem at dette foreloebig ikke er noen approksimasjon}
-\ghnote{ yttet rekkefoelge paa avsnitt. Bedre naa? Det er ingen approksimasjon, men forutsetter at vi er
-utenfor skyen av kidler, sant? Torbjorn, hvis du er enig, fjern kommentarer.}
+we can reformulate \fref{eq:VC:pointsources} by using the multipole expansion \cite**{Nunez2006}:
 \begin{equation}
 V_\mathrm{e}({\bf r}) = V_\mathrm{e}(R) = \frac{C_\mathrm{monopole}}{R} + \frac{C_\mathrm{dipole}}{R^2} + \frac{C_\mathrm{quadrupole}}{R^3} + \frac{C_\mathrm{octopole}}{R^4} + ...
 \label{eq:VC:multipole}
 \end{equation}
-where $R = {\bf r} - {\bf r}_c$ is the distance from the center of the source distribution (${\bf r}_c$), 
+where $R = {\bf r} - {\bf r}_c$\tvnnote{Ha med || for aa ta lengden av vektor?} is the distance from the center of the source distribution (${\bf r}_c$), 
 $C_\mathrm{monopole}$ is the monopolar contribution of the CSD to $V_\mathrm{e}$, 
 $C_\mathrm{dipole}$ is the dipolar contribution from the CSD to $V_\mathrm{e}$, 
 and so on. The derivation of this expression can be found in Appendix \ref{app:dipoleappendix}.
 
 As we explained in \fref{sec:Neuron:membranecurrents}, 
-the net sum of currents over a neuronal membrane is always zero \gex{($C_\mathrm{monopole}=0$)} 
+the net sum of currents over a neuronal membrane is always zero ($C_\mathrm{monopole}=0$) 
 meaning that the monopolar contribution, i.e., first term in \fref{eq:VC:multipole}, vanishes. 
 Furthermore, the quadrupole, octopole and higher-order contributions to $V_\mathrm{e}$ 
 decay rapidly with distance $R$. Provided that we are sufficiently far away from the source distribution, 
@@ -578,13 +568,13 @@ the measurement electrodes themselves must have a very low resistance
 so that no potential drop occurs from the measurement site to the amplifier. 
 The electrodes are therefore typically made of a highly conductive metal like silver or platinum, 
 and the potential directly on the inside of the electrode surface is in practice homogeneous. 
-In contrast, the amplifier must have a very high impedance \tvntxt{(a generalized version of resistance that can incorporate capacitive effects and be frequency dependent)}, 
+In contrast, the amplifier must have a very high impedance (a generalized version of resistance that can incorporate capacitive effects and be frequency dependent), 
 so that a negligible amount of current will cross the tissue-electrode interface, 
 as this can cause electrode polarization effects\index{Electrode polarization} \cite**{Schwan1992,Martinsen2008,Moulin2008,Ishai2013}. 
 The homogeneous potential inside the recording electrode ideally corresponds to a spatial average 
 of the potential across the outer surface of the electrode \cite**{Nelson2008,Nelson2010,Ness2015,Vermaas2020b}.
-\tvntxt{\ghtxt{\sout{We start by ignoring}For now, we ignore} any possible temporal signal distortion introduced by the
-recording equipment, but get back to this in \fref{sec:VC:elec_distrotions}.} \ghnote{Vet ikke om det bare er meg, men "we start by ignoring" hoertes rart ut. Ellers: Jeg har lest det groenne her, og synes det saa fint ut. Paint it black, og fjern kommentarer.}
+For now, we ignore any possible temporal signal distortion introduced by the
+recording equipment, but get back to this in \fref{sec:VC:elec_distrotions}.
 
 
 \begin{figure}[!ht]
@@ -616,18 +606,20 @@ or because $V_\mathrm{e}$ varies substantially over small distances
 (like extracellular spikes from axons). 
 The potential directly on the inside of the electrode surface is in practice homogeneous (since it is made of a highly conductive metal), and ideally corresponds to a spatial average of the potential directly on the outside of the electrode. Therefore, the area of the electrode surface will affect how large a region the extracellular potential is averaged over. 
 
-\ghtxt{The effect of the electrode size can be accounted for through a trivial expansion of the 
-point-electrode approximation: We calculate $V_\mathrm{e}$ at all points across the electrode surface 
-and compute the average potential.} This approach is referred to as the disc-electrode approximation 
+The effect of the electrode size can be accounted for through a trivial expansion of the 
+point-electrode approximation: 
+\tvntxt{We can calculate $V_\mathrm{e}$ 
+at many different randomly chosen points across the electrode surface 
+and compute the average potential.} 
+This approach is referred to as the disc-electrode approximation 
 \cite**{CamunasMesa2013,Linden2014,Hagen2015,Ness2015,Viswam2019}. 
 %To account for the effect of the electrode size we can calculate
 % $V_\mathrm{e}$ at many different points across the electrode surface 
 %and compute the average potential, 
 %an approach referred to as the disc-electrode approximation \cite**{CamunasMesa2013,Linden2014,Hagen2015,Ness2015,Viswam2019}. 
-\tvnnote{syntes det er fint aa ha med at dette egentlig bare er en triviell utvidelse av punk-kilde approksimasjonen} 
-\ghnote{Sjekk versjonen over. Er den ok? Jeg reagerte paa at det tidligere sto "many points", 
+\ghnote{Jeg reagerte paa at det tidligere sto "many points", 
 og byttet det med "all points" Er ikke det riktige? Det er jo analytisk, og man integrerer opp? 
-Eller tar man et sample?}
+Eller tar man et sample?}\tvnnote{Vi tar mange tilfeldig valgte punkter, saa det er sample.}
 
 The disc-electrode approximation accounts for the physical extent of the electrodes, 
 and therefore also for the spatial filtering effects introduced by electrodes that are large 
@@ -665,32 +657,29 @@ In certain cases, like in ECoG \index{ECoG} measurements from the cortical surfa
 \label{sec:VC:elec_shafts}
 Large multi-contact electrode shanks can be expected to have a substantial effect on close-by extracellular potentials, 
 since they represent large, non-conducting volumes \cite**{Moffitt2005,Lempka2011,Mechler2012,Buccino2019}. 
-\tvntxt{While such effects can be expected to be
+While such effects can be expected to be
 negligible for small microwires \cite**{Buccino2019},
 it has been demonstrated that large probes can amplify or dampen recorded potentials from nearby cells 
 by almost a factor of two, 
 depending on whether the cell was in front of or behind the electrode shank \cite**{Moffitt2005,Buccino2019}.
-Efforts to model large non-conducting volumes such as this are \ghtxt{\sout{also}} 
+Efforts to model large non-conducting volumes such as this are 
 briefly covered in \fref{sec:Sigma:nonhomo}, which concerns modeling of
 planar boundaries to non-conducting regions.
 Finally, note that insertion of large probes into neural tissue 
 can cause tissue damage, leading to eudema and encapsulation \cite**{Moffitt2005}, 
-as well as cell death, but we do not cover such issues here.}
-\ghnote{Saa igjennom. Paint black og fjern kommentarer. Vurder aa fjerne den siste setningen. 
-Er det viktig aa si dette her? Det er vel implisitt at naar vi sier "Effect of" saa mener vi effekten paa ekstracellulaere potensialer, 
-og ikke paa andre ting, som for eksempel humoeret? }
+as well as cell death, but we do not cover such issues here.
+
 
 %%%%%%
 
 \subsection{\blue{Signal distortion from recording equipment}}
 \label{sec:VC:elec_distrotions}
-\tvntxt{It is commonly assumed that if the proper recording equipment is used, 
+It is commonly assumed that if the proper recording equipment is used, 
 electrode impedance or other electrode properties should not substantially distort recorded potentials. In other words, it is assumed that the recorded potential, $V_\mathrm{Rec}$, is identical to the average potential across the electrode surface
 \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}, which we will here refer to as $V_\mathrm{True}$.
-\ghnote{Flyttet siteringene til etter "electrode surface", da sikkert ikke alle disse har kalt det for $V_\text{true}$.}
 Note that $V_\mathrm{True}$ here includes the effects from the electrode size and the presence of the electrode itself. The assumption that $V_\mathrm{Rec}$ equals $V_\mathrm{True}$ is typically referred to as assuming "ideal" electrodes.
 There are however several different complicating factors that can cause the recorded potential 
-to differ from the "true" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}.}
+to differ from the "true" potential \cite**{Robinson1968,Martinsen2008,Nelson2008}.
 %\ghtxt{
 %For the sake of examining electrode effects, let us consider a specific recording location, and define for
 %this location:
@@ -772,7 +761,7 @@ and partly because the signals that are of neural origin are primarily reflected
 However, slow potentials can also reflect relevant phenomena of both physiological 
 nature, such as brain-state transitions and readiness potentials, 
 and pathological nature, such as spreading depression, stroke, and epilepsy \cite**{caspers1980,kovac2018}. 
-Studies of such phenomena require the use of DC amplifiers \cite**{herreras2016,harting2017}
+Studies of such phenomena require the use of DC amplifiers \cite**{herreras2016,harting2017}.
 
 Slow potentials can often arise in simulated extracellular potentials 
 from cell models with active conductances, for example because of the 
@@ -784,6 +773,7 @@ computer simulations in better agreement with recordings obtained with AC-couple
 \ghnote{Laget ny versjon. Byttet DC-pot til slow pot. Grunn: DC pot brukes ofte om hele spektrumet, 
 dvs. maalinger som inneholder ALLE frekvenser fra 0 og opp. Hadde en diskusjon om dette
 da vi skrev artikkelen til Marte Julie, og valgte da "slow potential". }
+\tvnnote{Takk, dette syntes jeg virker bedre :-)}
 
 %\ghtxt{Note that \tvntxt{\sout{metallic recording electrodes are typically} the measurement equipment typically used in neuroscience is} unable to measure static (DC) potentials, or capture changes slower than $\sim$ 0.1 Hz.
 %Such DC potentials can be present in neural tissue, and can often arise in simulated 
@@ -792,13 +782,13 @@ da vi skrev artikkelen til Marte Julie, og valgte da "slow potential". }
 %extracellular potential is typically subtracted from the extracellular potentials to effectively 
 %remove the unobservable DC-potential.
 
-\gen{Hvor har vi dette tallet fra?}
-\ehnote{jeg er ogsaa overrasket over at metallelektroder ikke kan maale konstante potensialforskjeller i en loesning (i all den tid det finnes frie ioner i loesningen)?}
-\tvnnote{Jeg vet ikke om noen laerebok referanse, men det var det som ble oppgitt som nedre grense baade av Dirk og Anna (altsaa alle tilfeller jeg har vaert borti eksperimentell data), se Miceli-artikkelen, Uhlivora-artikkelen, og ogsaa Einevoll et al., 2007. Fra en av Anna's nyere artikler fant jeg frem til dokumentasjonen paa amplifieren de har brukt, og der staar det "Lower cutoff frequency configurable from 0.1 Hz to 500 Hz", men jeg vet ikke helt om forklaringen jeg har gitt over er helt riktig.}
-\ghnote{0.1 Hz staar i review-artikkel av Herreras 2016, som jeg siterte over. Sikkert andre steder ogsaa. Der staar det ogsaa at maalingene bruker AC-coupled amplifiers. Det forklarer kanskje ett og annet, uten at jeg kan si at jeg fullt ut forstaar dette her.}
-\ehnote{Det er vel da mer en begrensning med sampling apparat enn selve elektrodemaalingen. Si du sampler mange kanaler med int16 presisjon - det blir da et problem hvis DC-verdiene fluktuerer mye mer enn selve signalet (e.g., LFP).}
-\gen{Slik jeg forstod det da jeg snakket med Ulbert om saken i urtiden er det alltid et DC "kontaktpotensial" mellom metallkontakter og elektrolytter. Dette er i praksis ukjent og vil variere fra kontakt til kontakt, f.eks., i en MEA. Ulbert sa at DC potensialer derfor kun kunne maales med liquid elektroder.}
-\tvnnote{Er det greit naa, som jeg har byttet til "measurement equipment typically used in neuroscience"?}
+%\gen{Hvor har vi dette tallet fra?}
+%\ehnote{jeg er ogsaa overrasket over at metallelektroder ikke kan maale konstante potensialforskjeller i en loesning (i all den tid det finnes frie ioner i loesningen)?}
+%\tvnnote{Jeg vet ikke om noen laerebok referanse, men det var det som ble oppgitt som nedre grense baade av Dirk og Anna (altsaa alle tilfeller jeg har vaert borti eksperimentell data), se Miceli-artikkelen, Uhlivora-artikkelen, og ogsaa Einevoll et al., 2007. Fra en av Anna's nyere artikler fant jeg frem til dokumentasjonen paa amplifieren de har brukt, og der staar det "Lower cutoff frequency configurable from 0.1 Hz to 500 Hz", men jeg vet ikke helt om forklaringen jeg har gitt over er helt riktig.}
+%\ghnote{0.1 Hz staar i review-artikkel av Herreras 2016, som jeg siterte over. Sikkert andre steder ogsaa. Der staar det ogsaa at maalingene bruker AC-coupled amplifiers. Det forklarer kanskje ett og annet, uten at jeg kan si at jeg fullt ut forstaar dette her.}
+%\ehnote{Det er vel da mer en begrensning med sampling apparat enn selve elektrodemaalingen. Si du sampler mange kanaler med int16 presisjon - det blir da et problem hvis DC-verdiene fluktuerer mye mer enn selve signalet (e.g., LFP).}
+%\gen{Slik jeg forstod det da jeg snakket med Ulbert om saken i urtiden er det alltid et DC "kontaktpotensial" mellom metallkontakter og elektrolytter. Dette er i praksis ukjent og vil variere fra kontakt til kontakt, f.eks., i en MEA. Ulbert sa at DC potensialer derfor kun kunne maales med liquid elektroder.}
+%\tvnnote{Er det greit naa, som jeg har byttet til "measurement equipment typically used in neuroscience"?}
 
 
 
@@ -813,7 +803,7 @@ da vi skrev artikkelen til Marte Julie, og valgte da "slow potential". }
 %\label{VC:fig:elec_circuit}
 %\end{figure}
 
-\ghtxt{Apart from issues conserving the unobservable slow potential fluctuations}, 
+Apart from issues conserving the unobservable slow potential fluctuations, 
 it has been convincingly argued that, provided that the proper recording equipment is used (so that $Z_a' \gg Z_e'$), 
 electrode impedance or other electrode properties should not substantially distort recorded potentials 
 i.e., we can assume that  $V_\mathrm{Rec} \approx V_\mathrm{True}$ \cite**{Martinsen2008,Moulin2008,Nelson2008,Nelson2010}.
@@ -834,7 +824,7 @@ because of electrode polarization, see \fref{sec:EPI}.
 \subsection{\blue{Effect of position of reference electrode}}
 \label{sec:VC:ref_elec}
 %\ghnote{En eventuell diskusjon av hvor man plasserer referanseelektrodene kan inngaa her. Kommentarene under er sakset inn fra tidligere diskusjoner i Basics-kapittelet:} 
-\tvntxt{When we record extracellular potentials in the brain, we are in principle free to arbitrarily choose the location of the reference electrode,
+When we record extracellular potentials in the brain, we are in principle free to arbitrarily choose the location of the reference electrode,
 and the best location for the reference electrode will
 depend on what we want to measure \cite**{Sharott2015}.
 
@@ -847,8 +837,6 @@ the reference electrode should be placed sufficiently far away that it is not it
 by the neural activity we want to measure from. In cases like this, the reference electrode can for example be embedded in the skull of the animal.
 
 When modelling extracellular potentials, the reference electrode is typically (and often implicitly) placed at "infinity". This is mostly a sensible approach, since we typically only include in our modelling the neural sources we are interested in recording from. When trying to mimic experimental data, it is however important to keep the location of the reference electrode in mind, to exclude this as a possible source of confusion. For modelling a specific location for the reference electrode, it is sufficient to calculate the potential with respect to "infinity" (using e.g. \fref{eq:VC:pointsource2}) both at the location of the measurement electrode, and at the location of the reference electrode, and subtract the latter from the former.
-}
-\ghnote{Veldig bra. Paint it black.}
 
 %\tvntxt{When recording extracellular potentials in the brain, we are in principle free to arbitrarily choose the location of the reference electrode. 
 %The ideal location for the reference electrode depends on several different factors, but it is commonly placed "far away" from the neural activity that is being measured from so that the measured potential is not dependent on an unknown varying electrical activity around the reference electrode. When modelling extracellular potentials, the reference electrode is typically (and often implicitly) placed at "infinity". } \ghnote{Stemmer egentlig dette? Slik jeg forsto Sharott vil man i motsetning til det dere skriver ofte ha referanseelektroden naer maaleelektroden naar man maaler MUA, for paa den maaten aa filtrere bort effekter fra "nest naermeste nabo". Hva var galt med mitt (mer vage) forslag:} \ghtxt{When we record extracellular potentials in the brain, we can choose to place the reference electrode close or far away from the recording electrode, depending on the kind of signal one wishes to measure \cite**{Sharott2015}.} 
