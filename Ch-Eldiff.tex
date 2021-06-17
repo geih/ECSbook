@@ -1,15 +1,39 @@
-\chapter{Electrodiffusion in the extracellular space}
+\chapter{Diffusion potentials in brain tissue}
 \label{chap:Eldiff}
 \index{Electrodiffusion}
-
+\ghnote{Skiftet tittel. Reduserer dette kapittelet til enkle estimater, ikke
+formalisme for simuleringer.}
 \gen{Nevner vi intracellular electrodiffusion tidligere et sted? Viktig aa faa fortalt at electrodiffusion ikke er noe spesielt ECS fenomen, selvom det kanskje er praktisk mest viktig der}
 
-By necessity, the transmembrane ionic currents produced by active neurons will cause the intra- and extracellular ion concentrations to change. Since neurons and glial cells contain numerous homeostatic mechanisms that work continuously to restore baseline concentrations, concentration changes are often limited to small deviances from baseline. For that reason, it is often a good approximation to assume that they remain constant, as one does when constructing multicompartment neurons as described in Chapter \ref{sec:Neuron}, and when using volume conductor (VC) theory as described in Chapter \ref{sec:VC}.
+By necessity, the transmembrane ionic currents produced by active neurons 
+will cause the intra- and extracellular ion concentrations to change. 
+Since neurons and glial cells contain a homeostatic machinery that continuously works to restore baseline concentrations, 
+concentration changes are often limited to small deviances from baseline. 
+For that reason, it is often a good approximation to assume that they remain constant, 
+as one does when constructing multicompartment neurons as described in Chapter \ref{sec:Neuron}, 
+and when using volume conductor (VC) theory as described in Chapter \ref{sec:VC}.
 
-There are scenarios when the assumption of constant ion concentrations is not warranted. For example, during neuronal hyperactivity, or during several pathological conditions, the homeostatic machinery can fail to keep up, and ion concentrations may change rather dramatically, both in the intra- and extracellular space \cite**{kraio1978,Dietzel1989,Somjen2001,Somjenboka,Frohlich2008,Zandt2015,Ayata2015}. Concentration changes will generally affect both (i) the transmembrane, (ii) the intracellular and (iii) the extracellular concentration gradients. If (i) transmembrane concentration gradients change, it will affect neuronal reversal potentials (cf. eq. \ref{Neuron:eq:revpots}), and this can have dramatic effects on neuronal firing properties (see e.g., \cite**{Cressman2009,Zandt2011,Oyehaug2012,WeiUllahSchiff2014,Saetra2020}). If (ii) intracellular concentration gradients become large, longitudinal diffusion can dominate over electric drift currents, and standard multicompartment models, accounting only for the latter, 
-become inaccurate \cite**{Qian1989}. If (iii) extracellular concentration gradients become large, 
-diffusive currents through the extracellular space can evoke so-called diffusion-potentials \cite**{Gardner-Medwin1981,Dietzel1989,Halnes2016}. If present, these diffusion-potentials will give a contribution to the total extracellular potential ($\phi_e$), which are not accounted for
-by standard VC-theory, where diffusive effects are assumed to be absent. 
+There are scenarios when the assumption of constant ion concentrations is not warranted. 
+For example, during neuronal hyperactivity, or during several pathological conditions, 
+the homeostatic machinery can fail to keep up, and ion concentrations may change rather dramatically, 
+both in the intra- and extracellular space
+\cite**{kraio1978,Dietzel1989,Somjen2001,Somjenboka,Frohlich2008,Zandt2015,Ayata2015}. 
+Concentration changes will generally affect both 
+(i) the transmembrane, 
+(ii) the intracellular and 
+(iii) the extracellular concentration gradients. 
+If (i) transmembrane concentration gradients change, 
+it will affect neuronal reversal potentials (cf. eq. \ref{Neuron:eq:revpots}), 
+and this can have dramatic effects on neuronal firing properties (see e.g., \cite**{Cressman2009,Zandt2011,Oyehaug2012,WeiUllahSchiff2014,Saetra2020}). 
+If (ii) intracellular concentration gradients become large, 
+longitudinal diffusion can become of comparable magnitude to electric drift currents, 
+and standard multicompartment models, accounting only for the latter, 
+become inaccurate \cite**{Qian1989}. 
+If (iii) extracellular concentration gradients become large, 
+diffusive currents through the extracellular space can evoke so-called diffusion-potentials 
+\cite**{Gardner-Medwin1981,Dietzel1989,Halnes2016}. 
+If present, these diffusion-potentials will give a contribution to the total extracellular potential ($V_e$), 
+which is not accounted for by standard VC-theory, where diffusive effects are assumed to be absent. 
 
 We will start this Chapter by studying a simple example aimed to give an intuitive understanding of what a diffusion potential is and how it is generated through an electrodiffusive process (Section \ref{sec:Eldiff:LJpot}). Next, we will introduce the Nernst-Planck equation for electrodiffusive processes, and briefly introduce two alternative, physical framworks for solving it (Section \ref{sec:Eldiff:NP}). As we in this book focus on extracellular potentials, we are predominantly interested in the extracellular effects (iii) of ion concentration changes. We  will therefore present in some greater detail a framework for modeling extracellular electrodiffusion at the coarse-grained scale of tissue, and we will compare this framework to the standard VC-theory that we presented earlier (Section \ref{sec:Eldiff:porous}). Finally, we will use this framework to make some estimates of to which degree, and under which circumstances, diffusion potentials can be expected to be of non-negligible importance at the level of brain tissue (Section \ref{sec:Eldiff:estimates}).
 
