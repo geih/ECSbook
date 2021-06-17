@@ -511,7 +511,7 @@ which is a differential equation with the general solution
 \Fref{eq:Sigma:relax} shows that there is no steady-state free charge in the system considered, 
 and that if any nonzero free charge occurs, for example due to sudden change in the electric field, 
 it will decay towards zero with the time constant $\tau$. 
-From this, the interpretation of $\epsilon/\sigma_\mathrm{R}$ (\fref{eq:Basics:chargerelaxationtime}) 
+From this, the interpretation of $\epsilon/\sigma_\mathrm{R}$ (\fref{eq:Sigma:chargerelaxationtime}) 
 as the charge relaxation time is clear. 
 
 The ratio \Fref{eq:Sigma:ratiocondition2} tells us that only for frequencies that are very high 
@@ -519,7 +519,7 @@ The ratio \Fref{eq:Sigma:ratiocondition2} tells us that only for frequencies tha
 capacitive effects will be important. For fields of physiological origin, 
 the temporal frequencies are typically less than a few thousand \si{\hertz}. 
 Capacitive effects will therefore mainly be important if the charge relaxation time is not much smaller than a millisecond. 
-Below, we explore whether the criterion in \fref{eq:Basics:ratiocondition} or \fref{eq:Basics:ratiocondition2} is met 
+Below, we explore whether the criterion in \fref{eq:Sigma:ratiocondition} or \fref{eq:Sigma:ratiocondition2} is met 
 in three different mediums:
 
 \begin{itemize}
@@ -568,6 +568,7 @@ This corresponds to a passive membrane resistance
 $r_\text{m} = d/\sigma_\text{m} = 10^{-8}/2\times10^{-9} = 5\, \si{\ohm\square\metre} = 50 \, \si{\kilo\ohm\square\centi\metre}$.
 
 \ghnote{Dette ble et sidespor. Vi kan vurdere aa fjerne alt bortsett fra foerste avsnitt. For min egen sjelefred ville jeg dog verifisere at membrantidskonstanten rettmessig kan tolkes som charge-relaxation time i membran-mediumet.}
+\tvnnote{Jeg syntes det boer vaere med, og kanskje til og med komme foer konklusjonen?} 
 
 \item \textit{Neural tissue:} For the topic of this book, the most relevant medium is the neural tissue as a whole. 
 For tissue, the ratio in \fref{eq:Sigma:ratiocondition} is strongly frequency dependent, 
@@ -652,9 +653,10 @@ it is common to make the modeling approximation that  $\sigma_\text{t}$ is isotr
 \includegraphics[width=0.6\textwidth]{Figures/Sigma/fig_anisotropy_effect.pdf}
 \end{center}
 \caption[]{\textbf{Effect of modest anisotropy.}
-Extracellular potential following a single excitatory synaptic input (location marked by cyan dot) to a rat cortical layer 5 pyramidal neuron \cite**{Hay2011}. The extracellular potential is shown at the time when it was at its maximal value in the case of ({\bf A}) 
-an isotropic extracellular medium, or ({\bf B}) an anisotropic extracellular medium with a 50\% higher
-conductivity along the axis of the apical dendrite. The same neural simulation was used in ({\bf A}) and ({\bf B}). In ({\bf B}), the extracellular potential was calculated using \fref{eq:Sigma:Panisos}. \ghnote{Opprinnelig figurtekst framsto som litt rotete. Sjekk at det som staar er korrekt.}
+Extracellular potential following a single excitatory synaptic input (location marked by cyan dot) to a rat cortical layer 5 pyramidal neuron \cite**{Hay2011}. The extracellular potential is shown at the time when it was at its maximal value\tvntxt
+{. In ({\bf A}) the extracellular medium was 
+isotropic, and in ({\bf B}) the extracellular medium was anisotropic} with a 50\% higher
+conductivity along the axis of the apical dendrite. The same neural simulation was used in ({\bf A}) and ({\bf B}). In ({\bf B}), the extracellular potential was calculated using \fref{eq:Sigma:Panisos}. \ghnote{Opprinnelig figurtekst framsto som litt rotete. Sjekk at det som staar er korrekt.}\tvnnote{Jeg delte opp en settning, ellers fornoeyd}
 }
 \label{fig:Sigma:anisotropy_effect}
 \end{figure}
@@ -663,19 +665,19 @@ conductivity along the axis of the apical dendrite. The same neural simulation w
 When deemed necessary, 
 it is relatively straightforward to expand the VC theory to the case of an anistotropic $\sigma_\text{t}$. 
 Then,  $\sigma_\text{t}$ will no longer be a scalar, 
-but instead a tensor with the three components $\sigma_{tx}$, $\sigma_{ty}$ and $\sigma_{tz}$. 
+but instead a tensor with the three components $\sigma_{\text{t}x}$, $\sigma_{\text{t}y}$ and $\sigma_{\text{t}z}$. 
 If we use the point-source approximation (\fref{eq:VC:pointsources}), 
 the extracellular potential surrounding a set of point current sources $I_k$ is given by \cite**{nicholson1975,Parasnis1986}:
 
 \begin{equation}
-\phi(x,y,z) = \sum_k \frac{I_k}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}}.
+\phi(x,y,z) = \sum_k \frac{I_k}{4\pi\sqrt{\sigma_{\text{t}y}\sigma_{\text{t}z} (x-x_k)^2 + \sigma_{\text{t}x}\sigma_{\text{t}z} (y-y_k)^2 + \sigma_{\text{t}x}\sigma_{\text{t}y} (z-z_k)^2}}.
 \label{eq:Sigma:Panisos}
 \end{equation}
 A derivation of this equation is found in \fref{app:Aniso}.
 
-If we use the CSD-description of the sources (eq.~\ref{VC:eq:csds}), the corresponding expression is:
+If we use the CSD-description of the sources (\fref{eq:VC:csds}), the corresponding expression is:
 \begin{equation}
-\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi\sqrt{\sigma_{ty}\sigma_{tz} (x-x_k)^2 + \sigma_{tx}\sigma_{tz} (y-y_k)^2 + \sigma_{tx}\sigma_{ty} (z-z_k)^2}} \, dV.
+\phi(x,y,z) = \iiint_V \frac{C(x,y,z)}{4\pi\sqrt{\sigma_{\text{t}y}\sigma_{\text{t}z} (x-x_k)^2 + \sigma_{\text{t}x}\sigma_{\text{t}z} (y-y_k)^2 + \sigma_{\text{t}x}\sigma_{\text{t}y} (z-z_k)^2}} \, dV.
 \label{eq:Sigma:Canisos}
 \end{equation}
 
@@ -688,8 +690,6 @@ If we use the CSD-description of the sources (eq.~\ref{VC:eq:csds}), the corresp
 \section{\blue{Inhomogeneous conductivity}}
 \label{sec:Sigma:nonhomo}
 \index{Conductivity!Inhomogeneous}
-\tvnnote{In- or non-homogeneous?}
-\ghnote{Begge deler brukes i litteraturen. Byttet til Inhomogeneous.}
 In \fref{chap:VC}, we assumed that the extracellular conductivity $\sigma_\text{t}$ was homogeneous, 
 i.e., the same everywhere. 
 As we illustrated in \fref{fig:Sigma:ECS}, this assumption clearly does not hold on the micrometer scale, 
@@ -712,9 +712,9 @@ typically because of boundaries between neural tissue and other tissue types or 
 %The situation is different when signals are recorded very far from their sources. It is then likely that they on their journey have experienced a $\sigma_\text{t}$ that varied on a macroscopic scale \tvnnote{Er det egentlig riktig aa snakke om "reisen" til et potensial? }.
 %For example, electroencephalography (EEG) signals recorded outside of the head are strongly affected by the presence of the brain tissue, cerebrospinal fluid (CSF), skull and scalp, which are very different media with different electrical  conductivities.
 When the extracellular medium is inhomogeneous, there is no general analytical formula available 
-(like eqs. \ref{VC:eq:csds}, \ref{eq:Sigma:Panisos} or \ref{eq:Sigma:Canisos}) 
+(like \fref{eq:VC:csds}, \fref{eq:Sigma:Panisos} or \fref{eq:Sigma:Canisos}) 
 that link the extracellular potentials to the underlying current sources. 
-In principle, one can still always solve eq. \ref{VC:eq:CSD2} for arbitrarily complex geometries 
+In principle, one can still always solve \fref{eq:VC:CSD2} for arbitrarily complex geometries 
 with varying conductivities using numerical methods, like the Finite Element Method (FEM) \cite**{Logg2012}. 
 This approach has for example been used to model electroencephalography (EEG) signals 
 recorded outside of the head, because these potentials are not only affected by the conductivity of brain tissue, 
