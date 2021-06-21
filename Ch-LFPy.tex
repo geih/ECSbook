@@ -596,13 +596,13 @@ Then:
 where $\widetilde{\mathbf{r}}_X$ describes the probability density function of somatic locations of population $X$ in space.
 \item Let $K_{YX}$ denote the total number of pairwise connections between presynaptic population $X$ and postsynaptic population $Y$.
 Assuming a random connectivity with binomial in- and out-degree distributions the corresponding connection probability is then $C_{YX}=1-(1-1/{N_Y N_X})^{K_{YX}}$ \cite**{Potjans2014}.
-For small connection probabilities the expression can be approximated by $C_{YX} = K_{YX} / (N_Y N_X)$.
+For small connection probabilities the expression can be approximated by $C_{YX} \approx K_{YX} / (N_Y N_X)$.
 \item Let $k_{vu} \sim \widetilde{k}_{YX}$ denote the number of synapses per connection if a connection exist between neurons $u$ and $v$. 
 $\widetilde{k}_{YX}$ here describes a discrete distribution from which integer numbers greater than 0 are drawn.  
-\item Let layer or region (e.g., cortical layer) be denoted by $L$.
-\item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YXL} \geq 0 $ such that $\sum_L \mathcal{L}_{YXL} \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$. 
+\item (Let layer or region (e.g., cortical layer) be denoted by $L$.)  \ehnote{ikke kritisk for dette kapitlet}
+\item Let synapse placement be described by a spatial probability function $\mathcal{L}_{YX}(\mathbf{r}) \geq 0 $ such that $\iiint_\Omega \mathcal{L}_{YX}(\mathbf{r}) d\Omega \coloneq 1$ if $K_{YX} > 0$ and 0 if $K_{YX} = 0$. 
 Connection probabilities may also depend on both spatial location and/or properties of the postsynaptic neurons such as compartment surface areas $\mathbf{A}_Y$. 
-This can be incorporated by evaluating the product $\mathcal{L}_{YXL}(z_w)A_w$  at the depth $z_w$ of each postsynaptic compartment indexed by $w$, where $A_w$ denotes its area. 
+This can be incorporated by evaluating the product $\mathcal{L}_{YX}(z_w)A_w$  at the depth $z_w$ of each postsynaptic compartment indexed by $w$, where $A_w$ denotes its area. 
 \item Synaptic currents for each connection are given as $I_{\text{syn}YX}(t)=\overline{G}_{\text{syn}YX} f_{YX}(t)(V_\text{m}(t)-E_{\text{syn}X})$
 where $\overline{G}_{\text{syn}YX}$ denotes the maximum synaptic conductance and $f_{YX}(t) \in [0, 1]$ one of the temporal kernels listed in \Fref{sec:Ch-Neuron:conductance-based-synapses}.
 $V_\text{m}(t)$ denotes the postsynaptic membrane potential and 
@@ -725,7 +725,7 @@ $\widetilde{\Delta}_{YX}$ &
 	\end{cases}
 \) & Conduction delay distributions \\
 \hline
-$\mathcal{L}_{YXL}(z)$ & 
+$\mathcal{L}_{YX}(z)$ & 
 \(
 	\begin{cases}
 		\frac{\mathcal{N}(0, 100)(z)}{3} + \frac{2\mathcal{N}(500, 100)(z)}{3}, \\
@@ -1292,15 +1292,20 @@ and $\tau <= 0$ in the FIR case.}
 \subsubsection{\blue{Population firing rate models}}
 \label{sec:Schemes:populationmodels}
 \index{Firing rate model}
-Similar to how \ghtxt{spiking} dynamics of large-scale MC neuron networks \ghtxt{\sout{as reflected by spikes of the individual neurons}} can sometimes be preserved in \ghtxt{\sout{equivalent}simplified} networks of few-compartment or spiking point neurons \ghtxt{\sout{after a series of simplifying steps}}, further successive steps of simplification may be applied to point-neuron networks in order to describe neuronal dynamics at the level of populations. Such models are commonly referred to as \emph{rate models} as an umbrella term, and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} (whole brain) level such as oscillations.
+Similar to how spiking dynamics of large-scale MC neuron networks can sometimes be preserved in simplified networks of few-compartment or spiking point neurons, 
+further successive steps of simplification may be applied to point-neuron networks in order to describe neuronal dynamics at the level of populations. 
+Such models are commonly referred to as \emph{rate models} as an umbrella term, and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} (whole brain) level such as oscillations.
 
-
-\ghtxt{\sout{Rate models may simply describe the mean activity of subsets of neurons (`populations') as function of time but may also explain activity both in space and time.} The simplest rate models describe the mean activity of subsets of neurons (`populations') as function of time alone, but other versions exist that describe activity both in space and time. } The latter is sometimes referred to as \emph{neural fields} and may readily produce observed phenomena such as traveling waves of activity (see e.g., \cite**{Amari1977,Deco2008}). Certain rate model frameworks may also describe activity of individual neurons. Here, we will however not delve into much mathematical detail as the body of literature on both rate models and neural fields and their derivation is vast, see for example \cite**{Gerstner2014} and \cite**{Ermentrout2010}. As an example, we will merely show that in their simplest form the activity $A(t)$ in a rate model may be described by (Equation 15.17 in \cite**{Gerstner2014})
+Simple rate models describe the mean activity of subsets of neurons (`populations') as function of time alone, 
+but other rate-based formalisms exist that describe activity both in space and time. 
+The latter is sometimes referred to as \emph{neural fields} and may readily produce observed phenomena such as traveling waves of activity (see e.g., \cite**{Amari1977,Deco2008}). Certain rate model frameworks may also describe activity of individual neurons. 
+Here, we will however not delve into much mathematical detail as the body of literature on both rate models and neural fields and their derivation is vast, see for example \cite**{Gerstner2014} and \cite**{Ermentrout2010}. 
+As an example, we will merely show that in their simplest form the activity $A(t)$ in a rate model may be described by (Equation 15.17 in \cite**{Gerstner2014})
 \begin{equation}
-\tau_\text{m} \frac{\partial A(t)}{\partial t} = - A(t) + g_\sigma( I(t) ) ~,
+\tau_\text{m} \frac{\partial A(t)}{\partial t} = - A(t) + g_\sigma \left( I(t) \right) ~,
 \end{equation}
 where $\tau_\text{m}$ is the time constant of the effective low pass filter characterizing the system, $I(t)$ describes the input current (from external and recurrent sources) and $g_\sigma$ a stationary gain function (see \cite**{Gerstner2014} for details).
-\ehnote{mulig jeg kan gaa inn i bittelitt mer detalj her og bruke likning 15.18-19 fra seksjon 15.3.2 som eksempel her i stedet}
+%\ehnote{mulig jeg kan gaa inn i bittelitt mer detalj her og bruke likning 15.18-19 fra seksjon 15.3.2 som eksempel her i stedet}
 
 
 What we will primarily focus on here,
@@ -1317,7 +1322,7 @@ population sizes ($N_X, N_Y$) average synaptic in-degree ($\langle k_{YX} \rangl
 synaptic coupling strength ($\overline{I}_{\text{syn}YX}$),
 synaptic temporal kernel ($f_{YX}(t)$) and
 conduction delay distribution $\widetilde{\Delta}_{YX}(t)$ for each connection.
-Let us for now assume that these parameters are used to derive parameters and variables entering the actual rate equations (such as $\tau_m, g_\sigma$).
+Let us for now assume that these parameters are used to derive parameters and variables entering the actual rate equations (such as $\tau_\text{m}, g_\sigma$).
 If that is not the case, the magnitude and physical unit(s) of the final signal predictions may be arbitrary and dimensionless, respectively.
 
 \item We let the continuous variable $\nu_X(t)$ describe the population-averaged firing rate (with unit spikes \si{\per\second}) for all $N_X$ neurons in each population $X$ as predicted by the rate model.
@@ -1331,7 +1336,7 @@ Choices for filter $w$ could be (but is not limited to) a boxcar, Gaussian or Ha
 
 \end{enumerate}
 
-Granted that we already computed population-averaged spatiotemporal kernels $\langle H_{YX} (\mathbf{r}, \tau) \rangle$ for the particular pre and postsynaptic network populations ($X, Y \subseteq X$) our rate model represents as above,
+Granted that we already computed \ehtxt{appropriate} population-averaged spatiotemporal kernels $\langle H_{YX} (\mathbf{r}, \tau) \rangle$ for the particular pre and postsynaptic network populations ($X, Y \subseteq X$) our rate model represents as above,
 we could persevere and compute our signal as
 \begin{equation}
 \phi(\mathbf{r}, t) = \sum_X N_X \sum_Y \left( \nu_X \ast \langle H_{YX} \rangle \right)(\mathbf{r}, t) ~.
@@ -1348,9 +1353,12 @@ Thus we may assume that each postsynaptic population can be represented by \emph
 In \Fref{fig:LFPy_kernel_predictor}{\bf A} we show geometries used for each population $E$ and $I$ in relation to points in space where extracellular potentials are computed. 
 Panel {\bf B} shows the assumed spatial distribution of somas along the vertical $z$-axis. 
 The somas are assumed to be placed with homogeneous density within a radius $R$ in the horizontal $xy-$plane (not shown).
-We can define the distribution of somas in space as the probability density function $\widetilde{\mathbf{r}}_X$ introduced earlier. 
- 
-\item Further we assume that the statistics of synaptic placements and currents would be preserved,
+Hence, we have define the distribution of somas in space as the probability density function $\widetilde{\mathbf{r}}_X$ introduced earlier 
+\ehtxt{for the recurrent MC neuron network of \Fref{sec:Schemes:networkLFPy}}. 
+
+\ehnote{Note that the effect of cell-body distributions are easier to account for in practice by computing the extracellular signal as a weighted average over spatial locations while the compartment locations are kept fixed? Fuzzy sources vs. fuzzy contacts -- due to reciprocity the forward solution will be identical.}
+
+\item Further we assume that the statistics of synaptic placements and currents is preserved,
 which allows us to compute the average synaptic current density for each recurrent connection over the whole postsynaptic `neuron'.  
 %which fulfills
 %\begin{equation}
@@ -1361,23 +1369,26 @@ which allows us to compute the average synaptic current density for each recurre
 %\ehnote{skriv om! Trenger ikke $\rho_{\text{syn}YX}$}
 
 %\item $\rho_{\text{syn}YX}(\mathbf{r}, \tau)$ 
-\item Synaptic placements depends on some spatial specificity of synaptic connections \( \mathcal{L}_{YXL}(\mathbf{r}) \) and areas of putative target sections.
+\item Synaptic placements depends on some spatial specificity of synaptic connections \( \mathcal{L}_{YX}(\mathbf{r}) \) and areas of putative target sections.
 If we for instance only allow synaptic input within a certain depth interval $[z_1, z_2]$ where $z_1 < z_2$ (e.g., corresponding to the thickness of a cortical layer),
 this spatial specificity function may be defined as
 \begin{equation}
-\mathcal{L}_{YXL}(z) = \Theta(z - z_2) - \Theta(z - z_1) ~,
+\mathcal{L}_{YX}(z) = \Theta(z - z_2) - \Theta(z - z_1) ~,
 \end{equation}
 where $\Theta(z)$ denotes the Heaviside step function. 
 Alternatively, one could assume normal-distributed synaptic placements, that is, 
-$\mathcal{L}_{YXL}(z)\propto \mathcal{\widetilde{N}}(\langle z \rangle, \sigma_z)$ 
+$\mathcal{L}_{YX}(z)\propto \mathcal{\widetilde{N}}(\langle z \rangle, \sigma_z)$ 
 around some mean depth $\langle z \rangle$ with standard deviation $\sigma_z$.
+\ehtxt{The spatial specificity could also be constructed as an arbitrary sum of such components.}
 
-\item Furthermore, we let the synaptic density be proportional to the membrane area of postsynaptic compartments $\mathbf{A}_Y$ weighted by $\mathcal{L}_{YXL}$.
+\item Furthermore, we let the synaptic density be proportional to the membrane area of postsynaptic compartments $\mathbf{A}_Y$ weighted by $\mathcal{L}_{YX}$.
 Hence the expectation value for synaptic in-degree per compartment indexed by $w$ can be defined as
 \begin{equation}
-\langle k_{\text{syn}YXw} \rangle \coloneq \frac{K_{YX}}{N_Y} \frac{ \mathcal{L}_{YXL}(z_w) \mathbf{A}_{Yw}}{\sum_w \mathcal{L}_{YXL}(z_w) \mathbf{A}_{Yw}} ~,
+\langle k_{\text{syn}YXw} \rangle \coloneq \frac{\langle \widetilde{k}_{YX} \rangle K_{YX}}{N_Y} \frac{ \mathcal{L}_{YX}(z_w) \mathbf{A}_{Yw}}{\sum_w \mathcal{L}_{YX}(z_w) \mathbf{A}_{Yw}} ~,
 \end{equation}
-where $z_w$ denotes the center location of each compartment projected on the $z$-axis.
+where $z_w$ denotes the center location of each compartment projected on the $z$-axis, 
+\ehtxt{and $\langle \widetilde{k}_{YX} \rangle$ the mean multapse count per connection}.
+\ehnote{Det kan gi mening aa i tillegg konvolvere $L_{YX}$ med $z-$componenten av somatisk fordeling for aa gi riktig fordeling av inputstroemmer (i alle fall slik jeg har implementert det) i denne utregningen}
 With this quantity one may define the transfer function  of firing rate of population $X$ to each per-compartment synaptic input current as
 \begin{equation}
 H_{\text{syn}YXw}(\tau) = N_X \langle k_{\text{syn}YXw} \rangle \overline{I}_{\text{syn}YX} \left( \widetilde{\Delta}_{YX} \ast f_{YX}\right)(\tau) ~.
@@ -1415,24 +1426,26 @@ Our assumption of point sources in this context in contrast to line sources is m
 \end{enumerate}
 
 
-\section{Intermezzo: Quantitative comparison of predictions using hybrid scheme and rate predictor}
+\section{Intermezzo: Quantitative comparison of predictions using hybrid scheme and kernel-based predictors}
 \label{sec:Schemes:comparison}
 \ghnote{Jeg synes dette er fint og orienterende. Er det en tanke aa ha noe ala dette tidlig i kapittelet, som en slags introduksjon til det vi skal pine oss igjennom av teknikaliteter? Kan det lages et slags diagram over mulighetene. Step 1: Regne ut spike times eller rates (punktnevroner vs ratemodeller). Step 2: Mate dem inn i MC-modeller av ulik kompleksistet. Step 3: Regne ut LFP med VC teori. Step 2-3 kan erstattes med en filter-kernel som mapper Step 1 direkte til Step 3. Her oppstaar soet musikk og god overensstemmelse som vist i noen av disse pene figurene. Under skal vi gaa gjennom hele treskeriet som maa til for aa oppnaa denne soete musikken.... etc.}
 
 Before considering other approximate schemes for predicting extracellular signals of interest, 
 we shall briefly compare predictions using the `hybrid scheme' (\Fref{sec:Schemes:HybridLFPy}),
 averaged hybrid scheme kernels (\Fref{sec:Schemes:KernelLFPy}),
-and the deterministic population firing rate kernel predictor (\Fref{sec:Schemes:populationmodels}) to the ground truth signal predictions of the recurrent MC neuron network model. 
+and the deterministic population firing rate kernel predictor (\Fref{sec:Schemes:populationmodels}) to the ground truth signal predictions of the recurrent MC neuron network model 
+\ehtxt{(\Fref{sec:Schemes:networkLFPy})}. 
 
 The full network model constructed from two populations of active, stylized MC neuron models and resulting activity is summarized in \Fref{fig:LFPy_network}. 
-The main basis of comparison is the `real' ground truth extracellular potential shown in panel E. 
+The main basis of comparison is the `real' ground truth extracellular potential shown in panel E 
+\ehtxt{and current dipole moment in panel F}. 
 Together with the actual network specification (geometry, connectivity, cell properties), 
 the hybrid scheme mainly takes the spiking activity (panel C) as its input. 
 The kernel-based approximations utilize the corresponding firing rates (panel D). 
 
 For the hybrid scheme, 
 we will consider four different cases, that is, using quasi-active neuron models (`biophys:Ih\_lin') or fully passive (`biophys:pas') neuron models, 
-and ignore (`g\_eff:False') or account (`g\_eff:True') for changes to the effective membrane time constants resulting from synaptic conductances.  
+and ignore (`g\_eff:False') or account for changes to the effective membrane time constants (`g\_eff:True') resulting from synaptic conductances.  
 Comparing the extracellular potentials across depth in \Fref{fig:LFPy_predictions},
 it becomes immediately evident that predictions that do not account for changes in effective membrane time constants (columns 2 and 3) overestimate the typical signal amplitudes of the real signal, 
 irrespective of the choice of linear membrane model. 
