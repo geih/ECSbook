@@ -415,7 +415,7 @@ f_{ij} = \frac{1}{4\pi \sigma \Delta s_{ij}} \log \left| \frac{\sqrt{h_{ij}^2+\r
 %
 where $\rho_{ij}$ is the distance perpendicular to line source (compartment) $j$,
 $h_{ij}$ the longitudinal distance from the end of the line source
-and $\ell_{ij} = \delta s_{ij} + h_{ij}$ the longitudinal distance from the start of the line source to some electrode contact located at $\mathbf{R}_i$.
+and $\ell_{ij} = \Delta s_{ij} + h_{ij}$ the longitudinal distance from the start of the line source \ehtxt{with length $\Delta s_{ij}$} to some electrode contact located at $\mathbf{R}_i$.
 
 The approach is applicable also to other types of measurements which are linearly dependent on the transmembrane current sources,
 such as the current dipole moment (\Fref{eq:VC:dipole}).
@@ -621,9 +621,10 @@ which we will assume give approximately zero direct contributions to the signals
 \item Extracellular signal contributions in different spatial locations may be computed and summed up as
 $\sum_Y \sum_{v=1}^{N_Y} \mathbf{F}^{\langle v \rangle} \mathbf{I}_\text{m}^{\langle v \rangle}$ and similar for axial currents.
 $\mathbf{F}^{\langle v \rangle}$ here denotes a linear mapping of transmembrane currents of cell $v$ to a linearly dependent signal.
-\item The sequence of spike times $s_u(t) = \sum_k \delta (t - t_k)$ of each of each neuron $u \in X$ is recorded throughout the entire simulation interval $[0, t_\text{sim} \rangle$.
+\item The sequence of spike times $s_u(t) = \sum_k \delta (t - t_k) \equiv \sum_k \delta_{t_k}$ of each of each neuron $u \in X$ is recorded throughout the entire simulation interval $[0, t_\text{sim} \rangle$.
 We may choose to relax this requirement if a population $X$ represents an external population feeding persistent, uncorrelated events with spectrally `flat' spiking statistics (e.g., fixed-rate Poisson point processes) into the recurrently connected network. 
 \ehnote{gaa inn i detalj hvorfor?}
+\ehtxt{Note that we here (and for the remainder of the chapter) use the compact notation $\delta_{t_k} \coloneq \delta(t - t_k)$ to represent Dirac delta functions.}
 \item We may store the weighted, directed graph representing vertices (connections) between nodes (neurons) for every pair of pre- and postsynaptic populations.
 This requirement may also be relaxed if the total number of connections $K = \sum_X \sum_Y K_{YX}$ is large enough to make storage infeasible or one could recreate the full connectivity graph procedurally (at least statistically).
 Graph weights represent maximum synaptic conductances.
@@ -763,9 +764,9 @@ $T_\text{transient}$ &  \SI{200}{\milli\second} & Startup transient duration  \\
 $C^\circ$ & \SI{6.5}{\celsius} & Simulation temperature \\
 $V_\text{m}(0)$ & \SI{-65}{\milli\volt} & Initial membrane voltage \\
 \hline
-$s_u(t)$ & $\sum_k \delta(t - t_k)~\text{for all}~u \in X $ & Spike times $t_k$ of neurons $u$ \\
+$s_u(t)$ & $\sum_k \delta_{t_k}~\text{for all}~u \in X $ & Spike times $t_k$ of neurons $u$ \\
 \hline
-$\phi$ & $\{V_\text{e}(\mathbf{r}, t), \mathbf{P}(t) \} $ & Predicted extracellular signals \\ 
+$\phi$ & $\{V_\text{e}(\mathbf{r}, t), \mathbf{P}(t) \} $ & Predicted signals \\ 
 $\sigma$ & \SI{0.3}{\siemens\per\metre} & Conductivity \\
 $\mathbf{x}_\text{ch.}=\mathbf{y}_\text{ch.}$ & $[0, \ldots, 0 ]$ & $x,y$-positions of electrode contacts \\
 $\mathbf{z}_\text{ch.}$ & $[1000, 950, \ldots, -150, -200 ]\si{\micro\metre}$  & $z$-positions of electrode contacts \\
@@ -917,7 +918,7 @@ for instance layer 4 inhibitory interneurons,
 should be positioned onto the layer 5 pyramidal cell geometries according to rules derived from available data on such connections,
 while also preserving the typical number of incoming synapses (aka synaptic in-degree).
 
-In the original application of the hybrid scheme \cite**{Hagen2016} to a point-neuron network model representing a generic cortical microcircuit \cite**{Potjans2014} \ehtxt{illustrated in \Fref{fig:LFPy:hybridmodel}},
+In the original application of the hybrid scheme \cite**{Hagen2016} to a point-neuron network model representing a generic cortical microcircuit \cite**{Potjans2014} \ehtxt{illustrated in \Fref{fig:LFPy:hybridmodel}A},
 a number of parameters of the network model were inherited by the  forward-modeling step.
 In order to preserve synaptic currents,
 the same current-based synapse type (see \Fref{sec:Ch-Neuron:current-based-syn}) with an exponentially decaying temporal kernel were used,
@@ -928,7 +929,8 @@ The total numbers of synapses per connection (from each presynaptic to postsynap
 Furthermore, membrane time constants of the reconstructed morphologies which utilized purely passive compartments throughout were set similar to those of the point neurons.
 
 
-\subsubsection{Hybrid scheme -- a cookbook}
+\subsubsection{The hybrid scheme cookbook}
+\label{sec:LFPy:cookbook}
 \ghnote{Tanke: Er det mulig aa heller skrive dette som en kokebokoppskrift - punktlister for Step 1, Step 2, og Step 3 (som vel er bankers) foerst, og saa ta all diskusjon om eventuell validitet til slutt? Slik det staar blir det saapass mange forbehold introdusert underveis at det er lett aa miste traaden. Den foerste store lista (under) er ei liste over noe som egentlig ikke brukes direkte i hybrid-skjemaet. Den brukes kun under en validering som gaar ut paa aa bytte ut Step 1 med en ordentlig MC-simulering? Jeg tenker at kokebokoppskriften boer komme i forgrunnen.}
 \ehnote{MC-nettverk er naa en ny del som kommer foer dette. OK?}
 
@@ -969,15 +971,15 @@ The synaptic currents and associated transmembrane currents on the postsynaptic 
 at this point could destroy every connection of the recurrently connected network \ehtxt{in panel A},
 load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage  \ehtxt{(panel A)},
 reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times
-$\left(s_u(t) \ast \delta(t-\Delta_{vu})\right)$
+$\left(s_u(t) \ast \delta_{\Delta_{vu}}\right)$
 accounting for transmission delay,
 and otherwise keep neuron and synapse parameterization and locations the same.
 The asterisk symbol denotes a convolution operation.
 This would result in exactly the same changes in membrane voltages and consequently the same spatiotemporal distributions of transmembrane currents as in the recurrently connected case. 
-\ehtxt{We also show in \Fref{fig:LFPy_hybrid}B  the alternative approach, that is, let an equivalent recurrent point-neuron network generate spike sequences with similar statistics as the MC-neuron network in panel A.} 
+\ehtxt{We also ilustrate in \Fref{fig:LFPy_hybrid}B  the alternative approach, that is, let an equivalent recurrent point-neuron network generate spike sequences with similar statistics as the MC-neuron network in panel A.} 
 However, what did we gain through these steps?
 
-\begin{enumerate}
+\begin{itemize}
 \item Full disassociation of simulations of neuronal network dynamics and simulations of extracellular signals,
 as illustrated in \Fref{fig:LFPy_hybrid}.
 \item \ehtxt{One could let a computationally cheap point-neuron network simulation generate spike trains, while the costly MC+VC formalism is only used for signal prediction.}
@@ -985,8 +987,8 @@ as illustrated in \Fref{fig:LFPy_hybrid}.
 but one may now utilize a trivial parallelization scheme in order to compute extracellular signals as contributions of each cell is independent of the others.
 One could even do each single-cell simulation serially.
 \item Little was gained in terms of overall computational cost -- the total number of state variables (for active ion channels etc.) remains approximately the same.
-The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials, etc.
-\end{enumerate}
+The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials.
+\end{itemize}
 
 For the purpose of predicting extracellular signals \emph{only}, 
 let us now do some model simplification -- assuming we can preserve the \ehtxt{overall} spatiotemporal distributions of transmembrane currents. 
@@ -1016,7 +1018,7 @@ We would also note that some rescaling of current amplitudes \emph{may} be requi
 Assuming the total membrane conductance depends only on synaptic currents and the passive leakage current,
 the total membrane conductance per postsynaptic compartment $w$ is
 \begin{equation}
-G_{\text{tot}}(t) = \overline{G}_\text{L} + \sum_X \sum_{u \subset X} \overline{G}_{\text{syn}YX} \left( f_{YX} \ast s_u \ast \delta(t-\Delta_{vu}) \right)(t)
+G_{\text{tot}}(t) = \overline{G}_\text{L} + \sum_X \sum_{u \subset X} \overline{G}_{\text{syn}YX} \left( f_{YX} \ast s_u \ast \delta_{\Delta_{vu}} \right)(t)
 \end{equation}
 where $\overline{G}_\text{L} \coloneq \overline{g}_\text{L} A_w$ is the total leak conductance from the specific conductivity $\overline{g}_\text{L}$ and compartment area $A_w$, 
 $s_u(t)$ the sequence of presynaptic spikes and $\Delta_{vu}$ the conduction delay. 
@@ -1026,7 +1028,8 @@ the time-averaged effective conductance is approximately
 \begin{equation}
 G_\text{eff} \coloneq \langle G_\text{tot}(t) \rangle \approx \overline{G}_\text{L} + \sum_X \sum_{u \subset X} \langle \nu_u \rangle \overline{G}_{\text{syn}YX} \int_0^\infty f_{YX}(t) dt ~.
 \end{equation}
-\ehtxt{Then, the original $\overline{G}_\text{L}$ value is replaced by $G_\text{eff}$ on a per-compartment basis.}
+\ehtxt{Then, the original $\overline{G}_\text{L}$ value is replaced by $G_\text{eff}$ on a per-compartment basis.} 
+\ehnote{Det kan tenkes at ogsaa $E_L$ boer modifiseres slik at mean $I_syn$ er ivaretatt, men jeg har ikke testet ut dette siden dette kun vil gi et kjedelig DC bidrag til signalene evt.}
 
 \item \ehtxt{Independent of accounting for an effective membrane time constant, one can approximate} 
 active ion channel currents on the specific form
@@ -1095,6 +1098,7 @@ which ensures that the resting potential of the quasi-active model is similar to
 \ehnote{jeg highlighter naa at quasi-active greier er uavhengig av $G_\text{eff}$ i pkt 3. OK? Implementasjonen (min) av $G_\text{eff}$ inkluderer heller ingen endring i $E_L$ som her (tror ikke det vil ha noe aa si).}
 
 \item Remove active ion channels \ehtxt{omitting the above quasi-active linearization tricks} if their net contributions to the total transmembrane currents can be assumed to be minuscular around typical membrane voltage values. 
+\ehnote{Eksempler, basert si på Hay2011?}
 %\ghnote{Kan ikke dette angis som en parantes i punktet nedenfor. Disse kan vel lineariseres som alle andre?}
 
 \item Further reduction of number of state variables 
@@ -1106,7 +1110,7 @@ Extracellular signals like the LFP, EEG and MEG, however, carry more power at lo
 Reducing compartment counts also enforces replacing synaptic locations by their nearest suitable location.
 
 \item Further reduction of number of state variables describing linearly summing synaptic currents can be achieved by having at most one synapse per connection type (from $X$ onto $Y$) per compartment \ehtxt{indexed by $w$}.
-Its activation times are defined as the concatenation of sequences $\left(s_u \ast \Delta_{vu} \right)(t)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on compartment $w$. 
+Its activation times are defined as the concatenation of sequences $\left(s_u(t) \ast \delta_{\Delta_{vu}}\right)$ for the subset $u \subset X$ being presynaptic to neuron $v \subset Y$ at the original synapse site(s) located on compartment $w$. 
 \ehtxt{Note that this step may only be applied to synapses with identical $\overline{G}_{\text{syn}YX}$ values.}
 
 \item With the exception of spike measurements, most electric and magnetic signals of interest carry most power at comparably low frequencies ($\lesssim$\SI{1}{\kilo\hertz}).
@@ -1122,7 +1126,7 @@ that is, shorter than the typical time constants for membranes, synapses, ion ch
 \ehtxt{While we will summarize results of these simplifying steps quantitatively towards the end of this Chapter, 
 \Fref{fig:LFPy_predictions} showcase MC-VC extracellular potential predictions of the reference MC network described earlier in \Fref{sec:Schemes:networkLFPy} in the left-most column
 compared to different `hybrid-model' predictions applying steps 1-5 above.
-Here, columns 2-5 all incorporate linearized synaptic currents, 
+In \Fref{fig:LFPy_predictions}, columns 2-5 all incorporate linearized synaptic currents, 
 removed HH-style Na$^+$- and K$^+$-type currents, 
 linearized Ih currents (\texttt{biophys:Ih\_lin}) or purely passive (\texttt{biophys:pas}) membranes, 
 and accounting for the effective membrane leak conductance (\texttt{g\_eff:False/True}). 
@@ -1131,15 +1135,31 @@ Signal amplitudes are otherwise overestimated in a non-trivial manner, even if t
 }
 
 
+
+\subsection{Filter (kernel) based prediction methods}
+\ghnote{Kan det her gis en kjapp intro til hva vi skal gjennom. Har ikke full oversikt selv her, men handler dette om at vi kan finne en lineaer mapping fra spike times til $V_e$, og at vi enten (A) kan faa spike times fra punktnevronmodell (Step 1 over), eller, som vi skal vise lenger nede her, fra firing rate models?}
+
+\ehnote{nytt:}
+The hybrid methodology described in the previous Section relies on setting up network equivalent populations of MC neurons, 
+with synaptic currents that are distributed on the MC neurons which are subsequently activated at specific times corresponding to the firing of `spikes' of the recurrent network simulations.
+However, \cite**{Hagen2016} also showed that population averaged spike-LFP impulse responses can be used to accurately reconstruct the LFP signal, 
+by filtering the time-binned spike rates for each presynaptic population by corresponding filter kernels. 
+Here, we will go through the details of this idea as one can substantially reduce computational times by first computing a set of appropriate filters and reuse them with population spiking activity of arbitrary simulation durations.
+The method may also be used with signals \textit{other} than the LFP. 
+\ehnote{:nytt}
+
+
+
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-kernels.pdf}
 \end{center}
-\caption{\textbf{Spike-LFP impulse response functions (``kernels'').}
+\caption{\textbf{Spike-LFP \ehtxt{and spike-current-dipole-moment} impulse response functions (``kernels'').}
 Spatiotemporal functions $\langle H_{YX}(\mathbf{r}, \tau) \rangle$ for each connection between every possible pre- and postsynaptic network population $X$ and $Y$, respectively.
-The kernels are computed as the spike-averaged contribution by postsynaptic neurons to the extracellular potential in electrode contact locations shown in \Fref{fig:LFPy_network}{\bf A}.
+The \ehtxt{top row} kernels are computed as the spike-averaged contribution by postsynaptic neurons to the extracellular potential in electrode contact locations shown in \Fref{fig:LFPy_network}{\bf A}, 
+\ehtxt{while the bottom row kernels are computed as the spike-averaged current-dipole moment contribution in the horizontal $(x, y)$ and vertical $z$-axis.} 
 The kernels are computed either using fully passive (`pas') or with quasi-linearized (`Ih\_lin') cable models.
-\ehnote{placeholder - tenker fjerne current dipole moment.}
 }
 \label{fig:LFPy_kernels}
 \end{figure}
@@ -1205,14 +1225,14 @@ their covariance normalized by ground truth signal variance ($COV(\hat{\phi}, \p
 
 
 
-\section{Filter (kernel) based prediction methods}
-\ghnote{Kan det her gis en kjapp intro til hva vi skal gjennom. Har ikke full oversikt selv her, men handler dette om at vi kan finne en lineaer mapping fra spike times til $V_e$, og at vi enten (A) kan faa spike times fra punktnevronmodell (Step 1 over), eller, som vi skal vise lenger nede her, fra firing rate models?}
-
-\subsection{Spiking point-neuron network models}
+\subsubsection{Spiking point-neuron network models}
 \label{sec:Schemes:KernelLFPy}
 
 The cable equation describing the membrane voltage dynamics across different neuron sections is by definition a linear partial differential equation.
-Points 1--5 above \ghnote{In the last of the enumerated lists above? Hadde vaert fordelaktig aa kunne referere mer direkte til den siste lista.} allows for computing a \emph{linear} relation between spikes of each presynaptic neurons and resulting contribution to the extracellular signal(s),
+Points 1--5 \ehtxt{in \Fref{sec:LFPy:cookbook}}
+\ghnote{In the last of the enumerated lists above? Hadde vaert fordelaktig aa kunne referere mer direkte til den siste lista.}
+\ehnote{ok?}
+allows for computing a \emph{linear} relation between spikes of each presynaptic neurons and resulting contribution to the extracellular signal(s),
 as every component including synaptic conductances and voltage-gated ion channels of this hybridized simulation scheme is linearized and linearly separable with respect to time and space.
 The different effects of transmission delays (or transmission delay distributions),
 evoked synaptic currents,
@@ -1222,7 +1242,7 @@ may then be combined into a spatiotemporal filter kernel $H_{vu}(\mathbf{r},\tau
 where $u$ and $v$ denote pre- and postsynaptic neuron indices, respectively.
 One may compute this filter as
 \begin{equation}
-H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{I}_{\text{syn}YX} \left( \delta(t - \Delta_{vu}) \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~,
+H_{vu}(\mathbf{r},\tau) \coloneq \mathbf{F}^{\langle j \rangle} \left[ \overline{I}_{\text{syn}YX} \left( \delta_{\Delta_{vu}} \ast f_{YX} \ast G_{vu} \right)(\mathbf{r}, \tau) \right]~,
 \end{equation}
 where the Green's like functions $G_{vu}(\mathbf{r}, \tau)$ encompass all dendritic filtering effects on the synaptic input currents into each corresponding distribution of transmembrane currents $\mathbf{I}_\text{m}^{\langle ij \rangle}(\mathbf{r}, \tau)$.
 If each kernel function which is specific to each pair of pre- and postsynaptic neuron can be computed,
@@ -1236,22 +1256,23 @@ However, \citeasnoun**{Hagen2016} showed that a good approximation to the signal
 \begin{equation}
 \langle H_{YX} (\mathbf{r}, \tau) \rangle = \frac{1}{N_X} \sum_{u \in X} \sum_{j \subset Y} H_{vu}(\mathbf{r}, \tau)~.
 \end{equation}
-In order to compute these kernels averaged directly,
+In order to compute these kernel averages directly,
 actual network spiking activity may first be replaced by simultaneous and deterministic events
-$s_u(t) = \delta(t - t_X)$ where $t_X > 0$ is a chosen time for each population $X$,
+$s_u(t) = \delta_{t_X}$ where $t_X > 0$ is a chosen time for each population $X$,
 compute via the disassociated network model the signal contributions of each postsynaptic population $\phi_{YX}(\mathbf{r}, t)$ around $t_X$
 and average the response as
 \begin{equation}
 \langle H_{YX} (\mathbf{r}, \tau) \rangle = \frac{1}{N_X} \phi_{YX} (\mathbf{r}, \tau)
 \end{equation}
 where $\tau$ denote time relative to $t_X$.
-It is worth mentioning that these kernels are causal, that is,
+It is worth mentioning that these kernels must be causal, that is,
 by construction $\langle H_{YX}(\mathbf{r}, \tau) \rangle \coloneq 0$ for $\tau < 0$ as any contribution to the signal $\phi(\mathbf{r}, t)$ is solely postsynaptic which in this scenario can not occur before the presynaptic spike event at $\tau=0$.
-The time lags spanned by the kernels are also symmetric around $\tau=0$ and of finite duration --
+The time lags spanned by the kernels are also symmetric around $\tau=0$ and in practice of finite duration --
 the postsynaptic responses typically decay to approximately zero after a few tens of milliseconds.
 This decay time is related to the time constants relevant to the neuronal dynamics (that is, $\tau_\text{m}, \tau_\text{syn}, \tau_\text{w}, \ldots$).  
 In \Fref{fig:LFPy_kernels} we show a set of such kernels for the stylized two-population MC neuron network illustrated in \Fref{fig:LFPy_network}, 
 computed with either quasi-active or fully passive membrane dynamics. 
+The kernels shown are applicable with LFP signals (top row) and current dipole moments (bottom row).
 
 
 
@@ -1495,6 +1516,7 @@ as summarized in \Fref{fig:g_proxy}B.
 As $R^2$ is defined as the squared correlation coefficient, $R^2 \lesssim 1$ imply a near linear relationship between the proxy and actual signal while $R^2 \gtrsim 0$ imply independence.
 
 As expected, the population firing rate proxy ($g_{\sum \nu_X}(t)$) performed poorly as it can not account for any spatial or temporal filtering effects captured by actual spike-signal kernel functions $H_{YX}(\mathbf{r}, \tau)$. 
+\ehnote{Note that we throughout this Chapter allow the term ``spike'' to denote times of action potentials generated some neuron(s).} 
 $g_{V_\text{m}}(t)$ in contrast do account for conduction delays and
 temporal components of synaptic currents but without intrinsic dendritic filtering, 
 and resulting performance is indeed better as the membrane voltages indeed reflect transmembrane currents but do not equate them. 
