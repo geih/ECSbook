@@ -5,6 +5,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{\ehtxt{Introduction}}
+\label{sec:LFPy:introduction}
+
 The established way of computing extracellular potentials is to use a two-step multicompartment + volume conduction (MC+VC) scheme, which can be summarized by the steps:
 %
 \begin{enumerate}
@@ -21,7 +24,8 @@ Hence, this scheme does not account for the feedback-effect from membrane-curren
 \ehnote{The main problem is that cable theory is 1D while real neurons are 3D (with the exception of structures such as axonal tracts which may be well approximated as 1D). Self-ephaptic effects should be entirely possible to account for using standard methods (NEURON) for cable models with 1D geometry (at least that's what I think!).} \ghnote{Yes, I think Rall 1977 did this for some 1D cable with an oil-coating, but I do not think this is a relevant model, except under very specific and rare experimental conditions. I think this should be discussed somewhere, but maybe not here?}
 \ehnote{Ja, oil-coating svarer til null ytre conduktans. Default i NEURON (m. extracellular mech) er 10E9 saa i praksis uendelig. Kan se om jeg finner en plass for dette (men kanskje ikke i dette kapitlet). Man kan trikse litt her for aa modellere ting som juxtacellular recordings, med aa elektrisk isolere enkeltcompartments }
 
-There are, however, more complete and consistent schemes that account for both the ephaptic effects from $V_\text{e}$  on neurodynamics as well as for effects of ion concentration dynamics on extracelluar potentials. 
+There are, however, more complete and consistent schemes that account for both the ephaptic effects from $V_\text{e}$  on neurodynamics as well as for effects of ion concentration dynamics on extracelluar potentials
+\ehtxt{as introduced in \Fref{sec:VC:EMI}}. 
 In general, these more complete schemes require numerical simulations of both the neural and extracellular dynamics using finite element or finite difference methods, and are computationally expensive.
 
 In most scenarios, ephaptic effects from extracellular potentials on neurodynamics can be assumed to be small, and ion concentrations tend to stay close to baseline. Thus, the simplifying approximations applied in the two-step scheme do not critically affect the accuracy of its predictions. As the MC+VC scheme is far more computationally efficient than any of the more complete schemes, it remains the gold standard for computing extracellular electric signals from large neuronal population models mimicking physiologically realistic scenarios. Also, designated software makes it easy to perform simulations using the two-step-procedure. Therefore, the simulations in the application part of this book (Part 2) will predominantly be based on on the MC+VC-framework.
@@ -31,9 +35,17 @@ This is computationally demanding, even \ehtxt{using a more computationally} eff
 \ehnote{Computational demands are linearly dependent on the total number of compartments, so this a "simple" problem to solve, just scale up your computer capability accordingly. Tuning your model with billions of parameters into a reasonable regime is a bigger problem.} As we showed in \Fref{chap:VC}, VC theory provides linear analytical expressions for $V_\text{e}$  as a direct function of the neural current sources (Step 2), meaning that it is usually the simulations of the neurodynamics (Step 1) which is the bottleneck in the simulation. 
 
 \ehtxt{\sout{We first briefly introduce an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).}}
-\ehnote{noen vill ha sammenlikning av performance foer beskrivelsen. Er ikke overbevist om at det gir mening}\ehtxt{In \Fref{sec:Schemes:comparison} we compare between different methods based on the MC+VC methodology that may be used for signal predictions.}
-Then, we present computational schemes for the standard MC+VC approach, based on MC neural models (Section \ref{sec:Schemes:LFPy}), and follow up with different strategies that may be applied to reduce the computational cost when computing the neurodynamics using spiking point-neuron models or population-rate models (Sections \ref{sec:Schemes:HybridLFPy}, \ref{sec:Schemes:KernelLFPy}, \ref{sec:Schemes:proxies}). 
-\ehtxt{Towards the end of this Chapter, we briefly introduce an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).}
+\ehnote{noen vill ha sammenlikning av performance foer beskrivelsen. Er ikke overbevist om at det gir mening -- vil heller ha et sammendrag av "content" her og fortelle uinterresserte lesere at de kan hoppe til "Intermessoet" som kommer seinere.}
+\ehtxt{Throughout this chapter, we will describe in detail how constituents of the MC+VC scheme can be implemented and used in different applications for the purpose of predicting extracellular signals in neural simutions.}
+\ehtxt{First}, we present computational schemes for the standard MC+VC approach, based on \ehtxt{single MC neuron and recurrent network models built from multiple MC neurons} (\Fref{sec:Schemes:LFPy} \ehtxt{and \ref{sec:Schemes:networkLFPy}}), 
+and follow up with different strategies that may be applied to reduce the computational cost when computing the neurodynamics using spiking point-neuron models or population-rate models (Sections \ref{sec:Schemes:HybridLFPy}, \ref{sec:Schemes:KernelLFPy}). 
+\ehtxt{In \Fref{sec:Schemes:comparison} we compare quantitatively between different methods based on the MC+VC methodology that may be used for signal predictions. 
+Readers less interested in the technical details (of which there are many!) throughout \Fref{sec:Schemes:LFPy}--\ref{sec:Schemes:KernelLFPy} may wish to skip to this short intermezzo part directly.
+Finally in \Fref{sec:Schemes:proxies} we showcase even simpler and less accurate signal approximations applicable with point-neuron networks that ignore the effects of dendritic filtering altogether.}
+
+\ehnote{Utgaar:} \ehtxt{Towards the end of this Chapter, we briefly introduce an alternative, and self-consistent framework (Section \ref{sec:VC:EMI}).}
+
+
 
 \ehnote{For meg gir det mer mening og organisere dette i reduksjonistisk rekkefoelge: (1) self-consistent; (2) MC+VC; (3) point-neuron spiking + MC + VC; (4) firing-rate + MC + VC; (5) Proxies.
 Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4 endrer i prinsippet ingenting med MC+VC formalismen - man disassosierer bare simulering av nettverksaktivitet (korrelasjoner) fra (MC+VC)-formalismen.}
@@ -45,7 +57,7 @@ Men uansett, burde ikke dette vaere del av "Applications"-kapitlet? Punkt 3 og 4
 \label{sec:VC:EMI}
 \index{Ephaptic effects}
 
-\ehnote{har latt teksten i dette delkapitlet vaere. Dette flyttes tilbake igjen til slutten.}
+\ehnote{har latt teksten i dette delkapitlet vaere. Dette flyttes tilbake igjen til slutten eller helt ut av kapitlet.}
 
 Ephaptic effects refers to the phenomenon where the extracellular potential affects the membrane potential dynamics of neurons. The possible importance of ephaptic effects has been the topic of many studies, addressing in various ways how extracellular electric fields may affect neuronal firing or signal propagation in axons (see e.g., \cite**{clark1970,Rall1977,Holt1999,Bokil2001,anastassiou2010,anastassiou2015,Goldwyn2016,capllonch2020,ruffini2020}).
 
@@ -808,7 +820,8 @@ assuming that these models capture the spiking statistics of this MC network mod
 \end{center}
 \caption{\textbf{Predictions of signals from simplified neuron network model descriptions}.
 ({\bf A}) blabla
-\ehnote{Geir's motiverende utkast for forenkla prediksjoner}}
+\ehnote{Geir's motiverende utkast for forenkla prediksjoner. Usikker på hvordan jeg skal sy denne inn fordi det blir litt overlapp med }\ehtxt{\Fref{fig:LFPy_hybrid}}.
+}
 \label{fig:LFPy_circuits}
 \end{figure}
 
@@ -1121,10 +1134,10 @@ that is, shorter than the typical time constants for membranes, synapses, ion ch
 
 \end{enumerate}
 
-\ehnote{Sammenlikning av prediksjoner med `hybrid scheme' vs. ground truth kommer sammen med kernel-prediksjoner} 
+\ehnote{Kvantitative sammenlikning av prediksjoner med `hybrid scheme' vs. ground truth kommer sammen med kernel-prediksjoner} 
 
 \ehtxt{While we will summarize results of these simplifying steps quantitatively towards the end of this Chapter, 
-\Fref{fig:LFPy_predictions} showcase MC-VC extracellular potential predictions of the reference MC network described earlier in \Fref{sec:Schemes:networkLFPy} in the left-most column
+\Fref{fig:LFPy_predictions} showcase MC+VC extracellular potential predictions of the reference MC network described earlier in \Fref{sec:Schemes:networkLFPy} in the left-most column
 compared to different `hybrid-model' predictions applying steps 1-5 above.
 In \Fref{fig:LFPy_predictions}, columns 2-5 all incorporate linearized synaptic currents, 
 removed HH-style Na$^+$- and K$^+$-type currents, 
@@ -1190,43 +1203,18 @@ with layout of extracellular laminar probe.
 \end{center}
 \caption{\textbf{Spike-LFP impulse response function predictions.}
 Similar to \Fref{fig:LFPy_kernels},
-but here computed using a computationally fast method accounting for the expectation values in terms of cell and synapse placement.
+but here computed using a computationally fast \ehtxt{and deterministic} method accounting for the expectation values in terms of cell and synapse placement.
 \ehnote{placeholder}
 }
 \label{fig:LFPy_kernel_predictions}
 \end{figure}
 
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
-\end{center}
-\caption{\textbf{Ground truth signals vs. approximations.}
-Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the hybrid scheme (columns 2-5)
-with either passive or quasi-linear MC neurons,
-ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively),
-as well as kernel-based approximations obtained by convolving presynaptic population firing rates ($\nu_X(t)$) with respective kernels ($H_{YX}(\mathbf{r}, t)$) and summing the contributions (columns 6-9).
-}
-\label{fig:LFPy_predictions}
-\end{figure}
-
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-correlations.pdf}
-\end{center}
-\caption{\textbf{Accuracy of signal predictions vs. ground truth.}
-For each approximation shown in \Fref{fig:LFPy_predictions},
-their accuracy is evaluated in terms of the Pearson correlation coefficient between approximation and ground truth ($CC(\hat{\phi}, \phi)$, top row) and
-their covariance normalized by ground truth signal variance ($COV(\hat{\phi}, \phi)/VAR(\phi)$, bottom row).
-}
-\label{fig:LFPy_correlations}
-\end{figure}
-
-
 
 \subsubsection{Spiking point-neuron network models}
 \label{sec:Schemes:KernelLFPy}
+
+\ehnote{noen maate aa kryssreferere subsubsections naa naar disse ikke er nummererte?}
 
 The cable equation describing the membrane voltage dynamics across different neuron sections is by definition a linear partial differential equation.
 Points 1--5 \ehtxt{in \Fref{sec:LFPy:cookbook}}
@@ -1430,6 +1418,35 @@ Our assumption of point sources in this context in contrast to line sources is m
 \label{sec:Schemes:comparison}
 \ghnote{Jeg synes dette er fint og orienterende. Er det en tanke aa ha noe ala dette tidlig i kapittelet, som en slags introduksjon til det vi skal pine oss igjennom av teknikaliteter? Kan det lages et slags diagram over mulighetene. Step 1: Regne ut spike times eller rates (punktnevroner vs ratemodeller). Step 2: Mate dem inn i MC-modeller av ulik kompleksistet. Step 3: Regne ut LFP med VC teori. Step 2-3 kan erstattes med en filter-kernel som mapper Step 1 direkte til Step 3. Her oppstaar soet musikk og god overensstemmelse som vist i noen av disse pene figurene. Under skal vi gaa gjennom hele treskeriet som maa til for aa oppnaa denne soete musikken.... etc.}
 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
+\end{center}
+\caption{\textbf{Ground truth signals vs. approximations.}
+Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the hybrid scheme (columns 2-5)
+with either passive or quasi-linear MC neurons,
+ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively),
+as well as kernel-based approximations obtained by convolving presynaptic population firing rates ($\nu_X(t)$) with respective kernels ($H_{YX}(\mathbf{r}, t)$) and summing the contributions (columns 6-9).
+\ehnote{kommer til aa splitte i to figurer for hybrid of kernerprediksjoner}
+}
+\label{fig:LFPy_predictions}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-correlations.pdf}
+\end{center}
+\caption{\textbf{Accuracy of signal predictions vs. ground truth.}
+For each approximation shown in \Fref{fig:LFPy_predictions},
+their accuracy is evaluated in terms of the Pearson correlation coefficient between approximation and ground truth ($CC(\hat{\phi}, \phi)$, top row) and
+their covariance normalized by ground truth signal variance ($COV(\hat{\phi}, \phi)/VAR(\phi)$, bottom row).
+}
+\label{fig:LFPy_correlations}
+\end{figure}
+
+
 Before considering other approximate schemes for predicting extracellular signals of interest, 
 we shall briefly compare predictions using the `hybrid scheme' (\Fref{sec:Schemes:HybridLFPy}),
 averaged hybrid scheme kernels (\Fref{sec:Schemes:KernelLFPy}),
@@ -1444,14 +1461,15 @@ the hybrid scheme mainly takes the spiking activity (panel C) as its input.
 The kernel-based approximations utilize the corresponding firing rates (panel D). 
 
 For the hybrid scheme, 
-we will consider four different cases, that is, using quasi-active neuron models (`biophys:Ih\_lin') or fully passive (`biophys:pas') neuron models, 
+we consider four different cases, that is, using quasi-active neuron models (`biophys:Ih\_lin') or fully passive (`biophys:pas') neuron models, 
 and ignore (`g\_eff:False') or account for changes to the effective membrane time constants (`g\_eff:True') resulting from synaptic conductances.  
 Comparing the extracellular potentials across depth in \Fref{fig:LFPy_predictions},
 it becomes immediately evident that predictions that do not account for changes in effective membrane time constants (columns 2 and 3) overestimate the typical signal amplitudes of the real signal, 
 irrespective of the choice of linear membrane model. 
 By visual inspection, the converse predictions utilizing an effectively reduced membrane time constant (columns 4 and 5) preserve both the signal amplitudes across channels and temporal dynamics of the ground-truth signal. 
 This excellent agreement is quite surprising as the hybrid-scheme predictions do not account for any signal contributions by action potentials. 
-Note however, that this observation can be explained by the fairly low on average per-neuron firing rates (cf. \Fref{fig:LFPy_network}C) which means that synaptic contributions govern the extracellular potentials.
+Note however, that this observation can be explained by the fairly low on average per-neuron firing rates (cf. \Fref{fig:LFPy_network}C) which means that synaptic contributions govern the extracellular potentials. 
+\ehtxt{A decrease in agreement can be expected for simulations with increased spike rates, increased synchrony between neuronal spike trains or increased synaptic conductances, but we will not show this here.}
 
 For signal predictions set up either using spatiotemporal filter kernels for each recurrent connection from the hybrid scheme ($\langle H_{YX}(\mathbf{r}, \tau) \rangle$ in \Fref{fig:LFPy_kernels}) or deterministic rate-model version  ($\hat{H}_{YX}(\mathbf{r}, \tau)$ in \Fref{fig:LFPy_kernel_predictor}), 
 the final signal approximations shown in \Fref{fig:LFPy_predictions} columns 6-9 is virtually identical to the hybrid scheme predictions. 
@@ -1459,7 +1477,8 @@ the final signal approximations shown in \Fref{fig:LFPy_predictions} columns 6-9
 In all respects, the hybrid scheme with effective membrane time constants as well as the different kernel predictions demonstrate excellent agreement with the ground truth, except for channel 18 which is subject to the lowest overall signal amplitude (due to local cancellation effects). 
 Otherwise $CC(\hat{\phi}, \phi) \lesssim 1$ which imply near perfect temporal agreements, 
 while the normalized covariance measure $COV(\hat{\phi}, \phi)/VAR(\phi) \gtrsim 1$ imply that the steps that were incorporated did not introduce some arbitrary scaling factor in the approximated signals. 
-The choice of cable model, that is, quasi-active linear or passive linear, has minor impact on the different predictions.   
+The choice of cable model, that is, quasi-active linear or passive linear, has minor impact on the different predictions. 
+\ehtxt{Thus for the sake of simplification, a passive linear cable model with current-based synapse models may very well be used for the purpose of computing extracellular signals from point- and rate-based models.}
 
 
 \section{\blue{EH: Heuristic signal approximations.}}
@@ -1479,7 +1498,7 @@ As we shall demonstrate here, certain proxies that are easily implemented can st
 Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016} outlined throughout \Fref{sec:Schemes:HybridLFPy},   
 \cite**{Mazzoni2015} compared different LFP proxies that could be extracted in two-population spiking point-neuron network models. 
 These proxies, where some have been used to mimic the LFP, EEG or similar in past studies, 
-were by \cite**{Mazzoni2015} defined as the convolution between linearly separable components as
+were by \cite**{Mazzoni2015} defined as the convolution \ehnote{kunne vaert produkt?} between linearly separable components as
 \begin{equation}
 \phi_\text{proxy}(\mathbf{r}, t) = f_\text{proxy}(\mathbf{r}) \ast g_\text{proxy}(t)~, 
 \end{equation}
@@ -1489,21 +1508,21 @@ By construction, the temporal component has zero mean and variance of unity.
 As a ground truth extracellular potential signal $\phi(\mathbf{r}, t)$ was computed, 
 accuracies of different choices of $g_\text{proxy}(t)$ could be evaluated while fitting the corresponding spatial functions $f_\text{proxy}(\mathbf{r})$. 
 The ground truth LFP signal was predicted using the standard MC formalism in combination with the line-source VC model.
-Synaptic activation times were determined by the spiking activity of a two-population point-neuron network model  with current-based \ehnote{dobbeltsjekk} synapses taken from a previous study \cite**{Cavallari2014}. 
+Synaptic activation times were determined by the spiking activity of a two-population point-neuron network model taken from a previous study \cite**{Cavallari2014}. 
 The LFP signal was also computed at different depths and lateral offsets, 
 mimicking an experimental recording using a laminar probe inserted down through a cortical column. 
 Hence, performance of the different proxies could be evaluated across different depths. 
 
 So which choices for $g_\text{proxy}(t)$ can be considered? 
 In spiking point-neuron networks one can with relative ease record events and compute 
-the population-averaged spike rates $\nu_X(t)$ for each population $X$, 
-the population-averaged membrane voltages of the point neurons
-and the summed synaptic currents resolved into excitatory and inhibitory contributions onto different subpopulations.
+the \ehtxt{per-neuron and} population-averaged spike rates $\nu_X(t)$ for each population $X$, 
+the \ehtxt{per-neuron and} population-averaged membrane voltages of the point neurons
+and the summed synaptic currents resolved into excitatory and inhibitory contributions onto different \ehtxt{neurons and} subpopulations.
 Then, linear combinations of the synaptic currents can also be included in the comparison. 
 %the absolute of the summed synaptic currents amounting to the difference between them (as their sign is opposite), 
 %and finally a weighted sum of the mean-subtracted summed synaptic currents with added delays along the time axis.
 Using the nomenclature established throughout this Chapter, 
-these temporal components $g_\text{proxy}(t)$ of the proxy LFPs can be defined as \cite**{Mazzoni2015}:
+these temporal components $g_\text{proxy}(t)$ of the proxy LFPs can for \ehtxt{current-based synapses} be defined as \cite**{Mazzoni2015}:
 %
 \begin{eqnarray}
 z_\text{score}\left(g(t)\right) &=& \frac{g(t)-\mu_g}{\sigma_g} \\
@@ -1522,15 +1541,15 @@ g_\text{WS}(t) &=& z_\text{score} \bigg(\big| g_{\sum I_E}(t) + \alpha \big(g_{\
 Here, the function $z_\text{score}(g(t))$ ensures that each $g_\text{proxy}(t)$ has zero mean and unit variance. 
 For the last temporal component $g_\text{WS}(t)$ the parameter $\alpha$ is scalar 
 while the term $\delta_{\tau_I} \coloneq \delta(t-\tau_I)$ denotes a temporal delay of duration $\tau_I$.
+\ehtxt{Here, we only considered the case with current-based synapses while \cite**{Mazzoni2015} also compared predictions using non-linear conductance-based synapses which we for the sake of brevity ignore here.}
 
 Snapshots of the different temporal kernels $g_\text{proxy}(t)$ derived from our original MC network are compared in \Fref{fig:g_proxy}A.  
 As such, the task at hand is identifying which proxy maximises the fraction of variance explained ($R^2$) between the  ground-truth LFP signal and the respective proxy predictions in different locations, 
 as summarized in \Fref{fig:g_proxy}B. 
-As $R^2$ is defined as the squared correlation coefficient, $R^2 \lesssim 1$ imply a near linear relationship between the proxy and actual signal while $R^2 \gtrsim 0$ imply independence.
+As $R^2$ is defined as the squared correlation coefficient, $R^2 \lesssim 1$ imply a near linear relationship between the proxy and actual signal while $R^2 \gtrsim 0$ imply linear independence.
 
-As expected, the population firing rate proxy ($g_{\sum \nu_X}(t)$) performed poorly as it can not account for any spatial or temporal filtering effects captured by actual spike-signal kernel functions $H_{YX}(\mathbf{r}, \tau)$. 
-\ehnote{Note that we throughout this Chapter allow the term ``spike'' to denote times of action potentials generated some neuron(s).} 
-$g_{V_\text{m}}(t)$ in contrast do account for conduction delays and
+As expected, the population firing rate proxy ($g_{\sum \nu_X}(t)$) perform poorly as it can not account for any spatial or temporal filtering effects captured by actual spike-signal kernel functions $H_{YX}(\mathbf{r}, \tau)$. 
+\ehtxt{The membrane potential proxy ($g_{V_\text{m}}(t)$)} in contrast do account for conduction delays and
 temporal components of synaptic currents but without intrinsic dendritic filtering, 
 and resulting performance is indeed better as the membrane voltages indeed reflect transmembrane currents but do not equate them. 
 That leaves the various linear combinations of excitatory and inhibitory synaptic input currents, 
@@ -1548,10 +1567,12 @@ The time-shifted $g_{\sum \nu_X}(t)$ and $g_{\sum I_E}(t)$ components now result
 while the remaining components which already performed decently in terms of $R^2$ see minor improved performance, 
 but remain lower compared to predictions using the full hybrid scheme or the kernel based methods summarized in \Fref{sec:Schemes:comparison}. 
 Independent of time shift, none of the proxies perform well at the depth of channel 18 which has the lowest overall signal variance due to local cancellation effects.
-Dependent on on location, 
+Dependent on location, 
 either the inhibitory synapse current or absolute sum of synaptic currents maximize proxy performance 
 -- thus for the sake of simplicity inhibitory synapse currents onto excitatory neurons could well provide a valid indication of the temporal properties of extracellular measurements of activity from simplified neuronal network models. 
-However, they can not account for spatiotemporal effects of neuronal morphology and volume conductor model on the signals of interest. 
+However, \ehtxt{to reiterate,} 
+they can not account for spatiotemporal effects of neuronal morphology and volume conductor model on the signals of interest,
+\ehtxt{which for some applications may be important.}
 
 
 \begin{figure}[!ht]
@@ -1563,7 +1584,8 @@ However, they can not account for spatiotemporal effects of neuronal morphology 
 {\bf B} Ratio of variance explained $(R^2)$ by the different temporal components across channels without time shifts. 
 {\bf C} Same as panel B but for temporally shifted components with temporal delay values $\tau$ maximizing $R^2$ in each individual channel. 
 The legend shows the corresponding mean and standard deviation of the delays.
-\ehnote{Veit ikke om det er saa fryktelig viktig aa vise kurver for $f_{proxy}$ her.} 
+\ehnote{Veit ikke om det er saa fryktelig viktig aa vise kurver for $f_{proxy}$ her.
+Legg til labels! Current dipole moments?} 
 }
 \label{fig:g_proxy}
 \end{figure}
