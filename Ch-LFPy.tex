@@ -230,14 +230,15 @@ This machinery may appear as a bit of a hurdle to implement, but thankfully MC n
 we will typically assume that the transmembrane current density is equal along each constant-diameter cylindrical compartment (which violates our above assumption of constant axial current!). 
 \ghnote{Uklart m/ We will typically assume... Menes: Such software typically assumes?}
 \ehnote{For NEURON kan man vel anta det, situasjonen er annerledes m. Arbor som bruker et FVM type skjema. Der er vel antagelsen at differanse i aksial stroemflux mellom elementer er lik total transmembran stroem. 
-Kan kanskje ta med noe om Arbor spesielt? I Arbor er det vel aksial stroem paa tvers av segment som er gjeldende, og man da maa kunne anta at endring i aksial stroem varierer lineart langs segmentet hvis det har konstant diameter.}
+Kan kanskje ta med noe om Arbor spesielt? I Arbor er det vel aksial stroem paa tvers av segment som er gjeldende, og man da maa kunne anta at endring i aksial stroem varierer lineart langs segmentet hvis det har konstant diameter. 
+I tillegg ser jeg nevnt at membranpotensial i Arbor er "mean voltage in control volume (CV)" og ikke noedvendigvis potensial i midtpunkt.}
 
 Dependent on the implementation in the neural simulation software, a more direct measure of the transmembrane currents can be obtained by computing the sum over all capacitive currents, specific and non-specific ion-channel currents, synapse currents etc. (cf. \Fref{chap:Neuron}).
 %
 \snnote{Hva med aa bare fjerne de neste to setningene?}
 \ehnote{Kanskje.}
 The current situation is, however, a bit more dire with regards to predicting axial current per compartment (or half-compartment \cite**{Hagen2018}). 
-For now, we will emphasize that typical measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
+For now, we will assume that typical measures of extracellular electric or even magnetic signals can be derived from the transmembrane currents alone.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1136,7 +1137,7 @@ that is, shorter than the typical time constants for membranes, synapses, ion ch
 
 \ehnote{Kvantitative sammenlikning av prediksjoner med `hybrid scheme' vs. ground truth kommer sammen med kernel-prediksjoner} 
 
-\ehtxt{While we will summarize results of these simplifying steps quantitatively towards the end of this Chapter, 
+\ehtxt{While we will summarize prediction results of these simplifying steps quantitatively in \Fref{sec:Schemes:comparison}, 
 \Fref{fig:LFPy_predictions} showcase MC+VC extracellular potential predictions of the reference MC network described earlier in \Fref{sec:Schemes:networkLFPy} in the left-most column
 compared to different `hybrid-model' predictions applying steps 1-5 above.
 In \Fref{fig:LFPy_predictions}, columns 2-5 all incorporate linearized synaptic currents, 
@@ -1146,6 +1147,21 @@ and accounting for the effective membrane leak conductance (\texttt{g\_eff:False
 Accounting for the effective membrane leak conductance allows for predictions that accurately capture the ground-truth signal in terms of spatiotemporal properties and also signal amplitudes across depth (columns 4-5). 
 Signal amplitudes are otherwise overestimated in a non-trivial manner, even if the spatiotemporal pattern of the signals are well preserved (columns 2-3). 
 }
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
+\end{center}
+\caption{\textbf{Ground truth signals vs. hybrid scheme approximations.}
+Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the hybrid scheme
+with either passive or quasi-linear MC neurons \ehtxt{(biophys:pas vs. biophys:Ih\_lin)},
+ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively).
+\ehnote{legg til nedre rad m. \textbf{P}}
+}
+\label{fig:LFPy_predictions}
+\end{figure}
+
 
 
 
@@ -1159,7 +1175,8 @@ with synaptic currents that are distributed on the MC neurons which are subseque
 However, \cite**{Hagen2016} also showed that population averaged spike-LFP impulse responses can be used to accurately reconstruct the LFP signal, 
 by filtering the time-binned spike rates for each presynaptic population by corresponding filter kernels. 
 Here, we will go through the details of this idea as one can substantially reduce computational times by first computing a set of appropriate filters and reuse them with population spiking activity of arbitrary simulation durations.
-The method may also be used with signals \textit{other} than the LFP. 
+The method may also be used with signals \textit{other} than the LFP, 
+such as the current dipole moment (and measures that can be computed from it). 
 }
 
 
@@ -1417,31 +1434,20 @@ Our assumption of point sources in this context in contrast to line sources is m
 \section{Intermezzo: Quantitative comparison of predictions using hybrid scheme and kernel-based predictors}
 \label{sec:Schemes:comparison}
 \ghnote{Jeg synes dette er fint og orienterende. Er det en tanke aa ha noe ala dette tidlig i kapittelet, som en slags introduksjon til det vi skal pine oss igjennom av teknikaliteter? Kan det lages et slags diagram over mulighetene. Step 1: Regne ut spike times eller rates (punktnevroner vs ratemodeller). Step 2: Mate dem inn i MC-modeller av ulik kompleksistet. Step 3: Regne ut LFP med VC teori. Step 2-3 kan erstattes med en filter-kernel som mapper Step 1 direkte til Step 3. Her oppstaar soet musikk og god overensstemmelse som vist i noen av disse pene figurene. Under skal vi gaa gjennom hele treskeriet som maa til for aa oppnaa denne soete musikken.... etc.}
+\ehnote{Jeg har naa saann innledningsvis sagt at leseren kan hoppe hit hvis de ikke er interresserte i teknikaliteter. OK?}
 
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
-\end{center}
-\caption{\textbf{Ground truth signals vs. hybrid scheme approximations.}
-Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the hybrid scheme
-with either passive or quasi-linear MC neurons \ehtxt{(biophys:pas vs. biophys:Ih\_lin)},
-ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively).
-\ehnote{legg til nedre rad m. \textbf{P}}
-}
-\label{fig:LFPy_predictions}
-\end{figure}
 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_kernel_predictions.pdf}
 \end{center}
-\caption{\textbf{Ground truth signals vs. kernel-based approximations.}
+\caption{\ehtxt{\textbf{Ground truth signals vs. kernel-based approximations.}
 Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the different kernel-based approximations,
 with either passive or quasi-linear MC neurons, 
 accounting for the effective membrane conductance (g\_eff=True).
-The kernel-based approximations are obtained by convolving presynaptic population firing rates ($\nu_X(t)$) with respective kernels ($H_{YX}(\mathbf{r}, t)$) and summing the contributions.
+The kernel-based approximations are obtained by convolving presynaptic population firing rates ($\nu_X(t)$) with respective kernels ($H_{YX}(\mathbf{r}, t)$) and summing the contributions.}
 }
 \label{fig:LFPy_kernel_predictions}
 \end{figure}
@@ -1470,7 +1476,8 @@ and the deterministic population firing rate kernel predictor (\Fref{sec:Schemes
 The full network model constructed from two populations of active, stylized MC neuron models and resulting activity is summarized in \Fref{fig:LFPy_network}. 
 The main basis of comparison is the `real' ground truth extracellular potential shown in panel E 
 \ehtxt{and current dipole moment in panel F}. 
-Together with the actual network specification (geometry, connectivity, cell properties), 
+\ehnote{paneler kommer} 
+Together with the actual network specification (geometry, connectivity, cell properties \ehtxt{summarized in \Fref{tab:Ch-LFPy:MC-network-I}--\ref{tab:Ch-LFPy:MC-network-I}}), 
 the hybrid scheme mainly takes the spiking activity (panel C) as its input. 
 The kernel-based approximations utilize the corresponding firing rates (panel D). 
 
@@ -1486,7 +1493,8 @@ Note however, that this observation can be explained by the fairly low on averag
 \ehtxt{A decrease in agreement can be expected for simulations with increased spike rates, increased synchrony between neuronal spike trains or increased synaptic conductances, but we will not show this here.}
 
 For signal predictions set up either using spatiotemporal filter kernels for each recurrent connection from the hybrid scheme ($\langle H_{YX}(\mathbf{r}, \tau) \rangle$ in \Fref{fig:LFPy_kernels}) or deterministic rate-model version  ($\hat{H}_{YX}(\mathbf{r}, \tau)$ in \Fref{fig:LFPy_kernel_predictor}), 
-the final signal approximations shown in \Fref{fig:LFPy_predictions} columns 6-9 is virtually identical to the hybrid scheme predictions. 
+the final signal approximations shown in 
+\ehtxt{\Fref{fig:LFPy_kernel_predictions} columns 2-5 is very similar to the ground truth signal (column 1)}. 
 \Fref{fig:LFPy_correlations} compares across all channels both the Pearson correlation coefficients $CC(\hat{\phi}, \phi)$ between each approximation $\hat{\phi}$ and ground truth signal $\phi$ as well as covariance normalized by variance $COV(\hat{\phi}, \phi)/VAR(\phi)$. 
 In all respects, the hybrid scheme with effective membrane time constants as well as the different kernel predictions demonstrate excellent agreement with the ground truth, except for channel 18 which is subject to the lowest overall signal amplitude (due to local cancellation effects). 
 Otherwise $CC(\hat{\phi}, \phi) \lesssim 1$ which imply near perfect temporal agreements, 
