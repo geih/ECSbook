@@ -1150,6 +1150,7 @@ Signal amplitudes are otherwise overestimated in a non-trivial manner, even if t
 
 
 \subsection{Filter (kernel) based prediction methods}
+\label{sec:Schemes:ratekernels}
 \ghnote{Kan det her gis en kjapp intro til hva vi skal gjennom. Har ikke full oversikt selv her, men handler dette om at vi kan finne en lineaer mapping fra spike times til $V_e$, og at vi enten (A) kan faa spike times fra punktnevronmodell (Step 1 over), eller, som vi skal vise lenger nede her, fra firing rate models?}
 
 \ehnote{nytt:}
@@ -1579,13 +1580,13 @@ they can not account for spatiotemporal effects of neuronal morphology and volum
 \begin{center}
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-g_proxy.pdf}
 \end{center}
-\caption{\textbf{Comparison of temporal proxy components $g_\text{proxy}(t)$.} 
+\caption{\textbf{Comparison of temporal proxy components} $g_\text{proxy}(t)$\textbf{.} 
 {\bf A} Snapshots of normalized temporal components of different candidate proxy signals for mimicking extracellular signals from recurrent network model. 
 {\bf B} Ratio of variance explained $(R^2)$ by the different temporal components across channels without time shifts. 
 {\bf C} Same as panel B but for temporally shifted components with temporal delay values $\tau$ maximizing $R^2$ in each individual channel. 
 The legend shows the corresponding mean and standard deviation of the delays.
 \ehnote{Veit ikke om det er saa fryktelig viktig aa vise kurver for $f_{proxy}$ her.
-Legg til labels! Current dipole moments?} 
+Current dipole moments?} 
 }
 \label{fig:g_proxy}
 \end{figure}
