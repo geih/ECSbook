@@ -1152,15 +1152,15 @@ Signal amplitudes are otherwise overestimated in a non-trivial manner, even if t
 \subsection{Filter (kernel) based prediction methods}
 \label{sec:Schemes:ratekernels}
 \ghnote{Kan det her gis en kjapp intro til hva vi skal gjennom. Har ikke full oversikt selv her, men handler dette om at vi kan finne en lineaer mapping fra spike times til $V_e$, og at vi enten (A) kan faa spike times fra punktnevronmodell (Step 1 over), eller, som vi skal vise lenger nede her, fra firing rate models?}
-
 \ehnote{nytt:}
+\ehtxt{
 The hybrid methodology described in the previous Section relies on setting up network equivalent populations of MC neurons, 
 with synaptic currents that are distributed on the MC neurons which are subsequently activated at specific times corresponding to the firing of `spikes' of the recurrent network simulations.
 However, \cite**{Hagen2016} also showed that population averaged spike-LFP impulse responses can be used to accurately reconstruct the LFP signal, 
 by filtering the time-binned spike rates for each presynaptic population by corresponding filter kernels. 
 Here, we will go through the details of this idea as one can substantially reduce computational times by first computing a set of appropriate filters and reuse them with population spiking activity of arbitrary simulation durations.
 The method may also be used with signals \textit{other} than the LFP. 
-\ehnote{:nytt}
+}
 
 
 
@@ -1190,7 +1190,6 @@ with layout of extracellular laminar probe.
 {\bf C} Per-compartment synapse densities for each connection between the two populations.
 {\bf D} Normalized distributions of transmission delays $\widetilde{\Delta}_{YX} (\tau)$ for each connection relative to presynaptic activation time.
 {\bf E} Synaptic currents $I_{\text{syn}YX}(\tau)$ relative to synaptic onset for each connection.
-\ehnote{placeholder -- maa gaa over XY notasjon med lupe}
 }
 \label{fig:LFPy_kernel_predictor}
 \end{figure}
@@ -1424,15 +1423,29 @@ Our assumption of point sources in this context in contrast to line sources is m
 \begin{center}
 \includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_predictions.pdf}
 \end{center}
-\caption{\textbf{Ground truth signals vs. approximations.}
-Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the hybrid scheme (columns 2-5)
-with either passive or quasi-linear MC neurons,
-ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively),
-as well as kernel-based approximations obtained by convolving presynaptic population firing rates ($\nu_X(t)$) with respective kernels ($H_{YX}(\mathbf{r}, t)$) and summing the contributions (columns 6-9).
-\ehnote{kommer til aa splitte i to figurer for hybrid of kernerprediksjoner}
+\caption{\textbf{Ground truth signals vs. hybrid scheme approximations.}
+Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the hybrid scheme
+with either passive or quasi-linear MC neurons \ehtxt{(biophys:pas vs. biophys:Ih\_lin)},
+ignoring or accounting for the effective membrane conductance (g\_eff=False/True respectively).
+\ehnote{legg til nedre rad m. \textbf{P}}
 }
 \label{fig:LFPy_predictions}
 \end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/Ch-LFPy/Ch-LFPy-signal_vs_kernel_predictions.pdf}
+\end{center}
+\caption{\textbf{Ground truth signals vs. kernel-based approximations.}
+Here, extracellular potentials predicted from a MC neuron network model (left) is compared to predictions made using the different kernel-based approximations,
+with either passive or quasi-linear MC neurons, 
+accounting for the effective membrane conductance (g\_eff=True).
+The kernel-based approximations are obtained by convolving presynaptic population firing rates ($\nu_X(t)$) with respective kernels ($H_{YX}(\mathbf{r}, t)$) and summing the contributions.
+}
+\label{fig:LFPy_kernel_predictions}
+\end{figure}
+
 
 
 \begin{figure}[!ht]
