@@ -279,14 +279,20 @@ since saline is known to be a purely resistive medium \tvntxt{(it has no bound c
 A frequency dependent $\sigma_\text{t}$ would however not in itself be surprising.
 Capacitive neural membranes have a highly frequency dependent conductivity (\fref{sec:Neuron:Cap}),
 and one could easily imagine that low-frequency tissue currents are prone to pass resistively through the extracellular space, 
-while high-frequency tissue currents pass both resistively through the extracellular space and capacitively through cells. 
+while high-frequency tissue currents pass both resistively through the extracellular space and capacitively through cells \cite**{Amini2018}. 
 This would effectively cause $\sigma_\text{t}$ to increase with frequency and, as a consequence, 
 the amplitude of extracellular potentials to decrease with frequency (see \fref{eq:Sigma:pointsource_freq_dep}). 
-If such effects were present, we would for example expect the low-frequency LFP signals 
-to be less attenuated with distance compared to high-frequency spikes \cite**{Logothetis2007}\tvnnote{Dette er kanskje egentlig mer komplekst. I formalismen vi brukte i Miceli2017 (ved aa bare legge til en kapasitiv (kompleks) del), vil ikke forskjellige frekvenser avta forskjellig med avstand, 
-det er en konstant bias som er lik for alle avstander. For aa ta hoyde for propagerings-effekter, maatte vi nok gjort som i Bossetti2008, men hvordan blir det da med stoem-bevaring om man skal ha med avstandsavhengighet? Jeg tror hvertfall ikke det er saa enkelt som at et kapasitivt medium vil gi avstandsavhengig forvrengning}. 
-Such a frequency bias has been suggested as the explanation behind 
-\tvntxt{the apparent spatial stability of LFP signals relative to spike recordings, as well as an explaination of why the LFP and EEG signal is so biased towards low frequencies \cite**{Bedard2004}.} \tvnnote{Men dette trenger jo egentlig ingen slik forklaring, saa hele diskusjonen er litt rar... Boer vi gaa inn i dette?}%and 1/f power-laws in LFP \tvnnote{Expand a little on this and cite the French}. \ghnote{Forsto ikke helt setningen, men antar, som du antyder, at den er uferdig.}
+If such effects were present, we would for example expect
+\tvntxt{measurements of extracellular potentials to be biased towards} the low-frequency LFP signals 
+compared to high-frequency spikes \cite**{Logothetis2007}.
+\tvnnote{Her har jeg forenklet det som stod litt: 
+Mange tror (pga Bedard et al tror jeg) at et frekvensavhengig medium
+vil gjoere at lave frekvenser ikke henfaller like sterkt med avstand, og at det
+derfor etterhvert kun vil vaere lave frekvenser igjen i EP. Dette er ikke noedvendigvis riktig, og i et kapasitivt medium faller de forskjellige frekvens-komponentene av EP like fort, det er bare det at de lave frekvensene er litt fremhevet fra starten av. Snakket med Gaute, og vi kom frem til at det bare vil vaere forvirrende aa gaa inn paa dette.}
+%\tvnnote{Dette er kanskje egentlig mer komplekst. I formalismen vi brukte i Miceli2017 (ved aa bare legge til en kapasitiv (kompleks) del), vil ikke forskjellige frekvenser avta forskjellig med avstand, 
+%det er en konstant bias som er lik for alle avstander. For aa ta hoyde for propagerings-effekter, maatte vi nok gjort som i Bossetti2008, men hvordan blir det da med stoem-bevaring om man skal ha med avstandsavhengighet? Jeg tror hvertfall ikke det er saa enkelt som at et kapasitivt medium vil gi avstandsavhengig forvrengning}. 
+%Such a frequency bias has been suggested as the explanation behind 
+%\tvntxt{the apparent spatial stability of LFP signals relative to spike recordings, as well as an explaination of why the LFP and EEG signal is so biased towards low frequencies \cite**{Bedard2004}.} \tvnnote{Men dette trenger jo egentlig ingen slik forklaring, saa hele diskusjonen er litt rar... Boer vi gaa inn i dette?}%and 1/f power-laws in LFP \tvnnote{Expand a little on this and cite the French}. \ghnote{Forsto ikke helt setningen, men antar, som du antyder, at den er uferdig.}
 
 Early investigations indicated that $\sigma_\text{t}$ has little or no frequency dependence \cite**{Ranck1963,nicholson1975,Pfurtscheller1975}.
 This was later challenged by \citeasnoun**{Gabriel1996}, who measured
