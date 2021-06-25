@@ -286,7 +286,7 @@ If such effects were present, we would for example expect the low-frequency LFP 
 to be less attenuated with distance compared to high-frequency spikes \cite**{Logothetis2007}\tvnnote{Dette er kanskje egentlig mer komplekst. I formalismen vi brukte i Miceli2017 (ved aa bare legge til en kapasitiv (kompleks) del), vil ikke forskjellige frekvenser avta forskjellig med avstand, 
 det er en konstant bias som er lik for alle avstander. For aa ta hoyde for propagerings-effekter, maatte vi nok gjort som i Bossetti2008, men hvordan blir det da med stoem-bevaring om man skal ha med avstandsavhengighet? Jeg tror hvertfall ikke det er saa enkelt som at et kapasitivt medium vil gi avstandsavhengig forvrengning}. 
 Such a frequency bias has been suggested as the explanation behind 
-\tvntxt{the apparent spatial stability of LFP signals relative to spike recordings, as well as an explaination of why the LFP and EEG signal is so biased towards low frequencies \cite**{Bedard2004}.} %and 1/f power-laws in LFP \tvnnote{Expand a little on this and cite the French}. \ghnote{Forsto ikke helt setningen, men antar, som du antyder, at den er uferdig.}
+\tvntxt{the apparent spatial stability of LFP signals relative to spike recordings, as well as an explaination of why the LFP and EEG signal is so biased towards low frequencies \cite**{Bedard2004}.} \tvnnote{Men dette trenger jo egentlig ingen slik forklaring, saa hele diskusjonen er litt rar... Boer vi gaa inn i dette?}%and 1/f power-laws in LFP \tvnnote{Expand a little on this and cite the French}. \ghnote{Forsto ikke helt setningen, men antar, som du antyder, at den er uferdig.}
 
 Early investigations indicated that $\sigma_\text{t}$ has little or no frequency dependence \cite**{Ranck1963,nicholson1975,Pfurtscheller1975}.
 This was later challenged by \citeasnoun**{Gabriel1996}, who measured
@@ -449,12 +449,12 @@ V_\mathrm{e}({\bf r}, \omega) = \frac{I(\omega)}{4\pi (\sigma_\text{R} + \mathrm
 \ghnote{Flyttet all problematisering til slutten:}
 We note that \fref{eq:Sigma:itot3} is generally only valid in the frequency domain, 
 while in the time domain, ${\bf i}$ must be given as a temporal convolution 
-of $\sigma_\mathrm{t}$ and ${\bf E}$ \cite**{Bedard2009}. Only in the case when 
+of $\sigma_\mathrm{t}$ and ${\bf E}$ \cite**{Bedard2009}\footnote{\tvntxt{One can move between the time domain and the frequency domain through Fourier transforms.}}. Only in the case when 
 the $\sigma_\mathrm{t}$ is frequency independent, it is valid also in the time domain. 
-\ghnote{Skal vi si mer om saken, eller holder dette? Vi har ikke forklart hva time-domain og frequency-domain betyr.}
+\ghnote{Skal vi si mer om saken, eller holder dette? Vi har ikke forklart hva time-domain og frequency-domain betyr.} \tvnnote{La paa en fotnote. Kanskje kommentere paa forholdet mellom "I(omega)" og "vec i"?}
 
 We also note that we in the above focused on the frequency dependence due to capacitive properties in the medium.
-In addition to this, the real part of the conductivity and the permittivity may have "individual" frequency dependencies, 
+\tvntxt{\sout{In addition to this, the}This can be further generalized so that the} real part of the conductivity and the permittivity may have "individual" frequency dependencies, 
 so that $\sigma_\text{R}=\sigma_\text{R}(\omega)$ and $\epsilon = \epsilon(\omega)$, 
 thus causing the real and imaginary components of \fref{eq:Sigma:pointsource_freq_dep} 
 to have individual frequency dependencies.
@@ -469,7 +469,7 @@ $|\sigma_\text{R}(\omega)|$ and the induced phase-shift $e^{-\mathrm{j} \theta(f
 \ghnote{Burde vi si mer om hvorfor $\sigma_R$ "plutselig" ble frekvensavheng akkurat her? 
 Det kunne den vel ogsaa ha vaert tidligere, dvs. selv da vi ikke hadde med kapasitivt ledd?
 Eller skal vi late som ingenting, da den praktisk talt er noksaa frekvensUavhengig?} 
-
+\tvnnote{Jeg vet ikke. Det er jo mer generelt, men samtidig vanskeligere aa se for seg en biofysisk mekanisme som kan gjoere realdelen frekvensavhengig. Kanskje Ih-kanaler for eksempel, som aapner aa lukker seg basert paa frekvensen i feletet?}
 
 \subsection{\blue{Estimates of the capacitive effects in tissue currents}}
 \label{sec:Sigma:Estimates}
@@ -480,7 +480,6 @@ is negligible compared to the resistive contribution (first term) when the ratio
 \label{eq:Sigma:ratiocondition}
 \end{equation}
 where $\sigma_\text{R}$ is still the real and resistive component of the conductivity. 
-
 An alternative version of this ratio is:
 \begin{equation}
 2 \pi f \tau \ll 1, 
@@ -514,7 +513,7 @@ it will decay towards zero with the time constant $\tau$.
 From this, the interpretation of $\epsilon/\sigma_\mathrm{R}$ (\fref{eq:Sigma:chargerelaxationtime}) 
 as the charge relaxation time is clear. 
 
-The ratio \Fref{eq:Sigma:ratiocondition2} tells us that only for frequencies that are very high 
+The ratio in \Fref{eq:Sigma:ratiocondition2} tells us that only for frequencies that are very high 
 (approaching the order of one oscillation per charge relaxation time), 
 capacitive effects will be important. For fields of physiological origin, 
 the temporal frequencies are typically less than a few thousand \si{\hertz}. 
@@ -568,7 +567,7 @@ This corresponds to a passive membrane resistance
 $r_\text{m} = d/\sigma_\text{m} = 10^{-8}/2\times10^{-9} = 5\, \si{\ohm\square\metre} = 50 \, \si{\kilo\ohm\square\centi\metre}$.
 
 \ghnote{Dette ble et sidespor. Vi kan vurdere aa fjerne alt bortsett fra foerste avsnitt. For min egen sjelefred ville jeg dog verifisere at membrantidskonstanten rettmessig kan tolkes som charge-relaxation time i membran-mediumet.}
-\tvnnote{Jeg syntes det boer vaere med, og kanskje til og med komme foer konklusjonen?} 
+\tvnnote{Jeg syntes det var fint, og kanskje til og med boer komme foer konklusjonen?} 
 
 \item \textit{Neural tissue:} For the topic of this book, the most relevant medium is the neural tissue as a whole. 
 For tissue, the ratio in \fref{eq:Sigma:ratiocondition} is strongly frequency dependent, 
@@ -584,6 +583,9 @@ These values are much larger than the corresponding value found for the extracel
 reflecting the fact that currents passing through tissue to some degree interact with neural membranes. 
 Nevertheless, the relative contribution of the capacitive current is fairly low also in tissue, 
 meaning that resistive currents will dominate. 
+\tvntxt{This fits nicely with the earlier discussed measured impedance spectrum
+of neural tissue, which indicates a mostly (but not necessarily completely)
+frequency independent medium (\fref{fig:Sigma:freq_dep}).}
 We note that there is quite some variation in experimental estimates of  $\epsilon_\text{r}$ and $\sigma_\text{t}$ 
 for the tissue medium, 
 but they are normally of the same order of magnitude as the values used in the calculation above.
