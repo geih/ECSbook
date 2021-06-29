@@ -93,6 +93,7 @@ While the state variables in such a model could be computed with a general-purpo
 Such software greatly simplifies the process of specifying the model and choosing the appropriate numerical schemes for solving the resulting set of PDEs. 
 Most of these tools are by default based on one key assumption made in standard cable theory, 
 that is, the spatial variation in membrane voltage across the entire morphology can be computed independently of any effect transmembrane currents may have on the extracellular potential immediately outside the compartments (see chapter \Fref{chap:Neuron} for details).
+\tvnnote{Skal vi ha med en figur med auto-ephaptic effect, for aa vise at dette er en liten og neglisjerbar effekt? Har laget en tilsynelatende fungerende demonstrasjon av dette i mappen "autoephaptic testing".}
 
 The NEURON simulation environment\footnote{\href{https://neuron.yale.edu}{https://neuron.yale.edu}} \cite**{Hines1997} presently remains a prevalent choice for empiric-based simulations of MC neuron models as it supports both Windows-, linux- and unix-based operating systems including MacOS, 
 and can be used with a GUI or in a programmatic fashion on laptops, desktop computers and in parallel on large-scale high-performance computing (HPC) facilities. 
@@ -158,7 +159,7 @@ Its diameter is typically assumed to be constant,
 and the cylindrical compartment is a straight along its length axis.
 \ehnote{True for NEURON, but not for Arbor which adapts a Finite Volume Model (FVM) type scheme in 1D corresponding to electric compartments made up by series of conical frusta.}
 Note that it is possible to swap the central difference approximation
-by the forward and  backward difference approximation estimating axial currents for each half-compartment respectively as in \cite**{Hagen2018},
+by the forward and  backward difference approximation estimating axial currents for each half-compartment respectively as in \citeasnoun**{Hagen2018},
 but we will not go into further detail here. 
 %For the purpose of computing extracellular signals that may arise from axial currents $I_\text{a}$ we will simply assume that they are piecewise constant currents along the axis of each compartment.
 
@@ -253,7 +254,7 @@ For now, we will assume that typical measures of extracellular electric or even 
 \end{figure}
 
 
-Up to this point, the attentive reader of this chapter may have noticed that the axial currents (and transmembrane currents for that matter) is \textit{linearly} dependent on the midpoint membrane voltages of the MC model.
+Up to this point, the attentive reader\tvnnote{Litt imot slike formuleringer, siden det rakker litt ned paa de som ikke er attentive, som jeg tror i dette tilfellet vil vaere omtrent alle :-)} of this chapter may have noticed that the axial currents (and transmembrane currents for that matter) is \textit{linearly} dependent on the midpoint membrane voltages of the MC model.
 Thus, the full set of operations involved in computing the full set of axial current magnitudes can be rewritten as a linear combination on the form
 %
 \begin{eqnarray}
@@ -574,7 +575,7 @@ Throughout \Fref{sec:Schemes:LFPy} we defined a formalism based on linear combin
 The number $N$ current sources could, without loss of generality, denote the count of compartments per neuron model, 
 or the total count for sets of neurons. 
 Thus for the purpose of computing extracellular signals 
-$\phi$ \ehnote{Jeg vil bruke $\phi$ som generisk signal symbol for $V_e$, $P$, $B$ osv. OK?} 
+$\phi$ \ehnote{Jeg vil bruke $\phi$ som generisk signal symbol for $V_e$, $P$, $B$ osv. OK?} \tvnnote{Litt skeptisk, siden phi er ganske standard som extracellular potential?}
 from recurrently connected networks of MC neurons, 
 we have the two feasible options:
 \begin{enumerate}
@@ -794,7 +795,7 @@ $\mathbf{n}_\text{contact}$ & $[0, 1, 0]$ & Electrode contact surface normals \\
 \ehtxt{
 In \Fref{fig:LFPy_network}A we show the population and extracellular recording geometry for a phenomenological two-population MC network set up according to points 1-14 above. 
 The excitatory (E) and inhibitory (I) neurons are both modelled with a single thick compartment for the soma, and dendritic sections pointing up- and downwards along the depth-axis. 
-The I cells have a prominent apical section \SI{1}{\milli\metre} in length while the I cells are symmetric around the soma. 
+The \tvntxt{\sout{I}E} cells have a prominent apical section \SI{1}{\milli\metre} in length while the I cells are symmetric around the soma. 
 For this network we will predict extracellular potentials across depth (black circular markers) treating compartments as line-sources \ehnote{kryss-ref}, as well as the current dipole moment. 
 Panels B and C show the distributions across depth of somas and instantiated synapses for each pair of pre- and postsynaptic populations, accordingly. 
 The spike raster plot (\Fref{fig:LFPy_network}D) shows the resulting activity to be stable, asynchronous-irregular at biologically plausible rates. 
