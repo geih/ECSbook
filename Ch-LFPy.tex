@@ -662,6 +662,7 @@ The mean population-averaged firing rates are given shown in the legend.
 ({\bf D}) Per-population spike-count histograms with bin size \SI{5}{\milli\second}.
 ({\bf E}) Extracellular potentials.
 ({\bf F}) Components of the current dipole moment along the $x,y,z-$axes.
+\tvnnote{Foreslaar aa gaa ned til mye faerre elektroder, for aa oeke lesbarheten av denne og foelgende figurer? Kanskje nok med 6 elektroder eller noe?}
 }
 \label{fig:LFPy_network}
 \end{figure}
@@ -811,7 +812,8 @@ assuming that these models capture the spiking statistics of this MC network mod
 \section{\blue{EH: Forward-model predictions from spiking point-neuron network models}}
 \label{sec:Schemes:HybridLFPy}
 \index{Point neuron model}
-
+\tvnnote{Kanskje vi kan dele opp denne seksjonen i flere seksjoner? For eksempel kunne denne seksjonen het noe saant som "Forward-model predictions from simulations at higher levels of abstraction", og egentlig kun inneholdt motivasjonen, mens "Hybrid Scheme" kunne varte en egen section?}
+\tvnnote{Foroevrig foeler jeg fortsatt det hadde vaert best om mye av denne seksjonen kom ut i artikkel-format foerst :-)}
 %\ehnote{gammalt:}
 %%\sout{Point neuron models do not generate extracellular fields. Sad, because simulations would be much faster if we could use point neuron models. Trick to do this, Hybrid LFPy \cite**{Hagen2016}, Skaar et al (in revision)}
 
@@ -855,10 +857,10 @@ Their mathematical simplicity lends point neurons to be implemented and solved v
 As a consequence, dynamics of recurrently connected networks of spiking point neurons can be studied at a much grander scale and pace than similarly sized networks of MC neuron models.
 As typical point neurons also have very few intrinsic parameters compared to any MC neuron model,
 this has also allowed for separating effects of network connectivity from the cellular dynamics
-explaining observed phenomena such as asynchronous or synchronous, regular and irregular spiking activity also using rigorous mathematical analysis, see e.g., \cite**{Brunel2000}.
+explaining observed phenomena such as asynchronous or synchronous, regular and irregular spiking activity also using rigorous mathematical analysis, see e.g., \citeasnoun**{Brunel2000}.
 
 Linking activity of point neurons and point neuron network models to electric or magnetic extracellular measures of activity however poses a problem.
-One could attempt to extract equivalent transmembrane currents (synaptic, ionic, capacitive etc.) and quickly come to the conclusion that all currents \emph{must} sum to zero in the point(s) due to charge conservation.
+One could attempt to extract equivalent transmembrane currents (synaptic, ionic, capacitive etc.) and quickly come to the conclusion that all currents \emph{must} sum to zero in the point(s) due to charge conservation \tvntxt{(see \fref{fig:Neuron:point_vs_multi}{\bf A})}.
 As such there can be no electric or magnetic signals arising from point neurons or networks thereof.
 Physics-based computational schemes for predicting signals such as the local field potential (LFP) is therefore required.
 
@@ -872,7 +874,7 @@ at least a two-compartment neuron model is required for it to account for spatia
 \ehnote{redundant}
 
 One solution to this problem of deriving physics based schemes for computing extracellular electric or magnetic signals from point neuron networks was proposed by
-\cite**{Hagen2016},
+\citeasnoun**{Hagen2016},
 referred to as a hybrid scheme.
 The scheme is hybrid in the sense that the common-place scheme of using MC neuron models in conjunction with electrostatic forward models is used for signal prediction,
 while it assumes that simulations of the actual network activity can be done independently using neuron models with arbitrary levels of detail, including point processes (LIF neurons etc.).
@@ -912,14 +914,21 @@ The excitatory thalamocortical (TC) population projects mainly to layer 4 and la
 
 
 One main assumption is that point-neuron network models can accurately capture observations present in experimental data gathered \textit{in vivo},
-including irregular firing patterns \ehtxt{\cite**{Softky1993,van_Vreeswijk1997,Amit1997,Shadlen1998}, 
+including irregular firing patterns
+\tvnnote{Egentlig syntes jeg dette blir litt feil fokus: 
+Naar man bruker en nettverksmodel er jo alltid antagelsen at simuleringen er 
+god nok til det formaalet den blir brukt til, men dette gjelder jo baade punkt-nevron-nettverk og biofysisk detaljerte nettverk, og virker for meg uavhengig av hybrid scheme. Vi har vel heller ingen eksempler paa at biofysisk detaljerte nettverk
+er bedre enn punkt-nettverk paa aa gjenskape maalt nettverksaktivitet saa vidt jeg vet?
+Riktignok kan vi kanskje forvente at biofysisk detaljerte nettverksmodeller 'egentlig'
+er bedre enn punkt-nevron-nettverksmodeller, men jeg syntes det blir rart aa si at en av hoved-antagelsene i hybrid scheme er at punkt-nevron-modeller fungerer. Denne antagelsen tilhoerer vel modellene som brukes, ikke hybrid scheme?}
+ \ehtxt{\cite**{Softky1993,van_Vreeswijk1997,Amit1997,Shadlen1998}, 
 fluctuations of the membrane potential \cite**{Destexhe1999},
 asynchronous firing patterns \cite**{Renart2010,Ecker2010,Ostojic2014},
 correlations in neural activity \cite**{Okun2008,Gentet2010,Helias2013},
 self-sustained activity \cite**{Kriener2014},
 realistic firing rates across cortical lamina \cite**{Potjans2014}.}
 Similarly, reduced models derived from biophysically detailed MC neuron models has shown that point-neuron network models can accurately capture spiking statistics of the biophysically detailed model variants (see e.g., \cite**{Roessert2016,Billeh_2020}).
-In the case of \cite**{Roessert2016} the effect of dendritic filtering on synaptic input currents is captured by computing an equivalent filter for each possible synapse location and type using a Green's function formalism \cite**{Wybo_2013}.
+In the case of \citeasnoun**{Roessert2016} the effect of dendritic filtering on synaptic input currents is captured by computing an equivalent filter for each possible synapse location and type using a Green's function formalism \cite**{Wybo_2013}.
 The point neurons are modeled using a generalized integrate-and-fire (GIF) formalism,
 and the linear filters applied to the synaptic currents result in  well-preserved post-synaptic potentials in the point neuron.
 
@@ -949,7 +958,7 @@ Furthermore, membrane time constants of the reconstructed morphologies which uti
 \ghnote{Tanke: Er det mulig aa heller skrive dette som en kokebokoppskrift - punktlister for Step 1, Step 2, og Step 3 (som vel er bankers) foerst, og saa ta all diskusjon om eventuell validitet til slutt? Slik det staar blir det saapass mange forbehold introdusert underveis at det er lett aa miste traaden. Den foerste store lista (under) er ei liste over noe som egentlig ikke brukes direkte i hybrid-skjemaet. Den brukes kun under en validering som gaar ut paa aa bytte ut Step 1 med en ordentlig MC-simulering? Jeg tenker at kokebokoppskriften boer komme i forgrunnen.}
 \ehnote{MC-nettverk er naa en ny del som kommer foer dette. OK?}
 
-One key feature of the this hybrid scheme application as devised by \cite**{Hagen2016} was an assumed-to-be \emph{linear} spike-LFP relationship, that is, 
+One key feature of the this hybrid scheme application as devised by \citeasnoun**{Hagen2016} was an assumed-to-be \emph{linear} spike-LFP relationship, that is, 
 one spike generated by a \ehtxt{point neuron in any} network subpopulation would result in a fixed \ehtxt{(additive)} contribution 
 to the extracellular signal resulting from synaptic and transmembrane currents on postsynaptic MC neurons.
 So how can we make an argument about the validity of said scheme,
@@ -983,7 +992,7 @@ The synaptic currents and associated transmembrane currents on the postsynaptic 
 \end{figure}
 
 \ehtxt{As illustrated in \Fref{fig:LFPy_hybrid}C, one could}
-at this point could destroy every connection of the recurrently connected network \ehtxt{in panel A},
+at this point destroy every connection of the recurrently connected network \ehtxt{in panel A},
 load sets of spike events $s_u(t)$ of presynaptic neurons $u \in X$ recorded to some intermediate data storage  \ehtxt{(panel A)},
 reinstate every synapse on each postsynaptic neuron $v \in Y$ but this time activate them at times
 $\left(s_u(t) \ast \delta_{\Delta_{vu}}\right)$
@@ -1002,7 +1011,7 @@ as illustrated in \Fref{fig:LFPy_hybrid}.
 but one may now utilize a trivial parallelization scheme in order to compute extracellular signals as contributions of each cell is independent of the others.
 One could even do each single-cell simulation serially.
 \item Little was gained in terms of overall computational cost -- the total number of state variables (for active ion channels etc.) remains approximately the same.
-The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials.
+The computational cost of transmitting times of spike events across a recurrent network can be assumed to be minuscular compared to solving for the membrane potentials and extracellular potentials.\tvnnote{Dette gjelder vel kun smaa nettverk? For tilstrekkelig store nettverk er vel sending av spikes omtrent det eneste som tar tid?}
 \end{itemize}
 
 For the purpose of predicting extracellular signals \emph{only}, 
@@ -1132,7 +1141,7 @@ Its activation times are defined as the concatenation of sequences $\left(s_u(t)
 Thus, the temporal step size ($\Delta t$) of the simulations can usually be multifold increased compared to $\Delta t$ in the actual network simulation without sacrificing much in terms of accuracy in the relevant low-frequency range.
 The computational cost is inversely proportional to the temporal step size,
 and a reasonable choice may be $\Delta t \lesssim \tau \in \{ \tau_\text{m}, \tau_\text{syn}, \tau_\text{w}, \ldots \}$,
-that is, shorter than the typical time constants for membranes, synapses, ion channels etc.
+that is, shorter than the typical time constants for membranes, synapses, ion channels etc. \tvnnote{Kan jo ogsaa tenkes at det er relativt hoey-frekvente ting i nettverksaktiviteten, og man ser paa LFP-PSD?}
 
 \end{enumerate}
 
@@ -1173,11 +1182,11 @@ ignoring or accounting for the effective membrane conductance (g\_eff=False/True
 \ehtxt{
 The hybrid methodology described in the previous Section relies on setting up network equivalent populations of MC neurons, 
 with synaptic currents that are distributed on the MC neurons which are subsequently activated at specific times corresponding to the firing of `spikes' of the recurrent network simulations.
-However, \cite**{Hagen2016} also showed that population averaged spike-LFP impulse responses can be used to accurately reconstruct the LFP signal, 
+However, \citeasnoun**{Hagen2016} also showed that population averaged spike-LFP impulse responses can be used to accurately reconstruct the LFP signal, 
 by filtering the time-binned spike rates for each presynaptic population by corresponding filter kernels. 
 Here, we will go through the details of this idea as one can substantially reduce computational times by first computing a set of appropriate filters and reuse them with population spiking activity of arbitrary simulation durations.
 The method may also be used with signals \textit{other} than the LFP, 
-such as the current dipole moment (and measures that can be computed from it). 
+such as the current dipole moment (and measures that can be computed from it)\tvnnote{Kortere aa bare si EEG/MEG?}. 
 }
 
 
@@ -1192,6 +1201,8 @@ Spatiotemporal functions $\langle H_{YX}(\mathbf{r}, \tau) \rangle$ for each con
 The \ehtxt{top row} kernels are computed as the spike-averaged contribution by postsynaptic neurons to the extracellular potential in electrode contact locations shown in \Fref{fig:LFPy_network}{\bf A}, 
 \ehtxt{while the bottom row kernels are computed as the spike-averaged current-dipole moment contribution in the horizontal $(x, y)$ and vertical $z$-axis.} 
 The kernels are computed either using fully passive (`pas') or with quasi-linearized (`Ih\_lin') cable models.
+\tvnnote{Trengs begge disse versjonene?}
+\tvnnote{Hvorfor er P$_z$ nesten lik i alle tilfeller? Og hvorfor har I saa stort bidrag? Burde vi gjoere I mer sfaerisk-symmetrisk, eller mindre?}
 }
 \label{fig:LFPy_kernels}
 \end{figure}
@@ -1299,7 +1310,7 @@ and $\tau <= 0$ in the FIR case.}
 \label{sec:Schemes:populationmodels}
 \index{Firing rate model}
 Similar to how spiking dynamics of large-scale MC neuron networks can sometimes be preserved in simplified networks of few-compartment or spiking point neurons, 
-further successive steps of simplification may be applied to point-neuron networks in order to describe neuronal dynamics at the level of populations. 
+further successive steps of simplification may be applied to point-neuron networks in order to describe neuronal dynamics at the level of populations\tvnnote{Dette gir kanskje litt inntrykk av at man alltid starter med biofysisk detaljert model, ogsaa forenkler, men det er jo ikke slik det pleier aa foregaa.}. 
 Such models are commonly referred to as \emph{rate models} as an umbrella term, and may explain a host of observed phenomena on the \emph{mesoscopic} (local populations, brain areas) and \emph{macroscopic} (whole brain) level such as oscillations.
 
 Simple rate models describe the mean activity of subsets of neurons (`populations') as function of time alone, 
@@ -1411,7 +1422,7 @@ $\mathbf{I} \in \{ \mathbf{I}_\text{m}(\mathbf{r}, \tau), \mathbf{I}_\text{a}(\m
 \begin{equation}
 \hat{H}_{YX}(\mathbf{r}, \tau) = \mathbf{F}\mathbf{I}(\mathbf{r}, \tau) ~,
 \end{equation}
-however, this would would imply that the cell-body distribution in each postsynaptic population would be condensed to a point $\delta(\mathbf{r} - \mathbf{r}_Y)$.
+however, this would imply that the cell-body distribution in each postsynaptic population would be condensed to a point $\delta(\mathbf{r} - \mathbf{r}_Y)$.
 Assuming that the $N_Y$ cell bodies are sampled from the distribution $\widetilde{\mathbf{r}}_Y$
 (recall our initial description of the biophysically detailed network model in \Fref{chap:LFPy:hybrid}),
 one could consider computing an equivalent volumetric current field by convolving the predicted currents $\mathbf{I}(\mathbf{r}, \tau)$ with the normalized spatial function
@@ -1520,6 +1531,8 @@ As we shall demonstrate here, certain proxies that are easily implemented can st
 
 Using a computational model setup reminiscent of the hybrid scheme applied to a cortical microcircuit model in \cite**{Hagen2016} outlined throughout \Fref{sec:Schemes:HybridLFPy},   
 \cite**{Mazzoni2015} compared different LFP proxies that could be extracted in two-population spiking point-neuron network models. 
+\tvnnote{Her boer vi ogsaa faa med EEG-ekvivalenten med Pablo (Martinez-Canada2021).
+Kanskje beskrive det som en metode, istedet for som oppsummering av én artikkel?}
 These proxies, where some have been used to mimic the LFP, EEG or similar in past studies, 
 were by \cite**{Mazzoni2015} defined as the convolution \ehnote{kunne vaert produkt?} between linearly separable components as
 \begin{equation}
