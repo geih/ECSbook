@@ -199,7 +199,7 @@ $\sigma_\text{e}$ (\si{S/m}) is the conductivity of the \textit{extracellular me
 As we define it here, it is a theoretical quantity, 
 representing the conductivity experienced by a \textit{hypothetical} macroscopic (coarse-grained) current 
 that travels exclusively trough the extracellular part of brain tissue. 
-This current does not pass through a 3D volume filled entirely by extracellular saline, 
+Importantly, this current does not pass through a 3D volume filled entirely by extracellular saline, 
 but is (i) restricted to move only through the fraction $\alpha$ of the total medium volume that is extracellular, 
 and (ii) must take detours around neural and glial obstacles, 
 as reflected through the tortuousity $\lambda$ \cite**{Nicholson1998,Nunez2006}. 
@@ -221,11 +221,11 @@ we get a an estimated value $\sigma_\text{e} = 0.134\, \si{S/m}$.
 \subsection{\blue{Conductivity of brain tissue: $\sigma_\text{t}$}}
 \label{sec:Sigma:St}
 $\sigma_\text{t}$ (\si{\siemens\per\metre}) is the macroscopic (coarse-grained) conductivity of the brain tissue, 
-i.e., the conductivity experienced by a macroscopic (coarse-grained) current traveling through the tissue. 
-Sometimes referred to as the effective tissue conductivity, 
-$\sigma_\text{t}$ can be estimated experimentally
-by measuring gradients in $V_\text{e}$ resulting from a controlled current injection into the tissue.
+sometimes referred to as the effective tissue conductivity. 
+This is the conductivity experienced by a macroscopic (coarse-grained) current traveling through the tissue. 
 It is $\sigma_\text{t}$ that is the relevant conductivity for use in VC theory.
+It can be estimated experimentally by measuring gradients in $V_\text{e}$ 
+resulting from a controlled current injection into the tissue.
 
 Experimental estimates of $\sigma_\text{t}$ vary between different recordings.
 Some studies have estimated $\sigma_\text{t}$ in cortex
@@ -278,24 +278,26 @@ estimated in \Fref{sec:Sigma:Se} with the typically reported cortical tissue con
 $\sigma_\text{t} = 0.3 \,\si{S/m}$, would suggest that more than half of the tissue currents 
 travel through intracellular pathways.
 
-Fortunately, an exact understanding of how macroscopic currents make their way through brain tissue
-is not a prerequisite for using VC theory to predict extracellular potentials.
-A sufficient criterion for VC theory to work is that we can use the ohmic relation, 
-${\bf i}_\text{t} = -\sigma_\text{t} \nabla V_\text{e}$, for the tissue current
-combined with an experimentally measured value for $\sigma_\text{t}$.
+An exact understanding of how macroscopic currents make their way through brain tissue is lacking. 
+Fortunately, such an understanding is not a prerequisite for using VC theory to predict extracellular potentials.
+A sufficient criterion for VC theory to work is that we can use the linear ohmic relation, 
+${\bf i}_\text{t} = -\sigma_\text{t} \nabla V_\text{e}$, for the tissue current, 
+as we assumed in the VC-theory chapter (\Fref{chap:VC}). 
 As reviewed below (\Fref{sec:Sigma:f-independent}), 
 a number experimental studies indicate that the macroscopic (coarse-grained) tissue current density is indeed
-well approximated by the linear ohmic relation, ${\bf i}_\text{t} = -\sigma_\text{t} \nabla V_\text{e}$, 
-as we assumed in the VC-theory chapter (\Fref{chap:VC}). 
-Taken together, these observations suggest that both the extracellular and intracellular
-components of the tissue current density are linearly dependent on the extracellular
-potential gradient $\nabla V_\text{e}$, putatively due to a polarization of neurons and glial cells
-aligned with it.
+well approximated by the ohmic relation.
 
-The discussion of what $\sigma_\text{t}$ represents is related to the previous discussion
+If we accept this ohmic form, and use it together with some experimentally measured value of $\sigma_\text{t}$, 
+we do not need to worry about details regarding which pathways that currents follow through tissue. 
+We note, however, that if tissue currents contain both extra- and intracellular components, 
+the ohmic form suggest that both of them are linearly dependent on the extracellular
+potential gradient $\nabla V_\text{e}$. When it comes to the intracellular components, 
+this can putatively be explained by a polarization of neurons and glial cells
+aligned with the extracellular voltage gradients. 
+
+The above discussion of what $\sigma_\text{t}$ represents is tightly related to the previous discussion
 of how the current-source density equation should be interpreted (\Fref{sec:VC:C3}).
-To conclude this previous discussion, 
-the computation of $V_\text{e}$ by use of \fref{eq:VC:CSDit} together with 
+To conclude this previous discussion, the computation of $V_\text{e}$ by use of \fref{eq:VC:CSDit} together with 
 an ohmic model for the tissue current, and a measured value for $\sigma_\text{t}$, 
 does not require any \textit{a-priori} assumption regarding the pathways 
 taken by the currents evoked by the (simulated) sources $C$.
@@ -315,33 +317,40 @@ vi vet fra eksperimenter at Ohms lov virker, som rettferdiggjoer VC-teori?}
 An important question when modeling and interpreting electric signals in neuroscience 
 is whether the conductivity of neural tissue ($\sigma_\text{t}$) has a frequency dependence 
 (in which case it would be called the impedance spectrum). 
-If it does, recorded signals will be distorted as they propagate through the tissue, 
-which in turn will bias recordings towards certain parts of the frequency spectrum. 
+If it does, \ghtxt{\sout{recorded}} signals will be distorted as they propagate through the tissue, 
+which in turn will bias \ghtxt{\sout{recordings}them} towards certain parts of the frequency spectrum. 
 In this subsection we will briefly review some experimental measurements investigating this issue, 
 as well as the theory needed to model such effects, should it be deemed necessary.
 
-As we stated earlier, 
+\ghtxt{\sout{As we stated earlier, 
 extracellular currents often are assumed to move mostly through the extracellular saline solution
 between cells that constitute passive, non-conducting obstacles (\fref{sec:Sigma:continuous}). 
-If this is true, we would expect $\sigma_\text{t}$ to be frequency-independent,
+If this is true,}
+If tissue currents were exclusively extracellular,}
+we would expect $\sigma_\text{t}$ to be frequency-independent,
 since saline is known to be a purely resistive medium (it has no bound charges), 
 at least up to frequencies in the megahertz range
 \cite**{cooper1946,Martinsen2008}.
-
 A frequency dependent $\sigma_\text{t}$ would however not in itself be surprising.
 Capacitive neural membranes have a highly frequency dependent conductivity (\fref{sec:Neuron:Cap}),
 and one could easily imagine that low-frequency tissue currents are prone to pass resistively through the extracellular space, 
-while high-frequency tissue currents pass both resistively through the extracellular space and capacitively through cells \cite**{Amini2018}. 
+while high-frequency tissue currents can pass both resistively through the extracellular space and capacitively through cells \cite**{Amini2018}. 
 This would effectively cause $\sigma_\text{t}$ to increase with frequency and, as a consequence, 
 the amplitude of extracellular potentials to decrease with frequency (see \fref{eq:Sigma:pointsource_freq_dep}). 
-If such effects were present, we would for example expect
+\ghtxt{\sout{If such effects were present, we would for example expect
 \tvntxt{measurements of extracellular potentials to be biased towards} the low-frequency LFP signals 
-compared to high-frequency spikes \cite**{Logothetis2007}.
+compared to high-frequency spikes LOGOTHESIS2007}
+If such effects were present, we would for example expect 
+the extracellular signature of neural signaling to put a bias on slower neural signals 
+(reflected in the LFP) 
+compared to brief signals such as action potentials (reflected in extracellular spikes) \cite**{Logothetis2007}.}
+
 \tvnnote{Her har jeg forenklet det som stod litt: 
 Mange tror (pga Bedard et al tror jeg) at et frekvensavhengig medium
 vil gjoere at lave frekvenser ikke henfaller like sterkt med avstand, og at det
 derfor etterhvert kun vil vaere lave frekvenser igjen i EP. Dette er ikke noedvendigvis riktig, og i et kapasitivt medium faller de forskjellige frekvens-komponentene av EP like fort, det er bare det at de lave frekvensene er litt fremhevet fra starten av. Snakket med Gaute, og vi kom frem til at det bare vil vaere forvirrende aa gaa inn paa dette.}
-\ghnote{Jeg skjoenner ikke helt det du (og Gaute) sier, men sikkert smart aa forenkle. Uansett saa stusser jeg paa: "Expect measurements of ...."? Det er vel det faktiske ECS-potensialet som gir bias (i dette tenkte tilfellet), og ikke maalingen av det? Mener vi noe ala "Expect the extracellular signature of neural signaling to put a bias on slower neural signals (reflected in the LFP) compared to brief signals such as action potentials (reflected in extracellular spikes)?}
+\ghnote{Sikkert lurt aa forenkle, men skjoenner ikke helt det du (og Gaute) sier. Uansett saa stusset jeg paa: "Expect measurements of ...."? Det er vel det faktiske ECS-potensialet som blir biased (i dette tenkte tilfellet), 
+ikke maalingen av det? Se om du liker den nye versjonen. Jeg har ogsaa et par andre steder stroeket ut ting ala "measurements of" der jeg tror at det vi paastaar ikke handler om maalingen, men om det faktiske signalet.}
 
 %\tvnnote{Dette er kanskje egentlig mer komplekst. I formalismen vi brukte i Miceli2017 (ved aa bare legge til en kapasitiv (kompleks) del), vil ikke forskjellige frekvenser avta forskjellig med avstand, 
 %det er en konstant bias som er lik for alle avstander. For aa ta hoyde for propagerings-effekter, maatte vi nok gjort som i Bossetti2008, men hvordan blir det da med stoem-bevaring om man skal ha med avstandsavhengighet? Jeg tror hvertfall ikke det er saa enkelt som at et kapasitivt medium vil gi avstandsavhengig forvrengning}. 
@@ -377,11 +386,13 @@ about an order of magnitude lower than the commonly reported values.
 This value seems surprisingly low, given that healthy neural tissue contains a substantial fraction of highly conducting saline. 
 The authors were however careful to note that the reported low-frequency values might be distorted 
 by inadequate correction for electrode polarization (see \fref{sec:VC:electrodes} for a brief review of electrode polarization). 
-In addition, their recording were done in bovine brains obtained from a slaughterhouse 
+In addition, their recordings were done in bovine brains obtained from a slaughterhouse 
 up to a couple of hours post-mortem \cite**{Gabriel1996}, 
 which can potentially have resulted in suboptimal tissue preservation and cell swelling. 
 Finally, we note that a later study using the same recording equipment did not observe a similarly strong frequency-dependence, 
 or similarly low conductivity values (\citeasnoun**{Wagner2014}; \fref{fig:Sigma:freq_dep}). 
+
+\ghnote{Fun fact: I Marte Julies siste artikkel (neuron/glia/ECS) simulerte vi doeden gj. aa skru av alle pumpene. Resultatet var at nevronene lakk ut konsentrasjonsgradientene sine i loepet av noen (ca 3) minutter. Paa grunn av endringer i osmotiske trykk este nevronene ut, og ECS krympa til ca. 10 prosent av opprinnelig stoerrelse. Dette kan forklare en "order of magnitude" lavere konduktivitet hos Gabriel. Jeg tror ikke vi vil gaa inn paa dette her - det blir kanskje for mye om ene eksperimentet vi IKKE har lyst til a forlite oss til.}
 
 Consequently, experimental evidence suggests that neural tissue is predominantly resistive, 
 having at most a weak frequency dependency of the order of up to $\sim$30\% 
@@ -392,7 +403,8 @@ on measured potentials of physiological origin \cite**{Bossetti2008,Tracey2011,M
 \tvnnote{Add figure adapted from Miceli2017?}. 
 We note however that this is not necessarily true for potentials evoked by extracellular current stimulation 
 using very brief current pulses, because of the very high frequency content of the pulses \cite**{Bossetti2008}.
-We will revisit the topic of electrode stimulations in \fref{chap:Stim}, but will for now focus on physiological signals.
+We will revisit the topic of electrode stimulations in \fref{chap:Stim}, 
+but will in the current chapter focus on physiological signals.
 
 %\subsection{\red{Complex conductivity}}
 %\label{sec:Sigma:Complex}
@@ -454,8 +466,7 @@ We will revisit the topic of electrode stimulations in \fref{chap:Stim}, but wil
 %where $j$ is the imaginary unit, and where $\sigma_\text{Re}$ and $\sigma_\text{Im}$
 %are real and imaginary parts of
 If (linear) capacitive effects are present in tissue, 
-they can be incorporated into the theory by allowing the tissue conductivity to be complex
-and frequency dependent.
+they can be incorporated into the theory by allowing the tissue conductivity to be complex and frequency dependent.
 
 To define this complex conductivity, we start with the total (resistive plus capacitive) 
 current density through the medium:
@@ -590,18 +601,19 @@ and the criterion in \fref{eq:Basics:ratiocondition2} is clearly met.
 
 \item \textit{Neural membrane:}  
 The time constant for a neural membrane varies depending on what kinds of ion channels that are open. 
-The passive time constant, $\tau_\text{m}$, is for mammalian central neurons normally estimated to 
+The passive membrane time constant, $\tau_\text{m}$, is for mammalian central neurons normally estimated to 
 be in the range from 20 to 100 \si{\milli\second} \cite**{koch1996}. 
 
 Before we plug $\tau_\text{m}$ into \fref{eq:Sigma:ratiocondition2}, let us verify
-that it has the interpretation of a charge relaxation time $\tau=\epsilon_\text{m}/\sigma_\text{m}$.
+that it has the interpretation of a charge relaxation time: $\tau_\text{m}=\epsilon_\text{m}/\sigma_\text{m}$.
 The permittivity of a parallel plate capacitor is related to specific capacitance 
-through $\epsilon = c_\text{m} d$, where $d$ is the distance between the conductors. 
+through $\epsilon_\text{m} = c_\text{m} d$, where $d$ is the distance between the conductors. 
 For the neural membrane, the conductors are the intra- and extracellular saline solutions, 
 and $d$ is the membrane thickness. 
-The conductivity (\si{S/m}) is related to specific conductance $g$ (\si{S/m^2}) through $\sigma = gd$, 
-where $d$ is the "conduction distance". For the membrane, $d$ is, again, the membrane thickness. 
-We take $g$ to be the passive membrane conductance $g = g_\text{m}$, 
+The conductivity (\si{S/m}) is related to specific conductance $g_\text{m}$ (\si{S/m^2}) 
+through $\sigma_\text{m} = g_\text{m}d$, where $d$ is the "conduction distance". 
+For the membrane, $d$ is, again, the membrane thickness. 
+We take $g_\text{m}$ to be the passive membrane conductance,
 which is the inverse of the passive resistance $g_\text{m}=1/r_\text{m}$. 
 With this, $\tau_\text{m} = \epsilon_\text{m}/\sigma_\text{m} = (c_\text{m}d)/(g_\text{m}d) = c_\text{m}r_\text{m}$, 
 which is the classical definition of the passive membrane time constant \cite**{koch1996}. 
@@ -618,7 +630,7 @@ $r_\text{m} = d/\sigma_\text{m} = 10^{-8}/2\times10^{-9} = 5\, \si{\ohm\square\m
 
 Returning to the topic, with a change relaxation constant in the typical range (20 to 100 \si{\milli\second})
 of the membrane time constant, and with $f = 1000 \, \si{\hertz}$, we get that $2 \pi f \tau_\text{m} > 100$, 
-which shows that (not surprisingly) capacitive effects clearly can not be neglected for membrane currents. 
+which (not surprisingly) shows that capacitive effects clearly can not be neglected for membrane currents. 
 
 \ghnote{Dette ble et sidespor. Vi kan vurdere aa fjerne alt bortsett fra foerste avsnitt. For min egen sjelefred ville jeg dog verifisere at membrantidskonstanten rettmessig kan tolkes som charge-relaxation time i membran-mediumet.}
 \tvnnote{Jeg syntes det var fint, og kanskje til og med boer komme foer konklusjonen?} 
