@@ -2,21 +2,24 @@
 \label{chap:Sigma}
 \index{Conductivity}
 In \fref{chap:Neuron} we saw that neural activity causes transmembrane currents, and 
-in \fref{chap:VC} we introduced volume conductor (VC) theory, a framework that links such transmembrane currents to extracellular potentials, based on some simple assumptions about how
-currents move through the extracellular space.
+in \fref{chap:VC} we introduced volume conductor (VC) theory, a framework that links such transmembrane currents to extracellular potentials, based on some simplifying assumptions regarding how
+currents make their way through the surrounding tissue.
 
-In most applications of VC theory, the conductivity of brain tissue ($\sigma_\text{t}$) is assumed to be a constant, 
-and its value is normally taken from some experimental measurement. 
-An often used value is $\sigma_\text{t} = 0.3$ \si{S/m}, but we discuss other estimates later on in this chapter. 
+In most applications of VC theory, the conductivity of brain tissue ($\sigma_\text{t}$) is assumed to be constant, 
+as we also assumed throughout \Fref{chap:VC}. 
+Its value is then normally taken from some experimental measurement. 
+A commonly used value is $\sigma_\text{t} = 0.3$ \si{S/m}, 
+but we discuss other, both experimental and theoretical, estimates later on in this chapter 
+(\Fref{sec:Sigma:continuous}-\ref{sec:Sigma:f-independent}). 
 
 \ghnote{Kortet ned dette til aa si typisk 0.3, da jeg fant ut at diskusjonen om ulike estimater passer bedre i sigma-t-delkapittelet}
 
-Throughout \Fref{chap:VC}, we assumed that $\sigma_\text{t}$ was constant, 
-which amounts to assuming that brain tissue is \tvntxt{infinite, }homogeneous, isotropic and frequency independent.
+The use of a constant $\sigma_\text{t}$ amounts to assuming that brain tissue is 
+\tvntxt{infinite, }homogeneous, isotropic and frequency independent.
 While these assumptions are in many cases appropriate, 
 there are also many cases where they are not, 
-and in this chapter we discuss these assumptions and ways to relax them. 
-In addition, we review some experimental and theoretical estimates of $\sigma_\text{t}$. 
+and in the later parts of this chapter (\Fref{sec:Sigma:f-independent}-\ref{sec:Sigma:nonhomo}) 
+we discuss these assumptions and ways to relax them. 
 \ghnote{Trengs "infinite", eller er det implisitt dekket av "homogent"?
 Fysikere har jo lav terskel for aa slenge rundt seg med uendeligheter, men
 hvordan ser en uendelig hjerne ut for en biolog?}
@@ -24,6 +27,7 @@ hvordan ser en uendelig hjerne ut for en biolog?}
 Before we start examining the properties of $\sigma_\text{t}$, we must establish a clear picture
 of what it represents, i.e., what $\sigma_\text{t}$ is the conductivity \textit{of}.
 Such a picture is established through the continuous, porous medium approximation that we introduce below. 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,7 +96,7 @@ that of an obstacle-free saline solution. }
 
 On a small spatial scale, the conductivity in a certain spatial direction 
 will depend on whether there locally is a free extracellular passage in that direction (high conductivity), 
-or whether passage is hindered by a nearby membrane (low conductivity) (\fref{fig:Sigma:ECS}{\bf A}). 
+or whether passage is blocked by a nearby membrane (low conductivity) (\fref{fig:Sigma:ECS}{\bf A}). 
 At the spatial scale of micrometers and below, the tissue conductivity\index{Conductivity} 
 is therefore highly inhomogeneous and anisotropic. 
 
@@ -138,7 +142,8 @@ The conductivity of the saline solution (or Ringer solutions used by experimenta
 has been measured experimentally in several works, and experimentally reported values of $\sigma_\text{saline}$
 range between 1.3 and 1.8~\si{S/m} \cite**{Okada1994,Baumann1997,Logothetis2007,Martinsen2008,Miceli2017,McCann2019}.
 Note that within the brain, $\sigma_\text{saline}$ defines the (very) local conductivity 
-within the small gaps between cellular bodies, and is not the conductivity of the tissue as a whole. 
+within the small gaps between cellular bodies, i.e., where this saline solution exists.
+It is not the conductivity of the tissue as a whole. 
 
 The conductivity generally depends on the availability of free charge carriers, 
 and $\sigma_\text{saline}$ is theoretically determined by the ion concentrations in the saline solution:
@@ -146,7 +151,9 @@ and $\sigma_\text{saline}$ is theoretically determined by the ion concentrations
 \sigma_\text{saline} = \frac{F^2}{RT}\sum_{k} D_k z_{k}^2 c_{k}.
 \label{eq:Sigma:sigma1}
 \end{equation}
-In \Fref{eq:Basics:sigma_conc} we showed how this definition of the conductivity follows from the Nernst-Planck equation. We recall that $z_{k}$, $D_k$ and $c_{k}$ denote the valency, diffusion coefficient and concentration, respectively, of ion species $k$, while $F = 96485.3 \, \si{C/mol}$ is the Faraday constant, 
+In \Fref{eq:Basics:sigma_conc} we showed how this definition of the conductivity follows from the Nernst-Planck equation. 
+We recall that $z_{k}$, $D_k$ and $c_{k}$ denote the valency, diffusion coefficient and concentration, respectively, 
+of ion species $k$, while $F = 96485.3 \, \si{C/mol}$ is the Faraday constant, 
 $R = 8.314 \,\si{J/(K \, mol)}$ is the gas constant, and $T$ (\si{\kelvin}) the temperature.
 
 Typical concentrations of the most abundant ions in the extracellular saline solution were listed in 
