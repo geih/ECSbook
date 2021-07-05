@@ -42,12 +42,15 @@ where $\tilde{\nabla}$ is the gradient operator in the new coordinate system, an
 d\tilde{\Omega} = d\xi d\eta d\zeta =  \frac{d\Omega}{\sqrt{\sigma_x\sigma_y\sigma_z} }
 \label{eq:AppAniso:domega}
 \end{equation}
-is the volume increment in the new coordinate system. These substitutions are made because the field will be spherically symmetric in the new coordinate system. With the new variables, \fref{eq:AppAniso:marit} becomes:
+is the volume increment in the new coordinate system. With the new variables, \fref{eq:AppAniso:marit} becomes:
 \begin{equation}
 \iiint_{\tilde{\Omega}} \tilde{\nabla}^2 V \,d\tilde{\Omega} =  - \frac{I}{\sqrt{\sigma_x\sigma_y\sigma_z}}
 \label{eq:AppAniso:marit2}
 \end{equation}
-
+We realize that \fref{eq:AppAniso:marit2} has the same form as \fref{eq:VC:CSD5} for an isotropic medium.
+Hence, in the new coordinate system the tissue is isotropic, so that the
+field will be spherically symmetric around the source, and we can follow the same
+recipe for solving it as we did when solving \fref{eq:VC:CSD5}:
 Using Gauss' theorem, we convert the volume integral on the left hand side
 to an integral over the surface $\tilde{S}$ (enclosing the volume $\tilde{\Omega}$), 
 so that \fref{eq:AppAniso:marit2} becomes:
@@ -60,7 +63,8 @@ where
 \begin{equation}
 {\bf \tilde{r}} = \frac{x{\bf e}_\xi}{\sqrt{\sigma_{x}}} + \frac{y{\bf e}_\eta}{\sqrt{\sigma_{Y}}}+\frac{z{\bf e}_\zeta}{\sqrt{\sigma_{z}}}
 \end{equation}
-is the position vector in the $\xi\eta\zeta$-coordinate system. Due to spherical symmetry, this can be rewritten as:
+is the position vector in the $\xi\eta\zeta$-coordinate system. 
+Due to spherical symmetry, this can be rewritten as:
 \begin{equation}
 \oiint_{\tilde{S}} \frac{d V(\tilde{R})}{d\tilde{R}} d{\tilde{S}}  = - \frac{I}{\sqrt{\sigma_x\sigma_y\sigma_z}}
 \label{eq:AppAniso:berit1ogenhalv}
