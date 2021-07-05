@@ -478,7 +478,7 @@ Solutions of the inverse problem must therefore always rest on some
 \textit{a-priori} assumptions regarding the distributions of neural sources. 
 
 We will not be dwelling much with the inverse-problem in this book, 
-and the reader may chose to skip this part, which is mainly about terminology. 
+and the reader may chose to skip this subscection, which is mainly about terminology. 
 However, readers who have consulted the MEG and EEG literature
 addressing the inverse problem, may have encountered concepts such
 as \textit{the impressed current}\index{Impressed current} and 
@@ -486,12 +486,12 @@ as \textit{the impressed current}\index{Impressed current} and
 and below, we will try to define these concepts and
 and explain how they relate to the source term in the CSD equation.
 
-Starting with a general current continuity equation: 
+Starting with a general current continuity equation, 
 \begin{equation} 
 {\bf \nabla} \cdot {\bf i_\text{tot}} = 0, 
 \label{eq:VC:inverse0}
 \end{equation}
-the theory for dealing with the inverse problems is often based on decomposing the current (density)
+equations for dealing with the inverse problems are often derived by decomposing the current (density)
 in either of the two following ways: 
 \begin{equation}
 {\bf i_\text{tot}} =  {\bf i}_\mathrm{imp} + \sigma {\bf \nabla} V_\mathrm{e}, 
@@ -499,16 +499,16 @@ in either of the two following ways:
 \end{equation}
 or, 
 \begin{equation}
-{\bf i_\text{tot}} = {\bf i}_\mathrm{imp} + \sigma_\text{t} {\bf \nabla} V_\mathrm{e}, 
+{\bf i_\text{tot}} = {\bf i}_\mathrm{imp} + \sigma_\text{t} {\bf \nabla} V_\mathrm{e}.
 \label{eq:VC:inverse2}
 \end{equation}
-where (in both cases), the first term has to do with cellular activity
+In both cases, the first term has to do with cellular activity
 and the second represents surrounding (assumed-to-be ohmic) volume currents.
 
 In \fref{eq:VC:inverse1}, the impressed current (${\bf i}_\mathrm{imp}$)
 is taken to represent actual local transmembrane neuronal currents, 
 meaning that it is nonzero only at exact sites of membrane activity. 
-The problem with this definition is that it represents a "very fine grained" way of thinking.
+This definition poses some problems in that it represents a very "fine grained" way of thinking.
 There are essentially two ways by which $V_\mathrm{e}$ can change in tissue: 
 either by a change in ${\bf i}_\mathrm{imp}$, 
 or by a change (however local) in $\sigma$. 
@@ -527,23 +527,23 @@ length scale of about 1 mm. Hence, in this case $\sigma_\text{t}$ has
 the interpretation as the macroscopic tissue conductivity as we have defined it previously.
 As ${\bf i}_\mathrm{pri}$ is believed to predominantly reflect
 transmembrane (i.e., impressed) cellular currents, some authors have
-used impressed currents and primary currents as interchangeable terms. 
-However, whereas ${\bf i}_\mathrm{imp}$ is explicitly defined as membrane currents, 
-${\bf i}_\mathrm{pri}$ can be defined in a rather non-binding way 
+used "impressed currents" and "primary currents" as interchangeable terms. 
+However, whereas ${\bf i}_\mathrm{imp}$ by definition represents membrane currents, 
+${\bf i}_\mathrm{pri}$ is defined in a less binding way 
 as ${\bf i}_\mathrm{pri} = {\bf i}_\text{tot}-\sigma_\text{t} {\bf \nabla} V_\mathrm{e}$, 
 i.e., as "all current that is not explained by the macroscopic tissue current" \cite*{Ilmoniemi2019}.
 
 In forward modeling the distinction between impressed and primary currents
 is not so relevant, since there will not be any microscopic conductivity changes
 in the tissue near simulated cellular current sources unless we explicitly put them into the model. 
-Regarding spatial scale, the CSD equation (\fref{eq:VC:CSDit}) is on the same
+The CSD equation (\fref{eq:VC:CSDit}) is on the same
 macroscopic scale as the \fref{eq:VC:inverse2}. If we compare the two, 
 we can see that derive the former from the latter by 
 defining the current source density as the divergence of the primary current:
-
 \begin{equation}
 C = - {\bf \nabla} \cdot {\bf i}_\mathrm{p}.
 \end{equation}
+
 
 
 
