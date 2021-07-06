@@ -490,7 +490,9 @@ or,
 {\bf i_\text{tot}} = {\bf i}_\mathrm{p} + \sigma_\text{t} {\bf \nabla} V_\mathrm{e}, 
 \label{eq:VC:inverse2}
 \end{equation}
-In both cases, the first term on the right has to do with cellular current sources
+where it is implicit that the current densities have been subject to some (not yet defined)
+spatial averaging, which is why the derivation of the CSD equation in \fref{sec:VC:C2} is more formal.
+In both the equations above, the first term on the right has to do with cellular current sources
 and the second represents surrounding (assumed-to-be ohmic) volume currents.
 The difference between the two equations has mainly to do with spatial scale. 
 
@@ -533,7 +535,8 @@ is not so relevant, since there will not be any microscopic conductivity changes
 unless we explicitly put them into the model. 
 
 By requiring current conservation ($\nabla\cdot{\bf i_\text{tot}}=0$), 
-and by identifying the current source density as $C = -\nabla\cdot{\bf i}_\mathrm{p}$, 
+and by identifying the current source density as $C = -\nabla\cdot{\bf i}_\mathrm{p}$
+(equivalent to \fref{eq:VC:Sergey4}), 
 we see that \fref{eq:VC:inverse1} is equivalent with the CSD-equation (\fref{eq:VC:CSDit}).
 
 
