@@ -462,88 +462,79 @@ A further discussion of the tissue current ${\bf i}_\text{t}$ and its conductivi
 is given in \Fref{sec:Sigma:St}.
 
 
-\subsection{\blue{The inverse problem: Impressed versus primary currents}}
-\label{sec:VC:C4}
-When presenting the CSD equation above (\fref{eq:VC:CSDit}), 
-we focused on its use in the context of forward modeling, 
-i.e., the modeling of extracellular potentials arising from a set of known neuronal sources ($C$). 
-A continuity equation on this form is also the foundation 
-for addressing the inverse problem: i.e., the problem of predicting 
-neuronal current sources from recorded electric (or magnetic fields).
-Unlike the forward problem, the inverse problem is ill-posed, 
-meaning that it generally does not have a unique solution,
-as different distributions of current sources (different $C$'s)
-can give rise to the same extracellular potential. 
-Solutions of the inverse problem must therefore always rest on some
-\textit{a-priori} assumptions regarding the distributions of neural sources. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{\blue{Impressed versus primary currents}}
+\label{sec:VC:C4}\index{Inverse problem}
+Readers well versed in the literature on electric and magnetic fields in the brain
+may have come across terms such as \textit{the impressed current density}\index{Impressed current}
+and \textit{the primary current density}\index{Primary current}.
+As there is some confusion in the field regarding the interpretation of these terms, 
+we will here try to explain their meaning, as well as how they relate to the source term in the CSD equation.
+
+The reference to impressed or primary currents, and the distinction between them, 
+is mainly made in literature addressing the inverse problem, 
+i.e., the problem of predicting cellular current sources from recorded electric (or magnetic) fields.
+as opposed to the forward modeling, where one computes electric (or magnetic) fields
+from known (simulated) current source.
 We will not be dwelling much with the inverse-problem in this book, 
-and the reader may chose to skip this subscection, which is mainly about terminology. 
-However, readers who have consulted the MEG and EEG literature
-addressing the inverse problem, may have encountered concepts such
-as \textit{the impressed current}\index{Impressed current} and 
-\textit{the primary current}\index{Primary current}, 
-and below, we will try to define these concepts and
-and explain how they relate to the source term in the CSD equation.
+and the reader may chose to skip this subsection, which is mainly about terminology. 
 
-Starting with a general current continuity equation, 
-\begin{equation} 
-{\bf \nabla} \cdot {\bf i_\text{tot}} = 0, 
-\label{eq:VC:inverse0}
-\end{equation}
-equations for dealing with the inverse problems are often derived by decomposing the current (density)
-in either of the two following ways: 
+Less formal formulations of the forward problem often start by writing the current density in tissue as
 \begin{equation}
-{\bf i_\text{tot}} =  {\bf i}_\mathrm{imp} + \sigma {\bf \nabla} V_\mathrm{e}, 
+{\bf i_\text{tot}} =  {\bf i}_\mathrm{i} + \sigma {\bf \nabla} V_\mathrm{e}, 
 \label{eq:VC:inverse1}
 \end{equation}
 or, 
 \begin{equation}
-{\bf i_\text{tot}} = {\bf i}_\mathrm{imp} + \sigma_\text{t} {\bf \nabla} V_\mathrm{e}.
+{\bf i_\text{tot}} = {\bf i}_\mathrm{p} + \sigma_\text{t} {\bf \nabla} V_\mathrm{e}, 
 \label{eq:VC:inverse2}
 \end{equation}
-In both cases, the first term has to do with cellular activity
+In both cases, the first term on the right has to do with cellular current sources
 and the second represents surrounding (assumed-to-be ohmic) volume currents.
+The difference between the two equations has mainly to do with spatial scale. 
 
-In \fref{eq:VC:inverse1}, the impressed current (${\bf i}_\mathrm{imp}$)
-is taken to represent actual local transmembrane neuronal currents, 
-meaning that it is nonzero only at exact sites of membrane activity. 
-This definition poses some problems in that it represents a very "fine grained" way of thinking.
-There are essentially two ways by which $V_\mathrm{e}$ can change: 
-either by a change in ${\bf i}_\mathrm{imp}$, 
-or by a change (however local) in $\sigma$. 
-As argued by \citeasnoun**{hari1986}, both these changes are likely to take place
-in or near membranes during the activation of a synapse or ion channel, 
-but we do not have sufficient insight into the tissue microstructure
-to describe a $\sigma$ that varies dynamically and locally on this scale.
+\Fref{eq:VC:inverse1} is defined on a fine-grained scale, where
+${\bf i}_\mathrm{i}$ is the impressed current density\index{Impressed current}, 
+which exclusively reflects transmembrane neural currents and is nonzero 
+only on sites of cellular activity, and where $\sigma = \sigma({\bf r})$
+is the local conductivity. As argued by \citeasnoun**{hari1986}, a change in $V_\mathrm{e}$
+can generally reflect either a change in ${\bf i}_\mathrm{i}$ or a change (however local) in $\sigma$, 
+and both these changes are likely to take place near membranes during the activation of a synapse or ion channel.
+As we do not have sufficient insight into the tissue microstructure
+to describe a $\sigma$ that varies dynamically and locally on this scale, 
+it has been suggested that \fref{eq:VC:inverse1} should be replaced with
+\fref{eq:VC:inverse2}, where the involved variables are considered 
+on a coarse-grained (tissue averaged) length scale of about 1 mm \cite**{tripp1983,hari1986,sarvas1987,Ilmoniemi2019}.
 
-For the reasons given above, it has been advised that ${\bf i}_\mathrm{imp}$
-should be substituted with the primary current ${\bf i}_\mathrm{pri}$, 
-and that \fref{eq:VC:inverse2} should be used in place of \fref{eq:VC:inverse1}
-\cite**{tripp1983,hari1986,Ilmoniemi2019}.
-The two equations have the same form, but in the latter, 
-the involved variables are considered on a coarse-grained (tissue averaged) 
-length scale of about 1 mm. Hence, in this case $\sigma_\text{t}$ has
-the interpretation as the macroscopic tissue conductivity as we have defined it previously.
-As ${\bf i}_\mathrm{pri}$ is believed to predominantly reflect
+In \fref{eq:VC:inverse2}, the problem is tackled at the same spatial scale
+as our previously derived CSD-equation (\fref{eq:VC:CSDit}).
+Here, $\sigma_\text{t}$ has the interpretation of a macroscopic tissue conductivity as we have defined it previously, 
+while ${\bf i}_\mathrm{p}$ is referred to as the \textit{primary current density}\index{Primary current}, 
+which incorporates both ${\bf i}_\mathrm{i}$ and the above mentioned
+microscopic changes in conductivity \cite**{tripp1983}.
+As ${\bf i}_\mathrm{p}$ is believed to predominantly reflect
 transmembrane (i.e., impressed) cellular currents, some authors have
 used "impressed currents" and "primary currents" as interchangeable terms. 
-However, whereas ${\bf i}_\mathrm{imp}$ by definition represents membrane currents, 
-${\bf i}_\mathrm{pri}$ is defined in a less binding way 
-as ${\bf i}_\mathrm{pri} = {\bf i}_\text{tot}-\sigma_\text{t} {\bf \nabla} V_\mathrm{e}$, 
+However, whereas ${\bf i}_\mathrm{i}$ by definition includes only transmembrane contributions, 
+${\bf i}_\mathrm{p}$ is defined in a less binding way 
+as ${\bf i}_\mathrm{p} = {\bf i}_\text{tot}-\sigma_\text{t} {\bf \nabla} V_\mathrm{e}$, 
 i.e., as "all current that is not explained by the macroscopic tissue current" \cite*{Ilmoniemi2019}.
 
-In forward modeling the distinction between impressed and primary currents
+As we noted above, the distinction between impressed and primary current densities
+are mainly made by scientists addressing the inverse problem.
+The reference to a primary (instead of an impressed) current density then amounts to
+admitting that not everything measured by necessity must reflect transmembrane 
+sources, but possibly also secondary local conductivity changes, or even
+other sources, such as e.g., extracellular diffusion (see \fref{chap:Eldiff}).
+In forward modeling, the distinction between impressed and primary currents
 is not so relevant, since there will not be any microscopic conductivity changes
-in the tissue near simulated cellular current sources unless we explicitly put them into the model. 
-The CSD equation (\fref{eq:VC:CSDit}) is on the same
-macroscopic scale as the \fref{eq:VC:inverse2}. If we compare the two, 
-we can see that derive the former from the latter by 
-defining the current source density as the divergence of the primary current:
-\begin{equation}
-C = - {\bf \nabla} \cdot {\bf i}_\mathrm{p}.
-\end{equation}
+(or diffusive currents) in the tissue near simulated cellular current sources 
+unless we explicitly put them into the model. 
 
+By requiring current conservation ($\nabla\cdot{\bf i_\text{tot}}=0$), 
+and by identifying the current source density as $C = -\nabla\cdot{\bf i}_\mathrm{p}$, 
+we see that \fref{eq:VC:inverse1} is equivalent with the CSD-equation (\fref{eq:VC:CSDit}).
 
 
 
