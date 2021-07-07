@@ -7,20 +7,20 @@ formalisme for simuleringer.}
 
 By necessity, the transmembrane ionic currents produced by active neurons 
 cause intra- and extracellular ion concentrations to vary with time.
-However, the number of ions that cross a neuronal membrane during the generation of
-an action potential (or other brief neuronal event) is quite small, and only has a very minor
-impact on the ion concentrations on either side of the membrane (see, e.g., \citeasnoun**[Box 2.2]{Sterratt2011}).
-For this reason, concentration changes on a short time scale are normally negligible.
+However, as we explained in \fref{sec:Neuron:Ions_and_reversals}, 
+the number of ions that cross a neuronal membrane during the generation of
+an action potential (or other brief neuronal event) is too small to have a notable impact
+on the ion concentrations inside a neuron. 
+Short-term concentration changes on the cellular level are therefore normally negligible.
 Furthermore, neurons and glia cells contain a homeostatic machinery consisting of ion pumps and cotransporters,
 which constantly works to reverse the ionic exchange that occurs during neuronal signaling.
 Thanks to this machinery, ion concentrations tend to remain close to constant also on a longer time scale. 
 In standard multicompartment (MC) neuron models, 
-the homeostatic machinery is not explicitly modelled, but simply assumed to do its job, 
+the homeostatic machinery is therefore not explicitly modeled, but simply assumed to do its job, 
 and accordingly, ion concentrations are assumed to be constant. 
 
-Under normal conditions, 
-the assumption that ion concentrations remain constant is probably a good approximation. 
-However, there are scenarios when concentrations can deviate quite dramatically from baseline, 
+While the assumption of constant ion concentrations probably holds fairly well during normal cellular activity, 
+there are scenarios when concentrations can deviate quite dramatically from baseline, 
 either because the homeostatic machinery is impaired, for example due to lacking blood or oxygen supply,  
 or because the neuronal activity is so intense that the homeostatic machinery fails to keep up. 
 Notable changes in extracellular ion concentrations is a trademark of many pathological conditions, 
@@ -35,17 +35,18 @@ Shifts in (i) transmembrane concentration gradients will affect neuronal reversa
 (see e.g., \cite**{Cressman2009,Zandt2011,Oyehaug2012,WeiUllahSchiff2014,Saetra2020}). 
 If (ii) intracellular concentration gradients become large, 
 longitudinal diffusion can become of comparable magnitude to electric drift currents, 
-and standard MC models, accounting only for the latter, become inaccurate \cite**{Qian1989}. 
+and standard MC models, accounting only for the latter, become inaccurate \cite**{Qian1989,Saetra2021}. 
 If (iii) extracellular concentration gradients become large, 
 diffusive currents through the extracellular space can evoke so-called \textit{diffusion potentials}\index{Diffusion Potential} 
-\cite**{Gardner-Medwin1981,Dietzel1989,Halnes2016}. 
+\cite**{Gardner-Medwin1981,Dietzel1989,Herreras1993}. 
 If they are present, these diffusion potentials will give contributions to the total extracellular potential ($V_\text{e}$)
-that are not accounted for by standard volume conductor (VC) theory.
+that are not accounted for by standard volume conductor (VC) theory \cite**{Halnes2016,Halnes2017,Solbraa2018}.
 
 Focusing on extracellular diffusion potentials, the objective of this chapter
 is to evaluate whether diffusion potentials can be expected to contribute 
 to measured local field potentials, or if (as normally assumed), 
 the local field potentials exclusively reflect the distribution of transmembrane cellular currents. 
+
 
 In the presence of extracellular concentration gradients, 
 it can be shown (\ghnote{HENVIS}) that current conservation in brain tissue requires that: 
@@ -78,8 +79,6 @@ and
 \nabla \cdot (\sigma_\text{t}\nabla V_\text{d}) = - F\alpha \nabla \cdot \left (\sum_k{z_k \tilde{D}_k{\bf \nabla} c_{k}} \right).
 \label{eq:Eldiff:EDCSDdiff}
 \end{equation}
-
-
 
 
 For a more direct comparison, we can multiply eq.  \ref{eq:Eldiff:eldiffCSD2} with the extracellular volume fraction $\alpha$, and get:
