@@ -1,15 +1,22 @@
-\chapter{Extracellular conductivity}
+\chapter{The conductivity of brain tissue}
 \label{chap:Sigma}
 \index{Conductivity}
-In \fref{chap:Neuron} we saw that neural activity causes transmembrane currents, and 
-in \fref{chap:VC} we introduced volume conductor (VC) theory, a framework that links such transmembrane currents to extracellular potentials, based on some simplifying assumptions regarding how
+In \fref{chap:Neuron} we presented a framework for simulating the transmembrane currents of neurons, 
+and in \fref{chap:VC} we introduced volume conductor (VC) theory, a framework that links such transmembrane currents to extracellular potentials, based on some simplifying assumptions regarding how
 currents make their way through the surrounding tissue.
 
-In most applications of VC theory, the conductivity of brain tissue ($\sigma_\text{t}$) is assumed to be constant, 
+The main topic of the current chapter is the macroscopic conductivity ($\sigma_\text{t}$) of brain tissue. 
+We have used the subfix "t" to indicate that $\sigma_\text{t}$ (as we defined it in the beginning of \Fref{chap:VC})
+is the conductivity for the macroscopic current per unit \texit{tissue} cross section area. 
+This is the standard definition of the conductivity used in VC theory, and in most applications, 
+$\sigma_\text{t}$ is simply denoted $\sigma$. 
+The motivation for introducing the subfix "t" here is mainly to distinguish it from some other possible
+conductivity definitions, which we will discuss below. 
+
+In most applications of VC theory,  $\sigma_\text{t}$ is assumed to be constant, 
 as we also assumed throughout \Fref{chap:VC}. 
-Its value is then normally taken from some experimental measurement. 
-A commonly used value is $\sigma_\text{t} = 0.3$ \si{S/m}, 
-but we discuss other, both experimental and theoretical, estimates later on in this chapter 
+A commonly used experimental value is $\sigma_\text{t} = 0.3$ \si{S/m}.
+Other estimates, both experimental and theoretical, will de discussed later on in this chapter 
 (\Fref{sec:Sigma:continuous}-\ref{sec:Sigma:f-independent}). 
 
 The use of a constant $\sigma_\text{t}$ amounts to assuming that brain tissue is 
@@ -30,6 +37,7 @@ Such a picture is established through the continuous, porous medium approximatio
 \label{sec:Sigma:continuous}
 \index{Continuous medium}\index{Porous medium}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ghnote{Klas vil putte inn en fotnote om Nansen.}
 The idea of the brain as being composed of individual neurons communicating through synapses 
 dates back to the works by Santiago Ram\'{o}n y Cajal in the late 19th century.
 Using a silver-staining technique developed earlier by Camillo Golgi, 
@@ -42,18 +50,13 @@ and illustrated them in his famous and beautiful drawings \cite**{cajal1899}.
 \end{center}
 \caption[]{\textbf{Illustration of brain tissue.} 
 ({\bf A})  Example of Cajal drawing, depicting of purkinje neurons (downloaded from \url{https://commons.wikimedia.org}). 
-({\bf B}) Illustration of a tissue transection. Extracellular space (light blue) occupies only a fraction $\alpha$ 
-of the total tissue volume, and has a highly tortuous structure. The tortuosity, $\lambda$, 
-is defined as the ratio between the shortest pathway between two points in space 
-and the euclidian distance between these two points, 
-and accounts for the fact that ions traveling through the medium do not travel in straight lines, 
-but need to take detours around cellular obstacles. 
-$\alpha$ and $\lambda$ vary on the microscopic scale. 
-For example, the shortest path (red dotted curve) between locations $r_0$ and $r_1$ 
-is more tortuous than the path between locations $r_0$ and $r_2$.  
+({\bf B}) Illustration of a tissue transection. Extracellular space (light blue) occupies only a fraction
+of the total tissue volume. On a small spatial scale, the tissue is highly inhomogeneous. 
+The shortest extracellular pathway between two points depend strongly on the microstructure 
+(obstacles faced along the journey).
+In this example, the travel distance A -- B $>$ A--C, although the euclidian distances are the same in both cases. 
 ({\bf C}) On a larger spatial scale, local inhomogeneities average out, 
 and the tissue can be treated as homogeneous. 
-Typical tissue averages for $\alpha$ and $\lambda$ are 0.2 and 1.6, respectively \cite**{Nicholson1998,Sykova2008}. 
 }
 \gen{Kunne vaert fint med scalebars i disse figurene.}
 \gen{Litt forvirrende at punktene A, B og C er plassert likt i panelene B og C?}
@@ -74,7 +77,7 @@ It has been argued that tissue currents are predominantly confined
 to the extracellular part of the medium, meaning that cellular structures mainly act as
 non-conducting obstacles, forcing tissue currents to follow narrow winding extracellular pathways around cell bodies
 \cite**{Robinson1968,Nunez2006}.
-However, there is also evidence that a substantial fraction of tissue currents do cross
+However, other evidence suggest that a substantial fraction of tissue currents do cross
 neural membranes and make parts of their journey along intracellular pathways \cite**{Okada1994}.
 In any case, the presence of cells will force tissue currents to either cross the quite resistive cellular membranes
 or take detours around cellular structures. We therefore expect the effective tissue conductivity to be lower than 
