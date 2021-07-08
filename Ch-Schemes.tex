@@ -21,6 +21,35 @@ Among all existing schemes, HHC+VC is the by far most "user-friendly" scheme, an
 
 %%%%%%%%%%%%%%%%%%
 
+
+\section{\blue{GH: Self-consistent scheme for intra- and extracellular potentials} }
+\label{sec:VC:EMI}
+\index{Ephaptic effects}
+\ghnote{Dette delkap er parkert her midlertidig. Klippet inn fra LFPy-kapittelet, men skal integreres her. }
+\ehnote{har latt teksten i dette delkapitlet vaere uten endringer. Dette flyttes tilbake igjen til slutten eller helt ut av kapitlet.}
+
+
+Ephaptic effects refers to the phenomenon where the extracellular potential affects the membrane potential dynamics of neurons. The possible importance of ephaptic effects has been the topic of many studies, addressing in various ways how extracellular electric fields may affect neuronal firing or signal propagation in axons (see e.g., \cite**{clark1970,Rall1977,Holt1999,Bokil2001,anastassiou2010,anastassiou2015,Goldwyn2016,capllonch2020,ruffini2020}).
+
+Most of these studies have been based on some simplified approximations as to how evoked fields from one neuron affect other neurons, and less focus has been put on how the presence of ephaptic effects will affect the extracellular potential itself. Rigorous modeling of this, requires that the intra- and extracellular dynamics are modeled simultaneously on a unified framework based on VC theory. Such a framework exists \cite**{Krassowska1994,Agudelo-Toro2013,Tveito2017}, and was in a recent publication referred to as the extracellular-membrane-intracellular (EMI) framework \cite**{Tveito2017}.
+
+Here, we briefly describe the essence of the EMI framework. It is based on (Ohmic) current conservation in the intra- and extracellular spaces, so that:
+\begin{equation}
+\nabla \cdot \sigma_r \nabla \phi_r = 0,
+\label{eq:VC:EMI}
+\end{equation}
+where $r$ takes the indices `$\text{i}$' (intracellular space) or `$\text{e}$' (extracellular space). 
+The intra- and extracellular dynamics are coupled through suitable boundary condictions at the membrane, making sure that a current \textit{entering} the membrane (normal component) at one side of the membrane, is constrained to be identical to the current \textit{leaving} the membrane (negative normal component) on the opposite side \cite**{Krassowska1994}. 
+These entering and leaving currents are in turn determined by a set of mechanisms that jointly determine the transmembrane current $I_\text{m}$. 
+In previous numerical implementations of the EMI framework, the membrane currents were modeled with Hodgkin-Huxley like kinetics \cite**{Agudelo-Toro2013,Tveito2017}.
+
+Compared to the two-step MC+VC framework, EMI has the disadvantage that it is computationally expensive. In the MC+VC scheme, which uses volume conduction modeling only for the extracellular space, $\phi_e$ can be computed as an analytical function of the transmembrane neural currents (cf. Chapter \ref{chap:VC}). Using EMI, analytical examples of solutions can only be obtained for idealized scenarios \cite**{Krassowska1994}, while general EMI applications require that both the intra- and extracellular spaces are spatially resolved and their dynamics computed on a numerical framework \cite**{Agudelo-Toro2013,Tveito2017}.
+
+Using EMI to simulate larger systems with realistic morphologies would probably exceed the capacity of today's computers. However, EMI has been used to perform a systematic exploration of the inaccuracies induced when ignoring ephaptic effects in a small system of neurons represented with stylized geometries  \cite**{Tveito2017}.
+Even more sophisticated frameworks than EMI can, in addition to accounting for ephaptic effects, also account for effects of changing ion concentrations. 
+We will \ehtxt{introduce} this in \Fref{chap:Eldiff}, where we consider electrodiffusive transports in brain tissue.
+
+
 \section{\blue{Self-consistent electrodiffusive schemes}}
 \label{sec:Schemes:complete}
 \index{Electrodiffusion} \index{Nernst-Planck equation}
