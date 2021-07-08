@@ -314,9 +314,10 @@ taken by the currents evoked by the (simulated) sources $C$.
 %\ghnote{GH: Skrev skisse til dette. Puttet figuren m/ sigma-maalinger inn her, da disse ser ut til aa primaert diskuteres opp mot eventuell frekvensavhengighet. Mulig vi burde ha med "eksperimentelle maalinger i kapittel-tittelen?}
 %Regardless of the level of isotropy and homogeneity of a medium, its response to an imposed alternating current can depend on the frequency of the current. Then, the conductivity contains a resistive part, which is real and frequency independent, and an imaginary part that accounts for capacitive and inductive effects that are frequency dependent.
 An important question when modeling and interpreting electric signals in neuroscience 
-is whether the conductivity of neural tissue ($\sigma_\text{t}$) has a frequency dependence 
-(in which case it would be called the impedance spectrum \gen{Upresis formulering}). 
-If it does, extracellular potentials will be distorted \tvntxt{\sout{as they propagate through}by} the tissue, 
+is whether the conductivity of neural tissue ($\sigma_\text{t}$) has a frequency dependence. 
+\tvntxt{How the conductivity, or equivalently the resistivity, of a material
+changes with frequency is often referred to as the admittance or impedance spectrum, respectively.} 
+If \tvntxt{the conductivity of neural tissue is frequency dependent}, extracellular potentials will be distorted \tvntxt{\sout{as they propagate through}by} the tissue, 
 \tvntxt{and be biased} towards certain parts of the frequency spectrum. 
 In this subsection we will briefly review some experimental measurements investigating this issue, 
 as well as the theory needed to model such effects, should it be deemed necessary.
@@ -633,6 +634,7 @@ Data from \citeasnoun**{gabriel1996compilation} suggests that relative permittiv
 $\epsilon_\text{r}$, decreases from $4\times10^7$ to $1.6\times 10^5$ over the frequency range from 10 to 1000 \si{\hertz}. 
 \gen{Hmmm... Hva er $\epsilon_r$ maalt relativt til? I forhold til vakuum saa er $\epsilon_r$ mindre enn 10 for membranen og omtrent 80 for vann (ved lave frekvenser).}
 \gen{Tror det finnes det andre nyere referanser her i tillegg til Gabriel.}
+\tvnnote{Kan se paa Wagner et al. 2014 for eksempel.}
 In comparison, the conductivity does not vary as much with frequency, 
 and if we assume that it is constant and has a typically measured value 
 $\sigma_\text{R} = \sigma_\text{t} = 0.3 \, \si{S/m}$ \cite**{Goto2010}, 
@@ -775,8 +777,8 @@ In principle, one can still always solve \fref{eq:VC:CSD2} for arbitrarily compl
 with varying conductivities using numerical methods, like the Finite Element Method (FEM) \cite**{Logg2012}. 
 This approach has for example been used to model electroencephalography (EEG) signals 
 recorded outside of the head, because these potentials are not only affected by the conductivity of brain tissue, 
-but also by the presence of the cerebrospinal fluid (CSF), skull and scalp, which have widely different conductivities. 
-\ghnote{Sitering paa dette?} EEG-modeling is covered in more detail in \fref{chap:EEG}. 
+but also by the presence of the cerebrospinal fluid (CSF), skull and scalp, which have widely different conductivities \cite**{Nunez2006}. 
+EEG-modeling is covered in more detail in \fref{chap:EEG}. 
 Substantial inhomogeneities can also be introduced into neural tissue through the presence of big electrode shanks, 
 as briefly discussed in \fref{sec:VC:elec_shafts}.
 %For examples of neuroscience applications using this approach, see \cite**{Moffitt2005,Frey2009,Joucla2012,Haufe2015,Ness2015,Buccino2019b,Obien2019}.
@@ -791,7 +793,11 @@ for idealized cases with planar boundaries between different tissue-types or dif
 In such cases, the \textit{Method of Images} (MoI)\index{Method of Images} from electrostatics \cite**{Jackson1998} 
 can be used to account for the effect of a planar boundary on the extracellular potential 
 arising from underlying current sources \cite**{Gold2006,Pettersen2006,Nunez2006,Ness2015,Obien2019}. 
-This method is based on introducing virtual current sources on the opposite side of the boundary 
+This method is based on introducing virtual current sources
+\tvntxt{to ensure that the necessary boundary conditions on the planar boundary is fulfilled. 
+As an example, consider a point current source near a planar boundary to a non-conducting region. We know that no current can flow into the non-conducting region, and this boundary condition can be fulfilled by ensuring that the potential exactly at the boundary is constant in the direction perpendicular to the planar boundary (otherwise there would be current flow, see \fref{eq:Basics:Ohm_3D_phi}). This can be accomplished by mirroring the point current source across the planar boundary, since the symmetry of this arrangement removes the potential gradient perpendicular to the boundary at the location of the boundary.
+In general, the virtual current sources are always placed}
+ on the opposite side of the boundary 
 with the same distance to the boundary as the original point current sources,
 and with the amplitudes scaled by \cite**{Nunez2006,Ness2015},
 \begin{equation}
@@ -800,7 +806,7 @@ W = \frac{\sigma_1 - \sigma_2}{\sigma_1 + \sigma_2},
 \end{equation}
 where $\sigma_1$ is the conductivity of the region containing the real current sources,
 and $\sigma_2$ is the conductivity of the region on the other side of the boundary containing the virtual sources.
-\gen{Kanskje si at dette tricket soerger for riktige grensebetingelser (og fortelle hva disse er) paa grenseflaten?}
+\gen{Kanskje si at dette tricket soerger for riktige grensebetingelser (og fortelle hva disse er) paa grenseflaten?}\tvnnote{Greit naa?}
 
 The MoI has been used to model effects near the cortical surface during {\it in vivo} recordings.
 In such recordings, the cortical surface\index{Cortical surface! Measurement effects} must typically be exposed
