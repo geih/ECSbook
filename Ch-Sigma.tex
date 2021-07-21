@@ -116,23 +116,34 @@ since we in most experimental settings do not know the exact microstructure of t
 
 When treated as a continuous porous medium, the structure of brain tissue is 
 defined by two key parameters \cite**{Nicholson1981}. 
-The first parameter, $\alpha$, is the fraction of the tissue volume that is extracellular space. 
+The first parameter, $\alpha$, is the fraction of the tissue volume that is extracellular space:
+\begin{equation}
+\alpha = \frac{\mathrm{Vol}_\mathrm{extracellular}}{\mathrm{Vol}_\mathrm{tissue}}
+\label{eq:Sigma:alpha_dog}
+\end{equation}
+
 The second parameter, $\lambda$, is the tortuousity\index{Tortuosity} of the extracellular medium.
-\ghtxt{The tortuousity accounts for the fact that agents moving extracellularly through the medium 
-cannot travel in straight lines, but must take detours around cellular obstacles.
 The tortuosity may have different definitions in different disciplines, 
 but in studies of neural tissue it has simply been defined as the ratio
 between the diffusion constant $D^*$ in the tissue compared to its value $D$ in a free medium \cite**{Sykova2008}:
 \begin{equation}
-\lambda = \frac{D}{D^*}, 
+\lambda = \sqrt{\frac{D}{D^*}}, 
 \label{eq:Sigma:tort_og_svie}
-\end{equation}}
- 
+\end{equation}
+As reviewed in \cite**{Sykova2008}, the tortuousity may reflect a a variety of different hindrances
+faced by diffusive agents in the medium, including 
+(i) physical obstacles to free diffusion represented by cell bodies, which
+force diffusive agents to take detours around them,  
+(ii) transient trapping of diffusive agents in dead-space microdomains, such as cellular cavities, 
+(iii) chemical interaction between diffusive agents and molecules in the extracellular matrix, 
+(iv) unknown electric interactions between diffusive agents and molecules in the extracellular matrix, 
+and (v) physical obstacles to free diffusion represented by molecules in the extracellular matrix. 
+
 The parameters $\alpha$ and $\lambda$ can be estimated experimentally
 by measuring diffusion of tracer molecules believed to stay confined within the extracellular
-fraction of tissue \cite**{Nicholson1981,Sykova2008}. \ghtxt{Several studies have been performed
+fraction of tissue \cite**{Nicholson1981,Sykova2008}. Several studies have been performed
 to determine these quantities. We do not present them in any detail here,  
-but the interested reader can visit the comprehensive review paper by \citeasnoun**{Sykova2008}.}
+but the interested reader can visit the comprehensive review paper by \citeasnoun**{Sykova2008}.
 Typical estimates are $\alpha = 0.2$ and $\lambda = 1.6$,
 although these values can vary between brain regions, 
 and also locally within a brain region, due to brain-state dependent cellular swelling or shrinkage \cite**{Sykova2008,rasmussen2020}.
@@ -231,6 +242,57 @@ are 0.2 and 1.6, respectively \cite**{Nicholson1981,Nicholson1998,Sykova2008}.
 With these values, $\sigma_\text{e}$ becomes almost a factor 13 lower than $\sigma_\text{saline}$, 
 and with the above estimate, $\sigma_\text{saline} = 1.72 \, \si{S/m}$, 
 we get a an estimated value $\sigma_\text{e} = 0.134\, \si{S/m}$. 
+\begin{equation}
+\sigma_\text{e} = \frac{\alpha}{\lambda^2} \sigma_\text{saline}.
+\label{eq:Sigma:sigmat}
+\end{equation}
+
+It is worth taking a brief side-step to compare \fref{eq:Sigma:sigmat} to corresponding relationships
+obtained through more theoretical approaches. An early example is the Maxwell-Rayleigh formula
+for the resistivity of medium with a homogeneous suspension of identical non-conductive bodies.
+This equation was listed as equation 4.1 in \citeasnoun**{Nunez2006}. 
+Expressed in terms of the parameters 
+$\sigma_\text{e}$, $\sigma_\text{saline}$ and $\alpha$, this equation takes the form:
+\begin{equation}
+\frac{\sigma_\text{e}}{\sigma_\text{saline}} = \frac{\alpha}{1+h(1-\alpha)},
+\label{eq:Sigma:MaxRay}
+\end{equation}
+where the new parameter $h$ depend on the structure of the non-conducting bodies, 
+so that $h=1/2$ for spheres, and $h = 1$ for cylinders 
+(assuming that the current direction is normal to the cylinder axes).  
+By comparing \fref{eq:Sigma:MaxRay} and \fref{eq:Sigma:sigmat} 
+we find that they are in agreement if:
+\begin{equation}
+h = \frac{\lambda^2-1}{1-\alpha}
+\label{eq:Sigma:Comp_MaxRay}
+\end{equation}
+For the typical values $\lambda = 1.6$ and $\alpha = 0.2$ this gives us $h \approx 2$, 
+meaning that the cell bodies in brain tissue makes an extracellular journey
+roughly four and two times as awkward an "extra-bodily" journey through a medium
+with suspended spheres and cylinders, respectively. 
+All in all, this does not sound too unreasonable. 
+However, it should be noted that the theoretical treatments rest rest on some assumptions
+that are violated. For example, it is not possible to pack spheres tight enough to obtain
+an extracellular volume fraction as low as $\alpha = 0.2$
+
+
+
+
+
+
+
+
+
+
+Already in 1981, \citeasnoun**{Maxwell1954}
+derived a relationship for the conductivity of a conductive medium when filled with 
+
+
+more 
+
+theoreticall
+
+
 
 \gen{Er det opplagt/sikkert gitt at $\lambda$ er definert i caption til Figur 5.1?}
 \ghnote{Du hadde nok et godt poeng her. Jeg droppet den teoretiske definisjonen
@@ -519,14 +581,6 @@ but will in the current chapter focus on endogenous signals.
 \subsection{\blue{Complex conductivity}}
 \label{sec:Sigma:Complex}
 \ghnote{Kan Gaute/Klas sjekke at om seksjonen ser akseptabel ut?}
-\ghnote{Tankegang rundt notasjon:
-Vi har tidligere kalt tissue-conductivity for $\sigma_\text{t}$, og vi har sagt at 
-$\sigma_\text{t}$ kan vaere frekvensavhengig. Ergo tenker jeg at vi boer
-kalle den $\sigma_\text{t}$ ogsaa naar den er kompleks, selv om andre (Nunes for eksempel)
-bytter navn paa den og kaller den $\sigma_\text{c}$ naar den blir kompleks. 
-Vi trenger da et navn paa realdelen, og jeg har nedenfor kalt den $\sigma_\text{Rt}$,
-the real part of tissue conductivity for aa skille den fra the real part of another conductivity.
-Notasjonen $\sigma_\text{R}$ brukes ogsaa i Miceli-artikkelen. Er dere ok med dette?}
 \ghnote{Det meste av dette delkap skrives for generelt medium - bare siste del
 handler spesifikt om tissue.}
 
@@ -536,70 +590,98 @@ handler spesifikt om tissue.}
 %\end{equation}
 %where $j$ is the imaginary unit, and where $\sigma_\text{Re}$ and $\sigma_\text{Im}$
 %are real and imaginary parts of
-An electric field oscillating with angular frequency $\omega = 2\pi f$ 
+If the conductivity of a medium is frequency dependent, its value will be a function of the
+oscillation frequency of the electric field. 
+To introduce such effects into the theory, it is convenient to use a complex notation. 
+
+A field oscillation with a single frequency component with angular frequency $\omega = 2\pi f$ 
 can be expressed in complex notation as:
 \begin{equation}
-{\bf E}^* = {\bf E}_\text{max}^*e^{\mathrm{j}\omega t}.
+\hat{\vec{{\bf E}}}(t) = {\bf E}_\text{0}e^{\mathrm{j}\omega t}, 
 \label{eq:Sigma:Eomega}
 \end{equation}
-Here, $\mathrm{j}$ is the imaginary unit, and we have used an asterix 
-to indicate that an entity is complex. \ghnote{Ok med asterix? Burde vi brukt miraculix?}
-The complex pre-factor, ${\bf E}_\text{max}^*$ contains both the amplitude and phase of the field. 
+where $\mathrm{j}$ is the imaginary unit, and we have used a hat to indicate that an entity is complex.
+The constant vector ${\bf E}_\text{0}$ contains the amplitude of the field. 
+We note that in general, we could allow ${\bf E}_\text{0}$ to be a complex constant, 
+which also included the phase of the field. 
+However, we here use the field as the reference, and define it to be "in phase with itself".
 
-We now assume that the oscillatory field exists in a macroscopic medium.
-If the conductivity of this medium is frequency dependent, its value will be a function of the
-oscillation frequency of the field. If the frequency dependence stems from linear capacitive effects in the medium,
-it can be incorporated into the theory through a complex conductivity, 
-$\sigma^*(\omega)$, so that currents obey:
+An alternating field will give rise to an electric current density that
+alternates with the same frequency $\omega$ as the field, 
 \begin{equation}
-{\bf i}^* = \sigma^*(\omega) {\bf E}^*.
-\label{eq:Sigma:itot3}
+\hat{{\bf i}}(t) = \hat{{\bf i}}_\text{0}e^{\mathrm{j}\omega t}.
+\label{eq:Sigma:Iomega}
 \end{equation}
-We note that \fref{eq:Sigma:itot3} is only valid in the frequency domain
-\footnote{One can move between the time domain and the frequency domain through Fourier transforms.}.
+The current density will generally not be in phase with the field,
+so that $\hat{{\bf i}}_\text{0}$ is a complex constant, 
+containing both the amplitude and phase of the current density.
 
-To define the complex conductivity, we start out with the total (resistive plus capacitive) 
-current density through the medium:
+If the frequency dependence in a medium stems from linear capacitive effects,
+the field and the current density can be related linearly by defining
+a complex conductivity, $\hat{\sigma}(\omega)$, so that:
 \begin{equation}
-{\bf i}^* = \sigma_\text{R}{\bf E}^* +  \epsilon \frac{\partial {\bf E}^*}{\partial t},
+\hat{{\bf i}}(t) = \hat{\sigma}(\omega) \hat{{\bf E}}(t), 
+\label{eq:Sigma:WhatWeWant}
+\end{equation}
+To derive an expression for $\hat{\sigma}(\omega)$, 
+we start out with the total (resistive plus capacitive) current density through the medium:
+\begin{equation}
+\hat{{\bf i}}(t) = \sigma_\text{R}\hat{{\bf E}}(t) +  \epsilon \frac{\partial \hat{{\bf E}}(t)}{\partial t},
 \label{eq:Sigma:itot}
 \end{equation}
 where $\epsilon$ is the permittivity of the medium, 
 and where we have let $\sigma_\text{R}$ denote the real (resistive) part of the conductivity 
-($\sigma_\text{R} = \mathrm{Re}\{\sigma_\text{t}*\}$).
-If we insert \fref{eq:Sigma:Eomega} into \fref{eq:Sigma:itot}, we can write the current density as:
+($\sigma_\text{R} = \mathrm{Re}\hat{\sigma}(\omega)$).
+
+If we insert the field (\fref{eq:Sigma:Eomega}) into \fref{eq:Sigma:itot}, we get
 \begin{equation}
-{\bf i}^* = \left( \sigma_\text{R} + \mathrm{j}\omega \epsilon \right) {\bf E}^*.
-\label{eq:Sigma:itot2}
+\hat{{\bf i}}(t) = \sigma_\text{R}\hat{{\bf E}}(t) +  \mathrm{j}\omega\epsilon\hat{{\bf E}}.
+\label{eq:Sigma:itot}
 \end{equation}
-By comparing this to \fref{eq:Sigma:itot3}, we see that the complex conductivity is defined by:
+By comparison with \fref{eq:Sigma:WhatWeWant}, we see that the
+complex conductivity is given by:
 \begin{equation}
-\sigma^*(\omega) = \sigma_\text{R}\left(1 + \frac{\mathrm{j} \omega \epsilon}{\sigma_\text{R}} \right).
+\hat{\sigma}(\omega) = \sigma_\text{R}\left(1 + \frac{\mathrm{j} \omega \epsilon}{\sigma_\text{R}} \right).
 \label{eq:Sigma:complex}
 \end{equation}
-The real and imaginary parts of $\sigma^*(\omega)$ describe the 
+The real and imaginary parts of $\hat{\sigma}(\omega)$ describe the 
 resistive and capacitive properties of the medium, respectively. 
 
+In \fref{eq:Sigma:WhatWeWant}, we can also eliminate the factor $e^{\mathrm{j}\omega t}$
+from both sides of the equations, to get an equation,
+\begin{equation}
+\hat{{\bf i}}_0(\omega) = \hat{\sigma}(\omega){{\bf E}}_0,
+\label{eq:Sigma:f-space}
+\end{equation}
+that no longer contains the time variable. We say that \fref{eq:Sigma:f-space} 
+is only defined the frequency domain. It relates the frequency and phase
+of the current density to the frequency and phase of the electric field,
+but does not contain information about where we are in the cycle. 
+\footnote{One can move between the time domain and the frequency domain through Fourier transforms.}.
+
+If brain tissue has a frequency dependent conductivity, we may denote it by $\hat{\sigma_\text{t}}(\omega)$.
 We note that we up until this point have denoted the tissue conductivity simply by $\sigma_\text{t}$, 
-and we have mainly though of it as being purely resistive.
-However, to be precise, we from now on let $\sigma_\text{Rt}$ denote the resistive 
-part of the tissue conductivity, 
-i.e., the real part of the (possibly) complex and more general tissue conductivity, $\sigma_\text{t}^*$.
+as we have mainly spoken of its resistive properties. 
+However, to be precise, we will for the remainder of the current subchapter
+let $\sigma_\text{Rt}$ denote the resistive part of the tissue conductivity, 
+i.e., the real part of the (possibly) complex and more general tissue conductivity, $\hat{\sigma_\text{t}}(\omega)$.
 
 If we use a complex conductivity as a starting point for VC theory,  
 the (frequency independent) point-source equation (\fref{eq:VC:pointsource}) 
-must be replaced with a frequency dependent point-source equation \cite**{plonsey1967,Bossetti2008,Miceli2017}:
+can be replaced with a frequency dependent point-source equation \cite**{plonsey1967,Bossetti2008,Miceli2017}:
 \begin{equation}
-V_\mathrm{e}^*({\bf r}, \omega) = \frac{I^*(\omega)}{4\pi (\sigma_\text{Rt} + \mathrm{j} \omega \epsilon_\text{t}) r}, 
+\hat{V_\mathrm{e}}({\bf r}, \omega) = \frac{\hat{I}(\omega)}{4\pi (\sigma_\text{Rt} + \mathrm{j} \omega \epsilon_\text{t}) r},
 \label{eq:Sigma:pointsource_freq_dep}
 \end{equation}
-In \fref{eq:Sigma:pointsource_freq_dep}, $I^*(\omega)$ represents a singular point source oscillating at a single frequency, 
-$\omega$. However, the problem is linear, which means that for signals composed of multiple frequency components, 
+which is valid in frequency space. 
+In \fref{eq:Sigma:pointsource_freq_dep}, 
+$\hat{I}(\omega)$ represents a singular point source oscillating at a single frequency, $\omega$. 
+However, the problem is linear, which means that for signals composed of multiple frequency components, 
 one can solve \fref{eq:Sigma:pointsource_freq_dep} for each component separately, 
 and then sum up the individual solutions. 
 
 We note that we in the above focused on the frequency dependence due to capacitive properties in the medium.
-In a more general case, also the real parts of the conductivity and the permittivity 
+In a more general case, the real parts of the conductivity and the permittivity 
 can have "individual" frequency dependencies: 
 $\sigma_\text{Rt}=\sigma_\text{Rt}(\omega)$ and $\epsilon_\text{t} = \epsilon_\text{t}(\omega)$.
 Importantly, these individual frequency dependencies are not independent, 
